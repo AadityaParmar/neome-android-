@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.neomenta.neome"
+    namespace = "com.neome"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.neomenta.neome"
+        applicationId = "com.neome"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

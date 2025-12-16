@@ -1,4 +1,4 @@
-package com.neomenta.neome.feature.componentshowcase.domain.model
+package com.neome.feature.componentshowcase.domain.model
 
 data class ComponentCategory(
     val name: String,

@@ -1,4 +1,4 @@
-package com.neomenta.neome
+package com.neome
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

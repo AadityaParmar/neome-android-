@@ -1,7 +1,7 @@
-package com.neomenta.neome.feature.componentshowcase.presentation.showcase
+package com.neome.feature.componentshowcase.presentation.showcase
 
 import androidx.lifecycle.ViewModel
-import com.neomenta.neome.feature.componentshowcase.domain.model.ComponentCategory
+import com.neome.feature.componentshowcase.domain.model.ComponentCategory
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

@@ -1,4 +1,4 @@
-package com.neomenta.neome.ui.theme
+package com.neome.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

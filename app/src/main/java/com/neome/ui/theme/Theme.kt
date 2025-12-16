@@ -1,4 +1,4 @@
-package com.neomenta.neome.ui.theme
+package com.neome.ui.theme
 
 import android.app.Activity
 import android.os.Build

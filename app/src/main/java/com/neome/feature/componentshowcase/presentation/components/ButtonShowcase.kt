@@ -1,4 +1,4 @@
-package com.neomenta.neome.feature.componentshowcase.presentation.components
+package com.neome.feature.componentshowcase.presentation.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons

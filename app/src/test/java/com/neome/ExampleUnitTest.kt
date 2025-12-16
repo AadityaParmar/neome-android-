@@ -1,4 +1,4 @@
-package com.neomenta.neome
+package com.neome
 
 import org.junit.Test
 

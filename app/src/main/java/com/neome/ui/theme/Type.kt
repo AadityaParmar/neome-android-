@@ -1,4 +1,4 @@
-package com.neomenta.neome.ui.theme
+package com.neome.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

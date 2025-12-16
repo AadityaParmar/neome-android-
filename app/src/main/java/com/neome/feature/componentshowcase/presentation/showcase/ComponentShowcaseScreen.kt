@@ -1,4 +1,4 @@
-package com.neomenta.neome.feature.componentshowcase.presentation.showcase
+package com.neome.feature.componentshowcase.presentation.showcase
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.neomenta.neome.feature.componentshowcase.presentation.components.*
+import com.neome.feature.componentshowcase.presentation.components.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -164,7 +164,7 @@ private fun ComponentShowcaseScreenPreview() {
         ComponentShowcaseContent(
             state = ComponentShowcaseState(
                 categories = listOf(
-                    com.neomenta.neome.feature.componentshowcase.domain.model.ComponentCategory(
+                    com.neome.feature.componentshowcase.domain.model.ComponentCategory(
                         "Buttons",
                         "Material3 button components",
                         listOf("Button", "IconButton")

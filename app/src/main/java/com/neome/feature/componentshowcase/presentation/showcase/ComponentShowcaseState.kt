@@ -1,6 +1,6 @@
-package com.neomenta.neome.feature.componentshowcase.presentation.showcase
+package com.neome.feature.componentshowcase.presentation.showcase
 
-import com.neomenta.neome.feature.componentshowcase.domain.model.ComponentCategory
+import com.neome.feature.componentshowcase.domain.model.ComponentCategory
 
 data class ComponentShowcaseState(
     val categories: List<ComponentCategory> = emptyList(),

@@ -1,4 +1,4 @@
-package com.neomenta.neome
+package com.neome
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -23,8 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
-import com.neomenta.neome.feature.componentshowcase.presentation.showcase.ComponentShowcaseScreen
-import com.neomenta.neome.ui.theme.NeomeTheme
+import com.neome.feature.componentshowcase.presentation.showcase.ComponentShowcaseScreen
+import com.neome.ui.theme.NeomeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

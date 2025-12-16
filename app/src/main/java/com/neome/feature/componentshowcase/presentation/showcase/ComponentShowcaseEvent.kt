@@ -1,4 +1,4 @@
-package com.neomenta.neome.feature.componentshowcase.presentation.showcase
+package com.neome.feature.componentshowcase.presentation.showcase
 
 sealed interface ComponentShowcaseEvent {
     data class SelectCategory(val index: Int) : ComponentShowcaseEvent
