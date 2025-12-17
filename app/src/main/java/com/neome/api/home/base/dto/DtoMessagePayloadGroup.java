@@ -1,0 +1,29 @@
+// neome.ai API - do not change
+//
+
+package com.neome.api.home.base.dto;
+
+import com.neome.api.meta.base.Types.EntId;
+import com.neome.api.meta.base.Types.GroupId;
+import com.neome.api.meta.base.Types.MediaIdAvatar;
+
+import org.jetbrains.annotations.Nullable;
+
+@SuppressWarnings("unused")
+public class DtoMessagePayloadGroup extends DtoMessagePayload
+{
+  @Nullable
+  public String about;
+
+  @Nullable
+  public EntId entId;
+
+  @Nullable
+  public GroupId groupId;
+
+  @Nullable
+  public MediaIdAvatar mediaIdAvatar;
+
+  @Nullable
+  public String name;
+}

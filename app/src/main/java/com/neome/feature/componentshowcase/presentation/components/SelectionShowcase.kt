@@ -20,7 +20,7 @@ fun SelectionShowcase(
     ) {
         Text("Selection Controls", style = MaterialTheme.typography.headlineSmall)
 
-        Divider()
+        HorizontalDivider()
         Text("Checkboxes", style = MaterialTheme.typography.titleMedium)
 
         var checked1 by remember { mutableStateOf(false) }
@@ -77,7 +77,7 @@ fun SelectionShowcase(
             Text("Tri-state Checkbox (${triState.name})")
         }
 
-        Divider()
+        HorizontalDivider()
         Text("Radio Buttons", style = MaterialTheme.typography.titleMedium)
 
         val radioOptions = listOf("Option 1", "Option 2", "Option 3")
@@ -108,7 +108,7 @@ fun SelectionShowcase(
             Text("Disabled Radio Button")
         }
 
-        Divider()
+        HorizontalDivider()
         Text("Switches", style = MaterialTheme.typography.titleMedium)
 
         var switch1 by remember { mutableStateOf(false) }
@@ -150,7 +150,7 @@ fun SelectionShowcase(
             )
         }
 
-        Divider()
+        HorizontalDivider()
         Text("Sliders", style = MaterialTheme.typography.titleMedium)
 
         var sliderValue by remember { mutableFloatStateOf(0.5f) }

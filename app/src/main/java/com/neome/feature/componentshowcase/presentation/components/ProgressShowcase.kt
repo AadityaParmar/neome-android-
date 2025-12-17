@@ -1,8 +1,21 @@
 package com.neome.feature.componentshowcase.presentation.components
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,7 +41,7 @@ fun ProgressShowcase(
     ) {
         Text("Progress Indicators", style = MaterialTheme.typography.headlineSmall)
 
-        Divider()
+        HorizontalDivider()
         Text("Circular Progress", style = MaterialTheme.typography.titleMedium)
 
         Row(
@@ -43,7 +56,7 @@ fun ProgressShowcase(
             )
         }
 
-        Divider()
+        HorizontalDivider()
         Text("Linear Progress", style = MaterialTheme.typography.titleMedium)
 
         Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {

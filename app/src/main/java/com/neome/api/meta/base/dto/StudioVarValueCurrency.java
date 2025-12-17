@@ -1,0 +1,12 @@
+// neome.ai API - do not change
+//
+
+package com.neome.api.meta.base.dto;
+
+import com.neome.api.meta.base.Types.CurrencyKey;
+
+@SuppressWarnings("unused")
+public class StudioVarValueCurrency extends StudioBase
+{
+  public CurrencyKey value;
+}

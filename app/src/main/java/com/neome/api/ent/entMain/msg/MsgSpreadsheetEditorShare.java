@@ -1,0 +1,18 @@
+// neome.ai API - do not change
+//
+
+package com.neome.api.ent.entMain.msg;
+
+import com.neome.api.meta.base.Types.MetaIdAction;
+import com.neome.api.nucleus.base.msg.Msg;
+
+import org.jetbrains.annotations.Nullable;
+
+@SuppressWarnings("unused")
+public class MsgSpreadsheetEditorShare extends Msg
+{
+  public MetaIdAction actionId;
+
+  @Nullable
+  public Boolean reset;
+}

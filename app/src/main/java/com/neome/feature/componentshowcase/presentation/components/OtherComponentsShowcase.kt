@@ -1,10 +1,43 @@
 package com.neome.feature.componentshowcase.presentation.components
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
+import androidx.compose.material3.Button
+import androidx.compose.material3.ElevatedFilterChip
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.InputChip
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SuggestionChip
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,7 +69,7 @@ fun OtherComponentsShowcase(
         ) {
             Text("Other Components", style = MaterialTheme.typography.headlineSmall)
 
-            Divider()
+            HorizontalDivider()
             Text("Badges", style = MaterialTheme.typography.titleMedium)
 
             Row(
@@ -56,7 +89,7 @@ fun OtherComponentsShowcase(
                 }
             }
 
-            Divider()
+            HorizontalDivider()
             Text("Chips", style = MaterialTheme.typography.titleMedium)
 
             Row(
@@ -107,13 +140,13 @@ fun OtherComponentsShowcase(
                 } else null
             )
 
-            Divider()
+            HorizontalDivider()
             Text("Dividers", style = MaterialTheme.typography.titleMedium)
 
             HorizontalDivider()
             HorizontalDivider(thickness = 2.dp, color = MaterialTheme.colorScheme.primary)
 
-            Divider()
+            HorizontalDivider()
             Text("List Items", style = MaterialTheme.typography.titleMedium)
 
             ListItem(
@@ -144,7 +177,7 @@ fun OtherComponentsShowcase(
                 }
             )
 
-            Divider()
+            HorizontalDivider()
             Text("Snackbar", style = MaterialTheme.typography.titleMedium)
 
             Button(

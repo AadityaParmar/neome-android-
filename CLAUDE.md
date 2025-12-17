@@ -1,8 +1,16 @@
-# Android Project Rules - Clean Architecture + MVI
+# Android Project Rules - Clean Architecture + MVI/MVVM
 
 ## Project Overview
 
-This is a data-heavy Android application built with Jetpack Compose and Material3, following Clean Architecture principles with MVI (Model-View-Intent) pattern for state management.
+This is a data-heavy Android application built with Jetpack Compose and Material3, following Clean
+Architecture principles with support for both MVI (Model-View-Intent) and MVVM (
+Model-View-ViewModel) patterns for state management.
+
+**Pattern Selection:**
+
+- **Use MVI** for complex screens with multiple user interactions, state transformations, and side
+  effects
+- **Use MVVM** for simpler screens with straightforward data display and minimal user interactions
 
 ## Tech Stack
 
@@ -197,6 +205,267 @@ private fun FeatureContent(
     modifier: Modifier = Modifier
 ) {
     // UI implementation
+}
+```
+
+---
+
+## MVVM Pattern Rules
+
+### State Management (MVVM)
+
+Every MVVM screen MUST have these files in its package:
+
+1. **{Screen}ViewModel.kt** - Manages UI state using StateFlow/LiveData
+2. **{Screen}Screen.kt** - Composable UI that observes ViewModel state
+3. **{Screen}UiState.kt** (optional) - Data class for complex UI state
+4. **{Screen}UiAction.kt** (optional) - Sealed interface for navigation/one-time events
+
+### ViewModel Rules (MVVM)
+
+```kotlin
+// ✅ CORRECT - Simple MVVM ViewModel with StateFlow
+@HiltViewModel
+class ProfileViewModel @Inject constructor(
+    private val getUserProfileUseCase: GetUserProfileUseCase,
+    private val updateProfileUseCase: UpdateProfileUseCase
+) : ViewModel() {
+
+    // ✅ CORRECT - StateFlow for UI state
+    private val _uiState = MutableStateFlow(ProfileUiState())
+    val uiState = _uiState.asStateFlow()
+
+    // ✅ CORRECT - Channel for one-time UI actions (navigation, snackbar)
+    private val _uiAction = Channel<ProfileUiAction>()
+    val uiAction = _uiAction.receiveAsFlow()
+
+    init {
+        loadProfile()
+    }
+
+    // ✅ CORRECT - Public methods for user actions
+    fun loadProfile() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true) }
+
+            getUserProfileUseCase().collect { resource ->
+                when (resource) {
+                    is Resource.Loading -> {
+                        _uiState.update { it.copy(isLoading = true) }
+                    }
+                    is Resource.Success -> {
+                        _uiState.update {
+                            it.copy(
+                                isLoading = false,
+                                profile = resource.data,
+                                error = null
+                            )
+                        }
+                    }
+                    is Resource.Error -> {
+                        _uiState.update {
+                            it.copy(
+                                isLoading = false,
+                                error = resource.message
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun updateName(name: String) {
+        _uiState.update { it.copy(profile = it.profile?.copy(name = name)) }
+    }
+
+    fun saveProfile() {
+        viewModelScope.launch {
+            val profile = _uiState.value.profile ?: return@launch
+
+            updateProfileUseCase(profile).collect { resource ->
+                when (resource) {
+                    is Resource.Success -> {
+                        _uiAction.send(ProfileUiAction.ShowSuccess("Profile updated"))
+                    }
+                    is Resource.Error -> {
+                        _uiAction.send(ProfileUiAction.ShowError(resource.message))
+                    }
+                    else -> Unit
+                }
+            }
+        }
+    }
+}
+
+// ✅ CORRECT - UiState data class
+data class ProfileUiState(
+    val profile: Profile? = null,
+    val isLoading: Boolean = false,
+    val error: String? = null
+)
+
+// ✅ CORRECT - UiAction for one-time events
+sealed interface ProfileUiAction {
+    data class ShowSuccess(val message: String) : ProfileUiAction
+    data class ShowError(val message: String) : ProfileUiAction
+    data object NavigateBack : ProfileUiAction
+}
+```
+
+### Screen Composable Rules (MVVM)
+
+```kotlin
+@Composable
+fun ProfileScreen(
+    viewModel: ProfileViewModel = hiltViewModel(),
+    onNavigateBack: () -> Unit
+) {
+    // ✅ CORRECT - collectAsStateWithLifecycle for lifecycle awareness
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    // ✅ CORRECT - Handle one-time UI actions
+    LaunchedEffect(Unit) {
+        viewModel.uiAction.collect { action ->
+            when (action) {
+                is ProfileUiAction.ShowSuccess -> {
+                    // Show snackbar
+                }
+                is ProfileUiAction.ShowError -> {
+                    // Show error dialog
+                }
+                ProfileUiAction.NavigateBack -> onNavigateBack()
+            }
+        }
+    }
+
+    // ✅ CORRECT - Pass state and callback methods
+    ProfileContent(
+        uiState = uiState,
+        onNameChange = viewModel::updateName,
+        onSaveClick = viewModel::saveProfile,
+        onBackClick = { viewModel.navigateBack() }
+    )
+}
+
+// ✅ CORRECT - Stateless content composable
+@Composable
+private fun ProfileContent(
+    uiState: ProfileUiState,
+    onNameChange: (String) -> Unit,
+    onSaveClick: () -> Unit,
+    onBackClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    // UI implementation
+    if (uiState.isLoading) {
+        CircularProgressIndicator()
+    } else {
+        uiState.profile?.let { profile ->
+            Column(modifier = modifier) {
+                TextField(
+                    value = profile.name,
+                    onValueChange = onNameChange
+                )
+                Button(onClick = onSaveClick) {
+                    Text("Save")
+                }
+            }
+        }
+    }
+}
+```
+
+### MVVM vs MVI - When to Use
+
+| Scenario                   | Use MVVM | Use MVI |
+|----------------------------|----------|---------|
+| Simple data display        | ✅        | ❌       |
+| Form with few fields       | ✅        | ❌       |
+| List with basic filters    | ✅        | ❌       |
+| Complex multi-step form    | ❌        | ✅       |
+| Real-time data updates     | ❌        | ✅       |
+| Complex state machine      | ❌        | ✅       |
+| Multiple user interactions | ❌        | ✅       |
+| Side effects/Analytics     | ❌        | ✅       |
+
+### MVVM Examples
+
+```kotlin
+// ✅ CORRECT - Simple list screen with MVVM
+@HiltViewModel
+class ItemListViewModel @Inject constructor(
+    private val getItemsUseCase: GetItemsUseCase
+) : ViewModel() {
+
+    private val _items = MutableStateFlow<List<Item>>(emptyList())
+    val items = _items.asStateFlow()
+
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading = _isLoading.asStateFlow()
+
+    init {
+        loadItems()
+    }
+
+    fun loadItems() {
+        viewModelScope.launch {
+            _isLoading.value = true
+            getItemsUseCase().collect { resource ->
+                when (resource) {
+                    is Resource.Success -> _items.value = resource.data
+                    is Resource.Error -> { /* Handle error */
+                    }
+                    else -> Unit
+                }
+            }
+            _isLoading.value = false
+        }
+    }
+
+    fun onItemClick(itemId: String) {
+        // Handle click
+    }
+}
+
+// ✅ CORRECT - Simple form screen with MVVM
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val loginUseCase: LoginUseCase
+) : ViewModel() {
+
+    private val _email = MutableStateFlow("")
+    val email = _email.asStateFlow()
+
+    private val _password = MutableStateFlow("")
+    val password = _password.asStateFlow()
+
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading = _isLoading.asStateFlow()
+
+    fun updateEmail(value: String) {
+        _email.value = value
+    }
+
+    fun updatePassword(value: String) {
+        _password.value = value
+    }
+
+    fun login() {
+        viewModelScope.launch {
+            _isLoading.value = true
+            loginUseCase(email.value, password.value).collect { resource ->
+                when (resource) {
+                    is Resource.Success -> { /* Navigate */
+                    }
+                    is Resource.Error -> { /* Show error */
+                    }
+                    else -> Unit
+                }
+            }
+            _isLoading.value = false
+        }
+    }
 }
 ```
 
