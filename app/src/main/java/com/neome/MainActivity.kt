@@ -28,8 +28,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import com.neome.feature.componentshowcase.presentation.showcase.ComponentShowcaseScreen
-import com.neome.feature.form.presentation.form.DynamicFormScreen
-import com.neome.feature.form.utils.FormJsonParser
+import com.neome.feature.form.presentation.form.Form
+import com.neome.feature.form.utils.PlusJsonParser
 import com.neome.ui.theme.NeomeTheme
 
 class MainActivity : ComponentActivity() {
@@ -74,12 +74,12 @@ fun NeomeApp() {
 
                 AppDestinations.FORM -> {
                     // Parse sample DefnForm from JSON
-                    val defnFormJson = FormJsonParser.createSampleDefnForm()
-                    val defnForm = FormJsonParser.parseDefnForm(defnFormJson)
+                    val defnFormJson = PlusJsonParser.createSampleDefnForm()
+                    val defnForm = PlusJsonParser.parseDefnForm(defnFormJson)
                     println("===DefnForm ${defnForm?.compMap}")
 
                     if (defnForm != null) {
-                        DynamicFormScreen(
+                        Form(
                             defnForm = defnForm,
                             formValueRaw = null,
                             onNavigateBack = { currentDestination = AppDestinations.HOME }
