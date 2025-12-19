@@ -34,7 +34,9 @@ fun Form(
     defnForm: DefnForm,
     formValueRaw: FormValueRaw? = null,
     viewModel: FormViewModel = viewModel(),
-    onNavigateBack: () -> Unit = {}
+    onNavigateBack: () -> Unit = {},
+    modifier: Modifier = Modifier,
+    onFormRefReady: ((com.neome.feature.form.presentation.ref.FormRef) -> Unit)? = null
 ) {
     val context = LocalContext.current
     val snackbarHostState = remember { SnackbarHostState() }
@@ -47,6 +49,11 @@ fun Form(
     // Collect state
     val formState by viewModel.formState.collectAsStateWithLifecycle()
     val formRef = viewModel.formRef
+
+    // Expose formRef to parent
+    LaunchedEffect(formRef) {
+        onFormRefReady?.invoke(formRef)
+    }
 
     // Handle effects
     LaunchedEffect(Unit) {
@@ -82,7 +89,8 @@ fun Form(
         isValid = formState.isValid,
         snackbarHostState = snackbarHostState,
         onSubmit = { viewModel.onEvent(FormEvent.Submit) },
-        onReset = { viewModel.onEvent(FormEvent.Reset) }
+        onReset = { viewModel.onEvent(FormEvent.Reset) },
+        modifier = modifier
     )
 }
 

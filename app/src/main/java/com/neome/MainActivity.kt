@@ -4,15 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Science
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -26,10 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
-import androidx.compose.ui.unit.dp
 import com.neome.feature.componentshowcase.presentation.showcase.ComponentShowcaseScreen
-import com.neome.feature.form.presentation.form.Form
-import com.neome.feature.form.utils.PlusJsonParser
+import com.neome.feature.componentshowcase.presentation.testing.ComponentTestingScreen
 import com.neome.ui.theme.NeomeTheme
 
 class MainActivity : ComponentActivity() {
@@ -72,39 +68,8 @@ fun NeomeApp() {
                     onNavigateBack = {}
                 )
 
-                AppDestinations.FORM -> {
-                    // Parse sample DefnForm from JSON
-                    val defnFormJson = PlusJsonParser.createSampleDefnForm()
-                    val defnForm = PlusJsonParser.parseDefnForm(defnFormJson)
-                    println("===DefnForm ${defnForm?.compMap}")
-
-                    if (defnForm != null) {
-                        Form(
-                            defnForm = defnForm,
-                            formValueRaw = null,
-                            onNavigateBack = { currentDestination = AppDestinations.HOME }
-                        )
-                    } else {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(innerPadding)
-                                .padding(16.dp),
-                            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
-                            verticalArrangement = androidx.compose.foundation.layout.Arrangement.Center
-                        ) {
-                            Text(
-                                "Error loading form",
-                                style = androidx.compose.material3.MaterialTheme.typography.headlineMedium,
-                                color = androidx.compose.material3.MaterialTheme.colorScheme.error
-                            )
-                            androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(8.dp))
-                            Text(
-                                "Check logcat for details",
-                                style = androidx.compose.material3.MaterialTheme.typography.bodyMedium
-                            )
-                        }
-                    }
+                AppDestinations.TESTING -> {
+                    ComponentTestingScreen()
                 }
 
                 else -> Greeting(
@@ -121,7 +86,7 @@ enum class AppDestinations(
     val icon: ImageVector,
 ) {
     HOME("Home", Icons.Default.Home),
-    FORM("Form", Icons.Default.Add),
+    TESTING("Testing", Icons.Default.Science),
     FAVORITES("Favorites", Icons.Default.Favorite),
     PROFILE("Profile", Icons.Default.AccountBox),
 }
