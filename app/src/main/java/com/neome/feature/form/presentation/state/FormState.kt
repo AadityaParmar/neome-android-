@@ -1,10 +1,13 @@
 package com.neome.feature.form.presentation.state
 
+import com.neome.api.meta.base.dto.FormValueRaw
+
 /**
  * Centralized form state container
  * Single source of truth for all form data
  */
 data class FormState(
+    val formValueRaw: FormValueRaw? = null,
     val fields: Map<String, FieldState<*>> = emptyMap(),
     val errors: Map<String, String?> = emptyMap(),
     val isDirty: Boolean = false,

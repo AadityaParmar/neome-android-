@@ -6,6 +6,7 @@ import com.google.gson.JsonElement
 import com.google.gson.JsonPrimitive
 import com.neome.api.meta.base.dto.DefnForm
 import com.neome.api.meta.base.dto.FormValueRaw
+import com.neome.api.nucleus.base.ApiPlus
 import com.neome.feature.form.domain.validation.ValidationResult
 import com.neome.feature.form.presentation.ref.FormRef
 import com.neome.feature.form.presentation.ref.FormRefImpl
@@ -34,11 +35,15 @@ class FormViewModel : ViewModel() {
 
     val formRef: FormRef by lazy { FormRefImpl(this) }
 
+    private var currentDefnForm: DefnForm? = null
+
     /**
      * Initialize form from DefnForm and optional FormValueRaw
      */
     fun initializeFromDefnForm(defnForm: DefnForm, formValueRaw: FormValueRaw? = null) {
+        currentDefnForm = defnForm
         val fields = mutableMapOf<String, FieldState<*>>()
+        val valueMap = mutableMapOf<com.neome.api.meta.base.Types.MetaIdComp, JsonElement>()
 
         // Extract all fields from compMap
         defnForm.compMap.forEach { (compId, defnComp) ->
@@ -47,6 +52,9 @@ class FormViewModel : ViewModel() {
             // Get value from FormValueRaw or use default
             val jsonValue = formValueRaw?.valueMap?.get(compId)
             val value = extractValueFromJson(jsonValue, defnComp.type.name)
+
+            // Store in valueMap for FormValueRaw
+            valueMap[compId] = jsonValue ?: convertValueToJson(value)
 
             // Create field state
             fields[fieldId] = FieldState(
@@ -60,8 +68,20 @@ class FormViewModel : ViewModel() {
             )
         }
 
+        // Create or update FormValueRaw
+        val updatedFormValueRaw = formValueRaw ?: FormValueRaw().apply {
+            this.rowId = ApiPlus.nextRowId()
+            this.valueMap = valueMap
+        }
+
+        // Update existing FormValueRaw if provided
+        if (formValueRaw != null) {
+            updatedFormValueRaw.valueMap = valueMap
+        }
+
         _formState.update {
             it.copy(
+                formValueRaw = updatedFormValueRaw,
                 fields = fields,
                 errors = emptyMap(),
                 isDirty = false,
@@ -79,6 +99,7 @@ class FormViewModel : ViewModel() {
     fun onEvent(event: FormEvent) {
         when (event) {
             is FormEvent.UpdateField<*> -> handleUpdateField(event)
+            is FormEvent.SetValues -> handleSetValues(event.formValueRaw)
             is FormEvent.BlurField -> handleBlurField(event.fieldId)
             is FormEvent.ValidateField -> validateField(event.fieldId)
             is FormEvent.ValidateAll -> validateAllFields()
@@ -106,7 +127,33 @@ class FormViewModel : ViewModel() {
                 val updatedFields = state.fields.toMutableMap()
                 updatedFields[fieldId] = updatedField
 
+                // Update FormValueRaw
+                val updatedFormValueRaw = state.formValueRaw?.let { formValueRaw ->
+                    // Find the MetaIdComp for this field
+                    val compId = currentDefnForm?.compMap?.entries?.find { entry ->
+                        entry.value.name.name == fieldId
+                    }?.key
+
+                    if (compId != null) {
+                        val updatedValueMap = formValueRaw.valueMap.toMutableMap()
+                        updatedValueMap[compId] = convertValueToJson(newValue)
+
+                        FormValueRaw().apply {
+                            this.rowId = formValueRaw.rowId
+                            this.valueMap = updatedValueMap
+                            this.createdBy = formValueRaw.createdBy
+                            this.createdOn = formValueRaw.createdOn
+                            this.updatedBy = formValueRaw.updatedBy
+                            this.updatedOn = formValueRaw.updatedOn
+                            this.rowOrder = formValueRaw.rowOrder
+                        }
+                    } else {
+                        formValueRaw
+                    }
+                }
+
                 state.copy(
+                    formValueRaw = updatedFormValueRaw,
                     fields = updatedFields,
                     isDirty = updatedFields.values.any { it.isDirty }
                 )
@@ -122,6 +169,40 @@ class FormViewModel : ViewModel() {
         _formState.value.dependencies[fieldId]?.forEach { dependentField ->
             validateField(dependentField)
         }
+    }
+
+    private fun handleSetValues(formValueRaw: FormValueRaw) {
+        val defnForm = currentDefnForm ?: return
+
+        _formState.update { state ->
+            val updatedFields = state.fields.toMutableMap()
+
+            formValueRaw.valueMap.forEach { (compId, jsonValue) ->
+                val defnComp = defnForm.compMap[compId] ?: return@forEach
+                val fieldId = defnComp.name.name
+                val value = extractValueFromJson(jsonValue, defnComp.type.name)
+
+                val currentField = state.fields[fieldId]
+                if (currentField != null) {
+                    @Suppress("UNCHECKED_CAST")
+                    val updatedField = (currentField as FieldState<Any?>).copy(
+                        value = value,
+                        isDirty = value != currentField.defaultValue,
+                        isTouched = false
+                    )
+                    updatedFields[fieldId] = updatedField
+                }
+            }
+
+            state.copy(
+                formValueRaw = formValueRaw,
+                fields = updatedFields,
+                isDirty = updatedFields.values.any { it.isDirty }
+            )
+        }
+
+        // Update FormRef watchers
+        (formRef as? FormRefImpl)?.updateWatchers()
     }
 
     private fun handleBlurField(fieldId: String) {
@@ -288,6 +369,19 @@ class FormViewModel : ViewModel() {
             "BOOL" -> false
             "DATE" -> null
             else -> null
+        }
+    }
+
+    /**
+     * Convert value to JsonElement
+     */
+    private fun convertValueToJson(value: Any?): JsonElement {
+        return when (value) {
+            is String -> JsonPrimitive(value)
+            is Number -> JsonPrimitive(value)
+            is Boolean -> JsonPrimitive(value)
+            null -> com.google.gson.JsonNull.INSTANCE
+            else -> JsonPrimitive(value.toString())
         }
     }
 }

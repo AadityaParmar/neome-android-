@@ -22,8 +22,8 @@ class FormRefImpl(
         return viewModel.formState.value.fields[fieldId]?.value as? T
     }
 
-    override fun getValues(): Map<String, Any?> {
-        return viewModel.formState.value.fields.mapValues { it.value.value }
+    override fun getValues(): com.neome.api.meta.base.dto.FormValueRaw? {
+        return viewModel.formState.value.formValueRaw
     }
 
     override fun <T> setValue(fieldId: String, value: T, shouldValidate: Boolean) {
@@ -33,10 +33,11 @@ class FormRefImpl(
         }
     }
 
-    override fun setValues(values: Map<String, Any?>, shouldValidate: Boolean) {
-        values.forEach { (fieldId, value) ->
-            setValue(fieldId, value, shouldValidate = false)
-        }
+    override fun setValues(
+        formValueRaw: com.neome.api.meta.base.dto.FormValueRaw,
+        shouldValidate: Boolean
+    ) {
+        viewModel.onEvent(FormEvent.SetValues(formValueRaw))
         if (shouldValidate) {
             viewModel.onEvent(FormEvent.ValidateAll)
         }
@@ -52,10 +53,10 @@ class FormRefImpl(
         }
     }
 
-    override fun reset(values: Map<String, Any?>?) {
+    override fun reset(formValueRaw: com.neome.api.meta.base.dto.FormValueRaw?) {
         viewModel.onEvent(FormEvent.Reset)
-        if (values != null) {
-            setValues(values, shouldValidate = false)
+        if (formValueRaw != null) {
+            setValues(formValueRaw, shouldValidate = false)
         }
     }
 

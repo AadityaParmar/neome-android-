@@ -77,8 +77,8 @@ fun ComponentTestingScreen(
                             onClick = {
                                 // Example: Get all form values
                                 val values = formRef?.getValues()
-                                formDebugInfo = "Form values: ${values?.size ?: 0} fields"
-                                println(values)
+                                formDebugInfo = "Form values: ${values?.valueMap?.size ?: 0} fields"
+                                println(values?.valueMap)
                             },
                             modifier = Modifier.weight(1f)
                         ) {
@@ -120,7 +120,8 @@ fun ComponentTestingScreen(
                 onFormRefReady = { ref ->
                     // Store the formRef when it's ready
                     formRef = ref
-                    formDebugInfo = "FormRef ready - ${ref.getValues().size} fields initialized"
+                    formDebugInfo =
+                        "FormRef ready - ${ref.getValues()?.valueMap?.size ?: 0} fields initialized"
                 }
             )
         } else {

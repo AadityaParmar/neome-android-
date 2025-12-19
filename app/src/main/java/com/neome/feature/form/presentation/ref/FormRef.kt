@@ -1,5 +1,6 @@
 package com.neome.feature.form.presentation.ref
 
+import com.neome.api.meta.base.dto.FormValueRaw
 import kotlinx.coroutines.flow.StateFlow
 
 /**
@@ -13,9 +14,9 @@ interface FormRef {
     fun <T> getValue(fieldId: String): T?
 
     /**
-     * Get all form values
+     * Get all form values as FormValueRaw
      */
-    fun getValues(): Map<String, Any?>
+    fun getValues(): FormValueRaw?
 
     /**
      * Set value of a specific field
@@ -23,9 +24,9 @@ interface FormRef {
     fun <T> setValue(fieldId: String, value: T, shouldValidate: Boolean = true)
 
     /**
-     * Set multiple field values
+     * Set multiple field values from FormValueRaw
      */
-    fun setValues(values: Map<String, Any?>, shouldValidate: Boolean = true)
+    fun setValues(formValueRaw: FormValueRaw, shouldValidate: Boolean = true)
 
     /**
      * Trigger validation for specific field or all fields
@@ -35,7 +36,7 @@ interface FormRef {
     /**
      * Reset form to default or provided values
      */
-    fun reset(values: Map<String, Any?>? = null)
+    fun reset(formValueRaw: FormValueRaw? = null)
 
     /**
      * Clear errors for specific field or all fields
