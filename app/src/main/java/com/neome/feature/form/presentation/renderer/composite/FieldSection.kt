@@ -58,7 +58,7 @@ object FieldSection : ComponentRenderer {
                 section?.fieldIdSet?.forEach { fieldId ->
                     val childComp = defnForm.compMap[fieldId]
                     if (childComp != null) {
-                        ComponentRendererFactory.render(
+                        ComponentRendererFactory.Render(
                             defnComp = childComp,
                             defnForm = defnForm,
                             formRef = formRef

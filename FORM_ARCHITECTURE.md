@@ -2,67 +2,57 @@
 
 ## Quick Reference
 
-**Purpose:** Centralized form state management with dynamic JSON-driven rendering (DefnForm)
+**Purpose:** Pure MVI form component with dynamic JSON-driven rendering (DefnForm)
 
 **Key Classes:**
 
 - `DefnForm` - Form structure definition (JSON-driven)
 - `FormValueRaw` - Form data/values
-- `FormState` - Centralized state container
-- `FormRef` - Imperative API for external access
+- `FormState` - Configuration state (defnForm, initialFormValue only)
+- `FormIntent` - Two intents: Submit and Watch
+- `FormRef` - Imperative API for field operations
 - `ComponentRendererFactory` - Factory pattern for rendering
 
-**Location:**
+**Core features:**
 
-- DefnForm: `app/src/main/java/com/neome/api/meta/base/dto/DefnForm.java`
-- DefnComp: `app/src/main/java/com/neome/api/meta/base/dto/DefnComp.java`
-- Form Feature: `app/src/main/java/com/neome/feature/form/`
-
-**Implementation Status:**
-
-- ✅ Core MVI architecture (State, Event, Effect)
-- ✅ FormRef imperative API
-- ✅ Validation framework
+- ✅ Pure MVI architecture (State, Intent)
+- ✅ Simplified state (configuration only)
+- ✅ Two intents for external communication
+- ✅ FormRef imperative API for field operations
+- ✅ No ViewModel dependency in Form component
 - ✅ Factory pattern rendering
-- ✅ 7 field types (TEXT, EMAIL, PHONE, NUMBER, BOOL, PICK_TEXT, DATE)
-- ✅ 2 composite types (TAB, SECTION)
-- ✅ JSON parsing utilities
-- ✅ Integrated in MainActivity
-- ⏳ GRID renderer (pending)
-- ⏳ Additional field types (URL, CURRENCY)
 
 ---
 
 ## Core Patterns
 
-### 1. StateFlow (State Container)
+### 1. Pure MVI Architecture
 
-- Single source of truth for all form data
-- Thread-safe, survives config changes
-- Holds: values, errors, isDirty, isValid, isSubmitting
+- **State**: FormState with only configuration (defnForm, initialFormValue)
+- **View**: Form as pure function of state
+- **Intent**: Two intents (Submit, Watch) for external communication
+- No ViewModel dependency in Form component
 
-### 2. Channel (One-Time Effects)
+### 2. Simplified State Management
 
-- Navigation, toasts, dialogs
-- Consumed exactly once
-- No duplicate events on rotation
+- FormState holds ONLY configuration data
+- All runtime state (field values, errors, validation) managed by FormRef
+- Single source of truth: Parent component manages state
 
-### 3. Sealed Events (User Actions)
+### 3. FormIntent (User Actions)
 
-- Type-safe user interactions
-- Single entry point: `onEvent(FormEvent)`
+- Only two intents for external communication:
+    - `Submit(FormValueRaw)` - Form submission with complete data
+    - `Watch(fieldId, fieldValue, formValue)` - Field change notifications
+- All field operations go through FormRef imperative API
 
-### 4. Sealed Effects (Side Effects)
+### 4. FormRef Imperative API
 
-- ShowToast, NavigateBack, ShowDialog
-- Separate from state
+- Provides field operations: getValue, setValue, getValues, setValues
+- Manages runtime state internally (not in FormState)
+- Used by component renderers for field access
 
-### 5. Validation Use Cases
-
-- Reusable validation logic
-- Testable in isolation
-
-### 6. Factory Pattern (Rendering)
+### 5. Factory Pattern (Rendering)
 
 - `ComponentRendererFactory` creates renderers
 - Easy to add new field types
@@ -72,19 +62,18 @@
 
 ## Data Structures
 
-### FormState
+### FormState (Simplified - Pure MVI)
 
 ```kotlin
 data class FormState(
-    val fields: Map<String, FieldState<*>> = emptyMap(),
-    val errors: Map<String, String?> = emptyMap(),
-    val isDirty: Boolean = false,
-    val isValid: Boolean = false,
-    val isSubmitting: Boolean = false,
-    val touchedFields: Set<String> = emptySet(),
-    val dependencies: Map<String, List<String>> = emptyMap()
+    val defnForm: DefnForm? = null,
+    val initialFormValue: FormValueRaw? = null
 )
 ```
+
+**Philosophy**: FormState contains ONLY configuration data (form structure and initial values). All
+runtime state (field values, errors, validation, dirty state) is managed by FormRef, which provides
+an imperative API.
 
 ### FieldState
 
@@ -101,37 +90,49 @@ data class FieldState<T>(
 )
 ```
 
-### FormEvent
+### FormIntent (Simplified - Pure MVI)
+
+```kotlin
+sealed interface FormIntent {
+    data class Submit(val formValue: FormValueRaw) : FormIntent
+    data class Watch(
+        val fieldId: String,
+        val fieldValue: Any?,
+        val formValue: FormValueRaw
+    ) : FormIntent
+}
+```
+
+**Philosophy**: Only two intents for external communication:
+
+- `Submit`: Called when form is submitted with complete form data
+- `Watch`: Called when field changes, providing field ID, field value, and complete form data
+
+All other operations (field updates, validation, etc.) are handled through FormRef imperative API.
+
+### FormEvent (Deprecated - Used internally by FormRef)
 
 ```kotlin
 sealed interface FormEvent {
     data class UpdateField<T>(val fieldId: String, val value: T) : FormEvent
+    data class SetValues(val formValueRaw: FormValueRaw) : FormEvent
     data class BlurField(val fieldId: String) : FormEvent
     data class ValidateField(val fieldId: String) : FormEvent
     data object ValidateAll : FormEvent
     data object Submit : FormEvent
     data object Reset : FormEvent
+    data class SetError(val fieldId: String, val error: String) : FormEvent
+    data class ClearErrors(val fieldId: String? = null) : FormEvent
 }
 ```
 
-### FormEffect
-
-```kotlin
-sealed interface FormEffect {
-    data class NavigateToDetail(val id: String) : FormEffect
-    data class ShowSnackbar(val message: String) : FormEffect
-    data object NavigateBack : FormEffect
-}
-```
+**Note**: FormEvent is kept for internal use by FormRef but is not exposed in the public Form API.
 
 ---
 
-## DefnForm (JSON-Driven Forms)
+## DefnForm
 
 ### Structure Overview
-
-**Important**: DefnForm is created from JSON **outside** the form component. The component receives
-an already-parsed DefnForm instance.
 
 **DefnForm** (Structure Definition)
 
@@ -144,10 +145,8 @@ an already-parsed DefnForm instance.
 
 - `name: Symbol` - Component name
 - `type: EnumDefnCompType` - Component type
-- `disabled: Boolean?` - Disabled state
-- `hidden: Boolean?` - Visibility
-- `label: String?` - Display label
-- `permissionMatrix: DefnDtoPermissionMatrix`
+- `metaId MetaIdField` - Component Unique Id
+
 - Padding: `pt, pb, pl, pr`
 
 **FormValueRaw** (Actual Data)
@@ -166,26 +165,6 @@ an already-parsed DefnForm instance.
 - `valueMap: Map<MetaIdField, Object>` - Field values in row
 - `rowId: RowId` - Row ID
 - Audit fields
-
-### Component Types
-
-**Composites (Containers):**
-
-- ✅ `TAB` - Tab container (`tabIdSet`) - **IMPLEMENTED**
-- ✅ `SECTION` - Vertical section (`fieldIdSet`) - **IMPLEMENTED**
-- ⏳ `GRID` - Repeatable rows (`fieldIdSet`) - TODO
-
-**Fields:**
-
-- ✅ `TEXT` - Single line text input - **IMPLEMENTED**
-- ✅ `EMAIL` - Email input with validation - **IMPLEMENTED**
-- ✅ `PHONE` - Phone number input - **IMPLEMENTED**
-- ⏳ `URL` - URL input - TODO
-- ✅ `NUMBER` - Numeric input - **IMPLEMENTED**
-- ⏳ `CURRENCY` - Currency input with formatting - TODO
-- ✅ `BOOL` - Toggle/Switch - **IMPLEMENTED**
-- ✅ `PICK_TEXT` - Dropdown select - **IMPLEMENTED**
-- ✅ `DATE` - Date picker - **IMPLEMENTED** (basic)
 
 ### Rendering Algorithm
 
@@ -210,11 +189,11 @@ External access to form state (like React Hook Form's ref)
 ```kotlin
 interface FormRef {
     fun <T> getValue(fieldId: String): T?
-    fun getValues(): Map<String, Any?>
+    fun getValues(): FormValueRaw?
     fun <T> setValue(fieldId: String, value: T, shouldValidate: Boolean = true)
-    fun setValues(values: Map<String, Any?>, shouldValidate: Boolean = true)
+    fun setValues(formValueRaw: FormValueRaw, shouldValidate: Boolean = true)
     fun trigger(fieldId: String? = null): Boolean
-    fun reset(values: Map<String, Any?>? = null)
+    fun reset(formValueRaw: FormValueRaw? = null)
     fun clearErrors(fieldId: String? = null)
     fun setError(fieldId: String, error: String)
     fun <T> watch(fieldId: String): StateFlow<T?>
@@ -228,16 +207,20 @@ interface FormRef {
 ```kotlin
 val formRef = viewModel.formRef
 
-// Get value
+// Get single field value
 val email = formRef.getValue<String>("email")
 
-// Set values (prefill)
-formRef.setValues(mapOf("email" to "user@example.com"))
+// Get all form values as FormValueRaw
+val formValueRaw = formRef.getValues()
+// formValueRaw.valueMap contains Map<MetaIdComp, JsonElement>
+
+// Set values from FormValueRaw (prefill)
+formRef.setValues(existingFormValueRaw)
 
 // Validate
 val isValid = formRef.trigger()
 
-// Watch changes
+// Watch field changes
 val country by formRef.watch<String>("country").collectAsStateWithLifecycle()
 ```
 
@@ -299,7 +282,12 @@ interface ComponentRenderer {
 // 1. Create renderer
 object CurrencyFieldRenderer : ComponentRenderer {
     @Composable
-    override fun Render(defnComp: DefnComp, defnForm: DefnForm, formRef: FormRef, modifier: Modifier) {
+    override fun Render(
+        defnComp: DefnComp,
+        defnForm: DefnForm,
+        formRef: FormRef,
+        modifier: Modifier
+    ) {
         val fieldId = defnComp.name.value
         val value by formRef.watch<Double>(fieldId).collectAsStateWithLifecycle()
 
@@ -483,96 +471,257 @@ feature/form/
 
 ---
 
-## ViewModel Pattern
+## ViewModel Pattern (Simplified - Pure MVI)
 
 ```kotlin
-@HiltViewModel
-class DynamicFormViewModel @Inject constructor(
-    private val submitFormUseCase: SubmitFormUseCase
-) : ViewModel() {
+class FormViewModel : ViewModel() {
 
     private val _formState = MutableStateFlow(FormState())
     val formState = _formState.asStateFlow()
 
-    private val _effect = Channel<FormEffect>()
-    val effect = _effect.receiveAsFlow()
-
     val formRef: FormRef by lazy { FormRefImpl(this) }
 
+    /**
+     * Initialize form with DefnForm and optional initial value
+     */
     fun initializeFromDefnForm(defnForm: DefnForm, formValueRaw: FormValueRaw? = null) {
-        _formState.value = defnForm.toFormState(formValueRaw)
+        // Create initial FormValueRaw if not provided
+        val initialValue = formValueRaw ?: createInitialFormValueRaw(defnForm)
+
+        _formState.update {
+            it.copy(
+                defnForm = defnForm,
+                initialFormValue = initialValue
+            )
+        }
+
+        // Initialize FormRef with the form
+        (formRef as? FormRefImpl)?.initialize(defnForm, initialValue)
     }
 
-    fun onEvent(event: FormEvent) {
-        when (event) {
-            is FormEvent.UpdateField<*> -> handleUpdateField(event)
-            is FormEvent.ValidateField -> validateField(event.fieldId)
-            is FormEvent.Submit -> submitForm()
-            // ... other events
+    /**
+     * Create initial FormValueRaw with default values from DefnForm
+     */
+    private fun createInitialFormValueRaw(defnForm: DefnForm): FormValueRaw {
+        val valueMap = mutableMapOf<MetaIdComp, JsonElement>()
+
+        defnForm.compMap.forEach { (compId, defnComp) ->
+            val defaultValue = getDefaultValueForType(defnComp.type.name)
+            valueMap[compId] = convertValueToJson(defaultValue)
+        }
+
+        return FormValueRaw().apply {
+            this.rowId = ApiPlus.nextRowId()
+            this.valueMap = valueMap
         }
     }
 
-    private fun submitForm() {
-        validateAllFields()
-        if (!_formState.value.isValid) return
+    private fun getDefaultValueForType(typeName: String): Any? {
+        return when (typeName.uppercase()) {
+            "TEXT", "EMAIL", "PHONE", "URL", "PICK_TEXT" -> ""
+            "NUMBER", "CURRENCY" -> 0.0
+            "BOOL" -> false
+            "DATE" -> null
+            else -> null
+        }
+    }
 
-        viewModelScope.launch {
-            _formState.update { it.copy(isSubmitting = true) }
-
-            when (val result = submitFormUseCase(formState.value.toFormValueRaw())) {
-                is Resource.Success -> _effect.send(FormEffect.NavigateBack)
-                is Resource.Error -> _formState.update { it.copy(submitError = result.message) }
-            }
+    private fun convertValueToJson(value: Any?): JsonElement {
+        return when (value) {
+            is String -> JsonPrimitive(value)
+            is Number -> JsonPrimitive(value)
+            is Boolean -> JsonPrimitive(value)
+            null -> JsonNull.INSTANCE
+            else -> JsonPrimitive(value.toString())
         }
     }
 }
 ```
 
+**Key Changes**:
+
+- ViewModel only manages configuration state (defnForm, initialFormValue)
+- All runtime state managed by FormRef
+- No event handling in ViewModel (events handled by parent component)
+- Simplified initialization logic
+
 ---
 
-## Screen Pattern
+## Screen Pattern (Pure MVI Architecture)
+
+### Pure MVI Components
+
+1. **Model (State)**: `FormState` - Configuration only (defnForm, initialFormValue)
+2. **View**: `Form` - Pure function of state
+3. **Intent**: `FormIntent` - Two intents: Submit and Watch
+
+### Form Screen (Pure MVI)
+
+**Pure MVI Composable Signature:**
+
+1. state: FormState - Single source of truth
+2. onIntent: (FormIntent) -> Unit - Single intent handler
+3. modifier: Modifier - Standard
+
+**Responsibilities:**
+
+- Receives state from parent
+- Dispatches intents to parent
+- No ViewModel dependency
+- Fully testable and previewable
 
 ```kotlin
 @Composable
 fun Form(
-    defnForm: DefnForm,  // Already parsed outside component
-    formValueRaw: FormValueRaw? = null,  // Already parsed outside component
-    viewModel: FormViewModel = hiltViewModel()
+    state: FormState,
+    onIntent: (FormIntent) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    LaunchedEffect(defnForm) {
-        viewModel.initializeFromDefnForm(defnForm, formValueRaw)
-    }
+    // Form renders based purely on state
+    // All logic handled by parent through state/intent
+    FormContent(
+        state = state,
+        onIntent = onIntent,
+        modifier = modifier
+    )
+}
+```
 
-    val formState by viewModel.formState.collectAsStateWithLifecycle()
-    val formRef = viewModel.formRef
+### FormContent (Stateless)
 
-    LaunchedEffect(Unit) {
-        viewModel.effect.collect { effect ->
-            when (effect) {
-                is FormEffect.NavigateBack -> onNavigateBack()
-                is FormEffect.ShowSnackbar -> showSnackbar(effect.message)
-            }
+**Responsibilities:**
+
+- Pure presentation
+- Render UI based on state
+- Dispatch intents through onIntent callback
+
+```kotlin
+@Composable
+private fun FormContent(
+    state: FormState,
+    onIntent: (FormIntent) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp)
+    ) {
+        val defnForm = state.defnForm
+        val rootComponent = defnForm?.compMap?.get(defnForm.displayCompositeId)
+
+        if (rootComponent != null && defnForm != null) {
+            // TODO: ComponentRendererFactory will need FormRef
+            // This needs to be provided by the parent component
+            Text(
+                text = "Form rendering: ${defnForm.name.name}",
+                modifier = Modifier.padding(16.dp)
+            )
+        } else {
+            Text(
+                text = "Error: Root component not found",
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(16.dp)
+            )
         }
-    }
-
-    Scaffold(
-        bottomBar = {
-            Button(
-                onClick = { viewModel.onEvent(FormEvent.Submit) },
-                enabled = formState.isValid && !formState.isSubmitting
-            ) {
-                Text("Submit")
-            }
-        }
-    ) { padding ->
-        ComponentRendererFactory.render(
-            defnComp = defnForm.compMap[defnForm.displayCompositeId]!!,
-            defnForm = defnForm,
-            formRef = formRef,
-            modifier = Modifier.padding(padding)
-        )
     }
 }
+```
+
+### Parent Component Usage
+
+The parent component manages the ViewModel and handles intents:
+
+```kotlin
+@Composable
+fun FormScreen(
+    defnForm: DefnForm,
+    viewModel: FormViewModel = viewModel()
+) {
+    // Initialize form
+    LaunchedEffect(defnForm) {
+        viewModel.initializeFromDefnForm(defnForm)
+    }
+
+    // Collect state
+    val state by viewModel.formState.collectAsStateWithLifecycle()
+    val formRef = viewModel.formRef
+
+    // Render pure Form
+    Form(
+        state = state,
+        onIntent = { intent ->
+            when (intent) {
+                is FormIntent.Submit -> {
+                    // Handle form submission
+                    submitToApi(intent.formValue)
+                }
+                is FormIntent.Watch -> {
+                    // Handle field changes
+                    logFieldChange(intent.fieldId, intent.fieldValue)
+                }
+            }
+        }
+    )
+}
+```
+
+### Pure MVI Best Practices
+
+1. **State over Callbacks**: Pass single `state` object, not individual properties
+2. **Single Intent Handler**: Use `onIntent: (FormIntent) -> Unit` for all user actions
+3. **Stateless Components**: No `remember`, `LaunchedEffect`, or ViewModel in Form
+4. **Parent Handles Logic**: All business logic in parent component, not in Form
+5. **Immutable State**: FormState always copied, never mutated
+6. **FormRef for Imperative API**: Use FormRef for field operations, not state/intents
+
+### Pure MVI Parameter Ordering
+
+**Pure MVI Composable Signature:**
+
+```kotlin
+@Composable
+fun ComponentName(
+    // 1. State (single source of truth)
+    state: ComponentState,
+
+    // 2. Intent handler (all user actions)
+    onIntent: (ComponentIntent) -> Unit,
+
+    // 3. Modifier (standard convention)
+    modifier: Modifier = Modifier
+)
+```
+
+**Why this order?**
+
+- **State first**: Most important parameter, single source of truth
+- **Intent second**: Single entry point for all user actions
+- **Modifier last**: Standard Android convention
+
+**Example:**
+
+```kotlin
+// ✅ CORRECT - Pure MVI signature
+Form(
+    state = formState,
+    onIntent = { intent ->
+        when (intent) {
+            is FormIntent.Submit -> handleSubmit(intent.formValue)
+            is FormIntent.Watch -> logFieldChange(intent.fieldId)
+        }
+    }
+)
+
+// ❌ WRONG - Not pure MVI (has ViewModel, callbacks)
+Form(
+    defnForm = myDefnForm,
+    onFormRefReady = { ref -> ... },
+    viewModel = viewModel()
+)
 ```
 
 ---
@@ -588,7 +737,12 @@ Grids store `FieldValueGrid` with multiple rows. Each row has own `valueMap`.
 ```kotlin
 object GridRenderer : ComponentRenderer {
     @Composable
-    override fun Render(defnComp: DefnComp, defnForm: DefnForm, formRef: FormRef, modifier: Modifier) {
+    override fun Render(
+        defnComp: DefnComp,
+        defnForm: DefnForm,
+        formRef: FormRef,
+        modifier: Modifier
+    ) {
         val gridId = defnComp.name.value
         val gridValue by formRef.watch<FieldValueGrid>(gridId).collectAsStateWithLifecycle()
         val fieldIdSet = extractFieldIdSet(defnComp)
@@ -690,22 +844,42 @@ DefnForm (Structure)               FormValueRaw (Data)
             ↓
       Passed to Component
             ↓
-User Input → FormEvent → ViewModel → FormState → UI Recompose
-                                   → FormRef (external access)
+User Input → FormEvent.UpdateField → ViewModel
+                                   ↓
+                    Updates BOTH FormValueRaw.valueMap AND FieldState
+                                   ↓
+                              FormState → UI Recompose
+                                   ↓
+                    FormRef.getValues() → Returns FormValueRaw
+                                   ↓
+                            Submit to API
 ```
+
+### FormValueRaw Integration
+
+1. **FormValueRaw is the primary data container**: Always stored in FormState
+2. **Bidirectional sync**:
+    - `UpdateField` → updates both FieldState and FormValueRaw.valueMap
+    - `SetValues(FormValueRaw)` → updates both FormValueRaw and all FieldStates
+3. **FormRef exposes FormValueRaw**: `getValues()` returns the complete FormValueRaw ready for API
+   submission
+4. **Type conversions**: ViewModel handles conversions between Kotlin types and JsonElement
 
 ---
 
 ## Key Principles
 
-1. **Unidirectional Flow** - UI → Event → ViewModel → State → UI
-2. **Single Source of Truth** - FormState holds everything
-3. **Separation of Concerns** - Validation in use cases, rendering in factory
-4. **Type Safety** - Sealed classes, generics
-5. **Immutability** - State never mutated, always copied
-6. **Lifecycle Awareness** - collectAsStateWithLifecycle
-7. **Factory Pattern** - Easy to extend with new field types
-8. **JSON-Driven** - Forms defined by DefnForm, no code changes needed
+1. **Unidirectional Flow** - UI → Intent → Parent → State → UI
+2. **Simplified State** - FormState holds only configuration (defnForm, initialFormValue)
+3. **Pure MVI** - Form component is pure function of state, no ViewModel dependency
+4. **Two Intents** - Only Submit and Watch intents for external communication
+5. **FormRef Imperative API** - All field operations through FormRef (getValue, setValue, etc.)
+6. **Separation of Concerns** - Form renders, parent handles logic, FormRef manages fields
+7. **Type Safety** - Sealed classes, generics
+8. **Immutability** - State never mutated, always copied
+9. **Lifecycle Awareness** - collectAsStateWithLifecycle in parent component
+10. **Factory Pattern** - Easy to extend with new field types
+11. **JSON-Driven** - Forms defined by DefnForm, no code changes needed
 
 ---
 
@@ -779,10 +953,12 @@ User Input → FormEvent → ViewModel → FormState → UI Recompose
 ```kotlin
 LaunchedEffect(userId) {
     val user = loadUser(userId)
-    formRef.setValues(mapOf(
-        "name" to user.name,
-        "email" to user.email
-    ), shouldValidate = false)
+    formRef.setValues(
+        mapOf(
+            "name" to user.name,
+            "email" to user.email
+        ), shouldValidate = false
+    )
 }
 ```
 

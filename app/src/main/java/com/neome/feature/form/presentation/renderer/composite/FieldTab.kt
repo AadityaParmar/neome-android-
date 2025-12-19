@@ -74,7 +74,7 @@ object FieldTab : ComponentRenderer {
                                 .fillMaxWidth()
                                 .padding(16.dp)
                         ) {
-                            ComponentRendererFactory.render(
+                            ComponentRendererFactory.Render(
                                 defnComp = selectedTabComp,
                                 defnForm = defnForm,
                                 formRef = formRef

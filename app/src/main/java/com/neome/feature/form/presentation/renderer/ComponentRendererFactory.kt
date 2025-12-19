@@ -24,7 +24,7 @@ import com.neome.feature.form.presentation.renderer.field.UnsupportedRenderer
 object ComponentRendererFactory {
 
     @Composable
-    fun render(
+    fun Render(
         defnComp: DefnComp,
         defnForm: DefnForm,
         formRef: FormRef,
