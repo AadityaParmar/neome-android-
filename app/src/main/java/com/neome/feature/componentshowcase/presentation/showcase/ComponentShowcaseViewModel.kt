@@ -68,6 +68,11 @@ class ComponentShowcaseViewModel : ViewModel() {
                 name = "Other",
                 description = "Other Material3 components",
                 components = listOf("Badge", "Chip", "Divider", "ListItem", "Snackbar", "Tooltip")
+            ),
+            ComponentCategory(
+                name = "Media",
+                description = "Camera and media capture features",
+                components = listOf("Simple Camera", "Camera with Preview", "Camera with Cropper")
             )
         )
         _state.update { it.copy(categories = categories) }
