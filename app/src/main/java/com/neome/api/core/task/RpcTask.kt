@@ -1,0 +1,25 @@
+// neome.ai API - do not change
+//
+@file:Suppress("unused", "MemberVisibilityCanBePrivate", "CanBeParameter", "PropertyName")
+
+
+package com.neome.api.core.task
+
+import com.neome.api.core.task.msg.MsgTaskId
+import com.neome.api.core.task.sig.SigTask
+import com.neome.api.meta.base.Types.ServiceName
+import com.neome.api.nucleus.base.ApiPlus
+import com.neome.api.nucleus.base.CallFactory
+import com.neome.api.nucleus.base.ISigAcceptor
+
+class RpcTask {
+    companion object {
+        val SN: ServiceName = ServiceName.task
+
+        fun getTaskStatus(msg: MsgTaskId, sigAcceptor: ISigAcceptor<SigTask>) {
+            CallFactory.rpc.create(SigTask::class.java, ApiPlus.ENT_ID_GLOBAL, SN, "getTaskStatus")
+                .sendBearerToken()
+                .get(msg, sigAcceptor)
+        }
+    }
+}

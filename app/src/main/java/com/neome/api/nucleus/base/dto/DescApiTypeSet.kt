@@ -1,0 +1,11 @@
+// neome.ai API - do not change
+//
+@file:Suppress("unused", "MemberVisibilityCanBePrivate", "CanBeParameter", "PropertyName")
+
+
+package com.neome.api.nucleus.base.dto
+
+class DescApiTypeSet {
+    val fileName: string
+    val setMap: Record<string, string[]>
+}

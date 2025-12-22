@@ -1,0 +1,15 @@
+// neome.ai API - do not change
+//
+@file:Suppress("unused", "MemberVisibilityCanBePrivate", "CanBeParameter", "PropertyName")
+
+
+package com.neome.api.meta.base.dto
+
+import com.neome.api.meta.base.Types.MetaIdVar
+
+class EntVdExpertPause : EntVdAutoStep() {
+    var canAdminResume: boolean? = null
+    var message: StudioValueParagraph? = null
+    var option: MetaIdVar? = null
+    var pauseKey: StudioValueText? = null
+}

@@ -1,0 +1,14 @@
+// neome.ai API - do not change
+//
+@file:Suppress("unused", "MemberVisibilityCanBePrivate", "CanBeParameter", "PropertyName")
+
+
+package com.neome.api.app.base.dto
+
+import com.neome.api.meta.base.Types.MetaIdComposite
+import com.neome.api.meta.base.Types.MetaIdForm
+
+class DtoNeoScriptMenu : DtoNeoScript() {
+    var compositeId: MetaIdComposite? = null
+    var formId: MetaIdForm? = null
+}
