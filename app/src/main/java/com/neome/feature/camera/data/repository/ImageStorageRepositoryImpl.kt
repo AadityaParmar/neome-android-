@@ -6,13 +6,12 @@ import com.neome.feature.camera.domain.model.ImageDirectory
 import com.neome.feature.camera.domain.model.ImageQuality
 import com.neome.feature.camera.domain.model.SavedImageResult
 import com.neome.feature.camera.domain.repository.ImageStorageRepository
-import javax.inject.Inject
 
 /**
  * Implementation of ImageStorageRepository.
  * Delegates to ImageFileDataSource for actual file operations.
  */
-class ImageStorageRepositoryImpl @Inject constructor(
+class ImageStorageRepositoryImpl(
     private val imageFileDataSource: ImageFileDataSource
 ) : ImageStorageRepository {
 

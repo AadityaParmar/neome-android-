@@ -5,12 +5,11 @@ import com.neome.feature.camera.domain.model.ImageDirectory
 import com.neome.feature.camera.domain.model.ImageQuality
 import com.neome.feature.camera.domain.model.SavedImageResult
 import com.neome.feature.camera.domain.repository.ImageStorageRepository
-import javax.inject.Inject
 
 /**
  * Saves an image to device storage.
  */
-class SaveImageUseCase @Inject constructor(
+class SaveImageUseCase(
     private val repository: ImageStorageRepository
 ) {
     suspend operator fun invoke(

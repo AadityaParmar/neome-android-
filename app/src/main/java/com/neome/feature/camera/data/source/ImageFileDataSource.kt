@@ -11,7 +11,6 @@ import com.neome.feature.camera.domain.model.CapturedImage
 import com.neome.feature.camera.domain.model.ImageDirectory
 import com.neome.feature.camera.domain.model.ImageQuality
 import com.neome.feature.camera.domain.model.SavedImageResult
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -19,14 +18,13 @@ import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import javax.inject.Inject
 
 /**
  * Data source for file I/O operations.
  * Handles MediaStore for Android 10+ and direct file access for older versions.
  */
-class ImageFileDataSource @Inject constructor(
-    @ApplicationContext private val context: Context
+class ImageFileDataSource(
+    private val context: Context
 ) {
 
     suspend fun saveImage(

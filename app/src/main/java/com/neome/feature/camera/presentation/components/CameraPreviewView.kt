@@ -1,9 +1,9 @@
 package com.neome.feature.camera.presentation.components
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Matrix
+import android.view.ScaleGestureDetector
+import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -15,8 +15,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -26,11 +28,13 @@ import androidx.core.content.ContextCompat
 import com.neome.feature.camera.domain.model.CapturedImage
 import com.neome.feature.camera.presentation.capture.CameraFacing
 import com.neome.feature.camera.presentation.capture.FlashMode
-import java.io.ByteArrayOutputStream
 import java.util.concurrent.Executors
 
 /**
- * Camera preview composable using CameraX.
+ * Camera preview composable using CameraX with zoom and proper flash handling.
+ *
+ * Flash is explicitly applied at capture time to ensure the flash state
+ * always matches what user expects.
  */
 @Composable
 fun CameraPreviewView(
@@ -45,25 +49,68 @@ fun CameraPreviewView(
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
 
+    // Keep flash mode as updated state to ensure capture uses current value
+    val currentFlashMode by rememberUpdatedState(flashMode)
+
     var imageCapture by remember { mutableStateOf<ImageCapture?>(null) }
+    var camera by remember { mutableStateOf<Camera?>(null) }
+    var currentZoom by remember { mutableFloatStateOf(1f) }
     val cameraExecutor = remember { Executors.newSingleThreadExecutor() }
 
-    val previewView = remember { PreviewView(context) }
+    // Create PreviewView with pinch-to-zoom
+    val previewView = remember {
+        PreviewView(context).apply {
+            val scaleGestureDetector = ScaleGestureDetector(
+                context,
+                object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+                    override fun onScale(detector: ScaleGestureDetector): Boolean {
+                        val cam = camera ?: return true
+                        val zoomState = cam.cameraInfo.zoomState.value ?: return true
 
-    // Trigger capture when isCapturing changes to true
-    LaunchedEffect(isCapturing) {
-        if (isCapturing && imageCapture != null) {
-            captureImage(
-                imageCapture = imageCapture!!,
-                context = context,
-                onImageCaptured = onImageCaptured,
-                onError = onError
+                        val newZoom = (currentZoom * detector.scaleFactor)
+                            .coerceIn(zoomState.minZoomRatio, zoomState.maxZoomRatio)
+
+                        cam.cameraControl.setZoomRatio(newZoom)
+                        currentZoom = newZoom
+                        return true
+                    }
+                }
             )
+
+            setOnTouchListener { _, event ->
+                scaleGestureDetector.onTouchEvent(event)
+                true
+            }
         }
     }
 
-    // Setup camera
-    LaunchedEffect(cameraFacing, flashMode) {
+    // Trigger capture when isCapturing changes to true
+    // CRITICAL: Apply flash mode at capture time for reliable flash behavior
+    LaunchedEffect(isCapturing) {
+        if (isCapturing) {
+            val capture = imageCapture
+            if (capture != null) {
+                // Apply flash mode immediately before capture
+                capture.flashMode = when (currentFlashMode) {
+                    FlashMode.OFF -> ImageCapture.FLASH_MODE_OFF
+                    FlashMode.ON -> ImageCapture.FLASH_MODE_ON
+                    FlashMode.AUTO -> ImageCapture.FLASH_MODE_AUTO
+                }
+
+                captureImage(
+                    imageCapture = capture,
+                    context = context,
+                    onImageCaptured = onImageCaptured,
+                    onError = onError
+                )
+            } else {
+                onError("Camera not ready")
+            }
+        }
+    }
+
+    // Setup camera - only rebind when camera facing changes
+    LaunchedEffect(cameraFacing) {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
 
         cameraProviderFuture.addListener({
@@ -76,10 +123,11 @@ fun CameraPreviewView(
                         it.surfaceProvider = previewView.surfaceProvider
                     }
 
-                imageCapture = ImageCapture.Builder()
+                // Create ImageCapture with initial flash mode
+                val newImageCapture = ImageCapture.Builder()
                     .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
                     .setFlashMode(
-                        when (flashMode) {
+                        when (currentFlashMode) {
                             FlashMode.OFF -> ImageCapture.FLASH_MODE_OFF
                             FlashMode.ON -> ImageCapture.FLASH_MODE_ON
                             FlashMode.AUTO -> ImageCapture.FLASH_MODE_AUTO
@@ -87,18 +135,23 @@ fun CameraPreviewView(
                     )
                     .build()
 
+                imageCapture = newImageCapture
+
                 val cameraSelector = when (cameraFacing) {
                     CameraFacing.BACK -> CameraSelector.DEFAULT_BACK_CAMERA
                     CameraFacing.FRONT -> CameraSelector.DEFAULT_FRONT_CAMERA
                 }
 
                 cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
+                camera = cameraProvider.bindToLifecycle(
                     lifecycleOwner,
                     cameraSelector,
                     preview,
-                    imageCapture
+                    newImageCapture
                 )
+
+                // Reset zoom when switching cameras
+                currentZoom = 1f
 
                 onCameraReady()
             } catch (e: Exception) {

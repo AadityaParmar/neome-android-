@@ -48,8 +48,6 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.neome.feature.camera.domain.model.CapturedImage
 import com.neome.feature.camera.presentation.capture.CameraCaptureScreen
-import com.neome.feature.camera.presentation.coordinator.CameraFlowConfig
-import com.neome.feature.camera.presentation.crop.AspectRatio
 import com.neome.feature.camera.presentation.crop.ImageCropScreen
 
 /**
@@ -201,7 +199,6 @@ fun MediaShowcase() {
         ) {
             ImageCropScreen(
                 sourceImage = capturedImage!!,
-                aspectRatio = AspectRatio.Square,
                 onCropConfirmed = { croppedImage ->
                     capturedImage = croppedImage
                     showCropScreen = false

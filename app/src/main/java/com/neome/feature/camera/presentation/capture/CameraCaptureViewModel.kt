@@ -3,21 +3,18 @@ package com.neome.feature.camera.presentation.capture
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neome.feature.camera.domain.model.CapturedImage
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 /**
  * ViewModel for camera capture screen.
  * Manages camera state using MVI pattern.
  */
-@HiltViewModel
-class CameraCaptureViewModel @Inject constructor() : ViewModel() {
+class CameraCaptureViewModel : ViewModel() {
 
     private val _state = MutableStateFlow(CameraCaptureState())
     val state = _state.asStateFlow()

@@ -8,13 +8,12 @@ import com.neome.feature.camera.domain.model.CropRegion
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
-import javax.inject.Inject
 
 /**
  * Crops an image based on the provided region.
  * Performs the operation on a background thread.
  */
-class CropImageUseCase @Inject constructor() {
+class CropImageUseCase {
 
     suspend operator fun invoke(
         image: CapturedImage,

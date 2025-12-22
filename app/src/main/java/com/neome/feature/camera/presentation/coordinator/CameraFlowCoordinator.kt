@@ -101,7 +101,6 @@ fun CameraFlowCoordinator(
         is FlowStage.Crop -> {
             ImageCropScreen(
                 sourceImage = stage.image,
-                aspectRatio = config.aspectRatio,
                 onCropConfirmed = { croppedImage ->
                     if (config.enableSaving) {
                         // Move to save stage

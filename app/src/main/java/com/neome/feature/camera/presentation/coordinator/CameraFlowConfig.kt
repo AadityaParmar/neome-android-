@@ -3,7 +3,6 @@ package com.neome.feature.camera.presentation.coordinator
 import com.neome.feature.camera.domain.model.ImageDirectory
 import com.neome.feature.camera.domain.model.ImageQuality
 import com.neome.feature.camera.presentation.capture.CameraFacing
-import com.neome.feature.camera.presentation.crop.AspectRatio
 
 /**
  * Configuration for camera flow.
@@ -17,11 +16,12 @@ import com.neome.feature.camera.presentation.crop.AspectRatio
  *
  * Flow C: Capture → Save
  *   enableCropping = false, enableSaving = true
+ *
+ * Note: Cropping is always FREE mode (no aspect ratio constraints).
  */
 data class CameraFlowConfig(
     val enableCropping: Boolean = false,
     val enableSaving: Boolean = false,
-    val aspectRatio: AspectRatio = AspectRatio.Free,
     val imageQuality: ImageQuality = ImageQuality.HIGH,
     val saveDirectory: ImageDirectory = ImageDirectory.PICTURES,
     val initialCameraFacing: CameraFacing = CameraFacing.BACK
@@ -33,12 +33,12 @@ data class CameraFlowConfig(
         val CAPTURE_ONLY = CameraFlowConfig()
 
         /**
-         * Capture with square crop and save.
+         * Capture with free crop and save.
+         * User can crop to any shape/size they want.
          */
         val PROFILE_PHOTO = CameraFlowConfig(
             enableCropping = true,
             enableSaving = true,
-            aspectRatio = AspectRatio.Square,
             imageQuality = ImageQuality.HIGH
         )
 

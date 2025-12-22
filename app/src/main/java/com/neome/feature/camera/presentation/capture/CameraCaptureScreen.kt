@@ -33,15 +33,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.neome.feature.camera.domain.model.CapturedImage
 import com.neome.feature.camera.presentation.components.CameraPreviewView
 import com.neome.feature.camera.presentation.components.CaptureButton
 
 @Composable
 fun CameraCaptureScreen(
-    viewModel: CameraCaptureViewModel = hiltViewModel(),
+    viewModel: CameraCaptureViewModel = viewModel(),
     onImageCaptured: (CapturedImage) -> Unit,
     onCancelled: () -> Unit,
     onError: (CameraError) -> Unit

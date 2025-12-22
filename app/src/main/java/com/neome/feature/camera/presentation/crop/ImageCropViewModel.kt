@@ -1,25 +1,25 @@
 package com.neome.feature.camera.presentation.crop
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.neome.feature.camera.domain.model.CapturedImage
 import com.neome.feature.camera.domain.model.CropRegion
 import com.neome.feature.camera.domain.usecase.CropImageUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 /**
  * ViewModel for image crop screen.
  * Manages crop state using MVI pattern.
+ *
+ * Only FREE crop mode is supported - no aspect ratio constraints.
  */
-@HiltViewModel
-class ImageCropViewModel @Inject constructor(
+class ImageCropViewModel(
     private val cropImageUseCase: CropImageUseCase
 ) : ViewModel() {
 
@@ -37,10 +37,10 @@ class ImageCropViewModel @Inject constructor(
     }
 
     /**
-     * Set initial aspect ratio.
+     * Set initial aspect ratio (kept for backward compatibility, but ignored).
      */
     fun setAspectRatio(aspectRatio: AspectRatio) {
-        _state.update { it.copy(aspectRatio = aspectRatio) }
+        // Ignored - only free crop is supported
     }
 
     /**
@@ -49,7 +49,6 @@ class ImageCropViewModel @Inject constructor(
     fun onEvent(event: ImageCropEvent) {
         when (event) {
             is ImageCropEvent.CropRegionChanged -> updateCropRegion(event.region)
-            is ImageCropEvent.AspectRatioSelected -> updateAspectRatio(event.ratio)
             is ImageCropEvent.ConfirmCrop -> confirmCrop()
             is ImageCropEvent.Cancel -> cancel()
             is ImageCropEvent.Reset -> reset()
@@ -58,10 +57,6 @@ class ImageCropViewModel @Inject constructor(
 
     private fun updateCropRegion(region: CropRegion) {
         _state.update { it.copy(cropRegion = region) }
-    }
-
-    private fun updateAspectRatio(ratio: AspectRatio) {
-        _state.update { it.copy(aspectRatio = ratio) }
     }
 
     private fun confirmCrop() {
@@ -103,5 +98,20 @@ class ImageCropViewModel @Inject constructor(
 
     private fun reset() {
         _state.update { it.copy(cropRegion = CropRegion.FULL, error = null) }
+    }
+
+    /**
+     * Factory for creating ImageCropViewModel with manual dependency injection.
+     */
+    class Factory(
+        private val cropImageUseCase: CropImageUseCase
+    ) : ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(ImageCropViewModel::class.java)) {
+                return ImageCropViewModel(cropImageUseCase) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
+        }
     }
 }

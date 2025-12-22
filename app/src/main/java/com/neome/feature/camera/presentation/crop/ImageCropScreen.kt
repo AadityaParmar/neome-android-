@@ -13,16 +13,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -34,29 +36,39 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.neome.feature.camera.domain.model.CapturedImage
+import com.neome.feature.camera.domain.usecase.CropImageUseCase
 import com.neome.feature.camera.presentation.components.CropOverlay
 
+/**
+ * Image crop screen with free crop mode only.
+ *
+ * Features:
+ * - Free crop (always movable and resizable)
+ * - Consistent action buttons with proper tap areas
+ * - Safe padding to prevent gesture conflicts
+ * - Smooth, intuitive interactions
+ */
 @Composable
 fun ImageCropScreen(
     sourceImage: CapturedImage,
     aspectRatio: AspectRatio = AspectRatio.Free,
-    viewModel: ImageCropViewModel = hiltViewModel(),
+    viewModel: ImageCropViewModel = viewModel(
+        factory = ImageCropViewModel.Factory(
+            cropImageUseCase = CropImageUseCase()
+        )
+    ),
     onCropConfirmed: (CapturedImage) -> Unit,
     onCancelled: (CapturedImage) -> Unit,
     onError: (String) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    // Initialize with source image and aspect ratio
+    // Initialize with source image
     LaunchedEffect(sourceImage) {
         viewModel.setSourceImage(sourceImage)
-    }
-
-    LaunchedEffect(aspectRatio) {
-        viewModel.setAspectRatio(aspectRatio)
     }
 
     // Collect effects
@@ -98,7 +110,8 @@ private fun ImageCropContent(
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
                         text = "Processing...",
-                        color = Color.White
+                        color = Color.White,
+                        style = MaterialTheme.typography.bodyMedium
                     )
                 }
             }
@@ -112,10 +125,11 @@ private fun ImageCropContent(
                 )
             }
 
+            // Image area with safe margins for controls
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(vertical = 80.dp)
+                    .padding(top = 72.dp, bottom = 88.dp)
             ) {
                 if (bitmap != null) {
                     Image(
@@ -127,47 +141,52 @@ private fun ImageCropContent(
 
                     CropOverlay(
                         cropRegion = state.cropRegion,
-                        aspectRatio = state.aspectRatio.toRatio(),
                         onCropRegionChanged = { region ->
                             onEvent(ImageCropEvent.CropRegionChanged(region))
                         },
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier.fillMaxSize(),
+                        safePadding = 24.dp
                     )
                 }
             }
 
-            // Top controls
+            // Top controls - Cancel and Reset
             TopControls(
                 onClose = { onEvent(ImageCropEvent.Cancel) },
                 onReset = { onEvent(ImageCropEvent.Reset) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.TopCenter)
-                    .padding(16.dp)
+                    .background(Color.Black.copy(alpha = 0.3f))
+                    .padding(horizontal = 8.dp, vertical = 12.dp)
             )
 
-            // Bottom controls
+            // Bottom controls - Confirm button
             BottomControls(
-                aspectRatio = state.aspectRatio,
-                onAspectRatioSelected = { ratio ->
-                    onEvent(ImageCropEvent.AspectRatioSelected(ratio))
-                },
                 onConfirm = { onEvent(ImageCropEvent.ConfirmCrop) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.BottomCenter)
-                    .padding(16.dp)
+                    .background(Color.Black.copy(alpha = 0.3f))
+                    .padding(horizontal = 16.dp, vertical = 16.dp)
             )
 
             // Error message
             state.error?.let { error ->
-                Text(
-                    text = error,
-                    color = MaterialTheme.colorScheme.error,
+                Surface(
                     modifier = Modifier
                         .align(Alignment.Center)
-                        .padding(16.dp)
-                )
+                        .padding(32.dp),
+                    color = MaterialTheme.colorScheme.errorContainer,
+                    shape = MaterialTheme.shapes.medium
+                ) {
+                    Text(
+                        text = error,
+                        color = MaterialTheme.colorScheme.onErrorContainer,
+                        modifier = Modifier.padding(16.dp),
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
             }
         } else {
             // No image
@@ -177,13 +196,18 @@ private fun ImageCropContent(
             ) {
                 Text(
                     text = "No image to crop",
-                    color = Color.White
+                    color = Color.White,
+                    style = MaterialTheme.typography.bodyLarge
                 )
             }
         }
     }
 }
 
+/**
+ * Top controls with Cancel and Reset buttons.
+ * All buttons have consistent size (48dp) and tap area.
+ */
 @Composable
 private fun TopControls(
     onClose: () -> Unit,
@@ -195,84 +219,63 @@ private fun TopControls(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IconButton(onClick = onClose) {
+        // Cancel button - 48dp touch target
+        IconButton(
+            onClick = onClose,
+            modifier = Modifier.size(48.dp)
+        ) {
             Icon(
                 imageVector = Icons.Default.Close,
                 contentDescription = "Cancel",
-                tint = Color.White
+                tint = Color.White,
+                modifier = Modifier.size(28.dp)
             )
         }
 
-        IconButton(onClick = onReset) {
+        // Reset button - 48dp touch target
+        IconButton(
+            onClick = onReset,
+            modifier = Modifier.size(48.dp)
+        ) {
             Icon(
                 imageVector = Icons.Default.Refresh,
-                contentDescription = "Reset",
-                tint = Color.White
+                contentDescription = "Reset crop",
+                tint = Color.White,
+                modifier = Modifier.size(28.dp)
             )
         }
     }
 }
 
+/**
+ * Bottom controls with Confirm button.
+ * Confirm button matches the size and style of other action buttons.
+ */
 @Composable
 private fun BottomControls(
-    aspectRatio: AspectRatio,
-    onAspectRatioSelected: (AspectRatio) -> Unit,
     onConfirm: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(
+    Row(
         modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        // Aspect ratio chips
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.padding(bottom = 16.dp)
-        ) {
-            AspectRatioChip(
-                label = "Free",
-                isSelected = aspectRatio is AspectRatio.Free,
-                onClick = { onAspectRatioSelected(AspectRatio.Free) }
-            )
-            AspectRatioChip(
-                label = "1:1",
-                isSelected = aspectRatio is AspectRatio.Square,
-                onClick = { onAspectRatioSelected(AspectRatio.Square) }
-            )
-            AspectRatioChip(
-                label = "4:3",
-                isSelected = aspectRatio is AspectRatio.FourThree,
-                onClick = { onAspectRatioSelected(AspectRatio.FourThree) }
-            )
-            AspectRatioChip(
-                label = "16:9",
-                isSelected = aspectRatio is AspectRatio.SixteenNine,
-                onClick = { onAspectRatioSelected(AspectRatio.SixteenNine) }
-            )
-        }
-
-        // Confirm button
-        Button(
+        // Confirm button - prominent, easy to tap (56dp)
+        FilledIconButton(
             onClick = onConfirm,
-            modifier = Modifier.size(56.dp)
+            modifier = Modifier.size(56.dp),
+            shape = CircleShape,
+            colors = IconButtonDefaults.filledIconButtonColors(
+                containerColor = Color.White,
+                contentColor = Color.Black
+            )
         ) {
             Icon(
                 imageVector = Icons.Default.Check,
-                contentDescription = "Confirm crop"
+                contentDescription = "Confirm crop",
+                modifier = Modifier.size(32.dp)
             )
         }
     }
-}
-
-@Composable
-private fun AspectRatioChip(
-    label: String,
-    isSelected: Boolean,
-    onClick: () -> Unit
-) {
-    FilterChip(
-        selected = isSelected,
-        onClick = onClick,
-        label = { Text(label) }
-    )
 }
