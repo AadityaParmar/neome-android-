@@ -1,0 +1,21 @@
+// neome.ai API - do not change
+//
+
+package com.neome.java.api.meta.base.dto;
+
+import com.neome.java.api.meta.base.Types.EnumContactCopyField;
+import com.neome.java.api.meta.base.Types.MetaIdField;
+
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
+
+@SuppressWarnings("unused")
+public class StudioFieldRefContact extends StudioField
+{
+  @Nullable
+  public Map<MetaIdField, EnumContactCopyField> copyFieldMap;
+
+  @Nullable
+  public EnumContactCopyField[] editableContactFieldSet;
+}

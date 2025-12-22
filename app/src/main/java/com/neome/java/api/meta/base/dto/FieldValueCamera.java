@@ -1,0 +1,21 @@
+// neome.ai API - do not change
+//
+
+package com.neome.java.api.meta.base.dto;
+
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Date;
+
+@SuppressWarnings("unused")
+public class FieldValueCamera extends FieldValueImage
+{
+  @Nullable
+  public FieldValueLocation captureLocation;
+
+  @Nullable
+  public Date captureTime;
+
+  @Nullable
+  public FieldValueEntUserId captureUser;
+}

@@ -1,0 +1,14 @@
+// neome.ai API - do not change
+//
+
+package com.neome.java.api.meta.base.dto;
+
+import java.util.Map;
+
+@SuppressWarnings("unused")
+public class DefnStudioMapOfDtoOption
+{
+  public String[] keys;
+
+  public Map<String, DefnDtoOption> map;
+}

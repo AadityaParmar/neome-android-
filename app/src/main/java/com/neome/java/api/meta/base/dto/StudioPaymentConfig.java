@@ -1,0 +1,44 @@
+// neome.ai API - do not change
+//
+
+package com.neome.java.api.meta.base.dto;
+
+import com.neome.java.api.meta.base.Types.CurrencyKey;
+import com.neome.java.api.meta.base.Types.EnumDefnPaymentMethodKind;
+import com.neome.java.api.meta.base.Types.MetaIdField;
+
+import org.jetbrains.annotations.Nullable;
+
+@SuppressWarnings("unused")
+public class StudioPaymentConfig extends StudioBase
+{
+  @Nullable
+  public EnumDefnPaymentMethodKind[] allowedPaymentMethodSet;
+
+  @Nullable
+  public MetaIdField amountFieldId;
+
+  @Nullable
+  public CurrencyKey currency;
+
+  @Nullable
+  public MetaIdField currencyFieldId;
+
+  @Nullable
+  public MetaIdField customerContactFieldId;
+
+  @Nullable
+  public MetaIdField customerEmailFieldId;
+
+  @Nullable
+  public MetaIdField customerNameFieldId;
+
+  @Nullable
+  public MetaIdField descriptionFieldId;
+
+  @Nullable
+  public Boolean enablePayment;
+
+  @Nullable
+  public MetaIdField referenceIdFieldId;
+}

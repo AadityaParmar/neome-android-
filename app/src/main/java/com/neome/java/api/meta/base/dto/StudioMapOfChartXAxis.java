@@ -1,0 +1,16 @@
+// neome.ai API - do not change
+//
+
+package com.neome.java.api.meta.base.dto;
+
+import com.neome.java.api.meta.base.Types.MetaIdChartXAxis;
+
+import java.util.Map;
+
+@SuppressWarnings("unused")
+public class StudioMapOfChartXAxis extends StudioBase
+{
+  public MetaIdChartXAxis[] keys;
+
+  public Map<MetaIdChartXAxis, StudioDtoChartXAxis> map;
+}

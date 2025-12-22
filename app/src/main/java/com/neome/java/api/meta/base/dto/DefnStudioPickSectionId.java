@@ -1,0 +1,18 @@
+// neome.ai API - do not change
+//
+
+package com.neome.java.api.meta.base.dto;
+
+import com.neome.java.api.meta.base.Types.MetaIdForm;
+import com.neome.java.api.meta.base.Types.MetaIdSection;
+
+import org.jetbrains.annotations.Nullable;
+
+@SuppressWarnings("unused")
+public class DefnStudioPickSectionId extends DefnFieldEditable
+{
+  @Nullable
+  public MetaIdSection[] excludeSectionIdSet;
+
+  public MetaIdForm formId;
+}

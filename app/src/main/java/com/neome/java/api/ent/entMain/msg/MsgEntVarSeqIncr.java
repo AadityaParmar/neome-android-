@@ -1,0 +1,18 @@
+// neome.ai API - do not change
+//
+
+package com.neome.java.api.ent.entMain.msg;
+
+import com.neome.java.api.meta.base.Types.MetaIdVar;
+import com.neome.java.api.nucleus.base.msg.Msg;
+
+import org.jetbrains.annotations.Nullable;
+
+@SuppressWarnings("unused")
+public class MsgEntVarSeqIncr extends Msg
+{
+  public MetaIdVar seqVarId;
+
+  @Nullable
+  public Long step;
+}

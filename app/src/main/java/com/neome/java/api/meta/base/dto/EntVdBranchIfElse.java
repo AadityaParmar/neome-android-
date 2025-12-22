@@ -1,0 +1,22 @@
+// neome.ai API - do not change
+//
+
+package com.neome.java.api.meta.base.dto;
+
+import com.neome.java.api.meta.base.Types.EnumDefnKindBranchIfElse;
+import com.neome.java.api.meta.base.Types.MetaIdVar;
+
+import org.jetbrains.annotations.Nullable;
+
+@SuppressWarnings("unused")
+public class EntVdBranchIfElse extends EntVdAutoStep
+{
+  @Nullable
+  public StudioMapOfCondition condition;
+
+  @Nullable
+  public MetaIdVar conditionVarId;
+
+  @Nullable
+  public EnumDefnKindBranchIfElse option;
+}
