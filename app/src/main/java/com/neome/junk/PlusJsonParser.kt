@@ -1,10 +1,12 @@
-package com.neome.feature.form.utils
+package com.neome.junk
 
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
+import com.google.gson.JsonPrimitive
 import com.google.gson.JsonSerializer
 import com.google.gson.TypeAdapter
 import com.google.gson.TypeAdapterFactory
@@ -77,7 +79,7 @@ object PlusJsonParser {
 
                 // Add more mappings as needed based on EnumDefnCompType
                 else -> {
-                    android.util.Log.w(
+                    Log.w(
                         "FormJsonParser",
                         "Unknown DefnComp type: $typeField, using DefnComp"
                     )
@@ -168,13 +170,13 @@ object PlusJsonParser {
                 Symbol().apply { name = json.asString }
             })
             .registerTypeAdapter(Symbol::class.java, JsonSerializer<Symbol> { src, _, _ ->
-                com.google.gson.JsonPrimitive(src.name)
+                JsonPrimitive(src.name)
             })
             .registerTypeHierarchyAdapter(SysId::class.java, JsonDeserializer<SysId> { json, _, _ ->
                 SysId.create<SysId>(json.asString)
             })
             .registerTypeHierarchyAdapter(SysId::class.java, JsonSerializer<SysId> { src, _, _ ->
-                com.google.gson.JsonPrimitive(src.getId())
+                JsonPrimitive(src.getId())
             })
             .create()
     }
@@ -186,7 +188,7 @@ object PlusJsonParser {
         return try {
             gson.fromJson(json, DefnForm::class.java)
         } catch (e: Exception) {
-            android.util.Log.e("FormJsonParser", "Error parsing DefnForm JSON", e)
+            Log.e("FormJsonParser", "Error parsing DefnForm JSON", e)
             null
         }
     }
