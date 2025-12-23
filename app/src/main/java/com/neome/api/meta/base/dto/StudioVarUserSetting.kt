@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioVarUserSetting : StudioVar() {
-    var value: StudioBuildUserSetting? = null
+import com.neome.api.meta.base.dto.StudioBuildUserSetting
+import com.neome.api.meta.base.dto.StudioVar
+
+open class StudioVarUserSetting : StudioVar()
+{
+  var value: StudioBuildUserSetting? = null
 }

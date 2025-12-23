@@ -5,6 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-open class FieldValueText {
-    lateinit var value: String
+open class FieldValueText
+{
+  lateinit var value: String
 }

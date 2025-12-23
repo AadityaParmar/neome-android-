@@ -5,10 +5,11 @@
 
 package com.neome.api.ent.entMain.sig
 
-import com.neome.api.nucleus.base.sig.Sig
 import kotlin.properties.Delegates
+import com.neome.api.nucleus.base.sig.Sig
 
-open class SigEntVarSeq : Sig() {
-    var endSeq: Number by Delegates.notNull<Number>()
-    var startSeq: Number by Delegates.notNull<Number>()
+open class SigEntVarSeq : Sig()
+{
+  var endSeq: Number by Delegates.notNull<Number>()
+  var startSeq: Number by Delegates.notNull<Number>()
 }

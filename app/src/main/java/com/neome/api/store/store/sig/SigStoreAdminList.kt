@@ -5,9 +5,10 @@
 
 package com.neome.api.store.store.sig
 
-import com.neome.api.nucleus.base.sig.Sig
 import com.neome.api.store.base.dto.DtoStoreAdmin
+import com.neome.api.nucleus.base.sig.Sig
 
-open class SigStoreAdminList : Sig() {
-    lateinit var storeAdminList: Array<DtoStoreAdmin>
+open class SigStoreAdminList : Sig()
+{
+  lateinit var storeAdminList: Array<DtoStoreAdmin>
 }

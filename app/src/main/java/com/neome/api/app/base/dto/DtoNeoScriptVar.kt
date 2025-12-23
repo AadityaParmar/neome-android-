@@ -5,8 +5,10 @@
 
 package com.neome.api.app.base.dto
 
+import com.neome.api.app.base.dto.DtoNeoScript
 import com.neome.api.meta.base.Types.MetaIdVar
 
-open class DtoNeoScriptVar : DtoNeoScript() {
-    var varId: MetaIdVar? = null
+open class DtoNeoScriptVar : DtoNeoScript()
+{
+  var varId: MetaIdVar? = null
 }

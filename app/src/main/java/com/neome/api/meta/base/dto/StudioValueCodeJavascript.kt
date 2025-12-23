@@ -5,6 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioValueCodeJavascript : StudioValueCode() {
-    var value: String? = null
+import com.neome.api.meta.base.dto.StudioValueCode
+
+open class StudioValueCodeJavascript : StudioValueCode()
+{
+  var value: String? = null
 }

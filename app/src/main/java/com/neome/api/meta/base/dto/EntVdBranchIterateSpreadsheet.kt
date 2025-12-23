@@ -5,15 +5,18 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.EntVdAutoStep
 import com.neome.api.meta.base.Types.EnumDefnSortOrder
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import com.neome.api.meta.base.dto.StudioMapOfCondition
 
-open class EntVdBranchIterateSpreadsheet : EntVdAutoStep() {
-    var ascendingOrder: EnumDefnSortOrder? = null
-    var filterCondition: StudioMapOfCondition? = null
-    var numberOfRows: Number? = null
-    var orderByFieldIds: Array<MetaIdField>? = null
-    var selectFieldIds: Array<MetaIdField>? = null
-    var spreadsheetId: MetaIdSpreadsheet? = null
+open class EntVdBranchIterateSpreadsheet : EntVdAutoStep()
+{
+  var ascendingOrder: EnumDefnSortOrder? = null
+  var filterCondition: StudioMapOfCondition? = null
+  var numberOfRows: Number? = null
+  var orderByFieldIds: Array<MetaIdField>? = null
+  var selectFieldIds: Array<MetaIdField>? = null
+  var spreadsheetId: MetaIdSpreadsheet? = null
 }

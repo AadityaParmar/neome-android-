@@ -5,6 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioFieldError : StudioFieldEditable() {
-    var showCloseButton: Boolean? = null
+import com.neome.api.meta.base.dto.StudioFieldEditable
+
+open class StudioFieldError : StudioFieldEditable()
+{
+  var showCloseButton: Boolean? = null
 }

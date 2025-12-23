@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioPluginBundle : StudioPluginBundleBase() {
-    var draft: StudioPluginDraft? = null
+import com.neome.api.meta.base.dto.StudioPluginBundleBase
+import com.neome.api.meta.base.dto.StudioPluginDraft
+
+open class StudioPluginBundle : StudioPluginBundleBase()
+{
+  var draft: StudioPluginDraft? = null
 }

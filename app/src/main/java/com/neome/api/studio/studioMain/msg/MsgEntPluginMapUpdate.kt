@@ -5,9 +5,10 @@
 
 package com.neome.api.studio.studioMain.msg
 
-import com.neome.api.meta.base.dto.StudioEntDeployPluginMap
 import com.neome.api.nucleus.base.msg.Msg
+import com.neome.api.meta.base.dto.StudioEntDeployPluginMap
 
-open class MsgEntPluginMapUpdate : Msg() {
-    lateinit var pluginMap: StudioEntDeployPluginMap
+open class MsgEntPluginMapUpdate : Msg()
+{
+  lateinit var pluginMap: StudioEntDeployPluginMap
 }

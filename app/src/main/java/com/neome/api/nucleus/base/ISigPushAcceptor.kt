@@ -7,6 +7,7 @@ package com.neome.api.nucleus.base
 
 import com.neome.api.meta.base.sig.ISig
 
-interface ISigPushAcceptor<S : ISig> {
-    fun execute(sig: S)
+interface ISigPushAcceptor<S : ISig>
+{
+  fun execute(sig: S)
 }

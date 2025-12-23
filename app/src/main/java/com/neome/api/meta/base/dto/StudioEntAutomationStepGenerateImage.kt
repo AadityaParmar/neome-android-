@@ -8,9 +8,11 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdVar
+import com.neome.api.meta.base.dto.StudioEntAutomationStepGenerateDocument
 
-open class StudioEntAutomationStepGenerateImage : StudioEntAutomationStepGenerateDocument() {
-    var imageFieldId: MetaIdField? = null
-    var imageFormId: MetaIdForm? = null
-    var imageFormMappingVarId: MetaIdVar? = null
+open class StudioEntAutomationStepGenerateImage : StudioEntAutomationStepGenerateDocument()
+{
+  var imageFieldId: MetaIdField? = null
+  var imageFormId: MetaIdForm? = null
+  var imageFormMappingVarId: MetaIdVar? = null
 }

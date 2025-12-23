@@ -5,8 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.EntVdAutoStep
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 
-open class EntVdParamRemove : EntVdAutoStep() {
-    var pipelineParamId: MetaIdPipelineParam? = null
+open class EntVdParamRemove : EntVdAutoStep()
+{
+  var pipelineParamId: MetaIdPipelineParam? = null
 }

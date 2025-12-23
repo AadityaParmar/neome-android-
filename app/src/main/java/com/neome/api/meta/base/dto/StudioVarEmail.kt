@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioVarEmail : StudioVar() {
-    var value: StudioVarValueEmail? = null
+import com.neome.api.meta.base.dto.StudioVar
+import com.neome.api.meta.base.dto.StudioVarValueEmail
+
+open class StudioVarEmail : StudioVar()
+{
+  var value: StudioVarValueEmail? = null
 }

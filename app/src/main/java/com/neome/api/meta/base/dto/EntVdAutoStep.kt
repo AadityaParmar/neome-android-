@@ -5,5 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdAutoStep : EntVdAutoNode() {
+import com.neome.api.meta.base.dto.EntVdAutoNode
+
+open class EntVdAutoStep : EntVdAutoNode()
+{
 }

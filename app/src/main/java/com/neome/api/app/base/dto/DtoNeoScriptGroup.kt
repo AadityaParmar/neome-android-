@@ -5,8 +5,10 @@
 
 package com.neome.api.app.base.dto
 
+import com.neome.api.app.base.dto.DtoNeoScript
 import com.neome.api.meta.base.Types.MetaIdGroup
 
-open class DtoNeoScriptGroup : DtoNeoScript() {
-    var groupId: MetaIdGroup? = null
+open class DtoNeoScriptGroup : DtoNeoScript()
+{
+  var groupId: MetaIdGroup? = null
 }

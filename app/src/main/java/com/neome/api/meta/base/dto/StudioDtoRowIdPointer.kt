@@ -6,8 +6,11 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioBuildArgBinder
 
-open class StudioDtoRowIdPointer : StudioBase() {
-    var rowId: StudioBuildArgBinder? = null
-    var spreadsheetId: MetaIdSpreadsheet? = null
+open class StudioDtoRowIdPointer : StudioBase()
+{
+  var rowId: StudioBuildArgBinder? = null
+  var spreadsheetId: MetaIdSpreadsheet? = null
 }

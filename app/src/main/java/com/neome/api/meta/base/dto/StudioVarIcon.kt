@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioVarIcon : StudioVar() {
-    var value: StudioVarValueIcon? = null
+import com.neome.api.meta.base.dto.StudioVar
+import com.neome.api.meta.base.dto.StudioVarValueIcon
+
+open class StudioVarIcon : StudioVar()
+{
+  var value: StudioVarValueIcon? = null
 }

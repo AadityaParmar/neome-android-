@@ -5,7 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioFieldIdentifier : StudioFieldEditable() {
-    var setOnSend: Boolean? = null
-    var textPatternVarId: StudioValueVarIdText? = null
+import com.neome.api.meta.base.dto.StudioFieldEditable
+import com.neome.api.meta.base.dto.StudioValueVarIdText
+
+open class StudioFieldIdentifier : StudioFieldEditable()
+{
+  var setOnSend: Boolean? = null
+  var textPatternVarId: StudioValueVarIdText? = null
 }

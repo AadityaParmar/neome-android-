@@ -8,6 +8,7 @@ package com.neome.api.studio.studioMain.msg
 import com.neome.api.meta.base.Types.AdminId
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgAdminId : Msg() {
-    lateinit var adminId: AdminId
+open class MsgAdminId : Msg()
+{
+  lateinit var adminId: AdminId
 }

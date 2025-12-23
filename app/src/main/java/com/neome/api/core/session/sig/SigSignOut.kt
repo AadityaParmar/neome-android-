@@ -7,5 +7,6 @@ package com.neome.api.core.session.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigSignOut : Sig() {
+open class SigSignOut : Sig()
+{
 }

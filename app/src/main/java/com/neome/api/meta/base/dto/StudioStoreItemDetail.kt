@@ -8,7 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.StoreItemId
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioStoreItemDetail : StudioBase() {
-    lateinit var storeItemId: StoreItemId
-    lateinit var storeName: String
+open class StudioStoreItemDetail : StudioBase()
+{
+  lateinit var storeItemId: StoreItemId
+  lateinit var storeName: String
 }

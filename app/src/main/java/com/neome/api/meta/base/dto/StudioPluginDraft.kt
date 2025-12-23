@@ -5,6 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioPluginDraft {
-    var studioPlugin: StudioPlugin? = null
+import com.neome.api.meta.base.dto.StudioPlugin
+
+open class StudioPluginDraft
+{
+  var studioPlugin: StudioPlugin? = null
 }

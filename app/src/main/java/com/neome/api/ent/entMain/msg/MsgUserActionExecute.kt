@@ -9,7 +9,8 @@ import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.Types.MetaIdLayoutUser
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgUserActionExecute : Msg() {
-    lateinit var actionId: MetaIdAction
-    lateinit var layoutId: MetaIdLayoutUser
+open class MsgUserActionExecute : Msg()
+{
+  lateinit var actionId: MetaIdAction
+  lateinit var layoutId: MetaIdLayoutUser
 }

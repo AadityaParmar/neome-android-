@@ -7,6 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.AnyTime
 
-open class StudioVarValueSetOfTime {
-    lateinit var valueSet: Array<AnyTime>
+open class StudioVarValueSetOfTime
+{
+  lateinit var valueSet: Array<AnyTime>
 }

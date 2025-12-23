@@ -8,7 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.AnyTime
 import com.neome.api.meta.base.Types.EnumDefnTime
 
-open class StudioBuildTime {
-    var customValue: AnyTime? = null
-    var value: EnumDefnTime? = null
+open class StudioBuildTime
+{
+  var customValue: AnyTime? = null
+  var value: EnumDefnTime? = null
 }

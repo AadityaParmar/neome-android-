@@ -5,8 +5,10 @@
 
 package com.neome.api.app.base.dto
 
+import com.neome.api.app.base.dto.DtoNeoScript
 import com.neome.api.meta.base.Types.MetaIdPlugin
 
-open class DtoNeoScriptPlugin : DtoNeoScript() {
-    var pluginId: MetaIdPlugin? = null
+open class DtoNeoScriptPlugin : DtoNeoScript()
+{
+  var pluginId: MetaIdPlugin? = null
 }

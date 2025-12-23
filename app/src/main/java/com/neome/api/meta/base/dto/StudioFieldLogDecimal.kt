@@ -6,7 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdRole
+import com.neome.api.meta.base.dto.StudioFieldDecimal
 
-open class StudioFieldLogDecimal : StudioFieldDecimal() {
-    var logReadRoleSet: Array<MetaIdRole>? = null
+open class StudioFieldLogDecimal : StudioFieldDecimal()
+{
+  var logReadRoleSet: Array<MetaIdRole>? = null
 }

@@ -5,6 +5,9 @@
 
 package com.neome.api.home.base.dto
 
-open class DtoMessageReplyPayloadText : DtoMessageReplyPayload() {
-    lateinit var textSummary: String
+import com.neome.api.home.base.dto.DtoMessageReplyPayload
+
+open class DtoMessageReplyPayloadText : DtoMessageReplyPayload()
+{
+  lateinit var textSummary: String
 }

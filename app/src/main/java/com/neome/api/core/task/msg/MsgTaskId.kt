@@ -7,6 +7,7 @@ package com.neome.api.core.task.msg
 
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgTaskId : Msg() {
-    lateinit var taskId: String
+open class MsgTaskId : Msg()
+{
+  lateinit var taskId: String
 }

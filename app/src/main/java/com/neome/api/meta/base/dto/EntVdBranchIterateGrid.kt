@@ -5,8 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.EntVdAutoStep
 import com.neome.api.meta.base.Types.MetaIdGrid
 
-open class EntVdBranchIterateGrid : EntVdAutoStep() {
-    var gridId: MetaIdGrid? = null
+open class EntVdBranchIterateGrid : EntVdAutoStep()
+{
+  var gridId: MetaIdGrid? = null
 }

@@ -6,10 +6,12 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnVisibilityOperator
+import com.neome.api.meta.base.dto.FieldDtoArg
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnVisibilityCondition {
-    lateinit var lhs: MetaIdField
-    lateinit var operator: EnumDefnVisibilityOperator
-    var rhs: FieldDtoArg? = null
+open class DefnVisibilityCondition
+{
+  lateinit var lhs: MetaIdField
+  lateinit var operator: EnumDefnVisibilityOperator
+  var rhs: FieldDtoArg? = null
 }

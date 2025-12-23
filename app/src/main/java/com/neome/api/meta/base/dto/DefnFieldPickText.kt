@@ -5,17 +5,22 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnDtoPluginApi
+import com.neome.api.meta.base.dto.DefnFieldEditable
+import com.neome.api.meta.base.dto.DefnStudioMapOfDtoOption
+import com.neome.api.meta.base.dto.DefnStudioMapOfOptionPermission
 import com.neome.api.meta.base.Types.EnumDefnThemePickVariant
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldPickText : DefnFieldEditable() {
-    var defaultOptionFieldId: MetaIdField? = null
-    var defaultOptionId: String? = null
-    var optionFieldId: MetaIdField? = null
-    var optionMap: DefnStudioMapOfDtoOption? = null
-    var optionPermissionMap: DefnStudioMapOfOptionPermission? = null
-    var pageSize: Number? = null
-    var pluginApi: DefnDtoPluginApi? = null
-    var pluginErrorFieldId: MetaIdField? = null
-    var showAs: EnumDefnThemePickVariant? = null
+open class DefnFieldPickText : DefnFieldEditable()
+{
+  var defaultOptionFieldId: MetaIdField? = null
+  var defaultOptionId: String? = null
+  var optionFieldId: MetaIdField? = null
+  var optionMap: DefnStudioMapOfDtoOption? = null
+  var optionPermissionMap: DefnStudioMapOfOptionPermission? = null
+  var pageSize: Number? = null
+  var pluginApi: DefnDtoPluginApi? = null
+  var pluginErrorFieldId: MetaIdField? = null
+  var showAs: EnumDefnThemePickVariant? = null
 }

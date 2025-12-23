@@ -5,7 +5,10 @@
 
 package com.neome.api.nucleus.base.sig
 
-open class SigPong : Sig() {
-    lateinit var randomText: String
-    var triggerPing: Boolean? = null
+import com.neome.api.nucleus.base.sig.Sig
+
+open class SigPong : Sig()
+{
+  lateinit var randomText: String
+  var triggerPing: Boolean? = null
 }

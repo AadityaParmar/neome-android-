@@ -7,6 +7,7 @@ package com.neome.api.core.deeplink.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigDeeplinkPreview : Sig() {
-    var htmlContent: String? = null
+open class SigDeeplinkPreview : Sig()
+{
+  var htmlContent: String? = null
 }

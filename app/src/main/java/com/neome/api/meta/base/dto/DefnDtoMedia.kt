@@ -5,8 +5,13 @@
 
 package com.neome.api.meta.base.dto
 
-open class DefnDtoMedia {
-    var html: DefnDtoParagraph? = null
-    var hyperlink: DefnDtoHyperLink? = null
-    var image: FieldDtoImage? = null
+import com.neome.api.meta.base.dto.DefnDtoHyperLink
+import com.neome.api.meta.base.dto.DefnDtoParagraph
+import com.neome.api.meta.base.dto.FieldDtoImage
+
+open class DefnDtoMedia
+{
+  var html: DefnDtoParagraph? = null
+  var hyperlink: DefnDtoHyperLink? = null
+  var image: FieldDtoImage? = null
 }

@@ -5,5 +5,8 @@
 
 package com.neome.api.home.base.dto
 
-open class DtoMessageReplyPayloadSpreadsheetRow : DtoMessageReplyPayload() {
+import com.neome.api.home.base.dto.DtoMessageReplyPayload
+
+open class DtoMessageReplyPayloadSpreadsheetRow : DtoMessageReplyPayload()
+{
 }

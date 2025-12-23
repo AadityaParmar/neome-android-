@@ -7,14 +7,15 @@ package com.neome.api.studio.studioMain.msg
 
 import com.neome.api.meta.base.Types.AdminId
 import com.neome.api.meta.base.Types.EnumDefnAdminDoNotOptionPlugin
-import com.neome.api.meta.base.dto.StudioModuleSelection
 import com.neome.api.nucleus.base.msg.Msg
+import com.neome.api.meta.base.dto.StudioModuleSelection
 
-open class MsgPluginAdminUpdate : Msg() {
-    lateinit var adminId: AdminId
-    var doNotEditOptionSet: Array<EnumDefnAdminDoNotOptionPlugin>? = null
-    var doNotShowOptionSet: Array<EnumDefnAdminDoNotOptionPlugin>? = null
-    var handle: String? = null
-    var modules: StudioModuleSelection? = null
-    lateinit var nickName: String
+open class MsgPluginAdminUpdate : Msg()
+{
+  lateinit var adminId: AdminId
+  var doNotEditOptionSet: Array<EnumDefnAdminDoNotOptionPlugin>? = null
+  var doNotShowOptionSet: Array<EnumDefnAdminDoNotOptionPlugin>? = null
+  var handle: String? = null
+  var modules: StudioModuleSelection? = null
+  lateinit var nickName: String
 }

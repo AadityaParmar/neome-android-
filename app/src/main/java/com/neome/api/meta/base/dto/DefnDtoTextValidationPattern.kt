@@ -7,7 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnTextValidationPattern
 
-open class DefnDtoTextValidationPattern {
-    var customValue: String? = null
-    var value: EnumDefnTextValidationPattern? = null
+open class DefnDtoTextValidationPattern
+{
+  var customValue: String? = null
+  var value: EnumDefnTextValidationPattern? = null
 }

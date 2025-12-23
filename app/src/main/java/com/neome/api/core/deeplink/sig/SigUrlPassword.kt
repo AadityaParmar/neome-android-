@@ -5,6 +5,9 @@
 
 package com.neome.api.core.deeplink.sig
 
-open class SigUrlPassword : SigUrl() {
-    var password: String? = null
+import com.neome.api.core.deeplink.sig.SigUrl
+
+open class SigUrlPassword : SigUrl()
+{
+  var password: String? = null
 }

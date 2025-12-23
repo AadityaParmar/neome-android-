@@ -7,7 +7,8 @@ package com.neome.api.home.drawer.msg
 
 import com.neome.api.core.base.msg.MsgVersion
 
-open class MsgUserNotificationList : MsgVersion() {
-    var limit: Number? = null
-    var offset: Number? = null
+open class MsgUserNotificationList : MsgVersion()
+{
+  var limit: Number? = null
+  var offset: Number? = null
 }

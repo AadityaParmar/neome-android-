@@ -7,9 +7,12 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnVisibilityOperator
 import com.neome.api.meta.base.Types.MetaIdField
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioBuildArgBinder
 
-open class StudioDtoVisibilityCondition : StudioBase() {
-    lateinit var lhs: MetaIdField
-    lateinit var operator: EnumDefnVisibilityOperator
-    var rhs: StudioBuildArgBinder? = null
+open class StudioDtoVisibilityCondition : StudioBase()
+{
+  lateinit var lhs: MetaIdField
+  lateinit var operator: EnumDefnVisibilityOperator
+  var rhs: StudioBuildArgBinder? = null
 }

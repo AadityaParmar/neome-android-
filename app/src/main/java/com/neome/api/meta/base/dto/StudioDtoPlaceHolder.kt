@@ -5,8 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioDtoPlaceHolder : StudioBase() {
-    var image: FieldDtoImage? = null
-    var primaryText: String? = null
-    var secondaryText: String? = null
+import com.neome.api.meta.base.dto.FieldDtoImage
+import com.neome.api.meta.base.dto.StudioBase
+
+open class StudioDtoPlaceHolder : StudioBase()
+{
+  var image: FieldDtoImage? = null
+  var primaryText: String? = null
+  var secondaryText: String? = null
 }

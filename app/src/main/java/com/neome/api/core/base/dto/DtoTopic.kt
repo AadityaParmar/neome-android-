@@ -5,12 +5,13 @@
 
 package com.neome.api.core.base.dto
 
+import com.neome.api.meta.base.Types.ArtifactId
 import com.neome.api.core.base.Types.EnumTopicType
 import com.neome.api.meta.base.SysId
-import com.neome.api.meta.base.Types.ArtifactId
 
-open class DtoTopic {
-    lateinit var aboutId: SysId
-    lateinit var artifactId: ArtifactId
-    lateinit var type: EnumTopicType
+open class DtoTopic
+{
+  lateinit var aboutId: SysId
+  lateinit var artifactId: ArtifactId
+  lateinit var type: EnumTopicType
 }

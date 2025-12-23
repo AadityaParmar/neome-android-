@@ -5,17 +5,18 @@
 
 package com.neome.api.core.deeplink.sig
 
-import com.neome.api.core.base.Types.EnumDeeplinkActionType
+import kotlin.properties.Delegates
+import com.neome.api.meta.base.Types.ArtifactId
 import com.neome.api.core.base.dto.DeeplinkDataPayload
 import com.neome.api.core.base.dto.DtoDeeplinkWebPreview
-import com.neome.api.meta.base.Types.ArtifactId
+import com.neome.api.core.base.Types.EnumDeeplinkActionType
 import com.neome.api.nucleus.base.sig.Sig
-import kotlin.properties.Delegates
 
-open class SigDeeplinkData : Sig() {
-    lateinit var artifactId: ArtifactId
-    lateinit var deeplinkActionType: EnumDeeplinkActionType
-    var payload: DeeplinkDataPayload? = null
-    var preview: DtoDeeplinkWebPreview? = null
-    var requiredSignIn: Boolean by Delegates.notNull<Boolean>()
+open class SigDeeplinkData : Sig()
+{
+  lateinit var artifactId: ArtifactId
+  lateinit var deeplinkActionType: EnumDeeplinkActionType
+  var payload: DeeplinkDataPayload? = null
+  var preview: DtoDeeplinkWebPreview? = null
+  var requiredSignIn: Boolean by Delegates.notNull<Boolean>()
 }

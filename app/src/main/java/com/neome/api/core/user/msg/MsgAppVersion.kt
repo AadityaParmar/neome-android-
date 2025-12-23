@@ -5,11 +5,12 @@
 
 package com.neome.api.core.user.msg
 
+import kotlin.properties.Delegates
 import com.neome.api.meta.base.Types.EnumDeviceType
 import com.neome.api.nucleus.base.msg.Msg
-import kotlin.properties.Delegates
 
-open class MsgAppVersion : Msg() {
-    lateinit var deviceType: EnumDeviceType
-    var versionCode: Number by Delegates.notNull<Number>()
+open class MsgAppVersion : Msg()
+{
+  lateinit var deviceType: EnumDeviceType
+  var versionCode: Number by Delegates.notNull<Number>()
 }

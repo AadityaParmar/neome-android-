@@ -14,12 +14,13 @@ import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.core.base.msg.MsgEntUserIdNoVersion
 
-open class MsgEntUserAdd : MsgEntUserIdNoVersion() {
-    var avatarId: MediaIdAvatar? = null
-    lateinit var handle: String
-    var languageKey: LanguageKey? = null
-    var managerId: EntUserId? = null
-    lateinit var nickName: String
-    var roleIdSet: Array<MetaIdRole>? = null
-    var userVariableValueMap: Map<MetaIdVar, Any>? = null
+open class MsgEntUserAdd : MsgEntUserIdNoVersion()
+{
+  var avatarId: MediaIdAvatar? = null
+  lateinit var handle: String
+  var languageKey: LanguageKey? = null
+  var managerId: EntUserId? = null
+  lateinit var nickName: String
+  var roleIdSet: Array<MetaIdRole>? = null
+  var userVariableValueMap: Map<MetaIdVar, Any>? = null
 }

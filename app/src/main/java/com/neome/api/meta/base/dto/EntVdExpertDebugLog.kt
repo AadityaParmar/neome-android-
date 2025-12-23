@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdExpertDebugLog : EntVdAutoStep() {
-    var message: StudioValueParagraph? = null
+import com.neome.api.meta.base.dto.EntVdAutoStep
+import com.neome.api.meta.base.dto.StudioValueParagraph
+
+open class EntVdExpertDebugLog : EntVdAutoStep()
+{
+  var message: StudioValueParagraph? = null
 }

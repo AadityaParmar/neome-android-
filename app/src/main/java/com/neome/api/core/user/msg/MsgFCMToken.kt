@@ -7,6 +7,7 @@ package com.neome.api.core.user.msg
 
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgFCMToken : Msg() {
-    lateinit var fcmToken: String
+open class MsgFCMToken : Msg()
+{
+  lateinit var fcmToken: String
 }

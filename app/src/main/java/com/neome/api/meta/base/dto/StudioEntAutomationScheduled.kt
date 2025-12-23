@@ -5,7 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioEntAutomationScheduled : StudioEntAutomation() {
-    lateinit var eventMap: StudioEntAutomationScheduledEventMap
-    var scheduler: StudioVarValueScheduler? = null
+import com.neome.api.meta.base.dto.StudioEntAutomation
+import com.neome.api.meta.base.dto.StudioEntAutomationScheduledEventMap
+import com.neome.api.meta.base.dto.StudioVarValueScheduler
+
+open class StudioEntAutomationScheduled : StudioEntAutomation()
+{
+  lateinit var eventMap: StudioEntAutomationScheduledEventMap
+  var scheduler: StudioVarValueScheduler? = null
 }

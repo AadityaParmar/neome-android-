@@ -7,12 +7,15 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
+import com.neome.api.meta.base.dto.StudioBuildDate
+import com.neome.api.meta.base.dto.StudioFieldDate
 
-open class StudioFieldDateRange : StudioFieldDate() {
-    var fromDefault: StudioBuildDate? = null
-    var fromDefaultFieldId: MetaIdField? = null
-    var fromDefaultVarId: MetaIdVar? = null
-    var toDefault: StudioBuildDate? = null
-    var toDefaultFieldId: MetaIdField? = null
-    var toDefaultVarId: MetaIdVar? = null
+open class StudioFieldDateRange : StudioFieldDate()
+{
+  var fromDefault: StudioBuildDate? = null
+  var fromDefaultFieldId: MetaIdField? = null
+  var fromDefaultVarId: MetaIdVar? = null
+  var toDefault: StudioBuildDate? = null
+  var toDefaultFieldId: MetaIdField? = null
+  var toDefaultVarId: MetaIdVar? = null
 }

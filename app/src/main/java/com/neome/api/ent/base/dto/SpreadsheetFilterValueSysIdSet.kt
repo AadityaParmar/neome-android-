@@ -5,8 +5,11 @@
 
 package com.neome.api.ent.base.dto
 
+import java.util.Set
+import com.neome.api.ent.base.dto.SpreadsheetFilterValue
 import com.neome.api.meta.base.SysId
 
-open class SpreadsheetFilterValueSysIdSet : SpreadsheetFilterValue() {
-    lateinit var valueSet: Array<SysId>
+open class SpreadsheetFilterValueSysIdSet : SpreadsheetFilterValue()
+{
+  lateinit var valueSet: Array<SysId>
 }

@@ -5,10 +5,11 @@
 
 package com.neome.api.studio.studioMain.sig
 
-import com.neome.api.nucleus.base.sig.Sig
 import kotlin.properties.Delegates
+import com.neome.api.nucleus.base.sig.Sig
 
-open class SigEntUserCount : Sig() {
-    var acceptedInvite: Number by Delegates.notNull<Number>()
-    var total: Number by Delegates.notNull<Number>()
+open class SigEntUserCount : Sig()
+{
+  var acceptedInvite: Number by Delegates.notNull<Number>()
+  var total: Number by Delegates.notNull<Number>()
 }

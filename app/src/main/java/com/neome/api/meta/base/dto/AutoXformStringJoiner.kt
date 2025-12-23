@@ -5,8 +5,14 @@
 
 package com.neome.api.meta.base.dto
 
-open class AutoXformStringJoiner : AutoXform() {
-    var outputField: StudioDtoArgValueParameter? = null
-    var separator: StudioBuildArgBinder? = null
-    var sourceFieldMap: StudioMapOfArgBinder? = null
+import com.neome.api.meta.base.dto.AutoXform
+import com.neome.api.meta.base.dto.StudioBuildArgBinder
+import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
+import com.neome.api.meta.base.dto.StudioMapOfArgBinder
+
+open class AutoXformStringJoiner : AutoXform()
+{
+  var outputField: StudioDtoArgValueParameter? = null
+  var separator: StudioBuildArgBinder? = null
+  var sourceFieldMap: StudioMapOfArgBinder? = null
 }

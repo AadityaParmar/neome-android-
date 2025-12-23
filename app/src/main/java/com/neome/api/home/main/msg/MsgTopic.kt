@@ -6,10 +6,11 @@
 package com.neome.api.home.main.msg
 
 import com.neome.api.core.base.Types.EnumTopicType
-import com.neome.api.meta.base.SysId
 import com.neome.api.nucleus.base.msg.Msg
+import com.neome.api.meta.base.SysId
 
-open class MsgTopic : Msg() {
-    lateinit var aboutId: SysId
-    lateinit var type: EnumTopicType
+open class MsgTopic : Msg()
+{
+  lateinit var aboutId: SysId
+  lateinit var type: EnumTopicType
 }

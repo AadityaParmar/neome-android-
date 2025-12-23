@@ -6,10 +6,12 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdVar
+import com.neome.api.meta.base.dto.StudioEntDeeplink
 
-open class StudioEntDeeplinkWithHeader : StudioEntDeeplink() {
-    var hyperlinkVarIdSet: Array<MetaIdVar>? = null
-    var showEnterprise: Boolean? = null
-    var showHeader: Boolean? = null
-    var transparentHeader: Boolean? = null
+open class StudioEntDeeplinkWithHeader : StudioEntDeeplink()
+{
+  var hyperlinkVarIdSet: Array<MetaIdVar>? = null
+  var showEnterprise: Boolean? = null
+  var showHeader: Boolean? = null
+  var transparentHeader: Boolean? = null
 }

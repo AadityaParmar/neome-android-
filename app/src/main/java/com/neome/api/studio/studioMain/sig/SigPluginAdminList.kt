@@ -5,9 +5,10 @@
 
 package com.neome.api.studio.studioMain.sig
 
-import com.neome.api.nucleus.base.sig.Sig
 import com.neome.api.studio.base.dto.DtoPluginAdmin
+import com.neome.api.nucleus.base.sig.Sig
 
-open class SigPluginAdminList : Sig() {
-    lateinit var pluginAdminList: Array<DtoPluginAdmin>
+open class SigPluginAdminList : Sig()
+{
+  lateinit var pluginAdminList: Array<DtoPluginAdmin>
 }

@@ -7,5 +7,6 @@ package com.neome.api.nucleus.stem.sig
 
 import com.neome.api.nucleus.base.sig.SigCallback
 
-open class SigRefreshToken : SigCallback() {
+open class SigRefreshToken : SigCallback()
+{
 }

@@ -8,6 +8,7 @@ package com.neome.api.home.base.msg
 import com.neome.api.meta.base.Types.ChatId
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgChatId : Msg() {
-    lateinit var chatId: ChatId
+open class MsgChatId : Msg()
+{
+  lateinit var chatId: ChatId
 }

@@ -5,7 +5,10 @@
 
 package com.neome.api.home.base.dto
 
-open class DtoMessagePayloadText : DtoMessagePayload() {
-    var isUpdated: Boolean? = null
-    lateinit var text: String
+import com.neome.api.home.base.dto.DtoMessagePayload
+
+open class DtoMessagePayloadText : DtoMessagePayload()
+{
+  var isUpdated: Boolean? = null
+  lateinit var text: String
 }

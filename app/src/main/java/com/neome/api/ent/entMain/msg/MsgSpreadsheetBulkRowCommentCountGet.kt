@@ -5,10 +5,11 @@
 
 package com.neome.api.ent.entMain.msg
 
+import java.util.Map
 import com.neome.api.core.base.msg.MsgVersion
 import com.neome.api.meta.base.Types.RowId
-import java.util.Map
 
-open class MsgSpreadsheetBulkRowCommentCountGet : MsgVersion() {
-    lateinit var rowIdCommentVersionMap: Map<RowId, String>
+open class MsgSpreadsheetBulkRowCommentCountGet : MsgVersion()
+{
+  lateinit var rowIdCommentVersionMap: Map<RowId, String>
 }

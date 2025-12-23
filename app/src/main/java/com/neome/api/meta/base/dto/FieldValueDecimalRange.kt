@@ -5,7 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-open class FieldValueDecimalRange {
-    var maxValue: Number? = null
-    var minValue: Number? = null
+open class FieldValueDecimalRange
+{
+  var maxValue: Number? = null
+  var minValue: Number? = null
 }

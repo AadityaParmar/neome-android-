@@ -10,12 +10,15 @@ import com.neome.api.meta.base.Types.MetaIdGroup
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import com.neome.api.meta.base.dto.StudioDtoChatBubbleHeader
+import com.neome.api.meta.base.dto.StudioEntAutomationStep
 
-open class StudioEntAutomationStepPartitionSend : StudioEntAutomationStep() {
-    var chatBubbleHeader: StudioDtoChatBubbleHeader? = null
-    var senderFieldId: MetaIdField? = null
-    var senderFormPipelineVarId: MetaIdPipelineParam? = null
-    var senderRoleId: MetaIdRole? = null
-    var targetGroupIdSet: Array<MetaIdGroup>? = null
-    var targetSpreadsheetId: MetaIdSpreadsheet? = null
+open class StudioEntAutomationStepPartitionSend : StudioEntAutomationStep()
+{
+  var chatBubbleHeader: StudioDtoChatBubbleHeader? = null
+  var senderFieldId: MetaIdField? = null
+  var senderFormPipelineVarId: MetaIdPipelineParam? = null
+  var senderRoleId: MetaIdRole? = null
+  var targetGroupIdSet: Array<MetaIdGroup>? = null
+  var targetSpreadsheetId: MetaIdSpreadsheet? = null
 }

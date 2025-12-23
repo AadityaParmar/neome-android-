@@ -5,10 +5,13 @@
 
 package com.neome.api.meta.base.dto
 
+import java.util.Date
+import com.neome.api.meta.base.dto.StudioBuildRepeatSetting
 import com.neome.api.meta.base.Types.TimeZoneKey
 
-open class StudioVarValueScheduler {
-    var repeatSetting: StudioBuildRepeatSetting? = null
-    var startDateTime: String? = null
-    var timeZone: TimeZoneKey? = null
+open class StudioVarValueScheduler
+{
+  var repeatSetting: StudioBuildRepeatSetting? = null
+  var startDateTime: String? = null
+  var timeZone: TimeZoneKey? = null
 }

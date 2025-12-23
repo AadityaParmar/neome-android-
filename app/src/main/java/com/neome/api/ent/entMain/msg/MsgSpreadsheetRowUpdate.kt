@@ -5,12 +5,13 @@
 
 package com.neome.api.ent.entMain.msg
 
-import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.FormValueRaw
+import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgSpreadsheetRowUpdate : Msg() {
-    lateinit var formValueRaw: FormValueRaw
-    lateinit var spreadsheetId: MetaIdSpreadsheet
-    var transactionId: String? = null
+open class MsgSpreadsheetRowUpdate : Msg()
+{
+  lateinit var formValueRaw: FormValueRaw
+  lateinit var spreadsheetId: MetaIdSpreadsheet
+  var transactionId: String? = null
 }

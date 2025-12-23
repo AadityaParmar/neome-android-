@@ -7,13 +7,16 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
+import com.neome.api.meta.base.dto.StudioDtoTextValidationPattern
+import com.neome.api.meta.base.dto.StudioFieldEditableText
 
-open class StudioFieldText : StudioFieldEditableText() {
-    var maxCharCount: Number? = null
-    var maxCharCountFieldId: MetaIdField? = null
-    var maxCharCountVarId: MetaIdVar? = null
-    var minCharCount: Number? = null
-    var minCharCountFieldId: MetaIdField? = null
-    var minCharCountVarId: MetaIdVar? = null
-    var validationPattern: StudioDtoTextValidationPattern? = null
+open class StudioFieldText : StudioFieldEditableText()
+{
+  var maxCharCount: Number? = null
+  var maxCharCountFieldId: MetaIdField? = null
+  var maxCharCountVarId: MetaIdVar? = null
+  var minCharCount: Number? = null
+  var minCharCountFieldId: MetaIdField? = null
+  var minCharCountVarId: MetaIdVar? = null
+  var validationPattern: StudioDtoTextValidationPattern? = null
 }

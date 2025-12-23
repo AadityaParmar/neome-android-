@@ -7,8 +7,10 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import com.neome.api.meta.base.dto.StudioEntDeeplinkWithHeader
 
-open class StudioEntDeeplinkSpreadsheetEditor : StudioEntDeeplinkWithHeader() {
-    var layoutSpreadsheetId: MetaIdLayoutGrid? = null
-    var spreadsheetId: MetaIdSpreadsheet? = null
+open class StudioEntDeeplinkSpreadsheetEditor : StudioEntDeeplinkWithHeader()
+{
+  var layoutSpreadsheetId: MetaIdLayoutGrid? = null
+  var spreadsheetId: MetaIdSpreadsheet? = null
 }

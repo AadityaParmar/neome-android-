@@ -5,12 +5,14 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
+import com.neome.api.meta.base.dto.StudioFieldEditable
+import com.neome.api.meta.base.Symbol
 
-open class StudioFieldSymbol : StudioFieldEditable() {
-    var defaultFieldId: MetaIdField? = null
-    var defaultValue: Symbol? = null
-    var defaultVarId: MetaIdVar? = null
+open class StudioFieldSymbol : StudioFieldEditable()
+{
+  var defaultFieldId: MetaIdField? = null
+  var defaultValue: Symbol? = null
+  var defaultVarId: MetaIdVar? = null
 }

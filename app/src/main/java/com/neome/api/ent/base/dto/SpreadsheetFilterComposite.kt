@@ -5,8 +5,11 @@
 
 package com.neome.api.ent.base.dto
 
-open class SpreadsheetFilterComposite {
-    var andOr: Boolean? = null
-    var filter: SpreadsheetFilterValue? = null
-    var filterList: Array<SpreadsheetFilterComposite>? = null
+import com.neome.api.ent.base.dto.SpreadsheetFilterValue
+
+open class SpreadsheetFilterComposite
+{
+  var andOr: Boolean? = null
+  var filter: SpreadsheetFilterValue? = null
+  var filterList: Array<SpreadsheetFilterComposite>? = null
 }

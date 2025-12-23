@@ -6,7 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import com.neome.api.meta.base.dto.StudioEntAction
 
-open class StudioEntActionSpreadsheetHistory : StudioEntAction() {
-    var spreadsheetId: MetaIdSpreadsheet? = null
+open class StudioEntActionSpreadsheetHistory : StudioEntAction()
+{
+  var spreadsheetId: MetaIdSpreadsheet? = null
 }

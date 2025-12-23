@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioFieldRefTarget : StudioField() {
-    var refTargetSpreadsheetMap: StudioMapOfRefTarget? = null
+import com.neome.api.meta.base.dto.StudioField
+import com.neome.api.meta.base.dto.StudioMapOfRefTarget
+
+open class StudioFieldRefTarget : StudioField()
+{
+  var refTargetSpreadsheetMap: StudioMapOfRefTarget? = null
 }

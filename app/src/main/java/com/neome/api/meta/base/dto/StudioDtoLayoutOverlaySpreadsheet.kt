@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioDtoLayoutOverlaySpreadsheet : StudioBase() {
-    var item: StudioDtoLayoutCardItem? = null
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioDtoLayoutCardItem
+
+open class StudioDtoLayoutOverlaySpreadsheet : StudioBase()
+{
+  var item: StudioDtoLayoutCardItem? = null
 }

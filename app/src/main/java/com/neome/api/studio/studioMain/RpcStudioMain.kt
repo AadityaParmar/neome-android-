@@ -95,833 +95,562 @@ import com.neome.api.studio.studioMain.sig.SigWhatsAppTemplateGroupMap
 import com.neome.api.studio.studioMain.sig.SigWorkflowDebugConfig
 import com.neome.api.studio.studioMain.sig.SigWorkflowNodeFavorites
 
-class RpcStudioMain {
-    companion object {
-        val SN: ServiceName = ServiceName.studioMain
+class RpcStudioMain
+{
+  companion object
+  {
+    val SN: ServiceName = ServiceName.studioMain
 
-        fun analyticDashboardStateGet(
-            msg: MsgAnalyticDashboardStateGet,
-            sigAcceptor: ISigAcceptor<SigAnalyticsDashboardStateGet>
-        ) {
-            CallFactory.rpc.create(
-                SigAnalyticsDashboardStateGet::class.java,
-                ApiPlus.ENT_ID_GLOBAL,
-                SN,
-                "analyticDashboardStateGet"
-            )
-                .get(msg, sigAcceptor)
-        }
+      fun analyticDashboardStateGet(msg: MsgAnalyticDashboardStateGet, sigAcceptor: ISigAcceptor<SigAnalyticsDashboardStateGet>)
+          {
+            CallFactory.rpc.create(SigAnalyticsDashboardStateGet::class.java, ApiPlus.ENT_ID_GLOBAL, SN, "analyticDashboardStateGet")
+              .get(msg, sigAcceptor)
+          }
 
-        fun analyticEventCountGet(
-            entId: EntId,
-            msg: MsgAnalyticEventCount,
-            sigAcceptor: ISigAcceptor<SigAnalyticEventCount>
-        ) {
-            CallFactory.rpc.create(
-                SigAnalyticEventCount::class.java,
-                entId,
-                SN,
-                "analyticEventCountGet"
-            )
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+      fun analyticEventCountGet(entId: EntId, msg: MsgAnalyticEventCount, sigAcceptor: ISigAcceptor<SigAnalyticEventCount>)
+          {
+            CallFactory.rpc.create(SigAnalyticEventCount::class.java, entId, SN, "analyticEventCountGet")
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun analyticEventDataGet(
-            entId: EntId,
-            msg: MsgAnalyticEventData,
-            sigAcceptor: ISigAcceptor<SigAnalyticEventData>
-        ) {
-            CallFactory.rpc.create(
-                SigAnalyticEventData::class.java,
-                entId,
-                SN,
-                "analyticEventDataGet"
-            )
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+      fun analyticEventDataGet(entId: EntId, msg: MsgAnalyticEventData, sigAcceptor: ISigAcceptor<SigAnalyticEventData>)
+          {
+            CallFactory.rpc.create(SigAnalyticEventData::class.java, entId, SN, "analyticEventDataGet")
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun clusterAnalyticDataGet(
-            msg: MsgClusterAnalyticData,
-            sigAcceptor: ISigAcceptor<SigAnalyticData>
-        ) {
-            CallFactory.rpc.create(
-                SigAnalyticData::class.java,
-                ApiPlus.ENT_ID_GLOBAL,
-                SN,
-                "clusterAnalyticDataGet"
-            )
-                .sendBearerToken()
-                .post(msg, sigAcceptor)
-        }
+      fun clusterAnalyticDataGet(msg: MsgClusterAnalyticData, sigAcceptor: ISigAcceptor<SigAnalyticData>)
+          {
+            CallFactory.rpc.create(SigAnalyticData::class.java, ApiPlus.ENT_ID_GLOBAL, SN, "clusterAnalyticDataGet")
+              .sendBearerToken()
+              .post(msg, sigAcceptor)
+          }
 
-        fun clusterAnalyticEventCountGet(
-            msg: MsgClusterAnalyticEventCount,
-            sigAcceptor: ISigAcceptor<SigAnalyticEventCount>
-        ) {
-            CallFactory.rpc.create(
-                SigAnalyticEventCount::class.java,
-                ApiPlus.ENT_ID_GLOBAL,
-                SN,
-                "clusterAnalyticEventCountGet"
-            )
-                .sendBearerToken()
-                .post(msg, sigAcceptor)
-        }
+      fun clusterAnalyticEventCountGet(msg: MsgClusterAnalyticEventCount, sigAcceptor: ISigAcceptor<SigAnalyticEventCount>)
+          {
+            CallFactory.rpc.create(SigAnalyticEventCount::class.java, ApiPlus.ENT_ID_GLOBAL, SN, "clusterAnalyticEventCountGet")
+              .sendBearerToken()
+              .post(msg, sigAcceptor)
+          }
 
-        fun clusterAnalyticEventDataGet(
-            msg: MsgClusterAnalyticEventData,
-            sigAcceptor: ISigAcceptor<SigAnalyticEventData>
-        ) {
-            CallFactory.rpc.create(
-                SigAnalyticEventData::class.java,
-                ApiPlus.ENT_ID_GLOBAL,
-                SN,
-                "clusterAnalyticEventDataGet"
-            )
-                .sendBearerToken()
-                .post(msg, sigAcceptor)
-        }
+      fun clusterAnalyticEventDataGet(msg: MsgClusterAnalyticEventData, sigAcceptor: ISigAcceptor<SigAnalyticEventData>)
+          {
+            CallFactory.rpc.create(SigAnalyticEventData::class.java, ApiPlus.ENT_ID_GLOBAL, SN, "clusterAnalyticEventDataGet")
+              .sendBearerToken()
+              .post(msg, sigAcceptor)
+          }
 
-        fun clusterEntUserCountGet(
-            msg: MsgClusterEntUserCountGet,
-            sigAcceptor: ISigAcceptor<SigEntUserCount>
-        ) {
-            CallFactory.rpc.create(
-                SigEntUserCount::class.java,
-                ApiPlus.ENT_ID_GLOBAL,
-                SN,
-                "clusterEntUserCountGet"
-            )
-                .sendBearerToken()
-                .post(msg, sigAcceptor)
-        }
+      fun clusterEntUserCountGet(msg: MsgClusterEntUserCountGet, sigAcceptor: ISigAcceptor<SigEntUserCount>)
+          {
+            CallFactory.rpc.create(SigEntUserCount::class.java, ApiPlus.ENT_ID_GLOBAL, SN, "clusterEntUserCountGet")
+              .sendBearerToken()
+              .post(msg, sigAcceptor)
+          }
 
-        fun defnFormGet(entId: EntId, msg: MsgFormId, sigAcceptor: ISigAcceptor<SigDefnForm>) {
+      fun defnFormGet(entId: EntId, msg: MsgFormId, sigAcceptor: ISigAcceptor<SigDefnForm>)
+          {
             CallFactory.rpc.create(SigDefnForm::class.java, entId, SN, "defnFormGet")
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun entAdminAdd(entId: EntId, msg: MsgEntAdminAdd, sigAcceptor: ISigAcceptor<SigDone>) {
+      fun entAdminAdd(entId: EntId, msg: MsgEntAdminAdd, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entAdminAdd")
-                .sendBearerToken()
-                .post(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .post(msg, sigAcceptor)
+          }
 
-        fun entAdminCallerGet(entId: EntId, sigAcceptor: ISigAcceptor<SigEntAdminCaller>) {
+      fun entAdminCallerGet(entId: EntId, sigAcceptor: ISigAcceptor<SigEntAdminCaller>)
+          {
             CallFactory.rpc.create(SigEntAdminCaller::class.java, entId, SN, "entAdminCallerGet")
-                .sendBearerToken()
-                .get(null, sigAcceptor)
-        }
+              .sendBearerToken()
+              .get(null, sigAcceptor)
+          }
 
-        fun entAdminEditLockDetailGet(
-            entId: EntId,
-            msg: MsgVersion,
-            sigAcceptor: ISigAcceptor<SigAdminEditLockDetail>
-        ) {
-            CallFactory.rpc.create(
-                SigAdminEditLockDetail::class.java,
-                entId,
-                SN,
-                "entAdminEditLockDetailGet"
-            )
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+      fun entAdminEditLockDetailGet(entId: EntId, msg: MsgVersion, sigAcceptor: ISigAcceptor<SigAdminEditLockDetail>)
+          {
+            CallFactory.rpc.create(SigAdminEditLockDetail::class.java, entId, SN, "entAdminEditLockDetailGet")
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun entAdminEditLockTransfer(
-            entId: EntId,
-            msg: MsgAdminId,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun entAdminEditLockTransfer(entId: EntId, msg: MsgAdminId, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entAdminEditLockTransfer")
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
 
-        fun entAdminExit(entId: EntId, sigAcceptor: ISigAcceptor<SigDone>) {
+      fun entAdminExit(entId: EntId, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entAdminExit")
-                .sendBearerToken()
-                .delete(null, sigAcceptor)
-        }
+              .sendBearerToken()
+              .delete(null, sigAcceptor)
+          }
 
-        fun entAdminInvite(entId: EntId, msg: MsgAdminInvite, sigAcceptor: ISigAcceptor<SigDone>) {
+      fun entAdminInvite(entId: EntId, msg: MsgAdminInvite, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entAdminInvite")
-                .sendBearerToken()
-                .post(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .post(msg, sigAcceptor)
+          }
 
-        fun entAdminInviteDeeplinkGet(
-            entId: EntId,
-            msg: MsgEntAdminInviteDeeplinkGet,
-            sigAcceptor: ISigAcceptor<SigUrlPassword>
-        ) {
-            CallFactory.rpc.create(
-                SigUrlPassword::class.java,
-                entId,
-                SN,
-                "entAdminInviteDeeplinkGet"
-            )
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+      fun entAdminInviteDeeplinkGet(entId: EntId, msg: MsgEntAdminInviteDeeplinkGet, sigAcceptor: ISigAcceptor<SigUrlPassword>)
+          {
+            CallFactory.rpc.create(SigUrlPassword::class.java, entId, SN, "entAdminInviteDeeplinkGet")
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun entAdminListGet(
-            entId: EntId,
-            msg: MsgVersion,
-            sigAcceptor: ISigAcceptor<SigEntAdminList>
-        ) {
+      fun entAdminListGet(entId: EntId, msg: MsgVersion, sigAcceptor: ISigAcceptor<SigEntAdminList>)
+          {
             CallFactory.rpc.create(SigEntAdminList::class.java, entId, SN, "entAdminListGet")
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun entAdminRemove(entId: EntId, msg: MsgAdminId, sigAcceptor: ISigAcceptor<SigDone>) {
+      fun entAdminRemove(entId: EntId, msg: MsgAdminId, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entAdminRemove")
-                .sendBearerToken()
-                .delete(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .delete(msg, sigAcceptor)
+          }
 
-        fun entAdminUpdate(
-            entId: EntId,
-            msg: MsgEntAdminUpdate,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun entAdminUpdate(entId: EntId, msg: MsgEntAdminUpdate, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entAdminUpdate")
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
 
-        fun entDemoAppGet(entId: EntId, sigAcceptor: ISigAcceptor<SigEntDemoApp>) {
+      fun entDemoAppGet(entId: EntId, sigAcceptor: ISigAcceptor<SigEntDemoApp>)
+          {
             CallFactory.rpc.create(SigEntDemoApp::class.java, entId, SN, "entDemoAppGet")
-                .sendBearerToken()
-                .get(null, sigAcceptor)
-        }
+              .sendBearerToken()
+              .get(null, sigAcceptor)
+          }
 
-        fun entDemoAppPut(entId: EntId, msg: MsgEntDemoApp, sigAcceptor: ISigAcceptor<SigDone>) {
+      fun entDemoAppPut(entId: EntId, msg: MsgEntDemoApp, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entDemoAppPut")
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
 
-        fun entDemoAppRemove(entId: EntId, sigAcceptor: ISigAcceptor<SigDone>) {
+      fun entDemoAppRemove(entId: EntId, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entDemoAppRemove")
-                .sendBearerToken()
-                .delete(null, sigAcceptor)
-        }
+              .sendBearerToken()
+              .delete(null, sigAcceptor)
+          }
 
-        fun entFormFieldTypeUpdate(
-            entId: EntId,
-            msg: MsgFormFieldTypeUpdate,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun entFormFieldTypeUpdate(entId: EntId, msg: MsgFormFieldTypeUpdate, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entFormFieldTypeUpdate")
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
 
-        fun entPaymentMapGet(
-            entId: EntId,
-            msg: MsgVersion,
-            sigAcceptor: ISigAcceptor<SigEntPaymentMap>
-        ) {
+      fun entPaymentMapGet(entId: EntId, msg: MsgVersion, sigAcceptor: ISigAcceptor<SigEntPaymentMap>)
+          {
             CallFactory.rpc.create(SigEntPaymentMap::class.java, entId, SN, "entPaymentMapGet")
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun entPaymentMapUpdate(
-            entId: EntId,
-            msg: MsgEntPaymentMapUpdate,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun entPaymentMapUpdate(entId: EntId, msg: MsgEntPaymentMapUpdate, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entPaymentMapUpdate")
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
 
-        fun entPluginMapGet(
-            entId: EntId,
-            msg: MsgVersion,
-            sigAcceptor: ISigAcceptor<SigEntPluginMap>
-        ) {
+      fun entPluginMapGet(entId: EntId, msg: MsgVersion, sigAcceptor: ISigAcceptor<SigEntPluginMap>)
+          {
             CallFactory.rpc.create(SigEntPluginMap::class.java, entId, SN, "entPluginMapGet")
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun entPluginMapUpdate(
-            entId: EntId,
-            msg: MsgEntPluginMapUpdate,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun entPluginMapUpdate(entId: EntId, msg: MsgEntPluginMapUpdate, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entPluginMapUpdate")
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
 
-        fun entScheduleNextExecutionListGet(
-            entId: EntId,
-            msg: MsgScheduleNextExecutionList,
-            sigAcceptor: ISigAcceptor<SigScheduleNextExecutionList>
-        ) {
-            CallFactory.rpc.create(
-                SigScheduleNextExecutionList::class.java,
-                entId,
-                SN,
-                "entScheduleNextExecutionListGet"
-            )
-                .sendBearerToken()
-                .post(msg, sigAcceptor)
-        }
+      fun entScheduleNextExecutionListGet(entId: EntId, msg: MsgScheduleNextExecutionList, sigAcceptor: ISigAcceptor<SigScheduleNextExecutionList>)
+          {
+            CallFactory.rpc.create(SigScheduleNextExecutionList::class.java, entId, SN, "entScheduleNextExecutionListGet")
+              .sendBearerToken()
+              .post(msg, sigAcceptor)
+          }
 
-        fun entSnapshotGet(
-            entId: EntId,
-            msg: MsgEntSnapshotId,
-            sigAcceptor: ISigAcceptor<SigEntSnapshot>
-        ) {
+      fun entSnapshotGet(entId: EntId, msg: MsgEntSnapshotId, sigAcceptor: ISigAcceptor<SigEntSnapshot>)
+          {
             CallFactory.rpc.create(SigEntSnapshot::class.java, entId, SN, "entSnapshotGet")
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun entSnapshotListGet(
-            entId: EntId,
-            msg: MsgVersion,
-            sigAcceptor: ISigAcceptor<SigEntSnapshotAvatarList>
-        ) {
-            CallFactory.rpc.create(
-                SigEntSnapshotAvatarList::class.java,
-                entId,
-                SN,
-                "entSnapshotListGet"
-            )
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+      fun entSnapshotListGet(entId: EntId, msg: MsgVersion, sigAcceptor: ISigAcceptor<SigEntSnapshotAvatarList>)
+          {
+            CallFactory.rpc.create(SigEntSnapshotAvatarList::class.java, entId, SN, "entSnapshotListGet")
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun entSnapshotPut(entId: EntId, msg: MsgEntSnapshot, sigAcceptor: ISigAcceptor<SigDone>) {
+      fun entSnapshotPut(entId: EntId, msg: MsgEntSnapshot, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entSnapshotPut")
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
 
-        fun entSnapshotRemove(
-            entId: EntId,
-            msg: MsgEntSnapshotId,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun entSnapshotRemove(entId: EntId, msg: MsgEntSnapshotId, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entSnapshotRemove")
-                .sendBearerToken()
-                .delete(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .delete(msg, sigAcceptor)
+          }
 
-        fun entUserActivate(
-            entId: EntId,
-            msg: MsgEntUserIdNoVersion,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun entUserActivate(entId: EntId, msg: MsgEntUserIdNoVersion, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entUserActivate")
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
 
-        fun entUserAdd(entId: EntId, msg: MsgEntUserAdd, sigAcceptor: ISigAcceptor<SigDone>) {
+      fun entUserAdd(entId: EntId, msg: MsgEntUserAdd, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entUserAdd")
-                .sendBearerToken()
-                .post(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .post(msg, sigAcceptor)
+          }
 
-        fun entUserBulkImport(
-            entId: EntId,
-            msg: MsgEntUserBulkImport,
-            sigAcceptor: ISigAcceptor<SigEntUserBulkImport>
-        ) {
+      fun entUserBulkImport(entId: EntId, msg: MsgEntUserBulkImport, sigAcceptor: ISigAcceptor<SigEntUserBulkImport>)
+          {
             CallFactory.rpc.create(SigEntUserBulkImport::class.java, entId, SN, "entUserBulkImport")
-                .sendBearerToken()
-                .post(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .post(msg, sigAcceptor)
+          }
 
-        fun entUserCountGet(entId: EntId, sigAcceptor: ISigAcceptor<SigEntUserCount>) {
+      fun entUserCountGet(entId: EntId, sigAcceptor: ISigAcceptor<SigEntUserCount>)
+          {
             CallFactory.rpc.create(SigEntUserCount::class.java, entId, SN, "entUserCountGet")
-                .sendBearerToken()
-                .get(null, sigAcceptor)
-        }
+              .sendBearerToken()
+              .get(null, sigAcceptor)
+          }
 
-        fun entUserDeactivate(
-            entId: EntId,
-            msg: MsgEntUserIdSet,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun entUserDeactivate(entId: EntId, msg: MsgEntUserIdSet, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entUserDeactivate")
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
 
-        fun entUserDeviceListGet(
-            entId: EntId,
-            msg: MsgEntUserIdNoVersion,
-            sigAcceptor: ISigAcceptor<SigEntUserDeviceList>
-        ) {
-            CallFactory.rpc.create(
-                SigEntUserDeviceList::class.java,
-                entId,
-                SN,
-                "entUserDeviceListGet"
-            )
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+      fun entUserDeviceListGet(entId: EntId, msg: MsgEntUserIdNoVersion, sigAcceptor: ISigAcceptor<SigEntUserDeviceList>)
+          {
+            CallFactory.rpc.create(SigEntUserDeviceList::class.java, entId, SN, "entUserDeviceListGet")
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun entUserExit(entId: EntId, sigAcceptor: ISigAcceptor<SigDone>) {
+      fun entUserExit(entId: EntId, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entUserExit")
-                .sendBearerToken()
-                .delete(null, sigAcceptor)
-        }
+              .sendBearerToken()
+              .delete(null, sigAcceptor)
+          }
 
-        fun entUserGet(msg: MsgEntUserGet, sigAcceptor: ISigAcceptor<SigEntUser>) {
+      fun entUserGet(msg: MsgEntUserGet, sigAcceptor: ISigAcceptor<SigEntUser>)
+          {
             CallFactory.rpc.create(SigEntUser::class.java, ApiPlus.ENT_ID_GLOBAL, SN, "entUserGet")
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun entUserInvite(entId: EntId, msg: MsgEntUserInvite, sigAcceptor: ISigAcceptor<SigDone>) {
+      fun entUserInvite(entId: EntId, msg: MsgEntUserInvite, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entUserInvite")
-                .sendBearerToken()
-                .post(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .post(msg, sigAcceptor)
+          }
 
-        fun entUserInviteDeeplinkGet(
-            entId: EntId,
-            msg: MsgEntUserDeeplinkGet,
-            sigAcceptor: ISigAcceptor<SigUrlPassword>
-        ) {
-            CallFactory.rpc.create(
-                SigUrlPassword::class.java,
-                entId,
-                SN,
-                "entUserInviteDeeplinkGet"
-            )
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+      fun entUserInviteDeeplinkGet(entId: EntId, msg: MsgEntUserDeeplinkGet, sigAcceptor: ISigAcceptor<SigUrlPassword>)
+          {
+            CallFactory.rpc.create(SigUrlPassword::class.java, entId, SN, "entUserInviteDeeplinkGet")
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun entUserListGet(
-            entId: EntId,
-            msg: MsgEntUserListGet,
-            sigAcceptor: ISigAcceptor<SigEntUserList>
-        ) {
+      fun entUserListGet(entId: EntId, msg: MsgEntUserListGet, sigAcceptor: ISigAcceptor<SigEntUserList>)
+          {
             CallFactory.rpc.create(SigEntUserList::class.java, entId, SN, "entUserListGet")
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun entUserRemove(
-            entId: EntId,
-            msg: MsgEntUserIdNoVersion,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun entUserRemove(entId: EntId, msg: MsgEntUserIdNoVersion, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entUserRemove")
-                .sendBearerToken()
-                .delete(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .delete(msg, sigAcceptor)
+          }
 
-        fun entUserUpdate(entId: EntId, msg: MsgEntUserUpdate, sigAcceptor: ISigAcceptor<SigDone>) {
+      fun entUserUpdate(entId: EntId, msg: MsgEntUserUpdate, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "entUserUpdate")
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
 
-        fun entWebhookCodeGet(
-            entId: EntId,
-            msg: MsgWebhookCodeGet,
-            sigAcceptor: ISigAcceptor<SigWebhookId>
-        ) {
+      fun entWebhookCodeGet(entId: EntId, msg: MsgWebhookCodeGet, sigAcceptor: ISigAcceptor<SigWebhookId>)
+          {
             CallFactory.rpc.create(SigWebhookId::class.java, entId, SN, "entWebhookCodeGet")
-                .sendBearerToken()
-                .post(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .post(msg, sigAcceptor)
+          }
 
-        fun keychainCreate(
-            entId: EntId,
-            msg: MsgKeychainCreate,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun keychainCreate(entId: EntId, msg: MsgKeychainCreate, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "keychainCreate")
-                .sendBearerToken()
-                .post(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .post(msg, sigAcceptor)
+          }
 
-        fun keychainMapGet(
-            entId: EntId,
-            msg: MsgVersion,
-            sigAcceptor: ISigAcceptor<SigKeychainMap>
-        ) {
+      fun keychainMapGet(entId: EntId, msg: MsgVersion, sigAcceptor: ISigAcceptor<SigKeychainMap>)
+          {
             CallFactory.rpc.create(SigKeychainMap::class.java, entId, SN, "keychainMapGet")
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun keychainPut(entId: EntId, msg: MsgKeychainPut, sigAcceptor: ISigAcceptor<SigDone>) {
+      fun keychainPut(entId: EntId, msg: MsgKeychainPut, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "keychainPut")
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
 
-        fun keychainRemove(
-            entId: EntId,
-            msg: MsgKeychainRemove,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun keychainRemove(entId: EntId, msg: MsgKeychainRemove, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "keychainRemove")
-                .sendBearerToken()
-                .delete(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .delete(msg, sigAcceptor)
+          }
 
-        fun keychainSecretKeyGenerate(
-            entId: EntId,
-            sigAcceptor: ISigAcceptor<SigKeychainSecretKey>
-        ) {
-            CallFactory.rpc.create(
-                SigKeychainSecretKey::class.java,
-                entId,
-                SN,
-                "keychainSecretKeyGenerate"
-            )
-                .sendBearerToken()
-                .get(null, sigAcceptor)
-        }
+      fun keychainSecretKeyGenerate(entId: EntId, sigAcceptor: ISigAcceptor<SigKeychainSecretKey>)
+          {
+            CallFactory.rpc.create(SigKeychainSecretKey::class.java, entId, SN, "keychainSecretKeyGenerate")
+              .sendBearerToken()
+              .get(null, sigAcceptor)
+          }
 
-        fun neoQLResultGet(
-            entId: EntId,
-            msg: MsgNeoQLResult,
-            sigAcceptor: ISigAcceptor<SigNeoQLResult>
-        ) {
+      fun neoQLResultGet(entId: EntId, msg: MsgNeoQLResult, sigAcceptor: ISigAcceptor<SigNeoQLResult>)
+          {
             CallFactory.rpc.create(SigNeoQLResult::class.java, entId, SN, "neoQLResultGet")
-                .sendBearerToken()
-                .post(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .post(msg, sigAcceptor)
+          }
 
-        fun pluginAdminAdd(
-            pluginBundleId: PluginBundleId,
-            msg: MsgPluginAdminAdd,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun pluginAdminAdd(pluginBundleId: PluginBundleId, msg: MsgPluginAdminAdd, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, pluginBundleId, SN, "pluginAdminAdd")
-                .sendBearerToken()
-                .post(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .post(msg, sigAcceptor)
+          }
 
-        fun pluginAdminCallerGet(
-            pluginBundleId: PluginBundleId,
-            sigAcceptor: ISigAcceptor<SigPluginAdminCaller>
-        ) {
-            CallFactory.rpc.create(
-                SigPluginAdminCaller::class.java,
-                pluginBundleId,
-                SN,
-                "pluginAdminCallerGet"
-            )
-                .sendBearerToken()
-                .get(null, sigAcceptor)
-        }
+      fun pluginAdminCallerGet(pluginBundleId: PluginBundleId, sigAcceptor: ISigAcceptor<SigPluginAdminCaller>)
+          {
+            CallFactory.rpc.create(SigPluginAdminCaller::class.java, pluginBundleId, SN, "pluginAdminCallerGet")
+              .sendBearerToken()
+              .get(null, sigAcceptor)
+          }
 
-        fun pluginAdminEditLockDetailGet(
-            pluginBundleId: PluginBundleId,
-            msg: MsgVersion,
-            sigAcceptor: ISigAcceptor<SigAdminEditLockDetail>
-        ) {
-            CallFactory.rpc.create(
-                SigAdminEditLockDetail::class.java,
-                pluginBundleId,
-                SN,
-                "pluginAdminEditLockDetailGet"
-            )
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+      fun pluginAdminEditLockDetailGet(pluginBundleId: PluginBundleId, msg: MsgVersion, sigAcceptor: ISigAcceptor<SigAdminEditLockDetail>)
+          {
+            CallFactory.rpc.create(SigAdminEditLockDetail::class.java, pluginBundleId, SN, "pluginAdminEditLockDetailGet")
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun pluginAdminEditLockTransfer(
-            pluginBundleId: PluginBundleId,
-            msg: MsgAdminId,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
-            CallFactory.rpc.create(
-                SigDone::class.java,
-                pluginBundleId,
-                SN,
-                "pluginAdminEditLockTransfer"
-            )
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
+      fun pluginAdminEditLockTransfer(pluginBundleId: PluginBundleId, msg: MsgAdminId, sigAcceptor: ISigAcceptor<SigDone>)
+          {
+            CallFactory.rpc.create(SigDone::class.java, pluginBundleId, SN, "pluginAdminEditLockTransfer")
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
 
-        fun pluginAdminExit(pluginBundleId: PluginBundleId, sigAcceptor: ISigAcceptor<SigDone>) {
+      fun pluginAdminExit(pluginBundleId: PluginBundleId, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, pluginBundleId, SN, "pluginAdminExit")
-                .sendBearerToken()
-                .delete(null, sigAcceptor)
-        }
+              .sendBearerToken()
+              .delete(null, sigAcceptor)
+          }
 
-        fun pluginAdminInvite(
-            pluginBundleId: PluginBundleId,
-            msg: MsgAdminInvite,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun pluginAdminInvite(pluginBundleId: PluginBundleId, msg: MsgAdminInvite, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, pluginBundleId, SN, "pluginAdminInvite")
-                .sendBearerToken()
-                .post(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .post(msg, sigAcceptor)
+          }
 
-        fun pluginAdminListGet(
-            pluginBundleId: PluginBundleId,
-            sigAcceptor: ISigAcceptor<SigPluginAdminList>
-        ) {
-            CallFactory.rpc.create(
-                SigPluginAdminList::class.java,
-                pluginBundleId,
-                SN,
-                "pluginAdminListGet"
-            )
-                .sendBearerToken()
-                .get(null, sigAcceptor)
-        }
+      fun pluginAdminListGet(pluginBundleId: PluginBundleId, sigAcceptor: ISigAcceptor<SigPluginAdminList>)
+          {
+            CallFactory.rpc.create(SigPluginAdminList::class.java, pluginBundleId, SN, "pluginAdminListGet")
+              .sendBearerToken()
+              .get(null, sigAcceptor)
+          }
 
-        fun pluginAdminRemove(
-            pluginBundleId: PluginBundleId,
-            msg: MsgAdminId,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun pluginAdminRemove(pluginBundleId: PluginBundleId, msg: MsgAdminId, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, pluginBundleId, SN, "pluginAdminRemove")
-                .sendBearerToken()
-                .delete(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .delete(msg, sigAcceptor)
+          }
 
-        fun pluginAdminUpdate(
-            pluginBundleId: PluginBundleId,
-            msg: MsgPluginAdminUpdate,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun pluginAdminUpdate(pluginBundleId: PluginBundleId, msg: MsgPluginAdminUpdate, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, pluginBundleId, SN, "pluginAdminUpdate")
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
 
-        fun pluginApiSpecGet(
-            entId: EntId,
-            msg: MsgPluginApiSpecGet,
-            sigAcceptor: ISigAcceptor<SigPluginApiSpec>
-        ) {
+      fun pluginApiSpecGet(entId: EntId, msg: MsgPluginApiSpecGet, sigAcceptor: ISigAcceptor<SigPluginApiSpec>)
+          {
             CallFactory.rpc.create(SigPluginApiSpec::class.java, entId, SN, "pluginApiSpecGet")
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun pluginSourceCodeDownload(
-            pluginBundleId: PluginBundleId,
-            sigAcceptor: ISigAcceptor<SigMediaIdDocument>
-        ) {
-            CallFactory.rpc.create(
-                SigMediaIdDocument::class.java,
-                pluginBundleId,
-                SN,
-                "pluginSourceCodeDownload"
-            )
-                .sendBearerToken()
-                .get(null, sigAcceptor)
-        }
+      fun pluginSourceCodeDownload(pluginBundleId: PluginBundleId, sigAcceptor: ISigAcceptor<SigMediaIdDocument>)
+          {
+            CallFactory.rpc.create(SigMediaIdDocument::class.java, pluginBundleId, SN, "pluginSourceCodeDownload")
+              .sendBearerToken()
+              .get(null, sigAcceptor)
+          }
 
-        fun studioEntConfigGet(
-            entId: EntId,
-            msg: MsgVersion,
-            sigAcceptor: ISigAcceptor<SigStudioEntConfig>
-        ) {
+      fun studioEntConfigGet(entId: EntId, msg: MsgVersion, sigAcceptor: ISigAcceptor<SigStudioEntConfig>)
+          {
             CallFactory.rpc.create(SigStudioEntConfig::class.java, entId, SN, "studioEntConfigGet")
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun studioEntConfigUpdate(
-            entId: EntId,
-            msg: MsgEntConfigUpdate,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun studioEntConfigUpdate(entId: EntId, msg: MsgEntConfigUpdate, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "studioEntConfigUpdate")
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
 
-        fun studioEntDeployStatusGet(
-            entId: EntId,
-            msg: MsgVersion,
-            sigAcceptor: ISigAcceptor<SigEntDeployStatus>
-        ) {
-            CallFactory.rpc.create(
-                SigEntDeployStatus::class.java,
-                entId,
-                SN,
-                "studioEntDeployStatusGet"
-            )
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+      fun studioEntDeployStatusGet(entId: EntId, msg: MsgVersion, sigAcceptor: ISigAcceptor<SigEntDeployStatus>)
+          {
+            CallFactory.rpc.create(SigEntDeployStatus::class.java, entId, SN, "studioEntDeployStatusGet")
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun studioEntMerge(entId: EntId, msg: MsgStudioEnt, sigAcceptor: ISigAcceptor<SigDone>) {
+      fun studioEntMerge(entId: EntId, msg: MsgStudioEnt, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "studioEntMerge")
-                .sendBearerToken()
-                .post(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .post(msg, sigAcceptor)
+          }
 
-        fun studioEntPut(entId: EntId, msg: MsgStudioEnt, sigAcceptor: ISigAcceptor<SigDone>) {
+      fun studioEntPut(entId: EntId, msg: MsgStudioEnt, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "studioEntPut")
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
 
-        fun studioEntRevertToDeploy(entId: EntId, sigAcceptor: ISigAcceptor<SigDone>) {
+      fun studioEntRevertToDeploy(entId: EntId, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "studioEntRevertToDeploy")
-                .sendBearerToken()
-                .delete(null, sigAcceptor)
-        }
+              .sendBearerToken()
+              .delete(null, sigAcceptor)
+          }
 
-        fun studioFindUsages(
-            artifactId: ArtifactId,
-            msg: MsgStudioSearchUsages,
-            sigAcceptor: ISigAcceptor<SigStudioSearchUsages>
-        ) {
-            CallFactory.rpc.create(
-                SigStudioSearchUsages::class.java,
-                artifactId,
-                SN,
-                "studioFindUsages"
-            )
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+      fun studioFindUsages(artifactId: ArtifactId, msg: MsgStudioSearchUsages, sigAcceptor: ISigAcceptor<SigStudioSearchUsages>)
+          {
+            CallFactory.rpc.create(SigStudioSearchUsages::class.java, artifactId, SN, "studioFindUsages")
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun studioPluginMapGet(sigAcceptor: ISigAcceptor<SigStudioPluginMap>) {
-            CallFactory.rpc.create(
-                SigStudioPluginMap::class.java,
-                ApiPlus.ENT_ID_GLOBAL,
-                SN,
-                "studioPluginMapGet"
-            )
-                .sendBearerToken()
-                .get(null, sigAcceptor)
-        }
+      fun studioPluginMapGet(sigAcceptor: ISigAcceptor<SigStudioPluginMap>)
+          {
+            CallFactory.rpc.create(SigStudioPluginMap::class.java, ApiPlus.ENT_ID_GLOBAL, SN, "studioPluginMapGet")
+              .sendBearerToken()
+              .get(null, sigAcceptor)
+          }
 
-        fun studioPluginMarkObsolete(
-            pluginBundleId: PluginBundleId,
-            msg: MsgPluginId,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
-            CallFactory.rpc.create(
-                SigDone::class.java,
-                pluginBundleId,
-                SN,
-                "studioPluginMarkObsolete"
-            )
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
+      fun studioPluginMarkObsolete(pluginBundleId: PluginBundleId, msg: MsgPluginId, sigAcceptor: ISigAcceptor<SigDone>)
+          {
+            CallFactory.rpc.create(SigDone::class.java, pluginBundleId, SN, "studioPluginMarkObsolete")
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
 
-        fun studioPluginPut(
-            pluginBundleId: PluginBundleId,
-            msg: MsgStudioPlugin,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun studioPluginPut(pluginBundleId: PluginBundleId, msg: MsgStudioPlugin, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, pluginBundleId, SN, "studioPluginPut")
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
 
-        fun studioPluginRemove(
-            pluginBundleId: PluginBundleId,
-            msg: MsgPluginId,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun studioPluginRemove(pluginBundleId: PluginBundleId, msg: MsgPluginId, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, pluginBundleId, SN, "studioPluginRemove")
-                .sendBearerToken()
-                .delete(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .delete(msg, sigAcceptor)
+          }
 
-        fun sysDefnFormMapGet(sigAcceptor: ISigAcceptor<SigSysDefnFormMapGet>) {
-            CallFactory.rpc.create(
-                SigSysDefnFormMapGet::class.java,
-                ApiPlus.ENT_ID_GLOBAL,
-                SN,
-                "sysDefnFormMapGet"
-            )
-                .sendBearerToken()
-                .get(null, sigAcceptor)
-        }
+      fun sysDefnFormMapGet(sigAcceptor: ISigAcceptor<SigSysDefnFormMapGet>)
+          {
+            CallFactory.rpc.create(SigSysDefnFormMapGet::class.java, ApiPlus.ENT_ID_GLOBAL, SN, "sysDefnFormMapGet")
+              .sendBearerToken()
+              .get(null, sigAcceptor)
+          }
 
-        fun whatsAppTemplateGroupMapGet(
-            entId: EntId,
-            sigAcceptor: ISigAcceptor<SigWhatsAppTemplateGroupMap>
-        ) {
-            CallFactory.rpc.create(
-                SigWhatsAppTemplateGroupMap::class.java,
-                entId,
-                SN,
-                "whatsAppTemplateGroupMapGet"
-            )
-                .sendBearerToken()
-                .get(null, sigAcceptor)
-        }
+      fun whatsAppTemplateGroupMapGet(entId: EntId, sigAcceptor: ISigAcceptor<SigWhatsAppTemplateGroupMap>)
+          {
+            CallFactory.rpc.create(SigWhatsAppTemplateGroupMap::class.java, entId, SN, "whatsAppTemplateGroupMapGet")
+              .sendBearerToken()
+              .get(null, sigAcceptor)
+          }
 
-        fun workflowDebugBreakpointMapPut(
-            entId: EntId,
-            msg: MsgWorkflowDebugBreakpointMap,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
+      fun workflowDebugBreakpointMapPut(entId: EntId, msg: MsgWorkflowDebugBreakpointMap, sigAcceptor: ISigAcceptor<SigDone>)
+          {
             CallFactory.rpc.create(SigDone::class.java, entId, SN, "workflowDebugBreakpointMapPut")
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
 
-        fun workflowDebugConfigGet(
-            entId: EntId,
-            msg: MsgVersion,
-            sigAcceptor: ISigAcceptor<SigWorkflowDebugConfig>
-        ) {
-            CallFactory.rpc.create(
-                SigWorkflowDebugConfig::class.java,
-                entId,
-                SN,
-                "workflowDebugConfigGet"
-            )
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+      fun workflowDebugConfigGet(entId: EntId, msg: MsgVersion, sigAcceptor: ISigAcceptor<SigWorkflowDebugConfig>)
+          {
+            CallFactory.rpc.create(SigWorkflowDebugConfig::class.java, entId, SN, "workflowDebugConfigGet")
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun workflowNodeFavoritesGet(
-            msg: MsgVersion,
-            sigAcceptor: ISigAcceptor<SigWorkflowNodeFavorites>
-        ) {
-            CallFactory.rpc.create(
-                SigWorkflowNodeFavorites::class.java,
-                ApiPlus.ENT_ID_GLOBAL,
-                SN,
-                "workflowNodeFavoritesGet"
-            )
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
+      fun workflowNodeFavoritesGet(msg: MsgVersion, sigAcceptor: ISigAcceptor<SigWorkflowNodeFavorites>)
+          {
+            CallFactory.rpc.create(SigWorkflowNodeFavorites::class.java, ApiPlus.ENT_ID_GLOBAL, SN, "workflowNodeFavoritesGet")
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
 
-        fun workflowNodeFavoritesPut(
-            msg: MsgWorkflowNodeFavoritesPut,
-            sigAcceptor: ISigAcceptor<SigDone>
-        ) {
-            CallFactory.rpc.create(
-                SigDone::class.java,
-                ApiPlus.ENT_ID_GLOBAL,
-                SN,
-                "workflowNodeFavoritesPut"
-            )
-                .sendBearerToken()
-                .put(msg, sigAcceptor)
-        }
-    }
+      fun workflowNodeFavoritesPut(msg: MsgWorkflowNodeFavoritesPut, sigAcceptor: ISigAcceptor<SigDone>)
+          {
+            CallFactory.rpc.create(SigDone::class.java, ApiPlus.ENT_ID_GLOBAL, SN, "workflowNodeFavoritesPut")
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
+  }
 }

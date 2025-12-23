@@ -5,6 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioDtoLayoutXYChartPie : StudioDtoLayoutXYChart() {
-    var alwaysShowSliceValues: Boolean? = null
+import com.neome.api.meta.base.dto.StudioDtoLayoutXYChart
+
+open class StudioDtoLayoutXYChartPie : StudioDtoLayoutXYChart()
+{
+  var alwaysShowSliceValues: Boolean? = null
 }

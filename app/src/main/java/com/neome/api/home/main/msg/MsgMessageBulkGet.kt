@@ -6,10 +6,11 @@
 package com.neome.api.home.main.msg
 
 import com.neome.api.meta.base.Types.ChatId
-import com.neome.api.nucleus.base.msg.Msg
 import java.util.Map
+import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgMessageBulkGet : Msg() {
-    lateinit var chatId: ChatId
-    lateinit var offsetMap: Map<Number, String>
+open class MsgMessageBulkGet : Msg()
+{
+  lateinit var chatId: ChatId
+  lateinit var offsetMap: Map<Number, String>
 }

@@ -5,12 +5,14 @@
 
 package com.neome.api.home.aside.msg
 
-import com.neome.api.core.base.msg.MsgVersion
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.GroupId
+import com.neome.api.core.base.msg.MsgVersion
+import java.util.Set
 
-open class MsgGroupMembersRemove : MsgVersion() {
-    lateinit var groupId: GroupId
-    var removeAdminSet: Array<EntUserId>? = null
-    var removeMemberSet: Array<EntUserId>? = null
+open class MsgGroupMembersRemove : MsgVersion()
+{
+  lateinit var groupId: GroupId
+  var removeAdminSet: Array<EntUserId>? = null
+  var removeMemberSet: Array<EntUserId>? = null
 }

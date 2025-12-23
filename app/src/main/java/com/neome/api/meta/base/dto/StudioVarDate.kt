@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioVarDate : StudioVar() {
-    var value: StudioBuildDate? = null
+import com.neome.api.meta.base.dto.StudioBuildDate
+import com.neome.api.meta.base.dto.StudioVar
+
+open class StudioVarDate : StudioVar()
+{
+  var value: StudioBuildDate? = null
 }

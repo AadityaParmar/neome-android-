@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioVarCurrency : StudioVar() {
-    var value: StudioVarValueCurrency? = null
+import com.neome.api.meta.base.dto.StudioVar
+import com.neome.api.meta.base.dto.StudioVarValueCurrency
+
+open class StudioVarCurrency : StudioVar()
+{
+  var value: StudioVarValueCurrency? = null
 }

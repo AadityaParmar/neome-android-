@@ -5,7 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
-open class AutoXformStringIsMobileNumber : AutoXform() {
-    var outputField: StudioDtoArgValueParameter? = null
-    var sourceField: StudioBuildArgBinder? = null
+import com.neome.api.meta.base.dto.AutoXform
+import com.neome.api.meta.base.dto.StudioBuildArgBinder
+import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
+
+open class AutoXformStringIsMobileNumber : AutoXform()
+{
+  var outputField: StudioDtoArgValueParameter? = null
+  var sourceField: StudioBuildArgBinder? = null
 }

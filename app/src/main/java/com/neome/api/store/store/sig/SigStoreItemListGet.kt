@@ -5,9 +5,11 @@
 
 package com.neome.api.store.store.sig
 
-import com.neome.api.meta.base.Types.StoreItemId
+import java.util.Set
 import com.neome.api.nucleus.base.sig.Sig
+import com.neome.api.meta.base.Types.StoreItemId
 
-open class SigStoreItemListGet : Sig() {
-    lateinit var storeItemIdSet: Array<StoreItemId>
+open class SigStoreItemListGet : Sig()
+{
+  lateinit var storeItemIdSet: Array<StoreItemId>
 }

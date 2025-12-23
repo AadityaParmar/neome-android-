@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdFieldRemove : EntVdAutoStep() {
-    var field: StudioDtoArgValueParameter? = null
+import com.neome.api.meta.base.dto.EntVdAutoStep
+import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
+
+open class EntVdFieldRemove : EntVdAutoStep()
+{
+  var field: StudioDtoArgValueParameter? = null
 }

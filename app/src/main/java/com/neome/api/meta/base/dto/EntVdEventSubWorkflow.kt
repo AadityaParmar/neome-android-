@@ -5,11 +5,15 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.EntVdEvent
+import com.neome.api.meta.base.dto.EntVdWorkflowPointer
+import com.neome.api.meta.base.dto.FormRefKey
 import com.neome.api.meta.base.Types.MetaIdPipelineVar
 
-open class EntVdEventSubWorkflow : EntVdEvent() {
-    var inputForm: FormRefKey? = null
-    var outputForm: FormRefKey? = null
-    var sharedParameterSet: Array<MetaIdPipelineVar>? = null
-    var workflowPointer: EntVdWorkflowPointer? = null
+open class EntVdEventSubWorkflow : EntVdEvent()
+{
+  var inputForm: FormRefKey? = null
+  var outputForm: FormRefKey? = null
+  var sharedParameterSet: Array<MetaIdPipelineVar>? = null
+  var workflowPointer: EntVdWorkflowPointer? = null
 }

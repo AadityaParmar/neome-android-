@@ -6,7 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdVar
+import com.neome.api.meta.base.dto.StudioDtoArgValueContext
 
-open class StudioDtoArgValueContextCallerSetting : StudioDtoArgValueContext() {
-    lateinit var userSettingVarId: MetaIdVar
+open class StudioDtoArgValueContextCallerSetting : StudioDtoArgValueContext()
+{
+  lateinit var userSettingVarId: MetaIdVar
 }

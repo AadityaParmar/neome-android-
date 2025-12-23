@@ -12,14 +12,17 @@ import com.neome.api.core.task.msg.MsgTaskId
 import com.neome.api.meta.base.Types.ServiceName
 import com.neome.api.core.task.sig.SigTask
 
-class RpcTask {
-    companion object {
-        val SN: ServiceName = ServiceName.task
+class RpcTask
+{
+  companion object
+  {
+    val SN: ServiceName = ServiceName.task
 
-        fun getTaskStatus(msg: MsgTaskId, sigAcceptor: ISigAcceptor<SigTask>) {
+      fun getTaskStatus(msg: MsgTaskId, sigAcceptor: ISigAcceptor<SigTask>)
+          {
             CallFactory.rpc.create(SigTask::class.java, ApiPlus.ENT_ID_GLOBAL, SN, "getTaskStatus")
-                .sendBearerToken()
-                .get(msg, sigAcceptor)
-        }
-    }
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
+  }
 }

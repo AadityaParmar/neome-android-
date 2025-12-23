@@ -5,5 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioFieldSetOfDocument : StudioFieldDocument() {
+import com.neome.api.meta.base.dto.StudioFieldDocument
+
+open class StudioFieldSetOfDocument : StudioFieldDocument()
+{
 }

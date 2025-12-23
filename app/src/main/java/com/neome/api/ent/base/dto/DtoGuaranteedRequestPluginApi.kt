@@ -5,6 +5,10 @@
 
 package com.neome.api.ent.base.dto
 
-open class DtoGuaranteedRequestPluginApi : DtoGuaranteedRequest() {
-    lateinit var pluginApiRequest: DtoPluginApiRequestPayload
+import com.neome.api.ent.base.dto.DtoGuaranteedRequest
+import com.neome.api.ent.base.dto.DtoPluginApiRequestPayload
+
+open class DtoGuaranteedRequestPluginApi : DtoGuaranteedRequest()
+{
+  lateinit var pluginApiRequest: DtoPluginApiRequestPayload
 }

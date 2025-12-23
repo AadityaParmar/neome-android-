@@ -5,8 +5,14 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdRowSendComment : EntVdAutoStepWithError() {
-    var message: StudioValueParagraph? = null
-    var rowIdPointer: StudioDtoRowIdPointer? = null
-    var sender: StudioBuildArgBinder? = null
+import com.neome.api.meta.base.dto.EntVdAutoStepWithError
+import com.neome.api.meta.base.dto.StudioBuildArgBinder
+import com.neome.api.meta.base.dto.StudioDtoRowIdPointer
+import com.neome.api.meta.base.dto.StudioValueParagraph
+
+open class EntVdRowSendComment : EntVdAutoStepWithError()
+{
+  var message: StudioValueParagraph? = null
+  var rowIdPointer: StudioDtoRowIdPointer? = null
+  var sender: StudioBuildArgBinder? = null
 }

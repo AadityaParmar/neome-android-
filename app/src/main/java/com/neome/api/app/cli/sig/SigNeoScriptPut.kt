@@ -9,9 +9,10 @@ import com.neome.api.meta.base.Types.ArtifactId
 import com.neome.api.meta.base.dto.DtoLogItemList
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigNeoScriptPut : Sig() {
-    var appendItemList: DtoLogItemList? = null
-    var cliCodeId: String? = null
-    var lastArtifactName: String? = null
-    var lastDeployUnitId: ArtifactId? = null
+open class SigNeoScriptPut : Sig()
+{
+  var appendItemList: DtoLogItemList? = null
+  var cliCodeId: String? = null
+  var lastArtifactName: String? = null
+  var lastDeployUnitId: ArtifactId? = null
 }

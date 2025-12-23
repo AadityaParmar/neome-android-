@@ -5,6 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-open class DefnFieldWallpaper : DefnField() {
-    var repeatTile: Boolean? = null
+import com.neome.api.meta.base.dto.DefnField
+
+open class DefnFieldWallpaper : DefnField()
+{
+  var repeatTile: Boolean? = null
 }

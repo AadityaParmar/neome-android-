@@ -5,11 +5,14 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnDtoText
+import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-open class DefnFieldHyperlinkRow : DefnFieldEditable() {
-    var displayTextVar: DefnDtoText? = null
-    var hyperlinkFieldIdSet: Array<MetaIdField>? = null
-    var spreadsheetId: MetaIdSpreadsheet? = null
+open class DefnFieldHyperlinkRow : DefnFieldEditable()
+{
+  var displayTextVar: DefnDtoText? = null
+  var hyperlinkFieldIdSet: Array<MetaIdField>? = null
+  var spreadsheetId: MetaIdSpreadsheet? = null
 }

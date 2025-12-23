@@ -5,9 +5,10 @@
 
 package com.neome.api.ent.entMain.msg
 
-import com.neome.api.meta.base.Types.WorkflowExecutionId
 import com.neome.api.nucleus.base.msg.Msg
+import com.neome.api.meta.base.Types.WorkflowExecutionId
 
-open class MsgWorkflowExecutionIdNoVersion : Msg() {
-    lateinit var executionId: WorkflowExecutionId
+open class MsgWorkflowExecutionIdNoVersion : Msg()
+{
+  lateinit var executionId: WorkflowExecutionId
 }

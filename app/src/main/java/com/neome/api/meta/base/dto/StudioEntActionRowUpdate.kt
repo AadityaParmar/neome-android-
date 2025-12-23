@@ -8,10 +8,13 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import com.neome.api.meta.base.dto.StudioEntAction
+import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntActionRowUpdate : StudioEntAction() {
-    var filterConditionVarId: StudioValueVarIdCondition? = null
-    var layoutSpreadsheetId: MetaIdLayoutGrid? = null
-    var lookupFieldId: MetaIdField? = null
-    var spreadsheetId: MetaIdSpreadsheet? = null
+open class StudioEntActionRowUpdate : StudioEntAction()
+{
+  var filterConditionVarId: StudioValueVarIdCondition? = null
+  var layoutSpreadsheetId: MetaIdLayoutGrid? = null
+  var lookupFieldId: MetaIdField? = null
+  var spreadsheetId: MetaIdSpreadsheet? = null
 }

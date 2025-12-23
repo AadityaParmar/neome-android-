@@ -5,11 +5,12 @@
 
 package com.neome.api.studio.studioMain.msg
 
-import com.neome.api.meta.base.Types.MetaIdAutomation
 import com.neome.api.meta.base.dto.EntVdWorkflowPointer
+import com.neome.api.meta.base.Types.MetaIdAutomation
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgWebhookCodeGet : Msg() {
-    var automationId: MetaIdAutomation? = null
-    var workflowPointer: EntVdWorkflowPointer? = null
+open class MsgWebhookCodeGet : Msg()
+{
+  var automationId: MetaIdAutomation? = null
+  var workflowPointer: EntVdWorkflowPointer? = null
 }

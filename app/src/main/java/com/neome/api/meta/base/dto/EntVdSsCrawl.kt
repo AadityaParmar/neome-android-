@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdSsCrawl : EntVdAutoStepWithOutput() {
-    var rowIdPointer: StudioDtoRowIdPointer? = null
+import com.neome.api.meta.base.dto.EntVdAutoStepWithOutput
+import com.neome.api.meta.base.dto.StudioDtoRowIdPointer
+
+open class EntVdSsCrawl : EntVdAutoStepWithOutput()
+{
+  var rowIdPointer: StudioDtoRowIdPointer? = null
 }

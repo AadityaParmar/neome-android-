@@ -5,19 +5,20 @@
 
 package com.neome.api.home.drawer.sig
 
+import kotlin.properties.Delegates
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.Types.GroupId
 import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.nucleus.base.sig.SigVersion
-import kotlin.properties.Delegates
 
-open class SigGroupAvatar : SigVersion() {
-    var about: String? = null
-    var avatarId: MediaIdAvatar? = null
-    lateinit var entId: EntId
-    lateinit var groupId: GroupId
-    var isAdmin: Boolean? = null
-    var isMember: Boolean by Delegates.notNull<Boolean>()
-    var label: String? = null
-    lateinit var name: String
+open class SigGroupAvatar : SigVersion()
+{
+  var about: String? = null
+  var avatarId: MediaIdAvatar? = null
+  lateinit var entId: EntId
+  lateinit var groupId: GroupId
+  var isAdmin: Boolean? = null
+  var isMember: Boolean by Delegates.notNull<Boolean>()
+  var label: String? = null
+  lateinit var name: String
 }

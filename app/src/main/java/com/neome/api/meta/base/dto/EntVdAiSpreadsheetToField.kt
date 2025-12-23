@@ -5,16 +5,20 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.EntVdAi
 import com.neome.api.meta.base.Types.EnumDefnSortOrder
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
+import com.neome.api.meta.base.dto.StudioMapOfCondition
 
-open class EntVdAiSpreadsheetToField : EntVdAi() {
-    var ascendingOrder: EnumDefnSortOrder? = null
-    var filterCondition: StudioMapOfCondition? = null
-    var numberOfRows: Number? = null
-    var orderByFieldIds: Array<MetaIdField>? = null
-    var outputField: StudioDtoArgValueParameter? = null
-    var selectFieldIds: Array<MetaIdField>? = null
-    var spreadsheetId: MetaIdSpreadsheet? = null
+open class EntVdAiSpreadsheetToField : EntVdAi()
+{
+  var ascendingOrder: EnumDefnSortOrder? = null
+  var filterCondition: StudioMapOfCondition? = null
+  var numberOfRows: Number? = null
+  var orderByFieldIds: Array<MetaIdField>? = null
+  var outputField: StudioDtoArgValueParameter? = null
+  var selectFieldIds: Array<MetaIdField>? = null
+  var spreadsheetId: MetaIdSpreadsheet? = null
 }

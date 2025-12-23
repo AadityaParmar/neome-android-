@@ -8,6 +8,7 @@ package com.neome.api.home.main.msg
 import com.neome.api.meta.base.Types.GeoPoint
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgReverseGeocode : Msg() {
-    lateinit var geoPoints: Array<GeoPoint>
+open class MsgReverseGeocode : Msg()
+{
+  lateinit var geoPoints: Array<GeoPoint>
 }

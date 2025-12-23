@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdEventPluginWebhook : EntVdEvent() {
-    var pluginApi: StudioDtoPluginApi? = null
+import com.neome.api.meta.base.dto.EntVdEvent
+import com.neome.api.meta.base.dto.StudioDtoPluginApi
+
+open class EntVdEventPluginWebhook : EntVdEvent()
+{
+  var pluginApi: StudioDtoPluginApi? = null
 }

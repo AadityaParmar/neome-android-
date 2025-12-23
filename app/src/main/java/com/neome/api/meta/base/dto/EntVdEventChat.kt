@@ -5,5 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdEventChat : EntVdEvent() {
+import com.neome.api.meta.base.dto.EntVdEvent
+
+open class EntVdEventChat : EntVdEvent()
+{
 }

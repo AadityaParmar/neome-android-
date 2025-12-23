@@ -5,14 +5,15 @@
 
 package com.neome.api.studio.studioMain.sig
 
+import com.neome.api.nucleus.base.sig.SigVersion
 import com.neome.api.meta.base.dto.StudioEnt
 import com.neome.api.meta.base.dto.TranslateResult
 import com.neome.api.meta.base.dto.ValidationResult
-import com.neome.api.nucleus.base.sig.SigVersion
 
-open class SigStudioEnt : SigVersion() {
-    lateinit var ent: StudioEnt
-    var isEverDeployed: Boolean? = null
-    var translateResult: TranslateResult? = null
-    var validationResult: ValidationResult? = null
+open class SigStudioEnt : SigVersion()
+{
+  lateinit var ent: StudioEnt
+  var isEverDeployed: Boolean? = null
+  var translateResult: TranslateResult? = null
+  var validationResult: ValidationResult? = null
 }

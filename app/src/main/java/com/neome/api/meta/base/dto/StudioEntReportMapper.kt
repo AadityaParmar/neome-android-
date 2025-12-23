@@ -8,10 +8,12 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdReport
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.MetaIdVar
+import com.neome.api.meta.base.dto.StudioEntReport
 
-open class StudioEntReportMapper : StudioEntReport() {
-    var inputFormMappingVarId: MetaIdVar? = null
-    var mappedReportId: MetaIdReport? = null
-    var outputFormMappingVarId: MetaIdVar? = null
-    var saveToSpreadsheetId: MetaIdSpreadsheet? = null
+open class StudioEntReportMapper : StudioEntReport()
+{
+  var inputFormMappingVarId: MetaIdVar? = null
+  var mappedReportId: MetaIdReport? = null
+  var outputFormMappingVarId: MetaIdVar? = null
+  var saveToSpreadsheetId: MetaIdSpreadsheet? = null
 }

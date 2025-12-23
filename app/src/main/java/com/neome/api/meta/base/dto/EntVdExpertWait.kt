@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdExpertWait : EntVdAutoStep() {
-    var duration: StudioBuildArgBinder? = null
+import com.neome.api.meta.base.dto.EntVdAutoStep
+import com.neome.api.meta.base.dto.StudioBuildArgBinder
+
+open class EntVdExpertWait : EntVdAutoStep()
+{
+  var duration: StudioBuildArgBinder? = null
 }

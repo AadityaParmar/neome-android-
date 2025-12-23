@@ -5,14 +5,17 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnDtoColor
+import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.EnumDefnThemeColor
 import com.neome.api.meta.base.Types.EnumDefnThemeDirection
 import com.neome.api.meta.base.Types.EnumDefnThemeDividerKind
 
-open class DefnFieldDivider : DefnField() {
-    var color: DefnDtoColor? = null
-    var colorVar: EnumDefnThemeColor? = null
-    var dividerKind: EnumDefnThemeDividerKind? = null
-    var dividerKindVar: EnumDefnThemeDividerKind? = null
-    var sectionDirection: EnumDefnThemeDirection? = null
+open class DefnFieldDivider : DefnField()
+{
+  var color: DefnDtoColor? = null
+  var colorVar: EnumDefnThemeColor? = null
+  var dividerKind: EnumDefnThemeDividerKind? = null
+  var dividerKindVar: EnumDefnThemeDividerKind? = null
+  var sectionDirection: EnumDefnThemeDirection? = null
 }

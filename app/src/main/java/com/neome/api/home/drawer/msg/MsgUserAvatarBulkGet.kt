@@ -6,9 +6,10 @@
 package com.neome.api.home.drawer.msg
 
 import com.neome.api.meta.base.Types.EntUserId
-import com.neome.api.nucleus.base.msg.Msg
 import java.util.Map
+import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgUserAvatarBulkGet : Msg() {
-    lateinit var userIdVersionMap: Map<EntUserId, String>
+open class MsgUserAvatarBulkGet : Msg()
+{
+  lateinit var userIdVersionMap: Map<EntUserId, String>
 }

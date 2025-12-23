@@ -5,9 +5,10 @@
 
 package com.neome.api.studio.studioMain.sig
 
-import com.neome.api.nucleus.base.sig.Sig
 import kotlin.properties.Delegates
+import com.neome.api.nucleus.base.sig.Sig
 
-open class SigAnalyticEventCount : Sig() {
-    var eventCount: Number by Delegates.notNull<Number>()
+open class SigAnalyticEventCount : Sig()
+{
+  var eventCount: Number by Delegates.notNull<Number>()
 }

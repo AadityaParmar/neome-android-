@@ -7,9 +7,12 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdPlugin
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioMapOfUserCondition
 
-open class StudioVarValueSetOfUser : StudioBase() {
-    var node: StudioMapOfUserCondition? = null
-    var sourceFormId: MetaIdForm? = null
-    var sourcePluginId: MetaIdPlugin? = null
+open class StudioVarValueSetOfUser : StudioBase()
+{
+  var node: StudioMapOfUserCondition? = null
+  var sourceFormId: MetaIdForm? = null
+  var sourcePluginId: MetaIdPlugin? = null
 }

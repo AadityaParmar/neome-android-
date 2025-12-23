@@ -5,6 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-open class DefnFieldError : DefnFieldEditable() {
-    var showCloseButton: Boolean? = null
+import com.neome.api.meta.base.dto.DefnFieldEditable
+
+open class DefnFieldError : DefnFieldEditable()
+{
+  var showCloseButton: Boolean? = null
 }

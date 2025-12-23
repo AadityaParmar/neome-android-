@@ -5,7 +5,11 @@
 
 package com.neome.api.home.base.dto
 
-open class DtoMessagePayloadGroupMemberRemove : DtoMessagePayload() {
-    lateinit var initiatorMember: DtoGroupMemberKey
-    lateinit var targetMember: DtoGroupMemberKey
+import com.neome.api.home.base.dto.DtoGroupMemberKey
+import com.neome.api.home.base.dto.DtoMessagePayload
+
+open class DtoMessagePayloadGroupMemberRemove : DtoMessagePayload()
+{
+  lateinit var initiatorMember: DtoGroupMemberKey
+  lateinit var targetMember: DtoGroupMemberKey
 }

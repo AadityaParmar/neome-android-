@@ -5,10 +5,12 @@
 
 package com.neome.api.ent.base.dto
 
+import com.neome.api.ent.base.dto.DtoEntAction
 import com.neome.api.meta.base.Types.EnumDefnKindActionUIUpdate
 import com.neome.api.meta.base.Types.MetaIdGroup
 
-open class DtoEntActionUIUpdate : DtoEntAction() {
-    var groupId: MetaIdGroup? = null
-    lateinit var updateKind: EnumDefnKindActionUIUpdate
+open class DtoEntActionUIUpdate : DtoEntAction()
+{
+  var groupId: MetaIdGroup? = null
+  lateinit var updateKind: EnumDefnKindActionUIUpdate
 }

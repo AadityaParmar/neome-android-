@@ -5,6 +5,9 @@
 
 package com.neome.api.home.base.dto
 
-open class DtoMessageReplyPayloadDocument : DtoMessageReplyPayload() {
-    lateinit var fileName: String
+import com.neome.api.home.base.dto.DtoMessageReplyPayload
+
+open class DtoMessageReplyPayloadDocument : DtoMessageReplyPayload()
+{
+  lateinit var fileName: String
 }

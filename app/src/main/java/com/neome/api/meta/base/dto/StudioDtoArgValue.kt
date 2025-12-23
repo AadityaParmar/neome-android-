@@ -5,5 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioDtoArgValue : StudioBase() {
+import com.neome.api.meta.base.dto.StudioBase
+
+open class StudioDtoArgValue : StudioBase()
+{
 }

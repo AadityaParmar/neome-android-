@@ -5,6 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-open class DefnFieldChipSet : DefnFieldEditable() {
-    var allowDuplicate: Boolean? = null
+import com.neome.api.meta.base.dto.DefnFieldEditable
+
+open class DefnFieldChipSet : DefnFieldEditable()
+{
+  var allowDuplicate: Boolean? = null
 }

@@ -7,6 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDeviceType
 
-open class FieldChipSetDeviceType {
-    lateinit var valueSet: Array<EnumDeviceType>
+open class FieldChipSetDeviceType
+{
+  lateinit var valueSet: Array<EnumDeviceType>
 }

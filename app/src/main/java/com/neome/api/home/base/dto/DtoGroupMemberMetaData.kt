@@ -5,6 +5,9 @@
 
 package com.neome.api.home.base.dto
 
-open class DtoGroupMemberMetaData {
-    lateinit var date: String
+import java.util.Date
+
+open class DtoGroupMemberMetaData
+{
+  lateinit var date: String
 }

@@ -6,7 +6,9 @@
 package com.neome.api.home.main.msg
 
 import kotlin.properties.Delegates
+import com.neome.api.home.main.msg.MsgMessageList
 
-open class MsgMessageListOffset : MsgMessageList() {
-    var offset: Number by Delegates.notNull<Number>()
+open class MsgMessageListOffset : MsgMessageList()
+{
+  var offset: Number by Delegates.notNull<Number>()
 }

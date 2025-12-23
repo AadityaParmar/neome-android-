@@ -8,7 +8,8 @@ package com.neome.api.studio.studioDrawer.msg
 import com.neome.api.meta.base.Types.MetaId
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgStudioEntPartMerge : Msg() {
-    lateinit var srcPartId: MetaId
-    lateinit var tgtPartId: MetaId
+open class MsgStudioEntPartMerge : Msg()
+{
+  lateinit var srcPartId: MetaId
+  lateinit var tgtPartId: MetaId
 }

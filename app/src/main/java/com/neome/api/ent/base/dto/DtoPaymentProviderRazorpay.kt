@@ -6,10 +6,12 @@
 package com.neome.api.ent.base.dto
 
 import com.neome.api.meta.base.Types.CurrencyKey
+import com.neome.api.ent.base.dto.DtoPaymentProvider
 import com.neome.api.meta.base.Types.EnumDefnPaymentMethodKind
 
-open class DtoPaymentProviderRazorpay : DtoPaymentProvider() {
-    var allowedPaymentMethodSet: Array<EnumDefnPaymentMethodKind>? = null
-    lateinit var apiKey: String
-    lateinit var defaultCurrency: CurrencyKey
+open class DtoPaymentProviderRazorpay : DtoPaymentProvider()
+{
+  var allowedPaymentMethodSet: Array<EnumDefnPaymentMethodKind>? = null
+  lateinit var apiKey: String
+  lateinit var defaultCurrency: CurrencyKey
 }

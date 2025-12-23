@@ -6,11 +6,12 @@
 package com.neome.api.ent.entMain.msg
 
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
-import com.neome.api.meta.base.Types.RowId
 import com.neome.api.nucleus.base.msg.Msg
+import com.neome.api.meta.base.Types.RowId
 
-open class MsgSpreadsheetRowShare : Msg() {
-    var reset: Boolean? = null
-    lateinit var rowId: RowId
-    lateinit var spreadsheetId: MetaIdSpreadsheet
+open class MsgSpreadsheetRowShare : Msg()
+{
+  var reset: Boolean? = null
+  lateinit var rowId: RowId
+  lateinit var spreadsheetId: MetaIdSpreadsheet
 }

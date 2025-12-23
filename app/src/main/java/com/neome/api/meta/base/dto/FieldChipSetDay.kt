@@ -7,6 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnDay
 
-open class FieldChipSetDay {
-    lateinit var valueSet: Array<EnumDefnDay>
+open class FieldChipSetDay
+{
+  lateinit var valueSet: Array<EnumDefnDay>
 }

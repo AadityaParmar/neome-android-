@@ -5,6 +5,10 @@
 
 package com.neome.api.home.base.dto
 
-open class DtoMessagePayloadGroupExit : DtoMessagePayload() {
-    lateinit var initiatorMember: DtoGroupMemberKey
+import com.neome.api.home.base.dto.DtoGroupMemberKey
+import com.neome.api.home.base.dto.DtoMessagePayload
+
+open class DtoMessagePayloadGroupExit : DtoMessagePayload()
+{
+  lateinit var initiatorMember: DtoGroupMemberKey
 }

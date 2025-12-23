@@ -5,8 +5,14 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioEntPluginResourceMap : StudioBase() {
-    var dev: StudioEntPluginDev? = null
-    var jar: StudioEntPluginJar? = null
-    var rpc: StudioEntPluginRpc? = null
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioEntPluginDev
+import com.neome.api.meta.base.dto.StudioEntPluginJar
+import com.neome.api.meta.base.dto.StudioEntPluginRpc
+
+open class StudioEntPluginResourceMap : StudioBase()
+{
+  var dev: StudioEntPluginDev? = null
+  var jar: StudioEntPluginJar? = null
+  var rpc: StudioEntPluginRpc? = null
 }

@@ -5,6 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-open class DefnLayoutGridXYChartPie : DefnLayoutGridXYChart() {
-    var alwaysShowSliceValues: Boolean? = null
+import com.neome.api.meta.base.dto.DefnLayoutGridXYChart
+
+open class DefnLayoutGridXYChartPie : DefnLayoutGridXYChart()
+{
+  var alwaysShowSliceValues: Boolean? = null
 }

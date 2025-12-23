@@ -5,10 +5,13 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnDtoText
+import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldEditableText : DefnFieldEditable() {
-    var defaultFieldId: MetaIdField? = null
-    var defaultValue: String? = null
-    var defaultVar: DefnDtoText? = null
+open class DefnFieldEditableText : DefnFieldEditable()
+{
+  var defaultFieldId: MetaIdField? = null
+  var defaultValue: String? = null
+  var defaultVar: DefnDtoText? = null
 }

@@ -6,10 +6,12 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnCaptureValueKind
+import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldSignature : StudioFieldEditable() {
-    var captureLocation: Boolean? = null
-    var captureTime: Boolean? = null
-    var captureUser: Boolean? = null
-    var showCapturedValuesOnAside: Array<EnumDefnCaptureValueKind>? = null
+open class StudioFieldSignature : StudioFieldEditable()
+{
+  var captureLocation: Boolean? = null
+  var captureTime: Boolean? = null
+  var captureUser: Boolean? = null
+  var showCapturedValuesOnAside: Array<EnumDefnCaptureValueKind>? = null
 }

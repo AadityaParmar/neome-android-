@@ -5,16 +5,19 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types.EnumDefnKindAutomation
 import com.neome.api.meta.base.Types.MetaIdAutomation
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioModuleSelection
+import com.neome.api.meta.base.Symbol
 
-open class StudioEntAutomation : StudioBase() {
-    var active: Boolean? = null
-    var description: String? = null
-    lateinit var kind: EnumDefnKindAutomation
-    lateinit var metaId: MetaIdAutomation
-    var modules: StudioModuleSelection? = null
-    lateinit var name: Symbol
-    var secondary: String? = null
+open class StudioEntAutomation : StudioBase()
+{
+  var active: Boolean? = null
+  var description: String? = null
+  lateinit var kind: EnumDefnKindAutomation
+  lateinit var metaId: MetaIdAutomation
+  var modules: StudioModuleSelection? = null
+  lateinit var name: Symbol
+  var secondary: String? = null
 }

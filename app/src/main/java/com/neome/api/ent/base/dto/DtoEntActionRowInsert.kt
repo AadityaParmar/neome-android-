@@ -5,18 +5,21 @@
 
 package com.neome.api.ent.base.dto
 
+import com.neome.api.ent.base.dto.DtoEntAction
+import com.google.gson.JsonElement
+import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
-import java.util.Map
 
-open class DtoEntActionRowInsert : DtoEntAction() {
-    var defaultValueMap: Map<MetaIdComp, Any>? = null
-    var formEditorLayoutId: MetaIdLayoutForm? = null
-    var hasPartitions: Boolean? = null
-    var mobileFormEditorLayoutId: MetaIdLayoutForm? = null
-    var sendMessageToInbox: Boolean? = null
-    lateinit var spreadsheetFormId: MetaIdForm
-    lateinit var spreadsheetId: MetaIdSpreadsheet
+open class DtoEntActionRowInsert : DtoEntAction()
+{
+  var defaultValueMap: Map<MetaIdComp, Any>? = null
+  var formEditorLayoutId: MetaIdLayoutForm? = null
+  var hasPartitions: Boolean? = null
+  var mobileFormEditorLayoutId: MetaIdLayoutForm? = null
+  var sendMessageToInbox: Boolean? = null
+  lateinit var spreadsheetFormId: MetaIdForm
+  lateinit var spreadsheetId: MetaIdSpreadsheet
 }

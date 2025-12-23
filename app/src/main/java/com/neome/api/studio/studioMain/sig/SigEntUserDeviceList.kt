@@ -8,6 +8,7 @@ package com.neome.api.studio.studioMain.sig
 import com.neome.api.core.base.dto.DtoDevice
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigEntUserDeviceList : Sig() {
-    lateinit var deviceList: Array<DtoDevice>
+open class SigEntUserDeviceList : Sig()
+{
+  lateinit var deviceList: Array<DtoDevice>
 }

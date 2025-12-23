@@ -5,8 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.MetaIdDriveSheet
 
-open class DefnStudioMapOfLayoutDriveSheet : DefnField() {
-    var driveSheetId: MetaIdDriveSheet? = null
+open class DefnStudioMapOfLayoutDriveSheet : DefnField()
+{
+  var driveSheetId: MetaIdDriveSheet? = null
 }

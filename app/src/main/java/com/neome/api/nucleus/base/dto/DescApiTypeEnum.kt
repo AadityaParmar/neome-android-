@@ -5,6 +5,10 @@
 
 package com.neome.api.nucleus.base.dto
 
-open class DescApiTypeEnum : DescApiType() {
-    lateinit var valueSet: Array<String>
+import com.neome.api.nucleus.base.dto.DescApiType
+import java.util.Set
+
+open class DescApiTypeEnum : DescApiType()
+{
+  lateinit var valueSet: Array<String>
 }

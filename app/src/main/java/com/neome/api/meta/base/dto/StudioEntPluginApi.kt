@@ -5,21 +5,25 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types.EnumDefnPluginApiMethod
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.PluginApiId
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioMapOfArgBinder
+import com.neome.api.meta.base.dto.StudioPluginApiBody
+import com.neome.api.meta.base.Symbol
 
-open class StudioEntPluginApi : StudioBase() {
-    lateinit var apiType: EnumDefnPluginApiMethod
-    var baseURL: String? = null
-    var guaranteedInvocation: Boolean? = null
-    var headerParamMap: StudioMapOfArgBinder? = null
-    var inputFormId: MetaIdForm? = null
-    lateinit var name: Symbol
-    var outputFormId: MetaIdForm? = null
-    lateinit var pluginApiId: PluginApiId
-    var queryParamMap: StudioMapOfArgBinder? = null
-    var requestBody: StudioPluginApiBody? = null
-    var responseBody: StudioPluginApiBody? = null
+open class StudioEntPluginApi : StudioBase()
+{
+  lateinit var apiType: EnumDefnPluginApiMethod
+  var baseURL: String? = null
+  var guaranteedInvocation: Boolean? = null
+  var headerParamMap: StudioMapOfArgBinder? = null
+  var inputFormId: MetaIdForm? = null
+  lateinit var name: Symbol
+  var outputFormId: MetaIdForm? = null
+  lateinit var pluginApiId: PluginApiId
+  var queryParamMap: StudioMapOfArgBinder? = null
+  var requestBody: StudioPluginApiBody? = null
+  var responseBody: StudioPluginApiBody? = null
 }

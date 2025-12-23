@@ -5,6 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioFieldMultiSelect : StudioFieldEditable() {
-    var multiSelect: Boolean? = null
+import com.neome.api.meta.base.dto.StudioFieldEditable
+
+open class StudioFieldMultiSelect : StudioFieldEditable()
+{
+  var multiSelect: Boolean? = null
 }

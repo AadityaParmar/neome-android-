@@ -5,7 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioPluginApiBody : StudioBase() {
-    var declarative: StudioValueCodeJavascript? = null
-    var script: StudioValueCodeJavascript? = null
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioValueCodeJavascript
+
+open class StudioPluginApiBody : StudioBase()
+{
+  var declarative: StudioValueCodeJavascript? = null
+  var script: StudioValueCodeJavascript? = null
 }

@@ -5,6 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-open class DefnStudioDtoCondition : DefnMapOfCondition() {
-    var negation: Boolean? = null
+import com.neome.api.meta.base.dto.DefnMapOfCondition
+
+open class DefnStudioDtoCondition : DefnMapOfCondition()
+{
+  var negation: Boolean? = null
 }

@@ -9,11 +9,12 @@ import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.ServiceName
 import com.neome.api.meta.base.sig.ISig
 
-interface IRpcCallFactory {
-    fun <S : ISig> create(
-        sigClass: Class<S>,
-        artifactId: Types.ArtifactId,
-        serviceName: ServiceName,
-        apiName: String
-    ): IRpcCall<S>
+interface IRpcCallFactory
+{
+  fun <S : ISig> create(
+    sigClass: Class<S>,
+    artifactId: Types.ArtifactId,
+    serviceName: ServiceName,
+    apiName: String
+  ): IRpcCall<S>
 }

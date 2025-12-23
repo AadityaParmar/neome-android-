@@ -5,6 +5,10 @@
 
 package com.neome.api.ent.base.dto
 
-open class SpreadsheetFilterValueStringSet : SpreadsheetFilterValue() {
-    lateinit var valueSet: Array<String>
+import java.util.Set
+import com.neome.api.ent.base.dto.SpreadsheetFilterValue
+
+open class SpreadsheetFilterValueStringSet : SpreadsheetFilterValue()
+{
+  lateinit var valueSet: Array<String>
 }

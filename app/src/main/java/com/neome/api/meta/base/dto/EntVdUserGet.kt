@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdUserGet : EntVdAutoStepWithOutputAndError() {
-    var user: StudioBuildArgBinder? = null
+import com.neome.api.meta.base.dto.EntVdAutoStepWithOutputAndError
+import com.neome.api.meta.base.dto.StudioBuildArgBinder
+
+open class EntVdUserGet : EntVdAutoStepWithOutputAndError()
+{
+  var user: StudioBuildArgBinder? = null
 }

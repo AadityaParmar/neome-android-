@@ -6,7 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
+import com.neome.api.meta.base.dto.StudioComp
 
-open class StudioField : StudioComp() {
-    lateinit var metaId: MetaIdField
+open class StudioField : StudioComp()
+{
+  lateinit var metaId: MetaIdField
 }

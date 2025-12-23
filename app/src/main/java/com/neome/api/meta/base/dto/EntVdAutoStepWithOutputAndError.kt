@@ -5,8 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.EntVdAutoStepWithOutput
 import com.neome.api.meta.base.Types.EnumDefnNodeTerminateKind
 
-open class EntVdAutoStepWithOutputAndError : EntVdAutoStepWithOutput() {
-    var terminateKind: EnumDefnNodeTerminateKind? = null
+open class EntVdAutoStepWithOutputAndError : EntVdAutoStepWithOutput()
+{
+  var terminateKind: EnumDefnNodeTerminateKind? = null
 }

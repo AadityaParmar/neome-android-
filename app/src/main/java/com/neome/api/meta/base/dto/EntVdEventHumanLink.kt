@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdEventHumanLink : EntVdEvent() {
-    var sendForm: FormRefKey? = null
+import com.neome.api.meta.base.dto.EntVdEvent
+import com.neome.api.meta.base.dto.FormRefKey
+
+open class EntVdEventHumanLink : EntVdEvent()
+{
+  var sendForm: FormRefKey? = null
 }

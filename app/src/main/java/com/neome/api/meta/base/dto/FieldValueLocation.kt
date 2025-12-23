@@ -5,6 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-open class FieldValueLocation {
-    lateinit var value: FieldDtoLocation
+import com.neome.api.meta.base.dto.FieldDtoLocation
+
+open class FieldValueLocation
+{
+  lateinit var value: FieldDtoLocation
 }

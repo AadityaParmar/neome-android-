@@ -5,8 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
-open class DefnDtoPlaceholder {
-    var image: FieldDtoImage? = null
-    var primaryText: String? = null
-    var secondaryText: String? = null
+import com.neome.api.meta.base.dto.FieldDtoImage
+
+open class DefnDtoPlaceholder
+{
+  var image: FieldDtoImage? = null
+  var primaryText: String? = null
+  var secondaryText: String? = null
 }

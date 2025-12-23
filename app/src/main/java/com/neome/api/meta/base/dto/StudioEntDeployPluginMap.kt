@@ -6,11 +6,14 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.AdminId
-import com.neome.api.meta.base.Types.MetaIdPlugin
 import java.util.Map
+import com.neome.api.meta.base.Types.MetaIdPlugin
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioEntDeployPlugin
 
-open class StudioEntDeployPluginMap : StudioBase() {
-    lateinit var keys: Array<MetaIdPlugin>
-    lateinit var map: Map<MetaIdPlugin, StudioEntDeployPlugin>
-    var singletonPluginsAdminId: AdminId? = null
+open class StudioEntDeployPluginMap : StudioBase()
+{
+  lateinit var keys: Array<MetaIdPlugin>
+  lateinit var map: Map<MetaIdPlugin, StudioEntDeployPlugin>
+  var singletonPluginsAdminId: AdminId? = null
 }

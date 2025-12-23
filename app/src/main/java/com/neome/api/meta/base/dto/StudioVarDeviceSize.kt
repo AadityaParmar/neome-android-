@@ -6,7 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnDeviceSize
+import com.neome.api.meta.base.dto.StudioVar
 
-open class StudioVarDeviceSize : StudioVar() {
-    var value: EnumDefnDeviceSize? = null
+open class StudioVarDeviceSize : StudioVar()
+{
+  var value: EnumDefnDeviceSize? = null
 }

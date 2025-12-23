@@ -10,14 +10,17 @@ import com.neome.api.meta.base.Types.EnumDefnSortOrder
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
+import com.neome.api.meta.base.dto.StudioEntAutomationStep
+import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntAutomationStepUpdateFieldRefSet : StudioEntAutomationStep() {
-    var inputFormPipelineVarId: MetaIdPipelineParam? = null
-    var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
-    var iterateOnGridId: MetaIdGrid? = null
-    var operation: EnumDefnRefSetOperationKind? = null
-    var outputFormPipelineVarId: MetaIdPipelineParam? = null
-    var sortOrder: EnumDefnSortOrder? = null
-    var sourceFieldId: MetaIdField? = null
-    var targetFieldId: MetaIdField? = null
+open class StudioEntAutomationStepUpdateFieldRefSet : StudioEntAutomationStep()
+{
+  var inputFormPipelineVarId: MetaIdPipelineParam? = null
+  var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
+  var iterateOnGridId: MetaIdGrid? = null
+  var operation: EnumDefnRefSetOperationKind? = null
+  var outputFormPipelineVarId: MetaIdPipelineParam? = null
+  var sortOrder: EnumDefnSortOrder? = null
+  var sourceFieldId: MetaIdField? = null
+  var targetFieldId: MetaIdField? = null
 }

@@ -6,7 +6,9 @@
 package com.neome.api.core.deeplink.msg
 
 import com.neome.api.meta.base.dto.FormValueRaw
+import com.neome.api.core.deeplink.msg.MsgDeeplinkCode
 
-open class MsgDeeplinkCodeAction : MsgDeeplinkCode() {
-    var formValueRaw: FormValueRaw? = null
+open class MsgDeeplinkCodeAction : MsgDeeplinkCode()
+{
+  var formValueRaw: FormValueRaw? = null
 }

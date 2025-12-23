@@ -5,5 +5,8 @@
 
 package com.neome.api.nucleus.base.sig
 
-open class SigCallback : Sig() {
+import com.neome.api.nucleus.base.sig.Sig
+
+open class SigCallback : Sig()
+{
 }

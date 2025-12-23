@@ -8,6 +8,7 @@ package com.neome.api.ent.entMain.msg
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgEntJoin : Msg() {
-    lateinit var entId: EntId
+open class MsgEntJoin : Msg()
+{
+  lateinit var entId: EntId
 }

@@ -8,15 +8,20 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnRenderingKind
 import com.neome.api.meta.base.Types.EnumDefnShowBorderKind
 import com.neome.api.meta.base.Types.EnumDefnThemeDividerKind
+import com.neome.api.meta.base.dto.StudioDtoLayoutForm
+import com.neome.api.meta.base.dto.StudioDtoLayoutFormFooter
+import com.neome.api.meta.base.dto.StudioDtoLayoutFormHeader
+import com.neome.api.meta.base.dto.StudioDtoLayoutFormWatermark
 
-open class StudioDtoLayoutFormTemplate : StudioDtoLayoutForm() {
-    var borderPositionSet: Array<EnumDefnShowBorderKind>? = null
-    var footer: StudioDtoLayoutFormFooter? = null
-    var header: StudioDtoLayoutFormHeader? = null
-    var paddingPositionSet: Array<EnumDefnShowBorderKind>? = null
-    var paddingSize: EnumDefnThemeDividerKind? = null
-    var paperHeight: Number? = null
-    var paperSize: EnumDefnRenderingKind? = null
-    var paperWidth: Number? = null
-    var watermark: StudioDtoLayoutFormWatermark? = null
+open class StudioDtoLayoutFormTemplate : StudioDtoLayoutForm()
+{
+  var borderPositionSet: Array<EnumDefnShowBorderKind>? = null
+  var footer: StudioDtoLayoutFormFooter? = null
+  var header: StudioDtoLayoutFormHeader? = null
+  var paddingPositionSet: Array<EnumDefnShowBorderKind>? = null
+  var paddingSize: EnumDefnThemeDividerKind? = null
+  var paperHeight: Number? = null
+  var paperSize: EnumDefnRenderingKind? = null
+  var paperWidth: Number? = null
+  var watermark: StudioDtoLayoutFormWatermark? = null
 }

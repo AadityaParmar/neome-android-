@@ -5,7 +5,10 @@
 
 package com.neome.api.home.base.dto
 
-open class DtoReceipt {
-    var deliveredOn: String? = null
-    var readOn: String? = null
+import java.util.Date
+
+open class DtoReceipt
+{
+  var deliveredOn: String? = null
+  var readOn: String? = null
 }

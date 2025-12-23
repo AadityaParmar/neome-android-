@@ -5,10 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import com.neome.api.meta.base.dto.DefnDtoRefTarget
 import java.util.Map
+import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-open class DefnMapOfRefTarget {
-    lateinit var keys: Array<MetaIdSpreadsheet>
-    lateinit var map: Map<MetaIdSpreadsheet, DefnDtoRefTarget>
+open class DefnMapOfRefTarget
+{
+  lateinit var keys: Array<MetaIdSpreadsheet>
+  lateinit var map: Map<MetaIdSpreadsheet, DefnDtoRefTarget>
 }

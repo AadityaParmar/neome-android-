@@ -8,10 +8,13 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
+import com.neome.api.meta.base.dto.StudioEntAutomationStep
+import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntAutomationStepRemoveUser : StudioEntAutomationStep() {
-    var inputFormPipelineVarId: MetaIdPipelineParam? = null
-    var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
-    var iterateOnGridId: MetaIdGrid? = null
-    var removeUserFieldId: MetaIdField? = null
+open class StudioEntAutomationStepRemoveUser : StudioEntAutomationStep()
+{
+  var inputFormPipelineVarId: MetaIdPipelineParam? = null
+  var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
+  var iterateOnGridId: MetaIdGrid? = null
+  var removeUserFieldId: MetaIdField? = null
 }

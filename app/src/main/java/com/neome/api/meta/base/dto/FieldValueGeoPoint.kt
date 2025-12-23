@@ -7,6 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.GeoPoint
 
-open class FieldValueGeoPoint {
-    lateinit var value: GeoPoint
+open class FieldValueGeoPoint
+{
+  lateinit var value: GeoPoint
 }

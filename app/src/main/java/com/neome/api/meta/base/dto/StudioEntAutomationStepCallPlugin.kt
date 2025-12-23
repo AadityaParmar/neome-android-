@@ -11,18 +11,21 @@ import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.Types.PluginApiId
+import com.neome.api.meta.base.dto.StudioEntAutomationStep
+import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntAutomationStepCallPlugin : StudioEntAutomationStep() {
-    var errorFieldId: MetaIdField? = null
-    var errorRetryCountVarId: MetaIdVar? = null
-    var errorRetryDurationVarId: MetaIdVar? = null
-    var exposeOutputAsPipelineVariable: Boolean? = null
-    var inputFormPipelineVarId: MetaIdPipelineParam? = null
-    var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
-    var iterateOnGridId: MetaIdGrid? = null
-    var outputFormPipelineVarId: MetaIdPipelineParam? = null
-    var pluginInputMappingVarId: MetaIdVar? = null
-    var pluginOutputMappingVarId: MetaIdVar? = null
-    var targetPluginApiId: PluginApiId? = null
-    var targetPluginId: MetaIdPlugin? = null
+open class StudioEntAutomationStepCallPlugin : StudioEntAutomationStep()
+{
+  var errorFieldId: MetaIdField? = null
+  var errorRetryCountVarId: MetaIdVar? = null
+  var errorRetryDurationVarId: MetaIdVar? = null
+  var exposeOutputAsPipelineVariable: Boolean? = null
+  var inputFormPipelineVarId: MetaIdPipelineParam? = null
+  var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
+  var iterateOnGridId: MetaIdGrid? = null
+  var outputFormPipelineVarId: MetaIdPipelineParam? = null
+  var pluginInputMappingVarId: MetaIdVar? = null
+  var pluginOutputMappingVarId: MetaIdVar? = null
+  var targetPluginApiId: PluginApiId? = null
+  var targetPluginId: MetaIdPlugin? = null
 }

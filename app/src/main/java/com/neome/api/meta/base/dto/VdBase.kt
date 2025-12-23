@@ -5,6 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-open class VdBase : StudioBase() {
-    var uiVersion: String? = null
+import com.neome.api.meta.base.dto.StudioBase
+
+open class VdBase : StudioBase()
+{
+  var uiVersion: String? = null
 }

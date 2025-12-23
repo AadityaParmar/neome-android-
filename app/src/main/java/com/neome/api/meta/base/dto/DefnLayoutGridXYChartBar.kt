@@ -5,9 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnLayoutGridXYChart
 import com.neome.api.meta.base.Types.EnumDefnChartRenderingMode
 
-open class DefnLayoutGridXYChartBar : DefnLayoutGridXYChart() {
-    var alwaysShowBarValues: Boolean? = null
-    var renderingMode: EnumDefnChartRenderingMode? = null
+open class DefnLayoutGridXYChartBar : DefnLayoutGridXYChart()
+{
+  var alwaysShowBarValues: Boolean? = null
+  var renderingMode: EnumDefnChartRenderingMode? = null
 }

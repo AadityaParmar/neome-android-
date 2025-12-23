@@ -6,7 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.AnyTime
+import com.neome.api.meta.base.dto.DefnBuildDate
 
-open class DefnBuildDateTime : DefnBuildDate() {
-    var time: AnyTime? = null
+open class DefnBuildDateTime : DefnBuildDate()
+{
+  var time: AnyTime? = null
 }

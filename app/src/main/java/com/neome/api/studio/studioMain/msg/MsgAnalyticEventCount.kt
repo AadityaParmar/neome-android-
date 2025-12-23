@@ -8,6 +8,7 @@ package com.neome.api.studio.studioMain.msg
 import com.neome.api.nucleus.base.Types.EnumAnalyticEventFilterKind
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgAnalyticEventCount : Msg() {
-    lateinit var filter: EnumAnalyticEventFilterKind
+open class MsgAnalyticEventCount : Msg()
+{
+  lateinit var filter: EnumAnalyticEventFilterKind
 }

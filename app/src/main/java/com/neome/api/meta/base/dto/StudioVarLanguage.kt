@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioVarLanguage : StudioVar() {
-    var value: StudioVarValueLanguage? = null
+import com.neome.api.meta.base.dto.StudioVar
+import com.neome.api.meta.base.dto.StudioVarValueLanguage
+
+open class StudioVarLanguage : StudioVar()
+{
+  var value: StudioVarValueLanguage? = null
 }

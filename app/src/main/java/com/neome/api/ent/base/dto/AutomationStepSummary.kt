@@ -5,7 +5,10 @@
 
 package com.neome.api.ent.base.dto
 
-open class AutomationStepSummary {
-    lateinit var date: String
-    lateinit var message: String
+import java.util.Date
+
+open class AutomationStepSummary
+{
+  lateinit var date: String
+  lateinit var message: String
 }

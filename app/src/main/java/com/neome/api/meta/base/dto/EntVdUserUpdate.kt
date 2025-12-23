@@ -5,10 +5,16 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdUserUpdate : EntVdAutoStepWithError() {
-    var userActivateField: StudioBuildArgBinder? = null
-    var userIdField: StudioDtoArgValueParameter? = null
-    var userManager: StudioDtoUserFilter? = null
-    var userNameField: StudioDtoArgValueParameter? = null
-    var userRoles: StudioBuildArgBinder? = null
+import com.neome.api.meta.base.dto.EntVdAutoStepWithError
+import com.neome.api.meta.base.dto.StudioBuildArgBinder
+import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
+import com.neome.api.meta.base.dto.StudioDtoUserFilter
+
+open class EntVdUserUpdate : EntVdAutoStepWithError()
+{
+  var userActivateField: StudioBuildArgBinder? = null
+  var userIdField: StudioDtoArgValueParameter? = null
+  var userManager: StudioDtoUserFilter? = null
+  var userNameField: StudioDtoArgValueParameter? = null
+  var userRoles: StudioBuildArgBinder? = null
 }

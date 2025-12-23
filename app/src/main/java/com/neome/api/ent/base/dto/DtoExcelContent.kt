@@ -5,6 +5,7 @@
 
 package com.neome.api.ent.base.dto
 
-open class DtoExcelContent {
-    var content: String? = null
+open class DtoExcelContent
+{
+  var content: String? = null
 }

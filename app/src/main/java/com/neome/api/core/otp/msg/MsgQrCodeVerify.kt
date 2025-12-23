@@ -8,6 +8,7 @@ package com.neome.api.core.otp.msg
 import com.neome.api.meta.base.AnyKey
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgQrCodeVerify : Msg() {
-    lateinit var verifyKey: AnyKey
+open class MsgQrCodeVerify : Msg()
+{
+  lateinit var verifyKey: AnyKey
 }

@@ -9,8 +9,9 @@ import kotlin.properties.Delegates
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgEntSpreadsheetPartitionRowIdList : Msg() {
-    var pageSize: Number by Delegates.notNull<Number>()
-    lateinit var spreadsheetId: MetaIdSpreadsheet
-    lateinit var toRowOrderVer: String
+open class MsgEntSpreadsheetPartitionRowIdList : Msg()
+{
+  var pageSize: Number by Delegates.notNull<Number>()
+  lateinit var spreadsheetId: MetaIdSpreadsheet
+  lateinit var toRowOrderVer: String
 }

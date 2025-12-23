@@ -5,11 +5,15 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.EntVdAutoStep
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
+import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
+import com.neome.api.meta.base.dto.StudioValueText
 
-open class EntVdGeneratePdf : EntVdAutoStep() {
-    var contentLayoutId: MetaIdLayoutForm? = null
-    var fileName: StudioValueText? = null
-    var outputField: StudioDtoArgValueParameter? = null
-    var templateLayoutId: MetaIdLayoutForm? = null
+open class EntVdGeneratePdf : EntVdAutoStep()
+{
+  var contentLayoutId: MetaIdLayoutForm? = null
+  var fileName: StudioValueText? = null
+  var outputField: StudioDtoArgValueParameter? = null
+  var templateLayoutId: MetaIdLayoutForm? = null
 }

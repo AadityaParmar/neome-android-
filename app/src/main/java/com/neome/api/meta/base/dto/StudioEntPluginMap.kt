@@ -5,10 +5,13 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.Types.MetaIdPlugin
 import java.util.Map
+import com.neome.api.meta.base.Types.MetaIdPlugin
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioEntPlugin
 
-open class StudioEntPluginMap : StudioBase() {
-    lateinit var keys: Array<MetaIdPlugin>
-    lateinit var map: Map<MetaIdPlugin, StudioEntPlugin>
+open class StudioEntPluginMap : StudioBase()
+{
+  lateinit var keys: Array<MetaIdPlugin>
+  lateinit var map: Map<MetaIdPlugin, StudioEntPlugin>
 }

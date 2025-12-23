@@ -5,15 +5,19 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnDtoLayoutCardFilter
+import com.neome.api.meta.base.dto.DefnDtoLayoutCardItem
+import com.neome.api.meta.base.dto.DefnLayoutGrid
 import com.neome.api.meta.base.Types.EnumDefnGridRenderingMode
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnLayoutCard : DefnLayoutGrid() {
-    var filter: DefnDtoLayoutCardFilter? = null
-    var groupByFieldId: MetaIdField? = null
-    var hideBorders: Boolean? = null
-    lateinit var item: DefnDtoLayoutCardItem
-    var numOfColumns: Number? = null
-    var renderingMode: EnumDefnGridRenderingMode? = null
-    var showSearchBar: Boolean? = null
+open class DefnLayoutCard : DefnLayoutGrid()
+{
+  var filter: DefnDtoLayoutCardFilter? = null
+  var groupByFieldId: MetaIdField? = null
+  var hideBorders: Boolean? = null
+  lateinit var item: DefnDtoLayoutCardItem
+  var numOfColumns: Number? = null
+  var renderingMode: EnumDefnGridRenderingMode? = null
+  var showSearchBar: Boolean? = null
 }

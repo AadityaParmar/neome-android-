@@ -8,6 +8,7 @@ package com.neome.api.home.session.sig
 import kotlin.properties.Delegates
 import com.neome.api.core.session.sig.SigTopic
 
-open class SigTopicMessageNew : SigTopic() {
-    var messageOffset: Number by Delegates.notNull<Number>()
+open class SigTopicMessageNew : SigTopic()
+{
+  var messageOffset: Number by Delegates.notNull<Number>()
 }

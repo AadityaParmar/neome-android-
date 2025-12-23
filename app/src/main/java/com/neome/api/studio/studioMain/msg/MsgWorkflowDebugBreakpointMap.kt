@@ -5,11 +5,13 @@
 
 package com.neome.api.studio.studioMain.msg
 
+import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdVdAutoDia
 import com.neome.api.meta.base.Types.MetaIdVdAutoNode
 import com.neome.api.nucleus.base.msg.Msg
-import java.util.Map
+import java.util.Set
 
-open class MsgWorkflowDebugBreakpointMap : Msg() {
-    lateinit var breakpointMap: Map<MetaIdVdAutoDia, Array<MetaIdVdAutoNode>>
+open class MsgWorkflowDebugBreakpointMap : Msg()
+{
+  lateinit var breakpointMap: Map<MetaIdVdAutoDia, Array<MetaIdVdAutoNode>>
 }

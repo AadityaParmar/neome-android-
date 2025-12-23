@@ -11,8 +11,9 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.dto.SchemaColumn
 import com.neome.api.meta.base.Types.SymbolColumn
 
-open class SchemaColumnMap {
-    lateinit var columnMap: Map<SymbolColumn, SchemaColumn>
-    lateinit var fieldId: MetaIdField
-    lateinit var fieldType: EnumDefnCompType
+open class SchemaColumnMap
+{
+  lateinit var columnMap: Map<SymbolColumn, SchemaColumn>
+  lateinit var fieldId: MetaIdField
+  lateinit var fieldType: EnumDefnCompType
 }

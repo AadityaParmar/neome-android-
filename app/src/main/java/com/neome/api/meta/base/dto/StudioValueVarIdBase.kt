@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioValueVarIdBase : StudioBase() {
-    var argBinderMap: StudioMapOfArgBinder? = null
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioMapOfArgBinder
+
+open class StudioValueVarIdBase : StudioBase()
+{
+  var argBinderMap: StudioMapOfArgBinder? = null
 }

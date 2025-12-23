@@ -5,10 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdPlugin
 
-open class DefnStudioMapOfFormula : DefnField() {
-    lateinit var formId: MetaIdForm
-    var pluginId: MetaIdPlugin? = null
+open class DefnStudioMapOfFormula : DefnField()
+{
+  lateinit var formId: MetaIdForm
+  var pluginId: MetaIdPlugin? = null
 }

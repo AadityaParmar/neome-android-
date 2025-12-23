@@ -5,12 +5,14 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.FieldDtoImage
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 
-open class DefnLayoutFormFooter {
-    var footerImage: FieldDtoImage? = null
-    var footerImageHeight: Number? = null
-    var footerImageVar: FieldDtoImage? = null
-    var formLayoutId: MetaIdLayoutForm? = null
-    var showSeparator: Boolean? = null
+open class DefnLayoutFormFooter
+{
+  var footerImage: FieldDtoImage? = null
+  var footerImageHeight: Number? = null
+  var footerImageVar: FieldDtoImage? = null
+  var formLayoutId: MetaIdLayoutForm? = null
+  var showSeparator: Boolean? = null
 }

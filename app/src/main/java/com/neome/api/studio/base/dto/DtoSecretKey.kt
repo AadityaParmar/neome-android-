@@ -6,10 +6,13 @@
 package com.neome.api.studio.base.dto
 
 import com.neome.api.meta.base.Types.AdminId
+import java.util.Date
+import com.neome.api.studio.base.dto.DtoSecretKeyBase
 
-open class DtoSecretKey : DtoSecretKeyBase() {
-    var createdAt: String? = null
-    var createdBy: AdminId? = null
-    var updatedAt: String? = null
-    var updatedBy: AdminId? = null
+open class DtoSecretKey : DtoSecretKeyBase()
+{
+  var createdAt: String? = null
+  var createdBy: AdminId? = null
+  var updatedAt: String? = null
+  var updatedBy: AdminId? = null
 }

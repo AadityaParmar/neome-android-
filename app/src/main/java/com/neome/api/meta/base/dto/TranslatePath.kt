@@ -5,7 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class TranslatePath {
-    var neatPath: NeatPath? = null
-    var searchPath: String? = null
+import com.neome.api.meta.base.dto.NeatPath
+
+open class TranslatePath
+{
+  var neatPath: NeatPath? = null
+  var searchPath: String? = null
 }

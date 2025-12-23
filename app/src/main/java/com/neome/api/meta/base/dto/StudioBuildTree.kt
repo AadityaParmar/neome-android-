@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioBuildTree : StudioBase() {
-    lateinit var dtoTree: FieldDtoTree
+import com.neome.api.meta.base.dto.FieldDtoTree
+import com.neome.api.meta.base.dto.StudioBase
+
+open class StudioBuildTree : StudioBase()
+{
+  lateinit var dtoTree: FieldDtoTree
 }

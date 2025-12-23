@@ -6,23 +6,29 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnMapPinShape
+import com.neome.api.meta.base.dto.FieldDtoImage
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioDtoColor
+import com.neome.api.meta.base.dto.StudioValueVarIdParagraph
+import com.neome.api.meta.base.dto.StudioValueVarIdText
 
-open class StudioDtoLayoutLocmapPin : StudioBase() {
-    var avatar: FieldDtoImage? = null
-    var avatarFieldId: MetaIdField? = null
-    var avatarVarId: MetaIdVar? = null
-    var color: StudioDtoColor? = null
-    var colorFieldId: MetaIdField? = null
-    var colorVarId: MetaIdVar? = null
-    var label: String? = null
-    var labelFieldId: MetaIdField? = null
-    var labelVarId: StudioValueVarIdText? = null
-    var shape: EnumDefnMapPinShape? = null
-    var shapeFieldId: MetaIdField? = null
-    var shapeVarId: MetaIdVar? = null
-    var toolTip: String? = null
-    var toolTipFieldId: MetaIdField? = null
-    var toolTipVarId: StudioValueVarIdParagraph? = null
+open class StudioDtoLayoutLocmapPin : StudioBase()
+{
+  var avatar: FieldDtoImage? = null
+  var avatarFieldId: MetaIdField? = null
+  var avatarVarId: MetaIdVar? = null
+  var color: StudioDtoColor? = null
+  var colorFieldId: MetaIdField? = null
+  var colorVarId: MetaIdVar? = null
+  var label: String? = null
+  var labelFieldId: MetaIdField? = null
+  var labelVarId: StudioValueVarIdText? = null
+  var shape: EnumDefnMapPinShape? = null
+  var shapeFieldId: MetaIdField? = null
+  var shapeVarId: MetaIdVar? = null
+  var toolTip: String? = null
+  var toolTipFieldId: MetaIdField? = null
+  var toolTipVarId: StudioValueVarIdParagraph? = null
 }

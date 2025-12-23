@@ -7,6 +7,7 @@ package com.neome.api.ent.entMain.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigEntFormExport : Sig() {
-    var content: String? = null
+open class SigEntFormExport : Sig()
+{
+  var content: String? = null
 }

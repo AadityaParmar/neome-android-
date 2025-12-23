@@ -5,15 +5,17 @@
 
 package com.neome.api.ent.base.dto
 
-import com.neome.api.home.drawer.sig.SigUserAvatar
-import com.neome.api.meta.base.Types.EnumDefnLogOperationKind
 import kotlin.properties.Delegates
+import java.util.Date
+import com.neome.api.meta.base.Types.EnumDefnLogOperationKind
+import com.neome.api.home.drawer.sig.SigUserAvatar
 
-open class DtoEntLogNumberFieldTransaction {
-    lateinit var createdOn: String
-    var message: String? = null
-    lateinit var operationKind: EnumDefnLogOperationKind
-    lateinit var transactionId: String
-    lateinit var userAvatar: SigUserAvatar
-    var value: Number by Delegates.notNull<Number>()
+open class DtoEntLogNumberFieldTransaction
+{
+  lateinit var createdOn: String
+  var message: String? = null
+  lateinit var operationKind: EnumDefnLogOperationKind
+  lateinit var transactionId: String
+  lateinit var userAvatar: SigUserAvatar
+  var value: Number by Delegates.notNull<Number>()
 }

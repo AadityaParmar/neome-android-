@@ -5,5 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-open class DefnFieldSetOfDocument : DefnFieldDocument() {
+import com.neome.api.meta.base.dto.DefnFieldDocument
+
+open class DefnFieldSetOfDocument : DefnFieldDocument()
+{
 }

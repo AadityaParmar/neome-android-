@@ -5,18 +5,23 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnLayoutForm
+import com.neome.api.meta.base.dto.DefnLayoutFormFooter
+import com.neome.api.meta.base.dto.DefnLayoutFormHeader
+import com.neome.api.meta.base.dto.DefnLayoutFormWatermark
 import com.neome.api.meta.base.Types.EnumDefnRenderingKind
 import com.neome.api.meta.base.Types.EnumDefnShowBorderKind
 import com.neome.api.meta.base.Types.EnumDefnThemeDividerKind
 
-open class DefnLayoutFormTemplate : DefnLayoutForm() {
-    var borderPositionSet: Array<EnumDefnShowBorderKind>? = null
-    var footer: DefnLayoutFormFooter? = null
-    var header: DefnLayoutFormHeader? = null
-    var paddingPositionSet: Array<EnumDefnShowBorderKind>? = null
-    var paddingSize: EnumDefnThemeDividerKind? = null
-    var paperHeight: Number? = null
-    var paperSize: EnumDefnRenderingKind? = null
-    var paperWidth: Number? = null
-    var watermark: DefnLayoutFormWatermark? = null
+open class DefnLayoutFormTemplate : DefnLayoutForm()
+{
+  var borderPositionSet: Array<EnumDefnShowBorderKind>? = null
+  var footer: DefnLayoutFormFooter? = null
+  var header: DefnLayoutFormHeader? = null
+  var paddingPositionSet: Array<EnumDefnShowBorderKind>? = null
+  var paddingSize: EnumDefnThemeDividerKind? = null
+  var paperHeight: Number? = null
+  var paperSize: EnumDefnRenderingKind? = null
+  var paperWidth: Number? = null
+  var watermark: DefnLayoutFormWatermark? = null
 }

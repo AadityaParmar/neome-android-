@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdEventSchedule : EntVdEvent() {
-    var scheduler: StudioVarValueScheduler? = null
+import com.neome.api.meta.base.dto.EntVdEvent
+import com.neome.api.meta.base.dto.StudioVarValueScheduler
+
+open class EntVdEventSchedule : EntVdEvent()
+{
+  var scheduler: StudioVarValueScheduler? = null
 }

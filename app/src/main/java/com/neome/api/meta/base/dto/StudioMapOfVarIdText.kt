@@ -6,8 +6,11 @@
 package com.neome.api.meta.base.dto
 
 import java.util.Map
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioValueVarIdText
 
-open class StudioMapOfVarIdText : StudioBase() {
-    lateinit var keys: Array<String>
-    lateinit var map: Map<String, StudioValueVarIdText>
+open class StudioMapOfVarIdText : StudioBase()
+{
+  lateinit var keys: Array<String>
+  lateinit var map: Map<String, StudioValueVarIdText>
 }

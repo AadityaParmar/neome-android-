@@ -5,5 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdBotAddResponseToHistory : EntVdAutoStep() {
+import com.neome.api.meta.base.dto.EntVdAutoStep
+
+open class EntVdBotAddResponseToHistory : EntVdAutoStep()
+{
 }

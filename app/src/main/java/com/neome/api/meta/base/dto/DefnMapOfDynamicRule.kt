@@ -5,10 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.Types.MetaIdFieldDynamicRule
+import com.neome.api.meta.base.dto.DefnDtoDynamicRule
 import java.util.Map
+import com.neome.api.meta.base.Types.MetaIdFieldDynamicRule
 
-open class DefnMapOfDynamicRule {
-    lateinit var keys: Array<MetaIdFieldDynamicRule>
-    lateinit var map: Map<MetaIdFieldDynamicRule, DefnDtoDynamicRule>
+open class DefnMapOfDynamicRule
+{
+  lateinit var keys: Array<MetaIdFieldDynamicRule>
+  lateinit var map: Map<MetaIdFieldDynamicRule, DefnDtoDynamicRule>
 }

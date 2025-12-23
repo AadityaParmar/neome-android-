@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioVarMobileNumber : StudioVar() {
-    var value: StudioVarValueMobileNumber? = null
+import com.neome.api.meta.base.dto.StudioVar
+import com.neome.api.meta.base.dto.StudioVarValueMobileNumber
+
+open class StudioVarMobileNumber : StudioVar()
+{
+  var value: StudioVarValueMobileNumber? = null
 }

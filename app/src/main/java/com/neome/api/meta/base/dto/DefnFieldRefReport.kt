@@ -13,14 +13,15 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdReport
 
-open class DefnFieldRefReport : DefnField() {
-    var copyFieldMap: Map<MetaIdField, MetaIdField>? = null
-    var editableFieldIdSet: Array<MetaIdField>? = null
-    var forceOpenOnFormCreate: Boolean? = null
-    var forceOpenOnGridRowCreate: Boolean? = null
-    var gridId: MetaIdGrid? = null
-    var keyFieldIdSet: Array<MetaIdField>? = null
-    var layoutGrid: DefnLayoutGrid? = null
-    var overlayLayoutGrid: DefnDtoLayoutOverlaySpreadsheet? = null
-    lateinit var reportId: MetaIdReport
+open class DefnFieldRefReport : DefnField()
+{
+  var copyFieldMap: Map<MetaIdField, MetaIdField>? = null
+  var editableFieldIdSet: Array<MetaIdField>? = null
+  var forceOpenOnFormCreate: Boolean? = null
+  var forceOpenOnGridRowCreate: Boolean? = null
+  var gridId: MetaIdGrid? = null
+  var keyFieldIdSet: Array<MetaIdField>? = null
+  var layoutGrid: DefnLayoutGrid? = null
+  var overlayLayoutGrid: DefnDtoLayoutOverlaySpreadsheet? = null
+  lateinit var reportId: MetaIdReport
 }

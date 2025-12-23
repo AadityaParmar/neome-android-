@@ -7,5 +7,6 @@ package com.neome.api.nucleus.base.msg
 
 import com.neome.api.meta.base.msg.IMsg
 
-open class Msg : IMsg() {
+open class Msg : IMsg()
+{
 }

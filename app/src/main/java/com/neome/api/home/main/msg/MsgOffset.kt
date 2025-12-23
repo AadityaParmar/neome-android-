@@ -5,11 +5,12 @@
 
 package com.neome.api.home.main.msg
 
+import kotlin.properties.Delegates
 import com.neome.api.meta.base.Types.ChatId
 import com.neome.api.nucleus.base.msg.Msg
-import kotlin.properties.Delegates
 
-open class MsgOffset : Msg() {
-    lateinit var chatId: ChatId
-    var offset: Number by Delegates.notNull<Number>()
+open class MsgOffset : Msg()
+{
+  lateinit var chatId: ChatId
+  var offset: Number by Delegates.notNull<Number>()
 }

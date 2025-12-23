@@ -9,8 +9,9 @@ import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.RowId
 
-open class DtoEntSpreadsheetExportExcel {
-    var layoutSpreadsheetId: MetaIdLayoutGrid? = null
-    var rowIdSet: Array<RowId>? = null
-    lateinit var spreadsheetEditorActionId: MetaIdAction
+open class DtoEntSpreadsheetExportExcel
+{
+  var layoutSpreadsheetId: MetaIdLayoutGrid? = null
+  var rowIdSet: Array<RowId>? = null
+  lateinit var spreadsheetEditorActionId: MetaIdAction
 }

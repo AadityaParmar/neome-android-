@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdBotHistoryToStory : EntVdAi() {
-    var outputField: StudioDtoArgValueParameter? = null
+import com.neome.api.meta.base.dto.EntVdAi
+import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
+
+open class EntVdBotHistoryToStory : EntVdAi()
+{
+  var outputField: StudioDtoArgValueParameter? = null
 }

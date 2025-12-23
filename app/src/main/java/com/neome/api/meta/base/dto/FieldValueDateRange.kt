@@ -5,7 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class FieldValueDateRange {
-    var from: String? = null
-    var to: String? = null
+import java.util.Date
+
+open class FieldValueDateRange
+{
+  var from: String? = null
+  var to: String? = null
 }

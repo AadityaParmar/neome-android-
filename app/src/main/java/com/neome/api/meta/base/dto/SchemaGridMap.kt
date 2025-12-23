@@ -5,9 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.Types.MetaIdGrid
 import java.util.Map
+import com.neome.api.meta.base.Types.MetaIdGrid
+import com.neome.api.meta.base.dto.SchemaGrid
 
-open class SchemaGridMap {
-    lateinit var map: Map<MetaIdGrid, SchemaGrid>
+open class SchemaGridMap
+{
+  lateinit var map: Map<MetaIdGrid, SchemaGrid>
 }

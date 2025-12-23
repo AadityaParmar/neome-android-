@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioSetOfDate : StudioBase() {
-    lateinit var valueSet: Array<String>
+import java.util.Date
+import com.neome.api.meta.base.dto.StudioBase
+
+open class StudioSetOfDate : StudioBase()
+{
+  lateinit var valueSet: Array<String>
 }

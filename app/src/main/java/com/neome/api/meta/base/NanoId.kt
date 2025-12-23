@@ -7,18 +7,23 @@ package com.neome.api.meta.base
 
 // NanoId implementation placeholder
 
-open class NanoId : AnyValue() {
-    companion object {
-        fun newGuid(): String {
-            TODO("NanoId.newGuid() not yet implemented for Kotlin")
-        }
-
-        fun newGuidBig(): String {
-            TODO("NanoId.newGuidBig() not yet implemented for Kotlin")
-        }
-
-        fun newMetaId(): String {
-            TODO("NanoId.newMetaId() not yet implemented for Kotlin")
-        }
+class NanoId : AnyValue()
+{
+  companion object
+  {
+    fun newGuid(): String
+    {
+      TODO("NanoId.newGuid() not yet implemented for Kotlin")
     }
+
+    fun newGuidBig(): String
+    {
+      TODO("NanoId.newGuidBig() not yet implemented for Kotlin")
+    }
+
+    fun newMetaId(): String
+    {
+      TODO("NanoId.newMetaId() not yet implemented for Kotlin")
+    }
+  }
 }

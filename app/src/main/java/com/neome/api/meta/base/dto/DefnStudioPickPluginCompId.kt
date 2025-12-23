@@ -5,8 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnStudioPickCompId
 import com.neome.api.meta.base.Types.MetaIdPlugin
 
-open class DefnStudioPickPluginCompId : DefnStudioPickCompId() {
-    lateinit var pluginId: MetaIdPlugin
+open class DefnStudioPickPluginCompId : DefnStudioPickCompId()
+{
+  lateinit var pluginId: MetaIdPlugin
 }

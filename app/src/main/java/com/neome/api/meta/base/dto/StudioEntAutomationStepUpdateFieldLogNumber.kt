@@ -9,13 +9,17 @@ import com.neome.api.meta.base.Types.EnumDefnLogOperationKind
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import com.neome.api.meta.base.dto.StudioBuildArgBinderHolder
+import com.neome.api.meta.base.dto.StudioEntAutomationStep
+import com.neome.api.meta.base.dto.StudioValueVarIdText
 
-open class StudioEntAutomationStepUpdateFieldLogNumber : StudioEntAutomationStep() {
-    var customMessageVarId: StudioValueVarIdText? = null
-    var operation: EnumDefnLogOperationKind? = null
-    var rowFieldId: MetaIdField? = null
-    var sourcePipelineVarId: MetaIdPipelineParam? = null
-    var targetFieldId: MetaIdField? = null
-    var targetSpreadsheetId: MetaIdSpreadsheet? = null
-    var value: StudioBuildArgBinderHolder? = null
+open class StudioEntAutomationStepUpdateFieldLogNumber : StudioEntAutomationStep()
+{
+  var customMessageVarId: StudioValueVarIdText? = null
+  var operation: EnumDefnLogOperationKind? = null
+  var rowFieldId: MetaIdField? = null
+  var sourcePipelineVarId: MetaIdPipelineParam? = null
+  var targetFieldId: MetaIdField? = null
+  var targetSpreadsheetId: MetaIdSpreadsheet? = null
+  var value: StudioBuildArgBinderHolder? = null
 }

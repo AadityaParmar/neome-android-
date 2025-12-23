@@ -5,6 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-open class DefnDtoText {
-    var value: Array<String>? = null
+open class DefnDtoText
+{
+  var value: Array<String>? = null
 }

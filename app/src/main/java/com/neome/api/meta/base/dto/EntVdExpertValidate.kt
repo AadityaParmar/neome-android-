@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdExpertValidate : EntVdAutoStepWithError() {
-    var condition: StudioMapOfCondition? = null
+import com.neome.api.meta.base.dto.EntVdAutoStepWithError
+import com.neome.api.meta.base.dto.StudioMapOfCondition
+
+open class EntVdExpertValidate : EntVdAutoStepWithError()
+{
+  var condition: StudioMapOfCondition? = null
 }

@@ -8,7 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.Types.EntUserId
 
-open class EntUserIdTuple {
-    var entId: EntId? = null
-    var entUserId: EntUserId? = null
+open class EntUserIdTuple
+{
+  var entId: EntId? = null
+  var entUserId: EntUserId? = null
 }

@@ -5,10 +5,13 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.EntVdAutoStepWithOutput
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import com.neome.api.meta.base.dto.StudioBuildArgBinder
 
-open class EntVdSsSearch : EntVdAutoStepWithOutput() {
-    var maxResultCount: Number? = null
-    var searchSpreadsheetIdSet: Array<MetaIdSpreadsheet>? = null
-    var searchText: StudioBuildArgBinder? = null
+open class EntVdSsSearch : EntVdAutoStepWithOutput()
+{
+  var maxResultCount: Number? = null
+  var searchSpreadsheetIdSet: Array<MetaIdSpreadsheet>? = null
+  var searchText: StudioBuildArgBinder? = null
 }

@@ -5,5 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-open class IFieldValue {
+open class IFieldValue
+{
 }

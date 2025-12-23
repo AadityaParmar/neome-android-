@@ -6,8 +6,10 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdForm
+import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioEntPluginDev : StudioBase() {
-    var packageNameVar: String? = null
-    var pluginConfigFormId: MetaIdForm? = null
+open class StudioEntPluginDev : StudioBase()
+{
+  var packageNameVar: String? = null
+  var pluginConfigFormId: MetaIdForm? = null
 }

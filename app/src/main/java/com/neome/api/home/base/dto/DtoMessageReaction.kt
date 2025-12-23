@@ -5,7 +5,10 @@
 
 package com.neome.api.home.base.dto
 
-open class DtoMessageReaction {
-    lateinit var reaction: String
-    lateinit var updatedOn: String
+import java.util.Date
+
+open class DtoMessageReaction
+{
+  lateinit var reaction: String
+  lateinit var updatedOn: String
 }

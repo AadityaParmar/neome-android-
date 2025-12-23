@@ -5,9 +5,10 @@
 
 package com.neome.api.home.base.msg
 
-import com.neome.api.core.base.msg.MsgVersion
 import com.neome.api.meta.base.Types.GroupId
+import com.neome.api.core.base.msg.MsgVersion
 
-open class MsgGroupId : MsgVersion() {
-    lateinit var groupId: GroupId
+open class MsgGroupId : MsgVersion()
+{
+  lateinit var groupId: GroupId
 }

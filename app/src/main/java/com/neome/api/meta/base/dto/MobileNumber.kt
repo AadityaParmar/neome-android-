@@ -5,7 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class MobileNumber : GsonCto() {
-    var countryCode: Number? = null
-    var nationalNumber: Number? = null
+import com.neome.api.meta.base.dto.GsonCto
+
+open class MobileNumber : GsonCto()
+{
+  var countryCode: Number? = null
+  var nationalNumber: Number? = null
 }

@@ -5,7 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdApplyFormula : EntVdAutoStepWithError() {
-    var assignToField: StudioDtoArgValueParameter? = null
-    var javascriptFormula: StudioValueCodeJavascript? = null
+import com.neome.api.meta.base.dto.EntVdAutoStepWithError
+import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
+import com.neome.api.meta.base.dto.StudioValueCodeJavascript
+
+open class EntVdApplyFormula : EntVdAutoStepWithError()
+{
+  var assignToField: StudioDtoArgValueParameter? = null
+  var javascriptFormula: StudioValueCodeJavascript? = null
 }

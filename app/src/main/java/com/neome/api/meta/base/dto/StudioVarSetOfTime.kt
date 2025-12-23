@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioVarSetOfTime : StudioVar() {
-    var value: StudioVarValueSetOfTime? = null
+import com.neome.api.meta.base.dto.StudioVar
+import com.neome.api.meta.base.dto.StudioVarValueSetOfTime
+
+open class StudioVarSetOfTime : StudioVar()
+{
+  var value: StudioVarValueSetOfTime? = null
 }

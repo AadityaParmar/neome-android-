@@ -5,11 +5,12 @@
 
 package com.neome.api.studio.studioMain.sig
 
-import com.neome.api.meta.base.Types.HandleKey
 import com.neome.api.meta.base.dto.EnvValidationError
-import com.neome.api.nucleus.base.sig.Sig
+import com.neome.api.meta.base.Types.HandleKey
 import java.util.Map
+import com.neome.api.nucleus.base.sig.Sig
 
-open class SigEntUserBulkImport : Sig() {
-    lateinit var errorMap: Map<HandleKey, EnvValidationError>
+open class SigEntUserBulkImport : Sig()
+{
+  lateinit var errorMap: Map<HandleKey, EnvValidationError>
 }

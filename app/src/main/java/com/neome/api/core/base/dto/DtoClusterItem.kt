@@ -5,9 +5,10 @@
 
 package com.neome.api.core.base.dto
 
-open class DtoClusterItem {
-    var description: String? = null
-    var icon: String? = null
-    var id: String? = null
-    var label: String? = null
+open class DtoClusterItem
+{
+  var description: String? = null
+  var icon: String? = null
+  var id: String? = null
+  var label: String? = null
 }

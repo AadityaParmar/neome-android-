@@ -7,10 +7,13 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
+import com.neome.api.meta.base.dto.StudioEntAutomationStep
+import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntAutomationStepValidation : StudioEntAutomationStep() {
-    var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
-    var iterateOnGridId: MetaIdGrid? = null
-    var sourcePipelineVarId: MetaIdPipelineParam? = null
-    var validationConditionVarId: StudioValueVarIdCondition? = null
+open class StudioEntAutomationStepValidation : StudioEntAutomationStep()
+{
+  var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
+  var iterateOnGridId: MetaIdGrid? = null
+  var sourcePipelineVarId: MetaIdPipelineParam? = null
+  var validationConditionVarId: StudioValueVarIdCondition? = null
 }

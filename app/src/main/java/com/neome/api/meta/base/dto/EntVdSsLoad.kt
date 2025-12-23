@@ -5,8 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.EntVdAutoStep
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-open class EntVdSsLoad : EntVdAutoStep() {
-    var spreadsheetId: MetaIdSpreadsheet? = null
+open class EntVdSsLoad : EntVdAutoStep()
+{
+  var spreadsheetId: MetaIdSpreadsheet? = null
 }

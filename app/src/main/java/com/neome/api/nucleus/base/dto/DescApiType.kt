@@ -5,5 +5,6 @@
 
 package com.neome.api.nucleus.base.dto
 
-open class DescApiType {
+open class DescApiType
+{
 }

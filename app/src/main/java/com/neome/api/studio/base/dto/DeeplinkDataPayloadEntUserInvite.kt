@@ -5,5 +5,8 @@
 
 package com.neome.api.studio.base.dto
 
-open class DeeplinkDataPayloadEntUserInvite : DeeplinkDataPayloadEntInviteBase() {
+import com.neome.api.studio.base.dto.DeeplinkDataPayloadEntInviteBase
+
+open class DeeplinkDataPayloadEntUserInvite : DeeplinkDataPayloadEntInviteBase()
+{
 }

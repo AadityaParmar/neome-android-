@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class DefnFieldRefTarget : DefnField() {
-    lateinit var refTargetSpreadsheetMap: DefnMapOfRefTarget
+import com.neome.api.meta.base.dto.DefnField
+import com.neome.api.meta.base.dto.DefnMapOfRefTarget
+
+open class DefnFieldRefTarget : DefnField()
+{
+  lateinit var refTargetSpreadsheetMap: DefnMapOfRefTarget
 }

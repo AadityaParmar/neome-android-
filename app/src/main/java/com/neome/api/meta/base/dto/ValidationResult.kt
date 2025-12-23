@@ -5,10 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.Types.SearchPath
+import com.neome.api.meta.base.dto.EnvValidationError
 import java.util.Map
+import com.neome.api.meta.base.Types.SearchPath
 
-open class ValidationResult {
-    var errorCountMap: Map<SearchPath, Number>? = null
-    var errorMap: Map<SearchPath, EnvValidationError>? = null
+open class ValidationResult
+{
+  var errorCountMap: Map<SearchPath, Number>? = null
+  var errorMap: Map<SearchPath, EnvValidationError>? = null
 }

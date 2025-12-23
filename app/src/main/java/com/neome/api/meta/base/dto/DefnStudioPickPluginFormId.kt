@@ -5,10 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnStudioPickFormId
 import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.Types.PluginApiId
 
-open class DefnStudioPickPluginFormId : DefnStudioPickFormId() {
-    var pluginApiId: PluginApiId? = null
-    var pluginId: MetaIdPlugin? = null
+open class DefnStudioPickPluginFormId : DefnStudioPickFormId()
+{
+  var pluginApiId: PluginApiId? = null
+  var pluginId: MetaIdPlugin? = null
 }

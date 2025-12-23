@@ -7,5 +7,6 @@ package com.neome.api.nucleus.base.sig
 
 import com.neome.api.meta.base.sig.ISig
 
-open class Sig : ISig() {
+open class Sig : ISig()
+{
 }

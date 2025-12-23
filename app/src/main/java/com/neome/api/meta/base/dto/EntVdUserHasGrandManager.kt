@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdUserHasGrandManager : EntVdAutoNode() {
-    var user: StudioBuildArgBinder? = null
+import com.neome.api.meta.base.dto.EntVdAutoNode
+import com.neome.api.meta.base.dto.StudioBuildArgBinder
+
+open class EntVdUserHasGrandManager : EntVdAutoNode()
+{
+  var user: StudioBuildArgBinder? = null
 }

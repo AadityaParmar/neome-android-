@@ -5,5 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-open class DefnLayoutGridXYChartLine : DefnLayoutGridXYChart() {
+import com.neome.api.meta.base.dto.DefnLayoutGridXYChart
+
+open class DefnLayoutGridXYChartLine : DefnLayoutGridXYChart()
+{
 }

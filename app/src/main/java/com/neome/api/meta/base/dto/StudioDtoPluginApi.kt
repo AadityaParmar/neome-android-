@@ -7,8 +7,10 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.Types.PluginApiId
+import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioDtoPluginApi : StudioBase() {
-    var metaIdPlugin: MetaIdPlugin? = null
-    var pluginApiId: PluginApiId? = null
+open class StudioDtoPluginApi : StudioBase()
+{
+  var metaIdPlugin: MetaIdPlugin? = null
+  var pluginApiId: PluginApiId? = null
 }

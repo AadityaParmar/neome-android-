@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioVarSetOfText : StudioVar() {
-    var value: StudioMapOfOption? = null
+import com.neome.api.meta.base.dto.StudioMapOfOption
+import com.neome.api.meta.base.dto.StudioVar
+
+open class StudioVarSetOfText : StudioVar()
+{
+  var value: StudioMapOfOption? = null
 }

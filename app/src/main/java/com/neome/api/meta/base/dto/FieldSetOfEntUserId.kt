@@ -7,7 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EntUserId
 
-open class FieldSetOfEntUserId {
-    var displaySet: Array<String>? = null
-    lateinit var valueSet: Array<EntUserId>
+open class FieldSetOfEntUserId
+{
+  var displaySet: Array<String>? = null
+  lateinit var valueSet: Array<EntUserId>
 }

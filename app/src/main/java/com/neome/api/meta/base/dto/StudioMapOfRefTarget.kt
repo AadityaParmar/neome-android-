@@ -5,10 +5,13 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import java.util.Map
+import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioDtoRefTarget
 
-open class StudioMapOfRefTarget : StudioBase() {
-    lateinit var keys: Array<MetaIdSpreadsheet>
-    lateinit var map: Map<MetaIdSpreadsheet, StudioDtoRefTarget>
+open class StudioMapOfRefTarget : StudioBase()
+{
+  lateinit var keys: Array<MetaIdSpreadsheet>
+  lateinit var map: Map<MetaIdSpreadsheet, StudioDtoRefTarget>
 }

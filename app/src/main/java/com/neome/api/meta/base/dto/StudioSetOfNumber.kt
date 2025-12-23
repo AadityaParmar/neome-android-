@@ -5,6 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioSetOfNumber : StudioBase() {
-    lateinit var valueSet: Array<Number>
+import com.neome.api.meta.base.dto.StudioBase
+
+open class StudioSetOfNumber : StudioBase()
+{
+  lateinit var valueSet: Array<Number>
 }

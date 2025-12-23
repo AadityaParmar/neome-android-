@@ -5,13 +5,16 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.FieldDtoImage
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdVar
+import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioDtoLayoutFormFooter : StudioBase() {
-    var footerImage: FieldDtoImage? = null
-    var footerImageHeight: Number? = null
-    var footerImageVarId: MetaIdVar? = null
-    var formLayoutId: MetaIdLayoutForm? = null
-    var showSeparator: Boolean? = null
+open class StudioDtoLayoutFormFooter : StudioBase()
+{
+  var footerImage: FieldDtoImage? = null
+  var footerImageHeight: Number? = null
+  var footerImageVarId: MetaIdVar? = null
+  var formLayoutId: MetaIdLayoutForm? = null
+  var showSeparator: Boolean? = null
 }

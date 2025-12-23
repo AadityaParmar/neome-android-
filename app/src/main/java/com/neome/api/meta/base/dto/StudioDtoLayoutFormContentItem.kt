@@ -12,14 +12,16 @@ import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdVar
+import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioDtoLayoutFormContentItem : StudioBase() {
-    var borderColorVarId: MetaIdVar? = null
-    var borderPositionSet: Array<EnumDefnShowBorderKind>? = null
-    var fieldIdSet: Array<MetaIdField>? = null
-    var formLayoutIdSet: Array<MetaIdLayoutForm>? = null
-    var gridLayoutIdSet: Array<MetaIdLayoutGrid>? = null
-    var gridSwitcherSet: Array<MetaIdGrid>? = null
-    var paddingPositionSet: Array<EnumDefnShowBorderKind>? = null
-    var paddingSize: EnumDefnThemeDividerKind? = null
+open class StudioDtoLayoutFormContentItem : StudioBase()
+{
+  var borderColorVarId: MetaIdVar? = null
+  var borderPositionSet: Array<EnumDefnShowBorderKind>? = null
+  var fieldIdSet: Array<MetaIdField>? = null
+  var formLayoutIdSet: Array<MetaIdLayoutForm>? = null
+  var gridLayoutIdSet: Array<MetaIdLayoutGrid>? = null
+  var gridSwitcherSet: Array<MetaIdGrid>? = null
+  var paddingPositionSet: Array<EnumDefnShowBorderKind>? = null
+  var paddingSize: EnumDefnThemeDividerKind? = null
 }

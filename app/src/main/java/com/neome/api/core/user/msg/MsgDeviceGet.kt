@@ -5,9 +5,10 @@
 
 package com.neome.api.core.user.msg
 
-import com.neome.api.core.base.msg.MsgVersion
 import com.neome.api.meta.base.Types.DeviceId
+import com.neome.api.core.base.msg.MsgVersion
 
-open class MsgDeviceGet : MsgVersion() {
-    lateinit var deviceId: DeviceId
+open class MsgDeviceGet : MsgVersion()
+{
+  lateinit var deviceId: DeviceId
 }

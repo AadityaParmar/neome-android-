@@ -6,7 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import kotlin.properties.Delegates
+import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioVarValueBoolean : StudioBase() {
-    var value: Boolean by Delegates.notNull<Boolean>()
+open class StudioVarValueBoolean : StudioBase()
+{
+  var value: Boolean by Delegates.notNull<Boolean>()
 }

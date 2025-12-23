@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdAiFakerToForm : EntVdAiWithOutput() {
-    var outputForm: FormRefKey? = null
+import com.neome.api.meta.base.dto.EntVdAiWithOutput
+import com.neome.api.meta.base.dto.FormRefKey
+
+open class EntVdAiFakerToForm : EntVdAiWithOutput()
+{
+  var outputForm: FormRefKey? = null
 }

@@ -5,5 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdEventUserOnline : EntVdEvent() {
+import com.neome.api.meta.base.dto.EntVdEvent
+
+open class EntVdEventUserOnline : EntVdEvent()
+{
 }

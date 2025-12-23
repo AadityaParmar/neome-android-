@@ -7,9 +7,12 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import com.neome.api.meta.base.dto.StudioEntAutomationStep
+import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntAutomationStepRemoveSpreadsheetRows : StudioEntAutomationStep() {
-    var conditionVarId: StudioValueVarIdCondition? = null
-    var inputFormPipelineVarId: MetaIdPipelineParam? = null
-    var targetSpreadsheetId: MetaIdSpreadsheet? = null
+open class StudioEntAutomationStepRemoveSpreadsheetRows : StudioEntAutomationStep()
+{
+  var conditionVarId: StudioValueVarIdCondition? = null
+  var inputFormPipelineVarId: MetaIdPipelineParam? = null
+  var targetSpreadsheetId: MetaIdSpreadsheet? = null
 }

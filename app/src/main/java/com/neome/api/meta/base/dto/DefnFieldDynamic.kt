@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class DefnFieldDynamic : DefnField() {
-    var ruleMap: DefnMapOfDynamicRule? = null
+import com.neome.api.meta.base.dto.DefnField
+import com.neome.api.meta.base.dto.DefnMapOfDynamicRule
+
+open class DefnFieldDynamic : DefnField()
+{
+  var ruleMap: DefnMapOfDynamicRule? = null
 }

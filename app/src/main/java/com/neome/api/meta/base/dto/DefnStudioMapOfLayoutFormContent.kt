@@ -5,10 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 
-open class DefnStudioMapOfLayoutFormContent : DefnField() {
-    var defaultId: MetaIdLayoutForm? = null
-    lateinit var formId: MetaIdForm
+open class DefnStudioMapOfLayoutFormContent : DefnField()
+{
+  var defaultId: MetaIdLayoutForm? = null
+  lateinit var formId: MetaIdForm
 }

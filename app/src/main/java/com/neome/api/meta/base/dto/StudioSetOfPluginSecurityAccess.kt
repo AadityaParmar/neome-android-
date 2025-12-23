@@ -6,7 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnPluginSecurityAccess
+import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioSetOfPluginSecurityAccess : StudioBase() {
-    lateinit var valueSet: Array<EnumDefnPluginSecurityAccess>
+open class StudioSetOfPluginSecurityAccess : StudioBase()
+{
+  lateinit var valueSet: Array<EnumDefnPluginSecurityAccess>
 }

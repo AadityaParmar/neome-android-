@@ -10,15 +10,18 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdVar
+import com.neome.api.meta.base.dto.StudioEntAutomationStep
+import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntAutomationStepParseDocument : StudioEntAutomationStep() {
-    var aiInstructions: String? = null
-    var documentFieldId: MetaIdField? = null
-    var exposeOutputAsPipelineVariable: Boolean? = null
-    var inputFormPipelineVarId: MetaIdPipelineParam? = null
-    var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
-    var iterateOnGridId: MetaIdGrid? = null
-    var outputFormPipelineVarId: MetaIdPipelineParam? = null
-    var outputMappingVarId: MetaIdVar? = null
-    var schemaFormId: MetaIdForm? = null
+open class StudioEntAutomationStepParseDocument : StudioEntAutomationStep()
+{
+  var aiInstructions: String? = null
+  var documentFieldId: MetaIdField? = null
+  var exposeOutputAsPipelineVariable: Boolean? = null
+  var inputFormPipelineVarId: MetaIdPipelineParam? = null
+  var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
+  var iterateOnGridId: MetaIdGrid? = null
+  var outputFormPipelineVarId: MetaIdPipelineParam? = null
+  var outputMappingVarId: MetaIdVar? = null
+  var schemaFormId: MetaIdForm? = null
 }

@@ -9,9 +9,10 @@ import kotlin.properties.Delegates
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgEntSpreadsheetData : Msg() {
-    var fromGridVer: String? = null
-    var pageSize: Number by Delegates.notNull<Number>()
-    lateinit var spreadsheetId: MetaIdSpreadsheet
-    lateinit var toGridVer: String
+open class MsgEntSpreadsheetData : Msg()
+{
+  var fromGridVer: String? = null
+  var pageSize: Number by Delegates.notNull<Number>()
+  lateinit var spreadsheetId: MetaIdSpreadsheet
+  lateinit var toGridVer: String
 }

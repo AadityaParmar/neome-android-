@@ -7,6 +7,7 @@ package com.neome.api.core.user.sig
 
 import com.neome.api.nucleus.base.sig.SigVersion
 
-open class SigUserSetting : SigVersion() {
-    var userSetting: Object? = null
+open class SigUserSetting : SigVersion()
+{
+  var userSetting: Object? = null
 }

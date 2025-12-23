@@ -5,9 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.EntVdAi
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-open class EntVdAiXMLToSpreadsheet : EntVdAi() {
-    var inputField: StudioDtoArgValueParameter? = null
-    var spreadsheetId: MetaIdSpreadsheet? = null
+open class EntVdAiXMLToSpreadsheet : EntVdAi()
+{
+  var inputField: StudioDtoArgValueParameter? = null
+  var spreadsheetId: MetaIdSpreadsheet? = null
 }

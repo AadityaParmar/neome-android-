@@ -11,9 +11,10 @@ import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioDtoRowIdPointer
 import com.neome.api.meta.base.dto.StudioDtoUserFilter
 
-open class EntVdRowForward : EntVdAutoStep() {
-    var fromSender: StudioBuildArgBinder? = null
-    var rowIdPointer: StudioDtoRowIdPointer? = null
-    var toGroupIdSet: Array<MetaIdGroup>? = null
-    var toUsers: StudioDtoUserFilter? = null
+open class EntVdRowForward : EntVdAutoStep()
+{
+  var fromSender: StudioBuildArgBinder? = null
+  var rowIdPointer: StudioDtoRowIdPointer? = null
+  var toGroupIdSet: Array<MetaIdGroup>? = null
+  var toUsers: StudioDtoUserFilter? = null
 }

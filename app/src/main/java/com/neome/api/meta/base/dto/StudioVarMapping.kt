@@ -5,6 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioVarMapping : StudioVar() {
-    var value: StudioVarValueMapping? = null
+import com.neome.api.meta.base.dto.StudioVar
+import com.neome.api.meta.base.dto.StudioVarValueMapping
+
+open class StudioVarMapping : StudioVar()
+{
+  var value: StudioVarValueMapping? = null
 }

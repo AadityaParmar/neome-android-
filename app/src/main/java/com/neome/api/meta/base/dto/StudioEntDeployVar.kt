@@ -7,9 +7,11 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumStudioVarKind
 import com.neome.api.meta.base.Types.MetaIdVar
+import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioEntDeployVar : StudioBase() {
-    lateinit var kind: EnumStudioVarKind
-    lateinit var metaId: MetaIdVar
-    var varValue: Any? = null
+open class StudioEntDeployVar : StudioBase()
+{
+  lateinit var kind: EnumStudioVarKind
+  lateinit var metaId: MetaIdVar
+  var varValue: Any? = null
 }

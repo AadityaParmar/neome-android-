@@ -5,5 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdAiFormToSentiment : EntVdAi() {
+import com.neome.api.meta.base.dto.EntVdAi
+
+open class EntVdAiFormToSentiment : EntVdAi()
+{
 }

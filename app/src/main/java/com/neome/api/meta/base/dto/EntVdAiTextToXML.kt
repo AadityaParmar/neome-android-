@@ -5,7 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
-open class EntVdAiTextToXML : EntVdAi() {
-    var inputField: StudioDtoArgValueParameter? = null
-    var outputField: StudioDtoArgValueParameter? = null
+import com.neome.api.meta.base.dto.EntVdAi
+import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
+
+open class EntVdAiTextToXML : EntVdAi()
+{
+  var inputField: StudioDtoArgValueParameter? = null
+  var outputField: StudioDtoArgValueParameter? = null
 }

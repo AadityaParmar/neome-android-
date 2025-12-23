@@ -7,6 +7,7 @@ package com.neome.api.ent.agent.msg
 
 import com.neome.api.core.base.msg.MsgVersion
 
-open class MsgAgentEntGet : MsgVersion() {
-    var appVersionCode: Number? = null
+open class MsgAgentEntGet : MsgVersion()
+{
+  var appVersionCode: Number? = null
 }

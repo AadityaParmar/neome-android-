@@ -5,5 +5,8 @@
 
 package com.neome.api.nucleus.base.sig
 
-open class SigSignout : Sig() {
+import com.neome.api.nucleus.base.sig.Sig
+
+open class SigSignout : Sig()
+{
 }

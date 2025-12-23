@@ -5,9 +5,10 @@
 
 package com.neome.api.studio.studioMain.sig
 
-import com.neome.api.meta.base.dto.StudioEntDeployPaymentProviderMap
 import com.neome.api.nucleus.base.sig.SigVersion
+import com.neome.api.meta.base.dto.StudioEntDeployPaymentProviderMap
 
-open class SigEntPaymentMap : SigVersion() {
-    lateinit var providerMap: StudioEntDeployPaymentProviderMap
+open class SigEntPaymentMap : SigVersion()
+{
+  lateinit var providerMap: StudioEntDeployPaymentProviderMap
 }

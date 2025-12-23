@@ -5,5 +5,6 @@
 
 package com.neome.api.meta.base.msg
 
-open class IMsg {
+open class IMsg
+{
 }

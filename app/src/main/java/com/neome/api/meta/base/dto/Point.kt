@@ -5,7 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-open class Point {
-    var x: Number? = null
-    var y: Number? = null
+open class Point
+{
+  var x: Number? = null
+  var y: Number? = null
 }

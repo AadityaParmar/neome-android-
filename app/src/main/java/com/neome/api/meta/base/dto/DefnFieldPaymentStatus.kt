@@ -5,10 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.EnumDefnPaymentStatus
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldPaymentStatus : DefnFieldEditable() {
-    var defaultFieldId: MetaIdField? = null
-    var defaultValue: EnumDefnPaymentStatus? = null
+open class DefnFieldPaymentStatus : DefnFieldEditable()
+{
+  var defaultFieldId: MetaIdField? = null
+  var defaultValue: EnumDefnPaymentStatus? = null
 }

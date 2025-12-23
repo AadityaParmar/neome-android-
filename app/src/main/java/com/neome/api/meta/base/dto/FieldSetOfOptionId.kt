@@ -5,7 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-open class FieldSetOfOptionId {
-    var displaySet: Array<String>? = null
-    lateinit var valueSet: Array<String>
+open class FieldSetOfOptionId
+{
+  var displaySet: Array<String>? = null
+  lateinit var valueSet: Array<String>
 }

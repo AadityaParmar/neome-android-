@@ -5,7 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioComposite : StudioComp() {
-    var actionPermissionMap: StudioMapOfActionPermission? = null
-    lateinit var fieldMap: StudioFieldMap
+import com.neome.api.meta.base.dto.StudioComp
+import com.neome.api.meta.base.dto.StudioFieldMap
+import com.neome.api.meta.base.dto.StudioMapOfActionPermission
+
+open class StudioComposite : StudioComp()
+{
+  var actionPermissionMap: StudioMapOfActionPermission? = null
+  lateinit var fieldMap: StudioFieldMap
 }

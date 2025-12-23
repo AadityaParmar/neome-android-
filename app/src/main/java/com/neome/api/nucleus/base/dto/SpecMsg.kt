@@ -5,11 +5,12 @@
 
 package com.neome.api.nucleus.base.dto
 
-import com.neome.api.meta.base.Types.ServiceName
 import java.util.Map
+import com.neome.api.meta.base.Types.ServiceName
 
-open class SpecMsg {
-    lateinit var module: String
-    var paramMap: Map<String, String>? = null
-    lateinit var serviceName: ServiceName
+open class SpecMsg
+{
+  lateinit var module: String
+  var paramMap: Map<String, String>? = null
+  lateinit var serviceName: ServiceName
 }

@@ -9,8 +9,9 @@ import com.neome.api.app.base.Types.EnumKindAiAssist
 import com.neome.api.meta.base.Types.MetaId
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgAiNeoScriptGet : Msg() {
-    lateinit var kind: EnumKindAiAssist
-    lateinit var neoScriptOrUserMessage: String
-    var paramPath: Array<MetaId>? = null
+open class MsgAiNeoScriptGet : Msg()
+{
+  lateinit var kind: EnumKindAiAssist
+  lateinit var neoScriptOrUserMessage: String
+  var paramPath: Array<MetaId>? = null
 }
