@@ -14,6 +14,7 @@ import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonToken
 import com.google.gson.stream.JsonWriter
+import com.neome.api.meta.base.dto.DefnForm
 import com.neome.java.api.meta.base.Symbol
 import com.neome.java.api.meta.base.SysId
 import com.neome.java.api.meta.base.dto.DefnComp
@@ -27,7 +28,6 @@ import com.neome.java.api.meta.base.dto.DefnFieldParagraph
 import com.neome.java.api.meta.base.dto.DefnFieldPickEnum
 import com.neome.java.api.meta.base.dto.DefnFieldSwitch
 import com.neome.java.api.meta.base.dto.DefnFieldText
-import com.neome.java.api.meta.base.dto.DefnForm
 import com.neome.java.api.meta.base.dto.DefnGrid
 import com.neome.java.api.meta.base.dto.DefnSection
 import com.neome.java.api.meta.base.dto.DefnTab

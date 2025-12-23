@@ -15,27 +15,48 @@ import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdRole
 
-class DefnForm {
+open class DefnForm {
     var actionPermissionMap: DefnStudioMapOfActionPermission? = null
-    var allowToPrintForm: boolean? = null
+
+    var allowToPrintForm: Boolean? = null
+
     var calculateFormulaMode: EnumDefnCalculateFormulaMode? = null
-    var chatBubbleFieldIdSet: MetaIdField[]? = null
+
+    var chatBubbleFieldIdSet: Array<MetaIdField>? = null
+
     var chatLabelFieldId: MetaIdField? = null
+
     var chatLabelPatternVar: DefnDtoText? = null
+
     var chatPatternVar: DefnDtoParagraph? = null
-    var commentReadOnlyRoleSet: MetaIdRole[]? = null
-    var commentRoleSet: MetaIdRole[]? = null
-    val compMap: Record<MetaIdComp, DefnComp>
-    var configForm: boolean? = null
-    val displayCompositeId: MetaIdComposite
-    var formulaFieldIdSet: MetaIdField[]? = null
-    var gridLookupMap: Record<MetaIdLayoutGrid, MetaIdGrid>? = null
-    var label: string? = null
+
+    var commentReadOnlyRoleSet: Array<MetaIdRole>? = null
+
+    var commentRoleSet: Array<MetaIdRole>? = null
+
+    lateinit var compMap: Map<MetaIdComp, DefnComp>
+
+    var configForm: Boolean? = null
+
+    lateinit var displayCompositeId: MetaIdComposite
+
+    var formulaFieldIdSet: Array<MetaIdField>? = null
+
+    var gridLookupMap: Map<MetaIdLayoutGrid, MetaIdGrid>? = null
+
+    var label: String? = null
+
     var layoutMap: DefnLayoutFormMap? = null
-    val metaId: MetaIdForm
-    val name: Symbol
+
+    lateinit var metaId: MetaIdForm
+
+    lateinit var name: Symbol
+
     var paymentConfig: DefnPaymentConfig? = null
+
     var permissionMatrix: DefnDtoPermissionMatrix? = null
+
     var theme: DefnDtoFormTheme? = null
+
     var visibilityRuleMap: DefnVisibilityRuleMap? = null
 }

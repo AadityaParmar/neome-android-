@@ -11,9 +11,9 @@ import com.neome.api.nucleus.base.msg.Msg
 
 class MsgAiNeoQLGet : Msg() {
     var inputFormRefKey: FormRefKey? = null
-    var neoQL: string? = null
+    var neoQL: String? = null
     var outputFormRefKey: FormRefKey? = null
-    var paramMap: Record<string, FormRefKey>? = null
-    val spreadsheetIdSet: MetaIdSpreadsheet[]
-    val userMessage: string
+    var paramMap: Map<String, FormRefKey>? = null
+    lateinit var spreadsheetIdSet: Array<MetaIdSpreadsheet>
+    lateinit var userMessage: String
 }

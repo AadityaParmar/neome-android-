@@ -9,6 +9,6 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdPlugin
 
 class FormRefKey {
-    val formId: MetaIdForm
+    lateinit var formId: MetaIdForm
     var pluginId: MetaIdPlugin? = null
 }

@@ -11,21 +11,21 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
 
 class DefnComp {
-    var disabled: boolean? = null
+    var disabled: Boolean? = null
     var disabledFieldId: MetaIdField? = null
-    var disabledRoleIdSet: MetaIdRole[]? = null
-    var disabledVar: boolean? = null
-    var hidden: boolean? = null
-    var hideDirtyIndicator: boolean? = null
-    var invisible: boolean? = null
-    var label: string? = null
-    var maxWidth: number? = null
-    val name: Symbol
-    var pb: number? = null
+    var disabledRoleIdSet: Array<MetaIdRole>? = null
+    var disabledVar: Boolean? = null
+    var hidden: Boolean? = null
+    var hideDirtyIndicator: Boolean? = null
+    var invisible: Boolean? = null
+    var label: String? = null
+    var maxWidth: Number? = null
+    lateinit var name: Symbol
+    var pb: Number? = null
     var permissionMatrix: DefnDtoPermissionMatrix? = null
-    var pl: number? = null
-    var pr: number? = null
-    var pt: number? = null
-    var readOnly: boolean? = null
-    val type: EnumDefnCompType
+    var pl: Number? = null
+    var pr: Number? = null
+    var pt: Number? = null
+    var readOnly: Boolean? = null
+    lateinit var type: EnumDefnCompType
 }

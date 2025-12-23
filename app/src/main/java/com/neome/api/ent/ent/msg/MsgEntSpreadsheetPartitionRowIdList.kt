@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.nucleus.base.msg.Msg
 
 class MsgEntSpreadsheetPartitionRowIdList : Msg() {
-    val pageSize: number
-    val spreadsheetId: MetaIdSpreadsheet
-    val toRowOrderVer: string
+    lateinit var pageSize: Number
+    lateinit var spreadsheetId: MetaIdSpreadsheet
+    lateinit var toRowOrderVer: String
 }
