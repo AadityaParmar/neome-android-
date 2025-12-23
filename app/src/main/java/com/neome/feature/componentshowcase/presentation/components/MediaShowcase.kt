@@ -52,15 +52,18 @@ import com.neome.feature.camera.presentation.crop.ImageCropScreen
 
 /**
  * Media showcase demonstrating camera features.
+ *
+ * Two flows only:
+ * 1. Simple Camera: Capture only, returns immediately
+ * 2. Camera with Preview: Capture → Preview → (Optional Crop) → Done
  */
 @Composable
 fun MediaShowcase() {
+    // Simple states - no boolean explosion
     var showSimpleCamera by remember { mutableStateOf(false) }
-    var showCameraWithPreview by remember { mutableStateOf(false) }
-    var showCameraWithCropper by remember { mutableStateOf(false) }
-    var capturedImage by remember { mutableStateOf<CapturedImage?>(null) }
-    var showImagePreview by remember { mutableStateOf(false) }
-    var showCropScreen by remember { mutableStateOf(false) }
+    var showCameraForPreview by remember { mutableStateOf(false) }
+    var previewImage by remember { mutableStateOf<CapturedImage?>(null) }
+    var finalImage by remember { mutableStateOf<CapturedImage?>(null) }
 
     Column(
         modifier = Modifier
@@ -74,7 +77,7 @@ fun MediaShowcase() {
         )
 
         Text(
-            text = "Test the camera capture, preview, and crop features.",
+            text = "Test the camera capture and preview features.",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
@@ -90,127 +93,84 @@ fun MediaShowcase() {
             onClick = { showSimpleCamera = true }
         )
 
-        // Camera with Preview Card
+        // Camera with Preview Card (crop is optional inside preview)
         MediaFeatureCard(
             title = "Camera with Preview",
-            description = "Capture and view the image. Shows a preview of the captured photo before confirming.",
+            description = "Capture and preview. Optionally crop the image before confirming.",
             icon = Icons.Default.Image,
             buttonText = "Capture & Preview",
-            onClick = { showCameraWithPreview = true }
+            onClick = { showCameraForPreview = true }
         )
 
-        // Camera with Cropper Card
-        MediaFeatureCard(
-            title = "Camera with Cropper",
-            description = "Capture, crop (square), and view. Full flow with aspect ratio constraint.",
-            icon = Icons.Default.Crop,
-            buttonText = "Capture & Crop",
-            onClick = { showCameraWithCropper = true }
-        )
-
-        // Show captured image if available
-        capturedImage?.let { image ->
+        // Show final captured image if available
+        finalImage?.let { image ->
             CapturedImagePreviewCard(
                 image = image,
-                onClear = { capturedImage = null }
+                onClear = { finalImage = null }
             )
         }
     }
 
-    // Simple Camera Dialog
+    // Simple Camera Dialog - capture and immediately return
     if (showSimpleCamera) {
         FullScreenCameraDialog(
             onDismiss = { showSimpleCamera = false }
         ) {
             CameraCaptureScreen(
                 onImageCaptured = { image ->
-                    capturedImage = image
+                    finalImage = image
                     showSimpleCamera = false
                 },
                 onCancelled = {
                     showSimpleCamera = false
                 },
-                onError = { error ->
+                onError = {
                     showSimpleCamera = false
                 }
             )
         }
     }
 
-    // Camera with Preview Dialog
-    if (showCameraWithPreview) {
+    // Camera for Preview flow - capture then show preview
+    if (showCameraForPreview) {
         FullScreenCameraDialog(
-            onDismiss = { showCameraWithPreview = false }
+            onDismiss = { showCameraForPreview = false }
         ) {
             CameraCaptureScreen(
                 onImageCaptured = { image ->
-                    capturedImage = image
-                    showCameraWithPreview = false
-                    showImagePreview = true
+                    // Camera closes, Preview opens with captured image
+                    previewImage = image
+                    showCameraForPreview = false
                 },
                 onCancelled = {
-                    showCameraWithPreview = false
+                    showCameraForPreview = false
                 },
-                onError = { error ->
-                    showCameraWithPreview = false
+                onError = {
+                    showCameraForPreview = false
                 }
             )
         }
     }
 
-    // Image Preview Dialog
-    if (showImagePreview && capturedImage != null) {
-        ImagePreviewDialog(
-            image = capturedImage!!,
-            onDismiss = {
-                showImagePreview = false
+    // Preview Dialog - single source of truth for image state
+    // Crop is an optional action within preview, not a separate flow
+    if (previewImage != null) {
+        ImagePreviewWithCropDialog(
+            image = previewImage!!,
+            onImageUpdated = { updatedImage ->
+                // Cropped image replaces original in preview
+                previewImage = updatedImage
             },
-            onConfirm = {
-                showImagePreview = false
+            onDismiss = {
+                // Cancel - discard image
+                previewImage = null
+            },
+            onConfirm = { confirmedImage ->
+                // Done - save final image
+                finalImage = confirmedImage
+                previewImage = null
             }
         )
-    }
-
-    // Camera with Cropper Dialog
-    if (showCameraWithCropper) {
-        FullScreenCameraDialog(
-            onDismiss = { showCameraWithCropper = false }
-        ) {
-            CameraCaptureScreen(
-                onImageCaptured = { image ->
-                    capturedImage = image
-                    showCameraWithCropper = false
-                    showCropScreen = true
-                },
-                onCancelled = {
-                    showCameraWithCropper = false
-                },
-                onError = { error ->
-                    showCameraWithCropper = false
-                }
-            )
-        }
-    }
-
-    // Crop Screen Dialog
-    if (showCropScreen && capturedImage != null) {
-        FullScreenCameraDialog(
-            onDismiss = { showCropScreen = false }
-        ) {
-            ImageCropScreen(
-                sourceImage = capturedImage!!,
-                onCropConfirmed = { croppedImage ->
-                    capturedImage = croppedImage
-                    showCropScreen = false
-                },
-                onCancelled = { originalImage ->
-                    showCropScreen = false
-                },
-                onError = { message ->
-                    showCropScreen = false
-                }
-            )
-        }
     }
 }
 
@@ -355,12 +315,25 @@ private fun FullScreenCameraDialog(
     }
 }
 
+/**
+ * Preview dialog with optional crop functionality.
+ *
+ * Flow: Preview → (Optional Crop) → Preview → Done
+ *
+ * - Crop button in top bar opens cropper as overlay
+ * - Cropped image replaces original in preview
+ * - User can re-crop or confirm with Done
+ */
 @Composable
-private fun ImagePreviewDialog(
+private fun ImagePreviewWithCropDialog(
     image: CapturedImage,
+    onImageUpdated: (CapturedImage) -> Unit,
     onDismiss: () -> Unit,
-    onConfirm: () -> Unit
+    onConfirm: (CapturedImage) -> Unit
 ) {
+    // Single state: is cropper showing?
+    var showCropper by remember { mutableStateOf(false) }
+
     val bitmap = remember(image) {
         BitmapFactory.decodeByteArray(image.bytes, 0, image.bytes.size)
     }
@@ -377,63 +350,103 @@ private fun ImagePreviewDialog(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            Column(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                // Top bar
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(MaterialTheme.colorScheme.surface)
-                        .padding(8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+            Box(modifier = Modifier.fillMaxSize()) {
+                // Main Preview Content
+                Column(
+                    modifier = Modifier.fillMaxSize()
                 ) {
-                    IconButton(onClick = onDismiss) {
-                        Icon(
-                            imageVector = Icons.Default.Close,
-                            contentDescription = "Close"
-                        )
+                    // Top bar with Close, Crop, and Done
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(MaterialTheme.colorScheme.surface)
+                            .padding(horizontal = 8.dp, vertical = 4.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        // Close button
+                        IconButton(onClick = onDismiss) {
+                            Icon(
+                                imageVector = Icons.Default.Close,
+                                contentDescription = "Close"
+                            )
+                        }
+
+                        // Crop button - opens cropper overlay
+                        OutlinedButton(
+                            onClick = { showCropper = true }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Crop,
+                                contentDescription = null,
+                                modifier = Modifier.size(18.dp)
+                            )
+                            Spacer(modifier = Modifier.size(4.dp))
+                            Text("Crop")
+                        }
+
+                        // Done button
+                        FilledTonalButton(onClick = { onConfirm(image) }) {
+                            Text("Done")
+                        }
                     }
-                    Text(
-                        text = "Preview",
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    FilledTonalButton(onClick = onConfirm) {
-                        Text("Done")
+
+                    // Image preview
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .weight(1f),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        if (bitmap != null) {
+                            Image(
+                                bitmap = bitmap.asImageBitmap(),
+                                contentDescription = "Captured image preview",
+                                modifier = Modifier.fillMaxSize(),
+                                contentScale = ContentScale.Fit
+                            )
+                        }
+                    }
+
+                    // Info bar
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(MaterialTheme.colorScheme.surfaceVariant)
+                            .padding(16.dp),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = "${image.width} x ${image.height} • ${image.bytes.size / 1024} KB",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
                     }
                 }
 
-                // Image
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .weight(1f),
-                    contentAlignment = Alignment.Center
-                ) {
-                    if (bitmap != null) {
-                        Image(
-                            bitmap = bitmap.asImageBitmap(),
-                            contentDescription = "Captured image preview",
-                            modifier = Modifier.fillMaxSize(),
-                            contentScale = ContentScale.Fit
+                // Cropper Overlay - shown only when user taps Crop
+                if (showCropper) {
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        ImageCropScreen(
+                            sourceImage = image,
+                            onCropConfirmed = { croppedImage ->
+                                // Update image and return to preview
+                                onImageUpdated(croppedImage)
+                                showCropper = false
+                            },
+                            onCancelled = { _ ->
+                                // Cancel crop - keep original, return to preview
+                                showCropper = false
+                            },
+                            onError = { _ ->
+                                // Error - return to preview
+                                showCropper = false
+                            }
                         )
                     }
-                }
-
-                // Info bar
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(MaterialTheme.colorScheme.surfaceVariant)
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        text = "${image.width} x ${image.height} • ${image.bytes.size / 1024} KB",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
                 }
             }
         }
