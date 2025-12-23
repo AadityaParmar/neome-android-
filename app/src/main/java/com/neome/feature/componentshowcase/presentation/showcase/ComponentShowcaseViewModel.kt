@@ -73,6 +73,11 @@ class ComponentShowcaseViewModel : ViewModel() {
                 name = "Media",
                 description = "Camera and media capture features",
                 components = listOf("Simple Camera", "Camera with Preview", "Camera with Cropper")
+            ),
+            ComponentCategory(
+                name = "File Picker",
+                description = "System file picker for selecting files",
+                components = listOf("Pick Image", "Pick Video", "Pick Image + Video", "Pick PDF", "Pick All Files")
             )
         )
         _state.update { it.copy(categories = categories) }

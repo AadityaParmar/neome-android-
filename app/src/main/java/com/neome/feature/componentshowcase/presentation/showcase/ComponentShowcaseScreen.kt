@@ -34,6 +34,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.neome.feature.componentshowcase.presentation.components.ButtonShowcase
 import com.neome.feature.componentshowcase.presentation.components.CardShowcase
 import com.neome.feature.componentshowcase.presentation.components.DialogShowcase
+import com.neome.feature.componentshowcase.presentation.components.FilePickerShowcase
 import com.neome.feature.componentshowcase.presentation.components.MediaShowcase
 import com.neome.feature.componentshowcase.presentation.components.OtherComponentsShowcase
 import com.neome.feature.componentshowcase.presentation.components.ProgressShowcase
@@ -139,6 +140,7 @@ private fun ComponentShowcaseContent(
                         5 -> ProgressShowcase()
                         6 -> OtherComponentsShowcase()
                         7 -> MediaShowcase()
+                        8 -> FilePickerShowcase()
                     }
                 }
 
