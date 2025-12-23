@@ -38,246 +38,246 @@ class Types {
         wsoc
     }
 
-    const val AVATAR_CROP_QUALITY: Int = 1
-    const val AVATAR_MAX_MB: Double = 1.5
-    const val AVATAR_SIZE_MAX: Int = 640
-    const val AVATAR_SIZE_MIN: Int = 192
-    const val GRID_MAX_COUNT: Int = 20
-    const val PARAGRAPH_MAX_SIZE: Int = 10240
-    const val PREFIX_ADMIN_ID: String = "ea"
-    const val PREFIX_AUTOMATION_EXECUTION_ID: String = "ae"
-    const val PREFIX_CONN_ID: String = "conn"
-    const val PREFIX_DEMO_APP_ID: String = "dt"
-    const val PREFIX_DEVICE_ID: String = "d"
-    const val PREFIX_ENT_ID: String = "e"
-    const val PREFIX_ENT_USER_ID: String = "eu"
-    const val PREFIX_GHOST_ID: String = "gh"
-    const val PREFIX_GROUP_ID: String = "g"
-    const val PREFIX_INBOX_ID_FOLLOWER: String = "ii"
-    const val PREFIX_INBOX_ID_MASTER: String = "im"
-    const val PREFIX_INBOX_MESSAGE_ID: String = "imm"
-    const val PREFIX_KEYCHAIN_ID: String = "k"
-    const val PREFIX_KEYCHAIN_SECRET_ID: String = "ks"
-    const val PREFIX_MEDIA_ID_AUDIO: String = "ma"
-    const val PREFIX_MEDIA_ID_AVATAR: String = "mp"
-    const val PREFIX_MEDIA_ID_DOCUMENT: String = "md"
-    const val PREFIX_MEDIA_ID_IMAGE: String = "mi"
-    const val PREFIX_MEDIA_ID_JAR: String = "mj"
-    const val PREFIX_MEDIA_ID_STICKER: String = "ms"
-    const val PREFIX_MEDIA_ID_THUMBNAIL: String = "mt"
-    const val PREFIX_MEDIA_ID_VIDEO: String = "mv"
-    const val PREFIX_MEDIA_ID_VOICE: String = "mo"
-    const val PREFIX_MESSAGE_ID: String = "m"
-    const val PREFIX_META_ID_ACTION: String = "mac"
-    const val PREFIX_META_ID_AUTOMATION: String = "mau"
-    const val PREFIX_META_ID_CHART_X_AXIS: String = "mcx"
-    const val PREFIX_META_ID_CHART_Y_AXIS: String = "mcy"
-    const val PREFIX_META_ID_CODE: String = "mc"
-    const val PREFIX_META_ID_CONDITION: String = "mcn"
-    const val PREFIX_META_ID_DEEPLINK: String = "mdl"
-    const val PREFIX_META_ID_DRIVE_SHEET: String = "mds"
-    const val PREFIX_META_ID_EVENT: String = "mev"
-    const val PREFIX_META_ID_FIELD: String = "mfd"
-    const val PREFIX_META_ID_FIELD_DYNAMIC_CONDITION: String = "mfc"
-    const val PREFIX_META_ID_FIELD_DYNAMIC_RULE: String = "mfr"
-    const val PREFIX_META_ID_FOOTER: String = "mft"
-    const val PREFIX_META_ID_FORM: String = "mf"
-    const val PREFIX_META_ID_FORMULA: String = "mfm"
-    const val PREFIX_META_ID_FUNC_ARG: String = "mfa"
-    const val PREFIX_META_ID_GRID: String = "mgr"
-    const val PREFIX_META_ID_GROUP: String = "mgp"
-    const val PREFIX_META_ID_HEADER: String = "mhd"
-    const val PREFIX_META_ID_HYPERLINK: String = "mhl"
-    const val PREFIX_META_ID_LAYOUT_DRIVE_SHEET: String = "mld"
-    const val PREFIX_META_ID_LAYOUT_FORM: String = "mlf"
-    const val PREFIX_META_ID_LAYOUT_FORM_EDITOR_COMPOSITE: String = "mle"
-    const val PREFIX_META_ID_LAYOUT_GRID: String = "mlg"
-    const val PREFIX_META_ID_LAYOUT_USER: String = "mlu"
-    const val PREFIX_META_ID_MAPPING: String = "mg"
-    const val PREFIX_META_ID_MODULE: String = "mm"
-    const val PREFIX_META_ID_OPTION: String = "mop"
-    const val PREFIX_META_ID_PARTITION: String = "mpt"
-    const val PREFIX_META_ID_PAYMENT_PROVIDER: String = "mpp"
-    const val PREFIX_META_ID_PIPELINE_SYSTEM: String = "mps"
-    const val PREFIX_META_ID_PIPELINE_VAR: String = "mpv"
-    const val PREFIX_META_ID_PLUGIN: String = "mpl"
-    const val PREFIX_META_ID_PROMPT: String = "mpm"
-    const val PREFIX_META_ID_REPORT: String = "mrp"
-    const val PREFIX_META_ID_ROLE: String = "mr"
-    const val PREFIX_META_ID_SECTION: String = "msc"
-    const val PREFIX_META_ID_SPREADSHEET: String = "mss"
-    const val PREFIX_META_ID_SPREADSHEET_REF: String = "msr"
-    const val PREFIX_META_ID_STEP: String = "mst"
-    const val PREFIX_META_ID_SWIMLANE: String = "msw"
-    const val PREFIX_META_ID_TAB: String = "mtb"
-    const val PREFIX_META_ID_TABLE_STYLE: String = "mts"
-    const val PREFIX_META_ID_TRANSLATION: String = "mtl"
-    const val PREFIX_META_ID_USER_CONDITION: String = "muc"
-    const val PREFIX_META_ID_VAR: String = "mw"
-    const val PREFIX_META_ID_VD_AUTO_DIA: String = "va"
-    const val PREFIX_META_ID_VD_AUTO_EDGE: String = "vae"
-    const val PREFIX_META_ID_VD_AUTO_FUNC: String = "vaf"
-    const val PREFIX_META_ID_VD_AUTO_NODE: String = "van"
-    const val PREFIX_META_ID_VD_COMMENT: String = "vc"
-    const val PREFIX_META_ID_VD_ERD_DIA: String = "ve"
-    const val PREFIX_META_ID_VD_IMAGE_FUNC: String = "vif"
-    const val PREFIX_META_ID_VD_NOTE: String = "vn"
-    const val PREFIX_META_ID_VD_REGION: String = "vrg"
-    const val PREFIX_META_ID_VD_REPORT_DIA: String = "vr"
-    const val PREFIX_META_ID_VD_REVIEW: String = "vrv"
-    const val PREFIX_META_ID_VIDEO_TIMESTAMP: String = "mvt"
-    const val PREFIX_META_ID_VISIBILITY_ACTION: String = "mva"
-    const val PREFIX_META_ID_VISIBILITY_CONDITION: String = "mvc"
-    const val PREFIX_META_ID_VISIBILITY_RULE: String = "mvr"
-    const val PREFIX_META_ID_WIZARD: String = "mwz"
-    const val PREFIX_PLUGIN_API_ID: String = "pa"
-    const val PREFIX_PLUGIN_BUNDLE_ID: String = "pb"
-    const val PREFIX_PLUGIN_ID: String = "p"
-    const val PREFIX_PLUGIN_RESOURCE_ID: String = "pr"
-    const val PREFIX_REPORT_EXECUTION_ID: String = "re"
-    const val PREFIX_REQUEST_ID: String = "req"
-    const val PREFIX_ROW_ID: String = "r"
-    const val PREFIX_SCHEDULER_TASK_ID: String = "st"
-    const val PREFIX_SHEET_ID: String = "s"
-    const val PREFIX_SNAPSHOT_ID: String = "ss"
-    const val PREFIX_SPREADSHEET_PARTITION_ID: String = "sp"
-    const val PREFIX_STORE_ITEM_ID: String = "si"
-    const val PREFIX_TAB_ID: String = "t"
-    const val PREFIX_TRANSACTION_ID: String = "tr"
-    const val PREFIX_USER_ID: String = "u"
-    const val PREFIX_WORKFLOW_EXECUTION_ID: String = "we"
-    const val PREFIX_WORKFLOW_GROUP_EXECUTION_ID: String = "wg"
-    const val SCRIPT_MAX_SIZE: Int = 20480
-    const val SUFFIX_TEMPLATE: String = ".template"
-    const val THUMBNAIL_MAX_MB: Double = 0.25
-    const val THUMBNAIL_SIZE: Int = 144
+    val AVATAR_CROP_QUALITY: Int = 1
+    val AVATAR_MAX_MB: Double = 1.5
+    val AVATAR_SIZE_MAX: Int = 640
+    val AVATAR_SIZE_MIN: Int = 192
+    val GRID_MAX_COUNT: Int = 20
+    val PARAGRAPH_MAX_SIZE: Int = 10240
+    val PREFIX_ADMIN_ID: String = "ea"
+    val PREFIX_AUTOMATION_EXECUTION_ID: String = "ae"
+    val PREFIX_CONN_ID: String = "conn"
+    val PREFIX_DEMO_APP_ID: String = "dt"
+    val PREFIX_DEVICE_ID: String = "d"
+    val PREFIX_ENT_ID: String = "e"
+    val PREFIX_ENT_USER_ID: String = "eu"
+    val PREFIX_GHOST_ID: String = "gh"
+    val PREFIX_GROUP_ID: String = "g"
+    val PREFIX_INBOX_ID_FOLLOWER: String = "ii"
+    val PREFIX_INBOX_ID_MASTER: String = "im"
+    val PREFIX_INBOX_MESSAGE_ID: String = "imm"
+    val PREFIX_KEYCHAIN_ID: String = "k"
+    val PREFIX_KEYCHAIN_SECRET_ID: String = "ks"
+    val PREFIX_MEDIA_ID_AUDIO: String = "ma"
+    val PREFIX_MEDIA_ID_AVATAR: String = "mp"
+    val PREFIX_MEDIA_ID_DOCUMENT: String = "md"
+    val PREFIX_MEDIA_ID_IMAGE: String = "mi"
+    val PREFIX_MEDIA_ID_JAR: String = "mj"
+    val PREFIX_MEDIA_ID_STICKER: String = "ms"
+    val PREFIX_MEDIA_ID_THUMBNAIL: String = "mt"
+    val PREFIX_MEDIA_ID_VIDEO: String = "mv"
+    val PREFIX_MEDIA_ID_VOICE: String = "mo"
+    val PREFIX_MESSAGE_ID: String = "m"
+    val PREFIX_META_ID_ACTION: String = "mac"
+    val PREFIX_META_ID_AUTOMATION: String = "mau"
+    val PREFIX_META_ID_CHART_X_AXIS: String = "mcx"
+    val PREFIX_META_ID_CHART_Y_AXIS: String = "mcy"
+    val PREFIX_META_ID_CODE: String = "mc"
+    val PREFIX_META_ID_CONDITION: String = "mcn"
+    val PREFIX_META_ID_DEEPLINK: String = "mdl"
+    val PREFIX_META_ID_DRIVE_SHEET: String = "mds"
+    val PREFIX_META_ID_EVENT: String = "mev"
+    val PREFIX_META_ID_FIELD: String = "mfd"
+    val PREFIX_META_ID_FIELD_DYNAMIC_CONDITION: String = "mfc"
+    val PREFIX_META_ID_FIELD_DYNAMIC_RULE: String = "mfr"
+    val PREFIX_META_ID_FOOTER: String = "mft"
+    val PREFIX_META_ID_FORM: String = "mf"
+    val PREFIX_META_ID_FORMULA: String = "mfm"
+    val PREFIX_META_ID_FUNC_ARG: String = "mfa"
+    val PREFIX_META_ID_GRID: String = "mgr"
+    val PREFIX_META_ID_GROUP: String = "mgp"
+    val PREFIX_META_ID_HEADER: String = "mhd"
+    val PREFIX_META_ID_HYPERLINK: String = "mhl"
+    val PREFIX_META_ID_LAYOUT_DRIVE_SHEET: String = "mld"
+    val PREFIX_META_ID_LAYOUT_FORM: String = "mlf"
+    val PREFIX_META_ID_LAYOUT_FORM_EDITOR_COMPOSITE: String = "mle"
+    val PREFIX_META_ID_LAYOUT_GRID: String = "mlg"
+    val PREFIX_META_ID_LAYOUT_USER: String = "mlu"
+    val PREFIX_META_ID_MAPPING: String = "mg"
+    val PREFIX_META_ID_MODULE: String = "mm"
+    val PREFIX_META_ID_OPTION: String = "mop"
+    val PREFIX_META_ID_PARTITION: String = "mpt"
+    val PREFIX_META_ID_PAYMENT_PROVIDER: String = "mpp"
+    val PREFIX_META_ID_PIPELINE_SYSTEM: String = "mps"
+    val PREFIX_META_ID_PIPELINE_VAR: String = "mpv"
+    val PREFIX_META_ID_PLUGIN: String = "mpl"
+    val PREFIX_META_ID_PROMPT: String = "mpm"
+    val PREFIX_META_ID_REPORT: String = "mrp"
+    val PREFIX_META_ID_ROLE: String = "mr"
+    val PREFIX_META_ID_SECTION: String = "msc"
+    val PREFIX_META_ID_SPREADSHEET: String = "mss"
+    val PREFIX_META_ID_SPREADSHEET_REF: String = "msr"
+    val PREFIX_META_ID_STEP: String = "mst"
+    val PREFIX_META_ID_SWIMLANE: String = "msw"
+    val PREFIX_META_ID_TAB: String = "mtb"
+    val PREFIX_META_ID_TABLE_STYLE: String = "mts"
+    val PREFIX_META_ID_TRANSLATION: String = "mtl"
+    val PREFIX_META_ID_USER_CONDITION: String = "muc"
+    val PREFIX_META_ID_VAR: String = "mw"
+    val PREFIX_META_ID_VD_AUTO_DIA: String = "va"
+    val PREFIX_META_ID_VD_AUTO_EDGE: String = "vae"
+    val PREFIX_META_ID_VD_AUTO_FUNC: String = "vaf"
+    val PREFIX_META_ID_VD_AUTO_NODE: String = "van"
+    val PREFIX_META_ID_VD_COMMENT: String = "vc"
+    val PREFIX_META_ID_VD_ERD_DIA: String = "ve"
+    val PREFIX_META_ID_VD_IMAGE_FUNC: String = "vif"
+    val PREFIX_META_ID_VD_NOTE: String = "vn"
+    val PREFIX_META_ID_VD_REGION: String = "vrg"
+    val PREFIX_META_ID_VD_REPORT_DIA: String = "vr"
+    val PREFIX_META_ID_VD_REVIEW: String = "vrv"
+    val PREFIX_META_ID_VIDEO_TIMESTAMP: String = "mvt"
+    val PREFIX_META_ID_VISIBILITY_ACTION: String = "mva"
+    val PREFIX_META_ID_VISIBILITY_CONDITION: String = "mvc"
+    val PREFIX_META_ID_VISIBILITY_RULE: String = "mvr"
+    val PREFIX_META_ID_WIZARD: String = "mwz"
+    val PREFIX_PLUGIN_API_ID: String = "pa"
+    val PREFIX_PLUGIN_BUNDLE_ID: String = "pb"
+    val PREFIX_PLUGIN_ID: String = "p"
+    val PREFIX_PLUGIN_RESOURCE_ID: String = "pr"
+    val PREFIX_REPORT_EXECUTION_ID: String = "re"
+    val PREFIX_REQUEST_ID: String = "req"
+    val PREFIX_ROW_ID: String = "r"
+    val PREFIX_SCHEDULER_TASK_ID: String = "st"
+    val PREFIX_SHEET_ID: String = "s"
+    val PREFIX_SNAPSHOT_ID: String = "ss"
+    val PREFIX_SPREADSHEET_PARTITION_ID: String = "sp"
+    val PREFIX_STORE_ITEM_ID: String = "si"
+    val PREFIX_TAB_ID: String = "t"
+    val PREFIX_TRANSACTION_ID: String = "tr"
+    val PREFIX_USER_ID: String = "u"
+    val PREFIX_WORKFLOW_EXECUTION_ID: String = "we"
+    val PREFIX_WORKFLOW_GROUP_EXECUTION_ID: String = "wg"
+    val SCRIPT_MAX_SIZE: Int = 20480
+    val SUFFIX_TEMPLATE: String = ".template"
+    val THUMBNAIL_MAX_MB: Double = 0.25
+    val THUMBNAIL_SIZE: Int = 144
 
-    class AdminId : SysId()
-    class ArtifactId : SysId()
-    class AutomationExecutionId : SysId()
-    class ChatId : SysId()
-    class ConnId : SysId()
-    class ContactId : ChatId()
-    class DemoAppId : SysId()
-    class DeviceId : SysId()
-    class EntId : ArtifactId()
-    class EntUserId : ContactId()
-    class GhostId : SysId()
-    class GroupId : ContactId()
-    class InboxId : SysId()
-    class InboxIdFollower : InboxId()
-    class InboxIdMaster : InboxId()
-    class InboxMessageId : SysId()
-    class KeychainId : SysId()
-    class KeychainSecretId : SysId()
-    class MediaId : SysId()
-    class MediaIdAudio : MediaId()
-    class MediaIdAvatar : MediaId()
-    class MediaIdDocument : MediaId()
-    class MediaIdIcon : MediaId()
-    class MediaIdImage : MediaId()
-    class MediaIdJar : MediaId()
-    class MediaIdSticker : MediaId()
-    class MediaIdThumbnail : MediaId()
-    class MediaIdVideo : MediaId()
-    class MediaIdVoice : MediaId()
-    class MessageId : SysId()
-    class MetaId : SysId()
-    class MetaIdAction : MetaId()
-    class MetaIdAutomation : MetaId()
-    class MetaIdChartXAxis : MetaId()
-    class MetaIdChartYAxis : MetaId()
-    class MetaIdCode : MetaId()
-    class MetaIdComp : MetaId()
-    class MetaIdComposite : MetaIdComp()
-    class MetaIdCondition : MetaId()
-    class MetaIdDeeplink : MetaId()
-    class MetaIdDriveSheet : MetaId()
-    class MetaIdEvent : MetaId()
-    class MetaIdField : MetaIdComp()
-    class MetaIdFieldDynamicCondition : MetaId()
-    class MetaIdFieldDynamicRule : MetaId()
-    class MetaIdFooter : MetaId()
-    class MetaIdForm : MetaId()
-    class MetaIdFormula : MetaId()
-    class MetaIdFuncArg : MetaId()
-    class MetaIdGrid : MetaIdComposite()
-    class MetaIdGroup : MetaId()
-    class MetaIdHeader : MetaId()
-    class MetaIdHyperlink : MetaId()
-    class MetaIdLayoutDriveSheet : MetaId()
-    class MetaIdLayoutForm : MetaId()
-    class MetaIdLayoutFormEditorComposite : MetaId()
-    class MetaIdLayoutGrid : MetaId()
-    class MetaIdLayoutUser : MetaId()
-    class MetaIdMapping : MetaId()
-    class MetaIdModule : MetaId()
-    class MetaIdOption : MetaId()
-    class MetaIdPartition : MetaId()
-    class MetaIdPaymentProvider : MetaId()
-    class MetaIdPipelineParam : MetaId()
-    class MetaIdPipelineSystem : MetaIdPipelineParam()
-    class MetaIdPipelineVar : MetaIdPipelineParam()
-    class MetaIdPlugin : MetaId()
-    class MetaIdPrompt : MetaId()
-    class MetaIdReport : MetaId()
-    class MetaIdRole : MetaId()
-    class MetaIdSection : MetaIdComposite()
-    class MetaIdSpreadsheet : MetaId()
-    class MetaIdSpreadsheetRef : MetaIdComposite()
-    class MetaIdStep : MetaIdPipelineParam()
-    class MetaIdSwimlane : MetaId()
-    class MetaIdTab : MetaIdComposite()
-    class MetaIdTableStyle : MetaId()
-    class MetaIdTranslation : MetaId()
-    class MetaIdUserCondition : MetaId()
-    class MetaIdVar : MetaId()
-    class MetaIdVdAutoDia : MetaId()
-    class MetaIdVdAutoEdge : MetaId()
-    class MetaIdVdAutoFunc : MetaId()
-    class MetaIdVdAutoNode : MetaIdPipelineParam()
-    class MetaIdVdComment : MetaId()
-    class MetaIdVdErdDia : MetaId()
-    class MetaIdVdImageFunc : MetaId()
-    class MetaIdVdNote : MetaId()
-    class MetaIdVdRegion : MetaId()
-    class MetaIdVdReportDia : MetaId()
-    class MetaIdVdReview : MetaId()
-    class MetaIdVideoTimestamp : MetaId()
-    class MetaIdVisibilityAction : MetaId()
-    class MetaIdVisibilityCondition : MetaId()
-    class MetaIdVisibilityRule : MetaId()
-    class MetaIdWizard : MetaIdComposite()
-    class PluginApiId : SysId()
-    class PluginBundleId : ArtifactId()
-    class PluginId : SysId()
-    class PluginResourceId : SysId()
-    class ReportExecutionId : SysId()
-    class RequestId : SysId()
-    class RowId : ChatId()
-    class SchedulerTaskId : SysId()
-    class SheetId : SysId()
-    class SnapshotId : SysId()
-    class SpreadsheetPartitionId : SysId()
-    class StoreItemId : ArtifactId()
+    open class AdminId : SysId()
+    open class ArtifactId : SysId()
+    open class AutomationExecutionId : SysId()
+    open class ChatId : SysId()
+    open class ConnId : SysId()
+    open class ContactId : ChatId()
+    open class DemoAppId : SysId()
+    open class DeviceId : SysId()
+    open class EntId : ArtifactId()
+    open class EntUserId : ContactId()
+    open class GhostId : SysId()
+    open class GroupId : ContactId()
+    open class InboxId : SysId()
+    open class InboxIdFollower : InboxId()
+    open class InboxIdMaster : InboxId()
+    open class InboxMessageId : SysId()
+    open class KeychainId : SysId()
+    open class KeychainSecretId : SysId()
+    open class MediaId : SysId()
+    open class MediaIdAudio : MediaId()
+    open class MediaIdAvatar : MediaId()
+    open class MediaIdDocument : MediaId()
+    open class MediaIdIcon : MediaId()
+    open class MediaIdImage : MediaId()
+    open class MediaIdJar : MediaId()
+    open class MediaIdSticker : MediaId()
+    open class MediaIdThumbnail : MediaId()
+    open class MediaIdVideo : MediaId()
+    open class MediaIdVoice : MediaId()
+    open class MessageId : SysId()
+    open class MetaId : SysId()
+    open class MetaIdAction : MetaId()
+    open class MetaIdAutomation : MetaId()
+    open class MetaIdChartXAxis : MetaId()
+    open class MetaIdChartYAxis : MetaId()
+    open class MetaIdCode : MetaId()
+    open class MetaIdComp : MetaId()
+    open class MetaIdComposite : MetaIdComp()
+    open class MetaIdCondition : MetaId()
+    open class MetaIdDeeplink : MetaId()
+    open class MetaIdDriveSheet : MetaId()
+    open class MetaIdEvent : MetaId()
+    open class MetaIdField : MetaIdComp()
+    open class MetaIdFieldDynamicCondition : MetaId()
+    open class MetaIdFieldDynamicRule : MetaId()
+    open class MetaIdFooter : MetaId()
+    open class MetaIdForm : MetaId()
+    open class MetaIdFormula : MetaId()
+    open class MetaIdFuncArg : MetaId()
+    open class MetaIdGrid : MetaIdComposite()
+    open class MetaIdGroup : MetaId()
+    open class MetaIdHeader : MetaId()
+    open class MetaIdHyperlink : MetaId()
+    open class MetaIdLayoutDriveSheet : MetaId()
+    open class MetaIdLayoutForm : MetaId()
+    open class MetaIdLayoutFormEditorComposite : MetaId()
+    open class MetaIdLayoutGrid : MetaId()
+    open class MetaIdLayoutUser : MetaId()
+    open class MetaIdMapping : MetaId()
+    open class MetaIdModule : MetaId()
+    open class MetaIdOption : MetaId()
+    open class MetaIdPartition : MetaId()
+    open class MetaIdPaymentProvider : MetaId()
+    open class MetaIdPipelineParam : MetaId()
+    open class MetaIdPipelineSystem : MetaIdPipelineParam()
+    open class MetaIdPipelineVar : MetaIdPipelineParam()
+    open class MetaIdPlugin : MetaId()
+    open class MetaIdPrompt : MetaId()
+    open class MetaIdReport : MetaId()
+    open class MetaIdRole : MetaId()
+    open class MetaIdSection : MetaIdComposite()
+    open class MetaIdSpreadsheet : MetaId()
+    open class MetaIdSpreadsheetRef : MetaIdComposite()
+    open class MetaIdStep : MetaIdPipelineParam()
+    open class MetaIdSwimlane : MetaId()
+    open class MetaIdTab : MetaIdComposite()
+    open class MetaIdTableStyle : MetaId()
+    open class MetaIdTranslation : MetaId()
+    open class MetaIdUserCondition : MetaId()
+    open class MetaIdVar : MetaId()
+    open class MetaIdVdAutoDia : MetaId()
+    open class MetaIdVdAutoEdge : MetaId()
+    open class MetaIdVdAutoFunc : MetaId()
+    open class MetaIdVdAutoNode : MetaIdPipelineParam()
+    open class MetaIdVdComment : MetaId()
+    open class MetaIdVdErdDia : MetaId()
+    open class MetaIdVdImageFunc : MetaId()
+    open class MetaIdVdNote : MetaId()
+    open class MetaIdVdRegion : MetaId()
+    open class MetaIdVdReportDia : MetaId()
+    open class MetaIdVdReview : MetaId()
+    open class MetaIdVideoTimestamp : MetaId()
+    open class MetaIdVisibilityAction : MetaId()
+    open class MetaIdVisibilityCondition : MetaId()
+    open class MetaIdVisibilityRule : MetaId()
+    open class MetaIdWizard : MetaIdComposite()
+    open class PluginApiId : SysId()
+    open class PluginBundleId : ArtifactId()
+    open class PluginId : SysId()
+    open class PluginResourceId : SysId()
+    open class ReportExecutionId : SysId()
+    open class RequestId : SysId()
+    open class RowId : ChatId()
+    open class SchedulerTaskId : SysId()
+    open class SheetId : SysId()
+    open class SnapshotId : SysId()
+    open class SpreadsheetPartitionId : SysId()
+    open class StoreItemId : ArtifactId()
 
-    class TabId : SysId()
-    class TransactionId : SysId()
-    class UserId : SysId()
-    class WorkflowExecutionId : SysId()
-    class WorkflowGroupExecutionId : SysId()
+    open class TabId : SysId()
+    open class TransactionId : SysId()
+    open class UserId : SysId()
+    open class WorkflowExecutionId : SysId()
+    open class WorkflowGroupExecutionId : SysId()
 
-    class AnyTime : AnyValue()
-    class ColumnPath : AnyValue()
-    class CurrencyKey : AnyKey()
-    class GeoPoint : AnyValue()
-    class HandleKey : AnyKey()
-    class Key : AnyKey()
-    class LanguageKey : AnyKey()
-    class SearchPath : AnyValue()
-    class SymbolColumn : AnyValue()
-    class SymbolGrid : AnyValue()
-    class TimeZoneKey : AnyKey()
+    open class AnyTime : AnyValue()
+    open class ColumnPath : AnyValue()
+    open class CurrencyKey : AnyKey()
+    open class GeoPoint : AnyValue()
+    open class HandleKey : AnyKey()
+    open class Key : AnyKey()
+    open class LanguageKey : AnyKey()
+    open class SearchPath : AnyValue()
+    open class SymbolColumn : AnyValue()
+    open class SymbolGrid : AnyValue()
+    open class TimeZoneKey : AnyKey()
 
     enum class DtoLogTreeKeyValueType {
         neoQL,
@@ -407,25 +407,25 @@ class Types {
         roles
     }
 
-    enum class EnumDefnArgBinderContextEnt {
-        about,
-        id,
-        name,
-        timeZone,
-        displayDateFormat,
-        systemEntUserId
+    enum class EnumDefnArgBinderContextEnt(val value: String) {
+        about("about"),
+        id("id"),
+        Name("name"),
+        timeZone("timeZone"),
+        displayDateFormat("displayDateFormat"),
+        systemEntUserId("systemEntUserId")
     }
 
-    enum class EnumDefnArgBinderContextForm {
-        id,
-        name,
-        label
+    enum class EnumDefnArgBinderContextForm(val value: String) {
+        id("id"),
+        Name("name"),
+        label("label")
     }
 
-    enum class EnumDefnArgBinderContextPlugin {
-        about,
-        id,
-        name
+    enum class EnumDefnArgBinderContextPlugin(val value: String) {
+        about("about"),
+        id("id"),
+        Name("name")
     }
 
     enum class EnumDefnArgBinderContextRow {
@@ -1055,14 +1055,15 @@ class Types {
         warning
     }
 
+
     enum class EnumDefnFields {
-        $CreatedBy,
-        $CreatedOn,
-        $RowId,
-        $RowOrder,
-        $UpdatedBy,
-        $UpdatedOn,
-        $ParentRowId
+        `$CreatedBy`,
+        `$CreatedOn`,
+        `$RowId`,
+        `$RowOrder`,
+        `$UpdatedBy`,
+        `$UpdatedOn`,
+        `$ParentRowId`
     }
 
     enum class EnumDefnFormLayoutType {
@@ -1072,27 +1073,27 @@ class Types {
     }
 
     enum class EnumDefnForms {
-        $FormMapOfOptions,
-        $FormPickTree,
-        $FormSetOfUser,
-        $FormPluginConfig,
-        $FormSchedule,
-        $FormPaymentReceipt,
-        $FormUserSession,
-        $FormRowComment,
-        $FormLocation,
-        $FormEntAdmin,
-        $FormEntUser,
-        $FormEntAuditRecord,
-        $FormPrompt,
-        $FormRagPromptResponse,
-        $FormRowEditHistory,
-        $FormHumanLink,
-        $FormUserMembership,
-        $FormCrawl,
-        $FormSearch,
-        $FormBotResponse,
-        $FormBotHistory
+        `$FormMapOfOptions`,
+        `$FormPickTree`,
+        `$FormSetOfUser`,
+        `$FormPluginConfig`,
+        `$FormSchedule`,
+        `$FormPaymentReceipt`,
+        `$FormUserSession`,
+        `$FormRowComment`,
+        `$FormLocation`,
+        `$FormEntAdmin`,
+        `$FormEntUser`,
+        `$FormEntAuditRecord`,
+        `$FormPrompt`,
+        `$FormRagPromptResponse`,
+        `$FormRowEditHistory`,
+        `$FormHumanLink`,
+        `$FormUserMembership`,
+        `$FormCrawl`,
+        `$FormSearch`,
+        `$FormBotResponse`,
+        `$FormBotHistory`
     }
 
     enum class EnumDefnFreezeAvatarKind {
@@ -1631,12 +1632,12 @@ class Types {
     }
 
     enum class EnumDefnPipelineSystem {
-        $Curr,
-        $Iter,
-        $Out,
-        $Prev,
-        $Prior,
-        $Sys
+        `$Curr`,
+        `$Iter`,
+        `$Out`,
+        `$Prev`,
+        `$Prior`,
+        `$Sys`
     }
 
     enum class EnumDefnPlacement {
@@ -1753,13 +1754,13 @@ class Types {
     }
 
     enum class EnumDefnRoles {
-        $Public,
-        $Manager,
-        $GrandManager,
-        $AllManagers,
-        $Assistants,
-        $AllAssistants,
-        $Self
+        `$Public`,
+        `$Manager`,
+        `$GrandManager`,
+        `$AllManagers`,
+        `$Assistants`,
+        `$AllAssistants`,
+        `$Self`
     }
 
     enum class EnumDefnRowAuditTrail {
