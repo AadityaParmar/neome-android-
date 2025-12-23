@@ -1,4 +1,4 @@
-package com.neome.feature.filepick.presentation
+package com.neome.feature.filepicker.presentation
 
 import android.content.Context
 import android.net.Uri
@@ -8,8 +8,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import com.neome.feature.filepick.domain.model.FilePickerMode
-import com.neome.feature.filepick.domain.model.FilePickerResult
+import com.neome.feature.filepicker.domain.model.FilePickerMode
+import com.neome.feature.filepicker.domain.model.FilePickerResult
 
 @Composable
 fun rememberFilePicker(

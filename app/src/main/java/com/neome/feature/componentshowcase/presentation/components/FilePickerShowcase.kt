@@ -28,10 +28,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.neome.feature.filepick.domain.model.FilePickerMode
-import com.neome.feature.filepick.domain.model.FilePickerResult
-import com.neome.feature.filepick.presentation.rememberFilePicker
-import com.neome.feature.filepick.presentation.rememberMultiTypePicker
+import com.neome.feature.filepicker.domain.model.FilePickerMode
+import com.neome.feature.filepicker.domain.model.FilePickerResult
+import com.neome.feature.filepicker.presentation.rememberFilePicker
+import com.neome.feature.filepicker.presentation.rememberMultiTypePicker
 
 @Composable
 fun FilePickerShowcase() {

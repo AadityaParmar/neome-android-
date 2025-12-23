@@ -1,4 +1,4 @@
-package com.neome.feature.filepick.domain.model
+package com.neome.feature.filepicker.domain.model
 
 import android.net.Uri
 

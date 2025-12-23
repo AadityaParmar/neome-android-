@@ -1,4 +1,4 @@
-package com.neome.feature.filepick.domain.model
+package com.neome.feature.filepicker.domain.model
 
 enum class FilePickerMode(val mimeType: String) {
     IMAGE("image/*"),
