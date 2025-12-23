@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdAiAudioToText : EntVdAi() {
+open class EntVdAiAudioToText : EntVdAi() {
     var inputField: StudioDtoArgValueParameter? = null
     var outputField: StudioDtoArgValueParameter? = null
 }

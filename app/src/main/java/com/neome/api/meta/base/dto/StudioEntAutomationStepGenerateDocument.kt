@@ -10,7 +10,7 @@ import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioEntAutomationStepGenerateDocument : StudioEntAutomationStep() {
+open class StudioEntAutomationStepGenerateDocument : StudioEntAutomationStep() {
     var contentLayoutId: MetaIdLayoutForm? = null
     var fileNameVarId: StudioValueVarIdText? = null
     var inputFormMappingVarId: MetaIdVar? = null

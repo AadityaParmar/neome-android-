@@ -5,9 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioDtoOption : StudioBase() {
+open class StudioDtoOption : StudioBase() {
     var color: StudioDtoColor? = null
-    var disabled: boolean? = null
-    val metaId: string
-    val value: string
+    var disabled: Boolean? = null
+    lateinit var metaId: String
+    lateinit var value: String
 }

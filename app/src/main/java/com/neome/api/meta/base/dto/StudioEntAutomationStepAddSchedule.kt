@@ -10,7 +10,7 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioEntAutomationStepAddSchedule : StudioEntAutomationStep() {
+open class StudioEntAutomationStepAddSchedule : StudioEntAutomationStep() {
     var automationId: MetaIdAutomation? = null
     var dateTimeFieldId: MetaIdField? = null
     var inputFormPipelineVarId: MetaIdPipelineParam? = null

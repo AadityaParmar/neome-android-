@@ -7,4 +7,4 @@ package com.neome.api.meta.base
 
 // AnyEmailId class placeholder
 
-class AnyEmailId : AnyValue()
+open class AnyEmailId : AnyValue()

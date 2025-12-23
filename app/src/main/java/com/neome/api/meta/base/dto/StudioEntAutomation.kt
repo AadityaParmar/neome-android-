@@ -9,12 +9,12 @@ import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types.EnumDefnKindAutomation
 import com.neome.api.meta.base.Types.MetaIdAutomation
 
-class StudioEntAutomation : StudioBase() {
-    var active: boolean? = null
-    var description: string? = null
-    val kind: EnumDefnKindAutomation
-    val metaId: MetaIdAutomation
+open class StudioEntAutomation : StudioBase() {
+    var active: Boolean? = null
+    var description: String? = null
+    lateinit var kind: EnumDefnKindAutomation
+    lateinit var metaId: MetaIdAutomation
     var modules: StudioModuleSelection? = null
-    val name: Symbol
-    var secondary: string? = null
+    lateinit var name: Symbol
+    var secondary: String? = null
 }

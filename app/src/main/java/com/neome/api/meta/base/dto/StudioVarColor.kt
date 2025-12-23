@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarColor : StudioVar() {
+open class StudioVarColor : StudioVar() {
     var value: StudioDtoColor? = null
 }

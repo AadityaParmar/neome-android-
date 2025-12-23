@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdExecuteAction : EntVdAi() {
+open class EntVdExecuteAction : EntVdAi() {
     var inputField: StudioDtoArgValueParameter? = null
 }

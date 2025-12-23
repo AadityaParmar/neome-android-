@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdForm
 
-class DefnStudioBuildRefTargetSpreadsheet : DefnField() {
+open class DefnStudioBuildRefTargetSpreadsheet : DefnField() {
     var excludeFormId: MetaIdForm? = null
 }

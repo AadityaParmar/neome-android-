@@ -8,7 +8,7 @@ package com.neome.api.ent.entMain.msg
 import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgSpreadsheetEditorShare : Msg() {
-    val actionId: MetaIdAction
-    var reset: boolean? = null
+open class MsgSpreadsheetEditorShare : Msg() {
+    lateinit var actionId: MetaIdAction
+    var reset: Boolean? = null
 }

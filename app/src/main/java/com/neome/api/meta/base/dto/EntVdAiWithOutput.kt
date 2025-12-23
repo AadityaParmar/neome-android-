@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 
-class EntVdAiWithOutput : EntVdAi() {
+open class EntVdAiWithOutput : EntVdAi() {
     var outputParamId: MetaIdPipelineParam? = null
-    var outputParamName: string? = null
+    var outputParamName: String? = null
 }

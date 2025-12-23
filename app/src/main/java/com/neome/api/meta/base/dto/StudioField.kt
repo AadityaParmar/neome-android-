@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
 
-class StudioField : StudioComp() {
-    val metaId: MetaIdField
+open class StudioField : StudioComp() {
+    lateinit var metaId: MetaIdField
 }

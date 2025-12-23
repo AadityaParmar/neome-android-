@@ -6,8 +6,7 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnKindWebhookEvent
-import com.neome.api.meta.base.dto.StudioEntAutomationEvent
 
-class StudioEntAutomationWebhookEvent : StudioEntAutomationEvent() {
-    val fire: EnumDefnKindWebhookEvent
+open class StudioEntAutomationWebhookEvent : StudioEntAutomationEvent() {
+    lateinit var fire: EnumDefnKindWebhookEvent
 }

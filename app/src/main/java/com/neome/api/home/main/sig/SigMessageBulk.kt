@@ -7,8 +7,9 @@ package com.neome.api.home.main.sig
 
 import com.neome.api.meta.base.dto.EnvValidationError
 import com.neome.api.nucleus.base.sig.Sig
+import java.util.Map
 
-class SigMessageBulk : Sig() {
-    val errorMap: Record<number, EnvValidationError>
-    val messageMap: Record<number, SigMessage>
+open class SigMessageBulk : Sig() {
+    lateinit var errorMap: Map<Number, EnvValidationError>
+    lateinit var messageMap: Map<Number, SigMessage>
 }

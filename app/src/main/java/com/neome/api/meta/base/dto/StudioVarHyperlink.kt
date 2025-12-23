@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarHyperlink : StudioVar() {
+open class StudioVarHyperlink : StudioVar() {
     var value: StudioVarValueHyperlink? = null
 }

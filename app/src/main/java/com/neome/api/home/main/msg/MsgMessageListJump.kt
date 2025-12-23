@@ -7,7 +7,7 @@ package com.neome.api.home.main.msg
 
 import com.neome.api.meta.base.Types.MessageId
 
-class MsgMessageListJump : MsgMessageList() {
+open class MsgMessageListJump : MsgMessageList() {
     var messageId: MessageId? = null
-    var offset: number? = null
+    var offset: Number? = null
 }

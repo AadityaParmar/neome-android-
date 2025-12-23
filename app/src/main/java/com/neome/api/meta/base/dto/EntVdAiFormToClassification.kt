@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class EntVdAiFormToClassification : EntVdAi() {
+open class EntVdAiFormToClassification : EntVdAi() {
     var classificationVarId: MetaIdVar? = null
 }

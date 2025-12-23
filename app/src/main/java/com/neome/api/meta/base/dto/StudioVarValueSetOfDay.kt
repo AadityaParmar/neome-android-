@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnDay
 
-class StudioVarValueSetOfDay {
-    val valueSet: EnumDefnDay[]
+open class StudioVarValueSetOfDay {
+    lateinit var valueSet: Array<EnumDefnDay>
 }

@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.EnumDefnKindPipelineUpdate
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class EntVdParamUpdate : EntVdAutoStep() {
+open class EntVdParamUpdate : EntVdAutoStep() {
     var option: EnumDefnKindPipelineUpdate? = null
     var outputMapping: StudioDtoMapping? = null
     var outputMappingVarId: MetaIdVar? = null

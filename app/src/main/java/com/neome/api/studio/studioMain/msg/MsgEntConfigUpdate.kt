@@ -8,6 +8,6 @@ package com.neome.api.studio.studioMain.msg
 import com.neome.api.ent.base.dto.DtoEntConfig
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgEntConfigUpdate : Msg() {
-    val config: DtoEntConfig
+open class MsgEntConfigUpdate : Msg() {
+    lateinit var config: DtoEntConfig
 }

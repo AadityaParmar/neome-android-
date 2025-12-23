@@ -5,10 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdSendPushNotification : EntVdAutoStep() {
+open class EntVdSendPushNotification : EntVdAutoStep() {
     var customMessage: StudioValueParagraph? = null
     var customTitle: StudioValueText? = null
-    var customize: boolean? = null
+    var customize: Boolean? = null
     var sender: StudioBuildArgBinder? = null
     var toUsers: StudioDtoUserFilter? = null
 }

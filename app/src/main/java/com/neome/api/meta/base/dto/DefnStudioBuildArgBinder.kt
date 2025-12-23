@@ -16,24 +16,24 @@ import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class DefnStudioBuildArgBinder : DefnField() {
-    var compositeIdSet: MetaIdComposite[]? = null
-    var derivedCompositeIdSet: MetaIdComposite[]? = null
+open class DefnStudioBuildArgBinder : DefnField() {
+    var compositeIdSet: Array<MetaIdComposite>? = null
+    var derivedCompositeIdSet: Array<MetaIdComposite>? = null
     var derivedFormId: MetaIdForm? = null
     var derivedPluginId: MetaIdPlugin? = null
     var direction: EnumDefnThemeDirection? = null
-    var excludeFieldIdSet: MetaIdField[]? = null
-    var excludeVarIdSet: MetaIdVar[]? = null
-    var filterConstantFieldTypeSet: EnumDefnCompType[]? = null
-    var filterContextCallerSet: string[]? = null
-    var filterContextCallerSettingSet: string[]? = null
-    var filterContextEntSet: string[]? = null
-    var filterContextOptionSet: string[]? = null
-    var filterContextRowSet: string[]? = null
-    var filterDerivedFieldTypeSet: EnumDefnCompType[]? = null
-    var filterFieldTypeSet: EnumDefnCompType[]? = null
-    var filterKindSet: EnumDefnArgBinder[]? = null
-    var filterVarKindSet: EnumStudioVarKind[]? = null
+    var excludeFieldIdSet: Array<MetaIdField>? = null
+    var excludeVarIdSet: Array<MetaIdVar>? = null
+    var filterConstantFieldTypeSet: Array<EnumDefnCompType>? = null
+    var filterContextCallerSet: Array<String>? = null
+    var filterContextCallerSettingSet: Array<String>? = null
+    var filterContextEntSet: Array<String>? = null
+    var filterContextOptionSet: Array<String>? = null
+    var filterContextRowSet: Array<String>? = null
+    var filterDerivedFieldTypeSet: Array<EnumDefnCompType>? = null
+    var filterFieldTypeSet: Array<EnumDefnCompType>? = null
+    var filterKindSet: Array<EnumDefnArgBinder>? = null
+    var filterVarKindSet: Array<EnumStudioVarKind>? = null
     var formId: MetaIdForm? = null
     var gridId: MetaIdGrid? = null
     var includeOptionMap: DefnStudioMapOfDtoOption? = null
@@ -44,5 +44,5 @@ class DefnStudioBuildArgBinder : DefnField() {
     var pluginId: MetaIdPlugin? = null
     var refTargetFieldId: MetaIdField? = null
     var refTargetFormId: MetaIdForm? = null
-    var required: boolean? = null
+    var required: Boolean? = null
 }

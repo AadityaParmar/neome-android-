@@ -11,17 +11,17 @@ import com.neome.api.meta.base.Types.WorkflowExecutionId
 import com.neome.api.meta.base.dto.DefnStudioMapOfDtoOption
 import com.neome.api.meta.base.dto.EnvValidationError
 
-class DtoWorkflowExecutionStateInfo {
-    val callerName: string
-    var canAdminResume: boolean? = null
-    var createdOn: string? = null
-    val eventKind: EnumDefnKindAutoNode
-    val executionId: WorkflowExecutionId
+open class DtoWorkflowExecutionStateInfo {
+    lateinit var callerName: String
+    var canAdminResume: Boolean? = null
+    var createdOn: String? = null
+    lateinit var eventKind: EnumDefnKindAutoNode
+    lateinit var executionId: WorkflowExecutionId
     var failureError: EnvValidationError? = null
-    var message: string? = null
-    val name: string
-    val nodeName: string
+    var message: String? = null
+    lateinit var name: String
+    lateinit var nodeName: String
     var resumeOptions: DefnStudioMapOfDtoOption? = null
-    val stateKind: EnumWorkflowResultKind
-    var updatedOn: string? = null
+    lateinit var stateKind: EnumWorkflowResultKind
+    var updatedOn: String? = null
 }

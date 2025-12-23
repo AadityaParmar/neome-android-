@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdFooter
+import java.util.Map
 
-class DefnStudioMapOfTableFooter {
-    val keys: MetaIdFooter[]
-    val map: Record<MetaIdFooter, DefnDtoTableFooter>
+open class DefnStudioMapOfTableFooter {
+    lateinit var keys: Array<MetaIdFooter>
+    lateinit var map: Map<MetaIdFooter, DefnDtoTableFooter>
 }

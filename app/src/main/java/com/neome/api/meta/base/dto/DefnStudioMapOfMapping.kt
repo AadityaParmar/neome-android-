@@ -5,16 +5,15 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdPlugin
 
-class DefnStudioMapOfMapping : DefnFieldEditable() {
+open class DefnStudioMapOfMapping : DefnFieldEditable() {
     var fromFormId: MetaIdForm? = null
     var fromGridId: MetaIdGrid? = null
     var fromPluginId: MetaIdPlugin? = null
-    val toFormId: MetaIdForm
+    lateinit var toFormId: MetaIdForm
     var toGridId: MetaIdGrid? = null
     var toPluginId: MetaIdPlugin? = null
 }

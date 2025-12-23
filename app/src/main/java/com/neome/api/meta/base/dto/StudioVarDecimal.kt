@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarDecimal : StudioVar() {
+open class StudioVarDecimal : StudioVar() {
     var value: StudioVarValueDecimal? = null
 }

@@ -8,6 +8,6 @@ package com.neome.api.studio.studioMain.sig
 import com.neome.api.nucleus.base.sig.Sig
 import com.neome.api.studio.base.dto.DtoNeatPathSearchResult
 
-class SigStudioSearchUsages : Sig() {
+open class SigStudioSearchUsages : Sig() {
     var artifactSearchResult: DtoNeatPathSearchResult? = null
 }

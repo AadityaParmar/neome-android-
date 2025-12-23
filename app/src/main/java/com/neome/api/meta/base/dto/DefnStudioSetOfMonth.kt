@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnStudioSetOfMonth : DefnField() {
+open class DefnStudioSetOfMonth : DefnField() {
 }

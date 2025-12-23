@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdReport
 
-class EntVdExecuteReport : EntVdAutoStepWithOutputAndError() {
+open class EntVdExecuteReport : EntVdAutoStepWithOutputAndError() {
     var reportId: MetaIdReport? = null
 }

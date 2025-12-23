@@ -8,12 +8,12 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldHtml : StudioField() {
+open class StudioFieldHtml : StudioField() {
     var defaultFieldId: MetaIdField? = null
-    var defaultValue: string? = null
+    var defaultValue: String? = null
     var defaultVarId: MetaIdVar? = null
-    var placeHolder: string? = null
+    var placeHolder: String? = null
     var placeHolderFieldId: MetaIdField? = null
     var placeHolderVarId: StudioValueVarIdParagraph? = null
-    var showCloseButton: boolean? = null
+    var showCloseButton: Boolean? = null
 }

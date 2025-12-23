@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdExpertStopAndError : EntVdAutoStep() {
+open class EntVdExpertStopAndError : EntVdAutoStep() {
     var message: StudioValueParagraph? = null
 }

@@ -10,11 +10,11 @@ import com.neome.api.meta.base.Types.MetaIdModule
 import com.neome.api.meta.base.Types.TimeZoneKey
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgNeoScriptPut : Msg() {
-    val artifactId: ArtifactId
-    var cliCodeId: string? = null
-    val displayDateFormat: string
+open class MsgNeoScriptPut : Msg() {
+    lateinit var artifactId: ArtifactId
+    var cliCodeId: String? = null
+    lateinit var displayDateFormat: String
     var moduleId: MetaIdModule? = null
-    val neoScriptOrUserMessage: string
-    val timeZone: TimeZoneKey
+    lateinit var neoScriptOrUserMessage: String
+    lateinit var timeZone: TimeZoneKey
 }

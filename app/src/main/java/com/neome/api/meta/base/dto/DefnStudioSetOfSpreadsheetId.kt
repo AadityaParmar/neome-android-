@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnStudioSetOfSpreadsheetId : DefnField() {
+open class DefnStudioSetOfSpreadsheetId : DefnField() {
 }

@@ -10,24 +10,26 @@ import com.neome.api.meta.base.Types.LanguageKey
 import com.neome.api.meta.base.Types.MediaId
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
+import java.util.Map
+import kotlin.properties.Delegates
 
-class DtoEntUser {
-    val active: boolean
+open class DtoEntUser {
+    var active: Boolean by Delegates.notNull<Boolean>()
     var avatarId: MediaId? = null
-    val canRemove: boolean
-    val createdOn: string
-    val entUserId: EntUserId
-    val handle: string
-    var isCurrentUser: boolean? = null
-    val isMember: boolean
+    var canRemove: Boolean by Delegates.notNull<Boolean>()
+    lateinit var createdOn: String
+    lateinit var entUserId: EntUserId
+    lateinit var handle: String
+    var isCurrentUser: Boolean? = null
+    var isMember: Boolean by Delegates.notNull<Boolean>()
     var languageKey: LanguageKey? = null
-    var lastInviteSentOn: string? = null
-    var lastOnline: string? = null
+    var lastInviteSentOn: String? = null
+    var lastOnline: String? = null
     var managerId: EntUserId? = null
-    val nickName: string
-    var online: boolean? = null
-    var roleIdSet: MetaIdRole[]? = null
-    val updatedOn: string
-    val userColor: string
-    var userSettingValueMap: Record<MetaIdVar, DtoEntUserSettingValue>? = null
+    lateinit var nickName: String
+    var online: Boolean? = null
+    var roleIdSet: Array<MetaIdRole>? = null
+    lateinit var updatedOn: String
+    lateinit var userColor: String
+    var userSettingValueMap: Map<MetaIdVar, DtoEntUserSettingValue>? = null
 }

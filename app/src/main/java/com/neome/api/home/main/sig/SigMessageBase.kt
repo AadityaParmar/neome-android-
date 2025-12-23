@@ -11,14 +11,16 @@ import com.neome.api.home.base.dto.DtoMessageReplyPayload
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.MessageId
 import com.neome.api.nucleus.base.sig.Sig
+import java.util.Map
+import kotlin.properties.Delegates
 
-class SigMessageBase : Sig() {
-    val creationTime: string
-    var isCallerSender: boolean? = null
-    val messageId: MessageId
-    val messageOffset: number
-    val payload: DtoMessagePayload
-    var reactionMap: Record<EntUserId, DtoMessageReaction>? = null
+open class SigMessageBase : Sig() {
+    lateinit var creationTime: String
+    var isCallerSender: Boolean? = null
+    lateinit var messageId: MessageId
+    var messageOffset: Number by Delegates.notNull<Number>()
+    lateinit var payload: DtoMessagePayload
+    var reactionMap: Map<EntUserId, DtoMessageReaction>? = null
     var replyPayload: DtoMessageReplyPayload? = null
-    val senderId: EntUserId
+    lateinit var senderId: EntUserId
 }

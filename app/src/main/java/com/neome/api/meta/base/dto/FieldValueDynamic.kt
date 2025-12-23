@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnCompType
 
-class FieldValueDynamic {
+open class FieldValueDynamic {
     var fieldType: EnumDefnCompType? = null
-    val value: string
+    lateinit var value: String
 }

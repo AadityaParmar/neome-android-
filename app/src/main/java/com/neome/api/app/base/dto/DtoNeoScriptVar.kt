@@ -7,6 +7,6 @@ package com.neome.api.app.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class DtoNeoScriptVar : DtoNeoScript() {
+open class DtoNeoScriptVar : DtoNeoScript() {
     var varId: MetaIdVar? = null
 }

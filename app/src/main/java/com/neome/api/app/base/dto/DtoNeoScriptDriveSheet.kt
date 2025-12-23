@@ -7,6 +7,6 @@ package com.neome.api.app.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdDriveSheet
 
-class DtoNeoScriptDriveSheet : DtoNeoScript() {
+open class DtoNeoScriptDriveSheet : DtoNeoScript() {
     var driveSheetId: MetaIdDriveSheet? = null
 }

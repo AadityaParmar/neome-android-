@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.MetaIdSpreadsheetRef
 
-class StudioDtoArgValueRefTarget : StudioDtoArgValueField() {
-    val spreadsheetId: MetaIdSpreadsheet
-    val spreadsheetRefId: MetaIdSpreadsheetRef
+open class StudioDtoArgValueRefTarget : StudioDtoArgValueField() {
+    lateinit var spreadsheetId: MetaIdSpreadsheet
+    lateinit var spreadsheetRefId: MetaIdSpreadsheetRef
 }

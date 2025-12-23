@@ -10,9 +10,9 @@ import com.neome.api.meta.base.dto.TranslateResult
 import com.neome.api.meta.base.dto.ValidationResult
 import com.neome.api.nucleus.base.sig.SigVersion
 
-class SigStudioEnt : SigVersion() {
-    val ent: StudioEnt
-    var isEverDeployed: boolean? = null
+open class SigStudioEnt : SigVersion() {
+    lateinit var ent: StudioEnt
+    var isEverDeployed: Boolean? = null
     var translateResult: TranslateResult? = null
     var validationResult: ValidationResult? = null
 }

@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnDtoParagraph {
-    var value: string[]? = null
+open class DefnDtoParagraph {
+    var value: Array<String>? = null
 }

@@ -9,10 +9,10 @@ import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types.EnumDefnKindImport
 import com.neome.api.meta.base.Types.MetaIdPlugin
 
-class StudioEntImport : StudioBase() {
-    var description: string? = null
+open class StudioEntImport : StudioBase() {
+    var description: String? = null
     var kind: EnumDefnKindImport? = null
-    val metaId: MetaIdPlugin
+    lateinit var metaId: MetaIdPlugin
     var modules: StudioModuleSelection? = null
     var name: Symbol? = null
 }

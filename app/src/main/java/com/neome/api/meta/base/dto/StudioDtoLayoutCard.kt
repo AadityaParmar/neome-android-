@@ -8,12 +8,12 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnGridRenderingMode
 import com.neome.api.meta.base.Types.MetaIdField
 
-class StudioDtoLayoutCard : StudioDtoLayoutGrid() {
+open class StudioDtoLayoutCard : StudioDtoLayoutGrid() {
     var filter: StudioDtoLayoutCardFilter? = null
     var groupByFieldId: MetaIdField? = null
-    var hideBorders: boolean? = null
+    var hideBorders: Boolean? = null
     var item: StudioDtoLayoutCardItem? = null
-    var numOfColumns: number? = null
+    var numOfColumns: Number? = null
     var renderingMode: EnumDefnGridRenderingMode? = null
-    var showSearchBar: boolean? = null
+    var showSearchBar: Boolean? = null
 }

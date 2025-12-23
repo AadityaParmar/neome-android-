@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnKindSpreadsheetEvent
 
-class StudioEntAutomationSpreadsheetEvent : StudioEntAutomationEvent() {
-    val fire: EnumDefnKindSpreadsheetEvent
+open class StudioEntAutomationSpreadsheetEvent : StudioEntAutomationEvent() {
+    lateinit var fire: EnumDefnKindSpreadsheetEvent
 }

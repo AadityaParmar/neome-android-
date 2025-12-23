@@ -7,8 +7,6 @@ package com.neome.api.studio.studioMain.msg
 
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgEntDemoApp : Msg() {
-    val app:
-
-    object
+open class MsgEntDemoApp : Msg() {
+    lateinit var app: Object
 }

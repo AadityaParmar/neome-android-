@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
 
-class DefnFieldFormListItem : DefnFieldLabel() {
-    var editableFieldIdSet: MetaIdField[]? = null
-    var isCard: boolean? = null
+open class DefnFieldFormListItem : DefnFieldLabel() {
+    var editableFieldIdSet: Array<MetaIdField>? = null
+    var isCard: Boolean? = null
     var layout: DefnDtoLayoutCardItem? = null
 }

@@ -7,6 +7,6 @@ package com.neome.api.app.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdModule
 
-class DtoNeoScriptModule : DtoNeoScript() {
+open class DtoNeoScriptModule : DtoNeoScript() {
     var moduleId: MetaIdModule? = null
 }

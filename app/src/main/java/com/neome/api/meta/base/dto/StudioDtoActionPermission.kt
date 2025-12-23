@@ -12,16 +12,16 @@ import com.neome.api.meta.base.Types.MetaIdGroup
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioDtoActionPermission : StudioBase() {
-    var deviceSizeSet: EnumDefnDeviceSize[]? = null
-    var groupIdSet: MetaIdGroup[]? = null
-    var hidden: boolean? = null
+open class StudioDtoActionPermission : StudioBase() {
+    var deviceSizeSet: Array<EnumDefnDeviceSize>? = null
+    var groupIdSet: Array<MetaIdGroup>? = null
+    var hidden: Boolean? = null
     var inputMappingVarId: MetaIdVar? = null
-    var menuGroup: string? = null
-    val metaId: MetaIdAction
+    var menuGroup: String? = null
+    lateinit var metaId: MetaIdAction
     var name: Symbol? = null
-    var notAllowedRoleIdSet: MetaIdRole[]? = null
+    var notAllowedRoleIdSet: Array<MetaIdRole>? = null
     var outputMappingVarId: MetaIdVar? = null
-    val roleIdSet: MetaIdRole[]
-    var showMessageTooltip: boolean? = null
+    lateinit var roleIdSet: Array<MetaIdRole>
+    var showMessageTooltip: Boolean? = null
 }

@@ -8,13 +8,14 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.RowId
+import java.util.Map
 
-class FieldDtoGridRow {
+open class FieldDtoGridRow {
     var createdBy: EntUserId? = null
-    var createdOn: string? = null
-    val rowId: RowId
-    var rowOrder: string? = null
+    var createdOn: String? = null
+    lateinit var rowId: RowId
+    var rowOrder: String? = null
     var updatedBy: EntUserId? = null
-    var updatedOn: string? = null
-    var valueMap: Record<MetaIdField, any>? = null
+    var updatedOn: String? = null
+    var valueMap: Map<MetaIdField, Any>? = null
 }

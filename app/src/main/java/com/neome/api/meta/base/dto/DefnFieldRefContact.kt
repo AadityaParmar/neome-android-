@@ -5,10 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.EnumContactCopyField
+import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdField
 
-class DefnFieldRefContact : DefnField() {
-    var copyFieldMap: Record<MetaIdField, EnumContactCopyField>? = null
-    var editableContactFieldSet: EnumContactCopyField[]? = null
+open class DefnFieldRefContact : DefnField() {
+    var copyFieldMap: Map<MetaIdField, EnumContactCopyField>? = null
+    var editableContactFieldSet: Array<EnumContactCopyField>? = null
 }

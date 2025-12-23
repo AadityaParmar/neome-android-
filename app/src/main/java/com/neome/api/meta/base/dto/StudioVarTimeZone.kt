@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarTimeZone : StudioVar() {
+open class StudioVarTimeZone : StudioVar() {
     var value: StudioVarValueTimeZone? = null
 }

@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdForm
 
-class StudioPluginRpc : StudioBase() {
-    val lastUpdateTime: string
+open class StudioPluginRpc : StudioBase() {
+    lateinit var lastUpdateTime: String
     var pluginConfigFormId: MetaIdForm? = null
 }

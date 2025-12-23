@@ -7,11 +7,11 @@ package com.neome.api.home.base.dto
 
 import com.neome.api.core.base.dto.NotificationCustomData
 
-class DtoUserNotification {
-    val body: string
-    var createdOn: string? = null
+open class DtoUserNotification {
+    lateinit var body: String
+    var createdOn: String? = null
     var customData: NotificationCustomData? = null
-    val id: string
-    var isRead: boolean? = null
-    val title: string
+    lateinit var id: String
+    var isRead: Boolean? = null
+    lateinit var title: String
 }

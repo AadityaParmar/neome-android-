@@ -5,8 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioEntAutomationStepSendPushNotification : StudioEntAutomationStepSendMessageBase() {
+open class StudioEntAutomationStepSendPushNotification : StudioEntAutomationStepSendMessageBase() {
     var messageVarId: StudioValueVarIdParagraph? = null
-    var sendCustomMessage: boolean? = null
+    var sendCustomMessage: Boolean? = null
     var titleVarId: StudioValueVarIdText? = null
 }

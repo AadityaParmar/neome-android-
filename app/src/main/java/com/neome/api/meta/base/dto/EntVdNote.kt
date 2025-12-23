@@ -11,11 +11,11 @@ import com.neome.api.meta.base.Types.EnumDefnTextSize
 import com.neome.api.meta.base.Types.MetaIdVdNote
 import com.neome.api.meta.base.Types.MetaIdVdRegion
 
-class EntVdNote : EntVdRect() {
+open class EntVdNote : EntVdRect() {
     var adminId: AdminId? = null
-    val metaId: MetaIdVdNote
+    lateinit var metaId: MetaIdVdNote
     var parentRegionId: MetaIdVdRegion? = null
     var status: EnumDefnKindNoteStatus? = null
     var textSize: EnumDefnTextSize? = null
-    var value: string? = null
+    var value: String? = null
 }

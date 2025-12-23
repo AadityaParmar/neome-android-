@@ -5,13 +5,12 @@
 
 package com.neome.api.core.extn
 
+import com.neome.api.core.extn.msg.MsgExtnGstinDetailsGet
+import com.neome.api.core.extn.sig.SigExtnGstinDetails
+import com.neome.api.meta.base.Types.ServiceName
 import com.neome.api.nucleus.base.ApiPlus
 import com.neome.api.nucleus.base.CallFactory
-import com.neome.api.nucleus.base.ApiPlus
 import com.neome.api.nucleus.base.ISigAcceptor
-import com.neome.api.core.extn.msg.MsgExtnGstinDetailsGet
-import com.neome.api.meta.base.Types.ServiceName
-import com.neome.api.core.extn.sig.SigExtnGstinDetails
 
 class RpcExtn {
     companion object {

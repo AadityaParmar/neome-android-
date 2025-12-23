@@ -9,11 +9,11 @@ import com.neome.api.core.base.dto.DeeplinkDataPayload
 import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.meta.base.Types.PluginBundleId
 
-class DeeplinkDataPayloadPluginAdminInvite : DeeplinkDataPayload() {
-    var about: string? = null
+open class DeeplinkDataPayloadPluginAdminInvite : DeeplinkDataPayload() {
+    var about: String? = null
     var mediaIdAvatar: MediaIdAvatar? = null
-    val name: string
-    val pluginBundleId: PluginBundleId
-    val senderHandle: string
-    val senderName: string
+    lateinit var name: String
+    lateinit var pluginBundleId: PluginBundleId
+    lateinit var senderHandle: String
+    lateinit var senderName: String
 }

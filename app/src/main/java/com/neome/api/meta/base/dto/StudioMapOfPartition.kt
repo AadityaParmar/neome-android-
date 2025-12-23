@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdPartition
+import java.util.Map
 
-class StudioMapOfPartition : StudioBase() {
-    var keys: MetaIdPartition[]? = null
-    val map: Record<MetaIdPartition, StudioDtoPartition>
+open class StudioMapOfPartition : StudioBase() {
+    var keys: Array<MetaIdPartition>? = null
+    lateinit var map: Map<MetaIdPartition, StudioDtoPartition>
 }

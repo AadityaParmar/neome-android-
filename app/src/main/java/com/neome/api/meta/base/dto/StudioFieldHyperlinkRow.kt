@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class StudioFieldHyperlinkRow : StudioFieldEditable() {
+open class StudioFieldHyperlinkRow : StudioFieldEditable() {
     var displayTextVarId: StudioValueVarIdText? = null
-    var hyperlinkFieldIdSet: MetaIdField[]? = null
+    var hyperlinkFieldIdSet: Array<MetaIdField>? = null
     var spreadsheetId: MetaIdSpreadsheet? = null
 }

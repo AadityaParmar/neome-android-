@@ -9,12 +9,15 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.MetaIdSpreadsheetRef
+import com.neome.api.meta.base.dto.StudioComposite
+import com.neome.api.meta.base.dto.StudioMapOfActionPermission
+import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-class StudioSpreadsheetRef : StudioComposite() {
+open class StudioSpreadsheetRef : StudioComposite() {
     var filterConditionVarId: StudioValueVarIdCondition? = null
     var layoutSpreadsheetId: MetaIdLayoutGrid? = null
-    var maxRecords: number? = null
-    val metaId: MetaIdSpreadsheetRef
+    var maxRecords: Number? = null
+    lateinit var metaId: MetaIdSpreadsheetRef
     var refTargetFieldId: MetaIdField? = null
     var rowActionPermissionMap: StudioMapOfActionPermission? = null
     var spreadsheetId: MetaIdSpreadsheet? = null

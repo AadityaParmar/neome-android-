@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgPluginApiOutput : Msg() {
-    val fieldId: MetaIdField
-    val formId: MetaIdForm
+open class MsgPluginApiOutput : Msg() {
+    lateinit var fieldId: MetaIdField
+    lateinit var formId: MetaIdForm
     var formValueRaw: FormValueRaw? = null
 }

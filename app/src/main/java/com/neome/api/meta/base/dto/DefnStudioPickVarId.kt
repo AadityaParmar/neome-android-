@@ -9,11 +9,11 @@ import com.neome.api.meta.base.Types.EnumStudioVarKind
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class DefnStudioPickVarId : DefnFieldEditable() {
-    var excludeVarIdSet: MetaIdVar[]? = null
-    var filterOptionSet: string[]? = null
+open class DefnStudioPickVarId : DefnFieldEditable() {
+    var excludeVarIdSet: Array<MetaIdVar>? = null
+    var filterOptionSet: Array<String>? = null
     var formId: MetaIdForm? = null
-    var showAsEdit: boolean? = null
+    var showAsEdit: Boolean? = null
     var varKind: EnumStudioVarKind? = null
-    var varKindSet: EnumStudioVarKind[]? = null
+    var varKindSet: Array<EnumStudioVarKind>? = null
 }

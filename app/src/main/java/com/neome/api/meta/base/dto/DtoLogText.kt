@@ -8,19 +8,19 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumFormContentPosition
 import com.neome.api.meta.base.Types.EnumLogTextType
 
-class DtoLogText : DtoLogItem() {
-    val bgColor: string
-    var bold: boolean? = null
-    var caption: string? = null
+open class DtoLogText : DtoLogItem() {
+    lateinit var bgColor: String
+    var bold: Boolean? = null
+    var caption: String? = null
     var child: DtoLogItem? = null
     var contentPosition: EnumFormContentPosition? = null
-    var executable: boolean? = null
-    var iconEnd: string? = null
-    var iconEndColor: string? = null
-    var iconStart: string? = null
-    var iconStartColor: string? = null
-    var showChildDivider: boolean? = null
-    val text: string
-    var textColor: string? = null
+    var executable: Boolean? = null
+    var iconEnd: String? = null
+    var iconEndColor: String? = null
+    var iconStart: String? = null
+    var iconStartColor: String? = null
+    var showChildDivider: Boolean? = null
+    lateinit var text: String
+    var textColor: String? = null
     var textType: EnumLogTextType? = null
 }

@@ -6,10 +6,11 @@
 package com.neome.api.home.main.sig
 
 import com.neome.api.nucleus.base.sig.Sig
+import kotlin.properties.Delegates
 
-class SigMediaList : Sig() {
-    val documentList: SigMessageBase[]
-    val linkList: SigMessageBase[]
-    val mediaCount: number
-    val mediaList: SigMessageBase[]
+open class SigMediaList : Sig() {
+    lateinit var documentList: Array<SigMessageBase>
+    lateinit var linkList: Array<SigMessageBase>
+    var mediaCount: Number by Delegates.notNull<Number>()
+    lateinit var mediaList: Array<SigMessageBase>
 }

@@ -8,12 +8,12 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnCodeType
 import com.neome.api.meta.base.Types.MetaIdField
 
-class DefnFieldShowCode : DefnFieldEditable() {
+open class DefnFieldShowCode : DefnFieldEditable() {
     var codeType: EnumDefnCodeType? = null
     var defaultFieldId: MetaIdField? = null
-    var defaultValue: string? = null
+    var defaultValue: String? = null
     var defaultVar: DefnDtoParagraph? = null
-    var showLabel: boolean? = null
+    var showLabel: Boolean? = null
     var showLabelFieldId: MetaIdField? = null
-    var showLabelVar: boolean? = null
+    var showLabelVar: Boolean? = null
 }

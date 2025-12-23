@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.Types.EnumAnalyticEventFilterKind
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgClusterAnalyticEventCount : Msg() {
-    var entIdSet: EntId[]? = null
-    val filter: EnumAnalyticEventFilterKind
+open class MsgClusterAnalyticEventCount : Msg() {
+    var entIdSet: Array<EntId>? = null
+    lateinit var filter: EnumAnalyticEventFilterKind
 }

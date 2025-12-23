@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgGroupCreate : Msg() {
-    var about: string? = null
+open class MsgGroupCreate : Msg() {
+    var about: String? = null
     var mediaIdAvatar: MediaIdAvatar? = null
-    val members: EntUserId[]
-    val name: string
-    val settings: DtoGroupSettings
+    lateinit var members: Array<EntUserId>
+    lateinit var name: String
+    lateinit var settings: DtoGroupSettings
 }

@@ -8,8 +8,8 @@ package com.neome.api.core.user.msg
 import com.neome.api.core.base.msg.MsgHandle
 import com.neome.api.meta.base.Types.EnumDeviceType
 
-class MsgOtpSignIn : MsgHandle() {
-    val deviceName: string
-    val deviceType: EnumDeviceType
-    var rememberMe: boolean? = null
+open class MsgOtpSignIn : MsgHandle() {
+    lateinit var deviceName: String
+    lateinit var deviceType: EnumDeviceType
+    var rememberMe: Boolean? = null
 }

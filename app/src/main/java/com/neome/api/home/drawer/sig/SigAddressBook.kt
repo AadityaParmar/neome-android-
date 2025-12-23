@@ -9,8 +9,9 @@ import com.neome.api.home.base.dto.DtoUserAddrBookContact
 import com.neome.api.home.base.dto.DtoUserAddrBookOtherContact
 import com.neome.api.nucleus.base.Types.AnyPrefixKey
 import com.neome.api.nucleus.base.sig.SigVersion
+import java.util.Map
 
-class SigAddressBook : SigVersion() {
-    val candidateMap: Record<AnyPrefixKey, DtoUserAddrBookContact[]>
-    val othersList: DtoUserAddrBookOtherContact[]
+open class SigAddressBook : SigVersion() {
+    lateinit var candidateMap: Map<AnyPrefixKey, Array<DtoUserAddrBookContact>>
+    lateinit var othersList: Array<DtoUserAddrBookOtherContact>
 }

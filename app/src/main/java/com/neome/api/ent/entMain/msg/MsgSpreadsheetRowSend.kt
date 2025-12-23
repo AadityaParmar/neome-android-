@@ -11,10 +11,10 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgSpreadsheetRowSend : Msg() {
+open class MsgSpreadsheetRowSend : Msg() {
     var actionId: MetaIdAction? = null
-    val formValueRaw: FormValueRaw
+    lateinit var formValueRaw: FormValueRaw
     var mappingVarId: MetaIdVar? = null
     var targetSpreadsheetId: MetaIdSpreadsheet? = null
-    var transactionId: string? = null
+    var transactionId: String? = null
 }

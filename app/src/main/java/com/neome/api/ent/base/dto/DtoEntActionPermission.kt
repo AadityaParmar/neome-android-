@@ -8,9 +8,9 @@ package com.neome.api.ent.base.dto
 import com.neome.api.meta.base.Types.EnumDefnDeviceSize
 import com.neome.api.meta.base.Types.MetaIdAction
 
-class DtoEntActionPermission {
-    val actionId: MetaIdAction
-    var deviceSizeSet: EnumDefnDeviceSize[]? = null
-    var hidden: boolean? = null
-    var menuGroup: string? = null
+open class DtoEntActionPermission {
+    lateinit var actionId: MetaIdAction
+    var deviceSizeSet: Array<EnumDefnDeviceSize>? = null
+    var hidden: Boolean? = null
+    var menuGroup: String? = null
 }

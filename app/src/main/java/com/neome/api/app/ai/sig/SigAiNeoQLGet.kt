@@ -6,9 +6,10 @@
 package com.neome.api.app.ai.sig
 
 import com.neome.api.nucleus.base.sig.Sig
+import kotlin.properties.Delegates
 
-class SigAiNeoQLGet : Sig() {
-    val error: boolean
-    var errorReason: string? = null
-    var response: string? = null
+open class SigAiNeoQLGet : Sig() {
+    var error: Boolean by Delegates.notNull<Boolean>()
+    var errorReason: String? = null
+    var response: String? = null
 }

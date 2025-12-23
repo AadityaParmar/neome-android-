@@ -7,11 +7,11 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumEnvValidationError
 
-class EnvValidationError {
-    var children: EnvValidationError[]? = null
+open class EnvValidationError {
+    var children: Array<EnvValidationError>? = null
     var errorCode: EnumEnvValidationError? = null
-    var errorMessage: string? = null
-    var errorParams: string[]? = null
-    var paramName: string? = null
-    var paramNameSet: string[]? = null
+    var errorMessage: String? = null
+    var errorParams: Array<String>? = null
+    var paramName: String? = null
+    var paramNameSet: Array<String>? = null
 }

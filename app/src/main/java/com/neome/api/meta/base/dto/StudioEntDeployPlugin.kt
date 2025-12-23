@@ -9,10 +9,11 @@ import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types.EnumDefnPluginResources
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.Types.MetaIdPlugin
+import java.util.Map
 
-class StudioEntDeployPlugin : StudioBase() {
-    val metaId: MetaIdPlugin
-    val name: Symbol
-    var pluginConfigFormValueMap: Record<MetaIdComp, any>? = null
+open class StudioEntDeployPlugin : StudioBase() {
+    lateinit var metaId: MetaIdPlugin
+    lateinit var name: Symbol
+    var pluginConfigFormValueMap: Map<MetaIdComp, Any>? = null
     var pluginType: EnumDefnPluginResources? = null
 }

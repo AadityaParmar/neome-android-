@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnConditionOperator
 
-class StudioDtoConditionStatement : StudioBase() {
+open class StudioDtoConditionStatement : StudioBase() {
     var lhs: StudioBuildArgBinder? = null
     var operator: EnumDefnConditionOperator? = null
     var rhs: StudioBuildArgBinder? = null

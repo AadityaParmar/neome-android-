@@ -5,11 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.DefnStudioDtoOptionPermission
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdRole
+import java.util.Map
 
-class DefnStudioMapOfOptionPermission {
-    val keys: MetaIdRole[]
-    val map: Record<MetaIdRole, DefnStudioDtoOptionPermission>
+open class DefnStudioMapOfOptionPermission {
+    lateinit var keys: Array<MetaIdRole>
+    lateinit var map: Map<MetaIdRole, DefnStudioDtoOptionPermission>
 }

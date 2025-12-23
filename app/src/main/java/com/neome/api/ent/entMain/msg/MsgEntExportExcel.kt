@@ -10,8 +10,8 @@ import com.neome.api.ent.base.dto.DtoEntSpreadsheetExportExcel
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgEntExportExcel : Msg() {
-    val entId: EntId
+open class MsgEntExportExcel : Msg() {
+    lateinit var entId: EntId
     var formExportConfig: DtoEntFormExportExcel? = null
     var spreadsheetExportConfig: DtoEntSpreadsheetExportExcel? = null
 }

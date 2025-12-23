@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdEvent : EntVdAutoNode() {
+open class EntVdEvent : EntVdAutoNode() {
     var pipelineVarMap: EntVdPipelineVarMap? = null
 }

@@ -9,20 +9,20 @@ import com.neome.api.meta.base.Types.EnumDefnMapPinShape
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioDtoLayoutLocmapPin : StudioBase() {
+open class StudioDtoLayoutLocmapPin : StudioBase() {
     var avatar: FieldDtoImage? = null
     var avatarFieldId: MetaIdField? = null
     var avatarVarId: MetaIdVar? = null
     var color: StudioDtoColor? = null
     var colorFieldId: MetaIdField? = null
     var colorVarId: MetaIdVar? = null
-    var label: string? = null
+    var label: String? = null
     var labelFieldId: MetaIdField? = null
     var labelVarId: StudioValueVarIdText? = null
     var shape: EnumDefnMapPinShape? = null
     var shapeFieldId: MetaIdField? = null
     var shapeVarId: MetaIdVar? = null
-    var toolTip: string? = null
+    var toolTip: String? = null
     var toolTipFieldId: MetaIdField? = null
     var toolTipVarId: StudioValueVarIdParagraph? = null
 }

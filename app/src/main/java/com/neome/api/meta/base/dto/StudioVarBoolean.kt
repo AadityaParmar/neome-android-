@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarBoolean : StudioVar() {
+open class StudioVarBoolean : StudioVar() {
     var value: StudioVarValueBoolean? = null
 }

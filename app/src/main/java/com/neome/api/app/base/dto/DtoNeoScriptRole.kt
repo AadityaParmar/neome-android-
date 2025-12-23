@@ -7,6 +7,6 @@ package com.neome.api.app.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdRole
 
-class DtoNeoScriptRole : DtoNeoScript() {
+open class DtoNeoScriptRole : DtoNeoScript() {
     var roleId: MetaIdRole? = null
 }

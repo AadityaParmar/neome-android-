@@ -7,6 +7,6 @@ package com.neome.api.studio.studioMain.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigScheduleNextExecutionList : Sig() {
-    val dateList: string[]
+open class SigScheduleNextExecutionList : Sig() {
+    lateinit var dateList: Array<String>
 }

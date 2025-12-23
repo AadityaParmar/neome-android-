@@ -11,9 +11,9 @@ import com.neome.api.meta.base.Types.RowId
 import com.neome.api.meta.base.Types.SpreadsheetPartitionId
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigSpreadsheetRowSend : Sig() {
-    val formId: MetaIdForm
-    val rowId: RowId
-    val spreadsheetId: MetaIdSpreadsheet
-    val spreadsheetPartitionId: SpreadsheetPartitionId
+open class SigSpreadsheetRowSend : Sig() {
+    lateinit var formId: MetaIdForm
+    lateinit var rowId: RowId
+    lateinit var spreadsheetId: MetaIdSpreadsheet
+    lateinit var spreadsheetPartitionId: SpreadsheetPartitionId
 }

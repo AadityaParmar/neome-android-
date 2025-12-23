@@ -7,6 +7,6 @@ package com.neome.api.ent.base.dto
 
 import com.neome.api.meta.base.SysId
 
-class SpreadsheetFilterValueSysIdSet : SpreadsheetFilterValue() {
-    val valueSet: SysId[]
+open class SpreadsheetFilterValueSysIdSet : SpreadsheetFilterValue() {
+    lateinit var valueSet: Array<SysId>
 }

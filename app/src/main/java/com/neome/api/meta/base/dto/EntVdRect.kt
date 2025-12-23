@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdRect : StudioBase() {
+open class EntVdRect : StudioBase() {
     var bgClr: StudioDtoColor? = null
     var borderClr: StudioDtoColor? = null
     var fgClr: StudioDtoColor? = null

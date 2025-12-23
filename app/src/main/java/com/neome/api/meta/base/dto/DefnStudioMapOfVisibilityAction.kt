@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdForm
 
-class DefnStudioMapOfVisibilityAction : DefnField() {
+open class DefnStudioMapOfVisibilityAction : DefnField() {
     var formId: MetaIdForm? = null
 }

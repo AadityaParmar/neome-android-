@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdAction
+import java.util.Map
 
-class StudioEntActionMap : StudioBase() {
-    val keys: MetaIdAction[]
-    val map: Record<MetaIdAction, StudioEntAction>
+open class StudioEntActionMap : StudioBase() {
+    lateinit var keys: Array<MetaIdAction>
+    lateinit var map: Map<MetaIdAction, StudioEntAction>
 }

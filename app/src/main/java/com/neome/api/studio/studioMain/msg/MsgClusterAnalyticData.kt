@@ -9,7 +9,7 @@ import com.neome.api.core.base.Types.EnumTimeDuration
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgClusterAnalyticData : Msg() {
-    val duration: EnumTimeDuration
-    var entIdSet: EntId[]? = null
+open class MsgClusterAnalyticData : Msg() {
+    lateinit var duration: EnumTimeDuration
+    var entIdSet: Array<EntId>? = null
 }

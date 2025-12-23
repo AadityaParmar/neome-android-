@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdPlugin
 
-class DefnStudioMapOfUserCondition : DefnField() {
+open class DefnStudioMapOfUserCondition : DefnField() {
     var formId: MetaIdForm? = null
     var pluginId: MetaIdPlugin? = null
 }

@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MediaIdJar
+import java.util.Map
 
-class StudioMapOfJarFile : StudioBase() {
-    val keys: MediaIdJar[]
-    val map: Record<MediaIdJar, StudioDtoJarFile>
+open class StudioMapOfJarFile : StudioBase() {
+    lateinit var keys: Array<MediaIdJar>
+    lateinit var map: Map<MediaIdJar, StudioDtoJarFile>
 }

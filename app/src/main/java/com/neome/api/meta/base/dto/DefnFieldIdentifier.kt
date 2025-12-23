@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnFieldIdentifier : DefnFieldEditable() {
-    var setOnSend: boolean? = null
+open class DefnFieldIdentifier : DefnFieldEditable() {
+    var setOnSend: Boolean? = null
     var textPatternVar: DefnDtoText? = null
 }

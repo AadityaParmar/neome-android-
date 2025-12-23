@@ -7,14 +7,12 @@ package com.neome.api.core.base.dto
 
 import com.neome.api.meta.base.Types.DeviceId
 
-class DtoDevice {
-    val creationTime: string
-    val deviceId: DeviceId
-    var deviceName: string? = null
-    var isCurrentDevice: boolean? = null
-    var isOnline: boolean? = null
-    var lastOnlineTime: string? = null
-    val state:
-
-    object
+open class DtoDevice {
+    lateinit var creationTime: String
+    lateinit var deviceId: DeviceId
+    var deviceName: String? = null
+    var isCurrentDevice: Boolean? = null
+    var isOnline: Boolean? = null
+    var lastOnlineTime: String? = null
+    lateinit var state: Object
 }

@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnPlacement
 
-class StudioVarPlacement : StudioVar() {
+open class StudioVarPlacement : StudioVar() {
     var value: EnumDefnPlacement? = null
 }

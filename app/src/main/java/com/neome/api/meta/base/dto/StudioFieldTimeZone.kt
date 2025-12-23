@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.Types.TimeZoneKey
 
-class StudioFieldTimeZone : StudioFieldEditable() {
+open class StudioFieldTimeZone : StudioFieldEditable() {
     var defaultFieldId: MetaIdField? = null
     var defaultValue: TimeZoneKey? = null
     var defaultVarId: MetaIdVar? = null

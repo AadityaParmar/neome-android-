@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class FieldChipSetDateTime {
-    val valueSet: string[]
+open class FieldChipSetDateTime {
+    lateinit var valueSet: Array<String>
 }

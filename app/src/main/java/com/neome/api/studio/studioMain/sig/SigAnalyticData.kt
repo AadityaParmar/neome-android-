@@ -7,7 +7,8 @@ package com.neome.api.studio.studioMain.sig
 
 import com.neome.api.nucleus.base.Types.EnumAnalyticEventType
 import com.neome.api.nucleus.base.sig.Sig
+import java.util.Map
 
-class SigAnalyticData : Sig() {
-    val eventDataMap: Record<EnumAnalyticEventType, SigAnalyticEventData>
+open class SigAnalyticData : Sig() {
+    lateinit var eventDataMap: Map<EnumAnalyticEventType, SigAnalyticEventData>
 }

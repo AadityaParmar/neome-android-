@@ -7,7 +7,7 @@ package com.neome.api.studio.studioDrawer.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigStudioArtifactAvatarList : Sig() {
-    var entAvatarList: SigStudioEntAvatar[]? = null
-    var pluginBundleAvatarList: SigStudioPluginAvatar[]? = null
+open class SigStudioArtifactAvatarList : Sig() {
+    var entAvatarList: Array<SigStudioEntAvatar>? = null
+    var pluginBundleAvatarList: Array<SigStudioPluginAvatar>? = null
 }

@@ -9,9 +9,10 @@ import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdPrompt
 import com.neome.api.meta.base.dto.FormValue
+import kotlin.properties.Delegates
 
-class DtoPromptAction {
-    val executeOnClient: boolean
+open class DtoPromptAction {
+    var executeOnClient: Boolean by Delegates.notNull<Boolean>()
     var formValue: FormValue? = null
     var promptActionId: MetaIdAction? = null
     var promptId: MetaIdPrompt? = null

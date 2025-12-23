@@ -6,12 +6,13 @@
 package com.neome.api.ent.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdAction
+import java.util.Map
 
-class DtoEntGroupActionPermissionMap {
+open class DtoEntGroupActionPermissionMap {
     var defaultActionId: MetaIdAction? = null
-    var defaultPinnedActionIdSet: MetaIdAction[]? = null
-    var hideActionMenu: boolean? = null
-    val keys: MetaIdAction[]
-    val map: Record<MetaIdAction, DtoEntActionPermission>
-    var mobilePinnedActionIdSet: MetaIdAction[]? = null
+    var defaultPinnedActionIdSet: Array<MetaIdAction>? = null
+    var hideActionMenu: Boolean? = null
+    lateinit var keys: Array<MetaIdAction>
+    lateinit var map: Map<MetaIdAction, DtoEntActionPermission>
+    var mobilePinnedActionIdSet: Array<MetaIdAction>? = null
 }

@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioFieldSetOfLanguageKeys : StudioFieldEditable() {
+open class StudioFieldSetOfLanguageKeys : StudioFieldEditable() {
 }

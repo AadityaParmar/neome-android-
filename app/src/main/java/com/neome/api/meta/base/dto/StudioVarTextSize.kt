@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnTextSize
 
-class StudioVarTextSize : StudioVar() {
+open class StudioVarTextSize : StudioVar() {
     var value: EnumDefnTextSize? = null
 }

@@ -5,9 +5,9 @@
 
 package com.neome.api.studio.studioMain.msg
 
-import com.neome.api.nucleus.base.msg.Msg
 import com.neome.api.studio.base.dto.DtoEntUserImport
+import com.neome.api.nucleus.base.msg.Msg
 
-class MsgEntUserBulkImport : Msg() {
-    val users: DtoEntUserImport[]
+open class MsgEntUserBulkImport : Msg() {
+    lateinit var users: Array<DtoEntUserImport>
 }

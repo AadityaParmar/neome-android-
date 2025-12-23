@@ -10,7 +10,7 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioEntAutomationStepLock : StudioEntAutomationStep() {
+open class StudioEntAutomationStepLock : StudioEntAutomationStep() {
     var errorFieldId: MetaIdField? = null
     var errorRetryCountVarId: MetaIdVar? = null
     var errorRetryDurationVarId: MetaIdVar? = null

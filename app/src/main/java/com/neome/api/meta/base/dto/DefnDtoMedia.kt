@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnDtoMedia {
+open class DefnDtoMedia {
     var html: DefnDtoParagraph? = null
     var hyperlink: DefnDtoHyperLink? = null
     var image: FieldDtoImage? = null

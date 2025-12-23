@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarValueLocation {
-    val value: FieldDtoLocation
+open class StudioVarValueLocation {
+    lateinit var value: FieldDtoLocation
 }

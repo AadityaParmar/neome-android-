@@ -9,11 +9,11 @@ import com.neome.api.core.base.dto.DeeplinkDataPayload
 import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.meta.base.Types.StoreItemId
 
-class DeeplinkDataPayloadStoreAdminInvite : DeeplinkDataPayload() {
-    var about: string? = null
+open class DeeplinkDataPayloadStoreAdminInvite : DeeplinkDataPayload() {
+    var about: String? = null
     var mediaIdAvatar: MediaIdAvatar? = null
-    val name: string
-    val senderHandle: string
-    val senderName: string
-    val storeItemId: StoreItemId
+    lateinit var name: String
+    lateinit var senderHandle: String
+    lateinit var senderName: String
+    lateinit var storeItemId: StoreItemId
 }

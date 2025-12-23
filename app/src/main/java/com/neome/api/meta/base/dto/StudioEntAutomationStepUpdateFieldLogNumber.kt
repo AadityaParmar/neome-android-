@@ -10,7 +10,7 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class StudioEntAutomationStepUpdateFieldLogNumber : StudioEntAutomationStep() {
+open class StudioEntAutomationStepUpdateFieldLogNumber : StudioEntAutomationStep() {
     var customMessageVarId: StudioValueVarIdText? = null
     var operation: EnumDefnLogOperationKind? = null
     var rowFieldId: MetaIdField? = null

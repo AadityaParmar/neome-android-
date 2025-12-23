@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdExpertResume : EntVdAutoStep() {
+open class EntVdExpertResume : EntVdAutoStep() {
     var option: StudioBuildArgBinder? = null
     var pauseKey: StudioValueText? = null
 }

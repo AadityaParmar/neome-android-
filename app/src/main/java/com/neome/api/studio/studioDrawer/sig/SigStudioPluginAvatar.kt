@@ -10,15 +10,15 @@ import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.meta.base.Types.PluginBundleId
 import com.neome.api.nucleus.base.sig.SigVersion
 
-class SigStudioPluginAvatar : SigVersion() {
-    var about: string? = null
+open class SigStudioPluginAvatar : SigVersion() {
+    var about: String? = null
     var avatarId: MediaIdAvatar? = null
-    var errorCount: number? = null
-    var hasLock: boolean? = null
-    var isDirty: boolean? = null
-    var isEverDeployed: boolean? = null
-    val lastUpdateTime: string
+    var errorCount: Number? = null
+    var hasLock: Boolean? = null
+    var isDirty: Boolean? = null
+    var isEverDeployed: Boolean? = null
+    lateinit var lastUpdateTime: String
     var mode: EnumDefnPluginMode? = null
-    val name: string
-    val pluginBundleId: PluginBundleId
+    lateinit var name: String
+    lateinit var pluginBundleId: PluginBundleId
 }

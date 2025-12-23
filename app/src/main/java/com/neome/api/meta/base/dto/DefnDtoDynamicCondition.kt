@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnDynamicOperator
 import com.neome.api.meta.base.Types.MetaIdField
 
-class DefnDtoDynamicCondition {
-    val lhs: MetaIdField
-    val operator: EnumDefnDynamicOperator
+open class DefnDtoDynamicCondition {
+    lateinit var lhs: MetaIdField
+    lateinit var operator: EnumDefnDynamicOperator
     var rhs: FieldDtoArg? = null
 }

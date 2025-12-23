@@ -5,5 +5,5 @@
 
 package com.neome.api.home.base.dto
 
-class DtoMessagePayloadCamera : DtoMessagePayloadImage() {
+open class DtoMessagePayloadCamera : DtoMessagePayloadImage() {
 }

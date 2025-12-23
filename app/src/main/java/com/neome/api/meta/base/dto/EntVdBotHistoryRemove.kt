@@ -5,8 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdBotHistoryRemove : EntVdAutoStep() {
+open class EntVdBotHistoryRemove : EntVdAutoStep() {
     var historyIdField: StudioDtoArgValueParameter? = null
-    var removeAll: boolean? = null
-    var retainCount: number? = null
+    var removeAll: Boolean? = null
+    var retainCount: Number? = null
 }

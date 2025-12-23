@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdForm
 
-class DefnStudioSetOfLayoutFormContentId : DefnFieldEditable() {
-    val formId: MetaIdForm
+open class DefnStudioSetOfLayoutFormContentId : DefnFieldEditable() {
+    lateinit var formId: MetaIdForm
 }

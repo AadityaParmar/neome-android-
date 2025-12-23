@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnFieldRefTarget : DefnField() {
-    val refTargetSpreadsheetMap: DefnMapOfRefTarget
+open class DefnFieldRefTarget : DefnField() {
+    lateinit var refTargetSpreadsheetMap: DefnMapOfRefTarget
 }

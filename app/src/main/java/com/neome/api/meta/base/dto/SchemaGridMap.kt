@@ -6,7 +6,8 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdGrid
+import java.util.Map
 
-class SchemaGridMap {
-    val map: Record<MetaIdGrid, SchemaGrid>
+open class SchemaGridMap {
+    lateinit var map: Map<MetaIdGrid, SchemaGrid>
 }

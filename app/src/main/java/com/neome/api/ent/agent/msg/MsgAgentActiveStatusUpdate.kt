@@ -7,8 +7,9 @@ package com.neome.api.ent.agent.msg
 
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.msg.Msg
+import kotlin.properties.Delegates
 
-class MsgAgentActiveStatusUpdate : Msg() {
-    val active: boolean
-    val entId: EntId
+open class MsgAgentActiveStatusUpdate : Msg() {
+    var active: Boolean by Delegates.notNull<Boolean>()
+    lateinit var entId: EntId
 }

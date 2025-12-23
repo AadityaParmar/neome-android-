@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.RowId
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgSpreadsheetRowShare : Msg() {
-    var reset: boolean? = null
-    val rowId: RowId
-    val spreadsheetId: MetaIdSpreadsheet
+open class MsgSpreadsheetRowShare : Msg() {
+    var reset: Boolean? = null
+    lateinit var rowId: RowId
+    lateinit var spreadsheetId: MetaIdSpreadsheet
 }

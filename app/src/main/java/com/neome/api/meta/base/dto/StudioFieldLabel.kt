@@ -10,31 +10,31 @@ import com.neome.api.meta.base.Types.EnumDefnTextSize
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldLabel : StudioField() {
+open class StudioFieldLabel : StudioField() {
     var bgColor: StudioDtoColor? = null
     var bgColorVarId: MetaIdVar? = null
-    var bold: boolean? = null
+    var bold: Boolean? = null
     var boldFieldId: MetaIdField? = null
     var boldVarId: MetaIdVar? = null
     var colorVarId: MetaIdVar? = null
-    var italic: boolean? = null
+    var italic: Boolean? = null
     var italicFieldId: MetaIdField? = null
     var italicVarId: MetaIdVar? = null
     var justifyText: EnumDefnPlacement? = null
     var justifyTextVarId: MetaIdVar? = null
-    var opacity: number? = null
+    var opacity: Number? = null
     var opacityFieldId: MetaIdField? = null
     var opacityVarId: MetaIdVar? = null
-    var strikeThrough: boolean? = null
+    var strikeThrough: Boolean? = null
     var strikeThroughFieldId: MetaIdField? = null
     var strikeThroughVarId: MetaIdVar? = null
-    var textPattern: string? = null
+    var textPattern: String? = null
     var textPatternFieldId: MetaIdField? = null
     var textPatternVarId: StudioValueVarIdText? = null
     var textSize: EnumDefnTextSize? = null
     var textSizeFieldId: MetaIdField? = null
     var textSizeVarId: MetaIdVar? = null
-    var underline: boolean? = null
+    var underline: Boolean? = null
     var underlineFieldId: MetaIdField? = null
     var underlineVarId: MetaIdVar? = null
 }

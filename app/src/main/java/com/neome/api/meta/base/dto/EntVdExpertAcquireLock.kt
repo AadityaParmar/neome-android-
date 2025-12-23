@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdExpertAcquireLock : EntVdAutoStepWithError() {
+open class EntVdExpertAcquireLock : EntVdAutoStepWithError() {
     var duration: FieldDtoDuration? = null
     var lockKey: StudioValueText? = null
 }

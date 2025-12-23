@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.EnumDefnHttpMethod
 import com.neome.api.meta.base.Types.KeychainId
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 
-class EntVdExecuteRpc : EntVdAutoStepWithOutputAndError() {
+open class EntVdExecuteRpc : EntVdAutoStepWithOutputAndError() {
     var apiMethod: EnumDefnHttpMethod? = null
     var apiName: StudioValueText? = null
     var inputParamId: MetaIdPipelineParam? = null

@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioFieldDynamic : StudioField() {
+open class StudioFieldDynamic : StudioField() {
     var ruleMap: StudioMapOfDynamicRule? = null
 }

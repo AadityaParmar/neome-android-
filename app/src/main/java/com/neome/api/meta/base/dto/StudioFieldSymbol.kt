@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldSymbol : StudioFieldEditable() {
+open class StudioFieldSymbol : StudioFieldEditable() {
     var defaultFieldId: MetaIdField? = null
     var defaultValue: Symbol? = null
     var defaultVarId: MetaIdVar? = null

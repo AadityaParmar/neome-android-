@@ -8,9 +8,9 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.api.meta.base.Types.MetaIdFieldDynamicRule
 
-class DefnDtoDynamicRule {
-    val conditionNode: DefnMapOfDynamicCondition
-    val fieldType: EnumDefnCompType
-    val metaId: MetaIdFieldDynamicRule
+open class DefnDtoDynamicRule {
+    lateinit var conditionNode: DefnMapOfDynamicCondition
+    lateinit var fieldType: EnumDefnCompType
+    lateinit var metaId: MetaIdFieldDynamicRule
     var optionMap: DefnStudioMapOfDtoOption? = null
 }

@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.AnyTime
 
-class StudioBuildRepeatSettingDays : StudioBuildRepeatSetting() {
-    var setOfTime: AnyTime[]? = null
+open class StudioBuildRepeatSettingDays : StudioBuildRepeatSetting() {
+    var setOfTime: Array<AnyTime>? = null
 }

@@ -5,6 +5,6 @@
 
 package com.neome.api.nucleus.base.sig
 
-class SigVersion : Sig() {
-    val version: string
+open class SigVersion : Sig() {
+    lateinit var version: String
 }

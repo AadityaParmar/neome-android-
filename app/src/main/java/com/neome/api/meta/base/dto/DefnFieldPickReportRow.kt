@@ -8,13 +8,14 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdReport
+import java.util.Map
 
-class DefnFieldPickReportRow : DefnFieldEditable() {
-    var copyFieldMap: Record<MetaIdField, MetaIdField>? = null
-    var editableFieldIdSet: MetaIdField[]? = null
+open class DefnFieldPickReportRow : DefnFieldEditable() {
+    var copyFieldMap: Map<MetaIdField, MetaIdField>? = null
+    var editableFieldIdSet: Array<MetaIdField>? = null
     var gridDisplayFieldId: MetaIdField? = null
-    val reportId: MetaIdReport
+    lateinit var reportId: MetaIdReport
     var reportOutputFormGridId: MetaIdGrid? = null
     var reportOutputFormGridLayout: DefnLayoutGrid? = null
-    var showAsDropdown: boolean? = null
+    var showAsDropdown: Boolean? = null
 }

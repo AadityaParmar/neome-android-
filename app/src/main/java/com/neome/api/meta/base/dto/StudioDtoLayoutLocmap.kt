@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnMapRenderingMode
 import com.neome.api.meta.base.Types.MetaIdField
 
-class StudioDtoLayoutLocmap : StudioDtoLayoutGrid() {
+open class StudioDtoLayoutLocmap : StudioDtoLayoutGrid() {
     var lineStroke: StudioDtoLayoutLocmapLineStroke? = null
     var liveLocationPin: StudioDtoLayoutLocmapPin? = null
     var locationFieldId: MetaIdField? = null

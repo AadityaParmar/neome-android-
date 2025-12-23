@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.EnumStudioCompType
 import com.neome.api.meta.base.Types.MetaIdFieldDynamicRule
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioDtoDynamicRule : StudioBase() {
+open class StudioDtoDynamicRule : StudioBase() {
     var conditionNode: StudioMapOfFieldDynamicCondition? = null
-    val fieldType: EnumStudioCompType
-    val metaId: MetaIdFieldDynamicRule
-    val name: Symbol
+    lateinit var fieldType: EnumStudioCompType
+    lateinit var metaId: MetaIdFieldDynamicRule
+    lateinit var name: Symbol
     var sourceVarId: MetaIdVar? = null
 }

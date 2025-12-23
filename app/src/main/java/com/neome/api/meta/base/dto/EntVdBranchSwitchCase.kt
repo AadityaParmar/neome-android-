@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdBranchSwitchCase : EntVdAutoStep() {
+open class EntVdBranchSwitchCase : EntVdAutoStep() {
     var field: StudioDtoArgValueParameter? = null
 }

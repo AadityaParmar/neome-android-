@@ -5,25 +5,31 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnDtoLayoutOverlaySpreadsheet
+import com.neome.api.meta.base.dto.DefnField
+import com.neome.api.meta.base.dto.DefnLayoutGrid
 import com.neome.api.meta.base.Types.EnumDefnRefreshOn
+import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class DefnFieldRef : DefnField() {
-    var canCreateRefRecord: boolean? = null
+open class DefnFieldRef : DefnField() {
+    var canCreateRefRecord: Boolean? = null
     var categoryFilterDisplayFieldId: MetaIdField? = null
-    var copyFieldMap: Record<MetaIdField, MetaIdField>? = null
+    var copyFieldMap: Map<MetaIdField, MetaIdField>? = null
     var createRefRecordMappingVarId: MetaIdVar? = null
-    var editableFieldIdSet: MetaIdField[]? = null
-    var forceOpenOnFormCreate: boolean? = null
-    var forceOpenOnGridRowCreate: boolean? = null
-    var keyFieldIdSet: MetaIdField[]? = null
+    var editableFieldIdSet: Array<MetaIdField>? = null
+    var forceOpenOnFormCreate: Boolean? = null
+    var forceOpenOnGridRowCreate: Boolean? = null
+    var keyFieldIdSet: Array<MetaIdField>? = null
     var layoutSpreadsheet: DefnLayoutGrid? = null
     var lookupFieldId: MetaIdField? = null
+    var mobileLayoutSpreadsheet: DefnLayoutGrid? = null
+    var mobileOverlayLayoutSpreadsheet: DefnDtoLayoutOverlaySpreadsheet? = null
     var overlayLayoutSpreadsheet: DefnDtoLayoutOverlaySpreadsheet? = null
     var refreshOn: EnumDefnRefreshOn? = null
-    var showRefreshInMenu: boolean? = null
-    var showRefreshOnFieldIdSet: MetaIdField[]? = null
-    val spreadsheetId: MetaIdSpreadsheet
+    var showRefreshInMenu: Boolean? = null
+    var showRefreshOnFieldIdSet: Array<MetaIdField>? = null
+    lateinit var spreadsheetId: MetaIdSpreadsheet
 }

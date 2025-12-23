@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarHtml : StudioVar() {
+open class StudioVarHtml : StudioVar() {
     var value: StudioVarValueParagraph? = null
 }

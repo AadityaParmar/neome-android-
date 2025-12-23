@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioEntAutomationStepSendMessageBase : StudioEntAutomationStep() {
-    var dataSourceRoleIdSet: MetaIdRole[]? = null
+open class StudioEntAutomationStepSendMessageBase : StudioEntAutomationStep() {
+    var dataSourceRoleIdSet: Array<MetaIdRole>? = null
     var inputFormPipelineVarId: MetaIdPipelineParam? = null
     var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
     var iterateOnGridId: MetaIdGrid? = null

@@ -7,9 +7,9 @@ package com.neome.api.studio.base.dto
 
 import com.neome.api.meta.base.Types.AdminId
 
-class DtoSecretKey : DtoSecretKeyBase() {
-    var createdAt: string? = null
+open class DtoSecretKey : DtoSecretKeyBase() {
+    var createdAt: String? = null
     var createdBy: AdminId? = null
-    var updatedAt: string? = null
+    var updatedAt: String? = null
     var updatedBy: AdminId? = null
 }

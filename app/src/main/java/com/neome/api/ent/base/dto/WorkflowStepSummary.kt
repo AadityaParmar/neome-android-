@@ -5,7 +5,7 @@
 
 package com.neome.api.ent.base.dto
 
-class WorkflowStepSummary {
-    val date: string
-    val message: string
+open class WorkflowStepSummary {
+    lateinit var date: String
+    lateinit var message: String
 }

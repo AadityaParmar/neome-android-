@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdTableStyle
+import java.util.Map
 
-class DefnMapOfTableStyle {
-    var keys: MetaIdTableStyle[]? = null
-    val map: Record<MetaIdTableStyle, DefnDtoTableStyle>
+open class DefnMapOfTableStyle {
+    var keys: Array<MetaIdTableStyle>? = null
+    lateinit var map: Map<MetaIdTableStyle, DefnDtoTableStyle>
 }

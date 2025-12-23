@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdEvent
+import java.util.Map
 
-class StudioEntAutomationScheduledEventMap : StudioBase() {
-    val keys: MetaIdEvent[]
-    val map: Record<MetaIdEvent, StudioEntAutomationScheduledEvent>
+open class StudioEntAutomationScheduledEventMap : StudioBase() {
+    lateinit var keys: Array<MetaIdEvent>
+    lateinit var map: Map<MetaIdEvent, StudioEntAutomationScheduledEvent>
 }

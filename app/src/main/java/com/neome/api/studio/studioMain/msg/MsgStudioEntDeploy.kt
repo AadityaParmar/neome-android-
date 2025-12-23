@@ -7,6 +7,6 @@ package com.neome.api.studio.studioMain.msg
 
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgStudioEntDeploy : Msg() {
-    var sendInvites: boolean? = null
+open class MsgStudioEntDeploy : Msg() {
+    var sendInvites: Boolean? = null
 }

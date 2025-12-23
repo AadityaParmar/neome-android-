@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdUserRemove : EntVdAutoStepWithError() {
+open class EntVdUserRemove : EntVdAutoStepWithError() {
     var userIdField: StudioDtoArgValueParameter? = null
 }

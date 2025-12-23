@@ -5,5 +5,5 @@
 
 package com.neome.api.home.base.dto
 
-class DtoMessageReplyPayloadSpreadsheetPartition : DtoMessageReplyPayload() {
+open class DtoMessageReplyPayloadSpreadsheetPartition : DtoMessageReplyPayload() {
 }

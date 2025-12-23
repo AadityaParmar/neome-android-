@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdSwimlane
+import java.util.Map
 
-class StudioMapOfSwimlane : StudioBase() {
-    var keys: MetaIdSwimlane[]? = null
-    val map: Record<MetaIdSwimlane, StudioDtoSwimlane>
+open class StudioMapOfSwimlane : StudioBase() {
+    var keys: Array<MetaIdSwimlane>? = null
+    lateinit var map: Map<MetaIdSwimlane, StudioDtoSwimlane>
 }

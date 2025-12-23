@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.EnumDefnFormLayoutType
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 
-class DefnStudioPickLayoutFormContentId : DefnField() {
-    var excludeLayoutFormContentIdSet: MetaIdLayoutForm[]? = null
-    var filterKindSet: EnumDefnFormLayoutType[]? = null
-    val formId: MetaIdForm
+open class DefnStudioPickLayoutFormContentId : DefnField() {
+    var excludeLayoutFormContentIdSet: Array<MetaIdLayoutForm>? = null
+    var filterKindSet: Array<EnumDefnFormLayoutType>? = null
+    lateinit var formId: MetaIdForm
 }

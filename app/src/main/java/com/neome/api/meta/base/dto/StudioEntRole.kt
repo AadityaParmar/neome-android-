@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdRole
 
-class StudioEntRole : StudioBase() {
-    val details: StudioDetails
-    val metaId: MetaIdRole
+open class StudioEntRole : StudioBase() {
+    lateinit var details: StudioDetails
+    lateinit var metaId: MetaIdRole
 }

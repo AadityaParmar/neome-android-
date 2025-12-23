@@ -9,12 +9,12 @@ import com.neome.api.meta.base.Types.AdminId
 import com.neome.api.meta.base.Types.SnapshotId
 import com.neome.api.meta.base.dto.StudioBase
 
-class SnapshotAvatar : StudioBase() {
-    val createdBy: AdminId
-    val createdByName: string
-    val dateTime: string
-    val entVersion: string
-    val name: string
+open class SnapshotAvatar : StudioBase() {
+    lateinit var createdBy: AdminId
+    lateinit var createdByName: String
+    lateinit var dateTime: String
+    lateinit var entVersion: String
+    lateinit var name: String
     var parentSnapshotId: SnapshotId? = null
-    val snapshotId: SnapshotId
+    lateinit var snapshotId: SnapshotId
 }

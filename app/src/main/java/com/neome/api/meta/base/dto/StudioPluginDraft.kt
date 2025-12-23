@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioPluginDraft {
+open class StudioPluginDraft {
     var studioPlugin: StudioPlugin? = null
 }

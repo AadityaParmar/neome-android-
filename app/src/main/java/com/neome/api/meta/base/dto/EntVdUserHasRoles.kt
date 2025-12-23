@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdUserHasRoles : EntVdAutoNode() {
+open class EntVdUserHasRoles : EntVdAutoNode() {
     var roleField: StudioDtoArgValueParameter? = null
     var user: StudioBuildArgBinder? = null
 }

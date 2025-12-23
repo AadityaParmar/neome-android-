@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.PluginBundleId
 
-class DefnStudioPickPluginId : DefnFieldEditable() {
-    val pluginBundleId: PluginBundleId
+open class DefnStudioPickPluginId : DefnFieldEditable() {
+    lateinit var pluginBundleId: PluginBundleId
 }

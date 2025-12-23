@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnMonth
 
-class StudioVarMonth : StudioVar() {
+open class StudioVarMonth : StudioVar() {
     var value: EnumDefnMonth? = null
 }

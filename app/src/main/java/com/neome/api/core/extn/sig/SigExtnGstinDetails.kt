@@ -7,10 +7,8 @@ package com.neome.api.core.extn.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigExtnGstinDetails : Sig() {
-    var data:
-
-    object? = null
-    var errorCode: number? = null
-    var errorMessage: string? = null
+open class SigExtnGstinDetails : Sig() {
+    var data: Object? = null
+    var errorCode: Number? = null
+    var errorMessage: String? = null
 }

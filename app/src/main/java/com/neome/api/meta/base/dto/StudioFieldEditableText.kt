@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
 
-class StudioFieldEditableText : StudioFieldEditable() {
+open class StudioFieldEditableText : StudioFieldEditable() {
     var defaultFieldId: MetaIdField? = null
-    var defaultValue: string? = null
+    var defaultValue: String? = null
     var defaultVarId: StudioValueVarIdText? = null
 }

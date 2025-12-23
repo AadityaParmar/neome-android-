@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnThemeDividerKind
 
-class StudioVarDividerKind : StudioVar() {
+open class StudioVarDividerKind : StudioVar() {
     var value: EnumDefnThemeDividerKind? = null
 }

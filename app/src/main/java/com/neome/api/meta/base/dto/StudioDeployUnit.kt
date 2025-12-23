@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioDeployUnit : StudioBase() {
+open class StudioDeployUnit : StudioBase() {
 }

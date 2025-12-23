@@ -6,8 +6,9 @@
 package com.neome.api.ent.agent.msg
 
 import com.neome.api.nucleus.base.msg.Msg
+import kotlin.properties.Delegates
 
-class MsgGuaranteedRequestQueueIdOffset : Msg() {
-    val offset: number
-    val queueId: string
+open class MsgGuaranteedRequestQueueIdOffset : Msg() {
+    var offset: Number by Delegates.notNull<Number>()
+    lateinit var queueId: String
 }

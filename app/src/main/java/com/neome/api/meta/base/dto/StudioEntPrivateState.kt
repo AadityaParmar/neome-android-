@@ -12,13 +12,14 @@ import com.neome.api.meta.base.Types.MetaIdGroup
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.SchedulerTaskId
 import com.neome.api.meta.base.Types.SheetId
+import java.util.Map
 
-class StudioEntPrivateState : StudioBase() {
-    var cliSeedId: number? = null
-    var eventSchedulerTaskIdMapping: Record<Key, SchedulerTaskId>? = null
-    var groupIdMappingMap: Record<MetaIdGroup, GroupId>? = null
-    var refTokenSet: string[]? = null
-    var schedulerTaskIdMappingMap: Record<MetaIdAutomation, SchedulerTaskId>? = null
-    var sheetIdMappingMap: Record<MetaIdSpreadsheet, SheetId>? = null
-    var spreadsheetRefTokenMap: Record<MetaIdSpreadsheet, StudioEntSpreadsheetRefTokenMap>? = null
+open class StudioEntPrivateState : StudioBase() {
+    var cliSeedId: Number? = null
+    var eventSchedulerTaskIdMapping: Map<Key, SchedulerTaskId>? = null
+    var groupIdMappingMap: Map<MetaIdGroup, GroupId>? = null
+    var refTokenSet: Array<String>? = null
+    var schedulerTaskIdMappingMap: Map<MetaIdAutomation, SchedulerTaskId>? = null
+    var sheetIdMappingMap: Map<MetaIdSpreadsheet, SheetId>? = null
+    var spreadsheetRefTokenMap: Map<MetaIdSpreadsheet, StudioEntSpreadsheetRefTokenMap>? = null
 }

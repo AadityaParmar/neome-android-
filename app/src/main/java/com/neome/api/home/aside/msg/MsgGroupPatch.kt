@@ -11,11 +11,11 @@ import com.neome.api.home.base.dto.DtoGroupSettings
 import com.neome.api.meta.base.Types.GroupId
 import com.neome.api.meta.base.Types.MediaIdAvatar
 
-class MsgGroupPatch : MsgVersion() {
-    var about: string? = null
-    val groupId: GroupId
+open class MsgGroupPatch : MsgVersion() {
+    var about: String? = null
+    lateinit var groupId: GroupId
     var mediaIdAvatar: MediaIdAvatar? = null
-    var name: string? = null
-    val patchPropNameSet: EnumGroupPatchPropName[]
+    var name: String? = null
+    lateinit var patchPropNameSet: Array<EnumGroupPatchPropName>
     var settings: DtoGroupSettings? = null
 }

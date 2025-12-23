@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class DefnStudioMapOfCondition : DefnField() {
-    var excludeVarIdSet: MetaIdVar[]? = null
+open class DefnStudioMapOfCondition : DefnField() {
+    var excludeVarIdSet: Array<MetaIdVar>? = null
     var inputFormId: MetaIdForm? = null
-    val sourceFormId: MetaIdForm
+    lateinit var sourceFormId: MetaIdForm
     var sourceGridId: MetaIdGrid? = null
     var sourcePluginId: MetaIdPlugin? = null
 }

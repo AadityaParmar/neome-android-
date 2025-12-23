@@ -7,6 +7,6 @@ package com.neome.api.ent.entAside.msg
 
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgPaymentStatus : Msg() {
-    val invoiceId: string
+open class MsgPaymentStatus : Msg() {
+    lateinit var invoiceId: String
 }

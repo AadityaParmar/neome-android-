@@ -10,8 +10,8 @@ import com.neome.api.nucleus.base.sig.SigVersion
 import com.neome.api.studio.base.dto.DtoEntUser
 import com.neome.api.studio.base.dto.DtoStudioVarUserSettingWrapper
 
-class SigEntUserList : SigVersion() {
-    var deployedRoleSet: StudioEntRole[]? = null
-    var deployedUserSettingSet: DtoStudioVarUserSettingWrapper[]? = null
-    val entUserSet: DtoEntUser[]
+open class SigEntUserList : SigVersion() {
+    var deployedRoleSet: Array<StudioEntRole>? = null
+    var deployedUserSettingSet: Array<DtoStudioVarUserSettingWrapper>? = null
+    lateinit var entUserSet: Array<DtoEntUser>
 }

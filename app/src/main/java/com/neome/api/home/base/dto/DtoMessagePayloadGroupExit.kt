@@ -5,6 +5,6 @@
 
 package com.neome.api.home.base.dto
 
-class DtoMessagePayloadGroupExit : DtoMessagePayload() {
-    val initiatorMember: DtoGroupMemberKey
+open class DtoMessagePayloadGroupExit : DtoMessagePayload() {
+    lateinit var initiatorMember: DtoGroupMemberKey
 }

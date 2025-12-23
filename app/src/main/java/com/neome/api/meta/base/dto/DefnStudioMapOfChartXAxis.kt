@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdChartXAxis
+import java.util.Map
 
-class DefnStudioMapOfChartXAxis {
-    val keys: MetaIdChartXAxis[]
-    val map: Record<MetaIdChartXAxis, DefnDtoChartXAxis>
+open class DefnStudioMapOfChartXAxis {
+    lateinit var keys: Array<MetaIdChartXAxis>
+    lateinit var map: Map<MetaIdChartXAxis, DefnDtoChartXAxis>
 }

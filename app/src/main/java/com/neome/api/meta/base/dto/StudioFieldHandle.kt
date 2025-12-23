@@ -8,10 +8,10 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldHandle : StudioFieldEditable() {
-    var autoPickSelf: boolean? = null
+open class StudioFieldHandle : StudioFieldEditable() {
+    var autoPickSelf: Boolean? = null
     var defaultFieldId: MetaIdField? = null
-    var defaultValue: string? = null
+    var defaultValue: String? = null
     var defaultVarId: MetaIdVar? = null
     var invalidDomainVarId: MetaIdVar? = null
     var invalidMobileCountryCodeSetVarId: MetaIdVar? = null

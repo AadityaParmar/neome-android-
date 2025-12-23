@@ -11,7 +11,7 @@ import com.neome.api.meta.base.Types.EnumDefnRemoveVariant
 import com.neome.api.meta.base.Types.EnumDefnUpdateVariant
 import com.neome.api.meta.base.Types.MetaIdField
 
-class StudioDtoMappingFieldMap : StudioDtoMappingFieldMapBase() {
+open class StudioDtoMappingFieldMap : StudioDtoMappingFieldMapBase() {
     var emptyFieldVariant: EnumDefnEmptyFieldVariant? = null
     var fromKey: MetaIdField? = null
     var insertVariant: EnumDefnInsertVariant? = null

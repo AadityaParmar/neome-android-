@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdMediaExists : EntVdAutoStep() {
+open class EntVdMediaExists : EntVdAutoStep() {
     var mediaField: StudioDtoArgValueParameter? = null
 }

@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarCurrency : StudioVar() {
+open class StudioVarCurrency : StudioVar() {
     var value: StudioVarValueCurrency? = null
 }

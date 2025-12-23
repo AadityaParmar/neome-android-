@@ -8,6 +8,6 @@ package com.neome.api.studio.studioMain.sig
 import com.neome.api.nucleus.base.sig.Sig
 import com.neome.api.studio.base.dto.DtoEntUser
 
-class SigEntUser : Sig() {
-    val user: DtoEntUser
+open class SigEntUser : Sig() {
+    lateinit var user: DtoEntUser
 }

@@ -7,7 +7,7 @@ package com.neome.api.home.main.msg
 
 import com.neome.api.core.base.dto.DtoChatMessageOffset
 
-class MsgReaction : MsgOffset() {
+open class MsgReaction : MsgOffset() {
     var chatMessageOffset: DtoChatMessageOffset? = null
-    var reaction: string? = null
+    var reaction: String? = null
 }

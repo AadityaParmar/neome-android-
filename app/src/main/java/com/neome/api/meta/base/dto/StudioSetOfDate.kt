@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioSetOfDate : StudioBase() {
-    val valueSet: string[]
+open class StudioSetOfDate : StudioBase() {
+    lateinit var valueSet: Array<String>
 }

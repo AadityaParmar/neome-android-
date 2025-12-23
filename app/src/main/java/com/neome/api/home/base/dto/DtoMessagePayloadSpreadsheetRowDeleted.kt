@@ -5,5 +5,5 @@
 
 package com.neome.api.home.base.dto
 
-class DtoMessagePayloadSpreadsheetRowDeleted : DtoMessagePayload() {
+open class DtoMessagePayloadSpreadsheetRowDeleted : DtoMessagePayload() {
 }

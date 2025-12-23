@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdAiDocumentToForm : EntVdAiWithOutput() {
+open class EntVdAiDocumentToForm : EntVdAiWithOutput() {
     var inputField: StudioDtoArgValueParameter? = null
     var outputForm: FormRefKey? = null
 }

@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.GhostId
 
-class EntVdForm : StudioBase() {
+open class EntVdForm : StudioBase() {
     var form: FormRefKey? = null
-    val metaId: GhostId
+    lateinit var metaId: GhostId
 }

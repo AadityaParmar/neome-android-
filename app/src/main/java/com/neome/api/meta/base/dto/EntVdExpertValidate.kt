@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdExpertValidate : EntVdAutoStepWithError() {
+open class EntVdExpertValidate : EntVdAutoStepWithError() {
     var condition: StudioMapOfCondition? = null
 }

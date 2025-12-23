@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarValueDuration {
-    val value: FieldDtoDuration
+open class StudioVarValueDuration {
+    lateinit var value: FieldDtoDuration
 }

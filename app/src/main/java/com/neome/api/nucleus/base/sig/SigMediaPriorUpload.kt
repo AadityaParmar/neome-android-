@@ -6,8 +6,9 @@
 package com.neome.api.nucleus.base.sig
 
 import com.neome.api.nucleus.base.Types.EnumMediaExchangeStatus
+import kotlin.properties.Delegates
 
-class SigMediaPriorUpload : Sig() {
-    val serverUploadLen: number
-    val serverUploadState: EnumMediaExchangeStatus
+open class SigMediaPriorUpload : Sig() {
+    var serverUploadLen: Number by Delegates.notNull<Number>()
+    lateinit var serverUploadState: EnumMediaExchangeStatus
 }

@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumStudioVarKind
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioEntDeployVar : StudioBase() {
-    val kind: EnumStudioVarKind
-    val metaId: MetaIdVar
-    var varValue: any? = null
+open class StudioEntDeployVar : StudioBase() {
+    lateinit var kind: EnumStudioVarKind
+    lateinit var metaId: MetaIdVar
+    var varValue: Any? = null
 }

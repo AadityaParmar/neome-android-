@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class StudioDtoRefTarget : StudioBase() {
-    var displayFieldIdSet: MetaIdField[]? = null
+open class StudioDtoRefTarget : StudioBase() {
+    var displayFieldIdSet: Array<MetaIdField>? = null
     var filterConditionVarId: StudioValueVarIdCondition? = null
-    val metaId: MetaIdSpreadsheet
+    lateinit var metaId: MetaIdSpreadsheet
     var name: Symbol? = null
     var overrideLayoutSpreadsheetId: MetaIdLayoutGrid? = null
 }

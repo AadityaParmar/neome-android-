@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnStudioSetOfModule : DefnField() {
+open class DefnStudioSetOfModule : DefnField() {
 }

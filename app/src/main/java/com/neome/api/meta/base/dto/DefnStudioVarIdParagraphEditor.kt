@@ -11,13 +11,13 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdPlugin
 
-class DefnStudioVarIdParagraphEditor : DefnField() {
-    var argBinderFilterVarKindSet: EnumStudioVarKind[]? = null
-    val argBinderFormId: MetaIdForm
-    var compositeIdSet: MetaIdComposite[]? = null
-    var excludeFieldIdSet: MetaIdField[]? = null
-    var filterVarKindSet: EnumStudioVarKind[]? = null
+open class DefnStudioVarIdParagraphEditor : DefnField() {
+    var argBinderFilterVarKindSet: Array<EnumStudioVarKind>? = null
+    lateinit var argBinderFormId: MetaIdForm
+    var compositeIdSet: Array<MetaIdComposite>? = null
+    var excludeFieldIdSet: Array<MetaIdField>? = null
+    var filterVarKindSet: Array<EnumStudioVarKind>? = null
     var pluginId: MetaIdPlugin? = null
-    var required: boolean? = null
-    var showAsEdit: boolean? = null
+    var required: Boolean? = null
+    var showAsEdit: Boolean? = null
 }

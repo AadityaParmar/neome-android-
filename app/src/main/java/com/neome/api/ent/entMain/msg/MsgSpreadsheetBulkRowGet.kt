@@ -8,8 +8,9 @@ package com.neome.api.ent.entMain.msg
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.RowId
 import com.neome.api.nucleus.base.msg.Msg
+import java.util.Map
 
-class MsgSpreadsheetBulkRowGet : Msg() {
-    val rowIdVersionMap: Record<RowId, string>
-    val spreadsheetId: MetaIdSpreadsheet
+open class MsgSpreadsheetBulkRowGet : Msg() {
+    lateinit var rowIdVersionMap: Map<RowId, String>
+    lateinit var spreadsheetId: MetaIdSpreadsheet
 }

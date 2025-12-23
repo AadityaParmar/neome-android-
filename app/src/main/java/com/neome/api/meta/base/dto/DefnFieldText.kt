@@ -7,12 +7,12 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
 
-class DefnFieldText : DefnFieldEditableText() {
-    var maxCharCount: number? = null
+open class DefnFieldText : DefnFieldEditableText() {
+    var maxCharCount: Number? = null
     var maxCharCountFieldId: MetaIdField? = null
-    var maxCharCountVar: number? = null
-    var minCharCount: number? = null
+    var maxCharCountVar: Number? = null
+    var minCharCount: Number? = null
     var minCharCountFieldId: MetaIdField? = null
-    var minCharCountVar: number? = null
+    var minCharCountVar: Number? = null
     var validationPattern: DefnDtoTextValidationPattern? = null
 }

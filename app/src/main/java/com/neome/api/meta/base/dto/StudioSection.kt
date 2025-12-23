@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.EnumDefnThemeSectionVariant
 import com.neome.api.meta.base.Types.MetaIdSection
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioSection : StudioComposite() {
+open class StudioSection : StudioComposite() {
     var direction: EnumDefnThemeDirection? = null
-    val metaId: MetaIdSection
+    lateinit var metaId: MetaIdSection
     var propertyEditorLabelVarId: MetaIdVar? = null
     var sectionVariant: EnumDefnThemeSectionVariant? = null
 }

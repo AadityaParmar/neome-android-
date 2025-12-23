@@ -10,12 +10,12 @@ import com.neome.api.meta.base.Types.MetaIdChartXAxis
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioDtoChartXAxis : StudioBase() {
+open class StudioDtoChartXAxis : StudioBase() {
     var color: StudioDtoColor? = null
     var colorFieldId: MetaIdField? = null
     var colorVarId: MetaIdVar? = null
-    var label: string? = null
-    val metaId: MetaIdChartXAxis
+    var label: String? = null
+    lateinit var metaId: MetaIdChartXAxis
     var name: Symbol? = null
-    var valueOptionId: string? = null
+    var valueOptionId: String? = null
 }

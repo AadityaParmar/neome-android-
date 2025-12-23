@@ -5,15 +5,10 @@
 
 package com.neome.api.home.main
 
-import com.neome.api.nucleus.base.ApiPlus
-import com.neome.api.nucleus.base.CallFactory
-import com.neome.api.nucleus.base.ApiPlus
-import com.neome.api.meta.base.Types.EntId
-import com.neome.api.nucleus.base.ISigAcceptor
-import com.neome.api.home.main.msg.MsgChatBlock
-import com.neome.api.home.base.msg.MsgChatId
 import com.neome.api.core.base.msg.MsgEntUserIdNoVersion
+import com.neome.api.home.base.msg.MsgChatId
 import com.neome.api.home.base.msg.MsgGroupId
+import com.neome.api.home.main.msg.MsgChatBlock
 import com.neome.api.home.main.msg.MsgMessageBulkGet
 import com.neome.api.home.main.msg.MsgMessageEdit
 import com.neome.api.home.main.msg.MsgMessageForwardCandidateList
@@ -27,9 +22,7 @@ import com.neome.api.home.main.msg.MsgOffsetWithVersion
 import com.neome.api.home.main.msg.MsgReaction
 import com.neome.api.home.main.msg.MsgReverseGeocode
 import com.neome.api.home.main.msg.MsgUrl
-import com.neome.api.meta.base.Types.ServiceName
 import com.neome.api.home.main.sig.SigChatCandidateMap
-import com.neome.api.nucleus.base.sig.SigDone
 import com.neome.api.home.main.sig.SigGroupMessageCandidateList
 import com.neome.api.home.main.sig.SigLinkPreview
 import com.neome.api.home.main.sig.SigMessage
@@ -38,6 +31,12 @@ import com.neome.api.home.main.sig.SigMessageList
 import com.neome.api.home.main.sig.SigReverseGeocode
 import com.neome.api.home.main.sig.SigUserLastOnline
 import com.neome.api.home.main.sig.SigUserMessageCandidateList
+import com.neome.api.meta.base.Types.EntId
+import com.neome.api.meta.base.Types.ServiceName
+import com.neome.api.nucleus.base.ApiPlus
+import com.neome.api.nucleus.base.CallFactory
+import com.neome.api.nucleus.base.ISigAcceptor
+import com.neome.api.nucleus.base.sig.SigDone
 
 class RpcMain {
     companion object {

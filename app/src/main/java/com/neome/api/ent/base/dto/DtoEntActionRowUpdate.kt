@@ -11,10 +11,10 @@ import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-class DtoEntActionRowUpdate : DtoEntAction() {
+open class DtoEntActionRowUpdate : DtoEntAction() {
     var filterConditionVarId: StudioValueVarIdCondition? = null
     var layoutSpreadsheetId: MetaIdLayoutGrid? = null
     var lookupFieldId: MetaIdField? = null
-    val spreadsheetFormId: MetaIdForm
-    val spreadsheetId: MetaIdSpreadsheet
+    lateinit var spreadsheetFormId: MetaIdForm
+    lateinit var spreadsheetId: MetaIdSpreadsheet
 }

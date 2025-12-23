@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class FieldValueDuration {
-    val value: FieldDtoDuration
+open class FieldValueDuration {
+    lateinit var value: FieldDtoDuration
 }

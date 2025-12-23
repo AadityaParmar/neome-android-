@@ -8,7 +8,7 @@ package com.neome.api.home.main.msg
 import com.neome.api.meta.base.Types.ChatId
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgMessageList : Msg() {
-    val chatId: ChatId
-    var pageSize: number? = null
+open class MsgMessageList : Msg() {
+    lateinit var chatId: ChatId
+    var pageSize: Number? = null
 }

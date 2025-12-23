@@ -7,4 +7,4 @@ package com.neome.api.meta.base
 
 // AnyName class placeholder
 
-class AnyName : AnyValue()
+open class AnyName : AnyValue()

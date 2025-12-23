@@ -7,10 +7,10 @@ package com.neome.api.ent.entMain.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigSpreadsheetRowExpiry : Sig() {
-    var remainingInvisibleProgressPercentage: number? = null
-    var remainingInvisibleTimeMillis: number? = null
-    var remainingReadProgressPercentage: number? = null
-    var remainingReadTimeMillis: number? = null
-    var showTimer: boolean? = null
+open class SigSpreadsheetRowExpiry : Sig() {
+    var remainingInvisibleProgressPercentage: Number? = null
+    var remainingInvisibleTimeMillis: Number? = null
+    var remainingReadProgressPercentage: Number? = null
+    var remainingReadTimeMillis: Number? = null
+    var showTimer: Boolean? = null
 }

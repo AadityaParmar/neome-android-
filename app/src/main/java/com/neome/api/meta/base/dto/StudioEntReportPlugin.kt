@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioEntReportPlugin : StudioEntReport() {
+open class StudioEntReportPlugin : StudioEntReport() {
     var inputFormMappingVarId: MetaIdVar? = null
     var outputFormMappingVarId: MetaIdVar? = null
     var pluginApi: StudioDtoPluginApi? = null

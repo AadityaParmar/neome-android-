@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 
-class StudioEntAutomationStepGeneratePaymentLink : StudioEntAutomationStep() {
-    var allowedPaymentMethodSet: EnumDefnPaymentMethodKind[]? = null
+open class StudioEntAutomationStepGeneratePaymentLink : StudioEntAutomationStep() {
+    var allowedPaymentMethodSet: Array<EnumDefnPaymentMethodKind>? = null
     var amountValue: StudioBuildArgBinder? = null
     var currencyValue: StudioBuildArgBinder? = null
     var descriptionValue: StudioBuildArgBinder? = null

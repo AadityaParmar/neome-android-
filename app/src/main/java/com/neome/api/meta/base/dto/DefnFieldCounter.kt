@@ -8,19 +8,19 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnPlacement
 import com.neome.api.meta.base.Types.MetaIdField
 
-class DefnFieldCounter : DefnFieldEditable() {
+open class DefnFieldCounter : DefnFieldEditable() {
     var defaultFieldId: MetaIdField? = null
-    var defaultValue: number? = null
-    var defaultVar: number? = null
+    var defaultValue: Number? = null
+    var defaultVar: Number? = null
     var justifyContent: EnumDefnPlacement? = null
-    var max: number? = null
+    var max: Number? = null
     var maxFieldId: MetaIdField? = null
-    var maxVar: number? = null
-    var min: number? = null
-    var minDisplayValue: number? = null
+    var maxVar: Number? = null
+    var min: Number? = null
+    var minDisplayValue: Number? = null
     var minFieldId: MetaIdField? = null
-    var minVar: number? = null
-    var step: number? = null
+    var minVar: Number? = null
+    var step: Number? = null
     var stepFieldId: MetaIdField? = null
-    var stepVar: number? = null
+    var stepVar: Number? = null
 }

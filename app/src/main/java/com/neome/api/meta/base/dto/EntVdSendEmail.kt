@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdSendEmail : EntVdAutoStepWithError() {
+open class EntVdSendEmail : EntVdAutoStepWithError() {
     var attachmentField: StudioDtoArgValueParameter? = null
     var bccUsers: StudioDtoUserFilter? = null
     var ccUsers: StudioDtoUserFilter? = null

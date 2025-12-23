@@ -8,10 +8,10 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnKindPipelineUpdate
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class EntVdRowUpdate : EntVdAutoStepWithOutputAndError() {
+open class EntVdRowUpdate : EntVdAutoStepWithOutputAndError() {
     var option: EnumDefnKindPipelineUpdate? = null
     var outputMapping: StudioDtoMapping? = null
     var outputMappingVarId: MetaIdVar? = null
-    var overwriteRow: boolean? = null
+    var overwriteRow: Boolean? = null
     var rowIdPointer: StudioDtoRowIdPointer? = null
 }

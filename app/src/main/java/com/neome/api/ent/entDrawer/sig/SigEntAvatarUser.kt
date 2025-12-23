@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.nucleus.base.sig.SigVersion
 
-class SigEntAvatarUser : SigVersion() {
-    var about: string? = null
+open class SigEntAvatarUser : SigVersion() {
+    var about: String? = null
     var avatarId: MediaIdAvatar? = null
-    val entId: EntId
-    val name: string
+    lateinit var entId: EntId
+    lateinit var name: String
 }

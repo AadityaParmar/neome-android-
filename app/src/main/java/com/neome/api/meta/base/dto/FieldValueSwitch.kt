@@ -5,9 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
-class FieldValueSwitch {
+import kotlin.properties.Delegates
+
+open class FieldValueSwitch {
     var captureLocation: FieldValueLocation? = null
-    var captureTime: string? = null
+    var captureTime: String? = null
     var captureUser: FieldValueEntUserId? = null
-    val value: boolean
+    var value: Boolean by Delegates.notNull<Boolean>()
 }

@@ -8,6 +8,6 @@ package com.neome.api.studio.studioEnt.sig
 import com.neome.api.meta.base.Types.MediaIdDocument
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigMediaIdDocument : Sig() {
-    val documentMediaId: MediaIdDocument
+open class SigMediaIdDocument : Sig() {
+    lateinit var documentMediaId: MediaIdDocument
 }

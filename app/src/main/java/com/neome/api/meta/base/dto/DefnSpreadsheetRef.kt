@@ -9,11 +9,11 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.MetaIdSpreadsheetRef
 
-class DefnSpreadsheetRef : DefnComp() {
-    val layoutSpreadsheet: DefnLayoutGrid
-    var maxRecords: number? = null
-    val metaId: MetaIdSpreadsheetRef
+open class DefnSpreadsheetRef : DefnComp() {
+    lateinit var layoutSpreadsheet: DefnLayoutGrid
+    var maxRecords: Number? = null
+    lateinit var metaId: MetaIdSpreadsheetRef
     var refTargetFieldId: MetaIdField? = null
     var rowActionPermissionMap: DefnStudioMapOfActionPermission? = null
-    val spreadsheetId: MetaIdSpreadsheet
+    lateinit var spreadsheetId: MetaIdSpreadsheet
 }

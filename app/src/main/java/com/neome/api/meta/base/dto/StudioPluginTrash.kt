@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioPluginTrash {
+open class StudioPluginTrash {
 }

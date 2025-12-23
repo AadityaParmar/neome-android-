@@ -12,15 +12,16 @@ import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.MessageId
 import com.neome.api.nucleus.base.sig.SigVersion
+import kotlin.properties.Delegates
 
-class SigLastMessage : SigVersion() {
-    val chatId: ChatId
-    val entId: EntId
-    val messageId: MessageId
-    val messageOffset: number
-    val messagePayload: DtoMessagePayload
-    val messageSummary: string
-    val messageTime: string
+open class SigLastMessage : SigVersion() {
+    lateinit var chatId: ChatId
+    lateinit var entId: EntId
+    lateinit var messageId: MessageId
+    var messageOffset: Number by Delegates.notNull<Number>()
+    lateinit var messagePayload: DtoMessagePayload
+    lateinit var messageSummary: String
+    lateinit var messageTime: String
     var receiptStatus: EnumReceiptStatus? = null
-    val senderId: EntUserId
+    lateinit var senderId: EntUserId
 }

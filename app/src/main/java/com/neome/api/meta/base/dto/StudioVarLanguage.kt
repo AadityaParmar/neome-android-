@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarLanguage : StudioVar() {
+open class StudioVarLanguage : StudioVar() {
     var value: StudioVarValueLanguage? = null
 }

@@ -9,13 +9,13 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.MetaIdVdRegion
 
-class EntVdErdRef : StudioBase() {
-    var diamondExpanded: boolean? = null
+open class EntVdErdRef : StudioBase() {
+    var diamondExpanded: Boolean? = null
     var diamondParentRegionId: MetaIdVdRegion? = null
     var diamondPoint: Point? = null
-    var expanded: boolean? = null
-    val fieldId: MetaIdField
-    var fromNodeHandleId: string? = null
+    var expanded: Boolean? = null
+    lateinit var fieldId: MetaIdField
+    var fromNodeHandleId: String? = null
     var fromNodeId: MetaIdSpreadsheet? = null
     var parentRegionId: MetaIdVdRegion? = null
     var point: Point? = null

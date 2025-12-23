@@ -8,11 +8,11 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldDate : StudioFieldEditable() {
+open class StudioFieldDate : StudioFieldEditable() {
     var defaultFieldId: MetaIdField? = null
     var defaultValue: StudioBuildDate? = null
     var defaultVarId: MetaIdVar? = null
-    var displayDateFormat: string? = null
+    var displayDateFormat: String? = null
     var max: StudioBuildDate? = null
     var maxFieldId: MetaIdField? = null
     var maxVarId: MetaIdVar? = null

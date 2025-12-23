@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdAiTextToJSON : EntVdAi() {
+open class EntVdAiTextToJSON : EntVdAi() {
     var inputField: StudioDtoArgValueParameter? = null
     var outputField: StudioDtoArgValueParameter? = null
 }

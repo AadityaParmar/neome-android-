@@ -5,6 +5,6 @@
 
 package com.neome.api.home.base.dto
 
-class DtoGroupMemberMetaData {
-    val date: string
+open class DtoGroupMemberMetaData {
+    lateinit var date: String
 }

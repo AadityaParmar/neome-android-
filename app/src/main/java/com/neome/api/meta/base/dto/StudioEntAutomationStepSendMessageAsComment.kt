@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioEntAutomationStepSendMessageAsComment :
+open class StudioEntAutomationStepSendMessageAsComment :
     StudioEntAutomationStepSendMessageWithSenderField() {
 }

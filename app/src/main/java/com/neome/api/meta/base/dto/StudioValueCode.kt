@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdCode
 
-class StudioValueCode : StudioBase() {
-    val metaId: MetaIdCode
+open class StudioValueCode : StudioBase() {
+    lateinit var metaId: MetaIdCode
 }

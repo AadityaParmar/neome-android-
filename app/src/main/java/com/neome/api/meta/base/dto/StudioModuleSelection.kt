@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdModule
 
-class StudioModuleSelection : StudioBase() {
-    val moduleIdSet: MetaIdModule[]
+open class StudioModuleSelection : StudioBase() {
+    lateinit var moduleIdSet: Array<MetaIdModule>
 }

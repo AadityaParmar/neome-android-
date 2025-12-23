@@ -8,6 +8,6 @@ package com.neome.api.ent.entMain.msg
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgSpreadsheetClear : Msg() {
-    val spreadsheetId: MetaIdSpreadsheet
+open class MsgSpreadsheetClear : Msg() {
+    lateinit var spreadsheetId: MetaIdSpreadsheet
 }

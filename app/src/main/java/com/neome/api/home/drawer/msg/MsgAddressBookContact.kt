@@ -7,7 +7,7 @@ package com.neome.api.home.drawer.msg
 
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgAddressBookContact : Msg() {
-    val handle: string
-    val nickName: string
+open class MsgAddressBookContact : Msg() {
+    lateinit var handle: String
+    lateinit var nickName: String
 }

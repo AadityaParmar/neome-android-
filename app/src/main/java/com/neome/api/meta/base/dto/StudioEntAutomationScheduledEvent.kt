@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnKindScheduledEvent
 
-class StudioEntAutomationScheduledEvent : StudioEntAutomationEvent() {
-    val fire: EnumDefnKindScheduledEvent
+open class StudioEntAutomationScheduledEvent : StudioEntAutomationEvent() {
+    lateinit var fire: EnumDefnKindScheduledEvent
 }

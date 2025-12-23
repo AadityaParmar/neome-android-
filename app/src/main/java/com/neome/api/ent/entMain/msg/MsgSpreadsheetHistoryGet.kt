@@ -9,10 +9,10 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.RowId
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgSpreadsheetHistoryGet : Msg() {
-    var offset: string? = null
-    var pageSize: number? = null
+open class MsgSpreadsheetHistoryGet : Msg() {
+    var offset: String? = null
+    var pageSize: Number? = null
     var rowId: RowId? = null
-    var searchText: string? = null
-    val spreadsheetId: MetaIdSpreadsheet
+    var searchText: String? = null
+    lateinit var spreadsheetId: MetaIdSpreadsheet
 }

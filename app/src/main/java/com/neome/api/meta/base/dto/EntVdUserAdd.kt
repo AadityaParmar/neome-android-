@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdUserAdd : EntVdAutoStepWithError() {
+open class EntVdUserAdd : EntVdAutoStepWithError() {
     var outputField: StudioDtoArgValueParameter? = null
     var userHandleField: StudioDtoArgValueParameter? = null
     var userManager: StudioDtoUserFilter? = null

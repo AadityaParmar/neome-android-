@@ -10,7 +10,7 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class DtoNeoScriptSpreadsheet : DtoNeoScript() {
+open class DtoNeoScriptSpreadsheet : DtoNeoScript() {
     var compositeId: MetaIdComposite? = null
     var fieldId: MetaIdField? = null
     var formId: MetaIdForm? = null

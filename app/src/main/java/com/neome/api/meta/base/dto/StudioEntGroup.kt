@@ -11,21 +11,21 @@ import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.Types.MetaIdGroup
 import com.neome.api.meta.base.Types.MetaIdRole
 
-class StudioEntGroup : StudioBase() {
+open class StudioEntGroup : StudioBase() {
     var actionPermissionMap: StudioMapOfActionPermission? = null
-    var allowPromptAssistant: boolean? = null
+    var allowPromptAssistant: Boolean? = null
     var avatarId: MediaIdAvatar? = null
-    var chatPermissionSet: MetaIdRole[]? = null
+    var chatPermissionSet: Array<MetaIdRole>? = null
     var defaultActionId: MetaIdAction? = null
-    val details: StudioDetails
-    var freeze: boolean? = null
+    lateinit var details: StudioDetails
+    var freeze: Boolean? = null
     var freezeAvatarKind: EnumDefnFreezeAvatarKind? = null
-    var freezeSortName: string? = null
-    var groupPermissionSet: MetaIdRole[]? = null
-    var hideActionMenu: boolean? = null
-    var hideMembers: boolean? = null
-    val metaId: MetaIdGroup
-    var pinnedActionIdSet: MetaIdAction[]? = null
-    var pinnedActionIdSetMobile: MetaIdAction[]? = null
-    var removeMessagePermissionSet: MetaIdRole[]? = null
+    var freezeSortName: String? = null
+    var groupPermissionSet: Array<MetaIdRole>? = null
+    var hideActionMenu: Boolean? = null
+    var hideMembers: Boolean? = null
+    lateinit var metaId: MetaIdGroup
+    var pinnedActionIdSet: Array<MetaIdAction>? = null
+    var pinnedActionIdSetMobile: Array<MetaIdAction>? = null
+    var removeMessagePermissionSet: Array<MetaIdRole>? = null
 }

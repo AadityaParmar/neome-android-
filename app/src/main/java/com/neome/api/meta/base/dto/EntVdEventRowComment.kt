@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdEventRowComment : EntVdEventSpreadsheet() {
+open class EntVdEventRowComment : EntVdEventSpreadsheet() {
 }

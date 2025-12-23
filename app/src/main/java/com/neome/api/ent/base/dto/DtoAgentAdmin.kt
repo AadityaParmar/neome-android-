@@ -7,8 +7,8 @@ package com.neome.api.ent.base.dto
 
 import com.neome.api.meta.base.Types.AdminId
 
-class DtoAgentAdmin {
-    val adminId: AdminId
-    val handle: string
-    val nickName: string
+open class DtoAgentAdmin {
+    lateinit var adminId: AdminId
+    lateinit var handle: String
+    lateinit var nickName: String
 }

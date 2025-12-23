@@ -7,6 +7,6 @@ package com.neome.api.ent.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdLayoutUser
 
-class DtoEntActionUser : DtoEntAction() {
+open class DtoEntActionUser : DtoEntAction() {
     var layoutUserId: MetaIdLayoutUser? = null
 }

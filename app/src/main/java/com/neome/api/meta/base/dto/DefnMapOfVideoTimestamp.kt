@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdVideoTimestamp
+import java.util.Map
 
-class DefnMapOfVideoTimestamp {
-    val keys: MetaIdVideoTimestamp[]
-    val map: Record<MetaIdVideoTimestamp, DefnDtoVideoTimestamp>
+open class DefnMapOfVideoTimestamp {
+    lateinit var keys: Array<MetaIdVideoTimestamp>
+    lateinit var map: Map<MetaIdVideoTimestamp, DefnDtoVideoTimestamp>
 }

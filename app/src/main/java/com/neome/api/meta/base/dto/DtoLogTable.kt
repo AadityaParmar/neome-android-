@@ -5,17 +5,20 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DtoLogItem
+import com.neome.api.meta.base.dto.DtoLogTableCellHeader
+import com.neome.api.meta.base.dto.DtoLogTableRow
 import com.neome.api.meta.base.Types.EnumLogTableTextStyle
 
-class DtoLogTable : DtoLogItem() {
-    var header: DtoLogTableCellHeader[]? = null
-    val headerBgColor: string
-    val headerColor: string
-    val headerStyle: EnumLogTableTextStyle
-    var label: string? = null
-    val rowBgColor: string
-    val rowColor: string
-    val rowStyle: EnumLogTableTextStyle
-    var rows: DtoLogTableRow[]? = null
-    var showRows: number? = null
+open class DtoLogTable : DtoLogItem() {
+    var header: Array<DtoLogTableCellHeader>? = null
+    lateinit var headerBgColor: String
+    lateinit var headerColor: String
+    lateinit var headerStyle: EnumLogTableTextStyle
+    var label: String? = null
+    lateinit var rowBgColor: String
+    lateinit var rowColor: String
+    lateinit var rowStyle: EnumLogTableTextStyle
+    var rows: Array<DtoLogTableRow>? = null
+    var showRows: Number? = null
 }

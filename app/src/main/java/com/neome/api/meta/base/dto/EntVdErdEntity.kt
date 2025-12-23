@@ -9,10 +9,10 @@ import com.neome.api.meta.base.Types.MetaIdComposite
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.MetaIdVdRegion
 
-class EntVdErdEntity : VdBase() {
-    var expanded: boolean? = null
-    var expandedCompositeIdSet: MetaIdComposite[]? = null
+open class EntVdErdEntity : VdBase() {
+    var expanded: Boolean? = null
+    var expandedCompositeIdSet: Array<MetaIdComposite>? = null
     var parentRegionId: MetaIdVdRegion? = null
     var point: Point? = null
-    val spreadsheetId: MetaIdSpreadsheet
+    lateinit var spreadsheetId: MetaIdSpreadsheet
 }

@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdAiTextToSentiment : EntVdAi() {
+open class EntVdAiTextToSentiment : EntVdAi() {
     var inputField: StudioDtoArgValueParameter? = null
 }

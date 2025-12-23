@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioDtoArgValueVariable : StudioDtoArgValue() {
-    var valuePathArray: string[]? = null
-    val varId: MetaIdVar
+open class StudioDtoArgValueVariable : StudioDtoArgValue() {
+    var valuePathArray: Array<String>? = null
+    lateinit var varId: MetaIdVar
 }

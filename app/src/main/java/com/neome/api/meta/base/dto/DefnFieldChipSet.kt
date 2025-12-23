@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnFieldChipSet : DefnFieldEditable() {
-    var allowDuplicate: boolean? = null
+open class DefnFieldChipSet : DefnFieldEditable() {
+    var allowDuplicate: Boolean? = null
 }

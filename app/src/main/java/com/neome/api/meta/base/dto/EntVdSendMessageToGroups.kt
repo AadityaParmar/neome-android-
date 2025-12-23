@@ -7,9 +7,9 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdGroup
 
-class EntVdSendMessageToGroups : EntVdAutoStep() {
+open class EntVdSendMessageToGroups : EntVdAutoStep() {
     var message: StudioValueParagraph? = null
     var sender: StudioBuildArgBinder? = null
-    var toGroupIdSet: MetaIdGroup[]? = null
+    var toGroupIdSet: Array<MetaIdGroup>? = null
     var toUsers: StudioDtoUserFilter? = null
 }

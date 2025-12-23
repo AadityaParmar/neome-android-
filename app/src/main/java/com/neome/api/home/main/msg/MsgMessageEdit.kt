@@ -8,7 +8,7 @@ package com.neome.api.home.main.msg
 import com.neome.api.core.base.dto.DtoChatMessageOffset
 import com.neome.api.home.base.dto.DtoMessagePayload
 
-class MsgMessageEdit : MsgOffset() {
+open class MsgMessageEdit : MsgOffset() {
     var chatMessageOffset: DtoChatMessageOffset? = null
     var dtoMessagePayload: DtoMessagePayload? = null
 }

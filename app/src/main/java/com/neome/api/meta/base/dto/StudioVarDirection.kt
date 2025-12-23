@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnThemeDirection
 
-class StudioVarDirection : StudioVar() {
+open class StudioVarDirection : StudioVar() {
     var value: EnumDefnThemeDirection? = null
 }

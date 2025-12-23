@@ -7,6 +7,6 @@ package com.neome.api.home.base.dto
 
 import com.neome.api.meta.base.Types.MediaIdImage
 
-class DtoMessageReplyPayloadCamera : DtoMessageReplyPayload() {
-    val mediaIdImage: MediaIdImage
+open class DtoMessageReplyPayloadCamera : DtoMessageReplyPayload() {
+    lateinit var mediaIdImage: MediaIdImage
 }

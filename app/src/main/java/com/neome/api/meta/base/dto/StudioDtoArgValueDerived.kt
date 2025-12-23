@@ -8,13 +8,13 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.api.meta.base.Types.MetaIdField
 
-class StudioDtoArgValueDerived : StudioDtoArgValue() {
-    val derivedFieldId: MetaIdField
+open class StudioDtoArgValueDerived : StudioDtoArgValue() {
+    lateinit var derivedFieldId: MetaIdField
     var derivedFieldType: EnumDefnCompType? = null
-    var valueBoolean: boolean? = null
-    var valueDate: string? = null
-    var valueDouble: number? = null
-    var valueLong: number? = null
-    var valueOptionId: string? = null
-    var valueText: string? = null
+    var valueBoolean: Boolean? = null
+    var valueDate: String? = null
+    var valueDouble: Number? = null
+    var valueLong: Number? = null
+    var valueOptionId: String? = null
+    var valueText: String? = null
 }

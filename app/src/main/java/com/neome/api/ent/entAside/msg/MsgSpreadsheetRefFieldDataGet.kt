@@ -12,11 +12,11 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.FormValueRaw
 
-class MsgSpreadsheetRefFieldDataGet : MsgVersion() {
-    var ascOrder: boolean? = null
-    val formId: MetaIdForm
+open class MsgSpreadsheetRefFieldDataGet : MsgVersion() {
+    var ascOrder: Boolean? = null
+    lateinit var formId: MetaIdForm
     var formSpreadsheetId: MetaIdSpreadsheet? = null
-    val inputFormValueRaw: FormValueRaw
-    val refFieldId: MetaIdComp
-    var sortByFieldIdSet: MetaIdField[]? = null
+    lateinit var inputFormValueRaw: FormValueRaw
+    lateinit var refFieldId: MetaIdComp
+    var sortByFieldIdSet: Array<MetaIdField>? = null
 }

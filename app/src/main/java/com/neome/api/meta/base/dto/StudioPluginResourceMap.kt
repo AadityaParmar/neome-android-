@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioPluginResourceMap : StudioBase() {
+open class StudioPluginResourceMap : StudioBase() {
     var dev: StudioPluginDev? = null
     var jar: StudioPluginJar? = null
     var rpc: StudioPluginRpc? = null

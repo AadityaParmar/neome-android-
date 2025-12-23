@@ -6,11 +6,12 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdFieldDynamicCondition
+import java.util.Map
 
-class DefnMapOfDynamicCondition {
-    var andOr: boolean? = null
-    var keys: MetaIdFieldDynamicCondition[]? = null
-    var map: Record<MetaIdFieldDynamicCondition, DefnMapOfDynamicCondition>? = null
-    val metaId: MetaIdFieldDynamicCondition
+open class DefnMapOfDynamicCondition {
+    var andOr: Boolean? = null
+    var keys: Array<MetaIdFieldDynamicCondition>? = null
+    var map: Map<MetaIdFieldDynamicCondition, DefnMapOfDynamicCondition>? = null
+    lateinit var metaId: MetaIdFieldDynamicCondition
     var statement: DefnDtoDynamicCondition? = null
 }

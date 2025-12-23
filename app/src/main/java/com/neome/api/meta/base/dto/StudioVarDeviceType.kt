@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDeviceType
 
-class StudioVarDeviceType : StudioVar() {
+open class StudioVarDeviceType : StudioVar() {
     var value: EnumDeviceType? = null
 }

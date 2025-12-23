@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdRowSendComment : EntVdAutoStepWithError() {
+open class EntVdRowSendComment : EntVdAutoStepWithError() {
     var message: StudioValueParagraph? = null
     var rowIdPointer: StudioDtoRowIdPointer? = null
     var sender: StudioBuildArgBinder? = null

@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnThemeColor
 import com.neome.api.meta.base.Types.EnumDefnThemeColorShade
 
-class DefnDtoColor {
+open class DefnDtoColor {
     var shade: EnumDefnThemeColorShade? = null
     var value: EnumDefnThemeColor? = null
 }

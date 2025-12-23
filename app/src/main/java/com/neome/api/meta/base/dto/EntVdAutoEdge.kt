@@ -10,12 +10,12 @@ import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdVdAutoEdge
 import com.neome.api.meta.base.Types.MetaIdVdAutoNode
 
-class EntVdAutoEdge : VdBase() {
-    var fromNodeHandleId: string? = null
-    val fromNodeId: MetaIdVdAutoNode
-    val kind: EnumDefnKindAutoEdge
-    val metaId: MetaIdVdAutoEdge
+open class EntVdAutoEdge : VdBase() {
+    var fromNodeHandleId: String? = null
+    lateinit var fromNodeId: MetaIdVdAutoNode
+    lateinit var kind: EnumDefnKindAutoEdge
+    lateinit var metaId: MetaIdVdAutoEdge
     var outputPipelineParamId: MetaIdPipelineParam? = null
-    val toNodeId: MetaIdVdAutoNode
-    var value: string? = null
+    lateinit var toNodeId: MetaIdVdAutoNode
+    var value: String? = null
 }

@@ -10,27 +10,27 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldEditable : StudioField() {
-    var autoFill: boolean? = null
-    var autoFocus: boolean? = null
-    var helperText: string? = null
+open class StudioFieldEditable : StudioField() {
+    var autoFill: Boolean? = null
+    var autoFocus: Boolean? = null
+    var helperText: String? = null
     var helperTextFieldId: MetaIdField? = null
     var helperTextVarId: StudioValueVarIdText? = null
-    var hideLabel: boolean? = null
-    var icon: string? = null
+    var hideLabel: Boolean? = null
+    var icon: String? = null
     var iconVarId: MetaIdVar? = null
     var labelFieldId: MetaIdField? = null
-    var placeHolder: string? = null
+    var placeHolder: String? = null
     var placeHolderFieldId: MetaIdField? = null
     var placeHolderVarId: StudioValueVarIdText? = null
-    var prefix: string? = null
+    var prefix: String? = null
     var prefixVarId: StudioValueVarIdText? = null
     var refFieldId: MetaIdField? = null
     var refTargetId: MetaId? = null
-    var required: boolean? = null
+    var required: Boolean? = null
     var requiredFieldId: MetaIdField? = null
-    var requiredRoleIdSet: MetaIdRole[]? = null
+    var requiredRoleIdSet: Array<MetaIdRole>? = null
     var requiredVarId: MetaIdVar? = null
-    var suffix: string? = null
+    var suffix: String? = null
     var suffixVarId: StudioValueVarIdText? = null
 }

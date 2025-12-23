@@ -5,8 +5,8 @@
 
 package com.neome.api.nucleus.base.dto
 
-class DescApiTypeBasic : DescApiType() {
-    var importRef: string? = null
-    var superCls: string? = null
-    val value: string
+open class DescApiTypeBasic : DescApiType() {
+    var importRef: String? = null
+    var superCls: String? = null
+    lateinit var value: String
 }

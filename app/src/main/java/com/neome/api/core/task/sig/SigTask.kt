@@ -9,11 +9,9 @@ import com.neome.api.core.base.Types.EnumTaskStatus
 import com.neome.api.meta.base.dto.EnvValidationError
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigTask : Sig() {
+open class SigTask : Sig() {
     var error: EnvValidationError? = null
-    var progress: number? = null
-    var result:
-
-    object? = null
-    val status: EnumTaskStatus
+    var progress: Number? = null
+    var result: Object? = null
+    lateinit var status: EnumTaskStatus
 }

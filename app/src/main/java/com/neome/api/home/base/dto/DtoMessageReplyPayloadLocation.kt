@@ -5,6 +5,6 @@
 
 package com.neome.api.home.base.dto
 
-class DtoMessageReplyPayloadLocation : DtoMessageReplyPayload() {
-    val mapImageUrl: string
+open class DtoMessageReplyPayloadLocation : DtoMessageReplyPayload() {
+    lateinit var mapImageUrl: String
 }

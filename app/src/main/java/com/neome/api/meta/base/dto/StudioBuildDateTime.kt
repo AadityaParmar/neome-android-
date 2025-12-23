@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.AnyTime
 
-class StudioBuildDateTime : StudioBuildDate() {
+open class StudioBuildDateTime : StudioBuildDate() {
     var time: AnyTime? = null
 }

@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdRole
 
-class FieldSetOfRole {
-    var displaySet: string[]? = null
-    val valueSet: MetaIdRole[]
+open class FieldSetOfRole {
+    var displaySet: Array<String>? = null
+    lateinit var valueSet: Array<MetaIdRole>
 }

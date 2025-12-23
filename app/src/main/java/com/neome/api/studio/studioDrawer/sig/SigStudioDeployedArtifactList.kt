@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.Types.PluginBundleId
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigStudioDeployedArtifactList : Sig() {
-    var entIdSet: EntId[]? = null
-    var pluginBundleIdSet: PluginBundleId[]? = null
+open class SigStudioDeployedArtifactList : Sig() {
+    var entIdSet: Array<EntId>? = null
+    var pluginBundleIdSet: Array<PluginBundleId>? = null
 }

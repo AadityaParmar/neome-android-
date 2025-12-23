@@ -7,6 +7,6 @@ package com.neome.api.core.deeplink.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigUrl : Sig() {
-    val url: string
+open class SigUrl : Sig() {
+    lateinit var url: String
 }

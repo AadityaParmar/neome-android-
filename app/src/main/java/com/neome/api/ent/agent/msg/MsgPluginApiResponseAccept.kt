@@ -5,6 +5,6 @@
 
 package com.neome.api.ent.agent.msg
 
-class MsgPluginApiResponseAccept : MsgPluginApiResponse() {
-    val responseActorPath: string
+open class MsgPluginApiResponseAccept : MsgPluginApiResponse() {
+    lateinit var responseActorPath: String
 }

@@ -6,17 +6,18 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumWhatsAppTemplateHeaderType
+import kotlin.properties.Delegates
 
-class DtoWhatsAppTemplateGroup {
-    var carouselCardFormat: string? = null
-    var carouselCardSample: string? = null
+open class DtoWhatsAppTemplateGroup {
+    var carouselCardFormat: String? = null
+    var carouselCardSample: String? = null
     var carouselTemplateGroup: DtoCarouselTemplateGroup? = null
-    val format: string
-    val groupId: string
-    val groupName: string
-    val isCarouselTemplate: boolean
-    var numberOfButtonParams: number? = null
-    val numberOfParams: number
-    val sample: string
-    val supportedHeaders: EnumWhatsAppTemplateHeaderType[]
+    lateinit var format: String
+    lateinit var groupId: String
+    lateinit var groupName: String
+    var isCarouselTemplate: Boolean by Delegates.notNull<Boolean>()
+    var numberOfButtonParams: Number? = null
+    var numberOfParams: Number by Delegates.notNull<Number>()
+    lateinit var sample: String
+    lateinit var supportedHeaders: Array<EnumWhatsAppTemplateHeaderType>
 }

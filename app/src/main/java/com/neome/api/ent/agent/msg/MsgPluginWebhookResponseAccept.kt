@@ -11,9 +11,9 @@ import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgPluginWebhookResponseAccept : Msg() {
-    val entId: EntId
-    val formId: MetaIdForm
-    val pluginId: MetaIdPlugin
-    val responseFormValue: FormValueRaw
+open class MsgPluginWebhookResponseAccept : Msg() {
+    lateinit var entId: EntId
+    lateinit var formId: MetaIdForm
+    lateinit var pluginId: MetaIdPlugin
+    lateinit var responseFormValue: FormValueRaw
 }

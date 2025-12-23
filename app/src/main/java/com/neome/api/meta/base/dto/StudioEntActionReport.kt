@@ -8,9 +8,9 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdReport
 
-class StudioEntActionReport : StudioEntAction() {
+open class StudioEntActionReport : StudioEntAction() {
     var outputFormContentLayoutId: MetaIdLayoutForm? = null
     var outputFormTemplateLayoutId: MetaIdLayoutForm? = null
     var reportId: MetaIdReport? = null
-    var sendMessageToInbox: boolean? = null
+    var sendMessageToInbox: Boolean? = null
 }

@@ -13,13 +13,13 @@ import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioDtoLayoutFormContentItem : StudioBase() {
+open class StudioDtoLayoutFormContentItem : StudioBase() {
     var borderColorVarId: MetaIdVar? = null
-    var borderPositionSet: EnumDefnShowBorderKind[]? = null
-    var fieldIdSet: MetaIdField[]? = null
-    var formLayoutIdSet: MetaIdLayoutForm[]? = null
-    var gridLayoutIdSet: MetaIdLayoutGrid[]? = null
-    var gridSwitcherSet: MetaIdGrid[]? = null
-    var paddingPositionSet: EnumDefnShowBorderKind[]? = null
+    var borderPositionSet: Array<EnumDefnShowBorderKind>? = null
+    var fieldIdSet: Array<MetaIdField>? = null
+    var formLayoutIdSet: Array<MetaIdLayoutForm>? = null
+    var gridLayoutIdSet: Array<MetaIdLayoutGrid>? = null
+    var gridSwitcherSet: Array<MetaIdGrid>? = null
+    var paddingPositionSet: Array<EnumDefnShowBorderKind>? = null
     var paddingSize: EnumDefnThemeDividerKind? = null
 }

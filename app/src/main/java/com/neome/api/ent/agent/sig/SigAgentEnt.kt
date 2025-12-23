@@ -20,18 +20,19 @@ import com.neome.api.meta.base.dto.StudioEntRoleMap
 import com.neome.api.meta.base.dto.StudioEntSpreadsheetMap
 import com.neome.api.meta.base.dto.StudioModuleMap
 import com.neome.api.nucleus.base.sig.SigVersion
+import java.util.Map
 
-class SigAgentEnt : SigVersion() {
+open class SigAgentEnt : SigVersion() {
     var agentEntAdmin: DtoAgentAdmin? = null
     var agentEntUser: DtoAgentEntUser? = null
-    var defnFormMap: Record<MetaIdSpreadsheet, DefnForm>? = null
+    var defnFormMap: Map<MetaIdSpreadsheet, DefnForm>? = null
     var details: StudioEntDetails? = null
     var driveSheetMap: StudioEntDriveSheetMap? = null
-    val entDeployPluginMap: StudioEntDeployPluginMap
-    val entPluginMap: StudioEntPluginMap
+    lateinit var entDeployPluginMap: StudioEntDeployPluginMap
+    lateinit var entPluginMap: StudioEntPluginMap
     var moduleMap: StudioModuleMap? = null
-    val roleMap: StudioEntRoleMap
-    var schemaSheetMap: Record<MetaIdSpreadsheet, SchemaSheet>? = null
-    val spreadsheetMap: StudioEntSpreadsheetMap
-    var userSettingVarMap: Record<MetaIdVar, DefnUserSettingVar>? = null
+    lateinit var roleMap: StudioEntRoleMap
+    var schemaSheetMap: Map<MetaIdSpreadsheet, SchemaSheet>? = null
+    lateinit var spreadsheetMap: StudioEntSpreadsheetMap
+    var userSettingVarMap: Map<MetaIdVar, DefnUserSettingVar>? = null
 }

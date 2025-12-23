@@ -8,9 +8,9 @@ package com.neome.api.ent.base.dto
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.MediaId
 
-class DtoEntUserAvatar {
+open class DtoEntUserAvatar {
     var avatarId: MediaId? = null
-    val entUserId: EntUserId
-    val handle: string
-    val nickName: string
+    lateinit var entUserId: EntUserId
+    lateinit var handle: String
+    lateinit var nickName: String
 }

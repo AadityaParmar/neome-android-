@@ -8,7 +8,7 @@ package com.neome.api.core.cluster.sig
 import com.neome.api.core.base.dto.DtoClusterItemMetric
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigClusterItemData : Sig() {
-    val metricList: DtoClusterItemMetric[]
-    val nameColList: string[]
+open class SigClusterItemData : Sig() {
+    lateinit var metricList: Array<DtoClusterItemMetric>
+    lateinit var nameColList: Array<String>
 }

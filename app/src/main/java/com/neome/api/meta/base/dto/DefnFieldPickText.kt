@@ -8,13 +8,13 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnThemePickVariant
 import com.neome.api.meta.base.Types.MetaIdField
 
-class DefnFieldPickText : DefnFieldEditable() {
+open class DefnFieldPickText : DefnFieldEditable() {
     var defaultOptionFieldId: MetaIdField? = null
-    var defaultOptionId: string? = null
+    var defaultOptionId: String? = null
     var optionFieldId: MetaIdField? = null
     var optionMap: DefnStudioMapOfDtoOption? = null
     var optionPermissionMap: DefnStudioMapOfOptionPermission? = null
-    var pageSize: number? = null
+    var pageSize: Number? = null
     var pluginApi: DefnDtoPluginApi? = null
     var pluginErrorFieldId: MetaIdField? = null
     var showAs: EnumDefnThemePickVariant? = null

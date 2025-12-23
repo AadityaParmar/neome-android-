@@ -8,7 +8,7 @@ package com.neome.api.ent.entMain.msg
 import com.neome.api.meta.base.Types.GroupId
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgPromptActionsGet : Msg() {
-    val groupId: GroupId
-    val promptText: string
+open class MsgPromptActionsGet : Msg() {
+    lateinit var groupId: GroupId
+    lateinit var promptText: String
 }

@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdGroup
+import java.util.Map
 
-class StudioEntGroupMap : StudioBase() {
-    val keys: MetaIdGroup[]
-    val map: Record<MetaIdGroup, StudioEntGroup>
+open class StudioEntGroupMap : StudioBase() {
+    lateinit var keys: Array<MetaIdGroup>
+    lateinit var map: Map<MetaIdGroup, StudioEntGroup>
 }

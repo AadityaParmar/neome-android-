@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdReport
 
-class DefnStudioPickReportId : DefnField() {
-    var excludeReportIdSet: MetaIdReport[]? = null
+open class DefnStudioPickReportId : DefnField() {
+    var excludeReportIdSet: Array<MetaIdReport>? = null
 }

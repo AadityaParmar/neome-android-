@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioDtoLayoutXYChartScatterPlot : StudioDtoLayoutXYChart() {
+open class StudioDtoLayoutXYChartScatterPlot : StudioDtoLayoutXYChart() {
 }

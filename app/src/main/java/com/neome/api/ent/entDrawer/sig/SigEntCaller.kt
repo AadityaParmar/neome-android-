@@ -35,36 +35,37 @@ import com.neome.api.meta.base.dto.DefnLayoutUserMap
 import com.neome.api.meta.base.dto.DefnStudioDtoActionPermission
 import com.neome.api.meta.base.dto.StudioDtoLocationCapture
 import com.neome.api.nucleus.base.sig.SigVersion
+import java.util.Map
 
-class SigEntCaller : SigVersion() {
-    val actionMap: Record<MetaIdAction, DtoEntAction>
+open class SigEntCaller : SigVersion() {
+    lateinit var actionMap: Map<MetaIdAction, DtoEntAction>
     var avatarId: MediaId? = null
-    val color: string
-    var deeplinkMap: Record<MetaIdDeeplink, DtoEntDeeplink>? = null
-    var displayDateFormat: string? = null
-    val entId: EntId
-    val entUserId: EntUserId
-    val entUserIdHash: string
-    val formMap: Record<MetaIdForm, DefnForm>
+    lateinit var color: String
+    var deeplinkMap: Map<MetaIdDeeplink, DtoEntDeeplink>? = null
+    var displayDateFormat: String? = null
+    lateinit var entId: EntId
+    lateinit var entUserId: EntUserId
+    lateinit var entUserIdHash: String
+    lateinit var formMap: Map<MetaIdForm, DefnForm>
     var grandManagerId: EntUserId? = null
-    val groupIdMapping: Record<MetaIdGroup, GroupId>
-    val groupMap: DtoEntGroupMap
-    val handle: string
+    lateinit var groupIdMapping: Map<MetaIdGroup, GroupId>
+    lateinit var groupMap: DtoEntGroupMap
+    lateinit var handle: String
     var languageKey: LanguageKey? = null
     var layoutUserMap: DefnLayoutUserMap? = null
-    var layoutUserMenuActionMap: Record<MetaIdAction, DefnStudioDtoActionPermission>? = null
+    var layoutUserMenuActionMap: Map<MetaIdAction, DefnStudioDtoActionPermission>? = null
     var locationAccuracy: EnumDefnLocationAccuracy? = null
     var locationConfig: StudioDtoLocationCapture? = null
     var managerId: EntUserId? = null
-    var managerialRelationshipMap: Record<MetaIdRole, EntUserId[]>? = null
-    val nickName: string
+    var managerialRelationshipMap: Map<MetaIdRole, Array<EntUserId>>? = null
+    lateinit var nickName: String
     var paymentProvider: DtoPaymentProvider? = null
-    var promptMap: Record<MetaIdPrompt, DtoEntPrompt>? = null
-    val roleIdSet: MetaIdRole[]
-    val roleMap: Record<MetaIdRole, DtoEntRole>
-    var spreadsheetMap: Record<MetaIdSpreadsheet, DtoEntSpreadsheet>? = null
+    var promptMap: Map<MetaIdPrompt, DtoEntPrompt>? = null
+    lateinit var roleIdSet: Array<MetaIdRole>
+    lateinit var roleMap: Map<MetaIdRole, DtoEntRole>
+    var spreadsheetMap: Map<MetaIdSpreadsheet, DtoEntSpreadsheet>? = null
     var timeZone: TimeZoneKey? = null
-    val userId: UserId
-    var userSettingVarMap: Record<MetaIdVar, DtoVarUserSetting>? = null
+    lateinit var userId: UserId
+    var userSettingVarMap: Map<MetaIdVar, DtoVarUserSetting>? = null
     var wallpaper: DtoEntWallpaper? = null
 }

@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdBotGetHistory : EntVdAutoStepWithOutput() {
+open class EntVdBotGetHistory : EntVdAutoStepWithOutput() {
 }

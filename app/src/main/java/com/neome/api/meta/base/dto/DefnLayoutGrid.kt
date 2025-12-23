@@ -10,13 +10,13 @@ import com.neome.api.meta.base.Types.EnumDefnLayoutGridKind
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 
-class DefnLayoutGrid {
-    var allowToSwitchLayoutIdSet: MetaIdLayoutGrid[]? = null
+open class DefnLayoutGrid {
+    var allowToSwitchLayoutIdSet: Array<MetaIdLayoutGrid>? = null
     var bgColorFieldId: MetaIdField? = null
-    var description: string? = null
-    val kind: EnumDefnLayoutGridKind
-    var label: string? = null
-    val metaId: MetaIdLayoutGrid
-    val name: Symbol
+    var description: String? = null
+    lateinit var kind: EnumDefnLayoutGridKind
+    var label: String? = null
+    lateinit var metaId: MetaIdLayoutGrid
+    lateinit var name: Symbol
     var toolTipFieldId: MetaIdField? = null
 }

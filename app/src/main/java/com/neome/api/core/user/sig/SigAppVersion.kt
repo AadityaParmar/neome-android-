@@ -6,11 +6,12 @@
 package com.neome.api.core.user.sig
 
 import com.neome.api.nucleus.base.sig.Sig
+import kotlin.properties.Delegates
 
-class SigAppVersion : Sig() {
-    val currVersionCode: number
-    val hasForceUpdate: boolean
-    val hasUpdate: boolean
-    val mmkvVersion: number
-    val sqlVersion: number
+open class SigAppVersion : Sig() {
+    var currVersionCode: Number by Delegates.notNull<Number>()
+    var hasForceUpdate: Boolean by Delegates.notNull<Boolean>()
+    var hasUpdate: Boolean by Delegates.notNull<Boolean>()
+    var mmkvVersion: Number by Delegates.notNull<Number>()
+    var sqlVersion: Number by Delegates.notNull<Number>()
 }

@@ -11,17 +11,18 @@ import com.neome.api.meta.base.Types.EnumDefnDataPartitionPeriod
 import com.neome.api.meta.base.Types.MetaIdDriveSheet
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import kotlin.properties.Delegates
 
-class StudioEntDriveSheet : StudioBase() {
-    var attachmentRoleIdSet: MetaIdRole[]? = null
+open class StudioEntDriveSheet : StudioBase() {
+    var attachmentRoleIdSet: Array<MetaIdRole>? = null
     var dataPartitionPeriod: EnumDefnDataPartitionPeriod? = null
     var dataRetentionDuration: FieldDtoDuration? = null
-    var exportKindSet: EnumDefnDataExportKind[]? = null
+    var exportKindSet: Array<EnumDefnDataExportKind>? = null
     var layoutMap: StudioMapOfLayoutDriveSheet? = null
-    val metaId: MetaIdDriveSheet
+    lateinit var metaId: MetaIdDriveSheet
     var modules: StudioModuleSelection? = null
     var name: Symbol? = null
-    val partitionedData: boolean
-    var roleIdSet: MetaIdRole[]? = null
-    val spreadsheetId: MetaIdSpreadsheet
+    var partitionedData: Boolean by Delegates.notNull<Boolean>()
+    var roleIdSet: Array<MetaIdRole>? = null
+    lateinit var spreadsheetId: MetaIdSpreadsheet
 }

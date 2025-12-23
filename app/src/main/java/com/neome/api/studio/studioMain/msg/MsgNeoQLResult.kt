@@ -11,12 +11,12 @@ import com.neome.api.meta.base.Types.RowId
 import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgNeoQLResult : Msg() {
+open class MsgNeoQLResult : Msg() {
     var inputFormCompositeId: MetaIdComposite? = null
     var inputFormId: MetaIdForm? = null
     var inputFormValue: FormValueRaw? = null
     var inputGridRowId: RowId? = null
-    val neoQL: string
-    val outputFormId: MetaIdForm
-    val userHandle: string
+    lateinit var neoQL: String
+    lateinit var outputFormId: MetaIdForm
+    lateinit var userHandle: String
 }

@@ -7,8 +7,9 @@ package com.neome.api.home.main.msg
 
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.nucleus.base.msg.Msg
+import kotlin.properties.Delegates
 
-class MsgChatBlock : Msg() {
-    val block: boolean
-    val chatId: EntUserId
+open class MsgChatBlock : Msg() {
+    var block: Boolean by Delegates.notNull<Boolean>()
+    lateinit var chatId: EntUserId
 }

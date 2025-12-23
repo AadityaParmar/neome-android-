@@ -12,14 +12,14 @@ import com.neome.api.meta.base.Types.EnumDefnTextStyle
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdTableStyle
 
-class StudioDtoTableStyle : StudioBase() {
+open class StudioDtoTableStyle : StudioBase() {
     var bgColor: StudioDtoColor? = null
     var conditionVarId: StudioValueVarIdCondition? = null
-    var fieldIdSet: MetaIdField[]? = null
+    var fieldIdSet: Array<MetaIdField>? = null
     var fieldLayoutOn: EnumDefnDriveSheetFieldLayoutOn? = null
     var metaId: MetaIdTableStyle? = null
     var name: Symbol? = null
     var textColor: StudioDtoColor? = null
     var textSize: EnumDefnTextSize? = null
-    var textStyleSet: EnumDefnTextStyle[]? = null
+    var textStyleSet: Array<EnumDefnTextStyle>? = null
 }

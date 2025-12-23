@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdMapping
+import java.util.Map
 
-class StudioDtoMappingGridMap : StudioBase() {
-    val keys: MetaIdMapping[]
-    val map: Record<MetaIdMapping, StudioDtoMappingGrid>
+open class StudioDtoMappingGridMap : StudioBase() {
+    lateinit var keys: Array<MetaIdMapping>
+    lateinit var map: Map<MetaIdMapping, StudioDtoMappingGrid>
 }

@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioEntAutomationStepGenerateImage : StudioEntAutomationStepGenerateDocument() {
+open class StudioEntAutomationStepGenerateImage : StudioEntAutomationStepGenerateDocument() {
     var imageFieldId: MetaIdField? = null
     var imageFormId: MetaIdForm? = null
     var imageFormMappingVarId: MetaIdVar? = null

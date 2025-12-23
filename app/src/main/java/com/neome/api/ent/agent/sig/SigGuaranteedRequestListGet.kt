@@ -7,9 +7,10 @@ package com.neome.api.ent.agent.sig
 
 import com.neome.api.ent.base.dto.GuaranteedRequest
 import com.neome.api.nucleus.base.sig.Sig
+import kotlin.properties.Delegates
 
-class SigGuaranteedRequestListGet : Sig() {
-    val bottomOffset: number
-    val list: GuaranteedRequest[]
-    val pageBottomOffset: number
+open class SigGuaranteedRequestListGet : Sig() {
+    var bottomOffset: Number by Delegates.notNull<Number>()
+    lateinit var list: Array<GuaranteedRequest>
+    var pageBottomOffset: Number by Delegates.notNull<Number>()
 }

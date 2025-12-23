@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class Size {
-    var h: number? = null
-    var w: number? = null
+open class Size {
+    var h: Number? = null
+    var w: Number? = null
 }

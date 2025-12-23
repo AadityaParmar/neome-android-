@@ -10,12 +10,12 @@ import com.neome.api.meta.base.Types.EnumDefnDay
 import com.neome.api.meta.base.Types.EnumDefnLocationCapturingMode
 import com.neome.api.meta.base.Types.MetaIdRole
 
-class StudioDtoLocationCapture {
-    var excludeDaysSet: EnumDefnDay[]? = null
-    var frequencyBasedOnDistance: number? = null
-    var frequencyBasedOnTime: number? = null
+open class StudioDtoLocationCapture {
+    var excludeDaysSet: Array<EnumDefnDay>? = null
+    var frequencyBasedOnDistance: Number? = null
+    var frequencyBasedOnTime: Number? = null
     var fromTime: AnyTime? = null
-    var roleIdSet: MetaIdRole[]? = null
+    var roleIdSet: Array<MetaIdRole>? = null
     var toTime: AnyTime? = null
     var type: EnumDefnLocationCapturingMode? = null
 }

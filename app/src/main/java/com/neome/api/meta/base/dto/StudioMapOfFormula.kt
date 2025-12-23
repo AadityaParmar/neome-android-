@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdFormula
+import java.util.Map
 
-class StudioMapOfFormula : StudioBase() {
-    var keys: MetaIdFormula[]? = null
-    val map: Record<MetaIdFormula, StudioDtoFormula>
+open class StudioMapOfFormula : StudioBase() {
+    var keys: Array<MetaIdFormula>? = null
+    lateinit var map: Map<MetaIdFormula, StudioDtoFormula>
 }

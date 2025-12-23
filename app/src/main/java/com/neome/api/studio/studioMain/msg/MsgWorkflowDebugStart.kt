@@ -8,7 +8,7 @@ package com.neome.api.studio.studioMain.msg
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgWorkflowDebugStart : Msg() {
-    val debugEntUserId: EntUserId
-    var setAsDefaultDebugUser: boolean? = null
+open class MsgWorkflowDebugStart : Msg() {
+    lateinit var debugEntUserId: EntUserId
+    var setAsDefaultDebugUser: Boolean? = null
 }

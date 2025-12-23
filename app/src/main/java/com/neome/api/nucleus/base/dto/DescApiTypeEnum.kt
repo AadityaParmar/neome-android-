@@ -5,6 +5,6 @@
 
 package com.neome.api.nucleus.base.dto
 
-class DescApiTypeEnum : DescApiType() {
-    val valueSet: string[]
+open class DescApiTypeEnum : DescApiType() {
+    lateinit var valueSet: Array<String>
 }

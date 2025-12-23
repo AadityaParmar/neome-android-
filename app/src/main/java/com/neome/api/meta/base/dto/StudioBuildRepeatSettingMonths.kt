@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.AnyTime
 import com.neome.api.meta.base.Types.EnumDefnDateOccurrence
 
-class StudioBuildRepeatSettingMonths : StudioBuildRepeatSetting() {
-    var customDateSet: number[]? = null
+open class StudioBuildRepeatSettingMonths : StudioBuildRepeatSetting() {
+    var customDateSet: Array<Number>? = null
     var dateOccurrence: EnumDefnDateOccurrence? = null
-    var setOfTime: AnyTime[]? = null
+    var setOfTime: Array<AnyTime>? = null
 }

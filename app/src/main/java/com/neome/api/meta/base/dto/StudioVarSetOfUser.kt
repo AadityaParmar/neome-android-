@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarSetOfUser : StudioVar() {
+open class StudioVarSetOfUser : StudioVar() {
     var value: StudioVarValueSetOfUser? = null
 }

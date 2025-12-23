@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnFieldOtp : DefnFieldEditable() {
-    var otpDigitSize: number? = null
+open class DefnFieldOtp : DefnFieldEditable() {
+    var otpDigitSize: Number? = null
 }

@@ -6,7 +6,8 @@
 package com.neome.api.nucleus.base.dto
 
 import com.neome.api.meta.base.Types.ServiceName
+import java.util.Map
 
-class DescApiModule {
-    val service: Record<ServiceName, DescApiService>
+open class DescApiModule {
+    lateinit var service: Map<ServiceName, DescApiService>
 }

@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.dto.FormValue
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigFormMappingResultGet : Sig() {
-    val formId: MetaIdForm
-    val formValue: FormValue
-    var outputFieldIdSet: MetaIdField[]? = null
+open class SigFormMappingResultGet : Sig() {
+    lateinit var formId: MetaIdForm
+    lateinit var formValue: FormValue
+    var outputFieldIdSet: Array<MetaIdField>? = null
 }

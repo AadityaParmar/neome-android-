@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class FieldValueMobile {
-    val value: string
+open class FieldValueMobile {
+    lateinit var value: String
 }

@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdExpertValidatePrompt : EntVdAi() {
+open class EntVdExpertValidatePrompt : EntVdAi() {
     var inputField: StudioDtoArgValueParameter? = null
 }

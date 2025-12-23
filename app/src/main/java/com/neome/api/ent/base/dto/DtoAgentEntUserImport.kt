@@ -8,12 +8,13 @@ package com.neome.api.ent.base.dto
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
+import java.util.Map
 
-class DtoAgentEntUserImport {
-    val entUserId: EntUserId
-    val handle: string
+open class DtoAgentEntUserImport {
+    lateinit var entUserId: EntUserId
+    lateinit var handle: String
     var managerId: EntUserId? = null
-    val nickName: string
-    var roleIdSet: MetaIdRole[]? = null
-    var userVariableValueMap: Record<MetaIdVar, any>? = null
+    lateinit var nickName: String
+    var roleIdSet: Array<MetaIdRole>? = null
+    var userVariableValueMap: Map<MetaIdVar, Any>? = null
 }

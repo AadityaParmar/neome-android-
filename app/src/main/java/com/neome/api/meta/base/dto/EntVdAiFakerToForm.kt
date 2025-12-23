@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdAiFakerToForm : EntVdAiWithOutput() {
+open class EntVdAiFakerToForm : EntVdAiWithOutput() {
     var outputForm: FormRefKey? = null
 }

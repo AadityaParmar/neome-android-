@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnStudioSetOfActionId : DefnField() {
+open class DefnStudioSetOfActionId : DefnField() {
 }

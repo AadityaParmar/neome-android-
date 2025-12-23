@@ -9,7 +9,7 @@ import com.neome.api.meta.base.AnyKey
 import com.neome.api.nucleus.base.Types.AnyOtpValue
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgOtpVerify : Msg() {
-    val otp: AnyOtpValue
-    val verifyKey: AnyKey
+open class MsgOtpVerify : Msg() {
+    lateinit var otp: AnyOtpValue
+    lateinit var verifyKey: AnyKey
 }

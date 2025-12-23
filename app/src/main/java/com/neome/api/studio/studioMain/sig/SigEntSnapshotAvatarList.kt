@@ -8,6 +8,6 @@ package com.neome.api.studio.studioMain.sig
 import com.neome.api.nucleus.base.sig.SigVersion
 import com.neome.api.studio.base.dto.SnapshotAvatar
 
-class SigEntSnapshotAvatarList : SigVersion() {
-    val snapshotAvatarList: SnapshotAvatar[]
+open class SigEntSnapshotAvatarList : SigVersion() {
+    lateinit var snapshotAvatarList: Array<SnapshotAvatar>
 }

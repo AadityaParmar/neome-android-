@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdComposite
 import com.neome.api.meta.base.Types.MetaIdField
 
-class StudioDtoArgValueField : StudioDtoArgValue() {
+open class StudioDtoArgValueField : StudioDtoArgValue() {
     var compositeId: MetaIdComposite? = null
-    val fieldId: MetaIdField
-    var valuePathArray: string[]? = null
+    lateinit var fieldId: MetaIdField
+    var valuePathArray: Array<String>? = null
 }

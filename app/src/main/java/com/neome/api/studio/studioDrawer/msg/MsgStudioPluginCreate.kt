@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.PluginBundleId
 import com.neome.api.meta.base.dto.StudioPlugin
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgStudioPluginCreate : Msg() {
-    val adminId: AdminId
-    val pluginBundleId: PluginBundleId
-    val studioPlugin: StudioPlugin
+open class MsgStudioPluginCreate : Msg() {
+    lateinit var adminId: AdminId
+    lateinit var pluginBundleId: PluginBundleId
+    lateinit var studioPlugin: StudioPlugin
 }

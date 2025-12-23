@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
 
-class DefnFieldColor : DefnFieldEditable() {
+open class DefnFieldColor : DefnFieldEditable() {
     var defaultFieldId: MetaIdField? = null
-    var defaultValue: string? = null
+    var defaultValue: String? = null
 }

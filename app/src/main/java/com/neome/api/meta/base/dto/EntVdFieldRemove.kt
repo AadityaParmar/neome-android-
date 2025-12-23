@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdFieldRemove : EntVdAutoStep() {
+open class EntVdFieldRemove : EntVdAutoStep() {
     var field: StudioDtoArgValueParameter? = null
 }

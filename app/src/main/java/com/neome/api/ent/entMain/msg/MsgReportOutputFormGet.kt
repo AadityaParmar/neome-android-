@@ -11,8 +11,8 @@ import com.neome.api.meta.base.Types.RowId
 import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgReportOutputFormGet : Msg() {
-    val actionId: MetaIdAction
+open class MsgReportOutputFormGet : Msg() {
+    lateinit var actionId: MetaIdAction
     var inputFormCompositeId: MetaIdComposite? = null
     var inputFormGridRowId: RowId? = null
     var inputFormValue: FormValueRaw? = null

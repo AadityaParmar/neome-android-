@@ -8,8 +8,9 @@ package com.neome.api.ent.base.dto
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.MetaIdVdAutoDia
 import com.neome.api.meta.base.Types.MetaIdVdAutoNode
+import java.util.Map
 
-class DtoWorkflowDebugConfig {
-    val breakpointMap: Record<MetaIdVdAutoDia, MetaIdVdAutoNode[]>
+open class DtoWorkflowDebugConfig {
+    lateinit var breakpointMap: Map<MetaIdVdAutoDia, Array<MetaIdVdAutoNode>>
     var defaultDebugEntUserId: EntUserId? = null
 }

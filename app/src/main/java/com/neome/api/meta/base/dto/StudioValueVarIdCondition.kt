@@ -6,9 +6,8 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdVar
-import com.neome.api.meta.base.dto.StudioBase
 
-class StudioValueVarIdCondition : StudioBase() {
-    val condVarId: MetaIdVar
-    var negation: boolean? = null
+open class StudioValueVarIdCondition : StudioBase() {
+    lateinit var condVarId: MetaIdVar
+    var negation: Boolean? = null
 }

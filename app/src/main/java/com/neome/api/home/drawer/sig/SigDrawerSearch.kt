@@ -11,12 +11,14 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.RowId
 import com.neome.api.meta.base.dto.FormValue
 import com.neome.api.nucleus.base.sig.Sig
+import java.util.Map
+import kotlin.properties.Delegates
 
-class SigDrawerSearch : Sig() {
-    var auditRecordMap: Record<EntId, Record<MetaIdSpreadsheet, FormValue[]>>? = null
-    var groupAvatarList: SigGroupAvatar[]? = null
-    var latestMessageMap: Record<EntId, DtoChatMessageListMap>? = null
-    var spreadsheetRowMap: Record<EntId, Record<MetaIdSpreadsheet, RowId[]>>? = null
-    val totalMessageCount: number
-    var userAvatarList: SigUserAvatar[]? = null
+open class SigDrawerSearch : Sig() {
+    var auditRecordMap: Map<EntId, Map<MetaIdSpreadsheet, Array<FormValue>>>? = null
+    var groupAvatarList: Array<SigGroupAvatar>? = null
+    var latestMessageMap: Map<EntId, DtoChatMessageListMap>? = null
+    var spreadsheetRowMap: Map<EntId, Map<MetaIdSpreadsheet, Array<RowId>>>? = null
+    var totalMessageCount: Number by Delegates.notNull<Number>()
+    var userAvatarList: Array<SigUserAvatar>? = null
 }

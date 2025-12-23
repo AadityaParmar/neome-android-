@@ -10,11 +10,11 @@ import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.dto.FormValue
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigReportOutputFormGet : Sig() {
-    val formId: MetaIdForm
-    val formValue: FormValue
+open class SigReportOutputFormGet : Sig() {
+    lateinit var formId: MetaIdForm
+    lateinit var formValue: FormValue
     var outputFormContentLayoutId: MetaIdLayoutForm? = null
     var outputFormTemplateLayoutId: MetaIdLayoutForm? = null
-    var reportLabel: string? = null
-    val reportName: string
+    var reportLabel: String? = null
+    lateinit var reportName: String
 }

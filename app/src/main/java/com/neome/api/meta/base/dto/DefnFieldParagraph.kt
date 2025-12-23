@@ -7,18 +7,18 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
 
-class DefnFieldParagraph : DefnFieldEditable() {
+open class DefnFieldParagraph : DefnFieldEditable() {
     var defaultFieldId: MetaIdField? = null
-    var defaultValue: string? = null
+    var defaultValue: String? = null
     var defaultVar: DefnDtoParagraph? = null
-    var flexHeight: boolean? = null
-    var lineCount: number? = null
+    var flexHeight: Boolean? = null
+    var lineCount: Number? = null
     var lineCountFieldId: MetaIdField? = null
-    var lineCountVar: number? = null
-    var maxCharCount: number? = null
+    var lineCountVar: Number? = null
+    var maxCharCount: Number? = null
     var maxCharCountFieldId: MetaIdField? = null
-    var maxCharCountVar: number? = null
-    var minCharCount: number? = null
+    var maxCharCountVar: Number? = null
+    var minCharCount: Number? = null
     var minCharCountFieldId: MetaIdField? = null
-    var minCharCountVar: number? = null
+    var minCharCountVar: Number? = null
 }

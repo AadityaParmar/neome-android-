@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnRefSetOperationKind
 import com.neome.api.meta.base.Types.EnumDefnSortOrder
 
-class EntVdFieldRefSetSet : EntVdAutoStep() {
+open class EntVdFieldRefSetSet : EntVdAutoStep() {
     var inputField: StudioDtoArgValueParameter? = null
     var operation: EnumDefnRefSetOperationKind? = null
     var outputField: StudioDtoArgValueParameter? = null

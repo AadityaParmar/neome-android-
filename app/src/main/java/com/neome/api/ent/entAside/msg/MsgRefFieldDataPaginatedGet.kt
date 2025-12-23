@@ -16,19 +16,19 @@ import com.neome.api.meta.base.Types.RowId
 import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgRefFieldDataPaginatedGet : Msg() {
-    var ascOrder: boolean? = null
+open class MsgRefFieldDataPaginatedGet : Msg() {
+    var ascOrder: Boolean? = null
     var filterValue: SpreadsheetFilterComposite? = null
-    val formId: MetaIdForm
-    var includeFilters: boolean? = null
+    lateinit var formId: MetaIdForm
+    var includeFilters: Boolean? = null
     var inputFormCompositeId: MetaIdComposite? = null
     var inputFormGridRowId: RowId? = null
-    val inputFormValueRaw: FormValueRaw
+    lateinit var inputFormValueRaw: FormValueRaw
     var layoutSpreadsheetId: MetaIdLayoutGrid? = null
     var orderByFieldId: MetaIdField? = null
-    var pageNumber: number? = null
-    var pageSize: number? = null
-    val refFieldId: MetaIdComp
-    var searchText: string? = null
+    var pageNumber: Number? = null
+    var pageSize: Number? = null
+    lateinit var refFieldId: MetaIdComp
+    var searchText: String? = null
     var targetSpreadsheetId: MetaIdSpreadsheet? = null
 }

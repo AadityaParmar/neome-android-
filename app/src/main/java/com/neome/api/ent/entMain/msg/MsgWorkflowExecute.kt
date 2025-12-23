@@ -10,8 +10,8 @@ import com.neome.api.meta.base.dto.EntVdWorkflowPointer
 import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgWorkflowExecute : Msg() {
+open class MsgWorkflowExecute : Msg() {
     var automationId: MetaIdAutomation? = null
-    val formValue: FormValueRaw
+    lateinit var formValue: FormValueRaw
     var workflowPointer: EntVdWorkflowPointer? = null
 }

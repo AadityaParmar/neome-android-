@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnThemeDirection
 
-class DefnStudioBuildColor : DefnField() {
-    var allowShades: boolean? = null
+open class DefnStudioBuildColor : DefnField() {
+    var allowShades: Boolean? = null
     var direction: EnumDefnThemeDirection? = null
 }

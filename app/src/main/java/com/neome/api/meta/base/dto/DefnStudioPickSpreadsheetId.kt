@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class DefnStudioPickSpreadsheetId : DefnFieldEditable() {
-    var excludeSpreadsheetIdSet: MetaIdSpreadsheet[]? = null
-    var showAlias: boolean? = null
+open class DefnStudioPickSpreadsheetId : DefnFieldEditable() {
+    var excludeSpreadsheetIdSet: Array<MetaIdSpreadsheet>? = null
+    var showAlias: Boolean? = null
 }

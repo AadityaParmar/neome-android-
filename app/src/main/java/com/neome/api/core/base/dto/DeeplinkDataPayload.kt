@@ -7,6 +7,6 @@ package com.neome.api.core.base.dto
 
 import com.neome.api.core.base.Types.EnumDeeplinkActionType
 
-class DeeplinkDataPayload {
-    val deeplinkActionType: EnumDeeplinkActionType
+open class DeeplinkDataPayload {
+    lateinit var deeplinkActionType: EnumDeeplinkActionType
 }

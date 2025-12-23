@@ -8,8 +8,9 @@ package com.neome.api.home.drawer.sig
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.dto.EnvValidationError
 import com.neome.api.nucleus.base.sig.Sig
+import java.util.Map
 
-class SigBulkUserAvatar : Sig() {
-    var errorMap: Record<EntUserId, EnvValidationError>? = null
-    var resultMap: Record<EntUserId, SigUserAvatar>? = null
+open class SigBulkUserAvatar : Sig() {
+    var errorMap: Map<EntUserId, EnvValidationError>? = null
+    var resultMap: Map<EntUserId, SigUserAvatar>? = null
 }

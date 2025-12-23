@@ -6,9 +6,10 @@
 package com.neome.api.core.user.sig
 
 import com.neome.api.nucleus.base.sig.Sig
+import kotlin.properties.Delegates
 
-class SigBearerToken : Sig() {
-    val bearerToken: string
+open class SigBearerToken : Sig() {
+    lateinit var bearerToken: String
     var caller: SigCaller? = null
-    val updateRefreshToken: boolean
+    var updateRefreshToken: Boolean by Delegates.notNull<Boolean>()
 }

@@ -7,8 +7,8 @@ package com.neome.api.core.base.dto
 
 import com.neome.api.meta.base.Types.MediaIdAvatar
 
-class DtoDeeplinkAvatar {
-    var about: string? = null
+open class DtoDeeplinkAvatar {
+    var about: String? = null
     var mediaIdAvatar: MediaIdAvatar? = null
-    var name: string? = null
+    var name: String? = null
 }

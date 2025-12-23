@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioBuildRepeatSettingMinutes : StudioBuildRepeatSetting() {
+open class StudioBuildRepeatSettingMinutes : StudioBuildRepeatSetting() {
 }

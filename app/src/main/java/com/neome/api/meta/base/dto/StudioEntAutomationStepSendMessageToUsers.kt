@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioEntAutomationStepSendMessageToUsers :
+open class StudioEntAutomationStepSendMessageToUsers :
     StudioEntAutomationStepSendMessageWithSenderField() {
-    var dataSourceRoleIdSet: MetaIdRole[]? = null
+    var dataSourceRoleIdSet: Array<MetaIdRole>? = null
     var setOfUserVarId: MetaIdVar? = null
     var targetUserDataSourcePipelineVarId: MetaIdPipelineParam? = null
 }

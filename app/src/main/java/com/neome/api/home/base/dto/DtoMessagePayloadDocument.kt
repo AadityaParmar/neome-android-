@@ -6,10 +6,11 @@
 package com.neome.api.home.base.dto
 
 import com.neome.api.meta.base.Types.MediaIdDocument
+import kotlin.properties.Delegates
 
-class DtoMessagePayloadDocument : DtoMessagePayload() {
-    val fileExt: string
-    val fileName: string
-    val fileSize: number
-    val mediaIdDocument: MediaIdDocument
+open class DtoMessagePayloadDocument : DtoMessagePayload() {
+    lateinit var fileExt: String
+    lateinit var fileName: String
+    var fileSize: Number by Delegates.notNull<Number>()
+    lateinit var mediaIdDocument: MediaIdDocument
 }

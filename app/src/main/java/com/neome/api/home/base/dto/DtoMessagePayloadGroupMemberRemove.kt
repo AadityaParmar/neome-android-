@@ -5,7 +5,7 @@
 
 package com.neome.api.home.base.dto
 
-class DtoMessagePayloadGroupMemberRemove : DtoMessagePayload() {
-    val initiatorMember: DtoGroupMemberKey
-    val targetMember: DtoGroupMemberKey
+open class DtoMessagePayloadGroupMemberRemove : DtoMessagePayload() {
+    lateinit var initiatorMember: DtoGroupMemberKey
+    lateinit var targetMember: DtoGroupMemberKey
 }

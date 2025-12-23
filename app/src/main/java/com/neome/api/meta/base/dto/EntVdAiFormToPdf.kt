@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdAiFormToPdf : EntVdAi() {
+open class EntVdAiFormToPdf : EntVdAi() {
     var outputField: StudioDtoArgValueParameter? = null
 }

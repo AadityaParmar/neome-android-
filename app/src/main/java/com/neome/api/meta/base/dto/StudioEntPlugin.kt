@@ -12,22 +12,23 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.Types.PluginApiId
 import com.neome.api.meta.base.Types.PluginBundleId
 import com.neome.api.meta.base.Types.PluginId
+import java.util.Map
 
-class StudioEntPlugin : StudioEntImport() {
-    val mode: EnumDefnPluginMode
-    var pluginAbout: string? = null
-    val pluginApiIdKeys: PluginApiId[]
-    val pluginApiIdMap: Record<PluginApiId, StudioEntPluginApi>
+open class StudioEntPlugin : StudioEntImport() {
+    lateinit var mode: EnumDefnPluginMode
+    var pluginAbout: String? = null
+    lateinit var pluginApiIdKeys: Array<PluginApiId>
+    lateinit var pluginApiIdMap: Map<PluginApiId, StudioEntPluginApi>
     var pluginAvatarId: MediaIdAvatar? = null
-    val pluginBundleId: PluginBundleId
+    lateinit var pluginBundleId: PluginBundleId
     var pluginConfigFormId: MetaIdForm? = null
-    val pluginFormKeys: MetaIdForm[]
-    val pluginFormMap: Record<MetaIdForm, DefnForm>
-    val pluginId: PluginId
-    val pluginName: string
+    lateinit var pluginFormKeys: Array<MetaIdForm>
+    lateinit var pluginFormMap: Map<MetaIdForm, DefnForm>
+    lateinit var pluginId: PluginId
+    lateinit var pluginName: String
     var pluginResourceMap: StudioEntPluginResourceMap? = null
-    val pluginVarKeys: MetaIdVar[]
-    val pluginVarMap: Record<MetaIdVar, StudioVar>
-    val pluginVersion: string
-    var singleton: boolean? = null
+    lateinit var pluginVarKeys: Array<MetaIdVar>
+    lateinit var pluginVarMap: Map<MetaIdVar, StudioVar>
+    lateinit var pluginVersion: String
+    var singleton: Boolean? = null
 }

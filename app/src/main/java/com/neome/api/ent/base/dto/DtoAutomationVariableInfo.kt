@@ -10,10 +10,10 @@ import com.neome.api.meta.base.dto.DefnForm
 import com.neome.api.meta.base.dto.DtoLogTree
 import com.neome.api.meta.base.dto.FormValueRaw
 
-class DtoAutomationVariableInfo {
-    val form: DefnForm
+open class DtoAutomationVariableInfo {
+    lateinit var form: DefnForm
     var formValue: FormValueRaw? = null
     var formValueLogTree: DtoLogTree? = null
-    val name: string
+    lateinit var name: String
     var pipelineVarId: MetaIdPipelineParam? = null
 }

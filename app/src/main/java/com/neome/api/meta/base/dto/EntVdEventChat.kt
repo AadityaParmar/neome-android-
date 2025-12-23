@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdEventChat : EntVdEvent() {
+open class EntVdEventChat : EntVdEvent() {
 }

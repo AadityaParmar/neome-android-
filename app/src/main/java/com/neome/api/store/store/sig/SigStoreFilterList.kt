@@ -8,6 +8,6 @@ package com.neome.api.store.store.sig
 import com.neome.api.meta.base.Types.EnumStoreLabel
 import com.neome.api.nucleus.base.sig.SigVersion
 
-class SigStoreFilterList : SigVersion() {
-    val storeFilterSet: EnumStoreLabel[]
+open class SigStoreFilterList : SigVersion() {
+    lateinit var storeFilterSet: Array<EnumStoreLabel>
 }

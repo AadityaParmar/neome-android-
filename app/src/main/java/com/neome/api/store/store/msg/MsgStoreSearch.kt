@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.EnumStoreLabel
 import com.neome.api.meta.base.Types.StoreItemId
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgStoreSearch : Msg() {
+open class MsgStoreSearch : Msg() {
     var artifactKind: EnumStoreItemArtifact? = null
-    var filterStoreItemIdSet: StoreItemId[]? = null
-    val query: string
-    val searchId: string
-    var storeLabelSet: EnumStoreLabel[]? = null
+    var filterStoreItemIdSet: Array<StoreItemId>? = null
+    lateinit var query: String
+    lateinit var searchId: String
+    var storeLabelSet: Array<EnumStoreLabel>? = null
 }

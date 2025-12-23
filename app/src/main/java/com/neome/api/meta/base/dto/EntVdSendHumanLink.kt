@@ -8,15 +8,15 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnKindChannelType
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 
-class EntVdSendHumanLink : EntVdAutoStepWithOutputAndError() {
+open class EntVdSendHumanLink : EntVdAutoStepWithOutputAndError() {
     var embedFormParamId: MetaIdPipelineParam? = null
     var expiryDatetime: FieldDtoDuration? = null
     var fromHandle: StudioBuildArgBinder? = null
-    var maxClicks: number? = null
+    var maxClicks: Number? = null
     var message: StudioValueParagraph? = null
-    var reminders: number? = null
+    var reminders: Number? = null
     var sender: StudioBuildArgBinder? = null
-    var targetChannels: EnumDefnKindChannelType[]? = null
+    var targetChannels: Array<EnumDefnKindChannelType>? = null
     var title: StudioValueText? = null
     var toHandle: StudioBuildArgBinder? = null
 }

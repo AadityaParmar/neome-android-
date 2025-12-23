@@ -8,7 +8,8 @@ package com.neome.api.ent.entDrawer.sig
 import com.neome.api.ent.base.dto.DtoEntDeploy
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.sig.Sig
+import java.util.Map
 
-class SigEntDeployListGet : Sig() {
-    val entMap: Record<EntId, DtoEntDeploy>
+open class SigEntDeployListGet : Sig() {
+    lateinit var entMap: Map<EntId, DtoEntDeploy>
 }

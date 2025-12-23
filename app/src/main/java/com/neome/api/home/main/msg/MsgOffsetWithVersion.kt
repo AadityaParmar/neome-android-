@@ -7,8 +7,9 @@ package com.neome.api.home.main.msg
 
 import com.neome.api.core.base.msg.MsgVersion
 import com.neome.api.meta.base.Types.ChatId
+import kotlin.properties.Delegates
 
-class MsgOffsetWithVersion : MsgVersion() {
-    val chatId: ChatId
-    val offset: number
+open class MsgOffsetWithVersion : MsgVersion() {
+    lateinit var chatId: ChatId
+    var offset: Number by Delegates.notNull<Number>()
 }

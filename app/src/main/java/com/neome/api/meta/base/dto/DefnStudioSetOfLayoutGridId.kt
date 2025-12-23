@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnStudioSetOfLayoutGridId : DefnField() {
+open class DefnStudioSetOfLayoutGridId : DefnField() {
 }

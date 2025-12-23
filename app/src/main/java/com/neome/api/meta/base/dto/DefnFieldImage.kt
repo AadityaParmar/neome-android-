@@ -7,22 +7,22 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
 
-class DefnFieldImage : DefnFieldEditable() {
+open class DefnFieldImage : DefnFieldEditable() {
     var defaultImage: FieldDtoImage? = null
     var defaultImageFieldId: MetaIdField? = null
     var defaultImageVar: FieldDtoImage? = null
-    var flexWidth: boolean? = null
-    var height: number? = null
-    var maxSize: number? = null
+    var flexWidth: Boolean? = null
+    var height: Number? = null
+    var maxSize: Number? = null
     var maxSizeFieldId: MetaIdField? = null
-    var maxSizeVar: number? = null
-    var showLabel: boolean? = null
+    var maxSizeVar: Number? = null
+    var showLabel: Boolean? = null
     var showLabelFieldId: MetaIdField? = null
-    var showLabelVar: boolean? = null
-    var showPreview: boolean? = null
+    var showLabelVar: Boolean? = null
+    var showPreview: Boolean? = null
     var showPreviewFieldId: MetaIdField? = null
-    var showPreviewVar: boolean? = null
-    var showSize: boolean? = null
+    var showPreviewVar: Boolean? = null
+    var showSize: Boolean? = null
     var showSizeFieldId: MetaIdField? = null
-    var showSizeVar: boolean? = null
+    var showSizeVar: Boolean? = null
 }

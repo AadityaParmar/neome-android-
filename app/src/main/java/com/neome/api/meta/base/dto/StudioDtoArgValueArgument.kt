@@ -8,9 +8,9 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnArgBinderArgument
 import com.neome.api.meta.base.Types.MetaIdField
 
-class StudioDtoArgValueArgument : StudioDtoArgValue() {
-    val arg1: EnumDefnArgBinderArgument
+open class StudioDtoArgValueArgument : StudioDtoArgValue() {
+    lateinit var arg1: EnumDefnArgBinderArgument
     var arg2: EnumDefnArgBinderArgument? = null
-    val fieldId: MetaIdField
-    var valuePathArray: string[]? = null
+    lateinit var fieldId: MetaIdField
+    var valuePathArray: Array<String>? = null
 }

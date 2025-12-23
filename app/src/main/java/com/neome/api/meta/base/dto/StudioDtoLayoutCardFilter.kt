@@ -9,11 +9,11 @@ import com.neome.api.meta.base.Types.EnumDefnLayoutCardFilterKind
 import com.neome.api.meta.base.Types.EnumDefnSortOrder
 import com.neome.api.meta.base.Types.MetaIdField
 
-class StudioDtoLayoutCardFilter : StudioBase() {
-    var advanceFilterFieldIdSet: MetaIdField[]? = null
-    var categoryFieldIdSet: MetaIdField[]? = null
+open class StudioDtoLayoutCardFilter : StudioBase() {
+    var advanceFilterFieldIdSet: Array<MetaIdField>? = null
+    var categoryFieldIdSet: Array<MetaIdField>? = null
     var kind: EnumDefnLayoutCardFilterKind? = null
-    var showSearchBar: boolean? = null
-    var sortByFieldIdSet: MetaIdField[]? = null
+    var showSearchBar: Boolean? = null
+    var sortByFieldIdSet: Array<MetaIdField>? = null
     var sortOrder: EnumDefnSortOrder? = null
 }

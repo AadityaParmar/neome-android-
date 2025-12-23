@@ -5,9 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
-class FieldDtoTreeNode : StudioBase() {
-    val keys: string[]
-    val map: Record<string, FieldDtoTreeNode>
-    val metaId: string
-    var value: string? = null
+import java.util.Map
+
+open class FieldDtoTreeNode : StudioBase() {
+    lateinit var keys: Array<String>
+    lateinit var map: Map<String, FieldDtoTreeNode>
+    lateinit var metaId: String
+    var value: String? = null
 }

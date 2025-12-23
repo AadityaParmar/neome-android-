@@ -12,10 +12,10 @@ import com.neome.api.meta.base.Types.RowId
 import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgButtonWorkflowExecute : Msg() {
-    val buttonFieldId: MetaIdField
-    val buttonFormId: MetaIdForm
-    val formValue: FormValueRaw
+open class MsgButtonWorkflowExecute : Msg() {
+    lateinit var buttonFieldId: MetaIdField
+    lateinit var buttonFormId: MetaIdForm
+    lateinit var formValue: FormValueRaw
     var fromGridId: MetaIdGrid? = null
     var fromGridRowId: RowId? = null
 }

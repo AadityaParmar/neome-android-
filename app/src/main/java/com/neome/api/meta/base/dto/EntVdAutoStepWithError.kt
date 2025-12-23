@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnNodeTerminateKind
 
-class EntVdAutoStepWithError : EntVdAutoStep() {
+open class EntVdAutoStepWithError : EntVdAutoStep() {
     var terminateKind: EnumDefnNodeTerminateKind? = null
 }

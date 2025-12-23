@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdExpertDebugLog : EntVdAutoStep() {
+open class EntVdExpertDebugLog : EntVdAutoStep() {
     var message: StudioValueParagraph? = null
 }

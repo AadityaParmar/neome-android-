@@ -5,7 +5,7 @@
 
 package com.neome.api.home.base.dto
 
-class DtoUserAddrBookOtherContact {
-    val handle: string
-    val nickName: string
+open class DtoUserAddrBookOtherContact {
+    lateinit var handle: String
+    lateinit var nickName: String
 }

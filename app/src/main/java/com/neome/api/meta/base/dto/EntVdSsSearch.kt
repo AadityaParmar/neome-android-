@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class EntVdSsSearch : EntVdAutoStepWithOutput() {
-    var maxResultCount: number? = null
-    var searchSpreadsheetIdSet: MetaIdSpreadsheet[]? = null
+open class EntVdSsSearch : EntVdAutoStepWithOutput() {
+    var maxResultCount: Number? = null
+    var searchSpreadsheetIdSet: Array<MetaIdSpreadsheet>? = null
     var searchText: StudioBuildArgBinder? = null
 }

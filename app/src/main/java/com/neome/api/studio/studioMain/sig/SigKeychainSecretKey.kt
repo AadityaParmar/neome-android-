@@ -7,6 +7,6 @@ package com.neome.api.studio.studioMain.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigKeychainSecretKey : Sig() {
-    val secretKey: string
+open class SigKeychainSecretKey : Sig() {
+    lateinit var secretKey: String
 }

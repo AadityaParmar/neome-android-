@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdBranchSwitchPrompt : EntVdAutoStepWithError() {
+open class EntVdBranchSwitchPrompt : EntVdAutoStepWithError() {
     var field: StudioDtoArgValueParameter? = null
     var promptMap: EntVdPromptMap? = null
 }

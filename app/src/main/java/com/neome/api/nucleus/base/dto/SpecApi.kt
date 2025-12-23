@@ -17,39 +17,40 @@ import com.neome.api.nucleus.base.Types.EnumArtifactMemberType
 import com.neome.api.nucleus.base.Types.EnumConnType
 import com.neome.api.nucleus.base.Types.EnumDeployKind
 import com.neome.api.nucleus.base.Types.EnumScopeType
+import kotlin.properties.Delegates
 
-class SpecApi {
-    val allowedConnTypes: EnumConnType[]
-    val allowedDeployKinds: EnumDeployKind[]
-    val allowedDeviceTypes: EnumDeviceType[]
-    var apiDesc: string? = null
-    val apiMethod: EnumApiMethod
-    val apiName: string
-    val apiVer: EnumApiVer
-    val artifactMembers: EnumArtifactMemberType[]
-    val canBeAccessedViaDeeplink: boolean
-    val internal: boolean
-    var isDeprecated: boolean? = null
-    val logMsg: boolean
-    val module: string
-    var msgClassName: string? = null
-    var msgSchema: string? = null
+open class SpecApi {
+    lateinit var allowedConnTypes: Array<EnumConnType>
+    lateinit var allowedDeployKinds: Array<EnumDeployKind>
+    lateinit var allowedDeviceTypes: Array<EnumDeviceType>
+    var apiDesc: String? = null
+    lateinit var apiMethod: EnumApiMethod
+    lateinit var apiName: String
+    lateinit var apiVer: EnumApiVer
+    lateinit var artifactMembers: Array<EnumArtifactMemberType>
+    var canBeAccessedViaDeeplink: Boolean by Delegates.notNull<Boolean>()
+    var internal: Boolean by Delegates.notNull<Boolean>()
+    var isDeprecated: Boolean? = null
+    var logMsg: Boolean by Delegates.notNull<Boolean>()
+    lateinit var module: String
+    var msgClassName: String? = null
+    var msgSchema: String? = null
     var msgSpec: SpecMsg? = null
-    val publishes: string[]
-    val rateLimitPerSec: number
-    val requiredEntAdminScopes: EnumDefnAdminDoNotOptionEnt[]
-    val requiredPluginAdminScopes: EnumDefnAdminDoNotOptionPlugin[]
-    val requiredStoreAdminScopes: EnumDefnAdminDoNotOptionStoreItem[]
-    val rpcUri: string
-    val scope: EnumScopeType
-    val serviceName: ServiceName
-    var sigClassName: string? = null
-    var sigSchema: string? = null
-    val sigSpec: SpecSig
-    var skipEntLockCheck: boolean? = null
-    val skipEntUserAuthorization: boolean
-    val skipInputValidation: boolean
-    val sla: number
-    val timeout: number
-    val token: EnumApiToken
+    lateinit var publishes: Array<String>
+    var rateLimitPerSec: Number by Delegates.notNull<Number>()
+    lateinit var requiredEntAdminScopes: Array<EnumDefnAdminDoNotOptionEnt>
+    lateinit var requiredPluginAdminScopes: Array<EnumDefnAdminDoNotOptionPlugin>
+    lateinit var requiredStoreAdminScopes: Array<EnumDefnAdminDoNotOptionStoreItem>
+    lateinit var rpcUri: String
+    lateinit var scope: EnumScopeType
+    lateinit var serviceName: ServiceName
+    var sigClassName: String? = null
+    var sigSchema: String? = null
+    lateinit var sigSpec: SpecSig
+    var skipEntLockCheck: Boolean? = null
+    var skipEntUserAuthorization: Boolean by Delegates.notNull<Boolean>()
+    var skipInputValidation: Boolean by Delegates.notNull<Boolean>()
+    var sla: Number by Delegates.notNull<Number>()
+    var timeout: Number by Delegates.notNull<Number>()
+    lateinit var token: EnumApiToken
 }

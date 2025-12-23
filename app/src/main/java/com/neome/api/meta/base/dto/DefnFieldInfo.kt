@@ -8,24 +8,24 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnThemeDividerKind
 import com.neome.api.meta.base.Types.MetaIdField
 
-class DefnFieldInfo : DefnFieldLabel() {
+open class DefnFieldInfo : DefnFieldLabel() {
     var bottomPadding: EnumDefnThemeDividerKind? = null
     var bottomPaddingVar: EnumDefnThemeDividerKind? = null
     var defaultFieldId: MetaIdField? = null
-    var defaultValue: string? = null
+    var defaultValue: String? = null
     var defaultVar: DefnDtoParagraph? = null
-    var flexGrow: boolean? = null
+    var flexGrow: Boolean? = null
     var labelPatternVar: DefnDtoText? = null
     var leftPadding: EnumDefnThemeDividerKind? = null
     var leftPaddingVar: EnumDefnThemeDividerKind? = null
-    var lineCount: number? = null
+    var lineCount: Number? = null
     var lineCountFieldId: MetaIdField? = null
-    var lineCountVar: number? = null
+    var lineCountVar: Number? = null
     var rightPadding: EnumDefnThemeDividerKind? = null
     var rightPaddingVar: EnumDefnThemeDividerKind? = null
-    var showBorder: boolean? = null
-    var showCloseButton: boolean? = null
-    var showLabel: boolean? = null
+    var showBorder: Boolean? = null
+    var showCloseButton: Boolean? = null
+    var showLabel: Boolean? = null
     var topPadding: EnumDefnThemeDividerKind? = null
     var topPaddingVar: EnumDefnThemeDividerKind? = null
 }

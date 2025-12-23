@@ -8,6 +8,6 @@ package com.neome.api.studio.studioMain.msg
 import com.neome.api.meta.base.Types.KeychainId
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgKeychainRemove : Msg() {
-    val keychainId: KeychainId
+open class MsgKeychainRemove : Msg() {
+    lateinit var keychainId: KeychainId
 }

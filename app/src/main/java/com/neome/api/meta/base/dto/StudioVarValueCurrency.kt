@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.CurrencyKey
 
-class StudioVarValueCurrency : StudioBase() {
-    val value: CurrencyKey
+open class StudioVarValueCurrency : StudioBase() {
+    lateinit var value: CurrencyKey
 }

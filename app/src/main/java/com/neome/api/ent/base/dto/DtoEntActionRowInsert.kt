@@ -9,13 +9,14 @@ import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import java.util.Map
 
-class DtoEntActionRowInsert : DtoEntAction() {
-    var defaultValueMap: Record<MetaIdComp, any>? = null
+open class DtoEntActionRowInsert : DtoEntAction() {
+    var defaultValueMap: Map<MetaIdComp, Any>? = null
     var formEditorLayoutId: MetaIdLayoutForm? = null
-    var hasPartitions: boolean? = null
+    var hasPartitions: Boolean? = null
     var mobileFormEditorLayoutId: MetaIdLayoutForm? = null
-    var sendMessageToInbox: boolean? = null
-    val spreadsheetFormId: MetaIdForm
-    val spreadsheetId: MetaIdSpreadsheet
+    var sendMessageToInbox: Boolean? = null
+    lateinit var spreadsheetFormId: MetaIdForm
+    lateinit var spreadsheetId: MetaIdSpreadsheet
 }

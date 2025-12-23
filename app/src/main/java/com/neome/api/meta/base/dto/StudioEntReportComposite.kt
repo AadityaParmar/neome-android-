@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdReport
 
-class StudioEntReportComposite : StudioEntReport() {
-    var mergeReportIdSet: MetaIdReport[]? = null
+open class StudioEntReportComposite : StudioEntReport() {
+    var mergeReportIdSet: Array<MetaIdReport>? = null
 }

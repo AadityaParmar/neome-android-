@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.Types.PluginApiId
 
-class DefnDtoPluginApi {
-    val metaIdPlugin: MetaIdPlugin
-    val pluginApiId: PluginApiId
+open class DefnDtoPluginApi {
+    lateinit var metaIdPlugin: MetaIdPlugin
+    lateinit var pluginApiId: PluginApiId
 }

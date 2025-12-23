@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.GhostId
+import java.util.Map
 
-class EntVdFormMap : StudioBase() {
-    val keys: GhostId[]
-    val map: Record<GhostId, EntVdForm>
+open class EntVdFormMap : StudioBase() {
+    lateinit var keys: Array<GhostId>
+    lateinit var map: Map<GhostId, EntVdForm>
 }

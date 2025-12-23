@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdPipelineVar
+import java.util.Map
 
-class EntVdPipelineVarMap : StudioBase() {
-    val keys: MetaIdPipelineVar[]
-    val map: Record<MetaIdPipelineVar, EntVdPipelineVar>
+open class EntVdPipelineVarMap : StudioBase() {
+    lateinit var keys: Array<MetaIdPipelineVar>
+    lateinit var map: Map<MetaIdPipelineVar, EntVdPipelineVar>
 }

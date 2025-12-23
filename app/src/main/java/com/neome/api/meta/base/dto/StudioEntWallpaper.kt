@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MediaIdImage
 
-class StudioEntWallpaper : StudioBase() {
-    var repeatTile: boolean? = null
+open class StudioEntWallpaper : StudioBase() {
+    var repeatTile: Boolean? = null
     var wallpaperImageId: MediaIdImage? = null
 }

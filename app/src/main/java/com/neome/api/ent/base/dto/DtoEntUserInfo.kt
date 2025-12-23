@@ -9,12 +9,12 @@ import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.MediaId
 import com.neome.api.meta.base.Types.MetaIdRole
 
-class DtoEntUserInfo {
+open class DtoEntUserInfo {
     var avatarId: MediaId? = null
-    val entUserId: EntUserId
-    var handle: string? = null
+    lateinit var entUserId: EntUserId
+    var handle: String? = null
     var managerId: EntUserId? = null
-    val nickName: string
-    var roleIdSet: MetaIdRole[]? = null
-    val userColor: string
+    lateinit var nickName: String
+    var roleIdSet: Array<MetaIdRole>? = null
+    lateinit var userColor: String
 }

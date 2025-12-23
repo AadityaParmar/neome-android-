@@ -8,11 +8,12 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdModule
 import com.neome.api.meta.base.Types.MetaIdVdNote
 import com.neome.api.meta.base.Types.MetaIdVdRegion
+import java.util.Map
 
-class EntVdDia : StudioBase() {
-    var isDefault: boolean? = null
+open class EntVdDia : StudioBase() {
+    var isDefault: Boolean? = null
     var moduleId: MetaIdModule? = null
-    val noteMap: Record<MetaIdVdNote, EntVdNote>
-    val regionMap: Record<MetaIdVdRegion, EntVdRegion>
+    lateinit var noteMap: Map<MetaIdVdNote, EntVdNote>
+    lateinit var regionMap: Map<MetaIdVdRegion, EntVdRegion>
     var viewport: EntVdViewport? = null
 }

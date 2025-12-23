@@ -14,17 +14,17 @@ import com.neome.api.meta.base.Types.RowId
 import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgSpreadsheetRowsPageGet : Msg() {
-    val actionId: MetaIdAction
-    var ascOrder: boolean? = null
+open class MsgSpreadsheetRowsPageGet : Msg() {
+    lateinit var actionId: MetaIdAction
+    var ascOrder: Boolean? = null
     var filterValue: SpreadsheetFilterComposite? = null
-    var includeFilters: boolean? = null
+    var includeFilters: Boolean? = null
     var inputFormCompositeId: MetaIdComposite? = null
     var inputFormGridRowId: RowId? = null
     var inputFormValueRaw: FormValueRaw? = null
     var layoutSpreadsheetId: MetaIdLayoutGrid? = null
     var orderByFieldId: MetaIdField? = null
-    var pageNumber: number? = null
-    var pageSize: number? = null
-    var searchText: string? = null
+    var pageNumber: Number? = null
+    var pageSize: Number? = null
+    var searchText: String? = null
 }

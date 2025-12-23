@@ -7,6 +7,6 @@ package com.neome.api.home.drawer.msg
 
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgCallerPasswordReset : Msg() {
-    val newPassword: string
+open class MsgCallerPasswordReset : Msg() {
+    lateinit var newPassword: String
 }

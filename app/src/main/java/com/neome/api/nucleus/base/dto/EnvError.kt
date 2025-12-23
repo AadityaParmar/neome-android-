@@ -8,9 +8,9 @@ package com.neome.api.nucleus.base.dto
 import com.neome.api.meta.base.dto.EnvValidationError
 import com.neome.api.nucleus.base.Types.EnumEnvErrorCode
 
-class EnvError {
+open class EnvError {
     var errorCode: EnumEnvErrorCode? = null
-    var errorMessage: string? = null
-    var errorParams: string[]? = null
-    var validationErrors: EnvValidationError[]? = null
+    var errorMessage: String? = null
+    var errorParams: Array<String>? = null
+    var validationErrors: Array<EnvValidationError>? = null
 }

@@ -8,9 +8,9 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdGroup
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class EntVdRowInsertPartitionRequest : EntVdAutoStep() {
+open class EntVdRowInsertPartitionRequest : EntVdAutoStep() {
     var fromSender: StudioBuildArgBinder? = null
     var requestBubbleHeader: StudioDtoChatBubbleHeader? = null
     var spreadsheetId: MetaIdSpreadsheet? = null
-    var toGroupIdSet: MetaIdGroup[]? = null
+    var toGroupIdSet: Array<MetaIdGroup>? = null
 }

@@ -16,20 +16,20 @@ import com.neome.api.meta.base.Types.MetaIdComposite
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdLayoutDriveSheet
 
-class StudioDtoLayoutDriveSheet : StudioBase() {
+open class StudioDtoLayoutDriveSheet : StudioBase() {
     var alignment: EnumDefnContentAlignment? = null
     var bgColor: DefnDtoColor? = null
-    var borderSet: EnumDefnShowBorderKind[]? = null
+    var borderSet: Array<EnumDefnShowBorderKind>? = null
     var compositeId: MetaIdComposite? = null
     var conditionOperator: EnumDefnConditionOperator? = null
     var conditionValue: StudioBuildArgBinder? = null
     var fieldId: MetaIdField? = null
     var fieldLayoutOn: EnumDefnDriveSheetFieldLayoutOn? = null
-    var fontSize: number? = null
-    val layoutFor: EnumDefnDriveSheetLayoutFor
-    val metaId: MetaIdLayoutDriveSheet
+    var fontSize: Number? = null
+    lateinit var layoutFor: EnumDefnDriveSheetLayoutFor
+    lateinit var metaId: MetaIdLayoutDriveSheet
     var name: Symbol? = null
     var textColor: DefnDtoColor? = null
-    var textStyleSet: EnumDefnTextStyle[]? = null
-    var width: number? = null
+    var textStyleSet: Array<EnumDefnTextStyle>? = null
+    var width: Number? = null
 }

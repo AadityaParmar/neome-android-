@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types.MetaIdPipelineVar
 
-class EntVdPipelineVar : StudioBase() {
-    val metaId: MetaIdPipelineVar
-    val name: Symbol
+open class EntVdPipelineVar : StudioBase() {
+    lateinit var metaId: MetaIdPipelineVar
+    lateinit var name: Symbol
     var variableForm: FormRefKey? = null
 }

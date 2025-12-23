@@ -7,8 +7,8 @@ package com.neome.api.home.base.dto
 
 import com.neome.api.meta.base.Types.EntUserId
 
-class DtoGroupMemberKey {
-    val entUserId: EntUserId
-    val handle: string
-    val name: string
+open class DtoGroupMemberKey {
+    lateinit var entUserId: EntUserId
+    lateinit var handle: String
+    lateinit var name: String
 }

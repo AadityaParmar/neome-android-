@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdAiFormToImage : EntVdAi() {
+open class EntVdAiFormToImage : EntVdAi() {
     var outputField: StudioDtoArgValueParameter? = null
 }

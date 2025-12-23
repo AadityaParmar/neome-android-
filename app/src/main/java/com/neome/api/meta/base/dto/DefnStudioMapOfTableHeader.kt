@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdHeader
+import java.util.Map
 
-class DefnStudioMapOfTableHeader {
-    val keys: MetaIdHeader[]
-    val map: Record<MetaIdHeader, DefnDtoTableHeader>
+open class DefnStudioMapOfTableHeader {
+    lateinit var keys: Array<MetaIdHeader>
+    lateinit var map: Map<MetaIdHeader, DefnDtoTableHeader>
 }

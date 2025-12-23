@@ -9,10 +9,10 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdGroup
 import com.neome.api.meta.base.Types.MetaIdRole
 
-class StudioEntAutomationStepSendMessage : StudioEntAutomationStepSendMessageBase() {
-    var groupIdSet: MetaIdGroup[]? = null
+open class StudioEntAutomationStepSendMessage : StudioEntAutomationStepSendMessageBase() {
+    var groupIdSet: Array<MetaIdGroup>? = null
     var messageVarId: StudioValueVarIdParagraph? = null
-    var sendAsComment: boolean? = null
+    var sendAsComment: Boolean? = null
     var senderFieldId: MetaIdField? = null
     var senderRoleId: MetaIdRole? = null
 }

@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.EnumDefnUserContext
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
 
-class StudioDtoUserConditionStatement : StudioBase() {
-    var derivedRoleIdSet: MetaIdRole[]? = null
-    var fieldIdSet: MetaIdField[]? = null
+open class StudioDtoUserConditionStatement : StudioBase() {
+    var derivedRoleIdSet: Array<MetaIdRole>? = null
+    var fieldIdSet: Array<MetaIdField>? = null
     var kind: EnumDefnKindSetOfUser? = null
-    var roleIdSet: MetaIdRole[]? = null
-    var userContextSet: EnumDefnUserContext[]? = null
+    var roleIdSet: Array<MetaIdRole>? = null
+    var userContextSet: Array<EnumDefnUserContext>? = null
 }

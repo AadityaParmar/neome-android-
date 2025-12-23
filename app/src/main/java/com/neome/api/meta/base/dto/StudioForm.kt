@@ -11,23 +11,23 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdRole
 
-class StudioForm : StudioBase() {
+open class StudioForm : StudioBase() {
     var actionPermissionMap: StudioMapOfActionPermission? = null
-    var aiInstructions: string? = null
-    var allowToPrintForm: boolean? = null
+    var aiInstructions: String? = null
+    var allowToPrintForm: Boolean? = null
     var calculateFormulaMode: EnumDefnCalculateFormulaMode? = null
-    var chatBubbleFieldIdSet: MetaIdField[]? = null
+    var chatBubbleFieldIdSet: Array<MetaIdField>? = null
     var chatLabelFieldId: MetaIdField? = null
     var chatLabelPatternVarId: StudioValueVarIdText? = null
     var chatPatternVarId: StudioValueVarIdParagraph? = null
-    var commentReadOnlyRoleSet: MetaIdRole[]? = null
-    var commentRoleSet: MetaIdRole[]? = null
-    val compositeMap: StudioCompositeMap
-    var configForm: boolean? = null
-    val details: StudioDetails
+    var commentReadOnlyRoleSet: Array<MetaIdRole>? = null
+    var commentRoleSet: Array<MetaIdRole>? = null
+    lateinit var compositeMap: StudioCompositeMap
+    var configForm: Boolean? = null
+    lateinit var details: StudioDetails
     var formulaMap: StudioMapOfFormula? = null
     var layoutMap: StudioMapOfLayoutForm? = null
-    val metaId: MetaIdForm
+    lateinit var metaId: MetaIdForm
     var payment: StudioPaymentConfig? = null
     var permissionMatrix: StudioDtoPermissionMatrix? = null
     var tabVariant: EnumDefnThemeTabVariant? = null

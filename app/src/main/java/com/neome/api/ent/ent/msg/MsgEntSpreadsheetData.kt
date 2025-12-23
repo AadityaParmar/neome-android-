@@ -5,12 +5,13 @@
 
 package com.neome.api.ent.ent.msg
 
+import kotlin.properties.Delegates
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgEntSpreadsheetData : Msg() {
-    var fromGridVer: string? = null
-    val pageSize: number
-    val spreadsheetId: MetaIdSpreadsheet
-    val toGridVer: string
+open class MsgEntSpreadsheetData : Msg() {
+    var fromGridVer: String? = null
+    var pageSize: Number by Delegates.notNull<Number>()
+    lateinit var spreadsheetId: MetaIdSpreadsheet
+    lateinit var toGridVer: String
 }

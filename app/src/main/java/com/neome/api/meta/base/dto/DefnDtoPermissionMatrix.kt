@@ -7,9 +7,10 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnPermission
 import com.neome.api.meta.base.Types.MetaIdRole
+import java.util.Map
 
-class DefnDtoPermissionMatrix {
+open class DefnDtoPermissionMatrix {
     var defaultPermission: EnumDefnPermission? = null
-    var keys: MetaIdRole[]? = null
-    var map: Record<MetaIdRole, EnumDefnPermission>? = null
+    var keys: Array<MetaIdRole>? = null
+    var map: Map<MetaIdRole, EnumDefnPermission>? = null
 }

@@ -5,12 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdGrid
 
-class DefnStudioMapOfLayoutGrid : DefnField() {
-    val formId: MetaIdForm
-    val gridId: MetaIdGrid
-    var isPluginForm: boolean? = null
+open class DefnStudioMapOfLayoutGrid : DefnField() {
+    lateinit var formId: MetaIdForm
+    lateinit var gridId: MetaIdGrid
+    var isPluginForm: Boolean? = null
 }

@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioPluginDeploy : StudioBase() {
-    var changes: string? = null
-    val pluginVersion: string
+open class StudioPluginDeploy : StudioBase() {
+    var changes: String? = null
+    lateinit var pluginVersion: String
 }

@@ -7,7 +7,7 @@ package com.neome.api.core.extn.msg
 
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgExtnGstinDetailsGet : Msg() {
-    var action: string? = null
-    val gstin: string
+open class MsgExtnGstinDetailsGet : Msg() {
+    var action: String? = null
+    lateinit var gstin: String
 }

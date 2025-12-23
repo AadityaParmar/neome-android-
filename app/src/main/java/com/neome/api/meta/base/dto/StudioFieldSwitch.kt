@@ -10,20 +10,20 @@ import com.neome.api.meta.base.Types.EnumDefnPlacement
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldSwitch : StudioFieldEditable() {
-    var captureLocation: boolean? = null
-    var captureTime: boolean? = null
-    var captureUser: boolean? = null
+open class StudioFieldSwitch : StudioFieldEditable() {
+    var captureLocation: Boolean? = null
+    var captureTime: Boolean? = null
+    var captureUser: Boolean? = null
     var checkboxLabelVarId: StudioValueVarIdText? = null
     var defaultFieldId: MetaIdField? = null
-    var defaultValue: boolean? = null
+    var defaultValue: Boolean? = null
     var defaultVarId: MetaIdVar? = null
     var labelPlacement: EnumDefnPlacement? = null
     var labelPlacementVarId: MetaIdVar? = null
     var position: EnumDefnPlacement? = null
     var positionVarId: MetaIdVar? = null
-    var showAsCheckbox: boolean? = null
+    var showAsCheckbox: Boolean? = null
     var showAsCheckboxFieldId: MetaIdField? = null
     var showAsCheckboxVarId: MetaIdVar? = null
-    var showCapturedValuesOnAside: EnumDefnCaptureValueKind[]? = null
+    var showCapturedValuesOnAside: Array<EnumDefnCaptureValueKind>? = null
 }

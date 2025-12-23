@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdVisibilityAction
+import java.util.Map
 
-class StudioVisibilityActionMap : StudioBase() {
-    val keys: MetaIdVisibilityAction[]
-    val map: Record<MetaIdVisibilityAction, StudioVisibilityAction>
+open class StudioVisibilityActionMap : StudioBase() {
+    lateinit var keys: Array<MetaIdVisibilityAction>
+    lateinit var map: Map<MetaIdVisibilityAction, StudioVisibilityAction>
 }

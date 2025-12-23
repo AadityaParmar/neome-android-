@@ -11,13 +11,14 @@ import com.neome.api.meta.base.Types.LanguageKey
 import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
+import java.util.Map
 
-class MsgEntUserUpdate : MsgEntUserIdNoVersion() {
+open class MsgEntUserUpdate : MsgEntUserIdNoVersion() {
     var avatarId: MediaIdAvatar? = null
-    val handle: string
+    lateinit var handle: String
     var languageKey: LanguageKey? = null
     var managerId: EntUserId? = null
-    val nickName: string
-    var roleIdSet: MetaIdRole[]? = null
-    var userVariableValueMap: Record<MetaIdVar, any>? = null
+    lateinit var nickName: String
+    var roleIdSet: Array<MetaIdRole>? = null
+    var userVariableValueMap: Map<MetaIdVar, Any>? = null
 }

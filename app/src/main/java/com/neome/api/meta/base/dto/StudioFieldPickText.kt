@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.EnumDefnThemePickVariant
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldPickText : StudioFieldEditable() {
+open class StudioFieldPickText : StudioFieldEditable() {
     var defaultOptionFieldId: MetaIdField? = null
-    var defaultOptionId: string? = null
+    var defaultOptionId: String? = null
     var optionPermissionMap: StudioMapOfOptionPermission? = null
     var pluginApi: StudioDtoPluginApi? = null
     var pluginErrorFieldId: MetaIdField? = null

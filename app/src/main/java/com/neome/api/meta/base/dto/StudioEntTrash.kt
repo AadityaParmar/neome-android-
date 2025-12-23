@@ -18,19 +18,20 @@ import com.neome.api.meta.base.Types.MetaIdReport
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.MetaIdVar
+import java.util.Map
 
-class StudioEntTrash {
-    var actionMap: Record<MetaIdAction, StudioEntAction>? = null
-    var compositeMap: Record<MetaIdComposite, StudioComposite>? = null
-    var contentMap: Record<MetaIdLayoutForm, StudioDtoLayoutForm>? = null
-    var fieldMap: Record<MetaIdField, StudioField>? = null
-    var formMap: Record<MetaIdForm, StudioForm>? = null
-    var groupMap: Record<MetaIdGroup, StudioEntGroup>? = null
-    var layoutGridMap: Record<MetaIdLayoutGrid, StudioDtoLayoutGrid>? = null
-    var layoutUserMap: Record<MetaIdLayoutUser, StudioDtoLayoutUser>? = null
-    var moduleMap: Record<MetaIdModule, string>? = null
-    var reportMap: Record<MetaIdReport, StudioEntReport>? = null
-    var roleMap: Record<MetaIdRole, StudioEntRole>? = null
-    var spreadsheetMap: Record<MetaIdSpreadsheet, StudioEntSpreadsheet>? = null
-    var varMap: Record<MetaIdVar, StudioVar>? = null
+open class StudioEntTrash {
+    var actionMap: Map<MetaIdAction, StudioEntAction>? = null
+    var compositeMap: Map<MetaIdComposite, StudioComposite>? = null
+    var contentMap: Map<MetaIdLayoutForm, StudioDtoLayoutForm>? = null
+    var fieldMap: Map<MetaIdField, StudioField>? = null
+    var formMap: Map<MetaIdForm, StudioForm>? = null
+    var groupMap: Map<MetaIdGroup, StudioEntGroup>? = null
+    var layoutGridMap: Map<MetaIdLayoutGrid, StudioDtoLayoutGrid>? = null
+    var layoutUserMap: Map<MetaIdLayoutUser, StudioDtoLayoutUser>? = null
+    var moduleMap: Map<MetaIdModule, String>? = null
+    var reportMap: Map<MetaIdReport, StudioEntReport>? = null
+    var roleMap: Map<MetaIdRole, StudioEntRole>? = null
+    var spreadsheetMap: Map<MetaIdSpreadsheet, StudioEntSpreadsheet>? = null
+    var varMap: Map<MetaIdVar, StudioVar>? = null
 }

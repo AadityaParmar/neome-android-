@@ -7,6 +7,6 @@ package com.neome.api.app.base.dto
 
 import com.neome.api.app.base.Types.EnumKindNeoScript
 
-class DtoNeoScript {
-    val kind: EnumKindNeoScript
+open class DtoNeoScript {
+    lateinit var kind: EnumKindNeoScript
 }

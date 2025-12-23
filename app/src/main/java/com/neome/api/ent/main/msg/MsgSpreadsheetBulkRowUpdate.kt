@@ -9,9 +9,10 @@ import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.Types.RowId
 import com.neome.api.nucleus.base.msg.Msg
+import java.util.Map
 
-class MsgSpreadsheetBulkRowUpdate : Msg() {
-    val actionId: MetaIdAction
-    val rowIdSet: RowId[]
-    val valueMap: Record<MetaIdComp, any>
+open class MsgSpreadsheetBulkRowUpdate : Msg() {
+    lateinit var actionId: MetaIdAction
+    lateinit var rowIdSet: Array<RowId>
+    lateinit var valueMap: Map<MetaIdComp, Any>
 }

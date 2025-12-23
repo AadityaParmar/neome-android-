@@ -8,6 +8,6 @@ package com.neome.api.studio.studioMain.sig
 import com.neome.api.meta.base.Types.EnumDefnKindAutoNode
 import com.neome.api.nucleus.base.sig.SigVersion
 
-class SigWorkflowNodeFavorites : SigVersion() {
-    val favoriteSet: EnumDefnKindAutoNode[]
+open class SigWorkflowNodeFavorites : SigVersion() {
+    lateinit var favoriteSet: Array<EnumDefnKindAutoNode>
 }

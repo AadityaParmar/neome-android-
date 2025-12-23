@@ -8,7 +8,8 @@ package com.neome.api.ent.agent.sig
 import com.neome.api.meta.base.Types.HandleKey
 import com.neome.api.meta.base.dto.EnvValidationError
 import com.neome.api.nucleus.base.sig.Sig
+import java.util.Map
 
-class SigAgentEntUserImport : Sig() {
-    val errorMap: Record<HandleKey, EnvValidationError>
+open class SigAgentEntUserImport : Sig() {
+    lateinit var errorMap: Map<HandleKey, EnvValidationError>
 }

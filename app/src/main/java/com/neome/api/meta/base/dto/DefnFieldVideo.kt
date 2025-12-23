@@ -8,16 +8,16 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnVideoFormat
 import com.neome.api.meta.base.Types.MetaIdField
 
-class DefnFieldVideo : DefnFieldEditable() {
-    var allowPickVideo: boolean? = null
-    var maxSize: number? = null
+open class DefnFieldVideo : DefnFieldEditable() {
+    var allowPickVideo: Boolean? = null
+    var maxSize: Number? = null
     var maxSizeFieldId: MetaIdField? = null
-    var maxSizeVar: number? = null
-    var showPreview: boolean? = null
+    var maxSizeVar: Number? = null
+    var showPreview: Boolean? = null
     var showPreviewFieldId: MetaIdField? = null
-    var showPreviewVar: boolean? = null
-    var showSize: boolean? = null
+    var showPreviewVar: Boolean? = null
+    var showSize: Boolean? = null
     var showSizeFieldId: MetaIdField? = null
-    var showSizeVar: boolean? = null
+    var showSizeVar: Boolean? = null
     var videoFormatType: EnumDefnVideoFormat? = null
 }

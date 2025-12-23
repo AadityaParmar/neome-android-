@@ -8,11 +8,11 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnKindHyperlink
 import com.neome.api.meta.base.Types.MetaIdHyperlink
 
-class DefnDtoHyperLink {
+open class DefnDtoHyperLink {
     var color: DefnDtoColor? = null
     var colorVar: DefnDtoColor? = null
-    var displayText: string? = null
+    var displayText: String? = null
     var kind: EnumDefnKindHyperlink? = null
-    val metaId: MetaIdHyperlink
-    var value: string? = null
+    lateinit var metaId: MetaIdHyperlink
+    var value: String? = null
 }

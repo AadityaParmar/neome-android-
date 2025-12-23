@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioEntAutomationScheduled : StudioEntAutomation() {
-    val eventMap: StudioEntAutomationScheduledEventMap
+open class StudioEntAutomationScheduled : StudioEntAutomation() {
+    lateinit var eventMap: StudioEntAutomationScheduledEventMap
     var scheduler: StudioVarValueScheduler? = null
 }

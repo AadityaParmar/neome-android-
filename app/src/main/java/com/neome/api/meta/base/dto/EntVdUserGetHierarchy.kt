@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdUserGetHierarchy : EntVdAutoNode() {
+open class EntVdUserGetHierarchy : EntVdAutoNode() {
     var outputField: StudioDtoArgValueParameter? = null
     var user: StudioBuildArgBinder? = null
 }

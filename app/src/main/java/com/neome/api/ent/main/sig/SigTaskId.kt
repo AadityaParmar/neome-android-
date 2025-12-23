@@ -7,6 +7,6 @@ package com.neome.api.ent.main.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigTaskId : Sig() {
-    var taskId: string? = null
+open class SigTaskId : Sig() {
+    var taskId: String? = null
 }

@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdUserUpdate : EntVdAutoStepWithError() {
+open class EntVdUserUpdate : EntVdAutoStepWithError() {
     var userActivateField: StudioBuildArgBinder? = null
     var userIdField: StudioDtoArgValueParameter? = null
     var userManager: StudioDtoUserFilter? = null

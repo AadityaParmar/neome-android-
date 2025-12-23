@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.EnumDefnThemeColor
 import com.neome.api.meta.base.Types.EnumDefnThemeDirection
 import com.neome.api.meta.base.Types.EnumDefnThemeDividerKind
 
-class DefnFieldDivider : DefnField() {
+open class DefnFieldDivider : DefnField() {
     var color: DefnDtoColor? = null
     var colorVar: EnumDefnThemeColor? = null
     var dividerKind: EnumDefnThemeDividerKind? = null

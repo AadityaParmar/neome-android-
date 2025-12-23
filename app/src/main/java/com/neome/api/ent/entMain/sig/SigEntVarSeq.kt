@@ -6,8 +6,9 @@
 package com.neome.api.ent.entMain.sig
 
 import com.neome.api.nucleus.base.sig.Sig
+import kotlin.properties.Delegates
 
-class SigEntVarSeq : Sig() {
-    val endSeq: number
-    val startSeq: number
+open class SigEntVarSeq : Sig() {
+    var endSeq: Number by Delegates.notNull<Number>()
+    var startSeq: Number by Delegates.notNull<Number>()
 }

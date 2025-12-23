@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class EntVdAiXMLToSpreadsheet : EntVdAi() {
+open class EntVdAiXMLToSpreadsheet : EntVdAi() {
     var inputField: StudioDtoArgValueParameter? = null
     var spreadsheetId: MetaIdSpreadsheet? = null
 }

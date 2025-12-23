@@ -10,12 +10,12 @@ import com.neome.api.meta.base.Types.MetaIdComposite
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdForm
 
-class DefnStudioPickFieldId : DefnFieldEditable() {
-    var compositeIdSet: MetaIdComposite[]? = null
-    var excludeFieldIdSet: MetaIdField[]? = null
-    var filterFieldTypeSet: EnumDefnCompType[]? = null
-    val formId: MetaIdForm
-    var includeFieldIdSet: MetaIdField[]? = null
+open class DefnStudioPickFieldId : DefnFieldEditable() {
+    var compositeIdSet: Array<MetaIdComposite>? = null
+    var excludeFieldIdSet: Array<MetaIdField>? = null
+    var filterFieldTypeSet: Array<EnumDefnCompType>? = null
+    lateinit var formId: MetaIdForm
+    var includeFieldIdSet: Array<MetaIdField>? = null
     var includeOptionMap: DefnStudioMapOfDtoOption? = null
-    var showCompositeName: boolean? = null
+    var showCompositeName: Boolean? = null
 }

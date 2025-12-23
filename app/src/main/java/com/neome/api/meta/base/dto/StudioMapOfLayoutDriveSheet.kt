@@ -7,9 +7,10 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdLayoutDriveSheet
+import java.util.Map
 
-class StudioMapOfLayoutDriveSheet : StudioBase() {
-    var includeMetaFieldIdSet: MetaIdField[]? = null
-    val keys: MetaIdLayoutDriveSheet[]
-    val map: Record<MetaIdLayoutDriveSheet, StudioDtoLayoutDriveSheet>
+open class StudioMapOfLayoutDriveSheet : StudioBase() {
+    var includeMetaFieldIdSet: Array<MetaIdField>? = null
+    lateinit var keys: Array<MetaIdLayoutDriveSheet>
+    lateinit var map: Map<MetaIdLayoutDriveSheet, StudioDtoLayoutDriveSheet>
 }

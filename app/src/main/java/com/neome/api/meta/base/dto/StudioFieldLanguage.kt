@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.LanguageKey
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldLanguage : StudioFieldEditable() {
+open class StudioFieldLanguage : StudioFieldEditable() {
     var defaultFieldId: MetaIdField? = null
     var defaultValue: LanguageKey? = null
     var defaultVarId: MetaIdVar? = null

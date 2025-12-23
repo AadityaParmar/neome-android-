@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnPermission
 
-class DefnStudioBuildPermissionMatrix : DefnField() {
-    var filterOptionSet: EnumDefnPermission[]? = null
+open class DefnStudioBuildPermissionMatrix : DefnField() {
+    var filterOptionSet: Array<EnumDefnPermission>? = null
 }

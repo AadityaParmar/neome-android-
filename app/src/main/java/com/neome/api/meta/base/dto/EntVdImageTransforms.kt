@@ -6,10 +6,11 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdVdImageFunc
+import java.util.Map
 
-class EntVdImageTransforms : EntVdAutoStep() {
+open class EntVdImageTransforms : EntVdAutoStep() {
     var inputField: StudioDtoArgValueParameter? = null
-    val keys: MetaIdVdImageFunc[]
-    val map: Record<MetaIdVdImageFunc, ImageXform>
+    lateinit var keys: Array<MetaIdVdImageFunc>
+    lateinit var map: Map<MetaIdVdImageFunc, ImageXform>
     var outputField: StudioDtoArgValueParameter? = null
 }

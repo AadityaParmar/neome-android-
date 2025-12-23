@@ -8,9 +8,9 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.SymbolGrid
 
-class SchemaSheet {
-    val fieldMap: SchemaFieldMap
-    val formSymbol: SymbolGrid
-    val gridMap: SchemaGridMap
-    val metaId: MetaIdForm
+open class SchemaSheet {
+    lateinit var fieldMap: SchemaFieldMap
+    lateinit var formSymbol: SymbolGrid
+    lateinit var gridMap: SchemaGridMap
+    lateinit var metaId: MetaIdForm
 }

@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnFieldRowId : DefnFieldEditable() {
+open class DefnFieldRowId : DefnFieldEditable() {
 }

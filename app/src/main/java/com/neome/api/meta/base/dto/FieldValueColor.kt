@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class FieldValueColor {
-    val value: string
+open class FieldValueColor {
+    lateinit var value: String
 }

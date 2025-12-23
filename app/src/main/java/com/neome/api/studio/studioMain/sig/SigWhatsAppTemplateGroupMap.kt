@@ -7,7 +7,8 @@ package com.neome.api.studio.studioMain.sig
 
 import com.neome.api.meta.base.dto.DtoWhatsAppTemplateGroup
 import com.neome.api.nucleus.base.sig.Sig
+import java.util.Map
 
-class SigWhatsAppTemplateGroupMap : Sig() {
-    val map: Record<string, DtoWhatsAppTemplateGroup>
+open class SigWhatsAppTemplateGroupMap : Sig() {
+    lateinit var map: Map<String, DtoWhatsAppTemplateGroup>
 }

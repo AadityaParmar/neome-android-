@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdApplyFormula : EntVdAutoStepWithError() {
+open class EntVdApplyFormula : EntVdAutoStepWithError() {
     var assignToField: StudioDtoArgValueParameter? = null
     var javascriptFormula: StudioValueCodeJavascript? = null
 }

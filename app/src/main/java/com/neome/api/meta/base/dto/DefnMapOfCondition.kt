@@ -6,11 +6,12 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdCondition
+import java.util.Map
 
-class DefnMapOfCondition {
-    var andOr: boolean? = null
-    var keys: MetaIdCondition[]? = null
-    var map: Record<MetaIdCondition, DefnMapOfCondition>? = null
-    val metaId: MetaIdCondition
+open class DefnMapOfCondition {
+    var andOr: Boolean? = null
+    var keys: Array<MetaIdCondition>? = null
+    var map: Map<MetaIdCondition, DefnMapOfCondition>? = null
+    lateinit var metaId: MetaIdCondition
     var statement: DefnDtoConditionStatement? = null
 }

@@ -11,11 +11,11 @@ import com.neome.api.meta.base.Types.RequestId
 import com.neome.api.meta.base.dto.EntUserIdTriple
 import com.neome.api.meta.base.dto.FormValueRaw
 
-class DtoPluginApiRequestPayload {
+open class DtoPluginApiRequestPayload {
     var callerTriplet: EntUserIdTriple? = null
-    val pluginApiId: PluginApiId
-    val pluginId: MetaIdPlugin
+    lateinit var pluginApiId: PluginApiId
+    lateinit var pluginId: MetaIdPlugin
     var pluginInputFormValue: FormValueRaw? = null
-    val requestId: RequestId
-    val responseActorPath: string
+    lateinit var requestId: RequestId
+    lateinit var responseActorPath: String
 }

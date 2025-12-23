@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdExecuteSchedulerRemove : EntVdAutoStep() {
+open class EntVdExecuteSchedulerRemove : EntVdAutoStep() {
     var forSchedulerIdField: StudioDtoArgValueParameter? = null
 }

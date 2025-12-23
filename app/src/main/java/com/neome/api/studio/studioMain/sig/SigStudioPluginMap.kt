@@ -8,7 +8,8 @@ package com.neome.api.studio.studioMain.sig
 import com.neome.api.meta.base.Types.PluginBundleId
 import com.neome.api.nucleus.base.sig.Sig
 import com.neome.api.studio.base.dto.DtoPluginBundle
+import java.util.Map
 
-class SigStudioPluginMap : Sig() {
-    val pluginBundleMap: Record<PluginBundleId, DtoPluginBundle>
+open class SigStudioPluginMap : Sig() {
+    lateinit var pluginBundleMap: Map<PluginBundleId, DtoPluginBundle>
 }

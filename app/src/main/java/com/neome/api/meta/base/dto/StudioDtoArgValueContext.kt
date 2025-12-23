@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnArgBinderContext
 
-class StudioDtoArgValueContext : StudioDtoArgValue() {
-    val kind: EnumDefnArgBinderContext
+open class StudioDtoArgValueContext : StudioDtoArgValue() {
+    lateinit var kind: EnumDefnArgBinderContext
 }

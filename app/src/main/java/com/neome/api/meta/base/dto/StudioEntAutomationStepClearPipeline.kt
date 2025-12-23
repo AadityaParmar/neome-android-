@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 
-class StudioEntAutomationStepClearPipeline : StudioEntAutomationStep() {
-    var pipelineParamSet: MetaIdPipelineParam[]? = null
+open class StudioEntAutomationStepClearPipeline : StudioEntAutomationStep() {
+    var pipelineParamSet: Array<MetaIdPipelineParam>? = null
 }

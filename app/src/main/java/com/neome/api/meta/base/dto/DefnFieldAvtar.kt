@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnFieldAvtar : DefnField() {
+open class DefnFieldAvtar : DefnField() {
 }

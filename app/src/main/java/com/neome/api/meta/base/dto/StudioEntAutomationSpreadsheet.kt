@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class StudioEntAutomationSpreadsheet : StudioEntAutomation() {
-    val eventMap: StudioEntAutomationSpreadsheetEventMap
-    val spreadsheetId: MetaIdSpreadsheet
+open class StudioEntAutomationSpreadsheet : StudioEntAutomation() {
+    lateinit var eventMap: StudioEntAutomationSpreadsheetEventMap
+    lateinit var spreadsheetId: MetaIdSpreadsheet
 }

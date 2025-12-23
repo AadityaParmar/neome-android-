@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarSequence : StudioVar() {
+open class StudioVarSequence : StudioVar() {
     var value: StudioVarValueLong? = null
 }

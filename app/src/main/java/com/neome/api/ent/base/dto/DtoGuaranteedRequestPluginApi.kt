@@ -5,6 +5,6 @@
 
 package com.neome.api.ent.base.dto
 
-class DtoGuaranteedRequestPluginApi : DtoGuaranteedRequest() {
-    val pluginApiRequest: DtoPluginApiRequestPayload
+open class DtoGuaranteedRequestPluginApi : DtoGuaranteedRequest() {
+    lateinit var pluginApiRequest: DtoPluginApiRequestPayload
 }

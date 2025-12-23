@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioValueCodeNeoQL : StudioValueCode() {
-    var value: string? = null
+open class StudioValueCodeNeoQL : StudioValueCode() {
+    var value: String? = null
 }

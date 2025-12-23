@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnDate
 
-class StudioBuildDate : StudioBase() {
-    var customValue: string? = null
+open class StudioBuildDate : StudioBase() {
+    var customValue: String? = null
     var value: EnumDefnDate? = null
 }

@@ -7,6 +7,6 @@ package com.neome.api.ent.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class DtoEntActionSpreadsheetHistory : DtoEntAction() {
-    val spreadsheetId: MetaIdSpreadsheet
+open class DtoEntActionSpreadsheetHistory : DtoEntAction() {
+    lateinit var spreadsheetId: MetaIdSpreadsheet
 }

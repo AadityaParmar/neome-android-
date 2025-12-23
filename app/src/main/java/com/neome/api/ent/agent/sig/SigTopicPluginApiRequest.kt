@@ -8,6 +8,6 @@ package com.neome.api.ent.agent.sig
 import com.neome.api.core.session.sig.SigTopic
 import com.neome.api.ent.base.dto.DtoPluginApiRequestPayload
 
-class SigTopicPluginApiRequest : SigTopic() {
-    val payload: DtoPluginApiRequestPayload
+open class SigTopicPluginApiRequest : SigTopic() {
+    lateinit var payload: DtoPluginApiRequestPayload
 }

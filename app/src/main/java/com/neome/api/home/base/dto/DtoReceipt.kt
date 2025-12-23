@@ -5,7 +5,7 @@
 
 package com.neome.api.home.base.dto
 
-class DtoReceipt {
-    var deliveredOn: string? = null
-    var readOn: string? = null
+open class DtoReceipt {
+    var deliveredOn: String? = null
+    var readOn: String? = null
 }

@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioFieldSlider : StudioFieldCounter() {
-    var allowRangePicker: boolean? = null
-    var showAsInputBox: boolean? = null
+open class StudioFieldSlider : StudioFieldCounter() {
+    var allowRangePicker: Boolean? = null
+    var showAsInputBox: Boolean? = null
 }

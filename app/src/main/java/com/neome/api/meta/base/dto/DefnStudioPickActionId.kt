@@ -5,11 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.EnumDefnKindAction
 import com.neome.api.meta.base.Types.MetaIdAction
 
-class DefnStudioPickActionId : DefnFieldEditable() {
-    var excludeActionIdSet: MetaIdAction[]? = null
-    var filterActionKindSet: EnumDefnKindAction[]? = null
-    var includeActionIdSet: MetaIdAction[]? = null
+open class DefnStudioPickActionId : DefnFieldEditable() {
+    var excludeActionIdSet: Array<MetaIdAction>? = null
+    var filterActionKindSet: Array<EnumDefnKindAction>? = null
+    var includeActionIdSet: Array<MetaIdAction>? = null
 }

@@ -8,12 +8,12 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.AdminId
 import com.neome.api.meta.base.Types.PluginBundleId
 
-class StudioPluginBundleBase : StudioBase() {
-    val createdBy: AdminId
-    val creationTime: string
+open class StudioPluginBundleBase : StudioBase() {
+    lateinit var createdBy: AdminId
+    lateinit var creationTime: String
     var deployMap: StudioPluginMap? = null
-    val pluginBundleId: PluginBundleId
-    val updateBy: AdminId
-    val updateTime: string
-    val version: string
+    lateinit var pluginBundleId: PluginBundleId
+    lateinit var updateBy: AdminId
+    lateinit var updateTime: String
+    lateinit var version: String
 }

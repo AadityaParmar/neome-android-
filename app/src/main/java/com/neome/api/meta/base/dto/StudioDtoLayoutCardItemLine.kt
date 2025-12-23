@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioDtoLayoutCardItemLine : StudioBase() {
+open class StudioDtoLayoutCardItemLine : StudioBase() {
     var caption: StudioDtoLayoutCardItemLineSegment? = null
     var first: StudioDtoLayoutCardItemLineSegment? = null
     var middle: StudioDtoLayoutCardItemLineSegment? = null

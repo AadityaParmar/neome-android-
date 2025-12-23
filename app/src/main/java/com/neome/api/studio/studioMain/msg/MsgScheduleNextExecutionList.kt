@@ -8,7 +8,7 @@ package com.neome.api.studio.studioMain.msg
 import com.neome.api.meta.base.dto.StudioVarValueScheduler
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgScheduleNextExecutionList : Msg() {
-    var iterations: number? = null
-    val studioVarValueScheduler: StudioVarValueScheduler
+open class MsgScheduleNextExecutionList : Msg() {
+    var iterations: Number? = null
+    lateinit var studioVarValueScheduler: StudioVarValueScheduler
 }

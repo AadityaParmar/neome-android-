@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnKindAutoResponseWait
 
-class EntVdExecuteParallel : EntVdAutoStepWithError() {
+open class EntVdExecuteParallel : EntVdAutoStepWithError() {
     var responseWaitKind: EnumDefnKindAutoResponseWait? = null
     var workflowControlMap: EntVdWorkflowControlMap? = null
 }

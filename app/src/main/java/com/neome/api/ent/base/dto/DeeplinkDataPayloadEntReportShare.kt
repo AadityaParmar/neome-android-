@@ -10,14 +10,14 @@ import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.dto.DefnForm
 import com.neome.api.meta.base.dto.FormValue
 
-class DeeplinkDataPayloadEntReportShare : DeeplinkDataPayloadEnt() {
-    val defnForm: DefnForm
-    val formValue: FormValue
+open class DeeplinkDataPayloadEntReportShare : DeeplinkDataPayloadEnt() {
+    lateinit var defnForm: DefnForm
+    lateinit var formValue: FormValue
     var outputFormContentLayoutId: MetaIdLayoutForm? = null
     var outputFormTemplateLayoutId: MetaIdLayoutForm? = null
-    var paperHeight: number? = null
+    var paperHeight: Number? = null
     var paperSize: EnumDefnRenderingKind? = null
-    var paperWidth: number? = null
-    var reportLabel: string? = null
-    val reportName: string
+    var paperWidth: Number? = null
+    var reportLabel: String? = null
+    lateinit var reportName: String
 }

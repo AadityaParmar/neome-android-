@@ -11,12 +11,12 @@ import com.neome.api.meta.base.Types.RowId
 import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgFormMappingResultGet : Msg() {
+open class MsgFormMappingResultGet : Msg() {
     var inputFormGridRowId: RowId? = null
-    val inputFormId: MetaIdForm
-    val inputFormValueRaw: FormValueRaw
-    val mappingVarId: MetaIdVar
+    lateinit var inputFormId: MetaIdForm
+    lateinit var inputFormValueRaw: FormValueRaw
+    lateinit var mappingVarId: MetaIdVar
     var outputFormGridRowId: RowId? = null
-    val outputFormId: MetaIdForm
+    lateinit var outputFormId: MetaIdForm
     var outputFormValueRaw: FormValueRaw? = null
 }

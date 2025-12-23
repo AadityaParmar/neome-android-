@@ -8,7 +8,7 @@ package com.neome.api.store.store.msg
 import com.neome.api.core.base.dto.DtoCloneConfig
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgStoreItemCreate : Msg() {
+open class MsgStoreItemCreate : Msg() {
     var cloneConfig: DtoCloneConfig? = null
-    var isSeedEnt: boolean? = null
+    var isSeedEnt: Boolean? = null
 }

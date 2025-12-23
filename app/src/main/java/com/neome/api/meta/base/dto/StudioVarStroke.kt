@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnThemeStroke
 
-class StudioVarStroke : StudioVar() {
+open class StudioVarStroke : StudioVar() {
     var value: EnumDefnThemeStroke? = null
 }

@@ -8,6 +8,6 @@ package com.neome.api.store.store.sig
 import com.neome.api.meta.base.Types.StoreItemId
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigStoreItemListGet : Sig() {
-    val storeItemIdSet: StoreItemId[]
+open class SigStoreItemListGet : Sig() {
+    lateinit var storeItemIdSet: Array<StoreItemId>
 }

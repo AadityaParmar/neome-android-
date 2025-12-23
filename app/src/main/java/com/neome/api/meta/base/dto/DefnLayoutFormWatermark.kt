@@ -9,12 +9,12 @@ import com.neome.api.meta.base.Types.EnumDefnContentAlignment
 import com.neome.api.meta.base.Types.EnumDefnPlacement
 import com.neome.api.meta.base.Types.EnumDefnTextSize
 
-class DefnLayoutFormWatermark {
+open class DefnLayoutFormWatermark {
     var bgImage: FieldDtoImage? = null
     var bgImageHorizontalPosition: EnumDefnContentAlignment? = null
     var bgImageVar: FieldDtoImage? = null
     var bgImageVerticalPosition: EnumDefnContentAlignment? = null
-    var textOpacityVar: number? = null
+    var textOpacityVar: Number? = null
     var textPatternVar: DefnDtoText? = null
     var textPositionVar: EnumDefnPlacement? = null
     var textSizeVar: EnumDefnTextSize? = null

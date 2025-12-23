@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdGrid
 
-class DefnStudioPickGridId : DefnFieldEditable() {
-    var excludeGridIdSet: MetaIdGrid[]? = null
-    val formId: MetaIdForm
+open class DefnStudioPickGridId : DefnFieldEditable() {
+    var excludeGridIdSet: Array<MetaIdGrid>? = null
+    lateinit var formId: MetaIdForm
 }

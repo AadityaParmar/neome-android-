@@ -15,20 +15,21 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.DefnDtoColor
 import com.neome.api.meta.base.dto.DefnDtoParagraph
 import com.neome.api.meta.base.dto.DefnForm
+import java.util.Map
 
-class DeeplinkDataPayloadEntSpreadsheetInsertShare : DeeplinkDataPayloadEnt() {
+open class DeeplinkDataPayloadEntSpreadsheetInsertShare : DeeplinkDataPayloadEnt() {
     var chatId: ChatId? = null
-    val defnForm: DefnForm
-    val entId: EntId
+    lateinit var defnForm: DefnForm
+    lateinit var entId: EntId
     var formEditorLayoutId: MetaIdLayoutForm? = null
     var metaIdAction: MetaIdAction? = null
     var mobileFormEditorLayoutId: MetaIdLayoutForm? = null
-    var repeatButtonLabel: string? = null
-    var sendMessageToInbox: boolean? = null
-    var showRepeatButton: boolean? = null
+    var repeatButtonLabel: String? = null
+    var sendMessageToInbox: Boolean? = null
+    var showRepeatButton: Boolean? = null
     var spreadsheetId: MetaIdSpreadsheet? = null
-    val successMessage: DefnDtoParagraph
+    lateinit var successMessage: DefnDtoParagraph
     var successMessageBgColor: DefnDtoColor? = null
     var successMessageTextSize: EnumDefnTextSize? = null
-    var valueMap: Record<MetaIdComp, any>? = null
+    var valueMap: Map<MetaIdComp, Any>? = null
 }

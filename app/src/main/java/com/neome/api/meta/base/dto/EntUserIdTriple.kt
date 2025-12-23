@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.UserId
 
-class EntUserIdTriple : EntUserIdTuple() {
+open class EntUserIdTriple : EntUserIdTuple() {
     var userId: UserId? = null
 }

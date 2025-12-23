@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdGroup
 
-class StudioEntAutomationStepSendMessageToGroups :
+open class StudioEntAutomationStepSendMessageToGroups :
     StudioEntAutomationStepSendMessageWithSenderField() {
-    var groupIdSet: MetaIdGroup[]? = null
+    var groupIdSet: Array<MetaIdGroup>? = null
 }

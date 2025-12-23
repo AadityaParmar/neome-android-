@@ -7,7 +7,8 @@ package com.neome.api.home.drawer.sig
 
 import com.neome.api.nucleus.base.Types.AnyPrefixKey
 import com.neome.api.nucleus.base.sig.Sig
+import java.util.Map
 
-class SigGroupCandidateMap : Sig() {
-    val candidateMap: Record<AnyPrefixKey, SigUserAvatar[]>
+open class SigGroupCandidateMap : Sig() {
+    lateinit var candidateMap: Map<AnyPrefixKey, Array<SigUserAvatar>>
 }

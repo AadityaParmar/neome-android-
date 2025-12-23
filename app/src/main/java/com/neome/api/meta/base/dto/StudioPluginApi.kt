@@ -10,17 +10,17 @@ import com.neome.api.meta.base.Types.EnumDefnPluginApiMethod
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.PluginApiId
 
-class StudioPluginApi : StudioBase() {
-    val apiType: EnumDefnPluginApiMethod
+open class StudioPluginApi : StudioBase() {
+    lateinit var apiType: EnumDefnPluginApiMethod
     var baseURLVarId: StudioValueVarIdText? = null
-    val creationDate: string
-    var description: string? = null
-    var guaranteedInvocation: boolean? = null
+    lateinit var creationDate: String
+    var description: String? = null
+    var guaranteedInvocation: Boolean? = null
     var headerParamMap: StudioMapOfArgBinder? = null
     var inputFormId: MetaIdForm? = null
-    val metaId: PluginApiId
+    lateinit var metaId: PluginApiId
     var modules: StudioModuleSelection? = null
-    val name: Symbol
+    lateinit var name: Symbol
     var outputFormId: MetaIdForm? = null
     var queryParamMap: StudioMapOfArgBinder? = null
     var requestBody: StudioPluginApiBody? = null

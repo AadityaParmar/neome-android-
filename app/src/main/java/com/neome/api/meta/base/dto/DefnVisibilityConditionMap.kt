@@ -6,11 +6,12 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdVisibilityCondition
+import java.util.Map
 
-class DefnVisibilityConditionMap {
-    var andOr: boolean? = null
-    var keys: MetaIdVisibilityCondition[]? = null
-    var map: Record<MetaIdVisibilityCondition, DefnVisibilityConditionMap>? = null
-    val metaId: MetaIdVisibilityCondition
+open class DefnVisibilityConditionMap {
+    var andOr: Boolean? = null
+    var keys: Array<MetaIdVisibilityCondition>? = null
+    var map: Map<MetaIdVisibilityCondition, DefnVisibilityConditionMap>? = null
+    lateinit var metaId: MetaIdVisibilityCondition
     var statement: DefnVisibilityCondition? = null
 }

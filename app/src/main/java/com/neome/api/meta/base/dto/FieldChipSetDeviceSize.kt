@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnDeviceSize
 
-class FieldChipSetDeviceSize {
-    val valueSet: EnumDefnDeviceSize[]
+open class FieldChipSetDeviceSize {
+    lateinit var valueSet: Array<EnumDefnDeviceSize>
 }

@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioEntPluginResourceMap : StudioBase() {
+open class StudioEntPluginResourceMap : StudioBase() {
     var dev: StudioEntPluginDev? = null
     var jar: StudioEntPluginJar? = null
     var rpc: StudioEntPluginRpc? = null

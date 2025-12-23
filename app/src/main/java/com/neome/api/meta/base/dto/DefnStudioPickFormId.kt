@@ -7,9 +7,9 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdForm
 
-class DefnStudioPickFormId : DefnField() {
-    var alias: string? = null
-    var allowSystemForms: boolean? = null
-    var excludeFormIdSet: MetaIdForm[]? = null
+open class DefnStudioPickFormId : DefnField() {
+    var alias: String? = null
+    var allowSystemForms: Boolean? = null
+    var excludeFormIdSet: Array<MetaIdForm>? = null
     var includeOptionMap: DefnStudioMapOfDtoOption? = null
 }

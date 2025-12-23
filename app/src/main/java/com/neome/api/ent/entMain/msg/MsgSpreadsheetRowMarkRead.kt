@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.RowId
 import com.neome.api.meta.base.dto.FormValueRaw
 
-class MsgSpreadsheetRowMarkRead : MsgVersion() {
-    val formValueRaw: FormValueRaw
-    val rowId: RowId
-    val spreadsheetId: MetaIdSpreadsheet
+open class MsgSpreadsheetRowMarkRead : MsgVersion() {
+    lateinit var formValueRaw: FormValueRaw
+    lateinit var rowId: RowId
+    lateinit var spreadsheetId: MetaIdSpreadsheet
 }

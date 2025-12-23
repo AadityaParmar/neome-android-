@@ -9,10 +9,10 @@ import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdMapping
 
-class StudioDtoMappingField : StudioBase() {
-    val from: StudioBuildArgBinder
-    val metaId: MetaIdMapping
+open class StudioDtoMappingField : StudioBase() {
+    lateinit var from: StudioBuildArgBinder
+    lateinit var metaId: MetaIdMapping
     var name: Symbol? = null
-    var primary: boolean? = null
-    val to: MetaIdField
+    var primary: Boolean? = null
+    lateinit var to: MetaIdField
 }

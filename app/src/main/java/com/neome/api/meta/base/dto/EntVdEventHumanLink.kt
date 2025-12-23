@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdEventHumanLink : EntVdEvent() {
+open class EntVdEventHumanLink : EntVdEvent() {
     var sendForm: FormRefKey? = null
 }

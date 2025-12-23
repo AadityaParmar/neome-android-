@@ -6,10 +6,11 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnErrorSeverity
+import kotlin.properties.Delegates
 
-class FieldValueError {
-    val errorCounter: number
-    var errorParameterSet: string[]? = null
-    val errorReason: string
-    val severity: EnumDefnErrorSeverity
+open class FieldValueError {
+    var errorCounter: Number by Delegates.notNull<Number>()
+    var errorParameterSet: Array<String>? = null
+    lateinit var errorReason: String
+    lateinit var severity: EnumDefnErrorSeverity
 }

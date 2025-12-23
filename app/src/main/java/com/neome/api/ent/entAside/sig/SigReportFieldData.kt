@@ -9,7 +9,7 @@ import com.neome.api.meta.base.dto.DefnForm
 import com.neome.api.meta.base.dto.FormValue
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigReportFieldData : Sig() {
-    val reportOutputForm: DefnForm
-    val reportOutputFormValue: FormValue
+open class SigReportFieldData : Sig() {
+    lateinit var reportOutputForm: DefnForm
+    lateinit var reportOutputFormValue: FormValue
 }

@@ -7,6 +7,6 @@ package com.neome.api.app.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdAction
 
-class DtoNeoScriptAction : DtoNeoScript() {
+open class DtoNeoScriptAction : DtoNeoScript() {
     var actionId: MetaIdAction? = null
 }

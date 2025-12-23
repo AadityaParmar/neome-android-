@@ -5,6 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-class DtoLogTableRow {
-    var cellArray: DtoLogTableCell[]? = null
+import com.neome.api.meta.base.dto.DtoLogTableCell
+
+open class DtoLogTableRow {
+    var cellArray: Array<DtoLogTableCell>? = null
 }

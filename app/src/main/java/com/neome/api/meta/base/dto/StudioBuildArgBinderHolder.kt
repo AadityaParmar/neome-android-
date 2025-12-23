@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioBuildArgBinderHolder : StudioBase() {
+open class StudioBuildArgBinderHolder : StudioBase() {
     var argBinder: StudioBuildArgBinder? = null
 }

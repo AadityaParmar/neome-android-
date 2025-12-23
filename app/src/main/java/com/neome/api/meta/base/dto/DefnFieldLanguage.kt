@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.LanguageKey
 import com.neome.api.meta.base.Types.MetaIdField
 
-class DefnFieldLanguage : DefnFieldEditable() {
+open class DefnFieldLanguage : DefnFieldEditable() {
     var defaultFieldId: MetaIdField? = null
     var defaultValue: LanguageKey? = null
     var defaultVar: LanguageKey? = null

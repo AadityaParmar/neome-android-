@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarValueImage {
-    val value: FieldDtoImage
+open class StudioVarValueImage {
+    lateinit var value: FieldDtoImage
 }

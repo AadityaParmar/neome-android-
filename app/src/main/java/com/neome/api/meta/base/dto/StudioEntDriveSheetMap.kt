@@ -10,14 +10,15 @@ import com.neome.api.meta.base.Types.EnumDefnDataExportKind
 import com.neome.api.meta.base.Types.EnumDefnMonth
 import com.neome.api.meta.base.Types.EnumDefnSyncMode
 import com.neome.api.meta.base.Types.MetaIdDriveSheet
+import java.util.Map
 
-class StudioEntDriveSheetMap : StudioBase() {
-    var addressBookExportKindSet: EnumDefnDataExportKind[]? = null
+open class StudioEntDriveSheetMap : StudioBase() {
+    var addressBookExportKindSet: Array<EnumDefnDataExportKind>? = null
     var beginningOfTheYear: EnumDefnMonth? = null
     var driveFolderName: Symbol? = null
-    val keys: MetaIdDriveSheet[]
-    var manageAdmins: boolean? = null
-    var manageUsers: boolean? = null
-    val map: Record<MetaIdDriveSheet, StudioEntDriveSheet>
+    lateinit var keys: Array<MetaIdDriveSheet>
+    var manageAdmins: Boolean? = null
+    var manageUsers: Boolean? = null
+    lateinit var map: Map<MetaIdDriveSheet, StudioEntDriveSheet>
     var syncMode: EnumDefnSyncMode? = null
 }

@@ -5,8 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioMapOfOption : StudioBase() {
-    var addTextColor: boolean? = null
-    val keys: string[]
-    val map: Record<string, StudioDtoOption>
+import java.util.Map
+
+open class StudioMapOfOption : StudioBase() {
+    var addTextColor: Boolean? = null
+    lateinit var keys: Array<String>
+    lateinit var map: Map<String, StudioDtoOption>
 }

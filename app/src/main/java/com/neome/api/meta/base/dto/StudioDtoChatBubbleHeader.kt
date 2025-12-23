@@ -5,8 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioDtoChatBubbleHeader {
+open class StudioDtoChatBubbleHeader {
     var image: FieldDtoImage? = null
-    var subTitle: string? = null
-    var title: string? = null
+    var subTitle: String? = null
+    var title: String? = null
 }

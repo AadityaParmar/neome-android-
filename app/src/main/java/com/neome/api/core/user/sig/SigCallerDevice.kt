@@ -8,11 +8,11 @@ package com.neome.api.core.user.sig
 import com.neome.api.meta.base.Types.DeviceId
 import com.neome.api.nucleus.base.sig.SigVersion
 
-class SigCallerDevice : SigVersion() {
-    val creationTime: string
-    val deviceId: DeviceId
-    var deviceName: string? = null
-    var deviceToken: string? = null
-    val randomColor: string
-    val refreshTokenExpiry: string
+open class SigCallerDevice : SigVersion() {
+    lateinit var creationTime: String
+    lateinit var deviceId: DeviceId
+    var deviceName: String? = null
+    var deviceToken: String? = null
+    lateinit var randomColor: String
+    lateinit var refreshTokenExpiry: String
 }

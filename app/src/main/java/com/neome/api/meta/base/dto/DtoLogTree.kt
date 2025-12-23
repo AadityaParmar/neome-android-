@@ -5,12 +5,14 @@
 
 package com.neome.api.meta.base.dto
 
-class DtoLogTree : DtoLogItem() {
-    val bgColor: string
-    var children: DtoLogTreeItem[]? = null
-    val keyColor: string
-    val keyWidth: number
-    val lineColor: string
-    val tabWidth: number
-    val valueColor: string
+import kotlin.properties.Delegates
+
+open class DtoLogTree : DtoLogItem() {
+    lateinit var bgColor: String
+    var children: Array<DtoLogTreeItem>? = null
+    lateinit var keyColor: String
+    var keyWidth: Number by Delegates.notNull<Number>()
+    lateinit var lineColor: String
+    var tabWidth: Number by Delegates.notNull<Number>()
+    lateinit var valueColor: String
 }

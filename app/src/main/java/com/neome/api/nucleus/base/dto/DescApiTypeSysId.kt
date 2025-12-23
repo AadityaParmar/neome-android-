@@ -5,8 +5,8 @@
 
 package com.neome.api.nucleus.base.dto
 
-class DescApiTypeSysId : DescApiType() {
-    var importRef: string? = null
-    val superClass: string
-    val value: string
+open class DescApiTypeSysId : DescApiType() {
+    var importRef: String? = null
+    lateinit var superClass: String
+    lateinit var value: String
 }

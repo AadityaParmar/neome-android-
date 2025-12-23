@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.GhostId
+import java.util.Map
 
-class EntVdWorkflowControlMap : StudioBase() {
-    val keys: GhostId[]
-    val map: Record<GhostId, EntVdWorkflowControl>
+open class EntVdWorkflowControlMap : StudioBase() {
+    lateinit var keys: Array<GhostId>
+    lateinit var map: Map<GhostId, EntVdWorkflowControl>
 }

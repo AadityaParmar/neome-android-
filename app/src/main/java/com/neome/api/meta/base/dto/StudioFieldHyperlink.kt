@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldHyperlink : StudioFieldEditable() {
+open class StudioFieldHyperlink : StudioFieldEditable() {
     var defaultFieldId: MetaIdField? = null
     var defaultVarId: MetaIdVar? = null
 }

@@ -7,35 +7,35 @@ package com.neome.api.meta.base
 
 
 class Types {
-    enum class ServiceName {
-        agent,
-        ai,
-        api,
-        aside,
-        base,
-        cli,
-        cluster,
-        deeplink,
-        doc,
-        drawer,
-        ent,
-        entAside,
-        entDrawer,
-        entMain,
-        extn,
-        main,
-        otp,
-        rpc,
-        scheduler,
-        session,
-        stem,
-        store,
-        studioDrawer,
-        studioEnt,
-        studioMain,
-        task,
-        user,
-        wsoc
+    enum class ServiceName(val value: String) {
+        agent("agent"),
+        ai("ai"),
+        api("api"),
+        aside("aside"),
+        base("base"),
+        cli("cli"),
+        cluster("cluster"),
+        deeplink("deeplink"),
+        doc("doc"),
+        drawer("drawer"),
+        ent("ent"),
+        entAside("entAside"),
+        entDrawer("entDrawer"),
+        entMain("entMain"),
+        extn("extn"),
+        main("main"),
+        otp("otp"),
+        rpc("rpc"),
+        scheduler("scheduler"),
+        session("session"),
+        stem("stem"),
+        store("store"),
+        studioDrawer("studioDrawer"),
+        studioEnt("studioEnt"),
+        studioMain("studioMain"),
+        task("task"),
+        user("user"),
+        wsoc("wsoc")
     }
 
     val AVATAR_CROP_QUALITY: Int = 1
@@ -267,150 +267,150 @@ class Types {
     open class WorkflowExecutionId : SysId()
     open class WorkflowGroupExecutionId : SysId()
 
-    open class AnyTime : AnyValue()
-    open class ColumnPath : AnyValue()
-    open class CurrencyKey : AnyKey()
-    open class GeoPoint : AnyValue()
-    open class HandleKey : AnyKey()
-    open class Key : AnyKey()
-    open class LanguageKey : AnyKey()
-    open class SearchPath : AnyValue()
-    open class SymbolColumn : AnyValue()
-    open class SymbolGrid : AnyValue()
-    open class TimeZoneKey : AnyKey()
+    class AnyTime : AnyValue()
+    class ColumnPath : AnyValue()
+    class CurrencyKey : AnyKey()
+    class GeoPoint : AnyValue()
+    class HandleKey : AnyKey()
+    class Key : AnyKey()
+    class LanguageKey : AnyKey()
+    class SearchPath : AnyValue()
+    class SymbolColumn : AnyValue()
+    class SymbolGrid : AnyValue()
+    class TimeZoneKey : AnyKey()
 
-    enum class DtoLogTreeKeyValueType {
-        neoQL,
-        json,
-        javascript,
-        xml,
-        regular
+    enum class DtoLogTreeKeyValueType(val value: String) {
+        neoQL("neoQL"),
+        json("json"),
+        javascript("javascript"),
+        xml("xml"),
+        regular("regular")
     }
 
-    enum class EnumContactCopyField {
-        firstName,
-        lastName,
-        fullName,
-        mobileNumber,
-        email,
-        address,
-        birthDate
+    enum class EnumContactCopyField(val value: String) {
+        firstName("firstName"),
+        lastName("lastName"),
+        fullName("fullName"),
+        mobileNumber("mobileNumber"),
+        email("email"),
+        address("address"),
+        birthDate("birthDate")
     }
 
-    enum class EnumDefnAdminDoNotOptionEnt {
-        actions,
-        adminPermissions,
-        admins,
-        backend,
-        debug,
-        debugApiBrowser,
-        debugAutomation,
-        debugLogs,
-        debugQuery,
-        debugWorkflow,
-        deeplinks,
-        deploy,
-        deployInfo,
-        deployPayment,
-        deployPlugins,
-        deployVariables,
-        driveSheets,
-        extensions,
-        facets,
-        forms,
-        formulas,
-        frontend,
-        groups,
-        layouts,
-        manage,
-        manageDashboard,
-        manageKeychain,
-        managePayment,
-        manageSettings,
-        menus,
-        modules,
-        permissions,
-        plugins,
-        reports,
-        roles,
-        spreadsheets,
-        theme,
-        tools,
-        toolsDemoApp,
-        toolsWidgetWizard,
-        translations,
-        users,
-        variables,
-        visibilityRules,
-        workflows
+    enum class EnumDefnAdminDoNotOptionEnt(val value: String) {
+        actions("actions"),
+        adminPermissions("adminPermissions"),
+        admins("admins"),
+        backend("backend"),
+        debug("debug"),
+        debugApiBrowser("debugApiBrowser"),
+        debugAutomation("debugAutomation"),
+        debugLogs("debugLogs"),
+        debugQuery("debugQuery"),
+        debugWorkflow("debugWorkflow"),
+        deeplinks("deeplinks"),
+        deploy("deploy"),
+        deployInfo("deployInfo"),
+        deployPayment("deployPayment"),
+        deployPlugins("deployPlugins"),
+        deployVariables("deployVariables"),
+        driveSheets("driveSheets"),
+        extensions("extensions"),
+        facets("facets"),
+        forms("forms"),
+        formulas("formulas"),
+        frontend("frontend"),
+        groups("groups"),
+        layouts("layouts"),
+        manage("manage"),
+        manageDashboard("manageDashboard"),
+        manageKeychain("manageKeychain"),
+        managePayment("managePayment"),
+        manageSettings("manageSettings"),
+        menus("menus"),
+        modules("modules"),
+        permissions("permissions"),
+        plugins("plugins"),
+        reports("reports"),
+        roles("roles"),
+        spreadsheets("spreadsheets"),
+        theme("theme"),
+        tools("tools"),
+        toolsDemoApp("toolsDemoApp"),
+        toolsWidgetWizard("toolsWidgetWizard"),
+        translations("translations"),
+        users("users"),
+        variables("variables"),
+        visibilityRules("visibilityRules"),
+        workflows("workflows")
     }
 
-    enum class EnumDefnAdminDoNotOptionPlugin {
-        admins
+    enum class EnumDefnAdminDoNotOptionPlugin(val value: String) {
+        admins("admins")
     }
 
-    enum class EnumDefnAdminDoNotOptionStoreItem {
-        admins
+    enum class EnumDefnAdminDoNotOptionStoreItem(val value: String) {
+        admins("admins")
     }
 
-    enum class EnumDefnAdminPermissionType {
-        doNotEdit,
-        doNotShow
+    enum class EnumDefnAdminPermissionType(val value: String) {
+        doNotEdit("doNotEdit"),
+        doNotShow("doNotShow")
     }
 
-    enum class EnumDefnArgBinder {
-        argument,
-        context,
-        derived,
-        field,
-        input,
-        output,
-        spreadsheet,
-        sep,
-        variable,
-        constant,
-        response,
-        refTarget,
-        parameter
+    enum class EnumDefnArgBinder(val value: String) {
+        argument("argument"),
+        context_("context"),
+        derived("derived"),
+        field("field"),
+        input("input"),
+        output("output"),
+        spreadsheet("spreadsheet"),
+        sep("sep"),
+        variable("variable"),
+        constant("constant"),
+        response("response"),
+        refTarget("refTarget"),
+        parameter("parameter")
     }
 
-    enum class EnumDefnArgBinderArgument {
-        selectedSectionId,
-        selectedGridId,
-        selectedCompositeId,
-        selectedGridRowId
+    enum class EnumDefnArgBinderArgument(val value: String) {
+        selectedSectionId("selectedSectionId"),
+        selectedGridId("selectedGridId"),
+        selectedCompositeId("selectedCompositeId"),
+        selectedGridRowId("selectedGridRowId")
     }
 
-    enum class EnumDefnArgBinderContext {
-        caller,
-        callerSetting,
-        ent,
-        form,
-        plugin,
-        pluginConfig,
-        row
+    enum class EnumDefnArgBinderContext(val value: String) {
+        caller("caller"),
+        callerSetting("callerSetting"),
+        ent("ent"),
+        form("form"),
+        plugin("plugin"),
+        pluginConfig("pluginConfig"),
+        row("row")
     }
 
-    enum class EnumDefnArgBinderContextCaller {
-        color,
-        entUserId,
-        handle,
-        managerId,
-        assistantIds,
-        allAssistantIds,
-        allManagerIds,
-        grandManagerId,
-        nickName,
-        userId,
-        email,
-        mobileNumber,
-        roles
+    enum class EnumDefnArgBinderContextCaller(val value: String) {
+        color("color"),
+        entUserId("entUserId"),
+        handle("handle"),
+        managerId("managerId"),
+        assistantIds("assistantIds"),
+        allAssistantIds("allAssistantIds"),
+        allManagerIds("allManagerIds"),
+        grandManagerId("grandManagerId"),
+        nickName("nickName"),
+        userId("userId"),
+        email("email"),
+        mobileNumber("mobileNumber"),
+        roles("roles")
     }
 
     enum class EnumDefnArgBinderContextEnt(val value: String) {
         about("about"),
         id("id"),
-        Name("name"),
+        name_("name"),
         timeZone("timeZone"),
         displayDateFormat("displayDateFormat"),
         systemEntUserId("systemEntUserId")
@@ -418,1977 +418,1976 @@ class Types {
 
     enum class EnumDefnArgBinderContextForm(val value: String) {
         id("id"),
-        Name("name"),
+        name_("name"),
         label("label")
     }
 
     enum class EnumDefnArgBinderContextPlugin(val value: String) {
         about("about"),
         id("id"),
-        Name("name")
+        name_("name")
     }
 
-    enum class EnumDefnArgBinderContextRow {
-        createdBy,
-        createdOn,
-        id,
-        order,
-        parentId,
-        type,
-        updatedBy,
-        updatedOn
-    }
-
-    enum class EnumDefnAudioFormat {
-        ogg,
-        mp3,
-        wav
-    }
-
-    enum class EnumDefnAutomationSource {
-        currentForm,
-        currentGrid
-    }
-
-    enum class EnumDefnAutomationTerminateKind {
-        terminate,
-        resume,
-        setField
-    }
-
-    enum class EnumDefnAutomationWebhookKind {
-        location,
-        neomeComment,
-        neomeUserSession,
-        razorpayPaymentReceipt
-    }
-
-    enum class EnumDefnButtonTargetType {
-        callReport,
-        invokePlugin,
-        saveToSpreadsheet,
-        sendWhatsAppMessage,
-        triggerAction,
-        executeCallable,
-        startLocationTracking,
-        stopLocationTracking
-    }
-
-    enum class EnumDefnCalculateFormulaMode {
-        automatic,
-        manual,
-        onSend
-    }
-
-    enum class EnumDefnCaptureMode {
-        manual,
-        onInsert,
-        onUpdate
-    }
-
-    enum class EnumDefnCaptureValueKind {
-        captureLocation,
-        captureTime,
-        captureUser
-    }
-
-    enum class EnumDefnChartRenderingMode {
-        horizontal,
-        vertical
-    }
-
-    enum class EnumDefnCodeEditorLanguage {
-        csv,
-        html,
-        javascript,
-        json,
-        neoQL,
-        sql,
-        text,
-        xml
-    }
-
-    enum class EnumDefnCodeType {
-        barCode,
-        qrCode
-    }
-
-    enum class EnumDefnCompType {
-        bool,
-        date,
-        decimal,
-        logDecimal,
-        image,
-        label,
-        number,
-        logNumber,
-        paragraph,
-        text,
-        enumAdminDoNotOptionEnt,
-        enumAdminDoNotOptionPlugin,
-        enumAudioFormat,
-        enumAutomationSource,
-        enumCaptureValueKind,
-        enumCodeEditorLanguage,
-        enumConditionOperator,
-        enumConjunction,
-        enumDataPartitionPeriod,
-        enumDate,
-        enumDay,
-        enumDeeplinkConstraints,
-        enumDeployVar,
-        enumDeviceSize,
-        enumDeviceType,
-        enumDocFileExt,
-        enumDriveStatus,
-        enumDurationUnit,
-        enumEntLockBehavior,
-        enumEntLockReason,
-        enumFields,
-        enumFuncArgs,
-        enumMapPinShape,
-        enumPaymentMethod,
-        enumPaymentPlan,
-        enumPermission,
-        enumPluginApiMethod,
-        enumPluginResources,
-        enumPluginSecurityAccess,
-        enumPromptAction,
-        enumRoles,
-        enumRowAuditTrail,
-        enumSetupKind,
-        enumUserSettingOptions,
-        enumUserSettingValue,
-        enumVideoFormat,
-        enumVisibilityOperator,
-        enumMonth,
-        enumQuarter,
-        enumDeeplinkExpiry,
-        enumForms,
-        enumLogOperationKind,
-        enumCodeType,
-        enumPosition,
-        enumDateOccurrence,
-        enumFrequencyKind,
-        enumRenderingKind,
-        enumInsertVariant,
-        enumUpdateVariant,
-        enumRemoveVariant,
-        enumEmptyFieldVariant,
-        enumTableLayoutStyle,
-        enumUserProperty,
-        enumRowProperty,
-        enumStoreItem,
-        enumCaptureMode,
-        enumLockOperation,
-        enumRefreshOn,
-        enumEditorLayoutRenderingMode,
-        enumFormLayoutType,
-        enumSetOfUserKind,
-        enumUserContext,
-        enumDynamicOperator,
-        enumTargetType,
-        enumDriveSheetLayoutFor,
-        enumDriveSheetFieldLayoutOn,
-        enumTextStyle,
-        enumContentAlignment,
-        enumUserProps,
-        enumGridRenderingMode,
-        enumPaymentMethodKind,
-        enumSortOrder,
-        enumTextValidationPattern,
-        enumSyncMode,
-        enumPluginMode,
-        enumMapRenderingMode,
-        enumCalculateFormulaMode,
-        enumEjectionPolicy,
-        enumRefSetOperationKind,
-        enumEntStage,
-        enumFreezeAvatarKind,
-        enumTableLayoutTheme,
-        enumChartRenderingMode,
-        enumThemeImageRenderingMode,
-        enumPromptAttachmentFormat,
-        enumLocationCapturingMode,
-        enumArgBinderContext,
-        enumArgBinder,
-        enumKindAction,
-        enumKindActionUIUpdate,
-        enumKindAutomation,
-        enumKindButton,
-        enumKindDeeplink,
-        enumKindFormComposite,
-        enumKindHyperlink,
-        enumKindImport,
-        enumKindRating,
-        enumKindReport,
-        enumKindScheduledEvent,
-        enumKindAutomationStep,
-        enumKindSpreadsheetEvent,
-        enumKindPluginWebhookEvent,
-        enumKindWebhookEvent,
-        enumKindTranslation,
-        enumTerminateSetting,
-        enumAutomationWebhookKind,
-        enumLocationAccuracy,
-        enumKindAutoEdge,
-        enumKindAutoNode,
-        enumLayoutCardFilterKind,
-        enumLayoutGridKind,
-        enumThemeButtonSize,
-        enumThemeButtonVariant,
-        enumThemeColor,
-        enumThemeColorShade,
-        enumThemeDirection,
-        enumThemeDividerThickness,
-        enumThemeFieldMargin,
-        enumThemeFieldSize,
-        enumThemeFieldVariant,
-        enumThemeFormVariant,
-        enumThemeImageCorner,
-        enumThemePickVariant,
-        enumThemePickMultiVariant,
-        enumPlacement,
-        enumThemeSectionVariant,
-        enumThemeStroke,
-        enumThemeTabVariant,
-        enumVisibilityAction,
-        enumVisibilityActionOn,
-        enumWizardNavigationMode,
-        currency,
-        icon,
-        language,
-        timeZone,
-        pinShape,
-        lineStroke,
-        month,
-        quarter,
-        textSize,
-        paymentStatus,
-        messageKind,
-        chipSet,
-        chipSetDate,
-        chipSetDateTime,
-        chipSetDay,
-        chipSetDeviceSize,
-        chipSetDeviceType,
-        chipSetTime,
-        pickRole,
-        pickText,
-        pickTree,
-        pickUser,
-        pickGridRow,
-        pickReportRow,
-        setOfRole,
-        setOfUser,
-        setOfText,
-        color,
-        hyperlink,
-        audio,
-        camera,
-        counter,
-        logCounter,
-        dateRange,
-        dateTime,
-        dateTimeRange,
-        duration,
-        email,
-        handle,
-        location,
-        mobileNumber,
-        rating,
-        signature,
-        slider,
-        time,
-        video,
-        voice,
-        geoPoint,
-        rowId,
-        symbol,
-        schedulerId,
-        spreadsheetId,
-        button,
-        divider,
-        document,
-        error,
-        html,
-        identifier,
-        info,
-        propertyMap,
-        scanCode,
-        setOfDocument,
-        showCode,
-        userId,
-        dynamic,
-        hyperlinkRow,
-        password,
-        ref,
-        refSet,
-        refUser,
-        refReport,
-        refTarget,
-        refContact,
-        grid,
-        section,
-        spreadsheetRef,
-        tab,
-        wizard,
-        dateFormat,
-        studioVarIdTextEditor,
-        studioVarIdParagraphEditor,
-        studioCodeEditor,
-        pickActionId,
-        pickCompId,
-        pickPluginCompId,
-        pickFieldId,
-        pickPluginFieldId,
-        pickFormId,
-        pickPluginFormId,
-        pickGridId,
-        pickImportPluginId,
-        pickImportPluginApiId,
-        pickLayoutFormContentId,
-        pickLayoutGridId,
-        pickSpreadsheetRefLayoutId,
-        pickLayoutSpreadsheetId,
-        pickPluginBundleId,
-        pickPluginId,
-        pickReportId,
-        pickSectionId,
-        pickSpreadsheetId,
-        pickVarId,
-        pickGroupId,
-        pickDeeplinkId,
-        pickPipelineVarId,
-        pickDeployPaymentProviderId,
-        pickAutomationId,
-        studioBuildAllModules,
-        studioBuildArgBinder,
-        studioSetOfDate,
-        studioBuildColor,
-        studioBuildDate,
-        studioBuildDateTime,
-        studioBuildPermissionMatrix,
-        studioBuildTree,
-        studioBuildUserSetting,
-        studioBuildActionPermission,
-        studioBuildPropertyMap,
-        studioBuildMapping,
-        studioBuildVideoTimestampMap,
-        studioBuildOptionPermissionMatrix,
-        studioMapOfForwardRolePermission,
-        studioMapOfCondition,
-        studioMapOfFormula,
-        studioMapOfFuncArg,
-        studioMapOfJarFile,
-        studioMapOfLayoutSpreadsheet,
-        studioMapOfLayoutGrid,
-        studioMapOfText,
-        studioMapOfVisibilityCondition,
-        studioMapOfVisibilityAction,
-        studioMapOfPartition,
-        studioMapOfForwardGroupPermission,
-        studioMapOfDynamicRule,
-        studioMapOfPipelineVariable,
-        studioMapOfDynamicCondition,
-        studioMapOfUserCondition,
-        studioMapOfLayoutDriveSpreadsheet,
-        studioFieldMappingTree,
-        studioGridMappingTree,
-        studioMapOfArgBinder,
-        studioMapOfRefTargetSpreadsheet,
-        studioSetOfDocFileExt,
-        studioSetOfStoreItemCategory,
-        studioSetOfModule,
-        studioSetOfNumber,
-        studioSetOfAdminDoNotOption,
-        studioSetOfPluginSecurityAccess,
-        studioSetOfRowAuditTrail,
-        studioSetOfMonth,
-        studioSetOfBorder,
-        studioSetOfBorderRadius,
-        studioSetOfCompId,
-        studioSetOfDataExportKind,
-        studioSetOfLanguageKeys,
-        studioSetOfActionId,
-        studioSetOfFieldId,
-        studioSetOfPluginFieldId,
-        studioSetOfFieldRefId,
-        studioSetOfFormId,
-        studioSetOfGridId,
-        studioSetOfGroupId,
-        studioSetOfLayoutFormContentId,
-        studioSetOfLayoutGridId,
-        studioSetOfLayoutSpreadsheetId,
-        studioSetOfReportId,
-        studioSetOfSectionId,
-        studioSetOfSpreadsheetId,
-        studioSetOfVarId,
-        studioCompArray,
-        otp,
-        avtar,
-        carousel,
-        formList,
-        formListItem,
-        pickOption,
-        wallpaper
-    }
-
-    enum class EnumDefnConditionOperator {
-        hasNoValue,
-        equalTo,
-        greaterThan,
-        greaterThanOrEqualTo,
-        hasValue,
-        lessThan,
-        lessThanOrEqualTo,
-        notEqualTo,
-        contains,
-        notContains
-    }
-
-    enum class EnumDefnConjunction {
-        or,
-        and
-    }
-
-    enum class EnumDefnContentAlignment {
-        start,
-        center,
-        end
-    }
-
-    enum class EnumDefnDataExportKind {
-        xlsx,
-        json
-    }
-
-    enum class EnumDefnDataPartitionPeriod {
-        daily,
-        hourly,
-        weekly,
-        monthly,
-        quarterly,
-        yearly
-    }
-
-    enum class EnumDefnDate {
-        lastQuarter,
-        lastWeek,
-        lastMonth,
-        lastYear,
-        nextQuarter,
-        nextWeek,
-        nextMonth,
-        nextYear,
-        now,
-        tomorrow,
-        yesterday,
-        startOfWeek,
-        startOfMonth,
-        startOfYear,
-        endOfWeek,
-        endOfMonth,
-        endOfYear,
-        createdOn,
-        updatedOn
-    }
-
-    enum class EnumDefnDateOccurrence {
-        custom,
-        first,
-        last
-    }
-
-    enum class EnumDefnDay {
-        sunday,
-        monday,
-        tuesday,
-        wednesday,
-        thursday,
-        friday,
-        saturday
-    }
-
-    enum class EnumDefnDeeplinkConstraint {
-        enforceGlobalUserSignIn,
-        enforceEnterpriseUserSignIn,
-        makeAnEnterpriseUser,
-        allowPublicSharing
-    }
-
-    enum class EnumDefnDeeplinkExpiry {
-        onFirstClick,
-        withinOneWeek,
-        withinOneMonth,
-        noExpiry
-    }
-
-    enum class EnumDefnDeploy {
-        requiredOnDeploy,
-        fixedOnDeploy
-    }
-
-    enum class EnumDefnDeviceSize {
-        mobile,
-        tablet,
-        laptop,
-        desktop
-    }
-
-    enum class EnumDefnDocFileExt {
-        ai,
-        any,
-        avi,
-        cdr,
-        csv,
-        dll,
-        doc,
-        docx,
-        drawio,
-        dwg,
-        eml,
-        gif,
-        html,
-        jar,
-        jpeg,
-        jpg,
-        json,
-        mov,
-        mp3,
-        mp4,
-        msg,
-        oga,
-        ogg,
-        pdf,
-        png,
-        ppt,
-        pptx,
-        rvt,
-        std,
-        svg,
-        tiff,
-        txt,
-        wav,
-        webm,
-        xls,
-        xlsx,
-        xml,
-        zip
-    }
-
-    enum class EnumDefnDriveSheetFieldLayoutOn {
-        column,
-        header
-    }
-
-    enum class EnumDefnDriveSheetLayoutFor {
-        sectionOrGrid,
-        field
-    }
-
-    enum class EnumDefnDriveStatus {
-        connected,
-        disconnected,
-        notInstalled
-    }
-
-    enum class EnumDefnDurationUnit {
-        seconds,
-        minutes,
-        hours,
-        days,
-        weeks,
-        months,
-        quarters,
-        years
-    }
-
-    enum class EnumDefnDynamicOperator {
-        hasNoValue,
-        hasValue,
-        equalTo,
-        notEqualTo
-    }
-
-    enum class EnumDefnEditorLayoutRenderingMode {
-        tabs,
-        stack,
-        wizard
-    }
-
-    enum class EnumDefnEjectionPolicy {
-        FIFO,
-        LIFO
-    }
-
-    enum class EnumDefnEmptyFieldVariant {
-        ignoreEmptyField,
-        overrideEmptyField
-    }
-
-    enum class EnumDefnEntLockBehavior {
-        readAccess,
-        zeroAccess,
-        fullAccessWithWarning
-    }
-
-    enum class EnumDefnEntLockReason {
-        blocked,
-        obsolete,
-        other,
-        paymentNotReceived,
-        tooMuchLoad,
-        userUpgrade
-    }
-
-    enum class EnumDefnEntStage {
-        Created,
-        POC,
-        UserInvited,
-        Production
-    }
-
-    enum class EnumDefnErrorSeverity {
-        error,
-        suggestion,
-        warning
-    }
-
-
-    enum class EnumDefnFields {
-        `$CreatedBy`,
-        `$CreatedOn`,
-        `$RowId`,
-        `$RowOrder`,
-        `$UpdatedBy`,
-        `$UpdatedOn`,
-        `$ParentRowId`
-    }
-
-    enum class EnumDefnFormLayoutType {
-        editor,
-        content,
-        template
-    }
-
-    enum class EnumDefnForms {
-        `$FormMapOfOptions`,
-        `$FormPickTree`,
-        `$FormSetOfUser`,
-        `$FormPluginConfig`,
-        `$FormSchedule`,
-        `$FormPaymentReceipt`,
-        `$FormUserSession`,
-        `$FormRowComment`,
-        `$FormLocation`,
-        `$FormEntAdmin`,
-        `$FormEntUser`,
-        `$FormEntAuditRecord`,
-        `$FormPrompt`,
-        `$FormRagPromptResponse`,
-        `$FormRowEditHistory`,
-        `$FormHumanLink`,
-        `$FormUserMembership`,
-        `$FormCrawl`,
-        `$FormSearch`,
-        `$FormBotResponse`,
-        `$FormBotHistory`
-    }
-
-    enum class EnumDefnFreezeAvatarKind {
-        rounded,
-        square
-    }
-
-    enum class EnumDefnFuncArg {
-        number,
-        text,
-        numberArray,
-        textArray
-    }
-
-    enum class EnumDefnGridRenderingMode {
-        auto,
-        flex
-    }
-
-    enum class EnumDefnHttpMethod {
-        delete,
-        get,
-        patch,
-        post,
-        put
-    }
-
-    enum class EnumDefnInsertVariant {
-        insertForced,
-        skipEmptyKeyField,
-        doNotInsert
-    }
-
-    enum class EnumDefnKindAction {
-        executeCallable,
-        report,
-        rowInsert,
-        rowUpdate,
-        spreadsheetEditor,
-        spreadsheetHistory,
-        uiUpdate,
-        user
-    }
-
-    enum class EnumDefnKindActionUIUpdate {
-        groupSwitcher
-    }
-
-    enum class EnumDefnKindAiProvider {
-        openAI_4_1_MINI,
-        openAI_5
-    }
-
-    enum class EnumDefnKindAutoEdge {
-        ERROR,
-        EXPIRY,
-        FALSE,
-        ITERATE,
-        NEXT,
-        TRUE,
-        VALUE
-    }
-
-    enum class EnumDefnKindAutoNode {
-        acquireLock,
-        aiAgent,
-        aiAudioToText,
-        aiDocumentToForm,
-        aiExcelToSpreadsheet,
-        aiFakerToForm,
-        aiFakerToSpreadsheet,
-        aiFormToClassification,
-        aiFormToForm,
-        aiFormToHtml,
-        aiFormToImage,
-        aiFormToJSON,
-        aiFormToPDF,
-        aiFormToSentiment,
-        aiFormToSummary,
-        aiFormToXML,
-        aiSpreadsheetToCSV,
-        aiSpreadsheetToExcel,
-        aiSpreadsheetToHTML,
-        aiSpreadsheetToJSON,
-        aiSpreadsheetToPDF,
-        aiSpreadsheetToXML,
-        aiTextToClassification,
-        aiTextToForm,
-        aiTextToJSON,
-        aiTextToSentiment,
-        aiTextToSummary,
-        aiTextToXML,
-        aiXMLToForm,
-        aiXMLToSpreadsheet,
-        applyFormula,
-        applyTransforms,
-        botBuildResponse,
-        botHistoryAddPrompt,
-        botHistoryAddResponse,
-        botHistoryGet,
-        botHistoryRemove,
-        botHistoryToStory,
-        botSendResponse,
-        branchIfElse,
-        branchIterateArray,
-        branchIterateGrid,
-        branchIterateSpreadsheet,
-        branchSwitchCase,
-        branchSwitchForm,
-        branchSwitchPrompt,
-        debugLog,
-        eventChat,
-        eventHumanLink,
-        eventManualTrigger,
-        eventPaymentReceipt,
-        eventPluginWebhook,
-        eventRowComment,
-        eventRpcCall,
-        eventSchedule,
-        eventSsInsertAfter,
-        eventSsInsertBefore,
-        eventSsRemoveAfter,
-        eventSsRemoveBefore,
-        eventSsUpdateAfter,
-        eventSsUpdateBefore,
-        eventSubWorkflow,
-        eventUserExit,
-        eventUserJoin,
-        eventUserLocation,
-        eventUserOffline,
-        eventUserOnline,
-        executeAction,
-        executeJavascript,
-        executeParallel,
-        executePlugin,
-        executeReport,
-        executeRpc,
-        executeScheduler,
-        executeSchedulerRemove,
-        executeSubWorkflow,
-        fieldRefSetSet,
-        fieldRemove,
-        fieldSet,
-        generateDeeplink,
-        generateImage,
-        generatePaymentLink,
-        generatePdf,
-        imageTransforms,
-        mediaExists,
-        mediaRemove,
-        paramCalc,
-        paramClone,
-        paramCreate,
-        paramExist,
-        paramRemove,
-        paramUpdate,
-        pause,
-        releaseLock,
-        resume,
-        rowForward,
-        rowGet,
-        rowGetHistory,
-        rowInsert,
-        rowInsertPartitionRequest,
-        rowRemove,
-        rowSendComment,
-        rowUpdate,
-        rowUpdateFieldLogNumber,
-        sendEmail,
-        sendHumanLink,
-        sendMessageToGroups,
-        sendMessageToUsers,
-        sendPushNotification,
-        sendWhatsappMessage,
-        sendWhatsappTemplate,
-        ssCrawl,
-        ssExecuteQuery,
-        ssFtsSearch,
-        ssRagSearch,
-        ssRemoveRows,
-        stopAndError,
-        userAdd,
-        userGet,
-        userGetAllAssistants,
-        userGetAssistants,
-        userGetGrandManager,
-        userGetManager,
-        userHasGrandManager,
-        userHasManager,
-        userHasRoles,
-        userIsAllAssistant,
-        userIsAllManager,
-        userIsAssistant,
-        userIsGrandManager,
-        userIsManager,
-        userIterate,
-        userRemove,
-        userUpdate,
-        validate,
-        validatePrompt,
-        wait
-    }
-
-    enum class EnumDefnKindAutoResponseWait {
-        all,
-        anyOne,
-        none
-    }
-
-    enum class EnumDefnKindAutoXform {
-        stringJoiner,
-        stringIsMobileNumber,
-        stringIsEmail
-    }
-
-    enum class EnumDefnKindAutomation {
-        callable,
-        pluginWebhook,
-        scheduled,
-        spreadsheet,
-        webhook
-    }
-
-    enum class EnumDefnKindAutomationStep {
-        addUser,
-        updateUser,
-        calculateFormulas,
-        callPlugin,
-        callReport,
-        copyField,
-        forwardToGroups,
-        forwardToUsers,
-        generateDeeplink,
-        getSpreadsheetRow,
-        getSpreadsheetRows,
-        validation,
-        insertIntoSpreadsheet,
-        lock,
-        sendMessage,
-        sendMessageToUsers,
-        sendMessageAsComment,
-        sendMessageToGroups,
-        generatePdf,
-        generateImage,
-        generatePaymentLink,
-        sendWhatsappTemplateMessage,
-        sendWhatsappDynamicMessage,
-        sendEmail,
-        sendPushNotification,
-        partitionSend,
-        pause,
-        removeField,
-        removeFromSpreadsheet,
-        removeCurrentRow,
-        removeRows,
-        removeUser,
-        returnEvent,
-        terminate,
-        updateField,
-        updateFieldLogNumber,
-        updateFieldRefSet,
-        updateSpreadsheet,
-        execute,
-        executeAsync,
-        clearPipeline,
-        parseDocument,
-        addSchedule,
-        removeSchedule
-    }
-
-    enum class EnumDefnKindBranchIfElse {
-        Condition,
-        ConditionVar
-    }
-
-    enum class EnumDefnKindButton {
-        submit,
-        reset,
-        refresh,
-        normal
-    }
-
-    enum class EnumDefnKindCallableEvent {
-        onFire
-    }
-
-    enum class EnumDefnKindChannelType {
-        email,
-        neome,
-        slack,
-        sms,
-        whatsapp
-    }
-
-    enum class EnumDefnKindDeeplink {
-        report,
-        spreadsheetEditor,
-        spreadsheetInsert,
-        spreadsheetRow
-    }
-
-    enum class EnumDefnKindFormComposite {
-        grid,
-        section,
-        spreadsheetRef
-    }
-
-    enum class EnumDefnKindHyperlink {
-        general,
-        youtube
-    }
-
-    enum class EnumDefnKindImageXform {
-        blur
-    }
-
-    enum class EnumDefnKindImport {
-        plugin
-    }
-
-    enum class EnumDefnKindMessage {
-        audio,
-        camera,
-        document,
-        image,
-        linkText,
-        location,
-        text,
-        video,
-        user,
-        voice
-    }
-
-    enum class EnumDefnKindNoteStatus {
-        Done,
-        Error,
-        Start,
-        Verify
-    }
-
-    enum class EnumDefnKindPipelineUpdate {
-        Mapping,
-        MappingVar
-    }
-
-    enum class EnumDefnKindPluginWebhookEvent {
-        onCallback
-    }
-
-    enum class EnumDefnKindRating {
-        heart_1,
-        thumbs_2,
-        star_3,
-        star_4,
-        star_5
-    }
-
-    enum class EnumDefnKindReport {
-        composite,
-        mapper,
-        plugin,
-        query,
-        spreadsheet
-    }
-
-    enum class EnumDefnKindScheduledEvent {
-        onExpiry
-    }
-
-    enum class EnumDefnKindSentiment {
-        VeryPositive,
-        Positive,
-        Neutral,
-        Negative,
-        VeryNegative
-    }
-
-    enum class EnumDefnKindSetOfUser {
-        roles,
-        fields,
-        context
-    }
-
-    enum class EnumDefnKindSpreadsheetEvent {
-        afterInsert,
-        afterRemove,
-        afterUpdate,
-        beforeInsert,
-        beforeRemove,
-        beforeUpdate
-    }
-
-    enum class EnumDefnKindTranslation {
-        text,
-        paragraph
-    }
-
-    enum class EnumDefnKindWebhookEvent {
-        onCallback
-    }
-
-    enum class EnumDefnLayoutCardFilterKind {
-        tree,
-        tab
-    }
-
-    enum class EnumDefnLayoutGridKind {
-        card,
-        list,
-        map,
-        table,
-        kanban,
-        calendar,
-        xyChartBarGraph,
-        xyChartLineChart,
-        xyChartPieChart,
-        xyChartDoughnut,
-        xyChartScatterPlot
-    }
-
-    enum class EnumDefnLayoutUserKind {
-        hierarchy,
-        tree
-    }
-
-    enum class EnumDefnLocationAccuracy {
-        high,
-        balanced,
-        low
-    }
-
-    enum class EnumDefnLocationCapturingMode {
-        scheduled,
-        manual
-    }
-
-    enum class EnumDefnLockOperation {
-        acquire,
-        release
-    }
-
-    enum class EnumDefnLogOperationKind {
-        add,
-        subtract,
-        set
-    }
-
-    enum class EnumDefnMapPinShape {
-        avatar,
-        avatarWithName,
-        circle,
-        circleBig,
-        circleMedium,
-        circleWithLabel,
-        heart,
-        heartBig,
-        heartMedium,
-        label,
-        pin,
-        pinWithLabel,
-        square,
-        squareBig,
-        squareMedium,
-        star,
-        starBig,
-        starMedium,
-        triangle,
-        triangleBig,
-        triangleMedium
-    }
-
-    enum class EnumDefnMapRenderingMode {
-        fixedLocation,
-        liveLocation
-    }
-
-    enum class EnumDefnMonth {
-        January,
-        February,
-        March,
-        April,
-        May,
-        June,
-        July,
-        August,
-        September,
-        October,
-        November,
-        December,
-        CurrentMonth,
-        PreviousMonth,
-        NextMonth
-    }
-
-    enum class EnumDefnNodeTerminateKind {
-        resume,
-        stopOrErrorBranch
-    }
-
-    enum class EnumDefnPaymentMethod {
-        creditCard,
-        debitCard
-    }
-
-    enum class EnumDefnPaymentMethodKind {
-        netbanking,
-        card,
-        upi
-    }
-
-    enum class EnumDefnPaymentPlan {
-        free,
-        team,
-        business,
-        onPremise
-    }
-
-    enum class EnumDefnPaymentStatus {
-        pending,
-        paid,
-        failed
-    }
-
-    enum class EnumDefnPermission {
-        hide,
-        read,
-        writeOnInsert,
-        writeOnce,
-        invisible,
-        write
-    }
-
-    enum class EnumDefnPipelineFormKind {
-        input,
-        output
-    }
-
-    enum class EnumDefnPipelineSystem {
-        `$Curr`,
-        `$Iter`,
-        `$Out`,
-        `$Prev`,
-        `$Prior`,
-        `$Sys`
-    }
-
-    enum class EnumDefnPlacement {
-        top,
-        bottom,
-        start,
-        end,
-        center,
-        diagonal,
-        overlayTop,
-        flexCenter,
-        spaceBetween,
-        justify
-    }
-
-    enum class EnumDefnPluginApiMethod {
-        delete,
-        get,
-        patch,
-        post,
-        put,
-        webhook,
-        function
-    }
-
-    enum class EnumDefnPluginMode {
-        agent,
-        javascript,
-        webService
-    }
-
-    enum class EnumDefnPluginResources {
-        jar,
-        rpc,
-        dev
-    }
-
-    enum class EnumDefnPluginSecurityAccess {
-        drive,
-        network
-    }
-
-    enum class EnumDefnPosition {
-        topLeft,
-        topRight,
-        bottomLeft,
-        bottomRight
-    }
-
-    enum class EnumDefnPromptAction {
-        insert,
-        update,
-        remove,
-        get
-    }
-
-    enum class EnumDefnPromptAttachmentFormat {
-        pdf,
-        image
-    }
-
-    enum class EnumDefnQuarter {
-        Quarter_1,
-        Quarter_2,
-        Quarter_3,
-        Quarter_4
-    }
-
-    enum class EnumDefnRefSetOperationKind {
-        set,
-        union,
-        intersection,
-        insert,
-        put,
-        remove,
-        moveUp,
-        moveDown,
-        moveTop,
-        moveBottom,
-        sort
-    }
-
-    enum class EnumDefnRefreshOn {
-        refreshOnOpen,
-        refreshOnSend,
-        refreshOnDemand
-    }
-
-    enum class EnumDefnRemoveVariant {
-        removeForced,
-        doNotRemove
-    }
-
-    enum class EnumDefnRenderingKind {
-        a4Size,
-        custom,
-        fitToScreen,
-        fullScreen,
-        mm_48,
-        mm_58,
-        mm_72,
-        mm_80,
-        mm_104,
-        receiptSize
-    }
-
-    enum class EnumDefnRepeatFrequencyKind {
-        minutes,
-        hours,
-        days,
-        weeks,
-        months,
-        years
-    }
-
-    enum class EnumDefnRoles {
-        `$Public`,
-        `$Manager`,
-        `$GrandManager`,
-        `$AllManagers`,
-        `$Assistants`,
-        `$AllAssistants`,
-        `$Self`
-    }
-
-    enum class EnumDefnRowAuditTrail {
-        insert,
-        update,
-        remove
-    }
-
-    enum class EnumDefnRowProperty {
-        createdBy,
-        updatedBy
-    }
-
-    enum class EnumDefnScanCodeType {
-        barCode,
-        qrCode
-    }
-
-    enum class EnumDefnSetupKind {
-        quick,
-        standard,
-        advanced,
-        focusDeploy,
-        focusBackend,
-        focusFrontend
-    }
-
-    enum class EnumDefnShowBorderKind {
-        top,
-        bottom,
-        left,
-        right
-    }
-
-    enum class EnumDefnShowBorderRadiusKind {
-        topLeft,
-        topRight,
-        bottomLeft,
-        bottomRight
-    }
-
-    enum class EnumDefnSortOrder {
-        ascending,
-        descending
-    }
-
-    enum class EnumDefnStoreItem {
-        template,
-        application
-    }
-
-    enum class EnumDefnSyncMode {
-        backup,
-        biDirectional
-    }
-
-    enum class EnumDefnTableLayoutTheme {
-        standard,
-        spacious
-    }
-
-    enum class EnumDefnTableStyle {
-        defaultStyle
-    }
-
-    enum class EnumDefnTextSize {
-        body1,
-        body2,
-        button,
-        caption,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        inherit,
-        overline,
-        subtitle1,
-        subtitle2,
-        subtitle3,
-        subtitle4
-    }
-
-    enum class EnumDefnTextStyle {
-        bold,
-        italic,
-        underlined,
-        strikeout
-    }
-
-    enum class EnumDefnTextValidationPattern {
-        aadhaar,
-        gstin,
-        pan
-    }
-
-    enum class EnumDefnThemeButtonSize {
-        small,
-        medium,
-        large
-    }
-
-    enum class EnumDefnThemeButtonVariant {
-        text,
-        contained,
-        outlined,
-        icon
-    }
-
-    enum class EnumDefnThemeColor {
-        transparent,
-        primary,
-        secondary,
-        error,
-        info,
-        success,
-        warning,
-        textPrimary,
-        textSecondary,
-        textDisabled,
-        textInverse,
-        primaryLight,
-        secondaryLight,
-        successLight,
-        errorLight,
-        infoLight,
-        warningLight,
-        primaryDark,
-        secondaryDark,
-        successDark,
-        errorDark,
-        infoDark,
-        warningDark,
-        amber,
-        black,
-        blue,
-        cyan,
-        deepOrange,
-        deepPurple,
-        green,
-        grey,
-        indigo,
-        lightBlue,
-        lightGreen,
-        lime,
-        orange,
-        pink,
-        purple,
-        red,
-        teal,
-        white,
-        yellow
-    }
-
-    enum class EnumDefnThemeColorShade {
-        s50,
-        s100,
-        s200,
-        s300,
-        s400,
-        s500
-    }
-
-    enum class EnumDefnThemeDirection {
-        horizontal,
-        vertical
-    }
-
-    enum class EnumDefnThemeDividerKind {
-        thick,
-        thin
-    }
-
-    enum class EnumDefnThemeFieldMargin {
-        dense,
-        none,
-        normal
-    }
-
-    enum class EnumDefnThemeFieldSize {
-        medium,
-        small
-    }
-
-    enum class EnumDefnThemeFieldVariant {
-        outlined,
-        filled,
-        standard
-    }
-
-    enum class EnumDefnThemeFormVariant {
-        form,
-        report
-    }
-
-    enum class EnumDefnThemeImageCorner {
-        rectangle,
-        circle,
-        rounded
-    }
-
-    enum class EnumDefnThemeImageRenderingMode {
-        aspectFit,
-        scaleToFit
-    }
-
-    enum class EnumDefnThemePickMultiVariant {
-        checkboxVertical,
-        checkboxHorizontal,
-        dropdown
-    }
-
-    enum class EnumDefnThemePickVariant {
-        radioButtonVertical,
-        radioButtonHorizontal,
-        led,
-        dropdown
-    }
-
-    enum class EnumDefnThemeSectionVariant {
-        form,
-        propertyEditor
-    }
-
-    enum class EnumDefnThemeStroke {
-        dash,
-        dotted,
-        solid
-    }
-
-    enum class EnumDefnThemeTabVariant {
-        standard,
-        scrollable,
-        fullWidth
-    }
-
-    enum class EnumDefnTime {
-        now
-    }
-
-    enum class EnumDefnUpdateVariant {
-        updateForced,
-        doNotUpdate
-    }
-
-    enum class EnumDefnUserContext {
-        caller,
-        createdBy,
-        updatedBy
-    }
-
-    enum class EnumDefnUserProperty {
-        nickName,
-        handle
-    }
-
-    enum class EnumDefnUserProps {
-        firstName,
-        lastName,
-        fullName,
-        email,
-        mobileNumber,
-        handle
-    }
-
-    enum class EnumDefnUserSettingOptions {
-        text,
-        number,
-        decimal,
-        pickOne,
-        pickMany
-    }
-
-    enum class EnumDefnUserSettingValue {
-        dataEntered,
-        dataNotEntered
-    }
-
-    enum class EnumDefnVideoFormat {
-        mp4
-    }
-
-    enum class EnumDefnVisibilityAction {
-        blink,
-        click,
-        clear,
-        setValue,
-        disable,
-        enable,
-        executeAction,
-        hidden,
-        highlight,
-        invisible,
-        shake,
-        visible
-    }
-
-    enum class EnumDefnVisibilityActionOn {
-        component,
-        field,
-        layout,
-        sendButton
-    }
-
-    enum class EnumDefnVisibilityOperator {
-        hasNoValue,
-        hasValue,
-        equalTo,
-        notEqualTo,
-        hasChanged
-    }
-
-    enum class EnumDefnWizardNavigationMode {
-        nextButton,
-        nextPreviousButton
-    }
-
-    enum class EnumDeviceType {
-        android,
-        ios,
-        web,
-        widget,
-        agent,
-        test
-    }
-
-    enum class EnumEnvValidationError {
-        cli,
-        composite,
-        invalidParam,
-        notAccessible,
-        notChanged,
-        notFound,
-        ruleViolation
-    }
-
-    enum class EnumFormContentPosition {
-        start,
-        flexCenter,
-        end
-    }
-
-    enum class EnumFormExportType {
-        pdf,
-        image,
-        html
-    }
-
-    enum class EnumIdentityProviderKind {
-        apple,
-        google,
-        microsoft
-    }
-
-    enum class EnumKeychainType {
-        rpcReceive,
-        rpcSend,
-        slack
-    }
-
-    enum class EnumLogItemType {
-        text,
-        tree,
-        table
-    }
-
-    enum class EnumLogTableAlignment {
-        left,
-        center,
-        right
-    }
-
-    enum class EnumLogTableTextStyle {
-        plain,
-        bold,
-        italic,
-        underline,
-        strikeThrough,
-        boldItalic,
-        boldUnderline,
-        boldStrikeThrough
-    }
-
-    enum class EnumLogTextType {
-        neoQL,
-        cli,
-        json,
-        plain,
-        monospaced,
-        javascript,
-        html,
-        xml
-    }
-
-    enum class EnumLogTreeItemType {
-        keyValue,
-        line
-    }
-
-    enum class EnumLogTreeLineCollapse {
-        showCollapse,
-        showExpand,
-        ignore
-    }
-
-    enum class EnumMediaType {
-        audio,
-        document,
-        icon,
-        image,
-        jar,
-        avatar,
-        sticker,
-        thumbnail,
-        video,
-        voice
-    }
-
-    enum class EnumNeatPathCaption {
-        About,
-        Plugins,
-        Roles,
-        Variables,
-        Translations,
-        Forms,
-        Reports,
-        Spreadsheets,
-        Actions,
-        Groups,
-        Deeplinks,
-        DriveSheets,
-        Deploy,
-        Automation,
-        Admins,
-        Users,
-        Details,
-        API,
-        Resources,
-        Store
-    }
-
-    enum class EnumPaymentProviderKind {
-        razorpay
-    }
-
-    enum class EnumSchemaColumnType {
-        Boolean,
-        Date,
-        DateArray,
-        Double,
-        GeoHash,
-        GeoPoint,
-        Long,
-        String,
-        StringArray,
-        SysId,
-        LongArray,
-        SysIdArray
-    }
-
-    enum class EnumStoreItemArtifact {
-        ent,
-        plugin,
-        template
-    }
-
-    enum class EnumStoreLabel {
-        CRM,
-        Demo,
-        Ffreedom,
-        Hubspot,
-        Neome,
-        Plugin,
-        SalesForce,
-        ServiceNow,
-        Tally,
-        Ticketing,
-        Zendesk
-    }
-
-    enum class EnumStudioCompType {
-        bool,
-        date,
-        decimal,
-        logDecimal,
-        image,
-        label,
-        number,
-        logNumber,
-        paragraph,
-        text,
-        chipSet,
-        chipSetDate,
-        chipSetDateTime,
-        chipSetDay,
-        chipSetDeviceSize,
-        chipSetDeviceType,
-        chipSetTime,
-        currency,
-        icon,
-        language,
-        timeZone,
-        pinShape,
-        lineStroke,
-        paymentStatus,
-        month,
-        quarter,
-        textSize,
-        messageKind,
-        pickRole,
-        pickText,
-        pickTree,
-        pickUser,
-        pickGridRow,
-        pickReportRow,
-        setOfRole,
-        setOfUser,
-        setOfText,
-        color,
-        hyperlink,
-        audio,
-        camera,
-        counter,
-        logCounter,
-        dateRange,
-        dateTime,
-        dateTimeRange,
-        duration,
-        email,
-        handle,
-        location,
-        mobileNumber,
-        rating,
-        signature,
-        slider,
-        time,
-        video,
-        voice,
-        geoPoint,
-        rowId,
-        symbol,
-        schedulerId,
-        spreadsheetId,
-        button,
-        divider,
-        document,
-        error,
-        html,
-        identifier,
-        info,
-        propertyMap,
-        scanCode,
-        setOfDocument,
-        showCode,
-        userId,
-        dynamic,
-        hyperlinkRow,
-        password,
-        ref,
-        refSet,
-        refUser,
-        refReport,
-        refTarget,
-        refContact,
-        grid,
-        section,
-        spreadsheetRef
-    }
-
-    enum class EnumStudioVarKind {
-        any,
-        bool,
-        buttonVariant,
-        color,
-        currency,
-        date,
-        dateTime,
-        day,
-        decimal,
-        deviceSize,
-        deviceType,
-        direction,
-        dividerKind,
-        document,
-        duration,
-        email,
-        textSize,
-        html,
-        hyperlink,
-        icon,
-        image,
-        imageCorner,
-        language,
-        location,
-        mapPinShape,
-        mobileNumber,
-        number,
-        paragraph,
-        ratingKind,
-        stroke,
-        symbol,
-        text,
-        placement,
-        time,
-        timeZone,
-        month,
-        quarter,
-        condition,
-        function,
-        mapping,
-        sequence,
-        userSetting,
-        mapOfText,
-        setOfDate,
-        setOfDay,
-        setOfNumber,
-        setOfText,
-        setOfTime,
-        setOfUser,
-        tree
-    }
-
-    enum class EnumWhatsAppTemplateHeaderType {
-        none,
-        video,
-        document,
-        image
+    enum class EnumDefnArgBinderContextRow(val value: String) {
+        createdBy("createdBy"),
+        createdOn("createdOn"),
+        id("id"),
+        order("order"),
+        parentId("parentId"),
+        type("type"),
+        updatedBy("updatedBy"),
+        updatedOn("updatedOn")
+    }
+
+    enum class EnumDefnAudioFormat(val value: String) {
+        ogg("ogg"),
+        mp3("mp3"),
+        wav("wav")
+    }
+
+    enum class EnumDefnAutomationSource(val value: String) {
+        currentForm("currentForm"),
+        currentGrid("currentGrid")
+    }
+
+    enum class EnumDefnAutomationTerminateKind(val value: String) {
+        terminate("terminate"),
+        resume("resume"),
+        setField("setField")
+    }
+
+    enum class EnumDefnAutomationWebhookKind(val value: String) {
+        location("location"),
+        neomeComment("neomeComment"),
+        neomeUserSession("neomeUserSession"),
+        razorpayPaymentReceipt("razorpayPaymentReceipt")
+    }
+
+    enum class EnumDefnButtonTargetType(val value: String) {
+        callReport("callReport"),
+        invokePlugin("invokePlugin"),
+        saveToSpreadsheet("saveToSpreadsheet"),
+        sendWhatsAppMessage("sendWhatsAppMessage"),
+        triggerAction("triggerAction"),
+        executeCallable("executeCallable"),
+        startLocationTracking("startLocationTracking"),
+        stopLocationTracking("stopLocationTracking")
+    }
+
+    enum class EnumDefnCalculateFormulaMode(val value: String) {
+        automatic("automatic"),
+        manual("manual"),
+        onSend("onSend")
+    }
+
+    enum class EnumDefnCaptureMode(val value: String) {
+        manual("manual"),
+        onInsert("onInsert"),
+        onUpdate("onUpdate")
+    }
+
+    enum class EnumDefnCaptureValueKind(val value: String) {
+        captureLocation("captureLocation"),
+        captureTime("captureTime"),
+        captureUser("captureUser")
+    }
+
+    enum class EnumDefnChartRenderingMode(val value: String) {
+        horizontal("horizontal"),
+        vertical("vertical")
+    }
+
+    enum class EnumDefnCodeEditorLanguage(val value: String) {
+        csv("csv"),
+        html("html"),
+        javascript("javascript"),
+        json("json"),
+        neoQL("neoQL"),
+        sql("sql"),
+        text("text"),
+        xml("xml")
+    }
+
+    enum class EnumDefnCodeType(val value: String) {
+        barCode("barCode"),
+        qrCode("qrCode")
+    }
+
+    enum class EnumDefnCompType(val value: String) {
+        bool("bool"),
+        date("date"),
+        decimal("decimal"),
+        logDecimal("logDecimal"),
+        image("image"),
+        label("label"),
+        number("number"),
+        logNumber("logNumber"),
+        paragraph("paragraph"),
+        text("text"),
+        enumAdminDoNotOptionEnt("enumAdminDoNotOptionEnt"),
+        enumAdminDoNotOptionPlugin("enumAdminDoNotOptionPlugin"),
+        enumAudioFormat("enumAudioFormat"),
+        enumAutomationSource("enumAutomationSource"),
+        enumCaptureValueKind("enumCaptureValueKind"),
+        enumCodeEditorLanguage("enumCodeEditorLanguage"),
+        enumConditionOperator("enumConditionOperator"),
+        enumConjunction("enumConjunction"),
+        enumDataPartitionPeriod("enumDataPartitionPeriod"),
+        enumDate("enumDate"),
+        enumDay("enumDay"),
+        enumDeeplinkConstraints("enumDeeplinkConstraints"),
+        enumDeployVar("enumDeployVar"),
+        enumDeviceSize("enumDeviceSize"),
+        enumDeviceType("enumDeviceType"),
+        enumDocFileExt("enumDocFileExt"),
+        enumDriveStatus("enumDriveStatus"),
+        enumDurationUnit("enumDurationUnit"),
+        enumEntLockBehavior("enumEntLockBehavior"),
+        enumEntLockReason("enumEntLockReason"),
+        enumFields("enumFields"),
+        enumFuncArgs("enumFuncArgs"),
+        enumMapPinShape("enumMapPinShape"),
+        enumPaymentMethod("enumPaymentMethod"),
+        enumPaymentPlan("enumPaymentPlan"),
+        enumPermission("enumPermission"),
+        enumPluginApiMethod("enumPluginApiMethod"),
+        enumPluginResources("enumPluginResources"),
+        enumPluginSecurityAccess("enumPluginSecurityAccess"),
+        enumPromptAction("enumPromptAction"),
+        enumRoles("enumRoles"),
+        enumRowAuditTrail("enumRowAuditTrail"),
+        enumSetupKind("enumSetupKind"),
+        enumUserSettingOptions("enumUserSettingOptions"),
+        enumUserSettingValue("enumUserSettingValue"),
+        enumVideoFormat("enumVideoFormat"),
+        enumVisibilityOperator("enumVisibilityOperator"),
+        enumMonth("enumMonth"),
+        enumQuarter("enumQuarter"),
+        enumDeeplinkExpiry("enumDeeplinkExpiry"),
+        enumForms("enumForms"),
+        enumLogOperationKind("enumLogOperationKind"),
+        enumCodeType("enumCodeType"),
+        enumPosition("enumPosition"),
+        enumDateOccurrence("enumDateOccurrence"),
+        enumFrequencyKind("enumFrequencyKind"),
+        enumRenderingKind("enumRenderingKind"),
+        enumInsertVariant("enumInsertVariant"),
+        enumUpdateVariant("enumUpdateVariant"),
+        enumRemoveVariant("enumRemoveVariant"),
+        enumEmptyFieldVariant("enumEmptyFieldVariant"),
+        enumTableLayoutStyle("enumTableLayoutStyle"),
+        enumUserProperty("enumUserProperty"),
+        enumRowProperty("enumRowProperty"),
+        enumStoreItem("enumStoreItem"),
+        enumCaptureMode("enumCaptureMode"),
+        enumLockOperation("enumLockOperation"),
+        enumRefreshOn("enumRefreshOn"),
+        enumEditorLayoutRenderingMode("enumEditorLayoutRenderingMode"),
+        enumFormLayoutType("enumFormLayoutType"),
+        enumSetOfUserKind("enumSetOfUserKind"),
+        enumUserContext("enumUserContext"),
+        enumDynamicOperator("enumDynamicOperator"),
+        enumTargetType("enumTargetType"),
+        enumDriveSheetLayoutFor("enumDriveSheetLayoutFor"),
+        enumDriveSheetFieldLayoutOn("enumDriveSheetFieldLayoutOn"),
+        enumTextStyle("enumTextStyle"),
+        enumContentAlignment("enumContentAlignment"),
+        enumUserProps("enumUserProps"),
+        enumGridRenderingMode("enumGridRenderingMode"),
+        enumPaymentMethodKind("enumPaymentMethodKind"),
+        enumSortOrder("enumSortOrder"),
+        enumTextValidationPattern("enumTextValidationPattern"),
+        enumSyncMode("enumSyncMode"),
+        enumPluginMode("enumPluginMode"),
+        enumMapRenderingMode("enumMapRenderingMode"),
+        enumCalculateFormulaMode("enumCalculateFormulaMode"),
+        enumEjectionPolicy("enumEjectionPolicy"),
+        enumRefSetOperationKind("enumRefSetOperationKind"),
+        enumEntStage("enumEntStage"),
+        enumFreezeAvatarKind("enumFreezeAvatarKind"),
+        enumTableLayoutTheme("enumTableLayoutTheme"),
+        enumChartRenderingMode("enumChartRenderingMode"),
+        enumThemeImageRenderingMode("enumThemeImageRenderingMode"),
+        enumPromptAttachmentFormat("enumPromptAttachmentFormat"),
+        enumLocationCapturingMode("enumLocationCapturingMode"),
+        enumArgBinderContext("enumArgBinderContext"),
+        enumArgBinder("enumArgBinder"),
+        enumKindAction("enumKindAction"),
+        enumKindActionUIUpdate("enumKindActionUIUpdate"),
+        enumKindAutomation("enumKindAutomation"),
+        enumKindButton("enumKindButton"),
+        enumKindDeeplink("enumKindDeeplink"),
+        enumKindFormComposite("enumKindFormComposite"),
+        enumKindHyperlink("enumKindHyperlink"),
+        enumKindImport("enumKindImport"),
+        enumKindRating("enumKindRating"),
+        enumKindReport("enumKindReport"),
+        enumKindScheduledEvent("enumKindScheduledEvent"),
+        enumKindAutomationStep("enumKindAutomationStep"),
+        enumKindSpreadsheetEvent("enumKindSpreadsheetEvent"),
+        enumKindPluginWebhookEvent("enumKindPluginWebhookEvent"),
+        enumKindWebhookEvent("enumKindWebhookEvent"),
+        enumKindTranslation("enumKindTranslation"),
+        enumTerminateSetting("enumTerminateSetting"),
+        enumAutomationWebhookKind("enumAutomationWebhookKind"),
+        enumLocationAccuracy("enumLocationAccuracy"),
+        enumKindAutoEdge("enumKindAutoEdge"),
+        enumKindAutoNode("enumKindAutoNode"),
+        enumLayoutCardFilterKind("enumLayoutCardFilterKind"),
+        enumLayoutGridKind("enumLayoutGridKind"),
+        enumThemeButtonSize("enumThemeButtonSize"),
+        enumThemeButtonVariant("enumThemeButtonVariant"),
+        enumThemeColor("enumThemeColor"),
+        enumThemeColorShade("enumThemeColorShade"),
+        enumThemeDirection("enumThemeDirection"),
+        enumThemeDividerThickness("enumThemeDividerThickness"),
+        enumThemeFieldMargin("enumThemeFieldMargin"),
+        enumThemeFieldSize("enumThemeFieldSize"),
+        enumThemeFieldVariant("enumThemeFieldVariant"),
+        enumThemeFormVariant("enumThemeFormVariant"),
+        enumThemeImageCorner("enumThemeImageCorner"),
+        enumThemePickVariant("enumThemePickVariant"),
+        enumThemePickMultiVariant("enumThemePickMultiVariant"),
+        enumPlacement("enumPlacement"),
+        enumThemeSectionVariant("enumThemeSectionVariant"),
+        enumThemeStroke("enumThemeStroke"),
+        enumThemeTabVariant("enumThemeTabVariant"),
+        enumVisibilityAction("enumVisibilityAction"),
+        enumVisibilityActionOn("enumVisibilityActionOn"),
+        enumWizardNavigationMode("enumWizardNavigationMode"),
+        currency("currency"),
+        icon("icon"),
+        language("language"),
+        timeZone("timeZone"),
+        pinShape("pinShape"),
+        lineStroke("lineStroke"),
+        month("month"),
+        quarter("quarter"),
+        textSize("textSize"),
+        paymentStatus("paymentStatus"),
+        messageKind("messageKind"),
+        chipSet("chipSet"),
+        chipSetDate("chipSetDate"),
+        chipSetDateTime("chipSetDateTime"),
+        chipSetDay("chipSetDay"),
+        chipSetDeviceSize("chipSetDeviceSize"),
+        chipSetDeviceType("chipSetDeviceType"),
+        chipSetTime("chipSetTime"),
+        pickRole("pickRole"),
+        pickText("pickText"),
+        pickTree("pickTree"),
+        pickUser("pickUser"),
+        pickGridRow("pickGridRow"),
+        pickReportRow("pickReportRow"),
+        setOfRole("setOfRole"),
+        setOfUser("setOfUser"),
+        setOfText("setOfText"),
+        color("color"),
+        hyperlink("hyperlink"),
+        audio("audio"),
+        camera("camera"),
+        counter("counter"),
+        logCounter("logCounter"),
+        dateRange("dateRange"),
+        dateTime("dateTime"),
+        dateTimeRange("dateTimeRange"),
+        duration("duration"),
+        email("email"),
+        handle("handle"),
+        location("location"),
+        mobileNumber("mobileNumber"),
+        rating("rating"),
+        signature("signature"),
+        slider("slider"),
+        time("time"),
+        video("video"),
+        voice("voice"),
+        geoPoint("geoPoint"),
+        rowId("rowId"),
+        symbol("symbol"),
+        schedulerId("schedulerId"),
+        spreadsheetId("spreadsheetId"),
+        button("button"),
+        divider("divider"),
+        document("document"),
+        error("error"),
+        html("html"),
+        identifier("identifier"),
+        info("info"),
+        propertyMap("propertyMap"),
+        scanCode("scanCode"),
+        setOfDocument("setOfDocument"),
+        showCode("showCode"),
+        userId("userId"),
+        dynamic("dynamic"),
+        hyperlinkRow("hyperlinkRow"),
+        password("password"),
+        ref("ref"),
+        refSet("refSet"),
+        refUser("refUser"),
+        refReport("refReport"),
+        refTarget("refTarget"),
+        refContact("refContact"),
+        grid("grid"),
+        section("section"),
+        spreadsheetRef("spreadsheetRef"),
+        tab("tab"),
+        wizard("wizard"),
+        dateFormat("dateFormat"),
+        studioVarIdTextEditor("studioVarIdTextEditor"),
+        studioVarIdParagraphEditor("studioVarIdParagraphEditor"),
+        studioCodeEditor("studioCodeEditor"),
+        pickActionId("pickActionId"),
+        pickCompId("pickCompId"),
+        pickPluginCompId("pickPluginCompId"),
+        pickFieldId("pickFieldId"),
+        pickPluginFieldId("pickPluginFieldId"),
+        pickFormId("pickFormId"),
+        pickPluginFormId("pickPluginFormId"),
+        pickGridId("pickGridId"),
+        pickImportPluginId("pickImportPluginId"),
+        pickImportPluginApiId("pickImportPluginApiId"),
+        pickLayoutFormContentId("pickLayoutFormContentId"),
+        pickLayoutGridId("pickLayoutGridId"),
+        pickSpreadsheetRefLayoutId("pickSpreadsheetRefLayoutId"),
+        pickLayoutSpreadsheetId("pickLayoutSpreadsheetId"),
+        pickPluginBundleId("pickPluginBundleId"),
+        pickPluginId("pickPluginId"),
+        pickReportId("pickReportId"),
+        pickSectionId("pickSectionId"),
+        pickSpreadsheetId("pickSpreadsheetId"),
+        pickVarId("pickVarId"),
+        pickGroupId("pickGroupId"),
+        pickDeeplinkId("pickDeeplinkId"),
+        pickPipelineVarId("pickPipelineVarId"),
+        pickDeployPaymentProviderId("pickDeployPaymentProviderId"),
+        pickAutomationId("pickAutomationId"),
+        studioBuildAllModules("studioBuildAllModules"),
+        studioBuildArgBinder("studioBuildArgBinder"),
+        studioSetOfDate("studioSetOfDate"),
+        studioBuildColor("studioBuildColor"),
+        studioBuildDate("studioBuildDate"),
+        studioBuildDateTime("studioBuildDateTime"),
+        studioBuildPermissionMatrix("studioBuildPermissionMatrix"),
+        studioBuildTree("studioBuildTree"),
+        studioBuildUserSetting("studioBuildUserSetting"),
+        studioBuildActionPermission("studioBuildActionPermission"),
+        studioBuildPropertyMap("studioBuildPropertyMap"),
+        studioBuildMapping("studioBuildMapping"),
+        studioBuildVideoTimestampMap("studioBuildVideoTimestampMap"),
+        studioBuildOptionPermissionMatrix("studioBuildOptionPermissionMatrix"),
+        studioMapOfForwardRolePermission("studioMapOfForwardRolePermission"),
+        studioMapOfCondition("studioMapOfCondition"),
+        studioMapOfFormula("studioMapOfFormula"),
+        studioMapOfFuncArg("studioMapOfFuncArg"),
+        studioMapOfJarFile("studioMapOfJarFile"),
+        studioMapOfLayoutSpreadsheet("studioMapOfLayoutSpreadsheet"),
+        studioMapOfLayoutGrid("studioMapOfLayoutGrid"),
+        studioMapOfText("studioMapOfText"),
+        studioMapOfVisibilityCondition("studioMapOfVisibilityCondition"),
+        studioMapOfVisibilityAction("studioMapOfVisibilityAction"),
+        studioMapOfPartition("studioMapOfPartition"),
+        studioMapOfForwardGroupPermission("studioMapOfForwardGroupPermission"),
+        studioMapOfDynamicRule("studioMapOfDynamicRule"),
+        studioMapOfPipelineVariable("studioMapOfPipelineVariable"),
+        studioMapOfDynamicCondition("studioMapOfDynamicCondition"),
+        studioMapOfUserCondition("studioMapOfUserCondition"),
+        studioMapOfLayoutDriveSpreadsheet("studioMapOfLayoutDriveSpreadsheet"),
+        studioFieldMappingTree("studioFieldMappingTree"),
+        studioGridMappingTree("studioGridMappingTree"),
+        studioMapOfArgBinder("studioMapOfArgBinder"),
+        studioMapOfRefTargetSpreadsheet("studioMapOfRefTargetSpreadsheet"),
+        studioSetOfDocFileExt("studioSetOfDocFileExt"),
+        studioSetOfStoreItemCategory("studioSetOfStoreItemCategory"),
+        studioSetOfModule("studioSetOfModule"),
+        studioSetOfNumber("studioSetOfNumber"),
+        studioSetOfAdminDoNotOption("studioSetOfAdminDoNotOption"),
+        studioSetOfPluginSecurityAccess("studioSetOfPluginSecurityAccess"),
+        studioSetOfRowAuditTrail("studioSetOfRowAuditTrail"),
+        studioSetOfMonth("studioSetOfMonth"),
+        studioSetOfBorder("studioSetOfBorder"),
+        studioSetOfBorderRadius("studioSetOfBorderRadius"),
+        studioSetOfCompId("studioSetOfCompId"),
+        studioSetOfDataExportKind("studioSetOfDataExportKind"),
+        studioSetOfLanguageKeys("studioSetOfLanguageKeys"),
+        studioSetOfActionId("studioSetOfActionId"),
+        studioSetOfFieldId("studioSetOfFieldId"),
+        studioSetOfPluginFieldId("studioSetOfPluginFieldId"),
+        studioSetOfFieldRefId("studioSetOfFieldRefId"),
+        studioSetOfFormId("studioSetOfFormId"),
+        studioSetOfGridId("studioSetOfGridId"),
+        studioSetOfGroupId("studioSetOfGroupId"),
+        studioSetOfLayoutFormContentId("studioSetOfLayoutFormContentId"),
+        studioSetOfLayoutGridId("studioSetOfLayoutGridId"),
+        studioSetOfLayoutSpreadsheetId("studioSetOfLayoutSpreadsheetId"),
+        studioSetOfReportId("studioSetOfReportId"),
+        studioSetOfSectionId("studioSetOfSectionId"),
+        studioSetOfSpreadsheetId("studioSetOfSpreadsheetId"),
+        studioSetOfVarId("studioSetOfVarId"),
+        studioCompArray("studioCompArray"),
+        otp("otp"),
+        avtar("avtar"),
+        carousel("carousel"),
+        formList("formList"),
+        formListItem("formListItem"),
+        pickOption("pickOption"),
+        wallpaper("wallpaper")
+    }
+
+    enum class EnumDefnConditionOperator(val value: String) {
+        hasNoValue("hasNoValue"),
+        equalTo("equalTo"),
+        greaterThan("greaterThan"),
+        greaterThanOrEqualTo("greaterThanOrEqualTo"),
+        hasValue("hasValue"),
+        lessThan("lessThan"),
+        lessThanOrEqualTo("lessThanOrEqualTo"),
+        notEqualTo("notEqualTo"),
+        contains("contains"),
+        notContains("notContains")
+    }
+
+    enum class EnumDefnConjunction(val value: String) {
+        or("or"),
+        and("and")
+    }
+
+    enum class EnumDefnContentAlignment(val value: String) {
+        start("start"),
+        center("center"),
+        end("end")
+    }
+
+    enum class EnumDefnDataExportKind(val value: String) {
+        xlsx("xlsx"),
+        json("json")
+    }
+
+    enum class EnumDefnDataPartitionPeriod(val value: String) {
+        daily("daily"),
+        hourly("hourly"),
+        weekly("weekly"),
+        monthly("monthly"),
+        quarterly("quarterly"),
+        yearly("yearly")
+    }
+
+    enum class EnumDefnDate(val value: String) {
+        lastQuarter("lastQuarter"),
+        lastWeek("lastWeek"),
+        lastMonth("lastMonth"),
+        lastYear("lastYear"),
+        nextQuarter("nextQuarter"),
+        nextWeek("nextWeek"),
+        nextMonth("nextMonth"),
+        nextYear("nextYear"),
+        now("now"),
+        tomorrow("tomorrow"),
+        yesterday("yesterday"),
+        startOfWeek("startOfWeek"),
+        startOfMonth("startOfMonth"),
+        startOfYear("startOfYear"),
+        endOfWeek("endOfWeek"),
+        endOfMonth("endOfMonth"),
+        endOfYear("endOfYear"),
+        createdOn("createdOn"),
+        updatedOn("updatedOn")
+    }
+
+    enum class EnumDefnDateOccurrence(val value: String) {
+        custom("custom"),
+        first("first"),
+        last("last")
+    }
+
+    enum class EnumDefnDay(val value: String) {
+        sunday("sunday"),
+        monday("monday"),
+        tuesday("tuesday"),
+        wednesday("wednesday"),
+        thursday("thursday"),
+        friday("friday"),
+        saturday("saturday")
+    }
+
+    enum class EnumDefnDeeplinkConstraint(val value: String) {
+        enforceGlobalUserSignIn("enforceGlobalUserSignIn"),
+        enforceEnterpriseUserSignIn("enforceEnterpriseUserSignIn"),
+        makeAnEnterpriseUser("makeAnEnterpriseUser"),
+        allowPublicSharing("allowPublicSharing")
+    }
+
+    enum class EnumDefnDeeplinkExpiry(val value: String) {
+        onFirstClick("onFirstClick"),
+        withinOneWeek("withinOneWeek"),
+        withinOneMonth("withinOneMonth"),
+        noExpiry("noExpiry")
+    }
+
+    enum class EnumDefnDeploy(val value: String) {
+        requiredOnDeploy("requiredOnDeploy"),
+        fixedOnDeploy("fixedOnDeploy")
+    }
+
+    enum class EnumDefnDeviceSize(val value: String) {
+        mobile("mobile"),
+        tablet("tablet"),
+        laptop("laptop"),
+        desktop("desktop")
+    }
+
+    enum class EnumDefnDocFileExt(val value: String) {
+        ai("ai"),
+        any("any"),
+        avi("avi"),
+        cdr("cdr"),
+        csv("csv"),
+        dll("dll"),
+        doc("doc"),
+        docx("docx"),
+        drawio("drawio"),
+        dwg("dwg"),
+        eml("eml"),
+        gif("gif"),
+        html("html"),
+        jar("jar"),
+        jpeg("jpeg"),
+        jpg("jpg"),
+        json("json"),
+        mov("mov"),
+        mp3("mp3"),
+        mp4("mp4"),
+        msg("msg"),
+        oga("oga"),
+        ogg("ogg"),
+        pdf("pdf"),
+        png("png"),
+        ppt("ppt"),
+        pptx("pptx"),
+        rvt("rvt"),
+        std("std"),
+        svg("svg"),
+        tiff("tiff"),
+        txt("txt"),
+        wav("wav"),
+        webm("webm"),
+        xls("xls"),
+        xlsx("xlsx"),
+        xml("xml"),
+        zip("zip")
+    }
+
+    enum class EnumDefnDriveSheetFieldLayoutOn(val value: String) {
+        column("column"),
+        `header`("header")
+    }
+
+    enum class EnumDefnDriveSheetLayoutFor(val value: String) {
+        sectionOrGrid("sectionOrGrid"),
+        field("field")
+    }
+
+    enum class EnumDefnDriveStatus(val value: String) {
+        connected("connected"),
+        disconnected("disconnected"),
+        notInstalled("notInstalled")
+    }
+
+    enum class EnumDefnDurationUnit(val value: String) {
+        seconds("seconds"),
+        minutes("minutes"),
+        hours("hours"),
+        days("days"),
+        weeks("weeks"),
+        months("months"),
+        quarters("quarters"),
+        years("years")
+    }
+
+    enum class EnumDefnDynamicOperator(val value: String) {
+        hasNoValue("hasNoValue"),
+        hasValue("hasValue"),
+        equalTo("equalTo"),
+        notEqualTo("notEqualTo")
+    }
+
+    enum class EnumDefnEditorLayoutRenderingMode(val value: String) {
+        tabs("tabs"),
+        stack("stack"),
+        wizard("wizard")
+    }
+
+    enum class EnumDefnEjectionPolicy(val value: String) {
+        FIFO("FIFO"),
+        LIFO("LIFO")
+    }
+
+    enum class EnumDefnEmptyFieldVariant(val value: String) {
+        ignoreEmptyField("ignoreEmptyField"),
+        overrideEmptyField("overrideEmptyField")
+    }
+
+    enum class EnumDefnEntLockBehavior(val value: String) {
+        readAccess("readAccess"),
+        zeroAccess("zeroAccess"),
+        fullAccessWithWarning("fullAccessWithWarning")
+    }
+
+    enum class EnumDefnEntLockReason(val value: String) {
+        blocked("blocked"),
+        obsolete("obsolete"),
+        other("other"),
+        paymentNotReceived("paymentNotReceived"),
+        tooMuchLoad("tooMuchLoad"),
+        userUpgrade("userUpgrade")
+    }
+
+    enum class EnumDefnEntStage(val value: String) {
+        Created("Created"),
+        POC("POC"),
+        UserInvited("UserInvited"),
+        Production("Production")
+    }
+
+    enum class EnumDefnErrorSeverity(val value: String) {
+        error("error"),
+        suggestion("suggestion"),
+        warning("warning")
+    }
+
+    enum class EnumDefnFields(val value: String) {
+        _CreatedBy("\$CreatedBy"),
+        _CreatedOn("\$CreatedOn"),
+        _RowId("\$RowId"),
+        _RowOrder("\$RowOrder"),
+        _UpdatedBy("\$UpdatedBy"),
+        _UpdatedOn("\$UpdatedOn"),
+        _ParentRowId("\$ParentRowId")
+    }
+
+    enum class EnumDefnFormLayoutType(val value: String) {
+        editor("editor"),
+        content("content"),
+        template("template")
+    }
+
+    enum class EnumDefnForms(val value: String) {
+        _FormMapOfOptions("\$FormMapOfOptions"),
+        _FormPickTree("\$FormPickTree"),
+        _FormSetOfUser("\$FormSetOfUser"),
+        _FormPluginConfig("\$FormPluginConfig"),
+        _FormSchedule("\$FormSchedule"),
+        _FormPaymentReceipt("\$FormPaymentReceipt"),
+        _FormUserSession("\$FormUserSession"),
+        _FormRowComment("\$FormRowComment"),
+        _FormLocation("\$FormLocation"),
+        _FormEntAdmin("\$FormEntAdmin"),
+        _FormEntUser("\$FormEntUser"),
+        _FormEntAuditRecord("\$FormEntAuditRecord"),
+        _FormPrompt("\$FormPrompt"),
+        _FormRagPromptResponse("\$FormRagPromptResponse"),
+        _FormRowEditHistory("\$FormRowEditHistory"),
+        _FormHumanLink("\$FormHumanLink"),
+        _FormUserMembership("\$FormUserMembership"),
+        _FormCrawl("\$FormCrawl"),
+        _FormSearch("\$FormSearch"),
+        _FormBotResponse("\$FormBotResponse"),
+        _FormBotHistory("\$FormBotHistory")
+    }
+
+    enum class EnumDefnFreezeAvatarKind(val value: String) {
+        rounded("rounded"),
+        square("square")
+    }
+
+    enum class EnumDefnFuncArg(val value: String) {
+        number("number"),
+        text("text"),
+        numberArray("numberArray"),
+        textArray("textArray")
+    }
+
+    enum class EnumDefnGridRenderingMode(val value: String) {
+        auto("auto"),
+        flex("flex")
+    }
+
+    enum class EnumDefnHttpMethod(val value: String) {
+        delete("delete"),
+        get("get"),
+        patch("patch"),
+        post("post"),
+        put("put")
+    }
+
+    enum class EnumDefnInsertVariant(val value: String) {
+        insertForced("insertForced"),
+        skipEmptyKeyField("skipEmptyKeyField"),
+        doNotInsert("doNotInsert")
+    }
+
+    enum class EnumDefnKindAction(val value: String) {
+        executeCallable("executeCallable"),
+        report("report"),
+        rowInsert("rowInsert"),
+        rowUpdate("rowUpdate"),
+        spreadsheetEditor("spreadsheetEditor"),
+        spreadsheetHistory("spreadsheetHistory"),
+        uiUpdate("uiUpdate"),
+        user("user")
+    }
+
+    enum class EnumDefnKindActionUIUpdate(val value: String) {
+        groupSwitcher("groupSwitcher")
+    }
+
+    enum class EnumDefnKindAiProvider(val value: String) {
+        openAI_4_1_MINI("openAI_4_1_MINI"),
+        openAI_5("openAI_5")
+    }
+
+    enum class EnumDefnKindAutoEdge(val value: String) {
+        ERROR("ERROR"),
+        EXPIRY("EXPIRY"),
+        FALSE_("FALSE"),
+        ITERATE("ITERATE"),
+        NEXT("NEXT"),
+        TRUE_("TRUE"),
+        VALUE("VALUE")
+    }
+
+    enum class EnumDefnKindAutoNode(val value: String) {
+        acquireLock("acquireLock"),
+        aiAgent("aiAgent"),
+        aiAudioToText("aiAudioToText"),
+        aiDocumentToForm("aiDocumentToForm"),
+        aiExcelToSpreadsheet("aiExcelToSpreadsheet"),
+        aiFakerToForm("aiFakerToForm"),
+        aiFakerToSpreadsheet("aiFakerToSpreadsheet"),
+        aiFormToClassification("aiFormToClassification"),
+        aiFormToForm("aiFormToForm"),
+        aiFormToHtml("aiFormToHtml"),
+        aiFormToImage("aiFormToImage"),
+        aiFormToJSON("aiFormToJSON"),
+        aiFormToPDF("aiFormToPDF"),
+        aiFormToSentiment("aiFormToSentiment"),
+        aiFormToSummary("aiFormToSummary"),
+        aiFormToXML("aiFormToXML"),
+        aiSpreadsheetToCSV("aiSpreadsheetToCSV"),
+        aiSpreadsheetToExcel("aiSpreadsheetToExcel"),
+        aiSpreadsheetToHTML("aiSpreadsheetToHTML"),
+        aiSpreadsheetToJSON("aiSpreadsheetToJSON"),
+        aiSpreadsheetToPDF("aiSpreadsheetToPDF"),
+        aiSpreadsheetToXML("aiSpreadsheetToXML"),
+        aiTextToClassification("aiTextToClassification"),
+        aiTextToForm("aiTextToForm"),
+        aiTextToJSON("aiTextToJSON"),
+        aiTextToSentiment("aiTextToSentiment"),
+        aiTextToSummary("aiTextToSummary"),
+        aiTextToXML("aiTextToXML"),
+        aiXMLToForm("aiXMLToForm"),
+        aiXMLToSpreadsheet("aiXMLToSpreadsheet"),
+        applyFormula("applyFormula"),
+        applyTransforms("applyTransforms"),
+        botBuildResponse("botBuildResponse"),
+        botHistoryAddPrompt("botHistoryAddPrompt"),
+        botHistoryAddResponse("botHistoryAddResponse"),
+        botHistoryGet("botHistoryGet"),
+        botHistoryRemove("botHistoryRemove"),
+        botHistoryToStory("botHistoryToStory"),
+        botSendResponse("botSendResponse"),
+        branchIfElse("branchIfElse"),
+        branchIterateArray("branchIterateArray"),
+        branchIterateGrid("branchIterateGrid"),
+        branchIterateSpreadsheet("branchIterateSpreadsheet"),
+        branchSwitchCase("branchSwitchCase"),
+        branchSwitchForm("branchSwitchForm"),
+        branchSwitchPrompt("branchSwitchPrompt"),
+        debugLog("debugLog"),
+        eventChat("eventChat"),
+        eventHumanLink("eventHumanLink"),
+        eventManualTrigger("eventManualTrigger"),
+        eventPaymentReceipt("eventPaymentReceipt"),
+        eventPluginWebhook("eventPluginWebhook"),
+        eventRowComment("eventRowComment"),
+        eventRpcCall("eventRpcCall"),
+        eventSchedule("eventSchedule"),
+        eventSsInsertAfter("eventSsInsertAfter"),
+        eventSsInsertBefore("eventSsInsertBefore"),
+        eventSsRemoveAfter("eventSsRemoveAfter"),
+        eventSsRemoveBefore("eventSsRemoveBefore"),
+        eventSsUpdateAfter("eventSsUpdateAfter"),
+        eventSsUpdateBefore("eventSsUpdateBefore"),
+        eventSubWorkflow("eventSubWorkflow"),
+        eventUserExit("eventUserExit"),
+        eventUserJoin("eventUserJoin"),
+        eventUserLocation("eventUserLocation"),
+        eventUserOffline("eventUserOffline"),
+        eventUserOnline("eventUserOnline"),
+        executeAction("executeAction"),
+        executeJavascript("executeJavascript"),
+        executeParallel("executeParallel"),
+        executePlugin("executePlugin"),
+        executeReport("executeReport"),
+        executeRpc("executeRpc"),
+        executeScheduler("executeScheduler"),
+        executeSchedulerRemove("executeSchedulerRemove"),
+        executeSubWorkflow("executeSubWorkflow"),
+        fieldRefSetSet("fieldRefSetSet"),
+        fieldRemove("fieldRemove"),
+        fieldSet("fieldSet"),
+        generateDeeplink("generateDeeplink"),
+        generateImage("generateImage"),
+        generatePaymentLink("generatePaymentLink"),
+        generatePdf("generatePdf"),
+        imageTransforms("imageTransforms"),
+        mediaExists("mediaExists"),
+        mediaRemove("mediaRemove"),
+        paramCalc("paramCalc"),
+        paramClone("paramClone"),
+        paramCreate("paramCreate"),
+        paramExist("paramExist"),
+        paramRemove("paramRemove"),
+        paramUpdate("paramUpdate"),
+        pause("pause"),
+        releaseLock("releaseLock"),
+        resume("resume"),
+        rowForward("rowForward"),
+        rowGet("rowGet"),
+        rowGetHistory("rowGetHistory"),
+        rowInsert("rowInsert"),
+        rowInsertPartitionRequest("rowInsertPartitionRequest"),
+        rowRemove("rowRemove"),
+        rowSendComment("rowSendComment"),
+        rowUpdate("rowUpdate"),
+        rowUpdateFieldLogNumber("rowUpdateFieldLogNumber"),
+        sendEmail("sendEmail"),
+        sendHumanLink("sendHumanLink"),
+        sendMessageToGroups("sendMessageToGroups"),
+        sendMessageToUsers("sendMessageToUsers"),
+        sendPushNotification("sendPushNotification"),
+        sendWhatsappMessage("sendWhatsappMessage"),
+        sendWhatsappTemplate("sendWhatsappTemplate"),
+        ssCrawl("ssCrawl"),
+        ssExecuteQuery("ssExecuteQuery"),
+        ssFtsSearch("ssFtsSearch"),
+        ssRagSearch("ssRagSearch"),
+        ssRemoveRows("ssRemoveRows"),
+        stopAndError("stopAndError"),
+        userAdd("userAdd"),
+        userGet("userGet"),
+        userGetAllAssistants("userGetAllAssistants"),
+        userGetAssistants("userGetAssistants"),
+        userGetGrandManager("userGetGrandManager"),
+        userGetManager("userGetManager"),
+        userHasGrandManager("userHasGrandManager"),
+        userHasManager("userHasManager"),
+        userHasRoles("userHasRoles"),
+        userIsAllAssistant("userIsAllAssistant"),
+        userIsAllManager("userIsAllManager"),
+        userIsAssistant("userIsAssistant"),
+        userIsGrandManager("userIsGrandManager"),
+        userIsManager("userIsManager"),
+        userIterate("userIterate"),
+        userRemove("userRemove"),
+        userUpdate("userUpdate"),
+        validate("validate"),
+        validatePrompt("validatePrompt"),
+        wait("wait")
+    }
+
+    enum class EnumDefnKindAutoResponseWait(val value: String) {
+        all("all"),
+        anyOne("anyOne"),
+        none("none")
+    }
+
+    enum class EnumDefnKindAutoXform(val value: String) {
+        stringJoiner("stringJoiner"),
+        stringIsMobileNumber("stringIsMobileNumber"),
+        stringIsEmail("stringIsEmail")
+    }
+
+    enum class EnumDefnKindAutomation(val value: String) {
+        callable("callable"),
+        pluginWebhook("pluginWebhook"),
+        scheduled("scheduled"),
+        spreadsheet("spreadsheet"),
+        webhook("webhook")
+    }
+
+    enum class EnumDefnKindAutomationStep(val value: String) {
+        addUser("addUser"),
+        updateUser("updateUser"),
+        calculateFormulas("calculateFormulas"),
+        callPlugin("callPlugin"),
+        callReport("callReport"),
+        copyField("copyField"),
+        forwardToGroups("forwardToGroups"),
+        forwardToUsers("forwardToUsers"),
+        generateDeeplink("generateDeeplink"),
+        getSpreadsheetRow("getSpreadsheetRow"),
+        getSpreadsheetRows("getSpreadsheetRows"),
+        validation("validation"),
+        insertIntoSpreadsheet("insertIntoSpreadsheet"),
+        lock("lock"),
+        sendMessage("sendMessage"),
+        sendMessageToUsers("sendMessageToUsers"),
+        sendMessageAsComment("sendMessageAsComment"),
+        sendMessageToGroups("sendMessageToGroups"),
+        generatePdf("generatePdf"),
+        generateImage("generateImage"),
+        generatePaymentLink("generatePaymentLink"),
+        sendWhatsappTemplateMessage("sendWhatsappTemplateMessage"),
+        sendWhatsappDynamicMessage("sendWhatsappDynamicMessage"),
+        sendEmail("sendEmail"),
+        sendPushNotification("sendPushNotification"),
+        partitionSend("partitionSend"),
+        pause("pause"),
+        removeField("removeField"),
+        removeFromSpreadsheet("removeFromSpreadsheet"),
+        removeCurrentRow("removeCurrentRow"),
+        removeRows("removeRows"),
+        removeUser("removeUser"),
+        returnEvent("returnEvent"),
+        terminate("terminate"),
+        updateField("updateField"),
+        updateFieldLogNumber("updateFieldLogNumber"),
+        updateFieldRefSet("updateFieldRefSet"),
+        updateSpreadsheet("updateSpreadsheet"),
+        execute("execute"),
+        executeAsync("executeAsync"),
+        clearPipeline("clearPipeline"),
+        parseDocument("parseDocument"),
+        addSchedule("addSchedule"),
+        removeSchedule("removeSchedule")
+    }
+
+    enum class EnumDefnKindBranchIfElse(val value: String) {
+        Condition("Condition"),
+        ConditionVar("ConditionVar")
+    }
+
+    enum class EnumDefnKindButton(val value: String) {
+        submit("submit"),
+        reset("reset"),
+        refresh("refresh"),
+        normal("normal")
+    }
+
+    enum class EnumDefnKindCallableEvent(val value: String) {
+        onFire("onFire")
+    }
+
+    enum class EnumDefnKindChannelType(val value: String) {
+        email("email"),
+        neome("neome"),
+        slack("slack"),
+        sms("sms"),
+        whatsapp("whatsapp")
+    }
+
+    enum class EnumDefnKindDeeplink(val value: String) {
+        report("report"),
+        spreadsheetEditor("spreadsheetEditor"),
+        spreadsheetInsert("spreadsheetInsert"),
+        spreadsheetRow("spreadsheetRow")
+    }
+
+    enum class EnumDefnKindFormComposite(val value: String) {
+        grid("grid"),
+        section("section"),
+        spreadsheetRef("spreadsheetRef")
+    }
+
+    enum class EnumDefnKindHyperlink(val value: String) {
+        general("general"),
+        youtube("youtube")
+    }
+
+    enum class EnumDefnKindImageXform(val value: String) {
+        blur("blur")
+    }
+
+    enum class EnumDefnKindImport(val value: String) {
+        plugin("plugin")
+    }
+
+    enum class EnumDefnKindMessage(val value: String) {
+        audio("audio"),
+        camera("camera"),
+        document("document"),
+        image("image"),
+        linkText("linkText"),
+        location("location"),
+        text("text"),
+        video("video"),
+        user("user"),
+        voice("voice")
+    }
+
+    enum class EnumDefnKindNoteStatus(val value: String) {
+        Done("Done"),
+        Error("Error"),
+        Start("Start"),
+        Verify("Verify")
+    }
+
+    enum class EnumDefnKindPipelineUpdate(val value: String) {
+        Mapping("Mapping"),
+        MappingVar("MappingVar")
+    }
+
+    enum class EnumDefnKindPluginWebhookEvent(val value: String) {
+        onCallback("onCallback")
+    }
+
+    enum class EnumDefnKindRating(val value: String) {
+        heart_1("heart_1"),
+        thumbs_2("thumbs_2"),
+        star_3("star_3"),
+        star_4("star_4"),
+        star_5("star_5")
+    }
+
+    enum class EnumDefnKindReport(val value: String) {
+        composite("composite"),
+        mapper("mapper"),
+        plugin("plugin"),
+        query("query"),
+        spreadsheet("spreadsheet")
+    }
+
+    enum class EnumDefnKindScheduledEvent(val value: String) {
+        onExpiry("onExpiry")
+    }
+
+    enum class EnumDefnKindSentiment(val value: String) {
+        VeryPositive("VeryPositive"),
+        Positive("Positive"),
+        Neutral("Neutral"),
+        Negative("Negative"),
+        VeryNegative("VeryNegative")
+    }
+
+    enum class EnumDefnKindSetOfUser(val value: String) {
+        roles("roles"),
+        fields("fields"),
+        context_("context")
+    }
+
+    enum class EnumDefnKindSpreadsheetEvent(val value: String) {
+        afterInsert("afterInsert"),
+        afterRemove("afterRemove"),
+        afterUpdate("afterUpdate"),
+        beforeInsert("beforeInsert"),
+        beforeRemove("beforeRemove"),
+        beforeUpdate("beforeUpdate")
+    }
+
+    enum class EnumDefnKindTranslation(val value: String) {
+        text("text"),
+        paragraph("paragraph")
+    }
+
+    enum class EnumDefnKindWebhookEvent(val value: String) {
+        onCallback("onCallback")
+    }
+
+    enum class EnumDefnLayoutCardFilterKind(val value: String) {
+        tree("tree"),
+        tab("tab")
+    }
+
+    enum class EnumDefnLayoutGridKind(val value: String) {
+        card("card"),
+        list("list"),
+        map("map"),
+        table("table"),
+        kanban("kanban"),
+        calendar("calendar"),
+        xyChartBarGraph("xyChartBarGraph"),
+        xyChartLineChart("xyChartLineChart"),
+        xyChartPieChart("xyChartPieChart"),
+        xyChartDoughnut("xyChartDoughnut"),
+        xyChartScatterPlot("xyChartScatterPlot")
+    }
+
+    enum class EnumDefnLayoutUserKind(val value: String) {
+        hierarchy("hierarchy"),
+        tree("tree")
+    }
+
+    enum class EnumDefnLocationAccuracy(val value: String) {
+        high("high"),
+        balanced("balanced"),
+        low("low")
+    }
+
+    enum class EnumDefnLocationCapturingMode(val value: String) {
+        scheduled("scheduled"),
+        manual("manual")
+    }
+
+    enum class EnumDefnLockOperation(val value: String) {
+        acquire("acquire"),
+        release("release")
+    }
+
+    enum class EnumDefnLogOperationKind(val value: String) {
+        add("add"),
+        subtract("subtract"),
+        set("set")
+    }
+
+    enum class EnumDefnMapPinShape(val value: String) {
+        avatar("avatar"),
+        avatarWithName("avatarWithName"),
+        circle("circle"),
+        circleBig("circleBig"),
+        circleMedium("circleMedium"),
+        circleWithLabel("circleWithLabel"),
+        heart("heart"),
+        heartBig("heartBig"),
+        heartMedium("heartMedium"),
+        label("label"),
+        pin("pin"),
+        pinWithLabel("pinWithLabel"),
+        square("square"),
+        squareBig("squareBig"),
+        squareMedium("squareMedium"),
+        star("star"),
+        starBig("starBig"),
+        starMedium("starMedium"),
+        triangle("triangle"),
+        triangleBig("triangleBig"),
+        triangleMedium("triangleMedium")
+    }
+
+    enum class EnumDefnMapRenderingMode(val value: String) {
+        fixedLocation("fixedLocation"),
+        liveLocation("liveLocation")
+    }
+
+    enum class EnumDefnMonth(val value: String) {
+        January("January"),
+        February("February"),
+        March("March"),
+        April("April"),
+        May("May"),
+        June("June"),
+        July("July"),
+        August("August"),
+        September("September"),
+        October("October"),
+        November("November"),
+        December("December"),
+        CurrentMonth("CurrentMonth"),
+        PreviousMonth("PreviousMonth"),
+        NextMonth("NextMonth")
+    }
+
+    enum class EnumDefnNodeTerminateKind(val value: String) {
+        resume("resume"),
+        stopOrErrorBranch("stopOrErrorBranch")
+    }
+
+    enum class EnumDefnPaymentMethod(val value: String) {
+        creditCard("creditCard"),
+        debitCard("debitCard")
+    }
+
+    enum class EnumDefnPaymentMethodKind(val value: String) {
+        netbanking("netbanking"),
+        card("card"),
+        upi("upi")
+    }
+
+    enum class EnumDefnPaymentPlan(val value: String) {
+        free("free"),
+        team("team"),
+        business("business"),
+        onPremise("onPremise")
+    }
+
+    enum class EnumDefnPaymentStatus(val value: String) {
+        pending("pending"),
+        paid("paid"),
+        failed("failed")
+    }
+
+    enum class EnumDefnPermission(val value: String) {
+        hide("hide"),
+        read("read"),
+        writeOnInsert("writeOnInsert"),
+        writeOnce("writeOnce"),
+        invisible("invisible"),
+        write("write")
+    }
+
+    enum class EnumDefnPipelineFormKind(val value: String) {
+        input("input"),
+        output("output")
+    }
+
+    enum class EnumDefnPipelineSystem(val value: String) {
+        _Curr("\$Curr"),
+        _Iter("\$Iter"),
+        _Out("\$Out"),
+        _Prev("\$Prev"),
+        _Prior("\$Prior"),
+        _Sys("\$Sys")
+    }
+
+    enum class EnumDefnPlacement(val value: String) {
+        top("top"),
+        bottom("bottom"),
+        start("start"),
+        end("end"),
+        center("center"),
+        diagonal("diagonal"),
+        overlayTop("overlayTop"),
+        flexCenter("flexCenter"),
+        spaceBetween("spaceBetween"),
+        justify("justify")
+    }
+
+    enum class EnumDefnPluginApiMethod(val value: String) {
+        delete("delete"),
+        get("get"),
+        patch("patch"),
+        post("post"),
+        put("put"),
+        webhook("webhook"),
+        function("function")
+    }
+
+    enum class EnumDefnPluginMode(val value: String) {
+        agent("agent"),
+        javascript("javascript"),
+        webService("webService")
+    }
+
+    enum class EnumDefnPluginResources(val value: String) {
+        jar("jar"),
+        rpc("rpc"),
+        dev("dev")
+    }
+
+    enum class EnumDefnPluginSecurityAccess(val value: String) {
+        drive("drive"),
+        network("network")
+    }
+
+    enum class EnumDefnPosition(val value: String) {
+        topLeft("topLeft"),
+        topRight("topRight"),
+        bottomLeft("bottomLeft"),
+        bottomRight("bottomRight")
+    }
+
+    enum class EnumDefnPromptAction(val value: String) {
+        insert("insert"),
+        update("update"),
+        remove("remove"),
+        get("get")
+    }
+
+    enum class EnumDefnPromptAttachmentFormat(val value: String) {
+        pdf("pdf"),
+        image("image")
+    }
+
+    enum class EnumDefnQuarter(val value: String) {
+        Quarter_1("Quarter_1"),
+        Quarter_2("Quarter_2"),
+        Quarter_3("Quarter_3"),
+        Quarter_4("Quarter_4")
+    }
+
+    enum class EnumDefnRefSetOperationKind(val value: String) {
+        set("set"),
+        union("union"),
+        intersection("intersection"),
+        insert("insert"),
+        put("put"),
+        remove("remove"),
+        moveUp("moveUp"),
+        moveDown("moveDown"),
+        moveTop("moveTop"),
+        moveBottom("moveBottom"),
+        sort("sort")
+    }
+
+    enum class EnumDefnRefreshOn(val value: String) {
+        refreshOnOpen("refreshOnOpen"),
+        refreshOnSend("refreshOnSend"),
+        refreshOnDemand("refreshOnDemand")
+    }
+
+    enum class EnumDefnRemoveVariant(val value: String) {
+        removeForced("removeForced"),
+        doNotRemove("doNotRemove")
+    }
+
+    enum class EnumDefnRenderingKind(val value: String) {
+        a4Size("a4Size"),
+        custom("custom"),
+        fitToScreen("fitToScreen"),
+        fullScreen("fullScreen"),
+        mm_48("mm_48"),
+        mm_58("mm_58"),
+        mm_72("mm_72"),
+        mm_80("mm_80"),
+        mm_104("mm_104"),
+        receiptSize("receiptSize")
+    }
+
+    enum class EnumDefnRepeatFrequencyKind(val value: String) {
+        minutes("minutes"),
+        hours("hours"),
+        days("days"),
+        weeks("weeks"),
+        months("months"),
+        years("years")
+    }
+
+    enum class EnumDefnRoles(val value: String) {
+        _Public("\$Public"),
+        _Manager("\$Manager"),
+        _GrandManager("\$GrandManager"),
+        _AllManagers("\$AllManagers"),
+        _Assistants("\$Assistants"),
+        _AllAssistants("\$AllAssistants"),
+        _Self("\$Self")
+    }
+
+    enum class EnumDefnRowAuditTrail(val value: String) {
+        insert("insert"),
+        update("update"),
+        remove("remove")
+    }
+
+    enum class EnumDefnRowProperty(val value: String) {
+        createdBy("createdBy"),
+        updatedBy("updatedBy")
+    }
+
+    enum class EnumDefnScanCodeType(val value: String) {
+        barCode("barCode"),
+        qrCode("qrCode")
+    }
+
+    enum class EnumDefnSetupKind(val value: String) {
+        quick("quick"),
+        standard("standard"),
+        advanced("advanced"),
+        focusDeploy("focusDeploy"),
+        focusBackend("focusBackend"),
+        focusFrontend("focusFrontend")
+    }
+
+    enum class EnumDefnShowBorderKind(val value: String) {
+        top("top"),
+        bottom("bottom"),
+        left("left"),
+        right("right")
+    }
+
+    enum class EnumDefnShowBorderRadiusKind(val value: String) {
+        topLeft("topLeft"),
+        topRight("topRight"),
+        bottomLeft("bottomLeft"),
+        bottomRight("bottomRight")
+    }
+
+    enum class EnumDefnSortOrder(val value: String) {
+        ascending("ascending"),
+        descending("descending")
+    }
+
+    enum class EnumDefnStoreItem(val value: String) {
+        template("template"),
+        application("application")
+    }
+
+    enum class EnumDefnSyncMode(val value: String) {
+        backup("backup"),
+        biDirectional("biDirectional")
+    }
+
+    enum class EnumDefnTableLayoutTheme(val value: String) {
+        standard("standard"),
+        spacious("spacious")
+    }
+
+    enum class EnumDefnTableStyle(val value: String) {
+        defaultStyle("defaultStyle")
+    }
+
+    enum class EnumDefnTextSize(val value: String) {
+        body1("body1"),
+        body2("body2"),
+        button("button"),
+        caption("caption"),
+        h1("h1"),
+        h2("h2"),
+        h3("h3"),
+        h4("h4"),
+        h5("h5"),
+        h6("h6"),
+        inherit("inherit"),
+        overline("overline"),
+        subtitle1("subtitle1"),
+        subtitle2("subtitle2"),
+        subtitle3("subtitle3"),
+        subtitle4("subtitle4")
+    }
+
+    enum class EnumDefnTextStyle(val value: String) {
+        bold("bold"),
+        italic("italic"),
+        underlined("underlined"),
+        strikeout("strikeout")
+    }
+
+    enum class EnumDefnTextValidationPattern(val value: String) {
+        aadhaar("aadhaar"),
+        gstin("gstin"),
+        pan("pan")
+    }
+
+    enum class EnumDefnThemeButtonSize(val value: String) {
+        small("small"),
+        medium("medium"),
+        large("large")
+    }
+
+    enum class EnumDefnThemeButtonVariant(val value: String) {
+        text("text"),
+        contained("contained"),
+        outlined("outlined"),
+        icon("icon")
+    }
+
+    enum class EnumDefnThemeColor(val value: String) {
+        transparent("transparent"),
+        primary("primary"),
+        secondary("secondary"),
+        error("error"),
+        info("info"),
+        success("success"),
+        warning("warning"),
+        textPrimary("textPrimary"),
+        textSecondary("textSecondary"),
+        textDisabled("textDisabled"),
+        textInverse("textInverse"),
+        primaryLight("primaryLight"),
+        secondaryLight("secondaryLight"),
+        successLight("successLight"),
+        errorLight("errorLight"),
+        infoLight("infoLight"),
+        warningLight("warningLight"),
+        primaryDark("primaryDark"),
+        secondaryDark("secondaryDark"),
+        successDark("successDark"),
+        errorDark("errorDark"),
+        infoDark("infoDark"),
+        warningDark("warningDark"),
+        amber("amber"),
+        black("black"),
+        blue("blue"),
+        cyan("cyan"),
+        deepOrange("deepOrange"),
+        deepPurple("deepPurple"),
+        green("green"),
+        grey("grey"),
+        indigo("indigo"),
+        lightBlue("lightBlue"),
+        lightGreen("lightGreen"),
+        lime("lime"),
+        orange("orange"),
+        pink("pink"),
+        purple("purple"),
+        red("red"),
+        teal("teal"),
+        white("white"),
+        yellow("yellow")
+    }
+
+    enum class EnumDefnThemeColorShade(val value: String) {
+        s50("s50"),
+        s100("s100"),
+        s200("s200"),
+        s300("s300"),
+        s400("s400"),
+        s500("s500")
+    }
+
+    enum class EnumDefnThemeDirection(val value: String) {
+        horizontal("horizontal"),
+        vertical("vertical")
+    }
+
+    enum class EnumDefnThemeDividerKind(val value: String) {
+        thick("thick"),
+        thin("thin")
+    }
+
+    enum class EnumDefnThemeFieldMargin(val value: String) {
+        dense("dense"),
+        none("none"),
+        normal("normal")
+    }
+
+    enum class EnumDefnThemeFieldSize(val value: String) {
+        medium("medium"),
+        small("small")
+    }
+
+    enum class EnumDefnThemeFieldVariant(val value: String) {
+        outlined("outlined"),
+        filled("filled"),
+        standard("standard")
+    }
+
+    enum class EnumDefnThemeFormVariant(val value: String) {
+        form("form"),
+        report("report")
+    }
+
+    enum class EnumDefnThemeImageCorner(val value: String) {
+        rectangle("rectangle"),
+        circle("circle"),
+        rounded("rounded")
+    }
+
+    enum class EnumDefnThemeImageRenderingMode(val value: String) {
+        aspectFit("aspectFit"),
+        scaleToFit("scaleToFit")
+    }
+
+    enum class EnumDefnThemePickMultiVariant(val value: String) {
+        checkboxVertical("checkboxVertical"),
+        checkboxHorizontal("checkboxHorizontal"),
+        dropdown("dropdown")
+    }
+
+    enum class EnumDefnThemePickVariant(val value: String) {
+        radioButtonVertical("radioButtonVertical"),
+        radioButtonHorizontal("radioButtonHorizontal"),
+        led("led"),
+        dropdown("dropdown")
+    }
+
+    enum class EnumDefnThemeSectionVariant(val value: String) {
+        form("form"),
+        propertyEditor("propertyEditor")
+    }
+
+    enum class EnumDefnThemeStroke(val value: String) {
+        dash("dash"),
+        dotted("dotted"),
+        solid("solid")
+    }
+
+    enum class EnumDefnThemeTabVariant(val value: String) {
+        standard("standard"),
+        scrollable("scrollable"),
+        fullWidth("fullWidth")
+    }
+
+    enum class EnumDefnTime(val value: String) {
+        now("now")
+    }
+
+    enum class EnumDefnUpdateVariant(val value: String) {
+        updateForced("updateForced"),
+        doNotUpdate("doNotUpdate")
+    }
+
+    enum class EnumDefnUserContext(val value: String) {
+        caller("caller"),
+        createdBy("createdBy"),
+        updatedBy("updatedBy")
+    }
+
+    enum class EnumDefnUserProperty(val value: String) {
+        nickName("nickName"),
+        handle("handle")
+    }
+
+    enum class EnumDefnUserProps(val value: String) {
+        firstName("firstName"),
+        lastName("lastName"),
+        fullName("fullName"),
+        email("email"),
+        mobileNumber("mobileNumber"),
+        handle("handle")
+    }
+
+    enum class EnumDefnUserSettingOptions(val value: String) {
+        text("text"),
+        number("number"),
+        decimal("decimal"),
+        pickOne("pickOne"),
+        pickMany("pickMany")
+    }
+
+    enum class EnumDefnUserSettingValue(val value: String) {
+        dataEntered("dataEntered"),
+        dataNotEntered("dataNotEntered")
+    }
+
+    enum class EnumDefnVideoFormat(val value: String) {
+        mp4("mp4")
+    }
+
+    enum class EnumDefnVisibilityAction(val value: String) {
+        blink("blink"),
+        click("click"),
+        clear("clear"),
+        setValue("setValue"),
+        disable("disable"),
+        enable("enable"),
+        executeAction("executeAction"),
+        hidden("hidden"),
+        highlight("highlight"),
+        invisible("invisible"),
+        shake("shake"),
+        visible("visible")
+    }
+
+    enum class EnumDefnVisibilityActionOn(val value: String) {
+        component("component"),
+        field("field"),
+        layout("layout"),
+        sendButton("sendButton")
+    }
+
+    enum class EnumDefnVisibilityOperator(val value: String) {
+        hasNoValue("hasNoValue"),
+        hasValue("hasValue"),
+        equalTo("equalTo"),
+        notEqualTo("notEqualTo"),
+        hasChanged("hasChanged")
+    }
+
+    enum class EnumDefnWizardNavigationMode(val value: String) {
+        nextButton("nextButton"),
+        nextPreviousButton("nextPreviousButton")
+    }
+
+    enum class EnumDeviceType(val value: String) {
+        android("android"),
+        ios("ios"),
+        web("web"),
+        widget("widget"),
+        agent("agent"),
+        test("test")
+    }
+
+    enum class EnumEnvValidationError(val value: String) {
+        cli("cli"),
+        composite("composite"),
+        invalidParam("invalidParam"),
+        notAccessible("notAccessible"),
+        notChanged("notChanged"),
+        notFound("notFound"),
+        ruleViolation("ruleViolation")
+    }
+
+    enum class EnumFormContentPosition(val value: String) {
+        start("start"),
+        flexCenter("flexCenter"),
+        end("end")
+    }
+
+    enum class EnumFormExportType(val value: String) {
+        pdf("pdf"),
+        image("image"),
+        html("html")
+    }
+
+    enum class EnumIdentityProviderKind(val value: String) {
+        apple("apple"),
+        google("google"),
+        microsoft("microsoft")
+    }
+
+    enum class EnumKeychainType(val value: String) {
+        rpcReceive("rpcReceive"),
+        rpcSend("rpcSend"),
+        slack("slack")
+    }
+
+    enum class EnumLogItemType(val value: String) {
+        text("text"),
+        tree("tree"),
+        table("table")
+    }
+
+    enum class EnumLogTableAlignment(val value: String) {
+        left("left"),
+        center("center"),
+        right("right")
+    }
+
+    enum class EnumLogTableTextStyle(val value: String) {
+        plain("plain"),
+        bold("bold"),
+        italic("italic"),
+        underline("underline"),
+        strikeThrough("strikeThrough"),
+        boldItalic("boldItalic"),
+        boldUnderline("boldUnderline"),
+        boldStrikeThrough("boldStrikeThrough")
+    }
+
+    enum class EnumLogTextType(val value: String) {
+        neoQL("neoQL"),
+        cli("cli"),
+        json("json"),
+        plain("plain"),
+        monospaced("monospaced"),
+        javascript("javascript"),
+        html("html"),
+        xml("xml")
+    }
+
+    enum class EnumLogTreeItemType(val value: String) {
+        keyValue("keyValue"),
+        line("line")
+    }
+
+    enum class EnumLogTreeLineCollapse(val value: String) {
+        showCollapse("showCollapse"),
+        showExpand("showExpand"),
+        ignore("ignore")
+    }
+
+    enum class EnumMediaType(val value: String) {
+        audio("audio"),
+        document("document"),
+        icon("icon"),
+        image("image"),
+        jar("jar"),
+        avatar("avatar"),
+        sticker("sticker"),
+        thumbnail("thumbnail"),
+        video("video"),
+        voice("voice")
+    }
+
+    enum class EnumNeatPathCaption(val value: String) {
+        About("About"),
+        Plugins("Plugins"),
+        Roles("Roles"),
+        Variables("Variables"),
+        Translations("Translations"),
+        Forms("Forms"),
+        Reports("Reports"),
+        Spreadsheets("Spreadsheets"),
+        Actions("Actions"),
+        Groups("Groups"),
+        Deeplinks("Deeplinks"),
+        DriveSheets("DriveSheets"),
+        Deploy("Deploy"),
+        Automation("Automation"),
+        Admins("Admins"),
+        Users("Users"),
+        Details("Details"),
+        API("API"),
+        Resources("Resources"),
+        Store("Store")
+    }
+
+    enum class EnumPaymentProviderKind(val value: String) {
+        razorpay("razorpay")
+    }
+
+    enum class EnumSchemaColumnType(val value: String) {
+        Boolean("Boolean"),
+        Date("Date"),
+        DateArray("DateArray"),
+        Double("Double"),
+        GeoHash("GeoHash"),
+        GeoPoint("GeoPoint"),
+        Long("Long"),
+        String("String"),
+        StringArray("StringArray"),
+        SysId("SysId"),
+        LongArray("LongArray"),
+        SysIdArray("SysIdArray")
+    }
+
+    enum class EnumStoreItemArtifact(val value: String) {
+        ent("ent"),
+        plugin("plugin"),
+        template("template")
+    }
+
+    enum class EnumStoreLabel(val value: String) {
+        CRM("CRM"),
+        Demo("Demo"),
+        Ffreedom("Ffreedom"),
+        Hubspot("Hubspot"),
+        Neome("Neome"),
+        Plugin("Plugin"),
+        SalesForce("SalesForce"),
+        ServiceNow("ServiceNow"),
+        Tally("Tally"),
+        Ticketing("Ticketing"),
+        Zendesk("Zendesk")
+    }
+
+    enum class EnumStudioCompType(val value: String) {
+        bool("bool"),
+        date("date"),
+        decimal("decimal"),
+        logDecimal("logDecimal"),
+        image("image"),
+        label("label"),
+        number("number"),
+        logNumber("logNumber"),
+        paragraph("paragraph"),
+        text("text"),
+        chipSet("chipSet"),
+        chipSetDate("chipSetDate"),
+        chipSetDateTime("chipSetDateTime"),
+        chipSetDay("chipSetDay"),
+        chipSetDeviceSize("chipSetDeviceSize"),
+        chipSetDeviceType("chipSetDeviceType"),
+        chipSetTime("chipSetTime"),
+        currency("currency"),
+        icon("icon"),
+        language("language"),
+        timeZone("timeZone"),
+        pinShape("pinShape"),
+        lineStroke("lineStroke"),
+        paymentStatus("paymentStatus"),
+        month("month"),
+        quarter("quarter"),
+        textSize("textSize"),
+        messageKind("messageKind"),
+        pickRole("pickRole"),
+        pickText("pickText"),
+        pickTree("pickTree"),
+        pickUser("pickUser"),
+        pickGridRow("pickGridRow"),
+        pickReportRow("pickReportRow"),
+        setOfRole("setOfRole"),
+        setOfUser("setOfUser"),
+        setOfText("setOfText"),
+        color("color"),
+        hyperlink("hyperlink"),
+        audio("audio"),
+        camera("camera"),
+        counter("counter"),
+        logCounter("logCounter"),
+        dateRange("dateRange"),
+        dateTime("dateTime"),
+        dateTimeRange("dateTimeRange"),
+        duration("duration"),
+        email("email"),
+        handle("handle"),
+        location("location"),
+        mobileNumber("mobileNumber"),
+        rating("rating"),
+        signature("signature"),
+        slider("slider"),
+        time("time"),
+        video("video"),
+        voice("voice"),
+        geoPoint("geoPoint"),
+        rowId("rowId"),
+        symbol("symbol"),
+        schedulerId("schedulerId"),
+        spreadsheetId("spreadsheetId"),
+        button("button"),
+        divider("divider"),
+        document("document"),
+        error("error"),
+        html("html"),
+        identifier("identifier"),
+        info("info"),
+        propertyMap("propertyMap"),
+        scanCode("scanCode"),
+        setOfDocument("setOfDocument"),
+        showCode("showCode"),
+        userId("userId"),
+        dynamic("dynamic"),
+        hyperlinkRow("hyperlinkRow"),
+        password("password"),
+        ref("ref"),
+        refSet("refSet"),
+        refUser("refUser"),
+        refReport("refReport"),
+        refTarget("refTarget"),
+        refContact("refContact"),
+        grid("grid"),
+        section("section"),
+        spreadsheetRef("spreadsheetRef")
+    }
+
+    enum class EnumStudioVarKind(val value: String) {
+        any("any"),
+        bool("bool"),
+        buttonVariant("buttonVariant"),
+        color("color"),
+        currency("currency"),
+        date("date"),
+        dateTime("dateTime"),
+        day("day"),
+        decimal("decimal"),
+        deviceSize("deviceSize"),
+        deviceType("deviceType"),
+        direction("direction"),
+        dividerKind("dividerKind"),
+        document("document"),
+        duration("duration"),
+        email("email"),
+        textSize("textSize"),
+        html("html"),
+        hyperlink("hyperlink"),
+        icon("icon"),
+        image("image"),
+        imageCorner("imageCorner"),
+        language("language"),
+        location("location"),
+        mapPinShape("mapPinShape"),
+        mobileNumber("mobileNumber"),
+        number("number"),
+        paragraph("paragraph"),
+        ratingKind("ratingKind"),
+        stroke("stroke"),
+        symbol("symbol"),
+        text("text"),
+        placement("placement"),
+        time("time"),
+        timeZone("timeZone"),
+        month("month"),
+        quarter("quarter"),
+        condition("condition"),
+        function("function"),
+        mapping("mapping"),
+        sequence("sequence"),
+        userSetting("userSetting"),
+        mapOfText("mapOfText"),
+        setOfDate("setOfDate"),
+        setOfDay("setOfDay"),
+        setOfNumber("setOfNumber"),
+        setOfText("setOfText"),
+        setOfTime("setOfTime"),
+        setOfUser("setOfUser"),
+        tree("tree")
+    }
+
+    enum class EnumWhatsAppTemplateHeaderType(val value: String) {
+        none("none"),
+        video("video"),
+        document("document"),
+        image("image")
     }
 
     private val prefixSysIdClassMap: MutableMap<String, Class<out SysId>> = mutableMapOf()

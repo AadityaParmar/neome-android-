@@ -8,7 +8,7 @@ package com.neome.api.ent.base.dto
 import com.neome.api.meta.base.Types.EnumDefnKindActionUIUpdate
 import com.neome.api.meta.base.Types.MetaIdGroup
 
-class DtoEntActionUIUpdate : DtoEntAction() {
+open class DtoEntActionUIUpdate : DtoEntAction() {
     var groupId: MetaIdGroup? = null
-    val updateKind: EnumDefnKindActionUIUpdate
+    lateinit var updateKind: EnumDefnKindActionUIUpdate
 }

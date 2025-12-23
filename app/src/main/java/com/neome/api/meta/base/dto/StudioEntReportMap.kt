@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdReport
+import java.util.Map
 
-class StudioEntReportMap : StudioBase() {
-    val keys: MetaIdReport[]
-    val map: Record<MetaIdReport, StudioEntReport>
+open class StudioEntReportMap : StudioBase() {
+    lateinit var keys: Array<MetaIdReport>
+    lateinit var map: Map<MetaIdReport, StudioEntReport>
 }

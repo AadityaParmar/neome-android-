@@ -8,6 +8,6 @@ package com.neome.api.studio.studioMain.msg
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgEntUserDeeplinkGet : Msg() {
+open class MsgEntUserDeeplinkGet : Msg() {
     var entUserId: EntUserId? = null
 }

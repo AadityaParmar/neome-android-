@@ -8,8 +8,9 @@ package com.neome.api.nucleus.api.sig
 import com.neome.api.nucleus.base.dto.DescApiModule
 import com.neome.api.nucleus.base.dto.DescApiPushSigs
 import com.neome.api.nucleus.base.sig.Sig
+import java.util.Map
 
-class SigApiLib : Sig() {
-    val api: Record<string, DescApiModule>
-    val pushSigs: DescApiPushSigs
+open class SigApiLib : Sig() {
+    lateinit var api: Map<String, DescApiModule>
+    lateinit var pushSigs: DescApiPushSigs
 }

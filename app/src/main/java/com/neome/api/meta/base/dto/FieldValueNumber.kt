@@ -5,6 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-class FieldValueNumber {
-    val value: number
+import kotlin.properties.Delegates
+
+open class FieldValueNumber {
+    var value: Number by Delegates.notNull<Number>()
 }

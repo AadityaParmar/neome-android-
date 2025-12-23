@@ -7,6 +7,6 @@ package com.neome.api.studio.studioDrawer.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigStudioEntDeploy : Sig() {
-    val jobKey: string
+open class SigStudioEntDeploy : Sig() {
+    lateinit var jobKey: String
 }

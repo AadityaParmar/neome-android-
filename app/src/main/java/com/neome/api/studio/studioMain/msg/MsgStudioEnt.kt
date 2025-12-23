@@ -8,6 +8,6 @@ package com.neome.api.studio.studioMain.msg
 import com.neome.api.meta.base.dto.StudioEnt
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgStudioEnt : Msg() {
-    val studioEnt: StudioEnt
+open class MsgStudioEnt : Msg() {
+    lateinit var studioEnt: StudioEnt
 }

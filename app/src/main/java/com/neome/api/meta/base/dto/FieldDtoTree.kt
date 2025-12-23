@@ -5,7 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-class FieldDtoTree {
-    val keys: string[]
-    val map: Record<string, FieldDtoTreeNode>
+import java.util.Map
+
+open class FieldDtoTree {
+    lateinit var keys: Array<String>
+    lateinit var map: Map<String, FieldDtoTreeNode>
 }

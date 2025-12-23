@@ -5,7 +5,9 @@
 
 package com.neome.api.ent.base.dto
 
-class GuaranteedRequest {
-    val offset: number
-    val payload: DtoGuaranteedRequest
+import kotlin.properties.Delegates
+
+open class GuaranteedRequest {
+    var offset: Number by Delegates.notNull<Number>()
+    lateinit var payload: DtoGuaranteedRequest
 }

@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnCompType
 
-class StudioDtoArgValueConstant : StudioDtoArgValue() {
-    val type: EnumDefnCompType
-    var value: any? = null
+open class StudioDtoArgValueConstant : StudioDtoArgValue() {
+    lateinit var type: EnumDefnCompType
+    var value: Any? = null
 }

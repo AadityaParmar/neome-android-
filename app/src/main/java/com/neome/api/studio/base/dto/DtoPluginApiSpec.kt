@@ -8,10 +8,10 @@ package com.neome.api.studio.base.dto
 import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types.EnumDefnPluginApiMethod
 
-class DtoPluginApiSpec {
-    var input: any? = null
-    val method: EnumDefnPluginApiMethod
-    val name: Symbol
-    var output: any? = null
-    val url: string
+open class DtoPluginApiSpec {
+    var input: Any? = null
+    lateinit var method: EnumDefnPluginApiMethod
+    lateinit var name: Symbol
+    var output: Any? = null
+    lateinit var url: String
 }

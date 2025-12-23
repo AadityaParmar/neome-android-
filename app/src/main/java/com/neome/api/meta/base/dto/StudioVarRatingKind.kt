@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnKindRating
 
-class StudioVarRatingKind : StudioVar() {
+open class StudioVarRatingKind : StudioVar() {
     var value: EnumDefnKindRating? = null
 }

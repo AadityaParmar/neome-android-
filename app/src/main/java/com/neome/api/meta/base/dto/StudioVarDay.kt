@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnDay
 
-class StudioVarDay : StudioVar() {
+open class StudioVarDay : StudioVar() {
     var value: EnumDefnDay? = null
 }

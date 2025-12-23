@@ -8,11 +8,11 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.GeoPoint
 
-class FieldDtoLocation {
-    var address: string? = null
-    var city: string? = null
-    var country: string? = null
-    var dateTime: string? = null
+open class FieldDtoLocation {
+    var address: String? = null
+    var city: String? = null
+    var country: String? = null
+    var dateTime: String? = null
     var entUserId: EntUserId? = null
-    val geoPoint: GeoPoint
+    lateinit var geoPoint: GeoPoint
 }

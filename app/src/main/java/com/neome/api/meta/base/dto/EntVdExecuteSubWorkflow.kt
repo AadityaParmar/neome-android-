@@ -8,8 +8,9 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdPipelineVar
 import com.neome.api.meta.base.Types.MetaIdVdAutoNode
+import java.util.Map
 
-class EntVdExecuteSubWorkflow : EntVdAutoStepWithOutputAndError() {
-    var sharedParamMap: Record<MetaIdPipelineVar, MetaIdPipelineParam>? = null
+open class EntVdExecuteSubWorkflow : EntVdAutoStepWithOutputAndError() {
+    var sharedParamMap: Map<MetaIdPipelineVar, MetaIdPipelineParam>? = null
     var startNodeId: MetaIdVdAutoNode? = null
 }

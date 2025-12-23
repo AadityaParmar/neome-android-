@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnFieldPickOption : DefnFieldEditable() {
-    val optionSet: string[]
+open class DefnFieldPickOption : DefnFieldEditable() {
+    lateinit var optionSet: Array<String>
 }

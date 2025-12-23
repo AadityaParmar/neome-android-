@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.Types.PluginApiId
 
-class EntVdExecutePlugin : EntVdAutoStepWithOutputAndError() {
+open class EntVdExecutePlugin : EntVdAutoStepWithOutputAndError() {
     var pluginApiId: PluginApiId? = null
     var pluginId: MetaIdPlugin? = null
 }

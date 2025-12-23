@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class FieldValueHandle {
-    val value: string
+open class FieldValueHandle {
+    lateinit var value: String
 }

@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdVdAutoFunc
+import java.util.Map
 
-class EntVdApplyTransforms : EntVdAutoStep() {
-    val keys: MetaIdVdAutoFunc[]
-    val map: Record<MetaIdVdAutoFunc, AutoXform>
+open class EntVdApplyTransforms : EntVdAutoStep() {
+    lateinit var keys: Array<MetaIdVdAutoFunc>
+    lateinit var map: Map<MetaIdVdAutoFunc, AutoXform>
 }

@@ -9,14 +9,15 @@ import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.Types.GroupId
 import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.nucleus.base.sig.SigVersion
+import kotlin.properties.Delegates
 
-class SigGroupAvatar : SigVersion() {
-    var about: string? = null
+open class SigGroupAvatar : SigVersion() {
+    var about: String? = null
     var avatarId: MediaIdAvatar? = null
-    val entId: EntId
-    val groupId: GroupId
-    var isAdmin: boolean? = null
-    val isMember: boolean
-    var label: string? = null
-    val name: string
+    lateinit var entId: EntId
+    lateinit var groupId: GroupId
+    var isAdmin: Boolean? = null
+    var isMember: Boolean by Delegates.notNull<Boolean>()
+    var label: String? = null
+    lateinit var name: String
 }

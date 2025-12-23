@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class EntVdAiFakerToSpreadsheet : EntVdAi() {
+open class EntVdAiFakerToSpreadsheet : EntVdAi() {
     var spreadsheetId: MetaIdSpreadsheet? = null
 }

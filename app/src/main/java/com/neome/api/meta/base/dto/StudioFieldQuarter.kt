@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.EnumDefnQuarter
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldQuarter : StudioFieldEditable() {
+open class StudioFieldQuarter : StudioFieldEditable() {
     var defaultFieldId: MetaIdField? = null
     var defaultValue: EnumDefnQuarter? = null
     var defaultVarId: MetaIdVar? = null

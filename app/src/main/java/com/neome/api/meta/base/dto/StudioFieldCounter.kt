@@ -8,18 +8,18 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldCounter : StudioFieldEditable() {
+open class StudioFieldCounter : StudioFieldEditable() {
     var defaultFieldId: MetaIdField? = null
-    var defaultValue: number? = null
+    var defaultValue: Number? = null
     var defaultVarId: MetaIdVar? = null
-    var max: number? = null
+    var max: Number? = null
     var maxFieldId: MetaIdField? = null
     var maxVarId: MetaIdVar? = null
-    var min: number? = null
-    var minDisplayValue: number? = null
+    var min: Number? = null
+    var minDisplayValue: Number? = null
     var minFieldId: MetaIdField? = null
     var minVarId: MetaIdVar? = null
-    var step: number? = null
+    var step: Number? = null
     var stepFieldId: MetaIdField? = null
     var stepVarId: MetaIdVar? = null
 }

@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class EntVdExpertPause : EntVdAutoStep() {
-    var canAdminResume: boolean? = null
+open class EntVdExpertPause : EntVdAutoStep() {
+    var canAdminResume: Boolean? = null
     var message: StudioValueParagraph? = null
     var option: MetaIdVar? = null
     var pauseKey: StudioValueText? = null

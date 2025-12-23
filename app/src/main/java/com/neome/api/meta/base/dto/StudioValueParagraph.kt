@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioValueParagraph : StudioValueVarIdBase() {
-    var paramSet: string[]? = null
-    val value: string
+open class StudioValueParagraph : StudioValueVarIdBase() {
+    var paramSet: Array<String>? = null
+    lateinit var value: String
 }

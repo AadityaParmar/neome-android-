@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdForm
 
-class DefnStudioBuildPropertyMap : DefnField() {
+open class DefnStudioBuildPropertyMap : DefnField() {
     var sourceFormId: MetaIdForm? = null
 }

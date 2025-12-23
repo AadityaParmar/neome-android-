@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdPlugin
 
-class StudioVarValueCondition : StudioBase() {
+open class StudioVarValueCondition : StudioBase() {
     var inputFormId: MetaIdForm? = null
     var inputPluginId: MetaIdPlugin? = null
     var node: StudioMapOfCondition? = null

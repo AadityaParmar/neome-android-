@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.sig
 
-class ISig {
+open class ISig {
 }

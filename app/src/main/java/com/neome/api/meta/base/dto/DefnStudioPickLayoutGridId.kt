@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 
-class DefnStudioPickLayoutGridId : DefnFieldEditable() {
-    val excludeLayoutGridIdSet: MetaIdLayoutGrid[]
-    var filterLayoutKindSet: EnumDefnLayoutGridKind[]? = null
-    val formId: MetaIdForm
+open class DefnStudioPickLayoutGridId : DefnFieldEditable() {
+    lateinit var excludeLayoutGridIdSet: Array<MetaIdLayoutGrid>
+    var filterLayoutKindSet: Array<EnumDefnLayoutGridKind>? = null
+    lateinit var formId: MetaIdForm
     var gridId: MetaIdGrid? = null
 }

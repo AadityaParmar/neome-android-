@@ -7,8 +7,8 @@ package com.neome.api.core.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class DtoCloneConfig {
-    var cloneAdmin: boolean? = null
-    var cloneEntUser: boolean? = null
-    var cloneSpreadsheetIdSet: MetaIdSpreadsheet[]? = null
+open class DtoCloneConfig {
+    var cloneAdmin: Boolean? = null
+    var cloneEntUser: Boolean? = null
+    var cloneSpreadsheetIdSet: Array<MetaIdSpreadsheet>? = null
 }

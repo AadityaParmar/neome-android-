@@ -8,7 +8,8 @@ package com.neome.api.studio.studioDrawer.sig
 import com.neome.api.meta.base.Types.ArtifactId
 import com.neome.api.nucleus.base.sig.Sig
 import com.neome.api.studio.base.dto.DtoNeatPathSearchResult
+import java.util.Map
 
-class SigStudioSearch : Sig() {
-    val searchResultMap: Record<ArtifactId, DtoNeatPathSearchResult>
+open class SigStudioSearch : Sig() {
+    lateinit var searchResultMap: Map<ArtifactId, DtoNeatPathSearchResult>
 }

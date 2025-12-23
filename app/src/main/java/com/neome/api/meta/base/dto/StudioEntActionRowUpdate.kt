@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class StudioEntActionRowUpdate : StudioEntAction() {
+open class StudioEntActionRowUpdate : StudioEntAction() {
     var filterConditionVarId: StudioValueVarIdCondition? = null
     var layoutSpreadsheetId: MetaIdLayoutGrid? = null
     var lookupFieldId: MetaIdField? = null

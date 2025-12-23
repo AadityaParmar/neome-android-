@@ -6,8 +6,9 @@
 package com.neome.api.home.base.dto
 
 import com.neome.api.meta.base.Types.MediaIdAudio
+import kotlin.properties.Delegates
 
-class DtoMessageReplyPayloadVoice : DtoMessageReplyPayload() {
-    val durationMs: number
-    val mediaIdAudio: MediaIdAudio
+open class DtoMessageReplyPayloadVoice : DtoMessageReplyPayload() {
+    var durationMs: Number by Delegates.notNull<Number>()
+    lateinit var mediaIdAudio: MediaIdAudio
 }

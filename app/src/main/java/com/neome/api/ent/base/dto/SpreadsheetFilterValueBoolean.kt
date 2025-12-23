@@ -5,6 +5,8 @@
 
 package com.neome.api.ent.base.dto
 
-class SpreadsheetFilterValueBoolean : SpreadsheetFilterValue() {
-    val value: boolean
+import kotlin.properties.Delegates
+
+open class SpreadsheetFilterValueBoolean : SpreadsheetFilterValue() {
+    var value: Boolean by Delegates.notNull<Boolean>()
 }

@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioEntAutomationStepReturn : StudioEntAutomationStep() {
+open class StudioEntAutomationStepReturn : StudioEntAutomationStep() {
 }

@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.RowId
 
-class FieldValueRowId {
-    var displayField: string? = null
-    val value: RowId
+open class FieldValueRowId {
+    var displayField: String? = null
+    lateinit var value: RowId
 }

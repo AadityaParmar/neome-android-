@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.ArtifactId
 import com.neome.api.meta.base.Types.TimeZoneKey
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgNeoScriptGet : Msg() {
-    val artifactId: ArtifactId
-    val displayDateFormat: string
+open class MsgNeoScriptGet : Msg() {
+    lateinit var artifactId: ArtifactId
+    lateinit var displayDateFormat: String
     var metaId: SysId? = null
-    val timeZone: TimeZoneKey
+    lateinit var timeZone: TimeZoneKey
 }

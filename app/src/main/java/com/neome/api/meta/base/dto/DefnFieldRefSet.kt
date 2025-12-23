@@ -9,11 +9,11 @@ import com.neome.api.meta.base.Types.EnumDefnEjectionPolicy
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class DefnFieldRefSet : DefnFieldEditable() {
-    var allowDuplicateValues: boolean? = null
+open class DefnFieldRefSet : DefnFieldEditable() {
+    var allowDuplicateValues: Boolean? = null
     var displayFieldId: MetaIdField? = null
     var ejectionPolicy: EnumDefnEjectionPolicy? = null
     var layoutSpreadsheet: DefnLayoutGrid? = null
-    var maxSize: number? = null
-    val spreadsheetId: MetaIdSpreadsheet
+    var maxSize: Number? = null
+    lateinit var spreadsheetId: MetaIdSpreadsheet
 }

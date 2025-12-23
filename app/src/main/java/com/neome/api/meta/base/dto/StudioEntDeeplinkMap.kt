@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdDeeplink
+import java.util.Map
 
-class StudioEntDeeplinkMap : StudioBase() {
-    val keys: MetaIdDeeplink[]
-    val map: Record<MetaIdDeeplink, StudioEntDeeplink>
+open class StudioEntDeeplinkMap : StudioBase() {
+    lateinit var keys: Array<MetaIdDeeplink>
+    lateinit var map: Map<MetaIdDeeplink, StudioEntDeeplink>
 }

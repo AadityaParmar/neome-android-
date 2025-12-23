@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioComposite : StudioComp() {
+open class StudioComposite : StudioComp() {
     var actionPermissionMap: StudioMapOfActionPermission? = null
-    val fieldMap: StudioFieldMap
+    lateinit var fieldMap: StudioFieldMap
 }

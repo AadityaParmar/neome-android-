@@ -6,9 +6,10 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdTranslation
+import java.util.Map
 
-class StudioEntTranslationMap : StudioBase() {
-    val keys: MetaIdTranslation[]
-    val map: Record<MetaIdTranslation, StudioEntTranslation>
-    var usePublicLibrary: boolean? = null
+open class StudioEntTranslationMap : StudioBase() {
+    lateinit var keys: Array<MetaIdTranslation>
+    lateinit var map: Map<MetaIdTranslation, StudioEntTranslation>
+    var usePublicLibrary: Boolean? = null
 }

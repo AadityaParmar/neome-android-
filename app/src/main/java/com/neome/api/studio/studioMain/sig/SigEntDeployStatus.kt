@@ -9,10 +9,10 @@ import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.sig.SigVersion
 import com.neome.api.studio.base.Types.EnumEntDeployExecutionState
 
-class SigEntDeployStatus : SigVersion() {
-    val entId: EntId
-    val executionState: EnumEntDeployExecutionState
-    val jobKey: string
-    val lastUpdate: string
-    val message: string
+open class SigEntDeployStatus : SigVersion() {
+    lateinit var entId: EntId
+    lateinit var executionState: EnumEntDeployExecutionState
+    lateinit var jobKey: String
+    lateinit var lastUpdate: String
+    lateinit var message: String
 }

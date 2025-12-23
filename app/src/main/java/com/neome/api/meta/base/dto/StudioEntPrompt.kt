@@ -11,15 +11,15 @@ import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.Types.MetaIdPrompt
 import com.neome.api.meta.base.Types.MetaIdRole
 
-class StudioEntPrompt : StudioBase() {
+open class StudioEntPrompt : StudioBase() {
     var actionId: MetaIdAction? = null
-    val metaId: MetaIdPrompt
+    lateinit var metaId: MetaIdPrompt
     var modules: StudioModuleSelection? = null
-    val name: Symbol
-    var permissionRoleIdSet: MetaIdRole[]? = null
+    lateinit var name: Symbol
+    var permissionRoleIdSet: Array<MetaIdRole>? = null
     var promptAttachmentFormat: EnumDefnPromptAttachmentFormat? = null
     var promptText: StudioValueCodeJavascript? = null
-    var reviewBeforeExecuting: boolean? = null
-    var sendReviewDeeplinkOnError: boolean? = null
-    var sendSuccessDeeplink: boolean? = null
+    var reviewBeforeExecuting: Boolean? = null
+    var sendReviewDeeplinkOnError: Boolean? = null
+    var sendSuccessDeeplink: Boolean? = null
 }

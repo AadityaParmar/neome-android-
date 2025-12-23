@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnFieldMessageType : DefnFieldEditable() {
+open class DefnFieldMessageType : DefnFieldEditable() {
 }

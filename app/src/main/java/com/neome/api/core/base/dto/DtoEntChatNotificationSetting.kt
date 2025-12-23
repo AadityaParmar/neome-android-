@@ -7,8 +7,9 @@ package com.neome.api.core.base.dto
 
 import com.neome.api.meta.base.Types.ChatId
 import com.neome.api.meta.base.dto.GsonCto
+import java.util.Map
 
-class DtoEntChatNotificationSetting : GsonCto() {
+open class DtoEntChatNotificationSetting : GsonCto() {
     var entNotificationSetting: DtoNotificationSetting? = null
-    var map: Record<ChatId, DtoNotificationSetting>? = null
+    var map: Map<ChatId, DtoNotificationSetting>? = null
 }

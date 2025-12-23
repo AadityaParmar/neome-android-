@@ -6,7 +6,8 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdSpreadsheetRef
+import java.util.Map
 
-class StudioEntSpreadsheetRefTokenMap : StudioBase() {
-    var refTokenMap: Record<MetaIdSpreadsheetRef, string>? = null
+open class StudioEntSpreadsheetRefTokenMap : StudioBase() {
+    var refTokenMap: Map<MetaIdSpreadsheetRef, String>? = null
 }

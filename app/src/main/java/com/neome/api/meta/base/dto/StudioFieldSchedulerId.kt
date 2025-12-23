@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioFieldSchedulerId : StudioFieldEditable() {
+open class StudioFieldSchedulerId : StudioFieldEditable() {
 }

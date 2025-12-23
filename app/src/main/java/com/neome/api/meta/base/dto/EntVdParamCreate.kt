@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnKindPipelineUpdate
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class EntVdParamCreate : EntVdAutoStepWithOutput() {
+open class EntVdParamCreate : EntVdAutoStepWithOutput() {
     var option: EnumDefnKindPipelineUpdate? = null
     var outputForm: FormRefKey? = null
     var outputMapping: StudioDtoMapping? = null

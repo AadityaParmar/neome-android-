@@ -8,6 +8,6 @@ package com.neome.api.home.main.msg
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgEntFilterNoVersion : Msg() {
-    var filterEntIdSet: EntId[]? = null
+open class MsgEntFilterNoVersion : Msg() {
+    var filterEntIdSet: Array<EntId>? = null
 }

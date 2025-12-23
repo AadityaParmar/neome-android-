@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioDtoLayoutOverlaySpreadsheet : StudioBase() {
+open class StudioDtoLayoutOverlaySpreadsheet : StudioBase() {
     var item: StudioDtoLayoutCardItem? = null
 }

@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioFieldMessageType : StudioFieldEditable() {
+open class StudioFieldMessageType : StudioFieldEditable() {
 }

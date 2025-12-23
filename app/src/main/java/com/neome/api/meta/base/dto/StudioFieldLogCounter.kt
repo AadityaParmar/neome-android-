@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdRole
 
-class StudioFieldLogCounter : StudioFieldCounter() {
-    var logReadRoleSet: MetaIdRole[]? = null
+open class StudioFieldLogCounter : StudioFieldCounter() {
+    var logReadRoleSet: Array<MetaIdRole>? = null
 }

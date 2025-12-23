@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class VdBase : StudioBase() {
-    var uiVersion: string? = null
+open class VdBase : StudioBase() {
+    var uiVersion: String? = null
 }

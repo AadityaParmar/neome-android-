@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioPluginJar : StudioBase() {
-    val lastUpdateTime: string
+open class StudioPluginJar : StudioBase() {
+    lateinit var lastUpdateTime: String
     var packageNameVarId: MetaIdVar? = null
     var pluginConfigFormId: MetaIdForm? = null
     var uploadJarMap: StudioMapOfJarFile? = null

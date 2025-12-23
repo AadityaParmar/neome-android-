@@ -5,6 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarValueLong {
-    val value: number
+import kotlin.properties.Delegates
+
+open class StudioVarValueLong {
+    var value: Number by Delegates.notNull<Number>()
 }

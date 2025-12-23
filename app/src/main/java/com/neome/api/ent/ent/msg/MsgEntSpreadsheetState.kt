@@ -8,7 +8,7 @@ package com.neome.api.ent.ent.msg
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgEntSpreadsheetState : Msg() {
-    var gridVer: string? = null
-    val spreadsheetId: MetaIdSpreadsheet
+open class MsgEntSpreadsheetState : Msg() {
+    var gridVer: String? = null
+    lateinit var spreadsheetId: MetaIdSpreadsheet
 }

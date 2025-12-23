@@ -12,14 +12,14 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdStep
 
-class StudioEntAutomationStep : StudioBase() {
-    var description: string? = null
+open class StudioEntAutomationStep : StudioBase() {
+    var description: String? = null
     var executionConditionInputPipelineVarId: MetaIdPipelineParam? = null
     var executionConditionVarId: StudioValueVarIdCondition? = null
-    val kind: EnumDefnKindAutomationStep
-    val metaId: MetaIdStep
-    val name: Symbol
-    var skipUpdateSpreadsheetTrigger: boolean? = null
+    lateinit var kind: EnumDefnKindAutomationStep
+    lateinit var metaId: MetaIdStep
+    lateinit var name: Symbol
+    var skipUpdateSpreadsheetTrigger: Boolean? = null
     var terminateFieldId: MetaIdField? = null
     var terminateKind: EnumDefnAutomationTerminateKind? = null
 }

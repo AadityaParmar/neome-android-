@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnDtoLayoutCardItemLine {
+open class DefnDtoLayoutCardItemLine {
     var caption: DefnDtoLayoutCardItemLineSegment? = null
     var first: DefnDtoLayoutCardItemLineSegment? = null
     var middle: DefnDtoLayoutCardItemLineSegment? = null

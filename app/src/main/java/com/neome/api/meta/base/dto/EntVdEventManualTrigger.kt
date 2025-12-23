@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdEventManualTrigger : EntVdEvent() {
+open class EntVdEventManualTrigger : EntVdEvent() {
     var inputForm: FormRefKey? = null
 }

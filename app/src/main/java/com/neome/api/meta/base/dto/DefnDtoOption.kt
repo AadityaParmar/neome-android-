@@ -5,11 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnDtoOption {
+open class DefnDtoOption {
     var color: DefnDtoColor? = null
-    var disabled: boolean? = null
-    var hint: string? = null
-    var isRemoved: boolean? = null
-    val metaId: string
-    val value: string
+    var disabled: Boolean? = null
+    var hint: String? = null
+    var isRemoved: Boolean? = null
+    lateinit var metaId: String
+    lateinit var value: String
 }

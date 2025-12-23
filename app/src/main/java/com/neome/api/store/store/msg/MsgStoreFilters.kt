@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.EnumStoreItemArtifact
 import com.neome.api.meta.base.Types.EnumStoreLabel
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgStoreFilters : Msg() {
-    var artifactKindSet: EnumStoreItemArtifact[]? = null
-    var storeLabelSet: EnumStoreLabel[]? = null
+open class MsgStoreFilters : Msg() {
+    var artifactKindSet: Array<EnumStoreItemArtifact>? = null
+    var storeLabelSet: Array<EnumStoreLabel>? = null
 }

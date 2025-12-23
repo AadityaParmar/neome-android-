@@ -8,11 +8,11 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.TimeZoneKey
 
-class DefnFieldDate : DefnFieldEditable() {
+open class DefnFieldDate : DefnFieldEditable() {
     var defaultFieldId: MetaIdField? = null
     var defaultValue: DefnBuildDate? = null
     var defaultVar: DefnBuildDate? = null
-    var displayDateFormat: string? = null
+    var displayDateFormat: String? = null
     var max: DefnBuildDate? = null
     var maxFieldId: MetaIdField? = null
     var maxVar: DefnBuildDate? = null

@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdEventPaymentReceipt : EntVdEvent() {
+open class EntVdEventPaymentReceipt : EntVdEvent() {
 }

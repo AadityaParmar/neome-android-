@@ -9,14 +9,14 @@ import com.neome.api.meta.base.Types.RequestId
 import com.neome.api.meta.base.Types.ServiceName
 import com.neome.api.meta.base.sig.ISig
 
-class EnvSignal<S : ISig> {
-    var cookieRememberMe: boolean? = null
-    var cookieValue: string? = null
+open class EnvSignal<S : ISig> {
+    var cookieRememberMe: Boolean? = null
+    var cookieValue: String? = null
     var error: EnvError? = null
     var requestId: RequestId? = null
-    var serverName: string? = null
-    var serverTime: number? = null
+    var serverName: String? = null
+    var serverTime: Number? = null
     var serviceName: ServiceName? = null
     var sig: S? = null
-    var sigName: string? = null
+    var sigName: String? = null
 }

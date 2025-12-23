@@ -11,10 +11,10 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.RowId
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgEntLogNumberFieldDataGet : Msg() {
-    val fieldId: MetaIdField
+open class MsgEntLogNumberFieldDataGet : Msg() {
+    lateinit var fieldId: MetaIdField
     var gridId: MetaIdGrid? = null
     var gridRowId: RowId? = null
-    val rowId: RowId
-    val spreadsheetId: MetaIdSpreadsheet
+    lateinit var rowId: RowId
+    lateinit var spreadsheetId: MetaIdSpreadsheet
 }

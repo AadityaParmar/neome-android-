@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgSpreadsheetRowUpdate : Msg() {
-    val formValueRaw: FormValueRaw
-    val spreadsheetId: MetaIdSpreadsheet
-    var transactionId: string? = null
+open class MsgSpreadsheetRowUpdate : Msg() {
+    lateinit var formValueRaw: FormValueRaw
+    lateinit var spreadsheetId: MetaIdSpreadsheet
+    var transactionId: String? = null
 }

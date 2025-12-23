@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdExecuteJavascript : EntVdAutoStepWithOutputAndError() {
+open class EntVdExecuteJavascript : EntVdAutoStepWithOutputAndError() {
     var outputForm: FormRefKey? = null
     var script: StudioValueCodeJavascript? = null
 }

@@ -11,10 +11,10 @@ import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioEntAutomationStepParseDocument : StudioEntAutomationStep() {
-    var aiInstructions: string? = null
+open class StudioEntAutomationStepParseDocument : StudioEntAutomationStep() {
+    var aiInstructions: String? = null
     var documentFieldId: MetaIdField? = null
-    var exposeOutputAsPipelineVariable: boolean? = null
+    var exposeOutputAsPipelineVariable: Boolean? = null
     var inputFormPipelineVarId: MetaIdPipelineParam? = null
     var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
     var iterateOnGridId: MetaIdGrid? = null

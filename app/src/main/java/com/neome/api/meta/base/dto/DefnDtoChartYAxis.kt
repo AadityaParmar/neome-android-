@@ -8,11 +8,11 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdChartYAxis
 import com.neome.api.meta.base.Types.MetaIdField
 
-class DefnDtoChartYAxis {
+open class DefnDtoChartYAxis {
     var color: DefnDtoColor? = null
     var colorFieldId: MetaIdField? = null
     var colorVar: DefnDtoColor? = null
-    val fieldId: MetaIdField
-    var label: string? = null
-    val metaId: MetaIdChartYAxis
+    lateinit var fieldId: MetaIdField
+    var label: String? = null
+    lateinit var metaId: MetaIdChartYAxis
 }

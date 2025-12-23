@@ -8,10 +8,10 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnKindHyperlink
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioVarValueHyperlink {
+open class StudioVarValueHyperlink {
     var color: StudioDtoColor? = null
     var colorVarId: MetaIdVar? = null
-    var displayText: string? = null
+    var displayText: String? = null
     var kind: EnumDefnKindHyperlink? = null
-    var value: string? = null
+    var value: String? = null
 }

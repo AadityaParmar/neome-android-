@@ -7,6 +7,6 @@ package com.neome.api.ent.entMain.sig
 
 import com.neome.api.meta.base.Types.MetaIdField
 
-class SigOutputFormValue : SigFormValue() {
-    var outputFieldIdSet: MetaIdField[]? = null
+open class SigOutputFormValue : SigFormValue() {
+    var outputFieldIdSet: Array<MetaIdField>? = null
 }

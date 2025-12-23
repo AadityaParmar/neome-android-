@@ -7,11 +7,12 @@ package com.neome.api.home.base.dto
 
 import com.neome.api.meta.base.Types.MediaIdImage
 import com.neome.api.meta.base.Types.MediaIdVideo
+import kotlin.properties.Delegates
 
-class DtoMessageReplyPayloadVideo : DtoMessageReplyPayload() {
-    val durationMs: number
-    val mediaId: MediaIdImage
-    val mediaIdBlurImage: MediaIdImage
-    val mediaIdVideo: MediaIdVideo
-    val primaryColor: string
+open class DtoMessageReplyPayloadVideo : DtoMessageReplyPayload() {
+    var durationMs: Number by Delegates.notNull<Number>()
+    lateinit var mediaId: MediaIdImage
+    lateinit var mediaIdBlurImage: MediaIdImage
+    lateinit var mediaIdVideo: MediaIdVideo
+    lateinit var primaryColor: String
 }

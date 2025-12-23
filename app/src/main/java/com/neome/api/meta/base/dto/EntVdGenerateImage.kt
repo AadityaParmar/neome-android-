@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 
-class EntVdGenerateImage : EntVdAutoStep() {
+open class EntVdGenerateImage : EntVdAutoStep() {
     var contentLayoutId: MetaIdLayoutForm? = null
     var fileName: StudioValueText? = null
     var outputField: StudioDtoArgValueParameter? = null

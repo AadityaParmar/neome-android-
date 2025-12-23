@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.CurrencyKey
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldCurrency : StudioFieldEditable() {
+open class StudioFieldCurrency : StudioFieldEditable() {
     var defaultFieldId: MetaIdField? = null
     var defaultValue: CurrencyKey? = null
     var defaultVarId: MetaIdVar? = null

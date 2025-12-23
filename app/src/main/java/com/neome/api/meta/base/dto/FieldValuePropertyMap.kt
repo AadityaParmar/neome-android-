@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class FieldValuePropertyMap {
-    var keys: string[]? = null
-    var values: string[]? = null
+open class FieldValuePropertyMap {
+    var keys: Array<String>? = null
+    var values: Array<String>? = null
 }

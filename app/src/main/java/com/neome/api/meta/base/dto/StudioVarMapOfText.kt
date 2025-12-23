@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarMapOfText : StudioVar() {
+open class StudioVarMapOfText : StudioVar() {
     var value: StudioMapOfText? = null
 }

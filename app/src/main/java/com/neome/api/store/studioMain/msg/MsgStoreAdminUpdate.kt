@@ -10,11 +10,11 @@ import com.neome.api.meta.base.Types.EnumDefnAdminDoNotOptionStoreItem
 import com.neome.api.meta.base.dto.StudioModuleSelection
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgStoreAdminUpdate : Msg() {
-    val adminId: AdminId
-    var doNotEditOptionSet: EnumDefnAdminDoNotOptionStoreItem[]? = null
-    var doNotShowOptionSet: EnumDefnAdminDoNotOptionStoreItem[]? = null
-    var handle: string? = null
+open class MsgStoreAdminUpdate : Msg() {
+    lateinit var adminId: AdminId
+    var doNotEditOptionSet: Array<EnumDefnAdminDoNotOptionStoreItem>? = null
+    var doNotShowOptionSet: Array<EnumDefnAdminDoNotOptionStoreItem>? = null
+    var handle: String? = null
     var modules: StudioModuleSelection? = null
-    val nickName: string
+    lateinit var nickName: String
 }

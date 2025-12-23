@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdPlugin
+import java.util.Map
 
-class StudioEntPluginMap : StudioBase() {
-    val keys: MetaIdPlugin[]
-    val map: Record<MetaIdPlugin, StudioEntPlugin>
+open class StudioEntPluginMap : StudioBase() {
+    lateinit var keys: Array<MetaIdPlugin>
+    lateinit var map: Map<MetaIdPlugin, StudioEntPlugin>
 }

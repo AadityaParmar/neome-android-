@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdSendWhatsappMessage : EntVdAutoStep() {
+open class EntVdSendWhatsappMessage : EntVdAutoStep() {
     var mediaField: StudioDtoArgValueParameter? = null
     var message: StudioValueParagraph? = null
     var toUsers: StudioDtoUserFilter? = null

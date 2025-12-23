@@ -7,8 +7,8 @@ package com.neome.api.home.base.dto
 
 import com.neome.api.meta.base.Types.MediaIdImage
 
-class DtoMessageReplyPayloadImage : DtoMessageReplyPayload() {
-    val mediaId: MediaIdImage
-    val mediaIdBlurImage: MediaIdImage
-    val primaryColor: string
+open class DtoMessageReplyPayloadImage : DtoMessageReplyPayload() {
+    lateinit var mediaId: MediaIdImage
+    lateinit var mediaIdBlurImage: MediaIdImage
+    lateinit var primaryColor: String
 }

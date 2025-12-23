@@ -8,9 +8,9 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdReport
 import com.neome.api.meta.base.Types.MetaIdVdRegion
 
-class EntVdReport : StudioBase() {
-    var expanded: boolean? = null
+open class EntVdReport : StudioBase() {
+    var expanded: Boolean? = null
     var parentRegionId: MetaIdVdRegion? = null
     var point: Point? = null
-    val reportId: MetaIdReport
+    lateinit var reportId: MetaIdReport
 }

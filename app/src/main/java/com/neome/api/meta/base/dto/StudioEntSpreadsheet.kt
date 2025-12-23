@@ -11,31 +11,31 @@ import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioEntSpreadsheet : StudioBase() {
-    val alias: string
-    var auditTrailFormRoleSet: MetaIdRole[]? = null
-    var bypassDurationRoleSet: MetaIdRole[]? = null
-    var clearRoleSet: MetaIdRole[]? = null
-    val details: StudioDetails
-    val formId: MetaIdForm
+open class StudioEntSpreadsheet : StudioBase() {
+    lateinit var alias: String
+    var auditTrailFormRoleSet: Array<MetaIdRole>? = null
+    var bypassDurationRoleSet: Array<MetaIdRole>? = null
+    var clearRoleSet: Array<MetaIdRole>? = null
+    lateinit var details: StudioDetails
+    lateinit var formId: MetaIdForm
     var groupForwardRolePermissionMap: StudioMapOfForwardRolePermission? = null
-    var historyIdSet: MetaIdField[]? = null
-    var insertRoleSet: MetaIdRole[]? = null
+    var historyIdSet: Array<MetaIdField>? = null
+    var insertRoleSet: Array<MetaIdRole>? = null
     var invisibleAfterDurationVarId: MetaIdVar? = null
-    var isMasterSheet: boolean? = null
+    var isMasterSheet: Boolean? = null
     var layoutSpreadsheetMap: StudioMapOfLayoutGrid? = null
-    val metaId: MetaIdSpreadsheet
+    lateinit var metaId: MetaIdSpreadsheet
     var partitionMap: StudioMapOfPartition? = null
-    var queryableIdSet: MetaIdField[]? = null
-    var ragIdSet: MetaIdField[]? = null
+    var queryableIdSet: Array<MetaIdField>? = null
+    var ragIdSet: Array<MetaIdField>? = null
     var readAfterDurationVarId: MetaIdVar? = null
-    var readRoleSet: MetaIdRole[]? = null
+    var readRoleSet: Array<MetaIdRole>? = null
     var readRoleVarId: MetaIdVar? = null
-    var removeRoleSet: MetaIdRole[]? = null
-    var searchableIdSet: MetaIdField[]? = null
-    var supportOffline: boolean? = null
-    var uniqueIdSet: MetaIdField[]? = null
-    var uniqueIndexIdSet: MetaIdField[]? = null
-    var updateRoleSet: MetaIdRole[]? = null
+    var removeRoleSet: Array<MetaIdRole>? = null
+    var searchableIdSet: Array<MetaIdField>? = null
+    var supportOffline: Boolean? = null
+    var uniqueIdSet: Array<MetaIdField>? = null
+    var uniqueIndexIdSet: Array<MetaIdField>? = null
+    var updateRoleSet: Array<MetaIdRole>? = null
     var userForwardRolePermissionMap: StudioMapOfForwardRolePermission? = null
 }

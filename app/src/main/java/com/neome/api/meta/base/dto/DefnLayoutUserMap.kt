@@ -6,10 +6,11 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdLayoutUser
+import java.util.Map
 
-class DefnLayoutUserMap {
-    val keys: MetaIdLayoutUser[]
-    val map: Record<MetaIdLayoutUser, DefnLayoutUser>
+open class DefnLayoutUserMap {
+    lateinit var keys: Array<MetaIdLayoutUser>
+    lateinit var map: Map<MetaIdLayoutUser, DefnLayoutUser>
     var mobileDefaultLayoutId: MetaIdLayoutUser? = null
     var webDefaultLayoutId: MetaIdLayoutUser? = null
 }

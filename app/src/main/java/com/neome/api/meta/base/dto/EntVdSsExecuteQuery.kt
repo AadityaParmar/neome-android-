@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class EntVdSsExecuteQuery : EntVdAutoStepWithOutput() {
+open class EntVdSsExecuteQuery : EntVdAutoStepWithOutput() {
     var neoQL: StudioValueCodeNeoQL? = null
     var outputForm: FormRefKey? = null
-    var spreadsheetIdSet: MetaIdSpreadsheet[]? = null
+    var spreadsheetIdSet: Array<MetaIdSpreadsheet>? = null
 }

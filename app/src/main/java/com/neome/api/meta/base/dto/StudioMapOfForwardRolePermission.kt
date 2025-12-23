@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdRole
+import java.util.Map
 
-class StudioMapOfForwardRolePermission : StudioBase() {
-    val keys: MetaIdRole[]
-    val map: Record<MetaIdRole, StudioSetOfMetaId>
+open class StudioMapOfForwardRolePermission : StudioBase() {
+    lateinit var keys: Array<MetaIdRole>
+    lateinit var map: Map<MetaIdRole, StudioSetOfMetaId>
 }

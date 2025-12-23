@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioFieldRowId : StudioFieldEditable() {
+open class StudioFieldRowId : StudioFieldEditable() {
 }

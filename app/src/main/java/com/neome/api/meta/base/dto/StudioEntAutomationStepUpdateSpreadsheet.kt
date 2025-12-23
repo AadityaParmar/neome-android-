@@ -11,7 +11,7 @@ import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioEntAutomationStepUpdateSpreadsheet : StudioEntAutomationStep() {
+open class StudioEntAutomationStepUpdateSpreadsheet : StudioEntAutomationStep() {
     var inputFormPipelineVarId: MetaIdPipelineParam? = null
     var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
     var iterateOnGridId: MetaIdGrid? = null

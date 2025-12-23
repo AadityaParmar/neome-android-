@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdLayoutFormEditorComposite
+import java.util.Map
 
-class DefnMapOfLayoutFormEditorComposite {
-    val keys: MetaIdLayoutFormEditorComposite[]
-    val map: Record<MetaIdLayoutFormEditorComposite, DefnLayoutFormEditorComposite>
+open class DefnMapOfLayoutFormEditorComposite {
+    lateinit var keys: Array<MetaIdLayoutFormEditorComposite>
+    lateinit var map: Map<MetaIdLayoutFormEditorComposite, DefnLayoutFormEditorComposite>
 }

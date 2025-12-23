@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class FieldSetOfOptionId {
-    var displaySet: string[]? = null
-    val valueSet: string[]
+open class FieldSetOfOptionId {
+    var displaySet: Array<String>? = null
+    lateinit var valueSet: Array<String>
 }

@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdPlugin
 
-class DefnStudioPickPluginCompId : DefnStudioPickCompId() {
-    val pluginId: MetaIdPlugin
+open class DefnStudioPickPluginCompId : DefnStudioPickCompId() {
+    lateinit var pluginId: MetaIdPlugin
 }

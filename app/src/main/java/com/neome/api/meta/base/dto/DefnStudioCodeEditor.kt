@@ -7,14 +7,14 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnCodeEditorLanguage
 
-class DefnStudioCodeEditor : DefnFieldParagraph() {
-    var allowCopy: boolean? = null
+open class DefnStudioCodeEditor : DefnFieldParagraph() {
+    var allowCopy: Boolean? = null
     var autoCompletePayload: DefnStudioDtoCodeEditor? = null
-    var enableLineNumbers: boolean? = null
-    var enableMiniMap: boolean? = null
-    var excludeAiInput: boolean? = null
+    var enableLineNumbers: Boolean? = null
+    var enableMiniMap: Boolean? = null
+    var excludeAiInput: Boolean? = null
     var language: EnumDefnCodeEditorLanguage? = null
-    var minHeight: number? = null
-    var showExpandBtn: boolean? = null
-    var title: string? = null
+    var minHeight: Number? = null
+    var showExpandBtn: Boolean? = null
+    var title: String? = null
 }

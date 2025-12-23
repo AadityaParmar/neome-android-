@@ -10,12 +10,12 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioComp : StudioBase() {
-    var aiInstructions: string? = null
-    val details: StudioDetails
-    var disabled: boolean? = null
+open class StudioComp : StudioBase() {
+    var aiInstructions: String? = null
+    lateinit var details: StudioDetails
+    var disabled: Boolean? = null
     var disabledFieldId: MetaIdField? = null
-    var disabledRoleIdSet: MetaIdRole[]? = null
+    var disabledRoleIdSet: Array<MetaIdRole>? = null
     var disabledVarId: MetaIdVar? = null
     var permissionMatrix: StudioDtoPermissionMatrix? = null
     var type: EnumStudioCompType? = null

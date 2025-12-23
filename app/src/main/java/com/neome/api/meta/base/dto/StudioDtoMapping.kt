@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdGrid
 
-class StudioDtoMapping {
+open class StudioDtoMapping {
     var fieldMappingMap: StudioDtoMappingFieldMap? = null
     var fromGridId: MetaIdGrid? = null
     var gridMappingMap: StudioDtoMappingGridMap? = null

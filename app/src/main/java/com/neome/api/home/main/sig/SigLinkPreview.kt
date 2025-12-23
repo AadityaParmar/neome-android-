@@ -7,8 +7,8 @@ package com.neome.api.home.main.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigLinkPreview : Sig() {
-    var description: string? = null
-    var imageUrl: string? = null
-    val title: string
+open class SigLinkPreview : Sig() {
+    var description: String? = null
+    var imageUrl: String? = null
+    lateinit var title: String
 }

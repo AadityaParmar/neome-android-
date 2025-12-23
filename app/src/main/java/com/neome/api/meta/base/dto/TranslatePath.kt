@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class TranslatePath {
+open class TranslatePath {
     var neatPath: NeatPath? = null
-    var searchPath: string? = null
+    var searchPath: String? = null
 }

@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdRowRemove : EntVdAutoStepWithError() {
+open class EntVdRowRemove : EntVdAutoStepWithError() {
     var rowIdPointer: StudioDtoRowIdPointer? = null
 }

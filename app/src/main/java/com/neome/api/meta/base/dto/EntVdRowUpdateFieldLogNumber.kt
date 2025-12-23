@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnLogOperationKind
 import com.neome.api.meta.base.Types.MetaIdField
 
-class EntVdRowUpdateFieldLogNumber : EntVdAutoStepWithError() {
+open class EntVdRowUpdateFieldLogNumber : EntVdAutoStepWithError() {
     var inputField: StudioBuildArgBinder? = null
     var operation: EnumDefnLogOperationKind? = null
     var operationMessage: StudioValueText? = null

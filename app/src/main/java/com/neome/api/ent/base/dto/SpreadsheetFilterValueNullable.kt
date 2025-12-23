@@ -5,6 +5,8 @@
 
 package com.neome.api.ent.base.dto
 
-class SpreadsheetFilterValueNullable : SpreadsheetFilterValue() {
-    val isNullable: boolean
+import kotlin.properties.Delegates
+
+open class SpreadsheetFilterValueNullable : SpreadsheetFilterValue() {
+    var isNullable: Boolean by Delegates.notNull<Boolean>()
 }

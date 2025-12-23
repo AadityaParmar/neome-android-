@@ -8,11 +8,11 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumFormContentPosition
 import com.neome.api.meta.base.Types.EnumLogTreeLineCollapse
 
-class DtoLogTreeLine : DtoLogTreeItem() {
-    var bold: boolean? = null
-    var children: DtoLogTreeKeyValue[]? = null
+open class DtoLogTreeLine : DtoLogTreeItem() {
+    var bold: Boolean? = null
+    var children: Array<DtoLogTreeKeyValue>? = null
     var collapse: EnumLogTreeLineCollapse? = null
     var contentPosition: EnumFormContentPosition? = null
-    val line: string
-    var lineColor: string? = null
+    lateinit var line: String
+    var lineColor: String? = null
 }

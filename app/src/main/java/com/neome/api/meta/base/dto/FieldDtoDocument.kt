@@ -7,10 +7,11 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnDocFileExt
 import com.neome.api.meta.base.Types.MediaIdDocument
+import kotlin.properties.Delegates
 
-class FieldDtoDocument {
-    val fileExt: EnumDefnDocFileExt
-    val fileName: string
-    val fileSize: number
-    val mediaIdDocument: MediaIdDocument
+open class FieldDtoDocument {
+    lateinit var fileExt: EnumDefnDocFileExt
+    lateinit var fileName: String
+    var fileSize: Number by Delegates.notNull<Number>()
+    lateinit var mediaIdDocument: MediaIdDocument
 }

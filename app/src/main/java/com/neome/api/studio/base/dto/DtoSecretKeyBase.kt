@@ -7,9 +7,9 @@ package com.neome.api.studio.base.dto
 
 import com.neome.api.meta.base.Types.KeychainSecretId
 
-class DtoSecretKeyBase {
-    var description: string? = null
-    val name: string
-    val secretKey: string
-    val secretKeyId: KeychainSecretId
+open class DtoSecretKeyBase {
+    var description: String? = null
+    lateinit var name: String
+    lateinit var secretKey: String
+    lateinit var secretKeyId: KeychainSecretId
 }

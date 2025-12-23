@@ -5,7 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.DefnField
-
-class DefnStudioMapOfPipelineVariable : DefnField() {
+open class DefnStudioMapOfPipelineVariable : DefnField() {
 }

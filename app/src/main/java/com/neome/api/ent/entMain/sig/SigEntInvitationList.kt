@@ -8,6 +8,6 @@ package com.neome.api.ent.entMain.sig
 import com.neome.api.ent.entDrawer.sig.SigEntAvatarUser
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigEntInvitationList : Sig() {
-    var entList: SigEntAvatarUser[]? = null
+open class SigEntInvitationList : Sig() {
+    var entList: Array<SigEntAvatarUser>? = null
 }

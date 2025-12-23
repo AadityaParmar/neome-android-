@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdEventPluginWebhook : EntVdEvent() {
+open class EntVdEventPluginWebhook : EntVdEvent() {
     var pluginApi: StudioDtoPluginApi? = null
 }

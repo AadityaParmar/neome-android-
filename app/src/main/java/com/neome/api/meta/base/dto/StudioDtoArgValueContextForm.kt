@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnArgBinderContextForm
 
-class StudioDtoArgValueContextForm : StudioDtoArgValueContext() {
-    val attribute: EnumDefnArgBinderContextForm
+open class StudioDtoArgValueContextForm : StudioDtoArgValueContext() {
+    lateinit var attribute: EnumDefnArgBinderContextForm
 }

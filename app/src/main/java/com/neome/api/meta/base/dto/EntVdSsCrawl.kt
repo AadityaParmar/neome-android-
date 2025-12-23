@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdSsCrawl : EntVdAutoStepWithOutput() {
+open class EntVdSsCrawl : EntVdAutoStepWithOutput() {
     var rowIdPointer: StudioDtoRowIdPointer? = null
 }

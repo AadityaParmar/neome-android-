@@ -9,15 +9,15 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldPickUser : StudioFieldEditable() {
+open class StudioFieldPickUser : StudioFieldEditable() {
     var dataSourceVarId: MetaIdVar? = null
     var defaultValue: MetaIdRole? = null
     var defaultValueFieldId: MetaIdField? = null
     var pluginApi: StudioDtoPluginApi? = null
     var pluginErrorFieldId: MetaIdField? = null
     var pluginInputMappingVarId: MetaIdVar? = null
-    var roleIdDataSource: MetaIdRole[]? = null
-    var showAsDropdown: boolean? = null
+    var roleIdDataSource: Array<MetaIdRole>? = null
+    var showAsDropdown: Boolean? = null
     var showAsDropdownFieldId: MetaIdField? = null
     var showAsDropdownVarId: MetaIdVar? = null
 }

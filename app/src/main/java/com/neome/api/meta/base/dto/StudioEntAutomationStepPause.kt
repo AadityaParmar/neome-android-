@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 
-class StudioEntAutomationStepPause : StudioEntAutomationStep() {
+open class StudioEntAutomationStepPause : StudioEntAutomationStep() {
     var messageVarId: StudioValueVarIdParagraph? = null
     var sourcePipelineVarId: MetaIdPipelineParam? = null
 }

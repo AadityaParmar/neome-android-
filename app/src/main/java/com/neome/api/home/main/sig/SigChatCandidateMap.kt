@@ -8,7 +8,8 @@ package com.neome.api.home.main.sig
 import com.neome.api.home.base.dto.DtoNewChatCandidate
 import com.neome.api.nucleus.base.Types.AnyPrefixKey
 import com.neome.api.nucleus.base.sig.Sig
+import java.util.Map
 
-class SigChatCandidateMap : Sig() {
-    val candidateMap: Record<AnyPrefixKey, DtoNewChatCandidate[]>
+open class SigChatCandidateMap : Sig() {
+    lateinit var candidateMap: Map<AnyPrefixKey, Array<DtoNewChatCandidate>>
 }

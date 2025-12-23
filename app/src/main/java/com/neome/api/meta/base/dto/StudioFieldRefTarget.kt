@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioFieldRefTarget : StudioField() {
+open class StudioFieldRefTarget : StudioField() {
     var refTargetSpreadsheetMap: StudioMapOfRefTarget? = null
 }

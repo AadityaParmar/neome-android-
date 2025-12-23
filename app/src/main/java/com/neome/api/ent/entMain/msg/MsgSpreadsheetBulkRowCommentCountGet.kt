@@ -7,7 +7,8 @@ package com.neome.api.ent.entMain.msg
 
 import com.neome.api.core.base.msg.MsgVersion
 import com.neome.api.meta.base.Types.RowId
+import java.util.Map
 
-class MsgSpreadsheetBulkRowCommentCountGet : MsgVersion() {
-    val rowIdCommentVersionMap: Record<RowId, string>
+open class MsgSpreadsheetBulkRowCommentCountGet : MsgVersion() {
+    lateinit var rowIdCommentVersionMap: Map<RowId, String>
 }

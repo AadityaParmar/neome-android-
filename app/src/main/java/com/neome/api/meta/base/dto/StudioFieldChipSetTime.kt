@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.AnyTime
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldChipSetTime : StudioFieldEditable() {
+open class StudioFieldChipSetTime : StudioFieldEditable() {
     var defaultFieldId: MetaIdField? = null
-    var defaultValue: AnyTime[]? = null
+    var defaultValue: Array<AnyTime>? = null
     var defaultVarId: MetaIdVar? = null
 }

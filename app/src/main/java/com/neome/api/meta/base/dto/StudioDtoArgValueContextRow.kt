@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnArgBinderContextRow
 
-class StudioDtoArgValueContextRow : StudioDtoArgValueContext() {
-    val attribute: EnumDefnArgBinderContextRow
-    var fromAlias: string? = null
+open class StudioDtoArgValueContextRow : StudioDtoArgValueContext() {
+    lateinit var attribute: EnumDefnArgBinderContextRow
+    var fromAlias: String? = null
 }

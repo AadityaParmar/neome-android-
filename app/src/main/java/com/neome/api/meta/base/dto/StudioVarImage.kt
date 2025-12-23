@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarImage : StudioVar() {
+open class StudioVarImage : StudioVar() {
     var value: StudioVarValueImage? = null
 }

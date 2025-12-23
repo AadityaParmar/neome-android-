@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnPaymentMethodKind
 import com.neome.api.meta.base.Types.EnumPaymentProviderKind
 
-class EntVdGeneratePaymentLink : EntVdAutoStepWithError() {
-    var allowedPaymentMethodSet: EnumDefnPaymentMethodKind[]? = null
+open class EntVdGeneratePaymentLink : EntVdAutoStepWithError() {
+    var allowedPaymentMethodSet: Array<EnumDefnPaymentMethodKind>? = null
     var amount: StudioBuildArgBinder? = null
     var currency: StudioBuildArgBinder? = null
     var expiryDuration: StudioBuildArgBinder? = null

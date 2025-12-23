@@ -10,14 +10,14 @@ import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.Types.EnumStoreItemArtifact
 import com.neome.api.meta.base.Types.StoreItemId
 
-class StoreItem : StudioBase() {
-    val artifactKind: EnumStoreItemArtifact
+open class StoreItem : StudioBase() {
+    lateinit var artifactKind: EnumStoreItemArtifact
     var createdBy: AdminId? = null
-    var createdOn: string? = null
+    var createdOn: String? = null
     var pluginBundle: StudioPluginBundle? = null
     var seedEntId: EntId? = null
-    val storeItemId: StoreItemId
+    lateinit var storeItemId: StoreItemId
     var studioEnt: StudioEnt? = null
     var updatedBy: AdminId? = null
-    var updatedOn: string? = null
+    var updatedOn: String? = null
 }

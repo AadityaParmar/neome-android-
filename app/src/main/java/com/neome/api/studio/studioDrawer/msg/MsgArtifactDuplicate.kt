@@ -7,8 +7,9 @@ package com.neome.api.studio.studioDrawer.msg
 
 import com.neome.api.core.base.dto.DtoCloneConfig
 import com.neome.api.nucleus.base.msg.Msg
+import kotlin.properties.Delegates
 
-class MsgArtifactDuplicate : Msg() {
+open class MsgArtifactDuplicate : Msg() {
     var cloneConfig: DtoCloneConfig? = null
-    val includeData: boolean
+    var includeData: Boolean by Delegates.notNull<Boolean>()
 }

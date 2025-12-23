@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdExpertReleaseLock : EntVdAutoStep() {
+open class EntVdExpertReleaseLock : EntVdAutoStep() {
     var lockKey: StudioValueText? = null
 }

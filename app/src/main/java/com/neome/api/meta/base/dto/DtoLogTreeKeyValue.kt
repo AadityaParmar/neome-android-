@@ -7,14 +7,14 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.DtoLogTreeKeyValueType
 
-class DtoLogTreeKeyValue : DtoLogTreeItem() {
-    var children: DtoLogTreeKeyValue[]? = null
-    var keyColor: string? = null
-    val keyText: string
-    var keyTooltip: boolean? = null
-    var keyWidth: number? = null
-    var value: string? = null
-    var valueColor: string? = null
-    var valueTooltip: boolean? = null
+open class DtoLogTreeKeyValue : DtoLogTreeItem() {
+    var children: Array<DtoLogTreeKeyValue>? = null
+    var keyColor: String? = null
+    lateinit var keyText: String
+    var keyTooltip: Boolean? = null
+    var keyWidth: Number? = null
+    var value: String? = null
+    var valueColor: String? = null
+    var valueTooltip: Boolean? = null
     var valueType: DtoLogTreeKeyValueType? = null
 }

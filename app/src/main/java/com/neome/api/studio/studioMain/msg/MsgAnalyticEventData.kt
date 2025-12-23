@@ -9,7 +9,7 @@ import com.neome.api.core.base.Types.EnumTimeDuration
 import com.neome.api.nucleus.base.Types.EnumAnalyticEventType
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgAnalyticEventData : Msg() {
-    val duration: EnumTimeDuration
-    val eventType: EnumAnalyticEventType
+open class MsgAnalyticEventData : Msg() {
+    lateinit var duration: EnumTimeDuration
+    lateinit var eventType: EnumAnalyticEventType
 }

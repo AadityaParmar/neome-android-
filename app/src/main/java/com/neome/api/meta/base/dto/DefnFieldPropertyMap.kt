@@ -8,6 +8,6 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnFieldEditable
 import java.util.Map
 
-class DefnFieldPropertyMap : DefnFieldEditable() {
-    var defaultVar: Record<string, string>? = null
+open class DefnFieldPropertyMap : DefnFieldEditable() {
+    var defaultVar: Map<String, String>? = null
 }

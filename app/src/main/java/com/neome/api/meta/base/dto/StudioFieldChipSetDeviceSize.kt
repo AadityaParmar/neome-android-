@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.EnumDefnDeviceSize
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldChipSetDeviceSize : StudioFieldEditable() {
+open class StudioFieldChipSetDeviceSize : StudioFieldEditable() {
     var defaultFieldId: MetaIdField? = null
-    var defaultValue: EnumDefnDeviceSize[]? = null
+    var defaultValue: Array<EnumDefnDeviceSize>? = null
     var defaultVarId: MetaIdVar? = null
 }

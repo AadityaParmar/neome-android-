@@ -7,6 +7,6 @@ package com.neome.api.studio.studioMain.msg
 
 import com.neome.api.core.base.msg.MsgVersion
 
-class MsgEntUserListGet : MsgVersion() {
-    var lastOnlineRequired: boolean? = null
+open class MsgEntUserListGet : MsgVersion() {
+    var lastOnlineRequired: Boolean? = null
 }

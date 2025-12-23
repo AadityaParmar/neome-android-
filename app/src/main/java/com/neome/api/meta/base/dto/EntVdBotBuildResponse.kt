@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdBotBuildResponse : EntVdAutoStepWithOutput() {
+open class EntVdBotBuildResponse : EntVdAutoStepWithOutput() {
     var attachmentField: StudioDtoArgValueParameter? = null
     var contentField: StudioBuildArgBinder? = null
 }

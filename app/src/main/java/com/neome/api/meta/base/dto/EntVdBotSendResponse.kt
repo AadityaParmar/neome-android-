@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdBotSendResponse : EntVdAutoStepWithError() {
+open class EntVdBotSendResponse : EntVdAutoStepWithError() {
 }

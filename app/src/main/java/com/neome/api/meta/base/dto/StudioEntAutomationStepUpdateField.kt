@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
 
-class StudioEntAutomationStepUpdateField : StudioEntAutomationStep() {
+open class StudioEntAutomationStepUpdateField : StudioEntAutomationStep() {
     var assignValueFieldId: MetaIdField? = null
     var value: StudioBuildArgBinderHolder? = null
 }

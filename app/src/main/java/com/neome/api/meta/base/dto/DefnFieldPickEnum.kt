@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnFieldPickEnum : DefnFieldEditable() {
-    var filterOptionSet: string[]? = null
+open class DefnFieldPickEnum : DefnFieldEditable() {
+    var filterOptionSet: Array<String>? = null
 }

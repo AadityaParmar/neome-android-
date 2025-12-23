@@ -8,15 +8,16 @@ package com.neome.api.home.main.sig
 import com.neome.api.meta.base.Types.ChatId
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.sig.Sig
+import kotlin.properties.Delegates
 
-class SigMessageList : Sig() {
-    val bottomOffset: number
-    val chatId: ChatId
-    val chatIdHash: string
-    val entId: EntId
-    val messageList: SigMessage[]
-    val pageBottomOffset: number
-    val pageTopOffset: number
-    val readOffset: number
-    val topOffset: number
+open class SigMessageList : Sig() {
+    var bottomOffset: Number by Delegates.notNull<Number>()
+    lateinit var chatId: ChatId
+    lateinit var chatIdHash: String
+    lateinit var entId: EntId
+    lateinit var messageList: Array<SigMessage>
+    var pageBottomOffset: Number by Delegates.notNull<Number>()
+    var pageTopOffset: Number by Delegates.notNull<Number>()
+    var readOffset: Number by Delegates.notNull<Number>()
+    var topOffset: Number by Delegates.notNull<Number>()
 }

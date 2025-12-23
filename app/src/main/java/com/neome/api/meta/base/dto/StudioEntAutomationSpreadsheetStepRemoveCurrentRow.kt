@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioEntAutomationSpreadsheetStepRemoveCurrentRow : StudioEntAutomationStep() {
+open class StudioEntAutomationSpreadsheetStepRemoveCurrentRow : StudioEntAutomationStep() {
 }

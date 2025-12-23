@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.EnumDefnMonth
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldMonth : StudioFieldEditable() {
+open class StudioFieldMonth : StudioFieldEditable() {
     var defaultFieldId: MetaIdField? = null
     var defaultValue: EnumDefnMonth? = null
     var defaultVarId: MetaIdVar? = null

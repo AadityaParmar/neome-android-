@@ -8,6 +8,6 @@ package com.neome.api.studio.studioMain.msg
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgClusterEntUserCountGet : Msg() {
-    var entIdSet: EntId[]? = null
+open class MsgClusterEntUserCountGet : Msg() {
+    var entIdSet: Array<EntId>? = null
 }

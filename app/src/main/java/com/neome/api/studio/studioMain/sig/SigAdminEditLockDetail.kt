@@ -8,8 +8,8 @@ package com.neome.api.studio.studioMain.sig
 import com.neome.api.meta.base.Types.AdminId
 import com.neome.api.nucleus.base.sig.SigVersion
 
-class SigAdminEditLockDetail : SigVersion() {
+open class SigAdminEditLockDetail : SigVersion() {
     var adminId: AdminId? = null
-    var handle: string? = null
-    var nickName: string? = null
+    var handle: String? = null
+    var nickName: String? = null
 }

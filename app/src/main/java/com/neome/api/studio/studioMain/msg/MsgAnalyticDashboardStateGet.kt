@@ -7,6 +7,6 @@ package com.neome.api.studio.studioMain.msg
 
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgAnalyticDashboardStateGet : Msg() {
-    val token: string
+open class MsgAnalyticDashboardStateGet : Msg() {
+    lateinit var token: String
 }

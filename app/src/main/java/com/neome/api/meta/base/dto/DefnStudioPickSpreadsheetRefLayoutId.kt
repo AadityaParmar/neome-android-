@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.EnumDefnLayoutGridKind
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdSpreadsheetRef
 
-class DefnStudioPickSpreadsheetRefLayoutId : DefnFieldEditable() {
-    var filterLayoutKindSet: EnumDefnLayoutGridKind[]? = null
-    val formId: MetaIdForm
+open class DefnStudioPickSpreadsheetRefLayoutId : DefnFieldEditable() {
+    var filterLayoutKindSet: Array<EnumDefnLayoutGridKind>? = null
+    lateinit var formId: MetaIdForm
     var spreadsheetRefId: MetaIdSpreadsheetRef? = null
 }

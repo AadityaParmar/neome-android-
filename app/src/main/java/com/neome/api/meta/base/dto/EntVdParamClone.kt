@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 
-class EntVdParamClone : EntVdAutoStep() {
+open class EntVdParamClone : EntVdAutoStep() {
     var inputParamId: MetaIdPipelineParam? = null
     var outputParamId: MetaIdPipelineParam? = null
 }

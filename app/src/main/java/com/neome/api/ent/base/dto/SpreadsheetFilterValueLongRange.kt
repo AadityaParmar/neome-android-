@@ -5,7 +5,7 @@
 
 package com.neome.api.ent.base.dto
 
-class SpreadsheetFilterValueLongRange : SpreadsheetFilterValue() {
-    var max: number? = null
-    var min: number? = null
+open class SpreadsheetFilterValueLongRange : SpreadsheetFilterValue() {
+    var max: Number? = null
+    var min: Number? = null
 }

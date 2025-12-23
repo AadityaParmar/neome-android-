@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
 
-class StudioFieldChipSetDateTime : StudioFieldEditable() {
+open class StudioFieldChipSetDateTime : StudioFieldEditable() {
     var defaultFieldId: MetaIdField? = null
-    var defaultValue: string[]? = null
-    var displayDateFormat: string? = null
+    var defaultValue: Array<String>? = null
+    var displayDateFormat: String? = null
 }

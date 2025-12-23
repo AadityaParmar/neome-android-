@@ -7,34 +7,34 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnPlacement
 
-class FieldDtoSectionLayout {
+open class FieldDtoSectionLayout {
     var alignItems: EnumDefnPlacement? = null
-    var autoSize: boolean? = null
+    var autoSize: Boolean? = null
     var backgroundColorVar: DefnDtoColor? = null
-    var borderBottom: boolean? = null
-    var borderBottomLeftRadius: number? = null
-    var borderBottomRightRadius: number? = null
+    var borderBottom: Boolean? = null
+    var borderBottomLeftRadius: Number? = null
+    var borderBottomRightRadius: Number? = null
     var borderColor: DefnDtoColor? = null
-    var borderLeft: boolean? = null
-    var borderRight: boolean? = null
-    var borderTop: boolean? = null
-    var borderTopLeftRadius: number? = null
-    var borderTopRightRadius: number? = null
-    var flex: string? = null
-    var flexGrow: string? = null
-    var height: string? = null
+    var borderLeft: Boolean? = null
+    var borderRight: Boolean? = null
+    var borderTop: Boolean? = null
+    var borderTopLeftRadius: Number? = null
+    var borderTopRightRadius: Number? = null
+    var flex: String? = null
+    var flexGrow: String? = null
+    var height: String? = null
     var justifyContent: EnumDefnPlacement? = null
-    var maxHeight: string? = null
-    var maxWidth: string? = null
-    var minHeight: string? = null
-    var minWidth: string? = null
-    var overflow: string? = null
-    var overflowX: string? = null
-    var overflowY: string? = null
-    var pb: number? = null
-    var pl: number? = null
-    var pr: number? = null
-    var pt: number? = null
+    var maxHeight: String? = null
+    var maxWidth: String? = null
+    var minHeight: String? = null
+    var minWidth: String? = null
+    var overflow: String? = null
+    var overflowX: String? = null
+    var overflowY: String? = null
+    var pb: Number? = null
+    var pl: Number? = null
+    var pr: Number? = null
+    var pt: Number? = null
     var textColorVar: DefnDtoColor? = null
-    var width: string? = null
+    var width: String? = null
 }

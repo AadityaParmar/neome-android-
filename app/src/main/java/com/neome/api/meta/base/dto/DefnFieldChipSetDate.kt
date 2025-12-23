@@ -8,10 +8,10 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.TimeZoneKey
 
-class DefnFieldChipSetDate : DefnFieldEditable() {
+open class DefnFieldChipSetDate : DefnFieldEditable() {
     var defaultFieldId: MetaIdField? = null
-    var defaultValue: string[]? = null
-    var defaultVar: string[]? = null
-    var displayDateFormat: string? = null
+    var defaultValue: Array<String>? = null
+    var defaultVar: Array<String>? = null
+    var displayDateFormat: String? = null
     var timeZone: TimeZoneKey? = null
 }

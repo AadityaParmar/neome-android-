@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class FieldValueDateRange {
-    var from: string? = null
-    var to: string? = null
+open class FieldValueDateRange {
+    var from: String? = null
+    var to: String? = null
 }

@@ -5,8 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-class FieldValueVoice : FieldValueAudio() {
+open class FieldValueVoice : FieldValueAudio() {
     var captureLocation: FieldValueLocation? = null
-    var captureTime: string? = null
+    var captureTime: String? = null
     var captureUser: FieldValueEntUserId? = null
 }

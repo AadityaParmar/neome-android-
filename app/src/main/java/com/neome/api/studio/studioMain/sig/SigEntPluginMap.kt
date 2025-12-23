@@ -10,9 +10,10 @@ import com.neome.api.meta.base.dto.EnvValidationError
 import com.neome.api.meta.base.dto.StudioEntDeployPluginMap
 import com.neome.api.meta.base.dto.StudioEntPluginMap
 import com.neome.api.nucleus.base.sig.SigVersion
+import java.util.Map
 
-class SigEntPluginMap : SigVersion() {
-    val deployPluginMap: StudioEntDeployPluginMap
-    val errorMap: Record<MetaIdPlugin, EnvValidationError>
-    val pluginMap: StudioEntPluginMap
+open class SigEntPluginMap : SigVersion() {
+    lateinit var deployPluginMap: StudioEntDeployPluginMap
+    lateinit var errorMap: Map<MetaIdPlugin, EnvValidationError>
+    lateinit var pluginMap: StudioEntPluginMap
 }

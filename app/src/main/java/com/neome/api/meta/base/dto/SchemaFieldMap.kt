@@ -5,8 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
+import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdField
+import com.neome.api.meta.base.dto.SchemaColumnMap
 
-class SchemaFieldMap {
-    val map: Record<MetaIdField, SchemaColumnMap>
+open class SchemaFieldMap {
+    lateinit var map: Map<MetaIdField, SchemaColumnMap>
 }

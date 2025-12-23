@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdFieldSet : EntVdAutoStep() {
+open class EntVdFieldSet : EntVdAutoStep() {
     var outputField: StudioDtoArgValueParameter? = null
     var value: StudioBuildArgBinder? = null
 }

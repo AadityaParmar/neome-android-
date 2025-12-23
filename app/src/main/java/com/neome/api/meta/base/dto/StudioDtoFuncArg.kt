@@ -8,9 +8,9 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnFuncArg
 import com.neome.api.meta.base.Types.MetaIdFuncArg
 
-class StudioDtoFuncArg : StudioBase() {
+open class StudioDtoFuncArg : StudioBase() {
     var funcArgKind: EnumDefnFuncArg? = null
-    val metaId: MetaIdFuncArg
-    val name: string
-    var required: boolean? = null
+    lateinit var metaId: MetaIdFuncArg
+    lateinit var name: String
+    var required: Boolean? = null
 }

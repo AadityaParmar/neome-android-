@@ -5,6 +5,6 @@
 
 package com.neome.api.home.base.dto
 
-class DtoMessagePayloadGroupCreate : DtoMessagePayload() {
-    val initiatorMember: DtoGroupMemberKey
+open class DtoMessagePayloadGroupCreate : DtoMessagePayload() {
+    lateinit var initiatorMember: DtoGroupMemberKey
 }

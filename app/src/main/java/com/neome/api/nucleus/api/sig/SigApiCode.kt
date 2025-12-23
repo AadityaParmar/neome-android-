@@ -7,5 +7,5 @@ package com.neome.api.nucleus.api.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigApiCode : Sig() {
+open class SigApiCode : Sig() {
 }

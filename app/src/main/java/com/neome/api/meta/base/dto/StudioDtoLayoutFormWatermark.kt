@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnContentAlignment
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioDtoLayoutFormWatermark : StudioBase() {
+open class StudioDtoLayoutFormWatermark : StudioBase() {
     var bgImage: FieldDtoImage? = null
     var bgImageHorizontalPosition: EnumDefnContentAlignment? = null
     var bgImageVarId: MetaIdVar? = null

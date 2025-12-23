@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdComposite
 import com.neome.api.meta.base.Types.MetaIdForm
 
-class DefnStudioMapOfDynamicRule : DefnField() {
-    var compositeIdSet: MetaIdComposite[]? = null
-    val formId: MetaIdForm
+open class DefnStudioMapOfDynamicRule : DefnField() {
+    var compositeIdSet: Array<MetaIdComposite>? = null
+    lateinit var formId: MetaIdForm
 }

@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdPlugin
 
-class FormRefKey {
+open class FormRefKey {
     lateinit var formId: MetaIdForm
     var pluginId: MetaIdPlugin? = null
 }

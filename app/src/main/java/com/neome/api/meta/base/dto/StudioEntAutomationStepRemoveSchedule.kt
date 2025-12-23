@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 
-class StudioEntAutomationStepRemoveSchedule : StudioEntAutomationStep() {
+open class StudioEntAutomationStepRemoveSchedule : StudioEntAutomationStep() {
     var inputFormPipelineVarId: MetaIdPipelineParam? = null
     var schedulerFieldId: MetaIdField? = null
 }

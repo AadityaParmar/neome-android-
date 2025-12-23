@@ -5,10 +5,10 @@
 
 package com.neome.api.home.session.sig
 
-import com.neome.api.core.session.sig.SigTopic
 import com.neome.api.meta.base.Types.EntUserId
+import com.neome.api.core.session.sig.SigTopic
 
-class SigTopicGroupTyping : SigTopic() {
-    val targetEntUserId: EntUserId
-    val targetUserText: string
+open class SigTopicGroupTyping : SigTopic() {
+    lateinit var targetEntUserId: EntUserId
+    lateinit var targetUserText: String
 }

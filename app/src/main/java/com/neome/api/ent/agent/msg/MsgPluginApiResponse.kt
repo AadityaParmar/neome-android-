@@ -10,8 +10,8 @@ import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.nucleus.base.dto.EnvError
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgPluginApiResponse : Msg() {
+open class MsgPluginApiResponse : Msg() {
     var pluginError: EnvError? = null
-    val requestId: RequestId
+    lateinit var requestId: RequestId
     var responseFormValue: FormValueRaw? = null
 }

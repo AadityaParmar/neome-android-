@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnThemeButtonVariant
 
-class StudioVarButtonVariant : StudioVar() {
+open class StudioVarButtonVariant : StudioVar() {
     var value: EnumDefnThemeButtonVariant? = null
 }

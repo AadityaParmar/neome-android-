@@ -17,31 +17,32 @@ import com.neome.api.meta.base.Types.PluginBundleId
 import com.neome.api.meta.base.Types.StoreItemId
 import com.neome.api.meta.base.Types.UserId
 import com.neome.api.nucleus.base.sig.SigVersion
+import java.util.Map
 
-class SigCaller : SigVersion() {
-    var about: string? = null
-    var allowCluster: boolean? = null
-    var allowStorePublish: boolean? = null
-    var allowStudio: boolean? = null
-    var chatNotificationSettingMap: Record<EntId, DtoEntChatNotificationSetting>? = null
-    val creationTime: string
-    val entAdminIdMap: Record<EntId, AdminId>
-    val entUserIdMap: Record<EntId, EntUserId>
-    var enterIsSendDesktop: boolean? = null
-    var enterIsSendMobile: boolean? = null
-    var firstName: string? = null
-    var fromCache: boolean? = null
+open class SigCaller : SigVersion() {
+    var about: String? = null
+    var allowCluster: Boolean? = null
+    var allowStorePublish: Boolean? = null
+    var allowStudio: Boolean? = null
+    var chatNotificationSettingMap: Map<EntId, DtoEntChatNotificationSetting>? = null
+    lateinit var creationTime: String
+    lateinit var entAdminIdMap: Map<EntId, AdminId>
+    lateinit var entUserIdMap: Map<EntId, EntUserId>
+    var enterIsSendDesktop: Boolean? = null
+    var enterIsSendMobile: Boolean? = null
+    var firstName: String? = null
+    var fromCache: Boolean? = null
     var globalNotificationSetting: DtoNotificationSetting? = null
-    val groupIdSet: GroupId[]
-    var handle: string? = null
+    lateinit var groupIdSet: Array<GroupId>
+    var handle: String? = null
     var languageKey: LanguageKey? = null
-    var lastName: string? = null
-    val lastUpdate: string
+    var lastName: String? = null
+    lateinit var lastUpdate: String
     var mediaIdAvatar: MediaIdAvatar? = null
-    val pluginAdminIdMap: Record<PluginBundleId, AdminId>
-    var resetPassword: boolean? = null
-    val storeItemAdminIdMap: Record<StoreItemId, AdminId>
-    var updateProfile: boolean? = null
-    val userId: UserId
-    val userIdHash: string
+    lateinit var pluginAdminIdMap: Map<PluginBundleId, AdminId>
+    var resetPassword: Boolean? = null
+    lateinit var storeItemAdminIdMap: Map<StoreItemId, AdminId>
+    var updateProfile: Boolean? = null
+    lateinit var userId: UserId
+    lateinit var userIdHash: String
 }

@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarSetOfDate : StudioVar() {
+open class StudioVarSetOfDate : StudioVar() {
     var value: StudioSetOfDate? = null
 }

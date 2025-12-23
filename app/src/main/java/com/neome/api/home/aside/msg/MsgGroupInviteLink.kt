@@ -8,7 +8,7 @@ package com.neome.api.home.aside.msg
 import com.neome.api.meta.base.Types.GroupId
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgGroupInviteLink : Msg() {
-    val groupId: GroupId
-    var reset: boolean? = null
+open class MsgGroupInviteLink : Msg() {
+    lateinit var groupId: GroupId
+    var reset: Boolean? = null
 }

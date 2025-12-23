@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdForm
+import java.util.Map
 
-class StudioFormMap : StudioBase() {
-    val keys: MetaIdForm[]
-    val map: Record<MetaIdForm, StudioForm>
+open class StudioFormMap : StudioBase() {
+    lateinit var keys: Array<MetaIdForm>
+    lateinit var map: Map<MetaIdForm, StudioForm>
 }

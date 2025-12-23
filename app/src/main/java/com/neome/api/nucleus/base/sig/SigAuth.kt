@@ -5,6 +5,8 @@
 
 package com.neome.api.nucleus.base.sig
 
-class SigAuth : Sig() {
-    val unauthorizedBearerToken: boolean
+import kotlin.properties.Delegates
+
+open class SigAuth : Sig() {
+    var unauthorizedBearerToken: Boolean by Delegates.notNull<Boolean>()
 }

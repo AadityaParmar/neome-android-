@@ -9,12 +9,12 @@ import com.neome.api.meta.base.Types.EnumDefnSortOrder
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class EntVdAiSpreadsheetToField : EntVdAi() {
+open class EntVdAiSpreadsheetToField : EntVdAi() {
     var ascendingOrder: EnumDefnSortOrder? = null
     var filterCondition: StudioMapOfCondition? = null
-    var numberOfRows: number? = null
-    var orderByFieldIds: MetaIdField[]? = null
+    var numberOfRows: Number? = null
+    var orderByFieldIds: Array<MetaIdField>? = null
     var outputField: StudioDtoArgValueParameter? = null
-    var selectFieldIds: MetaIdField[]? = null
+    var selectFieldIds: Array<MetaIdField>? = null
     var spreadsheetId: MetaIdSpreadsheet? = null
 }

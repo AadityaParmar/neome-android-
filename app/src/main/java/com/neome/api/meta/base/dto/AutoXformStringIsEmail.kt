@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class AutoXformStringIsEmail : AutoXform() {
+open class AutoXformStringIsEmail : AutoXform() {
     var outputField: StudioDtoArgValueParameter? = null
     var sourceField: StudioBuildArgBinder? = null
 }

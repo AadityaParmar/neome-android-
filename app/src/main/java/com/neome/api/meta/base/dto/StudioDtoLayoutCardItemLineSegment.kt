@@ -9,14 +9,14 @@ import com.neome.api.meta.base.Types.EnumDefnTextSize
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioDtoLayoutCardItemLineSegment : StudioBase() {
+open class StudioDtoLayoutCardItemLineSegment : StudioBase() {
     var color: StudioDtoColor? = null
     var colorFieldId: MetaIdField? = null
     var colorVarId: MetaIdVar? = null
-    var line: string? = null
-    var lineFieldIdSet: MetaIdField[]? = null
+    var line: String? = null
+    var lineFieldIdSet: Array<MetaIdField>? = null
     var lineVarId: StudioValueVarIdText? = null
-    var showLabels: boolean? = null
+    var showLabels: Boolean? = null
     var textSize: EnumDefnTextSize? = null
     var textSizeFieldId: MetaIdField? = null
     var textSizeVarId: MetaIdVar? = null

@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdEventUserJoin : EntVdEvent() {
+open class EntVdEventUserJoin : EntVdEvent() {
 }

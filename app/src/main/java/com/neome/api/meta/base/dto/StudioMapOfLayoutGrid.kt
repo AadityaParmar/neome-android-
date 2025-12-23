@@ -7,11 +7,12 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnShowBorderKind
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
+import java.util.Map
 
-class StudioMapOfLayoutGrid : StudioBase() {
+open class StudioMapOfLayoutGrid : StudioBase() {
     var asideDefaultLayoutId: MetaIdLayoutGrid? = null
-    val keys: MetaIdLayoutGrid[]
-    val map: Record<MetaIdLayoutGrid, StudioDtoLayoutGrid>
+    lateinit var keys: Array<MetaIdLayoutGrid>
+    lateinit var map: Map<MetaIdLayoutGrid, StudioDtoLayoutGrid>
     var placeholder: StudioDtoPlaceHolder? = null
-    var showBorderSet: EnumDefnShowBorderKind[]? = null
+    var showBorderSet: Array<EnumDefnShowBorderKind>? = null
 }

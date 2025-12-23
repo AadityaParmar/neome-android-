@@ -9,7 +9,7 @@ import com.neome.api.core.base.dto.DtoNotificationSetting
 import com.neome.api.meta.base.Types.ChatId
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgCallerChatNotificationSettingPut : Msg() {
-    val chatId: ChatId
+open class MsgCallerChatNotificationSettingPut : Msg() {
+    lateinit var chatId: ChatId
     var notificationSetting: DtoNotificationSetting? = null
 }

@@ -5,9 +5,9 @@
 
 package com.neome.api.studio.base.dto
 
-class DtoEntUserImport {
-    val handle: string
-    var manager: string? = null
-    val nickName: string
-    var roles: string[]? = null
+open class DtoEntUserImport {
+    lateinit var handle: String
+    var manager: String? = null
+    lateinit var nickName: String
+    var roles: Array<String>? = null
 }

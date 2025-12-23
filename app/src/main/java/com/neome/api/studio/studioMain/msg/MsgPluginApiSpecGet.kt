@@ -8,6 +8,6 @@ package com.neome.api.studio.studioMain.msg
 import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgPluginApiSpecGet : Msg() {
-    val metaIdPlugin: MetaIdPlugin
+open class MsgPluginApiSpecGet : Msg() {
+    lateinit var metaIdPlugin: MetaIdPlugin
 }

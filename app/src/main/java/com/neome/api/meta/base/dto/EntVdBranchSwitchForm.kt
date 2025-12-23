@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdBranchSwitchForm : EntVdAi() {
+open class EntVdBranchSwitchForm : EntVdAi() {
     var field: StudioDtoArgValueParameter? = null
     var formMap: EntVdFormMap? = null
 }

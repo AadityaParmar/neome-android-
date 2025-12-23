@@ -10,16 +10,16 @@ import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.MediaId
 import com.neome.api.nucleus.base.sig.SigVersion
 
-class SigUserAvatar : SigVersion() {
-    var about: string? = null
+open class SigUserAvatar : SigVersion() {
+    var about: String? = null
     var avatarId: MediaId? = null
-    val entId: EntId
-    val entUserId: EntUserId
-    val firstName: string
-    var handle: string? = null
-    var isBlocked: boolean? = null
-    var isDeleted: boolean? = null
-    val lastName: string
-    var nickName: string? = null
-    val userColor: string
+    lateinit var entId: EntId
+    lateinit var entUserId: EntUserId
+    lateinit var firstName: String
+    var handle: String? = null
+    var isBlocked: Boolean? = null
+    var isDeleted: Boolean? = null
+    lateinit var lastName: String
+    var nickName: String? = null
+    lateinit var userColor: String
 }

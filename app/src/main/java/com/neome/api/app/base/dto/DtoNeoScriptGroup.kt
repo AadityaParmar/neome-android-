@@ -7,6 +7,6 @@ package com.neome.api.app.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdGroup
 
-class DtoNeoScriptGroup : DtoNeoScript() {
+open class DtoNeoScriptGroup : DtoNeoScript() {
     var groupId: MetaIdGroup? = null
 }

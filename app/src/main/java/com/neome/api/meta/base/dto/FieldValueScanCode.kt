@@ -7,10 +7,10 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnScanCodeType
 
-class FieldValueScanCode {
+open class FieldValueScanCode {
     var captureLocation: FieldValueLocation? = null
-    var captureTime: string? = null
+    var captureTime: String? = null
     var captureUser: FieldValueEntUserId? = null
-    val scanCode: string
-    val scanCodeType: EnumDefnScanCodeType
+    lateinit var scanCode: String
+    lateinit var scanCodeType: EnumDefnScanCodeType
 }

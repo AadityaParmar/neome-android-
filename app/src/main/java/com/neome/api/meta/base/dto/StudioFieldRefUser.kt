@@ -8,14 +8,15 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
+import java.util.Map
 
-class StudioFieldRefUser : StudioFieldEditable() {
-    var copyFieldVarMap: Record<MetaIdField, MetaIdVar>? = null
+open class StudioFieldRefUser : StudioFieldEditable() {
+    var copyFieldVarMap: Map<MetaIdField, MetaIdVar>? = null
     var dataSourceVarId: MetaIdVar? = null
     var defaultValue: MetaIdRole? = null
     var defaultValueFieldId: MetaIdField? = null
     var pluginApi: StudioDtoPluginApi? = null
     var pluginErrorFieldId: MetaIdField? = null
     var pluginInputMappingVarId: MetaIdVar? = null
-    var roleIdDataSource: MetaIdRole[]? = null
+    var roleIdDataSource: Array<MetaIdRole>? = null
 }

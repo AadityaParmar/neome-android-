@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
 
-class DefnField : DefnComp() {
-    val metaId: MetaIdField
+open class DefnField : DefnComp() {
+    lateinit var metaId: MetaIdField
 }

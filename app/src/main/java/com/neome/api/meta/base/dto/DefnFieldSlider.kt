@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnFieldSlider : DefnFieldCounter() {
-    var allowRangePicker: boolean? = null
-    var showAsInputBox: boolean? = null
+open class DefnFieldSlider : DefnFieldCounter() {
+    var allowRangePicker: Boolean? = null
+    var showAsInputBox: Boolean? = null
 }

@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdSendMessageToUsers : EntVdAutoStep() {
+open class EntVdSendMessageToUsers : EntVdAutoStep() {
     var message: StudioValueParagraph? = null
     var sender: StudioBuildArgBinder? = null
     var toUsers: StudioDtoUserFilter? = null

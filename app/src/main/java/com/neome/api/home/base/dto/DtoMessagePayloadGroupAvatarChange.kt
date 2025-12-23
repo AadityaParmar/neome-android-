@@ -5,6 +5,6 @@
 
 package com.neome.api.home.base.dto
 
-class DtoMessagePayloadGroupAvatarChange : DtoMessagePayload() {
-    val initiatorMember: DtoGroupMemberKey
+open class DtoMessagePayloadGroupAvatarChange : DtoMessagePayload() {
+    lateinit var initiatorMember: DtoGroupMemberKey
 }

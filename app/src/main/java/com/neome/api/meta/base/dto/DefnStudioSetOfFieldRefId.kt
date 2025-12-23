@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class DefnStudioSetOfFieldRefId : DefnField() {
-    var showCompositeName: boolean? = null
-    val spreadsheetId: MetaIdSpreadsheet
+open class DefnStudioSetOfFieldRefId : DefnField() {
+    var showCompositeName: Boolean? = null
+    lateinit var spreadsheetId: MetaIdSpreadsheet
 }

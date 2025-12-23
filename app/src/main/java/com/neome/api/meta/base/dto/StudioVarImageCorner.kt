@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnThemeImageCorner
 
-class StudioVarImageCorner : StudioVar() {
+open class StudioVarImageCorner : StudioVar() {
     var value: EnumDefnThemeImageCorner? = null
 }

@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdEventUserLocation : EntVdEvent() {
+open class EntVdEventUserLocation : EntVdEvent() {
     var locationCapture: StudioDtoLocationCapture? = null
 }

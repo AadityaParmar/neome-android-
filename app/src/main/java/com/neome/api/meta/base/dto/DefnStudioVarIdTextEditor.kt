@@ -11,15 +11,15 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdPlugin
 
-class DefnStudioVarIdTextEditor : DefnField() {
-    var argBinderFilterVarKindSet: EnumStudioVarKind[]? = null
+open class DefnStudioVarIdTextEditor : DefnField() {
+    var argBinderFilterVarKindSet: Array<EnumStudioVarKind>? = null
     var argBinderFormId: MetaIdForm? = null
-    var excludeFieldIdSet: MetaIdField[]? = null
-    var filterContextOptionSet: string[]? = null
-    var filterKindSet: EnumDefnArgBinder[]? = null
-    var filterVarKindSet: EnumStudioVarKind[]? = null
+    var excludeFieldIdSet: Array<MetaIdField>? = null
+    var filterContextOptionSet: Array<String>? = null
+    var filterKindSet: Array<EnumDefnArgBinder>? = null
+    var filterVarKindSet: Array<EnumStudioVarKind>? = null
     var inputFormId: MetaIdForm? = null
     var pluginConfigFormId: MetaIdForm? = null
     var pluginId: MetaIdPlugin? = null
-    var showAsEdit: boolean? = null
+    var showAsEdit: Boolean? = null
 }

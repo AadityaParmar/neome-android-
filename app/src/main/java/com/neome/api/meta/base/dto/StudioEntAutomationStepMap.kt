@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdStep
+import java.util.Map
 
-class StudioEntAutomationStepMap : StudioBase() {
-    val keys: MetaIdStep[]
-    val map: Record<MetaIdStep, StudioEntAutomationStep>
+open class StudioEntAutomationStepMap : StudioBase() {
+    lateinit var keys: Array<MetaIdStep>
+    lateinit var map: Map<MetaIdStep, StudioEntAutomationStep>
 }

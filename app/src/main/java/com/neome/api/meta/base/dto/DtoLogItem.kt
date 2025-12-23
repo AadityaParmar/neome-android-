@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumLogItemType
 
-class DtoLogItem {
-    val id: string
-    val type: EnumLogItemType
+open class DtoLogItem {
+    lateinit var id: String
+    lateinit var type: EnumLogItemType
 }

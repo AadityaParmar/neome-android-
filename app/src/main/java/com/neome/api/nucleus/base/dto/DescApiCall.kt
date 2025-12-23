@@ -5,8 +5,10 @@
 
 package com.neome.api.nucleus.base.dto
 
-class DescApiCall {
-    var call: Record<string, SpecApi>? = null
-    var importMap: Record<string, string>? = null
-    val pathSeg: string
+import java.util.Map
+
+open class DescApiCall {
+    var call: Map<String, SpecApi>? = null
+    var importMap: Map<String, String>? = null
+    lateinit var pathSeg: String
 }

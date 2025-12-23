@@ -7,9 +7,10 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.AdminId
 import com.neome.api.meta.base.Types.MetaIdPlugin
+import java.util.Map
 
-class StudioEntDeployPluginMap : StudioBase() {
-    val keys: MetaIdPlugin[]
-    val map: Record<MetaIdPlugin, StudioEntDeployPlugin>
+open class StudioEntDeployPluginMap : StudioBase() {
+    lateinit var keys: Array<MetaIdPlugin>
+    lateinit var map: Map<MetaIdPlugin, StudioEntDeployPlugin>
     var singletonPluginsAdminId: AdminId? = null
 }

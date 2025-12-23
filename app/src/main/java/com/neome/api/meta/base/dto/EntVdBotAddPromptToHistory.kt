@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdBotAddPromptToHistory : EntVdAutoStep() {
+open class EntVdBotAddPromptToHistory : EntVdAutoStep() {
     var documentAttachment: StudioDtoArgValueParameter? = null
     var imageAttachment: StudioDtoArgValueParameter? = null
     var label: StudioBuildArgBinder? = null

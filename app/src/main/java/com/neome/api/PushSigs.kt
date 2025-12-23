@@ -77,7 +77,6 @@ class PushSigs {
             if (sigName == "SigTopicPluginApiRequest") {
                 cbAgentSigTopicPluginApiRequest?.let()
                 {
-
                     return SignalPushAcceptor(SigTopicPluginApiRequest::class.java, it)
                 }
             }

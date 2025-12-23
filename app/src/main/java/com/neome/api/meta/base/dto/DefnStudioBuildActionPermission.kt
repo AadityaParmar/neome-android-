@@ -7,11 +7,11 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdAction
 
-class DefnStudioBuildActionPermission : DefnField() {
-    var allowGrouping: boolean? = null
-    var allowShowMessageTooltip: boolean? = null
-    var allowSystemRoles: boolean? = null
-    var includeActionIdSet: MetaIdAction[]? = null
+open class DefnStudioBuildActionPermission : DefnField() {
+    var allowGrouping: Boolean? = null
+    var allowShowMessageTooltip: Boolean? = null
+    var allowSystemRoles: Boolean? = null
+    var includeActionIdSet: Array<MetaIdAction>? = null
     var includeOptionMap: DefnStudioMapOfDtoOption? = null
-    var isGroupAction: boolean? = null
+    var isGroupAction: Boolean? = null
 }

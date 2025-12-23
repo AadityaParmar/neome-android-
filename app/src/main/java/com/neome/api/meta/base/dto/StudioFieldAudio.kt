@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.EnumDefnAudioFormat
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldAudio : StudioFieldEditable() {
+open class StudioFieldAudio : StudioFieldEditable() {
     var audioFormatType: EnumDefnAudioFormat? = null
-    var maxSize: number? = null
+    var maxSize: Number? = null
     var maxSizeFieldId: MetaIdField? = null
     var maxSizeVarId: MetaIdVar? = null
 }

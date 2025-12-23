@@ -7,7 +7,8 @@ package com.neome.api.home.drawer.msg
 
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.nucleus.base.msg.Msg
+import java.util.Map
 
-class MsgUserAvatarBulkGet : Msg() {
-    val userIdVersionMap: Record<EntUserId, string>
+open class MsgUserAvatarBulkGet : Msg() {
+    lateinit var userIdVersionMap: Map<EntUserId, String>
 }

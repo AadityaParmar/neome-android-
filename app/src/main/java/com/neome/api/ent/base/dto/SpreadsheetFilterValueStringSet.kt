@@ -5,6 +5,6 @@
 
 package com.neome.api.ent.base.dto
 
-class SpreadsheetFilterValueStringSet : SpreadsheetFilterValue() {
-    val valueSet: string[]
+open class SpreadsheetFilterValueStringSet : SpreadsheetFilterValue() {
+    lateinit var valueSet: Array<String>
 }

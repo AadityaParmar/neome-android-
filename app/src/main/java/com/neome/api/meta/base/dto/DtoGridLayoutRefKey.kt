@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 
-class DtoGridLayoutRefKey {
-    val gridId: MetaIdGrid
-    val layoutGridId: MetaIdLayoutGrid
+open class DtoGridLayoutRefKey {
+    lateinit var gridId: MetaIdGrid
+    lateinit var layoutGridId: MetaIdLayoutGrid
 }

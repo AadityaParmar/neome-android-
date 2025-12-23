@@ -9,7 +9,7 @@ import com.neome.api.meta.base.dto.StudioPluginBundle
 import com.neome.api.meta.base.dto.ValidationResult
 import com.neome.api.nucleus.base.sig.SigVersion
 
-class SigStudioPluginBundle : SigVersion() {
-    val studioPluginBundle: StudioPluginBundle
+open class SigStudioPluginBundle : SigVersion() {
+    lateinit var studioPluginBundle: StudioPluginBundle
     var validationResult: ValidationResult? = null
 }

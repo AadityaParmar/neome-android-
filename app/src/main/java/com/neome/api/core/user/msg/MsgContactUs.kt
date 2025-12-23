@@ -6,13 +6,14 @@
 package com.neome.api.core.user.msg
 
 import com.neome.api.nucleus.base.msg.Msg
+import java.util.Map
 
-class MsgContactUs : Msg() {
-    var attrMap: Record<string, string>? = null
-    var companyName: string? = null
-    var content: string? = null
-    var email: string? = null
-    var fullName: string? = null
-    var mobileNumber: string? = null
-    var pageName: string? = null
+open class MsgContactUs : Msg() {
+    var attrMap: Map<String, String>? = null
+    var companyName: String? = null
+    var content: String? = null
+    var email: String? = null
+    var fullName: String? = null
+    var mobileNumber: String? = null
+    var pageName: String? = null
 }

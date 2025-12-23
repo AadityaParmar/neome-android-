@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioDtoCompiledCode : StudioBase() {
+open class StudioDtoCompiledCode : StudioBase() {
     var argBinderMap: StudioMapOfArgBinder? = null
-    var value: string? = null
+    var value: String? = null
 }

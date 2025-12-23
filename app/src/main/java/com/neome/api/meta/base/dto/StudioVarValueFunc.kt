@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnFuncArg
 
-class StudioVarValueFunc {
+open class StudioVarValueFunc {
     var inputFuncArgMap: StudioMapOfFuncArg? = null
     var javascript: StudioValueCodeJavascript? = null
     var outputKind: EnumDefnFuncArg? = null

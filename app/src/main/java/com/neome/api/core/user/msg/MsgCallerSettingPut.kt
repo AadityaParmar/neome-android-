@@ -7,8 +7,6 @@ package com.neome.api.core.user.msg
 
 import com.neome.api.core.base.msg.MsgVersion
 
-class MsgCallerSettingPut : MsgVersion() {
-    val userSetting:
-
-    object
+open class MsgCallerSettingPut : MsgVersion() {
+    lateinit var userSetting: Object
 }

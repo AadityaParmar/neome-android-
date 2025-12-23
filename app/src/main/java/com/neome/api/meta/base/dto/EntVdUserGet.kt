@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdUserGet : EntVdAutoStepWithOutputAndError() {
+open class EntVdUserGet : EntVdAutoStepWithOutputAndError() {
     var user: StudioBuildArgBinder? = null
 }

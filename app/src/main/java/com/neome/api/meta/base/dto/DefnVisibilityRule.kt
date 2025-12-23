@@ -7,9 +7,9 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdVisibilityRule
 
-class DefnVisibilityRule {
-    val actionMapIfFalse: DefnVisibilityActionMap
-    val actionMapIfTrue: DefnVisibilityActionMap
-    val conditionNode: DefnVisibilityConditionMap
-    val metaId: MetaIdVisibilityRule
+open class DefnVisibilityRule {
+    lateinit var actionMapIfFalse: DefnVisibilityActionMap
+    lateinit var actionMapIfTrue: DefnVisibilityActionMap
+    lateinit var conditionNode: DefnVisibilityConditionMap
+    lateinit var metaId: MetaIdVisibilityRule
 }

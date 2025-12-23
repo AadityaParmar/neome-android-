@@ -9,10 +9,10 @@ import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.Types.GroupId
 import com.neome.api.meta.base.Types.MediaIdAvatar
 
-class DtoMessageReplyPayloadGroup : DtoMessageReplyPayload() {
-    var about: string? = null
+open class DtoMessageReplyPayloadGroup : DtoMessageReplyPayload() {
+    var about: String? = null
     var entId: EntId? = null
     var groupId: GroupId? = null
     var mediaIdAvatar: MediaIdAvatar? = null
-    var name: string? = null
+    var name: String? = null
 }

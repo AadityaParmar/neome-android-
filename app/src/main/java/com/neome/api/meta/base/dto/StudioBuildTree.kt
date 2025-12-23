@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioBuildTree : StudioBase() {
-    val dtoTree: FieldDtoTree
+open class StudioBuildTree : StudioBase() {
+    lateinit var dtoTree: FieldDtoTree
 }

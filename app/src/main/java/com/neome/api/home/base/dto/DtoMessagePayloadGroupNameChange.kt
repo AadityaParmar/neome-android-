@@ -5,7 +5,7 @@
 
 package com.neome.api.home.base.dto
 
-class DtoMessagePayloadGroupNameChange : DtoMessagePayload() {
-    val initiatorMember: DtoGroupMemberKey
-    val newSubject: string
+open class DtoMessagePayloadGroupNameChange : DtoMessagePayload() {
+    lateinit var initiatorMember: DtoGroupMemberKey
+    lateinit var newSubject: String
 }

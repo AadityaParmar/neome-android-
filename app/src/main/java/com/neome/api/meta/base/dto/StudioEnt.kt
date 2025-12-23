@@ -9,37 +9,37 @@ import com.neome.api.meta.base.Types.AdminId
 import com.neome.api.meta.base.Types.DemoAppId
 import com.neome.api.meta.base.Types.EntId
 
-class StudioEnt : StudioDeployUnit() {
-    val actionMap: StudioEntActionMap
-    val autoDiaMap: EntVdAutoDiaMap
-    val automationMap: StudioEntAutomationMap
+open class StudioEnt : StudioDeployUnit() {
+    lateinit var actionMap: StudioEntActionMap
+    lateinit var autoDiaMap: EntVdAutoDiaMap
+    lateinit var automationMap: StudioEntAutomationMap
     var createdBy: AdminId? = null
-    var creationTime: string? = null
-    val deeplinkMap: StudioEntDeeplinkMap
-    val demoAppId: DemoAppId
-    val deployVarMap: StudioEntDeployVarMap
-    val details: StudioEntDetails
-    val driveSheetMap: StudioEntDriveSheetMap
-    val entId: EntId
-    val erdDiaMap: EntVdErdDiaMap
-    val formMap: StudioFormMap
-    val groupMap: StudioEntGroupMap
+    var creationTime: String? = null
+    lateinit var deeplinkMap: StudioEntDeeplinkMap
+    lateinit var demoAppId: DemoAppId
+    lateinit var deployVarMap: StudioEntDeployVarMap
+    lateinit var details: StudioEntDetails
+    lateinit var driveSheetMap: StudioEntDriveSheetMap
+    lateinit var entId: EntId
+    lateinit var erdDiaMap: EntVdErdDiaMap
+    lateinit var formMap: StudioFormMap
+    lateinit var groupMap: StudioEntGroupMap
     var lastUpdateBy: AdminId? = null
-    var lastUpdateTime: string? = null
+    var lastUpdateTime: String? = null
     var layoutUserMap: StudioMapOfLayoutUser? = null
     var layoutUserMenuActionMap: StudioMapOfActionPermission? = null
-    val moduleMap: StudioModuleMap
+    lateinit var moduleMap: StudioModuleMap
     var nameCounterMap: StudioEntNameCounterMap? = null
-    val pluginMap: StudioEntPluginMap
-    val promptMap: StudioEntPromptMap
-    val reportDiaMap: EntVdReportDiaMap
-    val reportMap: StudioEntReportMap
-    val roleMap: StudioEntRoleMap
-    val spreadsheetMap: StudioEntSpreadsheetMap
+    lateinit var pluginMap: StudioEntPluginMap
+    lateinit var promptMap: StudioEntPromptMap
+    lateinit var reportDiaMap: EntVdReportDiaMap
+    lateinit var reportMap: StudioEntReportMap
+    lateinit var roleMap: StudioEntRoleMap
+    lateinit var spreadsheetMap: StudioEntSpreadsheetMap
     var storeItemDetailMap: StudioStoreItemDetailMap? = null
-    val translationMap: StudioEntTranslationMap
+    lateinit var translationMap: StudioEntTranslationMap
     var trash: StudioEntTrash? = null
-    val varMap: StudioVarMap
-    var version: string? = null
-    var versionCode: number? = null
+    lateinit var varMap: StudioVarMap
+    var version: String? = null
+    var versionCode: Number? = null
 }

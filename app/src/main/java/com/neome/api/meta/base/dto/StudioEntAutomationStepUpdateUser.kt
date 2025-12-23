@@ -11,7 +11,7 @@ import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioEntAutomationStepUpdateUser : StudioEntAutomationStep() {
+open class StudioEntAutomationStepUpdateUser : StudioEntAutomationStep() {
     var avatarFieldId: MetaIdField? = null
     var inputFormPipelineVarId: MetaIdPipelineParam? = null
     var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
@@ -23,5 +23,5 @@ class StudioEntAutomationStepUpdateUser : StudioEntAutomationStep() {
     var userIdFieldId: MetaIdField? = null
     var userNameFieldId: MetaIdField? = null
     var userRoleFieldId: MetaIdField? = null
-    var userRoleIdSet: MetaIdRole[]? = null
+    var userRoleIdSet: Array<MetaIdRole>? = null
 }

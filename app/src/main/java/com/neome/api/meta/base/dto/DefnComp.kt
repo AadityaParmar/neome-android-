@@ -10,7 +10,7 @@ import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
 
-class DefnComp {
+open class DefnComp {
     var disabled: Boolean? = null
     var disabledFieldId: MetaIdField? = null
     var disabledRoleIdSet: Array<MetaIdRole>? = null

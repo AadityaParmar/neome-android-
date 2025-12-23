@@ -9,8 +9,8 @@ import com.neome.api.meta.base.AnyEmailId
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioFieldEmail : StudioFieldEditable() {
-    var autoPickSelf: boolean? = null
+open class StudioFieldEmail : StudioFieldEditable() {
+    var autoPickSelf: Boolean? = null
     var defaultFieldId: MetaIdField? = null
     var defaultValue: AnyEmailId? = null
     var defaultVarId: MetaIdVar? = null

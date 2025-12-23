@@ -12,11 +12,11 @@ import com.neome.api.meta.base.Types.SpreadsheetPartitionId
 import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.nucleus.base.sig.SigVersion
 
-class SigSpreadsheetRow : SigVersion() {
-    val formId: MetaIdForm
+open class SigSpreadsheetRow : SigVersion() {
+    lateinit var formId: MetaIdForm
     var formValue: FormValueRaw? = null
     var rowCommentCount: SigSpreadsheetRowCommentCount? = null
-    val spreadsheetId: MetaIdSpreadsheet
-    val spreadsheetPartitionId: SpreadsheetPartitionId
-    var updatedKeySet: MetaIdComp[]? = null
+    lateinit var spreadsheetId: MetaIdSpreadsheet
+    lateinit var spreadsheetPartitionId: SpreadsheetPartitionId
+    var updatedKeySet: Array<MetaIdComp>? = null
 }

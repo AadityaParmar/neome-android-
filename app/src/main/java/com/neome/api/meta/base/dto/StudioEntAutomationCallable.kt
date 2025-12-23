@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdPlugin
 
-class StudioEntAutomationCallable : StudioEntAutomation() {
-    val eventMap: StudioEntAutomationCallableEventMap
-    val formId: MetaIdForm
+open class StudioEntAutomationCallable : StudioEntAutomation() {
+    lateinit var eventMap: StudioEntAutomationCallableEventMap
+    lateinit var formId: MetaIdForm
     var metaIdPlugin: MetaIdPlugin? = null
 }

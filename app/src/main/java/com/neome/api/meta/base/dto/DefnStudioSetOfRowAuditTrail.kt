@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnStudioSetOfRowAuditTrail : DefnField() {
+open class DefnStudioSetOfRowAuditTrail : DefnField() {
 }

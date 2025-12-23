@@ -8,8 +8,8 @@ package com.neome.api.studio.studioDrawer.msg
 import com.neome.api.meta.base.Types.ArtifactId
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgStudioSearch : Msg() {
-    var filterArtifactIdSet: ArtifactId[]? = null
-    val query: string
-    val searchId: string
+open class MsgStudioSearch : Msg() {
+    var filterArtifactIdSet: Array<ArtifactId>? = null
+    lateinit var query: String
+    lateinit var searchId: String
 }

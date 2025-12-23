@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioDtoArgValueSeparator : StudioDtoArgValue() {
+open class StudioDtoArgValueSeparator : StudioDtoArgValue() {
 }

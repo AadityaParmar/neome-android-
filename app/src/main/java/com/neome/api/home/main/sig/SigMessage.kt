@@ -7,7 +7,7 @@ package com.neome.api.home.main.sig
 
 import com.neome.api.home.base.Types.EnumReceiptStatus
 
-class SigMessage : SigMessageBase() {
+open class SigMessage : SigMessageBase() {
     var receiptStatus: EnumReceiptStatus? = null
-    var version: string? = null
+    var version: String? = null
 }

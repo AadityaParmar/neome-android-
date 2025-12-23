@@ -8,7 +8,8 @@ package com.neome.api.home.drawer.sig
 import com.neome.api.home.base.dto.DtoChatBadgeMap
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.sig.SigVersion
+import java.util.Map
 
-class SigBadgeMap : SigVersion() {
-    val entChatBadgeMap: Record<EntId, DtoChatBadgeMap>
+open class SigBadgeMap : SigVersion() {
+    lateinit var entChatBadgeMap: Map<EntId, DtoChatBadgeMap>
 }

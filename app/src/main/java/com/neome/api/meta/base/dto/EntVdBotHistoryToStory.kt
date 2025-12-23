@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdBotHistoryToStory : EntVdAi() {
+open class EntVdBotHistoryToStory : EntVdAi() {
     var outputField: StudioDtoArgValueParameter? = null
 }

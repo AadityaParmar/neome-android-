@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.EnumDefnPluginApiMethod
 import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.Types.PluginApiId
 
-class DefnStudioPickImportPluginApiId : DefnFieldEditable() {
-    var excludePluginApiIdSet: PluginApiId[]? = null
-    var filterApiMethodSet: EnumDefnPluginApiMethod[]? = null
-    val metaIdPlugin: MetaIdPlugin
+open class DefnStudioPickImportPluginApiId : DefnFieldEditable() {
+    var excludePluginApiIdSet: Array<PluginApiId>? = null
+    var filterApiMethodSet: Array<EnumDefnPluginApiMethod>? = null
+    lateinit var metaIdPlugin: MetaIdPlugin
 }

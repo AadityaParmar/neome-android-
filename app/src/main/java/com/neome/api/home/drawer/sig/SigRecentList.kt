@@ -8,7 +8,7 @@ package com.neome.api.home.drawer.sig
 import com.neome.api.home.base.dto.DtoRecentItem
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigRecentList : Sig() {
-    val recentList: DtoRecentItem[]
-    var version: string? = null
+open class SigRecentList : Sig() {
+    lateinit var recentList: Array<DtoRecentItem>
+    var version: String? = null
 }

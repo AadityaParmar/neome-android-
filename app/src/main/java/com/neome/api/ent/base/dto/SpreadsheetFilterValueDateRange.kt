@@ -5,7 +5,7 @@
 
 package com.neome.api.ent.base.dto
 
-class SpreadsheetFilterValueDateRange : SpreadsheetFilterValue() {
-    var from: string? = null
-    var to: string? = null
+open class SpreadsheetFilterValueDateRange : SpreadsheetFilterValue() {
+    var from: String? = null
+    var to: String? = null
 }

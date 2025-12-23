@@ -8,8 +8,9 @@ package com.neome.api.app.ai.msg
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.FormRefKey
 import com.neome.api.nucleus.base.msg.Msg
+import java.util.Map
 
-class MsgAiNeoQLGet : Msg() {
+open class MsgAiNeoQLGet : Msg() {
     var inputFormRefKey: FormRefKey? = null
     var neoQL: String? = null
     var outputFormRefKey: FormRefKey? = null

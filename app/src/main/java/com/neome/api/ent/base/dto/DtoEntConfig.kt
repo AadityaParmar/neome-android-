@@ -7,11 +7,11 @@ package com.neome.api.ent.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnEntStage
 
-class DtoEntConfig {
-    var allowClearSpreadsheet: boolean? = null
-    var confirmBeforeDelete: boolean? = null
-    var hideObsoleteFeatures: boolean? = null
-    var lockEnterprise: boolean? = null
-    var showCompletedWorkflows: boolean? = null
+open class DtoEntConfig {
+    var allowClearSpreadsheet: Boolean? = null
+    var confirmBeforeDelete: Boolean? = null
+    var hideObsoleteFeatures: Boolean? = null
+    var lockEnterprise: Boolean? = null
+    var showCompletedWorkflows: Boolean? = null
     var stage: EnumDefnEntStage? = null
 }

@@ -10,11 +10,11 @@ import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioEntDeeplinkSpreadsheetInsert : StudioEntDeeplinkWithHeader() {
+open class StudioEntDeeplinkSpreadsheetInsert : StudioEntDeeplinkWithHeader() {
     var formEditorLayoutId: MetaIdLayoutForm? = null
     var mobileFormEditorLayoutId: MetaIdLayoutForm? = null
-    var repeatButtonLabel: string? = null
-    var showRepeatButton: boolean? = null
+    var repeatButtonLabel: String? = null
+    var showRepeatButton: Boolean? = null
     var spreadsheetId: MetaIdSpreadsheet? = null
     var successDeeplinkId: MetaIdDeeplink? = null
     var successMessageBgColorVarId: MetaIdVar? = null

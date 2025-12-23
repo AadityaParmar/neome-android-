@@ -7,6 +7,6 @@ package com.neome.api.core.user.msg
 
 import com.neome.api.core.base.msg.MsgHandle
 
-class MsgForgotPassword : MsgHandle() {
-    val newPassword: string
+open class MsgForgotPassword : MsgHandle() {
+    lateinit var newPassword: String
 }

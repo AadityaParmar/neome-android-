@@ -5,8 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdViewport : StudioBase() {
-    var x: number? = null
-    var y: number? = null
-    var zoom: number? = null
+open class EntVdViewport : StudioBase() {
+    var x: Number? = null
+    var y: Number? = null
+    var zoom: Number? = null
 }

@@ -9,14 +9,15 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdReport
+import java.util.Map
 
-class StudioFieldRefReport : StudioField() {
-    var copyFieldMap: Record<MetaIdField, MetaIdField>? = null
-    var editableFieldIdSet: MetaIdField[]? = null
-    var forceOpenOnFormCreate: boolean? = null
-    var forceOpenOnGridRowCreate: boolean? = null
+open class StudioFieldRefReport : StudioField() {
+    var copyFieldMap: Map<MetaIdField, MetaIdField>? = null
+    var editableFieldIdSet: Array<MetaIdField>? = null
+    var forceOpenOnFormCreate: Boolean? = null
+    var forceOpenOnGridRowCreate: Boolean? = null
     var gridId: MetaIdGrid? = null
-    var keyFieldIdSet: MetaIdField[]? = null
+    var keyFieldIdSet: Array<MetaIdField>? = null
     var layoutGridId: MetaIdLayoutGrid? = null
     var overlayLayoutGrid: StudioDtoLayoutOverlaySpreadsheet? = null
     var reportId: MetaIdReport? = null

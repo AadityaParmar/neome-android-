@@ -9,10 +9,10 @@ import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.Types.MetaIdPrompt
 
-class DtoEntPrompt {
-    val actionId: MetaIdAction
-    var description: string? = null
-    var hint: string? = null
-    val metaId: MetaIdPrompt
-    val name: Symbol
+open class DtoEntPrompt {
+    lateinit var actionId: MetaIdAction
+    var description: String? = null
+    var hint: String? = null
+    lateinit var metaId: MetaIdPrompt
+    lateinit var name: Symbol
 }

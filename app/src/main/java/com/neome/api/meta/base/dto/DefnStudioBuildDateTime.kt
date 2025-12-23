@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnStudioBuildDateTime : DefnField() {
+open class DefnStudioBuildDateTime : DefnField() {
 }

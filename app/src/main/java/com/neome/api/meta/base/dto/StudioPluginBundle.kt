@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioPluginBundle : StudioPluginBundleBase() {
+open class StudioPluginBundle : StudioPluginBundleBase() {
     var draft: StudioPluginDraft? = null
 }

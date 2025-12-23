@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdExpertWait : EntVdAutoStep() {
+open class EntVdExpertWait : EntVdAutoStep() {
     var duration: StudioBuildArgBinder? = null
 }

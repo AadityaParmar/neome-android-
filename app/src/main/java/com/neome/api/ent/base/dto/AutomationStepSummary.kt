@@ -5,7 +5,7 @@
 
 package com.neome.api.ent.base.dto
 
-class AutomationStepSummary {
-    val date: string
-    val message: string
+open class AutomationStepSummary {
+    lateinit var date: String
+    lateinit var message: String
 }

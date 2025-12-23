@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import java.util.Map
 
-class StudioMapOfRefTarget : StudioBase() {
-    val keys: MetaIdSpreadsheet[]
-    val map: Record<MetaIdSpreadsheet, StudioDtoRefTarget>
+open class StudioMapOfRefTarget : StudioBase() {
+    lateinit var keys: Array<MetaIdSpreadsheet>
+    lateinit var map: Map<MetaIdSpreadsheet, StudioDtoRefTarget>
 }

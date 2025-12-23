@@ -8,7 +8,7 @@ package com.neome.api.app.base.dto
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class DtoNeoScriptLayoutSpreadsheet : DtoNeoScript() {
+open class DtoNeoScriptLayoutSpreadsheet : DtoNeoScript() {
     var spreadsheetId: MetaIdSpreadsheet? = null
     var spreadsheetLayoutId: MetaIdLayoutGrid? = null
 }

@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarDocument : StudioVar() {
+open class StudioVarDocument : StudioVar() {
     var value: StudioVarValueDocument? = null
 }

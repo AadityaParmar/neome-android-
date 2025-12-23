@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdPartition
 
-class StudioDtoPartition : StudioBase() {
-    val assignPartitionFieldId: MetaIdField
-    val formula: StudioValueCodeJavascript
-    val metaId: MetaIdPartition
-    val name: Symbol
+open class StudioDtoPartition : StudioBase() {
+    lateinit var assignPartitionFieldId: MetaIdField
+    lateinit var formula: StudioValueCodeJavascript
+    lateinit var metaId: MetaIdPartition
+    lateinit var name: Symbol
 }

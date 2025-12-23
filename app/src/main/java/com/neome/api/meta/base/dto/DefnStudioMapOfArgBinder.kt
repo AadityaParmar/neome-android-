@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdForm
 
-class DefnStudioMapOfArgBinder : DefnField() {
+open class DefnStudioMapOfArgBinder : DefnField() {
     var formId: MetaIdForm? = null
     var pluginConfigFormId: MetaIdForm? = null
 }

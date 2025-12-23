@@ -5,19 +5,18 @@
 
 package com.neome.api.meta.base.dto
 
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdReport
-import com.neome.api.meta.base.dto.StudioFieldEditable
+import java.util.Map
 
-class StudioFieldPickReportRow : StudioFieldEditable() {
-    var copyFieldMap: Record<MetaIdField, MetaIdField>? = null
-    var editableFieldIdSet: MetaIdField[]? = null
+open class StudioFieldPickReportRow : StudioFieldEditable() {
+    var copyFieldMap: Map<MetaIdField, MetaIdField>? = null
+    var editableFieldIdSet: Array<MetaIdField>? = null
     var gridDisplayFieldId: MetaIdField? = null
     var reportId: MetaIdReport? = null
     var reportOutputFormGridId: MetaIdGrid? = null
     var reportOutputFormGridLayoutId: MetaIdLayoutGrid? = null
-    var showAsDropdown: boolean? = null
+    var showAsDropdown: Boolean? = null
 }

@@ -12,7 +12,7 @@ import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioEntAutomationStepGenerateDeeplink : StudioEntAutomationStep() {
+open class StudioEntAutomationStepGenerateDeeplink : StudioEntAutomationStep() {
     var deeplinkFieldId: MetaIdField? = null
     var deeplinkId: MetaIdDeeplink? = null
     var inputFormMappingVarId: MetaIdVar? = null

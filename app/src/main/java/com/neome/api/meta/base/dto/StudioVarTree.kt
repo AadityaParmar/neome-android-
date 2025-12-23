@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioVarTree : StudioVar() {
+open class StudioVarTree : StudioVar() {
     var value: StudioVarValueTree? = null
 }

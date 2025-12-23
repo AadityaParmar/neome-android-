@@ -8,7 +8,7 @@ package com.neome.api.home.base.dto
 import com.neome.api.home.drawer.sig.SigGroupAvatar
 import com.neome.api.home.drawer.sig.SigUserAvatar
 
-class DtoNewChatCandidate {
+open class DtoNewChatCandidate {
     var groupAvatar: SigGroupAvatar? = null
     var userAvatar: SigUserAvatar? = null
 }

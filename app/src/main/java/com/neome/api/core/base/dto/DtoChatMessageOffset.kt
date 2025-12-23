@@ -8,8 +8,8 @@ package com.neome.api.core.base.dto
 import com.neome.api.meta.base.Types.ChatId
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class DtoChatMessageOffset {
+open class DtoChatMessageOffset {
     var chatId: ChatId? = null
-    var offset: number? = null
+    var offset: Number? = null
     var spreadsheetId: MetaIdSpreadsheet? = null
 }

@@ -8,18 +8,18 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSection
 
-class DefnFieldFormList : DefnField() {
+open class DefnFieldFormList : DefnField() {
     var bgColorFieldId: MetaIdField? = null
-    var cardLayoutItemHideBorders: boolean? = null
-    var cardLayoutNumOfColumns: number? = null
+    var cardLayoutItemHideBorders: Boolean? = null
+    var cardLayoutNumOfColumns: Number? = null
     var displayItemId: MetaIdField? = null
     var displaySectionId: MetaIdSection? = null
-    var editableFieldIdSet: MetaIdField[]? = null
-    var hideMenu: boolean? = null
-    var ignoreSelection: boolean? = null
-    var isPickMany: boolean? = null
-    var itemHeight: number? = null
+    var editableFieldIdSet: Array<MetaIdField>? = null
+    var hideMenu: Boolean? = null
+    var ignoreSelection: Boolean? = null
+    var isPickMany: Boolean? = null
+    var itemHeight: Number? = null
     var layout: DefnDtoLayoutCardItem? = null
-    var pickRowOnFieldIdSet: MetaIdField[]? = null
-    var showAsCardLayout: boolean? = null
+    var pickRowOnFieldIdSet: Array<MetaIdField>? = null
+    var showAsCardLayout: Boolean? = null
 }

@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class ImageXformBlur : ImageXform() {
+open class ImageXformBlur : ImageXform() {
     var value: StudioBuildArgBinder? = null
 }

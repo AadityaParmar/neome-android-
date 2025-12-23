@@ -7,10 +7,10 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnCodeEditorLanguage
 
-class StudioFieldCodeEditor : StudioFieldParagraph() {
-    var enableLineNumbers: boolean? = null
-    var enableMiniMap: boolean? = null
+open class StudioFieldCodeEditor : StudioFieldParagraph() {
+    var enableLineNumbers: Boolean? = null
+    var enableMiniMap: Boolean? = null
     var language: EnumDefnCodeEditorLanguage? = null
-    var showExpandBtn: boolean? = null
-    var title: string? = null
+    var showExpandBtn: Boolean? = null
+    var title: String? = null
 }

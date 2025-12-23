@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdUserIsAllManager : EntVdAutoNode() {
+open class EntVdUserIsAllManager : EntVdAutoNode() {
     var managerField: StudioDtoArgValueParameter? = null
     var user: StudioBuildArgBinder? = null
 }

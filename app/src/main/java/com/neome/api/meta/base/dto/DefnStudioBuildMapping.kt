@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnStudioBuildMapping : DefnField() {
+open class DefnStudioBuildMapping : DefnField() {
     var from: DefnStudioBuildArgBinder? = null
     var to: DefnStudioPickPluginFieldId? = null
 }

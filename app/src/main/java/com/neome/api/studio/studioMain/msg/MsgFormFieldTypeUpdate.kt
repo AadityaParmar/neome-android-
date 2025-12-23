@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgFormFieldTypeUpdate : Msg() {
-    val fieldId: MetaIdField
-    val formId: MetaIdForm
-    val newFieldType: EnumStudioCompType
+open class MsgFormFieldTypeUpdate : Msg() {
+    lateinit var fieldId: MetaIdField
+    lateinit var formId: MetaIdForm
+    lateinit var newFieldType: EnumStudioCompType
 }

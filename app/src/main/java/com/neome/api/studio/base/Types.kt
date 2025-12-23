@@ -6,17 +6,17 @@
 package com.neome.api.studio.base
 
 class Types {
-    enum class EnumEntActivityState {
-        active,
-        inactive,
-        dead
+    enum class EnumEntActivityState(val value: String) {
+        active("active"),
+        inactive("inactive"),
+        dead("dead")
     }
 
-    enum class EnumEntDeployExecutionState {
-        created,
-        initiated,
-        inProgress,
-        completed,
-        failed
+    enum class EnumEntDeployExecutionState(val value: String) {
+        created("created"),
+        initiated("initiated"),
+        inProgress("inProgress"),
+        completed("completed"),
+        failed("failed")
     }
 }

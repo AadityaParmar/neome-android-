@@ -5,7 +5,7 @@
 
 package com.neome.api.home.base.dto
 
-class DtoMessageReaction {
-    val reaction: string
-    val updatedOn: string
+open class DtoMessageReaction {
+    lateinit var reaction: String
+    lateinit var updatedOn: String
 }

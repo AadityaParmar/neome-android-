@@ -10,14 +10,15 @@ import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdReport
+import java.util.Map
 
-class DtoEntActionReport : DtoEntAction() {
-    var defaultValueMap: Record<MetaIdComp, any>? = null
+open class DtoEntActionReport : DtoEntAction() {
+    var defaultValueMap: Map<MetaIdComp, Any>? = null
     var inputFormId: MetaIdForm? = null
     var outputFormContentLayoutId: MetaIdLayoutForm? = null
-    val outputFormId: MetaIdForm
+    lateinit var outputFormId: MetaIdForm
     var outputFormTemplateLayoutId: MetaIdLayoutForm? = null
-    val reportId: MetaIdReport
-    val reportKind: EnumDefnKindReport
-    var sendMessageToInbox: boolean? = null
+    lateinit var reportId: MetaIdReport
+    lateinit var reportKind: EnumDefnKindReport
+    var sendMessageToInbox: Boolean? = null
 }

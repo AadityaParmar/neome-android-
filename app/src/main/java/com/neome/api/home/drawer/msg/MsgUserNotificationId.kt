@@ -7,6 +7,6 @@ package com.neome.api.home.drawer.msg
 
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgUserNotificationId : Msg() {
-    var notificationId: string? = null
+open class MsgUserNotificationId : Msg() {
+    var notificationId: String? = null
 }

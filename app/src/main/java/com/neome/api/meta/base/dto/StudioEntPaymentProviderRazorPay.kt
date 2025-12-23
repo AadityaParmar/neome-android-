@@ -8,10 +8,10 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.CurrencyKey
 import com.neome.api.meta.base.Types.EnumDefnPaymentMethodKind
 
-class StudioEntPaymentProviderRazorPay : StudioEntPaymentProvider() {
-    var allowedPaymentMethodSet: EnumDefnPaymentMethodKind[]? = null
-    var apiKey: string? = null
-    var apiSecret: string? = null
+open class StudioEntPaymentProviderRazorPay : StudioEntPaymentProvider() {
+    var allowedPaymentMethodSet: Array<EnumDefnPaymentMethodKind>? = null
+    var apiKey: String? = null
+    var apiSecret: String? = null
     var defaultCurrency: CurrencyKey? = null
-    var webhookSecret: string? = null
+    var webhookSecret: String? = null
 }

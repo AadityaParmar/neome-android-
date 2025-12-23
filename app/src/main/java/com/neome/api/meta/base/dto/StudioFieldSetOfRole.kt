@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.EnumDefnThemePickMultiVariant
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
 
-class StudioFieldSetOfRole : StudioFieldEditable() {
+open class StudioFieldSetOfRole : StudioFieldEditable() {
     var defaultRoleFieldId: MetaIdField? = null
-    var defaultRoleIdSet: MetaIdRole[]? = null
+    var defaultRoleIdSet: Array<MetaIdRole>? = null
     var showAs: EnumDefnThemePickMultiVariant? = null
 }

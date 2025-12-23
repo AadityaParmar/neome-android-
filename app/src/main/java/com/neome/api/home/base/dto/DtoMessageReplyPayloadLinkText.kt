@@ -5,7 +5,7 @@
 
 package com.neome.api.home.base.dto
 
-class DtoMessageReplyPayloadLinkText : DtoMessageReplyPayload() {
-    var imageUrl: string? = null
-    val textSummary: string
+open class DtoMessageReplyPayloadLinkText : DtoMessageReplyPayload() {
+    var imageUrl: String? = null
+    lateinit var textSummary: String
 }

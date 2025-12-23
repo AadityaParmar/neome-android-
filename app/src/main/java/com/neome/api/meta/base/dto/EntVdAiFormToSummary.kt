@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdAiFormToSummary : EntVdAi() {
+open class EntVdAiFormToSummary : EntVdAi() {
     var outputField: StudioDtoArgValueParameter? = null
 }

@@ -5,7 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.DefnField
-
-class DefnStudioMapOfFuncArg : DefnField() {
+open class DefnStudioMapOfFuncArg : DefnField() {
 }

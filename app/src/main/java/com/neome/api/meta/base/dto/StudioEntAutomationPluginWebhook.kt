@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-class StudioEntAutomationPluginWebhook : StudioEntAutomation() {
-    val eventMap: StudioEntAutomationPluginWebhookEventMap
-    val pluginApi: StudioDtoPluginApi
+open class StudioEntAutomationPluginWebhook : StudioEntAutomation() {
+    lateinit var eventMap: StudioEntAutomationPluginWebhookEventMap
+    lateinit var pluginApi: StudioDtoPluginApi
 }

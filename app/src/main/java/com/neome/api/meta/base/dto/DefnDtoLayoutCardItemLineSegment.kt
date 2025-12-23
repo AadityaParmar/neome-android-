@@ -8,14 +8,14 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnTextSize
 import com.neome.api.meta.base.Types.MetaIdField
 
-class DefnDtoLayoutCardItemLineSegment {
+open class DefnDtoLayoutCardItemLineSegment {
     var color: DefnDtoColor? = null
     var colorFieldId: MetaIdField? = null
     var colorVar: DefnDtoColor? = null
-    var line: string? = null
-    var lineFieldIdSet: MetaIdField[]? = null
+    var line: String? = null
+    var lineFieldIdSet: Array<MetaIdField>? = null
     var lineVar: DefnDtoText? = null
-    var showLabels: boolean? = null
+    var showLabels: Boolean? = null
     var textSize: EnumDefnTextSize? = null
     var textSizeFieldId: MetaIdField? = null
     var textSizeVar: EnumDefnTextSize? = null

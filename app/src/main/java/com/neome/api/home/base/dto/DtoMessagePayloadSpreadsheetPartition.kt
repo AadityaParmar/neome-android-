@@ -11,12 +11,12 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.RowId
 import com.neome.api.meta.base.Types.SpreadsheetPartitionId
 
-class DtoMessagePayloadSpreadsheetPartition : DtoMessagePayload() {
-    val chatBubbleHeader: DtoChatBubbleHeader
-    val formId: MetaIdForm
-    var partitionList: DtoPartition[]? = null
+open class DtoMessagePayloadSpreadsheetPartition : DtoMessagePayload() {
+    lateinit var chatBubbleHeader: DtoChatBubbleHeader
+    lateinit var formId: MetaIdForm
+    var partitionList: Array<DtoPartition>? = null
     var rowId: RowId? = null
-    val spreadsheetId: MetaIdSpreadsheet
-    val spreadsheetPartitionId: SpreadsheetPartitionId
+    lateinit var spreadsheetId: MetaIdSpreadsheet
+    lateinit var spreadsheetPartitionId: SpreadsheetPartitionId
     var spreadsheetRow: SigSpreadsheetRow? = null
 }

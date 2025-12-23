@@ -5,6 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-class TranslateResult {
-    val translateMap: Record<string, TranslatePath[]>
+import java.util.Map
+
+open class TranslateResult {
+    lateinit var translateMap: Map<String, Array<TranslatePath>>
 }

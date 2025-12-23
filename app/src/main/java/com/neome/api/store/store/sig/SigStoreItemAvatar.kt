@@ -11,12 +11,12 @@ import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.meta.base.Types.StoreItemId
 import com.neome.api.nucleus.base.sig.SigVersion
 
-class SigStoreItemAvatar : SigVersion() {
-    var about: string? = null
-    val artifactKind: EnumStoreItemArtifact
+open class SigStoreItemAvatar : SigVersion() {
+    var about: String? = null
+    lateinit var artifactKind: EnumStoreItemArtifact
     var avatarId: MediaIdAvatar? = null
-    val name: string
-    val storeItemId: StoreItemId
+    lateinit var name: String
+    lateinit var storeItemId: StoreItemId
     var updatedBy: AdminId? = null
-    var updatedOn: string? = null
+    var updatedOn: String? = null
 }

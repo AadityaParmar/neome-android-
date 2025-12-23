@@ -7,6 +7,6 @@ package com.neome.api.core.base.dto
 
 import com.neome.api.meta.base.dto.GsonCto
 
-class DtoNotificationSetting : GsonCto() {
-    var mute: boolean? = null
+open class DtoNotificationSetting : GsonCto() {
+    var mute: Boolean? = null
 }

@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnStudioSetOfStoreItemCategory : DefnField() {
+open class DefnStudioSetOfStoreItemCategory : DefnField() {
 }

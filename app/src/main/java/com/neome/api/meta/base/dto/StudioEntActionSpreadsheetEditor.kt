@@ -12,16 +12,16 @@ import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-class StudioEntActionSpreadsheetEditor : StudioEntAction() {
+open class StudioEntActionSpreadsheetEditor : StudioEntAction() {
     var actionPermissionMap: StudioMapOfActionPermission? = null
-    var bulkInsertRoleSet: MetaIdRole[]? = null
-    var bulkUpdateFieldIdSet: MetaIdField[]? = null
-    var bulkUpdateRoleSet: MetaIdRole[]? = null
-    var doNotOpenAside: boolean? = null
+    var bulkInsertRoleSet: Array<MetaIdRole>? = null
+    var bulkUpdateFieldIdSet: Array<MetaIdField>? = null
+    var bulkUpdateRoleSet: Array<MetaIdRole>? = null
+    var doNotOpenAside: Boolean? = null
     var filterConditionVarId: StudioValueVarIdCondition? = null
     var inputFormId: MetaIdForm? = null
     var layoutSpreadsheetId: MetaIdLayoutGrid? = null
-    var readOnly: boolean? = null
+    var readOnly: Boolean? = null
     var sendMessageToGroupId: MetaIdGroup? = null
     var spreadsheetId: MetaIdSpreadsheet? = null
 }

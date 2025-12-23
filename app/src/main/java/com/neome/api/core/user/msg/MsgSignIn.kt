@@ -7,10 +7,11 @@ package com.neome.api.core.user.msg
 
 import com.neome.api.core.base.msg.MsgHandle
 import com.neome.api.meta.base.Types.EnumDeviceType
+import kotlin.properties.Delegates
 
-class MsgSignIn : MsgHandle() {
-    val deviceName: string
-    val deviceType: EnumDeviceType
-    val password: string
-    val rememberMe: boolean
+open class MsgSignIn : MsgHandle() {
+    lateinit var deviceName: String
+    lateinit var deviceType: EnumDeviceType
+    lateinit var password: String
+    var rememberMe: Boolean by Delegates.notNull<Boolean>()
 }

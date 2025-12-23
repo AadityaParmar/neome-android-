@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.Types.EnumAnalyticEventType
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgClusterAnalyticEventData : Msg() {
-    val duration: EnumTimeDuration
-    var entIdSet: EntId[]? = null
-    val eventType: EnumAnalyticEventType
+open class MsgClusterAnalyticEventData : Msg() {
+    lateinit var duration: EnumTimeDuration
+    var entIdSet: Array<EntId>? = null
+    lateinit var eventType: EnumAnalyticEventType
 }

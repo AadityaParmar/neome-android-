@@ -5,11 +5,11 @@
 
 package com.neome.api.home.session.sig
 
-import com.neome.api.core.session.sig.SigTopic
 import com.neome.api.home.base.Types.EnumReceiptStatus
 import com.neome.api.meta.base.Types.MessageId
+import com.neome.api.core.session.sig.SigTopic
 
-class SigTopicMessageProps : SigTopic() {
-    val messageId: MessageId
-    val receiptStatus: EnumReceiptStatus
+open class SigTopicMessageProps : SigTopic() {
+    lateinit var messageId: MessageId
+    lateinit var receiptStatus: EnumReceiptStatus
 }

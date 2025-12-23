@@ -8,10 +8,10 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumStoreLabel
 import com.neome.api.meta.base.Types.MediaIdAvatar
 
-class StudioPluginDetails : StudioBase() {
-    var about: string? = null
+open class StudioPluginDetails : StudioBase() {
+    var about: String? = null
     var avatarId: MediaIdAvatar? = null
-    val name: string
-    var storeAbout: string? = null
-    var storeLabelSet: EnumStoreLabel[]? = null
+    lateinit var name: String
+    var storeAbout: String? = null
+    var storeLabelSet: Array<EnumStoreLabel>? = null
 }

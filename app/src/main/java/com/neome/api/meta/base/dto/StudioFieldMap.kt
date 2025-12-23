@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
+import java.util.Map
 
-class StudioFieldMap : StudioBase() {
-    val keys: MetaIdField[]
-    val map: Record<MetaIdField, StudioField>
+open class StudioFieldMap : StudioBase() {
+    lateinit var keys: Array<MetaIdField>
+    lateinit var map: Map<MetaIdField, StudioField>
 }

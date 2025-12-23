@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdDeeplink
 
-class DefnStudioPickDeeplinkId : DefnFieldEditable() {
-    var includeDeeplinkIdSet: MetaIdDeeplink[]? = null
+open class DefnStudioPickDeeplinkId : DefnFieldEditable() {
+    var includeDeeplinkIdSet: Array<MetaIdDeeplink>? = null
 }

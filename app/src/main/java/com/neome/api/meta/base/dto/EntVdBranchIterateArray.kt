@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
 
-class EntVdBranchIterateArray : EntVdAutoStep() {
+open class EntVdBranchIterateArray : EntVdAutoStep() {
     var arrayField: MetaIdField? = null
 }

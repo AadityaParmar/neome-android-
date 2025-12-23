@@ -5,5 +5,5 @@
 
 package com.neome.api.meta.base.dto
 
-class DefnStudioPickPluginBundleId : DefnFieldEditable() {
+open class DefnStudioPickPluginBundleId : DefnFieldEditable() {
 }

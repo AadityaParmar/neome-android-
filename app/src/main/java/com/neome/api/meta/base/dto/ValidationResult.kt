@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.SearchPath
+import java.util.Map
 
-class ValidationResult {
-    var errorCountMap: Record<SearchPath, number>? = null
-    var errorMap: Record<SearchPath, EnvValidationError>? = null
+open class ValidationResult {
+    var errorCountMap: Map<SearchPath, Number>? = null
+    var errorMap: Map<SearchPath, EnvValidationError>? = null
 }

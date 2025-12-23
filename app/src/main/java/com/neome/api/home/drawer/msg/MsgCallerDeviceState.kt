@@ -7,8 +7,6 @@ package com.neome.api.home.drawer.msg
 
 import com.neome.api.nucleus.base.msg.Msg
 
-class MsgCallerDeviceState : Msg() {
-    val state:
-
-    object
+open class MsgCallerDeviceState : Msg() {
+    lateinit var state: Object
 }

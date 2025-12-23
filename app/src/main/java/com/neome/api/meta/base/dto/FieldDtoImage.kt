@@ -6,13 +6,14 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MediaIdImage
+import kotlin.properties.Delegates
 
-class FieldDtoImage {
-    val fileName: string
-    val height: number
-    val mediaIdBlurImage: MediaIdImage
-    val mediaIdImage: MediaIdImage
-    val primaryColor: string
-    val size: number
-    val width: number
+open class FieldDtoImage {
+    lateinit var fileName: String
+    var height: Number by Delegates.notNull<Number>()
+    lateinit var mediaIdBlurImage: MediaIdImage
+    lateinit var mediaIdImage: MediaIdImage
+    lateinit var primaryColor: String
+    var size: Number by Delegates.notNull<Number>()
+    var width: Number by Delegates.notNull<Number>()
 }

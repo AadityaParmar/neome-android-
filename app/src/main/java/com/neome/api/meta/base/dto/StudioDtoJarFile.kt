@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MediaIdJar
 
-class StudioDtoJarFile : StudioBase() {
-    val fileName: string
-    val md5: string
-    val metaId: MediaIdJar
+open class StudioDtoJarFile : StudioBase() {
+    lateinit var fileName: String
+    lateinit var md5: String
+    lateinit var metaId: MediaIdJar
 }

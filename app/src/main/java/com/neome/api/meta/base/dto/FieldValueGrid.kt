@@ -6,8 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.RowId
+import java.util.Map
 
-class FieldValueGrid {
-    val keys: RowId[]
-    val map: Record<RowId, FieldDtoGridRow>
+open class FieldValueGrid {
+    lateinit var keys: Array<RowId>
+    lateinit var map: Map<RowId, FieldDtoGridRow>
 }

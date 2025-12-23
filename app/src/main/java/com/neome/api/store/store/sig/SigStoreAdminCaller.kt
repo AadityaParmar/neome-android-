@@ -9,10 +9,10 @@ import com.neome.api.meta.base.Types.AdminId
 import com.neome.api.meta.base.Types.EnumDefnAdminDoNotOptionStoreItem
 import com.neome.api.nucleus.base.sig.Sig
 
-class SigStoreAdminCaller : Sig() {
-    val adminId: AdminId
-    var doNotEditOptionSet: EnumDefnAdminDoNotOptionStoreItem[]? = null
-    var doNotShowOptionSet: EnumDefnAdminDoNotOptionStoreItem[]? = null
-    var hasLock: boolean? = null
-    val nickName: string
+open class SigStoreAdminCaller : Sig() {
+    lateinit var adminId: AdminId
+    var doNotEditOptionSet: Array<EnumDefnAdminDoNotOptionStoreItem>? = null
+    var doNotShowOptionSet: Array<EnumDefnAdminDoNotOptionStoreItem>? = null
+    var hasLock: Boolean? = null
+    lateinit var nickName: String
 }

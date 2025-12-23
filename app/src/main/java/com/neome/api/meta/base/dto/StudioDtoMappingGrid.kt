@@ -14,13 +14,13 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdMapping
 
-class StudioDtoMappingGrid : StudioBase() {
+open class StudioDtoMappingGrid : StudioBase() {
     var emptyFieldVariant: EnumDefnEmptyFieldVariant? = null
     var fieldMappingMap: StudioDtoMappingFieldMapBase? = null
     var fromGridId: MetaIdGrid? = null
     var fromGridKey: MetaIdField? = null
     var insertVariant: EnumDefnInsertVariant? = null
-    val metaId: MetaIdMapping
+    lateinit var metaId: MetaIdMapping
     var name: Symbol? = null
     var removeVariant: EnumDefnRemoveVariant? = null
     var toGridId: MetaIdGrid? = null

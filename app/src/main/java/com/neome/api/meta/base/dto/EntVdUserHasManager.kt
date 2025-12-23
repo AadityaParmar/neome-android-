@@ -5,6 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-class EntVdUserHasManager : EntVdAutoNode() {
+open class EntVdUserHasManager : EntVdAutoNode() {
     var user: StudioBuildArgBinder? = null
 }

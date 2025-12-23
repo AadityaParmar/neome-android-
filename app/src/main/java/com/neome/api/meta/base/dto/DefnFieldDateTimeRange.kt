@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
 
-class DefnFieldDateTimeRange : DefnFieldDateTime() {
-    var allowSingleDate: boolean? = null
+open class DefnFieldDateTimeRange : DefnFieldDateTime() {
+    var allowSingleDate: Boolean? = null
     var fromDefault: DefnBuildDateTime? = null
     var fromDefaultFieldId: MetaIdField? = null
     var fromDefaultVar: DefnBuildDateTime? = null

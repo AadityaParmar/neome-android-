@@ -11,12 +11,12 @@ import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.MetaIdVar
 
-class StudioEntAutomationStepGetSpreadsheetRows : StudioEntAutomationStep() {
-    var ascOrder: boolean? = null
+open class StudioEntAutomationStepGetSpreadsheetRows : StudioEntAutomationStep() {
+    var ascOrder: Boolean? = null
     var inputFormPipelineVarId: MetaIdPipelineParam? = null
     var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
     var iterateOnGridId: MetaIdGrid? = null
-    var maxRecords: number? = null
+    var maxRecords: Number? = null
     var outputFormPipelineVarId: MetaIdPipelineParam? = null
     var sortByFieldId: MetaIdField? = null
     var targetSpreadsheetFilterVarId: StudioValueVarIdCondition? = null

@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
 
-class DefnFieldIcon : DefnFieldEditable() {
+open class DefnFieldIcon : DefnFieldEditable() {
     var defaultFieldId: MetaIdField? = null
-    var defaultValue: string? = null
-    var defaultVar: string? = null
+    var defaultValue: String? = null
+    var defaultVar: String? = null
 }
