@@ -25,6 +25,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.neome.feature.camera.domain.model.CapturedImage
 import com.neome.feature.camera.presentation.capture.CameraFacing
 import com.neome.feature.camera.presentation.capture.FlashMode
@@ -47,7 +48,7 @@ fun CameraPreviewView(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val lifecycleOwner = LocalLifecycleOwner.current
+    val lifecycleOwner = androidx.lifecycle.compose.LocalLifecycleOwner.current
 
     // Keep flash mode as updated state to ensure capture uses current value
     val currentFlashMode by rememberUpdatedState(flashMode)

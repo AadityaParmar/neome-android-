@@ -19,7 +19,6 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.*
 import com.neome.feature.camera.domain.model.CropRegion
-import kotlin.math.min
 import kotlin.math.sqrt
 
 private enum class DragHandle {
