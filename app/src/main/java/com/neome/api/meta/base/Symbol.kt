@@ -7,4 +7,4 @@ package com.neome.api.meta.base
 
 // Symbol class placeholder
 
-class Symbol : AnyValue()
+open class Symbol : AnyValue()

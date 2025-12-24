@@ -7,7 +7,7 @@ package com.neome.api.meta.base
 
 // GridRowList class placeholder
 
-class GridRowList<T>
+open class GridRowList<T>
 {
   var rows: List<T> = emptyList()
   var hasMore: Boolean = false
