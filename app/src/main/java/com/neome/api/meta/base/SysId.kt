@@ -6,7 +6,6 @@
 package com.neome.api.meta.base
 
 import kotlin.reflect.KClass
-import com.neome.java.api.meta.base.Types as JavaTypes
 
 /**
  * Abstract base class for system identifiers with type-safe prefix handling
@@ -26,29 +25,29 @@ abstract class SysId : Comparable<SysId> {
             // Initialize system IDs for roles
             Types.EnumDefnRoles.entries.forEach { value ->
                 val sysId =
-                    createInternal<Types.MetaIdRole>(value.name, Types.MetaIdRole::class.java)
+                        createInternal<Types.MetaIdRole>(value.name, Types.MetaIdRole::class.java)
                 systemIdMap[value.name] = sysId
             }
 
             // Initialize system IDs for fields
             Types.EnumDefnFields.entries.forEach { value ->
                 val sysId =
-                    createInternal<Types.MetaIdField>(value.name, Types.MetaIdField::class.java)
+                        createInternal<Types.MetaIdField>(value.name, Types.MetaIdField::class.java)
                 systemIdMap[value.name] = sysId
             }
 
             // Initialize system IDs for forms
             Types.EnumDefnForms.entries.forEach { value ->
                 val sysId =
-                    createInternal<Types.MetaIdForm>(value.name, Types.MetaIdForm::class.java)
+                        createInternal<Types.MetaIdForm>(value.name, Types.MetaIdForm::class.java)
                 systemIdMap[value.name] = sysId
             }
 
             // Initialize system IDs for pipeline system
             Types.EnumDefnPipelineSystem.entries.forEach { value ->
                 val sysId = createInternal<Types.MetaIdPipelineSystem>(
-                    value.name,
-                    Types.MetaIdPipelineSystem::class.java
+                        value.name,
+                        Types.MetaIdPipelineSystem::class.java
                 )
                 systemIdMap[value.name] = sysId
             }
@@ -93,24 +92,15 @@ abstract class SysId : Comparable<SysId> {
                 throw IllegalArgumentException("Prefix must not be empty")
             }
 
-            val javaClsSysId = JavaTypes.getSysIdClass(prefix)
-                ?: throw IllegalArgumentException("Prefix not supported: $prefix")
+            val clsSysId = Types.getSysIdClass(prefix)
+                    ?: throw IllegalArgumentException("Prefix not supported: $prefix")
 
-            // Convert Java class to Kotlin class name and get Kotlin class
-            val className = javaClsSysId.name.replace("com.neome.java.api", "com.neome.api")
-            val kotlinClsSysId = try {
-                @Suppress("UNCHECKED_CAST")
-                Class.forName(className) as Class<out SysId>
-            } catch (e: Exception) {
-                throw IllegalArgumentException("Could not find Kotlin class for: $className", e)
-            }
-
-            val newPrefix = JavaTypes.getSysIdPrefix(javaClsSysId)
+            val newPrefix = Types.getSysIdPrefix(clsSysId)
             if (newPrefix != null && prefix != newPrefix) {
                 modifiedId = id.replaceFirst(prefix, newPrefix)
             }
 
-            return createInternal<T>(modifiedId, kotlinClsSysId)
+            return createInternal<T>(modifiedId, clsSysId)
         }
 
         /**
@@ -157,22 +147,18 @@ abstract class SysId : Comparable<SysId> {
          * Generates next ID for the given SysId class with GUID and extension
          */
         @Suppress("UNCHECKED_CAST")
-        fun <T : SysId> nextId(clsSysId: Class<T>, guid: String?, ext: String?): T {
+        fun <T : SysId> nextId(clsSysId: Class<T>?, guid: String?, ext: String?): T {
+            requireNotNull(clsSysId) { "clsSysId must not be null" }
             requireNotNull(guid) { "guid must not be null" }
 
-            // Convert Kotlin class to Java class for prefix lookup
-            val javaClassName = clsSysId.name.replace("com.neome.api", "com.neome.java.api")
-            val javaClsSysId = try {
-                Class.forName(javaClassName)
-            } catch (e: Exception) {
-                throw IllegalArgumentException("Could not find Java class for: $javaClassName", e)
-            }
-
-            val prefix =
-                JavaTypes.getSysIdPrefix(javaClsSysId as Class<out com.neome.java.api.meta.base.SysId>)
+            val prefix = Types.getSysIdPrefix(clsSysId)
                     ?: throw IllegalArgumentException("prefix must not be null")
 
-            val id = prefix + SEP_PREFIX + guid + (ext?.let { SEP_EXT + it } ?: "")
+            val id = if (ext != null) {
+                prefix + SEP_PREFIX + guid + SEP_EXT + ext
+            } else {
+                prefix + SEP_PREFIX + guid
+            }
 
             return createInternal<T>(id, clsSysId)
         }
@@ -188,7 +174,9 @@ abstract class SysId : Comparable<SysId> {
          * Creates SysId instance from ID and class (internal helper)
          */
         @Suppress("UNCHECKED_CAST")
-        private fun <T : SysId> createInternal(id: String?, clsSysId: Class<out SysId>): T {
+        private fun <T : SysId> createInternal(id: String?, clsSysId: Class<out SysId>?): T {
+            requireNotNull(clsSysId) { "clsSysId must not be null" }
+
             if (id == null) {
                 return null as T
             }
@@ -265,15 +253,8 @@ abstract class SysId : Comparable<SysId> {
      * Gets the prefix part of the ID
      */
     fun getPrefix(): String? {
-        // Convert Kotlin class to Java class for prefix lookup
-        val javaClassName = javaClass.name.replace("com.neome.api", "com.neome.java.api")
-        return try {
-            val javaClass = Class.forName(javaClassName)
-            @Suppress("UNCHECKED_CAST")
-            JavaTypes.getSysIdPrefix(javaClass as Class<out com.neome.java.api.meta.base.SysId>)
-        } catch (e: Exception) {
-            null
-        }
+        @Suppress("UNCHECKED_CAST")
+        return Types.getSysIdPrefix(javaClass as Class<out SysId>)
     }
 
     /**

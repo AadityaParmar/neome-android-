@@ -8,7 +8,7 @@ package com.neome.api.nucleus.base
 import com.neome.api.meta.base.AnyKey
 import com.neome.api.meta.base.AnyValue
 
-class Types
+object Types
 {
   class AnyOtpValue : AnyValue()
   class AnyPrefixKey : AnyKey()

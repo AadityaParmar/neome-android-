@@ -3,13 +3,10 @@ package com.neome.feature.componentshowcase.presentation.testing
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -18,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.neome.feature.form.presentation.component.Form
-import com.neome.junk.TestKotlinxJsonParser
 import com.neome.ui.theme.NeomeTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -41,19 +37,19 @@ fun ComponentTestingScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             // Test buttons section
-            Button(
-                onClick = { TestKotlinxJsonParser.testWithMapper() },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Test Kotlinx + Mapper → DefnForm")
-            }
-
-            Button(
-                onClick = { TestKotlinxJsonParser.compareAllParsers() },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Compare: Gson vs Kotlinx")
-            }
+//            Button(
+//                onClick = { TestKotlinxJsonParser.testWithMapper() },
+//                modifier = Modifier.fillMaxWidth()
+//            ) {
+//                Text("Test Kotlinx + Mapper → DefnForm")
+//            }
+//
+//            Button(
+//                onClick = { TestKotlinxJsonParser.compareAllParsers() },
+//                modifier = Modifier.fillMaxWidth()
+//            ) {
+//                Text("Compare: Gson vs Kotlinx")
+//            }
 
             // Render Form component with Pure MVI signature
             Form(

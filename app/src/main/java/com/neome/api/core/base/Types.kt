@@ -5,7 +5,7 @@
 
 package com.neome.api.core.base
 
-class Types
+object Types
 {
   enum class EnumDeeplinkActionType(val value: String)
   {

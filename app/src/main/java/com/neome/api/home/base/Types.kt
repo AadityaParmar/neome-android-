@@ -5,7 +5,7 @@
 
 package com.neome.api.home.base
 
-class Types
+object Types
 {
   enum class EnumGroupPatchPropName(val value: String)
   {

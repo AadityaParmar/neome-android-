@@ -14,23 +14,22 @@ import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonToken
 import com.google.gson.stream.JsonWriter
+import com.neome.api.meta.base.SysId
+import com.neome.api.meta.base.dto.DefnComp
+import com.neome.api.meta.base.dto.DefnFieldDate
+import com.neome.api.meta.base.dto.DefnFieldDecimal
+import com.neome.api.meta.base.dto.DefnFieldEmail
+import com.neome.api.meta.base.dto.DefnFieldLabel
+import com.neome.api.meta.base.dto.DefnFieldMobileNumber
+import com.neome.api.meta.base.dto.DefnFieldNumber
+import com.neome.api.meta.base.dto.DefnFieldParagraph
+import com.neome.api.meta.base.dto.DefnFieldPickEnum
+import com.neome.api.meta.base.dto.DefnFieldSwitch
+import com.neome.api.meta.base.dto.DefnFieldText
 import com.neome.api.meta.base.dto.DefnForm
-import com.neome.java.api.meta.base.Symbol
-import com.neome.java.api.meta.base.SysId
-import com.neome.java.api.meta.base.dto.DefnComp
-import com.neome.java.api.meta.base.dto.DefnFieldDate
-import com.neome.java.api.meta.base.dto.DefnFieldDecimal
-import com.neome.java.api.meta.base.dto.DefnFieldEmail
-import com.neome.java.api.meta.base.dto.DefnFieldLabel
-import com.neome.java.api.meta.base.dto.DefnFieldMobileNumber
-import com.neome.java.api.meta.base.dto.DefnFieldNumber
-import com.neome.java.api.meta.base.dto.DefnFieldParagraph
-import com.neome.java.api.meta.base.dto.DefnFieldPickEnum
-import com.neome.java.api.meta.base.dto.DefnFieldSwitch
-import com.neome.java.api.meta.base.dto.DefnFieldText
-import com.neome.java.api.meta.base.dto.DefnGrid
-import com.neome.java.api.meta.base.dto.DefnSection
-import com.neome.java.api.meta.base.dto.DefnTab
+import com.neome.api.meta.base.dto.DefnGrid
+import com.neome.api.meta.base.dto.DefnSection
+import com.neome.api.meta.base.dto.DefnTab
 import java.lang.reflect.Type
 
 /**
@@ -166,12 +165,12 @@ object PlusJsonParser {
         GsonBuilder()
             .registerTypeAdapter(DefnComp::class.java, DefnCompDeserializer())
             .registerTypeAdapterFactory(SysIdArrayAdapterFactory())
-            .registerTypeAdapter(Symbol::class.java, JsonDeserializer<Symbol> { json, _, _ ->
-                Symbol().apply { name = json.asString }
-            })
-            .registerTypeAdapter(Symbol::class.java, JsonSerializer<Symbol> { src, _, _ ->
-                JsonPrimitive(src.name)
-            })
+//            .registerTypeAdapter(Symbol::class.java, JsonDeserializer<Symbol> { json, _, _ ->
+//                Symbol().apply { name = json.asString }
+//            })
+//            .registerTypeAdapter(Symbol::class.java, JsonSerializer<Symbol> { src, _, _ ->
+//                JsonPrimitive(src.name)
+//            })
             .registerTypeHierarchyAdapter(SysId::class.java, JsonDeserializer<SysId> { json, _, _ ->
                 SysId.create<SysId>(json.asString)
             })

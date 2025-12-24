@@ -5,7 +5,7 @@
 
 package com.neome.api.studio.base
 
-class Types
+object Types
 {
   enum class EnumEntActivityState(val value: String)
   {

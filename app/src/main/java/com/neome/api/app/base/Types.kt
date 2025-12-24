@@ -5,7 +5,7 @@
 
 package com.neome.api.app.base
 
-class Types
+object Types
 {
   enum class EnumKindAiAssist(val value: String)
   {

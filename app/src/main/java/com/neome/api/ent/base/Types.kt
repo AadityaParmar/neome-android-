@@ -5,7 +5,7 @@
 
 package com.neome.api.ent.base
 
-class Types
+object Types
 {
   enum class EnumAuditAction(val value: String)
   {
