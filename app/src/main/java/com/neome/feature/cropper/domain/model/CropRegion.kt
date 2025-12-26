@@ -1,4 +1,4 @@
-package com.neome.feature.camera.domain.model
+package com.neome.feature.cropper.domain.model
 
 /**
  * Normalized crop region (0.0 to 1.0 percentages).

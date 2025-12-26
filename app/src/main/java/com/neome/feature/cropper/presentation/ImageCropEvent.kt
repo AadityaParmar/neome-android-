@@ -1,6 +1,6 @@
-package com.neome.feature.camera.presentation.crop
+package com.neome.feature.cropper.presentation
 
-import com.neome.feature.camera.domain.model.CropRegion
+import com.neome.feature.cropper.domain.model.CropRegion
 
 /**
  * All possible user actions on crop screen.

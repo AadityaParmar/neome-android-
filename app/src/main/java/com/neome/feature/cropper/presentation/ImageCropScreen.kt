@@ -1,4 +1,4 @@
-package com.neome.feature.camera.presentation.crop
+package com.neome.feature.cropper.presentation
 
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
@@ -38,9 +38,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.neome.feature.camera.domain.model.CapturedImage
-import com.neome.feature.camera.domain.usecase.CropImageUseCase
-import com.neome.feature.camera.presentation.components.CropOverlay
+import com.neome.feature.cropper.domain.model.CroppableImage
+import com.neome.feature.cropper.domain.usecase.CropImageUseCase
+import com.neome.feature.cropper.presentation.components.CropOverlay
 
 /**
  * Image crop screen with free crop mode only.
@@ -53,15 +53,15 @@ import com.neome.feature.camera.presentation.components.CropOverlay
  */
 @Composable
 fun ImageCropScreen(
-    sourceImage: CapturedImage,
+    sourceImage: CroppableImage,
     aspectRatio: AspectRatio = AspectRatio.Free,
     viewModel: ImageCropViewModel = viewModel(
         factory = ImageCropViewModel.Factory(
             cropImageUseCase = CropImageUseCase()
         )
     ),
-    onCropConfirmed: (CapturedImage) -> Unit,
-    onCancelled: (CapturedImage) -> Unit,
+    onCropConfirmed: (CroppableImage) -> Unit,
+    onCancelled: (CroppableImage) -> Unit,
     onError: (String) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()

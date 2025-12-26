@@ -1,4 +1,4 @@
-package com.neome.feature.camera.presentation.components
+package com.neome.feature.cropper.presentation.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.awaitEachGesture
@@ -18,7 +18,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.*
-import com.neome.feature.camera.domain.model.CropRegion
+import com.neome.feature.cropper.domain.model.CropRegion
 import kotlin.math.sqrt
 
 private enum class DragHandle {
@@ -64,7 +64,7 @@ fun CropOverlay(
 
                 awaitEachGesture {
 
-                    // 1️⃣ LOCK TO ONE POINTER
+                    // 1. LOCK TO ONE POINTER
                     val down = awaitFirstDown()
                     val pointerId = down.id
 
@@ -83,7 +83,7 @@ fun CropOverlay(
                     var lastPosition = down.position
                     var currentRegion = cropRegion
 
-                    // 2️⃣ CONTINUOUS DRAG LOOP
+                    // 2. CONTINUOUS DRAG LOOP
                     while (true) {
                         val event = awaitPointerEvent()
                         val change = event.changes.firstOrNull { it.id == pointerId } ?: break

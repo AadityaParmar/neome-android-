@@ -1,11 +1,11 @@
-package com.neome.feature.camera.presentation.crop
+package com.neome.feature.cropper.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.neome.feature.camera.domain.model.CapturedImage
-import com.neome.feature.camera.domain.model.CropRegion
-import com.neome.feature.camera.domain.usecase.CropImageUseCase
+import com.neome.feature.cropper.domain.model.CroppableImage
+import com.neome.feature.cropper.domain.model.CropRegion
+import com.neome.feature.cropper.domain.usecase.CropImageUseCase
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -32,7 +32,7 @@ class ImageCropViewModel(
     /**
      * Set the source image to be cropped.
      */
-    fun setSourceImage(image: CapturedImage) {
+    fun setSourceImage(image: CroppableImage) {
         _state.update { it.copy(sourceImage = image) }
     }
 

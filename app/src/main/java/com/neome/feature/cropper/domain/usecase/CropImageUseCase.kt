@@ -1,10 +1,10 @@
-package com.neome.feature.camera.domain.usecase
+package com.neome.feature.cropper.domain.usecase
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
-import com.neome.feature.camera.domain.model.CapturedImage
-import com.neome.feature.camera.domain.model.CropRegion
+import com.neome.feature.cropper.domain.model.CroppableImage
+import com.neome.feature.cropper.domain.model.CropRegion
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
@@ -16,9 +16,9 @@ import java.io.ByteArrayOutputStream
 class CropImageUseCase {
 
     suspend operator fun invoke(
-        image: CapturedImage,
+        image: CroppableImage,
         cropRegion: CropRegion
-    ): Result<CapturedImage> = withContext(Dispatchers.IO) {
+    ): Result<CroppableImage> = withContext(Dispatchers.IO) {
         try {
             // Decode bitmap from bytes
             val options = BitmapFactory.Options().apply {
@@ -70,13 +70,12 @@ class CropImageUseCase {
             croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
             val croppedBytes = outputStream.toByteArray()
 
-            val result = CapturedImage(
+            val result = CroppableImage(
                 bytes = croppedBytes,
                 width = croppedBitmap.width,
                 height = croppedBitmap.height,
                 rotation = 0, // Rotation already applied
-                mimeType = image.mimeType,
-                timestamp = System.currentTimeMillis()
+                mimeType = image.mimeType
             )
 
             croppedBitmap.recycle()

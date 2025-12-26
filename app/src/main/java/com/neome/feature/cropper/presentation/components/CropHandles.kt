@@ -1,4 +1,4 @@
-package com.neome.feature.camera.presentation.components
+package com.neome.feature.cropper.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures

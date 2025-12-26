@@ -48,7 +48,8 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.neome.feature.camera.domain.model.CapturedImage
 import com.neome.feature.camera.presentation.capture.CameraCaptureScreen
-import com.neome.feature.camera.presentation.crop.ImageCropScreen
+import com.neome.feature.cropper.domain.model.CroppableImage
+import com.neome.feature.cropper.presentation.ImageCropScreen
 
 /**
  * Media showcase demonstrating camera features.
@@ -431,10 +432,10 @@ private fun ImagePreviewWithCropDialog(
                         color = MaterialTheme.colorScheme.background
                     ) {
                         ImageCropScreen(
-                            sourceImage = image,
+                            sourceImage = image.toCroppableImage(),
                             onCropConfirmed = { croppedImage ->
                                 // Update image and return to preview
-                                onImageUpdated(croppedImage)
+                                onImageUpdated(croppedImage.toCapturedImage())
                                 showCropper = false
                             },
                             onCancelled = { _ ->
@@ -451,4 +452,31 @@ private fun ImagePreviewWithCropDialog(
             }
         }
     }
+}
+
+/**
+ * Convert CapturedImage to CroppableImage for use with the Cropper feature.
+ */
+private fun CapturedImage.toCroppableImage(): CroppableImage {
+    return CroppableImage(
+        bytes = bytes,
+        width = width,
+        height = height,
+        rotation = rotation,
+        mimeType = mimeType
+    )
+}
+
+/**
+ * Convert CroppableImage back to CapturedImage after cropping.
+ */
+private fun CroppableImage.toCapturedImage(): CapturedImage {
+    return CapturedImage(
+        bytes = bytes,
+        width = width,
+        height = height,
+        rotation = rotation,
+        mimeType = mimeType,
+        timestamp = System.currentTimeMillis()
+    )
 }

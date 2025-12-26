@@ -1,16 +1,15 @@
-package com.neome.feature.camera.presentation.crop
+package com.neome.feature.cropper.presentation
 
-import com.neome.feature.camera.domain.model.CapturedImage
-import com.neome.feature.camera.domain.model.CropRegion
+import com.neome.feature.cropper.domain.model.CroppableImage
+import com.neome.feature.cropper.domain.model.CropRegion
 
 /**
  * Single immutable state for crop screen.
- * NOTE: Image preview is ONLY shown in this screen.
  *
  * Cropper is always in FREE mode - no aspect ratio constraints.
  */
 data class ImageCropState(
-    val sourceImage: CapturedImage? = null,
+    val sourceImage: CroppableImage? = null,
     val cropRegion: CropRegion = CropRegion.FULL,
     val isProcessing: Boolean = false,
     val error: String? = null

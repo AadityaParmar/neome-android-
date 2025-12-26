@@ -23,7 +23,8 @@ import com.neome.feature.camera.domain.model.CapturedImage
 import com.neome.feature.camera.domain.usecase.SaveImageUseCase
 import com.neome.feature.camera.presentation.capture.CameraCaptureScreen
 import com.neome.feature.camera.presentation.capture.CameraError
-import com.neome.feature.camera.presentation.crop.ImageCropScreen
+import com.neome.feature.cropper.domain.model.CroppableImage
+import com.neome.feature.cropper.presentation.ImageCropScreen
 import kotlinx.coroutines.launch
 
 /**
@@ -39,13 +40,13 @@ private sealed interface FlowStage {
  * Coordinates the flow between capture, crop, and save.
  *
  * Flow A: Capture Only
- *   Camera → Return CapturedImage
+ *   Camera -> Return CapturedImage
  *
- * Flow B: Capture → Crop → Save
- *   Camera → Crop (preview here) → Save → Return SavedImageResult
+ * Flow B: Capture -> Crop -> Save
+ *   Camera -> Crop (preview here) -> Save -> Return SavedImageResult
  *
- * Flow C: Capture → Save
- *   Camera → Save → Return SavedImageResult (no preview)
+ * Flow C: Capture -> Save
+ *   Camera -> Save -> Return SavedImageResult (no preview)
  */
 @Composable
 fun CameraFlowCoordinator(
@@ -99,17 +100,22 @@ fun CameraFlowCoordinator(
         }
 
         is FlowStage.Crop -> {
+            // Convert CapturedImage to CroppableImage for the cropper
+            val croppableImage = stage.image.toCroppableImage()
+
             ImageCropScreen(
-                sourceImage = stage.image,
+                sourceImage = croppableImage,
                 onCropConfirmed = { croppedImage ->
+                    // Convert back to CapturedImage
+                    val resultImage = croppedImage.toCapturedImage()
                     if (config.enableSaving) {
                         // Move to save stage
-                        currentStage = FlowStage.Saving(croppedImage, wasCropped = true)
+                        currentStage = FlowStage.Saving(resultImage, wasCropped = true)
                     } else {
                         // Return cropped image without saving
                         onResult(
                             CameraFlowResult.Success(
-                                capturedImage = croppedImage,
+                                capturedImage = resultImage,
                                 savedResult = null,
                                 wasCropped = true
                             )
@@ -199,4 +205,31 @@ private fun SaveStage(
             )
         }
     }
+}
+
+/**
+ * Extension function to convert CapturedImage to CroppableImage.
+ */
+private fun CapturedImage.toCroppableImage(): CroppableImage {
+    return CroppableImage(
+        bytes = bytes,
+        width = width,
+        height = height,
+        rotation = rotation,
+        mimeType = mimeType
+    )
+}
+
+/**
+ * Extension function to convert CroppableImage back to CapturedImage.
+ */
+private fun CroppableImage.toCapturedImage(): CapturedImage {
+    return CapturedImage(
+        bytes = bytes,
+        width = width,
+        height = height,
+        rotation = rotation,
+        mimeType = mimeType,
+        timestamp = System.currentTimeMillis()
+    )
 }
