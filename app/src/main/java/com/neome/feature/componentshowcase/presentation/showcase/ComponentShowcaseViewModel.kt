@@ -78,6 +78,11 @@ class ComponentShowcaseViewModel : ViewModel() {
                 name = "File Picker",
                 description = "System file picker for selecting files",
                 components = listOf("Pick Image", "Pick Video", "Pick Image + Video", "Pick PDF", "Pick All Files")
+            ),
+            ComponentCategory(
+                name = "Image Compression",
+                description = "Native image compression using Android SDK",
+                components = listOf("Pick Image", "Compression Settings", "Preview Original vs Compressed")
             )
         )
         _state.update { it.copy(categories = categories) }
