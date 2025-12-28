@@ -83,6 +83,11 @@ class ComponentShowcaseViewModel : ViewModel() {
                 name = "Image Compression",
                 description = "Native image compression using Android SDK",
                 components = listOf("Pick Image", "Compression Settings", "Preview Original vs Compressed")
+            ),
+            ComponentCategory(
+                name = "Thumbnail Picker",
+                description = "Native video thumbnail extraction using Android SDK",
+                components = listOf("Pick Video", "Extract First Frame", "Preview Thumbnail")
             )
         )
         _state.update { it.copy(categories = categories) }

@@ -41,6 +41,7 @@ import com.neome.feature.componentshowcase.presentation.components.OtherComponen
 import com.neome.feature.componentshowcase.presentation.components.ProgressShowcase
 import com.neome.feature.componentshowcase.presentation.components.SelectionShowcase
 import com.neome.feature.componentshowcase.presentation.components.TextFieldShowcase
+import com.neome.feature.componentshowcase.presentation.components.ThumbnailPickerShowcase
 import com.neome.feature.componentshowcase.domain.model.ComponentCategory
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -143,6 +144,7 @@ private fun ComponentShowcaseContent(
                         7 -> MediaShowcase()
                         8 -> FilePickerShowcase()
                         9 -> ImageCompressionShowcase()
+                        10 -> ThumbnailPickerShowcase()
                     }
                 }
 
