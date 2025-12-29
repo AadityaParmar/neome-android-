@@ -132,6 +132,10 @@ private fun ImageCropContent(
                     .padding(top = 72.dp, bottom = 88.dp)
             ) {
                 if (bitmap != null) {
+                    val imageAspectRatio = remember(bitmap) {
+                        bitmap.width.toFloat() / bitmap.height.toFloat()
+                    }
+
                     Image(
                         bitmap = bitmap.asImageBitmap(),
                         contentDescription = "Image to crop",
@@ -144,6 +148,7 @@ private fun ImageCropContent(
                         onCropRegionChanged = { region ->
                             onEvent(ImageCropEvent.CropRegionChanged(region))
                         },
+                        imageAspectRatio = imageAspectRatio,
                         modifier = Modifier.fillMaxSize(),
                         safePadding = 24.dp
                     )

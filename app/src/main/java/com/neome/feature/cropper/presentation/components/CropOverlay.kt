@@ -19,6 +19,7 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.*
 import com.neome.feature.cropper.domain.model.CropRegion
+import kotlin.math.min
 import kotlin.math.sqrt
 
 private enum class DragHandle {
@@ -32,6 +33,7 @@ private enum class DragHandle {
 fun CropOverlay(
     cropRegion: CropRegion,
     onCropRegionChanged: (CropRegion) -> Unit,
+    imageAspectRatio: Float,
     modifier: Modifier = Modifier,
     safePadding: Dp = 24.dp
 ) {
@@ -43,16 +45,37 @@ fun CropOverlay(
     var canvasSize by remember { mutableStateOf(Size.Zero) }
     var activeHandle by remember { mutableStateOf(DragHandle.NONE) }
 
-    val contentArea = remember(canvasSize, safePaddingPx) {
-        if (canvasSize.width > safePaddingPx * 2 && canvasSize.height > safePaddingPx * 2) {
-            Rect(
-                safePaddingPx,
-                safePaddingPx,
-                canvasSize.width - safePaddingPx,
-                canvasSize.height - safePaddingPx
-            )
+    // Use rememberUpdatedState to always access the latest cropRegion
+    val currentCropRegion by rememberUpdatedState(cropRegion)
+
+    // Calculate the actual image display bounds within the container
+    // This matches ContentScale.Fit behavior
+    val imageBounds = remember(canvasSize, safePaddingPx, imageAspectRatio) {
+        if (canvasSize.width <= 0 || canvasSize.height <= 0 || imageAspectRatio <= 0) {
+            Rect.Zero
         } else {
-            Rect(0f, 0f, canvasSize.width, canvasSize.height)
+            val availableWidth = canvasSize.width - safePaddingPx * 2
+            val availableHeight = canvasSize.height - safePaddingPx * 2
+
+            if (availableWidth <= 0 || availableHeight <= 0) {
+                Rect.Zero
+            } else {
+                val containerAspect = availableWidth / availableHeight
+
+                val (imageWidth, imageHeight) = if (imageAspectRatio > containerAspect) {
+                    // Image is wider than container - fit to width
+                    availableWidth to (availableWidth / imageAspectRatio)
+                } else {
+                    // Image is taller than container - fit to height
+                    (availableHeight * imageAspectRatio) to availableHeight
+                }
+
+                // Center the image bounds within the available area
+                val offsetX = safePaddingPx + (availableWidth - imageWidth) / 2
+                val offsetY = safePaddingPx + (availableHeight - imageHeight) / 2
+
+                Rect(offsetX, offsetY, offsetX + imageWidth, offsetY + imageHeight)
+            }
         }
     }
 
@@ -60,7 +83,7 @@ fun CropOverlay(
         modifier = modifier
             .fillMaxSize()
             .onSizeChanged { canvasSize = it.toSize() }
-            .pointerInput(contentArea) {
+            .pointerInput(imageBounds) {
 
                 awaitEachGesture {
 
@@ -68,7 +91,8 @@ fun CropOverlay(
                     val down = awaitFirstDown()
                     val pointerId = down.id
 
-                    val cropRect = calculateCropRect(cropRegion, contentArea)
+                    // Always read the latest cropRegion via rememberUpdatedState
+                    val cropRect = calculateCropRect(currentCropRegion, imageBounds)
                     activeHandle = detectHandle(
                         down.position,
                         cropRect,
@@ -81,7 +105,7 @@ fun CropOverlay(
                     down.consume()
 
                     var lastPosition = down.position
-                    var currentRegion = cropRegion
+                    var currentRegion = currentCropRegion
 
                     // 2. CONTINUOUS DRAG LOOP
                     while (true) {
@@ -99,7 +123,7 @@ fun CropOverlay(
                                 handle = activeHandle,
                                 currentRegion = currentRegion,
                                 dragDelta = delta,
-                                contentArea = contentArea
+                                contentArea = imageBounds
                             )
                             if (updated != null) {
                                 currentRegion = updated
@@ -114,10 +138,12 @@ fun CropOverlay(
             }
     ) {
         Canvas(modifier = Modifier.fillMaxSize()) {
-            val rect = calculateCropRect(cropRegion, contentArea)
+            if (imageBounds == Rect.Zero) return@Canvas
+
+            val rect = calculateCropRect(currentCropRegion, imageBounds)
             if (rect.width <= 0 || rect.height <= 0) return@Canvas
 
-            drawOverlay(rect)
+            drawOverlay(rect, imageBounds)
             drawCropBorder(rect)
             drawGridLines(rect)
             drawCornerHandles(rect)
@@ -227,12 +253,45 @@ private fun applyDrag(
 
 /* -------------------- DRAWING -------------------- */
 
-private fun DrawScope.drawOverlay(rect: Rect) {
-    val c = Color.Black.copy(alpha = 0.6f)
-    drawRect(c, Offset.Zero, Size(size.width, rect.top))
-    drawRect(c, Offset(0f, rect.bottom), Size(size.width, size.height - rect.bottom))
-    drawRect(c, Offset(0f, rect.top), Size(rect.left, rect.height))
-    drawRect(c, Offset(rect.right, rect.top), Size(size.width - rect.right, rect.height))
+private fun DrawScope.drawOverlay(cropRect: Rect, imageBounds: Rect) {
+    val dimColor = Color.Black.copy(alpha = 0.6f)
+    val fullDark = Color.Black
+
+    // Draw fully dark areas outside image bounds
+    // Top area (above image)
+    if (imageBounds.top > 0) {
+        drawRect(fullDark, Offset.Zero, Size(size.width, imageBounds.top))
+    }
+    // Bottom area (below image)
+    if (imageBounds.bottom < size.height) {
+        drawRect(fullDark, Offset(0f, imageBounds.bottom), Size(size.width, size.height - imageBounds.bottom))
+    }
+    // Left area (left of image, between top/bottom dark areas)
+    if (imageBounds.left > 0) {
+        drawRect(fullDark, Offset(0f, imageBounds.top), Size(imageBounds.left, imageBounds.height))
+    }
+    // Right area (right of image, between top/bottom dark areas)
+    if (imageBounds.right < size.width) {
+        drawRect(fullDark, Offset(imageBounds.right, imageBounds.top), Size(size.width - imageBounds.right, imageBounds.height))
+    }
+
+    // Draw semi-transparent overlay within image bounds but outside crop region
+    // Top strip (within image, above crop)
+    if (cropRect.top > imageBounds.top) {
+        drawRect(dimColor, Offset(imageBounds.left, imageBounds.top), Size(imageBounds.width, cropRect.top - imageBounds.top))
+    }
+    // Bottom strip (within image, below crop)
+    if (cropRect.bottom < imageBounds.bottom) {
+        drawRect(dimColor, Offset(imageBounds.left, cropRect.bottom), Size(imageBounds.width, imageBounds.bottom - cropRect.bottom))
+    }
+    // Left strip (within image, left of crop, between top/bottom strips)
+    if (cropRect.left > imageBounds.left) {
+        drawRect(dimColor, Offset(imageBounds.left, cropRect.top), Size(cropRect.left - imageBounds.left, cropRect.height))
+    }
+    // Right strip (within image, right of crop, between top/bottom strips)
+    if (cropRect.right < imageBounds.right) {
+        drawRect(dimColor, Offset(cropRect.right, cropRect.top), Size(imageBounds.right - cropRect.right, cropRect.height))
+    }
 }
 
 private fun DrawScope.drawCropBorder(rect: Rect) {
