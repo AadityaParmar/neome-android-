@@ -57,6 +57,56 @@ fun rememberMultiTypePicker(
     }
 }
 
+@Composable
+fun rememberMultiFilePicker(
+    mode: FilePickerMode,
+    onResult: (List<FilePickerResult>) -> Unit
+): () -> Unit {
+    val context = LocalContext.current
+
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetMultipleContents()
+    ) { uris: List<Uri> ->
+        if (uris.isNotEmpty()) {
+            val results = uris.mapNotNull { uri ->
+                extractFileMetadata(context, uri)
+            }
+            onResult(results)
+        } else {
+            onResult(emptyList())
+        }
+    }
+
+    return remember(mode) {
+        { launcher.launch(mode.mimeType) }
+    }
+}
+
+@Composable
+fun rememberMultiFileMultiTypePicker(
+    mimeTypes: Array<String>,
+    onResult: (List<FilePickerResult>) -> Unit
+): () -> Unit {
+    val context = LocalContext.current
+
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.OpenMultipleDocuments()
+    ) { uris: List<Uri> ->
+        if (uris.isNotEmpty()) {
+            val results = uris.mapNotNull { uri ->
+                extractFileMetadata(context, uri)
+            }
+            onResult(results)
+        } else {
+            onResult(emptyList())
+        }
+    }
+
+    return remember(mimeTypes.contentHashCode()) {
+        { launcher.launch(mimeTypes) }
+    }
+}
+
 private fun extractFileMetadata(context: Context, uri: Uri): FilePickerResult? {
     return try {
         context.contentResolver.query(uri, null, null, null, null)?.use { cursor ->

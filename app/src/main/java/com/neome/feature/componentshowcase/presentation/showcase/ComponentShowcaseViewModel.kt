@@ -93,6 +93,11 @@ class ComponentShowcaseViewModel : ViewModel() {
                 name = "Image Primary Color",
                 description = "Native image primary color extraction using Android SDK",
                 components = listOf("Pick Image", "Extract Dominant Color", "Color Swatch Preview")
+            ),
+            ComponentCategory(
+                name = "Media Carousel",
+                description = "Horizontally swipeable carousel for images and videos",
+                components = listOf("Image Preview", "Video Playback", "Page Indicator", "Crop Integration")
             )
         )
         _state.update { it.copy(categories = categories) }
