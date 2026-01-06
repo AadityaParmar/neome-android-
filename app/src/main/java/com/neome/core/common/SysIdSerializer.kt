@@ -12,7 +12,7 @@ import kotlinx.serialization.encoding.Encoder
 open class SysIdSerializer<T : SysId>(descriptor: String) : KSerializer<T> {
 
     override val descriptor: SerialDescriptor =
-        PrimitiveSerialDescriptor("MessageId", PrimitiveKind.STRING)
+        PrimitiveSerialDescriptor(descriptor, PrimitiveKind.STRING)
 
     override fun serialize(encoder: Encoder, value: T) {
         encoder.encodeString(value.toString())
@@ -22,14 +22,16 @@ open class SysIdSerializer<T : SysId>(descriptor: String) : KSerializer<T> {
         val string = decoder.decodeString()
         // Use SysId.create() to properly create and initialize the MessageId
         return SysId.create(string)
-            ?: throw IllegalArgumentException("Failed to create MessageId from: $string")
+            ?: throw IllegalArgumentException("Failed to create SysId from: $string")
     }
 }
 
 // Base SysId serializers
 object AdminIdSer : SysIdSerializer<Types.AdminId>("AdminId")
 object ArtifactIdSer : SysIdSerializer<Types.ArtifactId>("ArtifactId")
-object AutomationExecutionIdSer : SysIdSerializer<Types.AutomationExecutionId>("AutomationExecutionId")
+object AutomationExecutionIdSer :
+    SysIdSerializer<Types.AutomationExecutionId>("AutomationExecutionId")
+
 object ChatIdSer : SysIdSerializer<Types.ChatId>("ChatId")
 object ConnIdSer : SysIdSerializer<Types.ConnId>("ConnId")
 object ContactIdSer : SysIdSerializer<Types.ContactId>("ContactId")
@@ -80,8 +82,12 @@ object MetaIdDeeplinkSer : SysIdSerializer<Types.MetaIdDeeplink>("MetaIdDeeplink
 object MetaIdDriveSheetSer : SysIdSerializer<Types.MetaIdDriveSheet>("MetaIdDriveSheet")
 object MetaIdEventSer : SysIdSerializer<Types.MetaIdEvent>("MetaIdEvent")
 object MetaIdFieldSer : SysIdSerializer<Types.MetaIdField>("MetaIdField")
-object MetaIdFieldDynamicConditionSer : SysIdSerializer<Types.MetaIdFieldDynamicCondition>("MetaIdFieldDynamicCondition")
-object MetaIdFieldDynamicRuleSer : SysIdSerializer<Types.MetaIdFieldDynamicRule>("MetaIdFieldDynamicRule")
+object MetaIdFieldDynamicConditionSer :
+    SysIdSerializer<Types.MetaIdFieldDynamicCondition>("MetaIdFieldDynamicCondition")
+
+object MetaIdFieldDynamicRuleSer :
+    SysIdSerializer<Types.MetaIdFieldDynamicRule>("MetaIdFieldDynamicRule")
+
 object MetaIdFooterSer : SysIdSerializer<Types.MetaIdFooter>("MetaIdFooter")
 object MetaIdFormSer : SysIdSerializer<Types.MetaIdForm>("MetaIdForm")
 object MetaIdFormulaSer : SysIdSerializer<Types.MetaIdFormula>("MetaIdFormula")
@@ -90,16 +96,22 @@ object MetaIdGridSer : SysIdSerializer<Types.MetaIdGrid>("MetaIdGrid")
 object MetaIdGroupSer : SysIdSerializer<Types.MetaIdGroup>("MetaIdGroup")
 object MetaIdHeaderSer : SysIdSerializer<Types.MetaIdHeader>("MetaIdHeader")
 object MetaIdHyperlinkSer : SysIdSerializer<Types.MetaIdHyperlink>("MetaIdHyperlink")
-object MetaIdLayoutDriveSheetSer : SysIdSerializer<Types.MetaIdLayoutDriveSheet>("MetaIdLayoutDriveSheet")
+object MetaIdLayoutDriveSheetSer :
+    SysIdSerializer<Types.MetaIdLayoutDriveSheet>("MetaIdLayoutDriveSheet")
+
 object MetaIdLayoutFormSer : SysIdSerializer<Types.MetaIdLayoutForm>("MetaIdLayoutForm")
-object MetaIdLayoutFormEditorCompositeSer : SysIdSerializer<Types.MetaIdLayoutFormEditorComposite>("MetaIdLayoutFormEditorComposite")
+object MetaIdLayoutFormEditorCompositeSer :
+    SysIdSerializer<Types.MetaIdLayoutFormEditorComposite>("MetaIdLayoutFormEditorComposite")
+
 object MetaIdLayoutGridSer : SysIdSerializer<Types.MetaIdLayoutGrid>("MetaIdLayoutGrid")
 object MetaIdLayoutUserSer : SysIdSerializer<Types.MetaIdLayoutUser>("MetaIdLayoutUser")
 object MetaIdMappingSer : SysIdSerializer<Types.MetaIdMapping>("MetaIdMapping")
 object MetaIdModuleSer : SysIdSerializer<Types.MetaIdModule>("MetaIdModule")
 object MetaIdOptionSer : SysIdSerializer<Types.MetaIdOption>("MetaIdOption")
 object MetaIdPartitionSer : SysIdSerializer<Types.MetaIdPartition>("MetaIdPartition")
-object MetaIdPaymentProviderSer : SysIdSerializer<Types.MetaIdPaymentProvider>("MetaIdPaymentProvider")
+object MetaIdPaymentProviderSer :
+    SysIdSerializer<Types.MetaIdPaymentProvider>("MetaIdPaymentProvider")
+
 object MetaIdPipelineParamSer : SysIdSerializer<Types.MetaIdPipelineParam>("MetaIdPipelineParam")
 object MetaIdPipelineSystemSer : SysIdSerializer<Types.MetaIdPipelineSystem>("MetaIdPipelineSystem")
 object MetaIdPipelineVarSer : SysIdSerializer<Types.MetaIdPipelineVar>("MetaIdPipelineVar")
@@ -129,8 +141,12 @@ object MetaIdVdRegionSer : SysIdSerializer<Types.MetaIdVdRegion>("MetaIdVdRegion
 object MetaIdVdReportDiaSer : SysIdSerializer<Types.MetaIdVdReportDia>("MetaIdVdReportDia")
 object MetaIdVdReviewSer : SysIdSerializer<Types.MetaIdVdReview>("MetaIdVdReview")
 object MetaIdVideoTimestampSer : SysIdSerializer<Types.MetaIdVideoTimestamp>("MetaIdVideoTimestamp")
-object MetaIdVisibilityActionSer : SysIdSerializer<Types.MetaIdVisibilityAction>("MetaIdVisibilityAction")
-object MetaIdVisibilityConditionSer : SysIdSerializer<Types.MetaIdVisibilityCondition>("MetaIdVisibilityCondition")
+object MetaIdVisibilityActionSer :
+    SysIdSerializer<Types.MetaIdVisibilityAction>("MetaIdVisibilityAction")
+
+object MetaIdVisibilityConditionSer :
+    SysIdSerializer<Types.MetaIdVisibilityCondition>("MetaIdVisibilityCondition")
+
 object MetaIdVisibilityRuleSer : SysIdSerializer<Types.MetaIdVisibilityRule>("MetaIdVisibilityRule")
 object MetaIdWizardSer : SysIdSerializer<Types.MetaIdWizard>("MetaIdWizard")
 
@@ -147,10 +163,13 @@ object RowIdSer : SysIdSerializer<Types.RowId>("RowId")
 object SchedulerTaskIdSer : SysIdSerializer<Types.SchedulerTaskId>("SchedulerTaskId")
 object SheetIdSer : SysIdSerializer<Types.SheetId>("SheetId")
 object SnapshotIdSer : SysIdSerializer<Types.SnapshotId>("SnapshotId")
-object SpreadsheetPartitionIdSer : SysIdSerializer<Types.SpreadsheetPartitionId>("SpreadsheetPartitionId")
+object SpreadsheetPartitionIdSer :
+    SysIdSerializer<Types.SpreadsheetPartitionId>("SpreadsheetPartitionId")
+
 object StoreItemIdSer : SysIdSerializer<Types.StoreItemId>("StoreItemId")
 object TabIdSer : SysIdSerializer<Types.TabId>("TabId")
 object TransactionIdSer : SysIdSerializer<Types.TransactionId>("TransactionId")
 object UserIdSer : SysIdSerializer<Types.UserId>("UserId")
 object WorkflowExecutionIdSer : SysIdSerializer<Types.WorkflowExecutionId>("WorkflowExecutionId")
-object WorkflowGroupExecutionIdSer : SysIdSerializer<Types.WorkflowGroupExecutionId>("WorkflowGroupExecutionId")
+object WorkflowGroupExecutionIdSer :
+    SysIdSerializer<Types.WorkflowGroupExecutionId>("WorkflowGroupExecutionId")
