@@ -5,25 +5,32 @@
 
 package com.neome.api.meta.base
 
-// NanoId implementation placeholder
+import com.aventrix.jnanoid.jnanoid.NanoIdUtils
+import java.security.SecureRandom
+import java.util.Random
 
 open class NanoId : AnyValue()
 {
   companion object
   {
+    private val ALPHA_NUMERIC_CHARS: CharArray =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".toCharArray()
+
+    private val random: Random = SecureRandom()
+
     fun newGuid(): String
     {
-      TODO("NanoId.newGuid() not yet implemented for Kotlin")
+      return NanoIdUtils.randomNanoId(random, ALPHA_NUMERIC_CHARS, 25)
     }
 
     fun newGuidBig(): String
     {
-      TODO("NanoId.newGuidBig() not yet implemented for Kotlin")
+      return NanoIdUtils.randomNanoId(random, ALPHA_NUMERIC_CHARS, 32)
     }
 
     fun newMetaId(): String
     {
-      TODO("NanoId.newMetaId() not yet implemented for Kotlin")
+      return NanoIdUtils.randomNanoId(random, ALPHA_NUMERIC_CHARS, 10)
     }
   }
 }

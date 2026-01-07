@@ -1,6 +1,9 @@
 package com.neome.core.common
 
 import com.neome.api.meta.base.Types
+import com.neome.core.common.serializer.ContactIdSer
+import com.neome.core.common.serializer.MediaIdImageSer
+import com.neome.core.common.serializer.MessageIdSer
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
@@ -57,7 +60,7 @@ class SigMessageSerSimpleTest {
         """.trimIndent()
 
         // When
-        val message = json.decodeFromString<SigMessageSer>(jsonString)
+        val message = json.decodeFromString<SigMessageSer>(jsonString) as SigMessage
         val messageStr = json.encodeToString(message)
 
         // Then

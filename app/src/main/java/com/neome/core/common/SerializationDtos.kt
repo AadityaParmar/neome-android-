@@ -75,7 +75,7 @@ interface SigMessage : SigMessageBase {
 
 // Serializable sealed hierarchy for polymorphic deserialization
 @Serializable
-sealed class DtoMessagePayloadSer : DtoMessagePayload
+sealed class DtoMessagePayloadSeal : DtoMessagePayload
 
 @Serializable
 @SerialName("text")
@@ -85,7 +85,7 @@ data class DtoMessagePayloadTextSer(
     override var messageType: EnumMessageType = EnumMessageType.text,
     override var isUpdated: Boolean? = null,
     override var text: String,
-) : DtoMessagePayloadSer(), DtoMessagePayloadText
+) : DtoMessagePayloadSeal(), DtoMessagePayloadText
 
 @Serializable
 @SerialName("image")
@@ -101,7 +101,7 @@ data class DtoMessagePayloadImageSer(
     override var mediaIdImage: @Contextual MediaIdImage,
     override var primaryColor: String,
     override var width: Long? = null,
-) : DtoMessagePayloadSer(), DtoMessagePayloadImage
+) : DtoMessagePayloadSeal(), DtoMessagePayloadImage
 
 // Add more payload types as needed (audio, video, document, etc.)
 @Serializable
@@ -112,7 +112,7 @@ data class DtoMessagePayloadAudioSer(
     override var messageType: EnumMessageType = EnumMessageType.audio,
     override var isUpdated: Boolean? = null,
     override var text: String = "",
-) : DtoMessagePayloadSer(), DtoMessagePayloadText
+) : DtoMessagePayloadSeal(), DtoMessagePayloadText
 
 @Serializable
 data class SigMessageSer(
@@ -136,7 +136,7 @@ object DtoMessagePayloadSerializer : JsonContentPolymorphicSerializer<DtoMessage
             "text", EnumMessageType.text.value -> DtoMessagePayloadTextSer.serializer()
             "image", EnumMessageType.image.value -> DtoMessagePayloadImageSer.serializer()
             "audio", EnumMessageType.audio.value -> DtoMessagePayloadAudioSer.serializer()
-            else -> DtoMessagePayloadSer.serializer() // Default fallback
+            else -> DtoMessagePayloadSeal.serializer() // Default fallback
         }
     }
 }
