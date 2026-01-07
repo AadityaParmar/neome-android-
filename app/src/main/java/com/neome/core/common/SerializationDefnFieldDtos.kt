@@ -6,7 +6,6 @@ import com.neome.api.meta.base.Types.EnumDefnCalculateFormulaMode
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
-import com.neome.core.common.serializer.DefnDtoTextSer
 import com.neome.core.common.serializer.SymbolSer
 import com.neome.core.common.serializer.sysId.MetaIdCompSer
 import com.neome.core.common.serializer.sysId.MetaIdCompositeSer
@@ -15,7 +14,6 @@ import com.neome.core.common.serializer.sysId.MetaIdFormSer
 import com.neome.core.common.serializer.sysId.MetaIdGridSer
 import com.neome.core.common.serializer.sysId.MetaIdLayoutGridSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer
-import kotlinx.serialization.Contextual
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -24,120 +22,103 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-@Serializable
-sealed interface DefnComp {
-    var disabled: Boolean?
-    var disabledFieldId: Types.MetaIdField?
-    var disabledRoleIdSet: Array<Types.MetaIdRole>?
-    var disabledVar: Boolean?
-    var hidden: Boolean?
-    var hideDirtyIndicator: Boolean?
-    var invisible: Boolean?
-    var label: String?
-    var maxWidth: Int?
-    var name: Symbol
-    var pb: Int?
-    var pl: Int?
-    var pr: Int?
-    var pt: Int?
-    var readOnly: Boolean?
-    var type: Types.EnumDefnCompType
+interface DefnComp {
+    val disabled: Boolean?
+    val disabledFieldId: Types.MetaIdField?
+    val disabledRoleIdSet: Array<Types.MetaIdRole>?
+    val disabledVar: Boolean?
+    val hidden: Boolean?
+    val hideDirtyIndicator: Boolean?
+    val invisible: Boolean?
+    val label: String?
+    val maxWidth: Int?
+    val name: Symbol
+    val pb: Int?
+    val pl: Int?
+    val pr: Int?
+    val pt: Int?
+    val readOnly: Boolean?
+    val type: Types.EnumDefnCompType
 }
 
-@Serializable
-sealed interface DefnField : DefnComp {
-    var metaId: MetaIdField
-}
-
-@Serializable
-sealed interface DefnDtoText {
-    var value: Array<String>?
+interface DefnField : DefnComp {
+    val metaId: MetaIdField
 }
 
 
-@Serializable
-sealed interface DefnFieldEditable : DefnField {
-    var autoFill: Boolean?
-    var autoFocus: Boolean?
-    var helperText: String?
-    var helperTextFieldId: MetaIdField?
-    var helperTextVar: DefnDtoText?
-    var hideLabel: Boolean?
-    var icon: String?
-    var iconVar: String?
-    var labelFieldId: MetaIdField?
-    var placeHolder: String?
-    var placeHolderFieldId: MetaIdField?
-    var placeHolderVar: DefnDtoText?
-    var prefix: String?
-    var prefixVar: DefnDtoText?
-    var required: Boolean?
-    var requiredFieldId: MetaIdField?
-    var requiredRoleIdSet: Array<MetaIdRole>?
-    var requiredVar: Boolean?
-    var suffix: String?
-    var suffixVar: DefnDtoText?
+interface DefnFieldEditable : DefnField {
+    val autoFill: Boolean?
+    val autoFocus: Boolean?
+    val helperText: String?
+    val helperTextFieldId: MetaIdField?
+    val helperTextVar: DefnDtoText?
+    val hideLabel: Boolean?
+    val icon: String?
+    val iconVar: String?
+    val labelFieldId: MetaIdField?
+    val placeHolder: String?
+    val placeHolderFieldId: MetaIdField?
+    val placeHolderVar: DefnDtoText?
+    val prefix: String?
+    val prefixVar: DefnDtoText?
+    val required: Boolean?
+    val requiredFieldId: MetaIdField?
+    val requiredRoleIdSet: Array<MetaIdRole>?
+    val requiredVar: Boolean?
+    val suffix: String?
+    val suffixVar: DefnDtoText?
 }
 
-@Serializable
-sealed interface DefnFieldEditableText : DefnFieldEditable {
-    var defaultFieldId: MetaIdField?
-    var defaultValue: String?
-    var defaultVar: DefnDtoText?
+interface DefnFieldEditableText : DefnFieldEditable {
+    val defaultFieldId: MetaIdField?
+    val defaultValue: String?
+    val defaultVar: DefnDtoText?
 }
 
-@Serializable
-sealed interface DefnFieldText : DefnFieldEditableText {
-    var maxCharCount: Int?
-    var maxCharCountFieldId: MetaIdField?
-    var maxCharCountVar: Int?
-    var minCharCount: Int?
-    var minCharCountFieldId: MetaIdField?
-    var minCharCountVar: Int?
+interface DefnFieldText : DefnFieldEditableText {
+    val maxCharCount: Int?
+    val maxCharCountFieldId: MetaIdField?
+    val maxCharCountVar: Int?
+    val minCharCount: Int?
+    val minCharCountFieldId: MetaIdField?
+    val minCharCountVar: Int?
 }
 
 
-@Serializable
-sealed interface DefnFieldNumber : DefnFieldEditable {
-    var defaultFieldId: MetaIdField?
-    var defaultValue: Int?
-    var defaultVar: Int?
-    var max: Int?
-    var maxFieldId: MetaIdField?
-    var maxVar: Int?
-    var min: Int?
-    var minDisplayValue: Int?
-    var minFieldId: MetaIdField?
-    var minVar: Int?
-    var numberFormat: String?
+interface DefnFieldNumber : DefnFieldEditable {
+    val defaultFieldId: MetaIdField?
+    val defaultValue: Int?
+    val defaultVar: Int?
+    val max: Int?
+    val maxFieldId: MetaIdField?
+    val maxVar: Int?
+    val min: Int?
+    val minDisplayValue: Int?
+    val minFieldId: MetaIdField?
+    val minVar: Int?
+    val numberFormat: String?
 }
 
 
-@Serializable
-sealed interface DefnForm {
-    var allowToPrintForm: Boolean?
-    var calculateFormulaMode: EnumDefnCalculateFormulaMode?
-    var chatBubbleFieldIdSet: Array<MetaIdField>?
-    var chatLabelFieldId: MetaIdField?
-    var chatLabelPatternVar: DefnDtoText?
-    var commentReadOnlyRoleSet: Array<MetaIdRole>?
-    var commentRoleSet: Array<MetaIdRole>?
-    var compMap: Map<MetaIdComp, DefnComp>
-    var configForm: Boolean?
-    var displayCompositeId: Types.MetaIdComposite
-    var formulaFieldIdSet: Array<MetaIdField>?
-    var gridLookupMap: Map<Types.MetaIdLayoutGrid, Types.MetaIdGrid>?
-    var label: String?
-    var metaId: Types.MetaIdForm
-    var name: Symbol
+interface DefnForm {
+    val allowToPrintForm: Boolean?
+    val calculateFormulaMode: EnumDefnCalculateFormulaMode?
+    val chatBubbleFieldIdSet: Array<MetaIdField>?
+    val chatLabelFieldId: MetaIdField?
+    val chatLabelPatternVar: DefnDtoText?
+    val commentReadOnlyRoleSet: Array<MetaIdRole>?
+    val commentRoleSet: Array<MetaIdRole>?
+    val compMap: Map<MetaIdComp, DefnComp>
+    val configForm: Boolean?
+    val displayCompositeId: Types.MetaIdComposite
+    val formulaFieldIdSet: Array<MetaIdField>?
+    val gridLookupMap: Map<Types.MetaIdLayoutGrid, Types.MetaIdGrid>?
+    val label: String?
+    val metaId: Types.MetaIdForm
+    val name: Symbol
 }
 
 // ===== Serializable classes for polymorphic serialization =====
-
-@Serializable
-data class DefnDtoTextData(
-    override var value: Array<String>?
-) : DefnDtoText
 
 
 // Sealed class hierarchy for DefnComp
@@ -199,8 +180,7 @@ data class DefnFieldTextSer(
     @Serializable(with = MetaIdFieldSer::class)
     override var helperTextFieldId: MetaIdField? = null,
 
-    @Serializable(with = DefnDtoTextSer::class)
-    override var helperTextVar: DefnDtoText? = null,
+    override var helperTextVar: DefnDtoTextData? = null,
 
     override var hideLabel: Boolean? = null,
 
@@ -216,11 +196,11 @@ data class DefnFieldTextSer(
     @Serializable(with = MetaIdFieldSer::class)
     override var placeHolderFieldId: MetaIdField? = null,
 
-    @Serializable(with = DefnDtoTextSer::class) override var placeHolderVar: DefnDtoText? = null,
+    override var placeHolderVar: DefnDtoTextData? = null,
 
     override var prefix: String? = null,
 
-    @Serializable(with = DefnDtoTextSer::class) override var prefixVar: DefnDtoText? = null,
+    override var prefixVar: DefnDtoTextData? = null,
 
     override var required: Boolean? = null,
 
@@ -233,8 +213,7 @@ data class DefnFieldTextSer(
 
     override var suffix: String? = null,
 
-    @Serializable(with = DefnDtoTextSer::class)
-    override var suffixVar: DefnDtoText? = null,
+    override var suffixVar: DefnDtoTextData? = null,
 
 
     // DefnFieldEditableText properties
@@ -243,7 +222,7 @@ data class DefnFieldTextSer(
 
     override var defaultValue: String? = null,
 
-    @Serializable(with = DefnDtoTextSer::class) override var defaultVar: DefnDtoText? = null,
+    override var defaultVar: DefnDtoTextData? = null,
 
 
     // DefnFieldText properties
@@ -319,8 +298,7 @@ data class DefnFieldNumberSer(
     @Serializable(with = MetaIdFieldSer::class)
     override var helperTextFieldId: MetaIdField? = null,
 
-    @Serializable(with = DefnDtoTextSer::class)
-    override var helperTextVar: DefnDtoText? = null,
+    override var helperTextVar: DefnDtoTextData? = null,
 
     override var hideLabel: Boolean? = null,
 
@@ -336,11 +314,11 @@ data class DefnFieldNumberSer(
     @Serializable(with = MetaIdFieldSer::class)
     override var placeHolderFieldId: MetaIdField? = null,
 
-    @Serializable(with = DefnDtoTextSer::class) override var placeHolderVar: DefnDtoText? = null,
+    override var placeHolderVar: DefnDtoTextData? = null,
 
     override var prefix: String? = null,
 
-    @Serializable(with = DefnDtoTextSer::class) override var prefixVar: DefnDtoText? = null,
+    override var prefixVar: DefnDtoTextData? = null,
 
     override var required: Boolean? = null,
 
@@ -353,7 +331,7 @@ data class DefnFieldNumberSer(
 
     override var suffix: String? = null,
 
-    @Contextual override var suffixVar: DefnDtoText? = null,
+    override var suffixVar: DefnDtoTextData? = null,
 
 
     // DefnFieldNumber properties
@@ -415,7 +393,7 @@ data class DefnFormSer(
     @Serializable(with = MetaIdFieldSer::class)
     override var chatLabelFieldId: MetaIdField? = null,
 
-    @Contextual override var chatLabelPatternVar: DefnDtoText? = null,
+    override var chatLabelPatternVar: DefnDtoTextData? = null,
 
     override var commentReadOnlyRoleSet: Array<@Serializable(with = MetaIdRoleSer::class) MetaIdRole>? = null,
 

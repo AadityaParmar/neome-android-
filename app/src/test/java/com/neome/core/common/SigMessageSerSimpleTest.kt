@@ -45,7 +45,10 @@ class SigMessageSerSimpleTest {
           "creationTime": "2024-01-06T10:30:00Z",
           "messageId": "m-test",
           "payload": {
-            "messageType": "text",
+              "messageType": "text",
+              "dtoText": {
+                "value": ["Please enter", "a unique username"]
+              },
             "text": "Hello, how are you?",
           "enumTest2": "${'$'}CreatedBy",
           "enumTest1": "name"
@@ -54,7 +57,7 @@ class SigMessageSerSimpleTest {
         """.trimIndent()
 
         // When
-        val message = json.decodeFromString<SigMessageSer>(jsonString)
+        val message = json.decodeFromString<SigMessageData>(jsonString)
         val messageStr = json.encodeToString(message)
 
         // Then
@@ -63,18 +66,19 @@ class SigMessageSerSimpleTest {
         println("Creation Time: ${message.creationTime}")
         println("messageOffset: ${message.messageOffset}")
         println("Payload messageType: ${message.payload.messageType}")
+        println("Payload dtoText: ${message.payload.dtoText}")
         println("messageStr: ${messageStr}")
-        println("Payload enumTest2: ${EnumKind1.Name.value}")
-        println("Payload enumTest2: ${EnumKind1.Name.name}")
+        println("Payload enumTest2: ${EnumKind.Name.value}")
+        println("Payload enumTest2: ${EnumKind.Name.name}")
         println("Payload text: ${(message.payload as DtoMessagePayloadText).text}")
         println("Payload Type: ${message.payload::class.simpleName}")
         println("=========================================\n")
 
         Assert.assertNotNull(message)
         Assert.assertEquals("2024-01-06T10:30:00Z", message.creationTime)
-        Assert.assertTrue(message.payload is DtoMessagePayloadTextSer)
+        Assert.assertTrue(message.payload is DtoMessagePayloadTextData)
 
-        val textPayload = message.payload as DtoMessagePayloadTextSer
+        val textPayload = message.payload as DtoMessagePayloadTextData
         Assert.assertEquals("Hello, how are you?", textPayload.text)
         Assert.assertEquals(
             com.neome.api.home.base.Types.EnumMessageType.text,
@@ -110,7 +114,7 @@ class SigMessageSerSimpleTest {
         """.trimIndent()
 
         // When
-        val message = json.decodeFromString<SigMessageSer>(jsonString)
+        val message = json.decodeFromString<SigMessageData>(jsonString)
 
         // Then
         println("\n=== Deserialized Full Text Message ===")
@@ -131,8 +135,8 @@ class SigMessageSerSimpleTest {
         Assert.assertEquals(true, message.isCallerSender)
         Assert.assertEquals(5, message.messageOffset)
 
-        Assert.assertTrue(message.payload is DtoMessagePayloadTextSer)
-        val textPayload = message.payload as DtoMessagePayloadTextSer
+        Assert.assertTrue(message.payload is DtoMessagePayloadTextData)
+        val textPayload = message.payload as DtoMessagePayloadTextData
         Assert.assertEquals("Hey @john and @jane, check this out!", textPayload.text)
         Assert.assertEquals(true, textPayload.isForwarded)
         Assert.assertEquals(false, textPayload.isUpdated)
@@ -158,12 +162,12 @@ class SigMessageSerSimpleTest {
         """.trimIndent()
 
         // When
-        val message = json.decodeFromString<SigMessageSer>(jsonString)
+        val message = json.decodeFromString<SigMessageData>(jsonString)
 
         // Then
         Assert.assertNotNull(message)
-        Assert.assertTrue(message.payload is DtoMessagePayloadTextSer)
-        val textPayload = message.payload as DtoMessagePayloadTextSer
+        Assert.assertTrue(message.payload is DtoMessagePayloadTextData)
+        val textPayload = message.payload as DtoMessagePayloadTextData
         Assert.assertEquals("Message with unknown fields", textPayload.text)
     }
 
@@ -189,7 +193,7 @@ class SigMessageSerSimpleTest {
         """.trimIndent()
 
         // When
-        val message = json.decodeFromString<SigMessageSer>(jsonString)
+        val message = json.decodeFromString<SigMessageData>(jsonString)
 
         // Then
         println("\n=== Deserialized Simple Image Message ===")
@@ -197,9 +201,9 @@ class SigMessageSerSimpleTest {
         println("Payload Type: ${message.payload::class.simpleName}")
         println("==========================================\n")
         Assert.assertNotNull(message)
-        Assert.assertTrue(message.payload is DtoMessagePayloadImageSer)
+        Assert.assertTrue(message.payload is DtoMessagePayloadImageData)
 
-        val imagePayload = message.payload as DtoMessagePayloadImageSer
+        val imagePayload = message.payload as DtoMessagePayloadImageData
         Assert.assertEquals("Beautiful sunset", imagePayload.text)
         Assert.assertEquals(
             com.neome.api.home.base.Types.EnumMessageType.image,
@@ -239,16 +243,16 @@ class SigMessageSerSimpleTest {
         """.trimIndent()
 
         // When
-        val message = json.decodeFromString<SigMessageSer>(jsonString)
+        val message = json.decodeFromString<SigMessageData>(jsonString)
 
         // Then
         println("\n=== Deserialized Full Image Message ===")
         println("Message ID: ${message.messageId}")
         println("Receipt Status: ${message.receiptStatus}")
         println("Is Caller Sender: ${message.isCallerSender}")
-        println("Image Width: ${(message.payload as DtoMessagePayloadImageSer).width}")
-        println("Image Height: ${(message.payload as DtoMessagePayloadImageSer).height}")
-        println("File Size: ${(message.payload as DtoMessagePayloadImageSer).fileSize} bytes")
+        println("Image Width: ${(message.payload as DtoMessagePayloadImageData).width}")
+        println("Image Height: ${(message.payload as DtoMessagePayloadImageData).height}")
+        println("File Size: ${(message.payload as DtoMessagePayloadImageData).fileSize} bytes")
         println("========================================\n")
 
         Assert.assertEquals(
@@ -259,8 +263,8 @@ class SigMessageSerSimpleTest {
         Assert.assertEquals(false, message.isCallerSender)
         Assert.assertEquals(12, message.messageOffset)
 
-        Assert.assertTrue(message.payload is DtoMessagePayloadImageSer)
-        val imagePayload = message.payload as DtoMessagePayloadImageSer
+        Assert.assertTrue(message.payload is DtoMessagePayloadImageData)
+        val imagePayload = message.payload as DtoMessagePayloadImageData
         Assert.assertEquals("Check out this amazing photo! 📸", imagePayload.text)
         Assert.assertEquals(false, imagePayload.isForwarded)
         Assert.assertEquals(true, imagePayload.isUpdated)
@@ -289,11 +293,11 @@ class SigMessageSerSimpleTest {
         """.trimIndent()
 
         // When
-        val message = json.decodeFromString<SigMessageSer>(jsonString)
+        val message = json.decodeFromString<SigMessageData>(jsonString)
 
         // Then
-        Assert.assertTrue(message.payload is DtoMessagePayloadImageSer)
-        val imagePayload = message.payload as DtoMessagePayloadImageSer
+        Assert.assertTrue(message.payload is DtoMessagePayloadImageData)
+        val imagePayload = message.payload as DtoMessagePayloadImageData
         Assert.assertEquals(1080L, imagePayload.width)
         Assert.assertNull(imagePayload.height)
         Assert.assertNull(imagePayload.fileSize)
@@ -332,8 +336,8 @@ class SigMessageSerSimpleTest {
         """.trimIndent()
 
         // When
-        val textMessage = json.decodeFromString<SigMessageSer>(textJson)
-        val imageMessage = json.decodeFromString<SigMessageSer>(imageJson)
+        val textMessage = json.decodeFromString<SigMessageData>(textJson)
+        val imageMessage = json.decodeFromString<SigMessageData>(imageJson)
 
         // Then
         println("\n=== Polymorphic Type Discrimination ===")
@@ -341,14 +345,14 @@ class SigMessageSerSimpleTest {
         println("Image message type: ${imageMessage.payload::class.simpleName}")
         println("========================================\n")
 
-        Assert.assertTrue(textMessage.payload is DtoMessagePayloadTextSer)
-        Assert.assertTrue(imageMessage.payload is DtoMessagePayloadImageSer)
+        Assert.assertTrue(textMessage.payload is DtoMessagePayloadTextData)
+        Assert.assertTrue(imageMessage.payload is DtoMessagePayloadImageData)
 
         // Verify we can access type-specific fields
-        val textPayload = textMessage.payload as DtoMessagePayloadTextSer
+        val textPayload = textMessage.payload as DtoMessagePayloadTextData
         Assert.assertEquals("This is a text message", textPayload.text)
 
-        val imagePayload = imageMessage.payload as DtoMessagePayloadImageSer
+        val imagePayload = imageMessage.payload as DtoMessagePayloadImageData
         Assert.assertEquals("#27AE60", imagePayload.primaryColor)
     }
 
@@ -374,7 +378,7 @@ class SigMessageSerSimpleTest {
         """.trimIndent()
 
         // When
-        val message = json.decodeFromString<SigMessageSer>(jsonString)
+        val message = json.decodeFromString<SigMessageData>(jsonString)
 
         // Then
         Assert.assertNull(message.receiptStatus)
@@ -382,7 +386,7 @@ class SigMessageSerSimpleTest {
         Assert.assertNull(message.isCallerSender)
         Assert.assertNull(message.messageOffset)
 
-        val textPayload = message.payload as DtoMessagePayloadTextSer
+        val textPayload = message.payload as DtoMessagePayloadTextData
         Assert.assertNull(textPayload.isForwarded)
         Assert.assertNull(textPayload.mentionMap)
         Assert.assertNull(textPayload.isUpdated)
@@ -403,11 +407,11 @@ class SigMessageSerSimpleTest {
 
         // When - Deserialize and pattern match
         val results = messages.map { jsonString ->
-            val message = json.decodeFromString<SigMessageSer>(jsonString)
+            val message = json.decodeFromString<SigMessageData>(jsonString)
             when (val payload = message.payload) {
-                is DtoMessagePayloadTextSer -> "Text: ${payload.text}"
-                is DtoMessagePayloadImageSer -> "Image: ${payload.primaryColor}"
-                is DtoMessagePayloadAudioSer -> "Audio message"
+                is DtoMessagePayloadTextData -> "Text: ${payload.text}"
+                is DtoMessagePayloadImageData -> "Image: ${payload.primaryColor}"
+                is DtoMessagePayloadAudioData -> "Audio message"
                 else -> "Unknown type: ${payload::class.simpleName}"
             }
         }
