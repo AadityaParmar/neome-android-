@@ -7,6 +7,7 @@ import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.core.common.serializer.SymbolSer
+import com.neome.core.common.serializer.api.DefnDtoText
 import com.neome.core.common.serializer.sysId.MetaIdCompSer
 import com.neome.core.common.serializer.sysId.MetaIdCompositeSer
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
@@ -124,6 +125,9 @@ interface DefnForm {
 // Sealed class hierarchy for DefnComp
 @Serializable
 sealed class DefnCompSeal : DefnComp
+sealed class DefnFieldSeal : DefnField
+sealed class DefnFieldEditableSeal : DefnFieldEditable
+sealed class DefnFieldEditableTextSeal : DefnFieldEditableText
 
 // DefnFieldText serializable
 @Serializable
@@ -240,7 +244,7 @@ data class DefnFieldTextSer(
 
     override var minCharCountVar: Int? = null,
 
-    ) : DefnCompSeal(),
+    ) : DefnFieldEditableTextSeal(),
     DefnFieldText
 
 // DefnFieldNumber serializable
@@ -359,7 +363,7 @@ data class DefnFieldNumberSer(
     override var minVar: Int? = null,
 
     override var numberFormat: String? = null
-) : DefnCompSeal(),
+) : DefnFieldEditableSeal(),
     DefnFieldNumber
 
 // Polymorphic serializer for DefnComp

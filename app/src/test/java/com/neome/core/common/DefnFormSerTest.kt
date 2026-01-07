@@ -96,6 +96,7 @@ class DefnFormSerTest {
         val form = json.decodeFromString<DefnFormSer>(jsonString)
         val formStr = json.encodeToString(form)
 
+
         // Then
         println("\n=== Deserialized Form with Mixed Field Types ===")
         println("Form ID: ${form.metaId}")
@@ -106,7 +107,6 @@ class DefnFormSerTest {
 
         form.compMap.forEach { (id, comp) ->
             println("id = ${id} comp =  ${comp}")
-
         }
         println("================================================\n")
 

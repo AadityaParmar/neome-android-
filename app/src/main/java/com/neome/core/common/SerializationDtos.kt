@@ -5,6 +5,11 @@ import com.neome.api.home.base.Types.EnumReceiptStatus
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.ContactId
 import com.neome.api.meta.base.Types.MediaIdImage
+import com.neome.core.common.serializer.api.DefnDtoText
+import com.neome.core.common.serializer.api.DtoMessagePayload
+import com.neome.core.common.serializer.api.DtoMessagePayloadImage
+import com.neome.core.common.serializer.api.DtoMessagePayloadText
+import com.neome.core.common.serializer.api.SigMessage
 import com.neome.core.common.serializer.sysId.ContactIdSer
 import com.neome.core.common.serializer.sysId.MediaIdImageSer
 import com.neome.core.common.serializer.sysId.MessageIdSer
@@ -39,52 +44,6 @@ enum class EnumKind(val value: String) {
     Name("name")
 }
 
-interface DefnDtoText {
-    var value: Array<String>?
-}
-
-
-interface DtoMessagePayload {
-    var isForwarded: Boolean?
-    var mentionMap: Map<String, @Serializable(with = ContactIdSer::class) ContactId>?
-    var messageType: EnumMessageType
-    val dtoText: DefnDtoText?
-}
-
-interface DtoMessagePayloadText : DtoMessagePayload {
-    var isUpdated: Boolean?
-    var text: String
-}
-
-
-interface DtoMessagePayloadImage : DtoMessagePayloadText {
-    var fileSize: Long?
-    var height: Long?
-
-    @Serializable(with = MediaIdImageSer::class)
-    var mediaIdBlurImage: MediaIdImage
-
-    @Serializable(with = MediaIdImageSer::class)
-    var mediaIdImage: MediaIdImage
-    var primaryColor: String
-    var width: Long?
-}
-
-
-interface SigMessageBase {
-    var creationTime: String
-    var isCallerSender: Boolean?
-
-    @Serializable(with = MessageIdSer::class)
-    var messageId: Types.MessageId
-    var messageOffset: Int?
-    var payload: DtoMessagePayload
-}
-
-interface SigMessage : SigMessageBase {
-    var receiptStatus: EnumReceiptStatus?
-    var version: String?
-}
 
 // derived classes
 // Serializable sealed hierarchy for polymorphic deserialization
@@ -98,7 +57,6 @@ data class DefnDtoTextData(
 sealed class DtoMessagePayloadSeal : DtoMessagePayload
 
 @Serializable
-@SerialName("text")
 data class DtoMessagePayloadTextData(
     override var isForwarded: Boolean? = null,
     override var mentionMap: Map<String, @Serializable(with = ContactIdSer::class) ContactId>? = null,
@@ -109,7 +67,6 @@ data class DtoMessagePayloadTextData(
 ) : DtoMessagePayloadSeal(), DtoMessagePayloadText
 
 @Serializable
-@SerialName("image")
 data class DtoMessagePayloadImageData(
     override var isForwarded: Boolean? = null,
     override var mentionMap: Map<String, @Serializable(with = ContactIdSer::class) ContactId>? = null,
@@ -129,7 +86,6 @@ data class DtoMessagePayloadImageData(
 
 // Add more payload types as needed (audio, video, document, etc.)
 @Serializable
-@SerialName("audio")
 data class DtoMessagePayloadAudioData(
     override var isForwarded: Boolean? = null,
     override var mentionMap: Map<String, @Serializable(with = ContactIdSer::class) ContactId>? = null,
