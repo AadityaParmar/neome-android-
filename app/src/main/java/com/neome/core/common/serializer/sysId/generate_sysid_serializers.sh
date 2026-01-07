@@ -35,10 +35,7 @@ cat > "$OUTPUT_FILE" << 'HEADER'
 
 package com.neome.core.common.serializer.sysId
 
-import com.neome.api.meta.base.SysId
 import com.neome.api.meta.base.Types
-import kotlinx.serialization.KSerializer
-import kotlin.reflect.KClass
 
 HEADER
 
@@ -50,54 +47,6 @@ echo "$CLASS_NAMES" | while read -r class_name; do
     fi
 done
 
-# Add blank line
-echo "" >> "$OUTPUT_FILE"
-
-# Generate the object class with map and functions
-cat >> "$OUTPUT_FILE" << 'MAP_START'
-/**
- * Registry for SysId serializers
- */
-object SysIdSerializers {
-    /**
-     * Map from SysId class to its corresponding serializer
-     */
-    val serializerMap: Map<KClass<out SysId>, KSerializer<out SysId>> = mapOf(
-MAP_START
-
-# Generate map entries (with extra indentation for object)
-LAST_CLASS=$(echo "$CLASS_NAMES" | tail -1)
-echo "$CLASS_NAMES" | while read -r class_name; do
-    if [ -n "$class_name" ]; then
-        ser_name="${class_name}Ser"
-        if [ "$class_name" = "$LAST_CLASS" ]; then
-            echo "        Types.${class_name}::class to $ser_name" >> "$OUTPUT_FILE"
-        else
-            echo "        Types.${class_name}::class to $ser_name," >> "$OUTPUT_FILE"
-        fi
-    fi
-done
-
-cat >> "$OUTPUT_FILE" << 'MAP_END'
-    )
-
-    /**
-     * Get serializer for a SysId class
-     */
-    @Suppress("UNCHECKED_CAST")
-    fun <T : SysId> get(klass: KClass<T>): KSerializer<T>? {
-        return serializerMap[klass] as? KSerializer<T>
-    }
-
-    /**
-     * Get serializer for a SysId instance using reified type
-     */
-    @Suppress("UNCHECKED_CAST")
-    inline fun <reified T : SysId> get(): KSerializer<T>? {
-        return serializerMap[T::class] as? KSerializer<T>
-    }
-}
-MAP_END
 
 echo "Generated $OUTPUT_FILE"
 echo "Total serializers: $CLASS_COUNT"

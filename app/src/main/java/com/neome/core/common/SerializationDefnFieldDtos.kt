@@ -7,14 +7,14 @@ import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.core.common.serializer.DefnDtoTextSer
-import com.neome.core.common.serializer.MetaIdCompSer
-import com.neome.core.common.serializer.MetaIdCompositeSer
-import com.neome.core.common.serializer.MetaIdFieldSer
-import com.neome.core.common.serializer.MetaIdFormSer
-import com.neome.core.common.serializer.MetaIdGridSer
-import com.neome.core.common.serializer.MetaIdLayoutGridSer
-import com.neome.core.common.serializer.MetaIdRoleSer
 import com.neome.core.common.serializer.SymbolSer
+import com.neome.core.common.serializer.sysId.MetaIdCompSer
+import com.neome.core.common.serializer.sysId.MetaIdCompositeSer
+import com.neome.core.common.serializer.sysId.MetaIdFieldSer
+import com.neome.core.common.serializer.sysId.MetaIdFormSer
+import com.neome.core.common.serializer.sysId.MetaIdGridSer
+import com.neome.core.common.serializer.sysId.MetaIdLayoutGridSer
+import com.neome.core.common.serializer.sysId.MetaIdRoleSer
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerialName
@@ -434,10 +434,9 @@ data class DefnFormSer(
 
     override var formulaFieldIdSet: Array<@Serializable(with = MetaIdFieldSer::class) MetaIdField>? = null,
 
-    override var gridLookupMap: Map<@Serializable(with = MetaIdLayoutGridSer::class) Types.MetaIdLayoutGrid,
-            @Serializable(
-                with = MetaIdGridSer::class
-            ) Types.MetaIdGrid>? = null,
+    override var gridLookupMap: Map<
+            @Serializable(with = MetaIdLayoutGridSer::class) Types.MetaIdLayoutGrid,
+            @Serializable(with = MetaIdGridSer::class) Types.MetaIdGrid>? = null,
 
     override var label: String? = null,
 
