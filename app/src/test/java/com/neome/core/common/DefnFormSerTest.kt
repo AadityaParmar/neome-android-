@@ -1,14 +1,7 @@
 package com.neome.core.common
 
 import com.neome.api.meta.base.Symbol
-import com.neome.api.meta.base.Types
-import com.neome.core.common.serializer.MetaIdCompSer
-import com.neome.core.common.serializer.MetaIdCompositeSer
-import com.neome.core.common.serializer.MetaIdFieldSer
-import com.neome.core.common.serializer.MetaIdFormSer
-import com.neome.core.common.serializer.MetaIdGridSer
-import com.neome.core.common.serializer.MetaIdLayoutGridSer
-import com.neome.core.common.serializer.MetaIdRoleSer
+
 import com.neome.core.common.serializer.SymbolSer
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -35,13 +28,6 @@ class DefnFormSerTest {
             // Configure serializers module for contextual types
             serializersModule = SerializersModule {
                 // Register custom serializers for MetaId types
-                contextual(Types.MetaIdField::class, MetaIdFieldSer)
-                contextual(Types.MetaIdComp::class, MetaIdCompSer)
-                contextual(Types.MetaIdForm::class, MetaIdFormSer)
-                contextual(Types.MetaIdRole::class, MetaIdRoleSer)
-                contextual(Types.MetaIdComposite::class, MetaIdCompositeSer)
-                contextual(Types.MetaIdLayoutGrid::class, MetaIdLayoutGridSer)
-                contextual(Types.MetaIdGrid::class, MetaIdGridSer)
 
                 // Symbol and DefnDtoText serializers
                 contextual(Symbol::class, SymbolSer)

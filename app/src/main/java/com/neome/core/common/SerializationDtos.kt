@@ -5,7 +5,9 @@ import com.neome.api.home.base.Types.EnumReceiptStatus
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.ContactId
 import com.neome.api.meta.base.Types.MediaIdImage
-import kotlinx.serialization.Contextual
+import com.neome.core.common.serializer.sysId.ContactIdSer
+import com.neome.core.common.serializer.sysId.MediaIdImageSer
+import com.neome.core.common.serializer.sysId.MessageIdSer
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -40,7 +42,7 @@ enum class EnumKind1(val value: String) {
 
 interface DtoMessagePayload {
     var isForwarded: Boolean?
-    var mentionMap: Map<String, @Contextual ContactId>?
+    var mentionMap: Map<String, @Serializable(with = ContactIdSer::class) ContactId>?
     var messageType: EnumMessageType
 }
 
@@ -53,8 +55,12 @@ interface DtoMessagePayloadText : DtoMessagePayload {
 interface DtoMessagePayloadImage : DtoMessagePayloadText {
     var fileSize: Long?
     var height: Long?
-    var mediaIdBlurImage: @Contextual MediaIdImage
-    var mediaIdImage: @Contextual MediaIdImage
+
+    @Serializable(with = MediaIdImageSer::class)
+    var mediaIdBlurImage: MediaIdImage
+
+    @Serializable(with = MediaIdImageSer::class)
+    var mediaIdImage: MediaIdImage
     var primaryColor: String
     var width: Long?
 }
@@ -63,7 +69,9 @@ interface DtoMessagePayloadImage : DtoMessagePayloadText {
 interface SigMessageBase {
     var creationTime: String
     var isCallerSender: Boolean?
-    var messageId: @Contextual Types.MessageId
+
+    @Serializable(with = MessageIdSer::class)
+    var messageId: Types.MessageId
     var messageOffset: Int?
     var payload: DtoMessagePayload
 }
@@ -81,7 +89,7 @@ sealed class DtoMessagePayloadSeal : DtoMessagePayload
 @SerialName("text")
 data class DtoMessagePayloadTextSer(
     override var isForwarded: Boolean? = null,
-    override var mentionMap: Map<String, @Contextual ContactId>? = null,
+    override var mentionMap: Map<String, @Serializable(with = ContactIdSer::class) ContactId>? = null,
     override var messageType: EnumMessageType = EnumMessageType.text,
     override var isUpdated: Boolean? = null,
     override var text: String,
@@ -91,14 +99,16 @@ data class DtoMessagePayloadTextSer(
 @SerialName("image")
 data class DtoMessagePayloadImageSer(
     override var isForwarded: Boolean? = null,
-    override var mentionMap: Map<String, @Contextual ContactId>? = null,
+    override var mentionMap: Map<String, @Serializable(with = ContactIdSer::class) ContactId>? = null,
     override var messageType: EnumMessageType = EnumMessageType.image,
     override var isUpdated: Boolean? = null,
     override var text: String = "",
     override var fileSize: Long? = null,
     override var height: Long? = null,
-    override var mediaIdBlurImage: @Contextual MediaIdImage,
-    override var mediaIdImage: @Contextual MediaIdImage,
+    @Serializable(with = MediaIdImageSer::class)
+    override var mediaIdBlurImage: MediaIdImage,
+    @Serializable(with = MediaIdImageSer::class)
+    override var mediaIdImage: MediaIdImage,
     override var primaryColor: String,
     override var width: Long? = null,
 ) : DtoMessagePayloadSeal(), DtoMessagePayloadImage
@@ -108,7 +118,7 @@ data class DtoMessagePayloadImageSer(
 @SerialName("audio")
 data class DtoMessagePayloadAudioSer(
     override var isForwarded: Boolean? = null,
-    override var mentionMap: Map<String, @Contextual ContactId>? = null,
+    override var mentionMap: Map<String, @Serializable(with = ContactIdSer::class) ContactId>? = null,
     override var messageType: EnumMessageType = EnumMessageType.audio,
     override var isUpdated: Boolean? = null,
     override var text: String = "",
@@ -120,7 +130,8 @@ data class SigMessageSer(
     override var version: String? = null,
     override var creationTime: String,
     override var isCallerSender: Boolean? = null,
-    @Contextual override var messageId: Types.MessageId,
+    @Serializable(with = MessageIdSer::class)
+    override var messageId: Types.MessageId,
     override var messageOffset: Int? = null,
     @Serializable(with = DtoMessagePayloadSerializer::class)
     override var payload: DtoMessagePayload

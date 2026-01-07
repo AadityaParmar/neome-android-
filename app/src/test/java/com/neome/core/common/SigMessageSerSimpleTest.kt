@@ -1,9 +1,5 @@
 package com.neome.core.common
 
-import com.neome.api.meta.base.Types
-import com.neome.core.common.serializer.ContactIdSer
-import com.neome.core.common.serializer.MediaIdImageSer
-import com.neome.core.common.serializer.MessageIdSer
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
@@ -29,9 +25,7 @@ class SigMessageSerSimpleTest {
             // Configure serializers module for contextual types
             serializersModule = SerializersModule {
                 // Register custom serializers for contextual types
-                contextual(Types.MessageId::class, MessageIdSer)
-                contextual(Types.ContactId::class, ContactIdSer)
-                contextual(Types.MediaIdImage::class, MediaIdImageSer)
+
 
                 // Note: Payload polymorphism is handled by DtoMessagePayloadSerializer
                 // which inspects the messageType field
@@ -60,7 +54,7 @@ class SigMessageSerSimpleTest {
         """.trimIndent()
 
         // When
-        val message = json.decodeFromString<SigMessageSer>(jsonString) as SigMessage
+        val message = json.decodeFromString<SigMessageSer>(jsonString)
         val messageStr = json.encodeToString(message)
 
         // Then
