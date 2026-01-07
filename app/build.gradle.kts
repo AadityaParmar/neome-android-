@@ -19,6 +19,15 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Read API key from local.properties
+        val properties = org.jetbrains.kotlin.konan.properties.Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            properties.load(localPropertiesFile.inputStream())
+        }
+        val googleApiKey = properties.getProperty("GOOGLE_API_KEY") ?: "GOOGLE_API_KEY_HERE"
+        buildConfigField("String", "GOOGLE_API_KEY", "\"$googleApiKey\"")
     }
 
     buildTypes {
@@ -39,6 +48,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     ndkVersion = "26.1.10909125"
     buildToolsVersion = rootProject.extra["buildToolsVersion"] as String
@@ -72,6 +82,21 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     implementation(libs.hilt.navigation.compose)
+
+    // Location Services
+    implementation("com.google.android.gms:play-services-location:21.3.0")
+
+    // Coroutines for Play Services (provides await() extension)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.0")
+
+    // Networking for Geocoding API
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
+    // Permissions (Accompanist)
+    implementation("com.google.accompanist:accompanist-permissions:0.36.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

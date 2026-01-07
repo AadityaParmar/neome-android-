@@ -44,6 +44,7 @@ import com.neome.feature.componentshowcase.presentation.components.TextFieldShow
 import com.neome.feature.componentshowcase.presentation.components.ThumbnailPickerShowcase
 import com.neome.feature.componentshowcase.presentation.components.ImagePrimaryColorShowcase
 import com.neome.feature.componentshowcase.presentation.components.MediaCarouselShowcase
+import com.neome.feature.componentshowcase.presentation.components.LocationShowcase
 import com.neome.feature.componentshowcase.domain.model.ComponentCategory
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -149,6 +150,7 @@ private fun ComponentShowcaseContent(
                         10 -> ThumbnailPickerShowcase()
                         11 -> ImagePrimaryColorShowcase()
                         12 -> MediaCarouselShowcase()
+                        13 -> LocationShowcase()
                     }
                 }
 

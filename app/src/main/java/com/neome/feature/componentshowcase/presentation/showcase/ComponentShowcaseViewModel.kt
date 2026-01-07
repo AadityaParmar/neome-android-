@@ -98,6 +98,11 @@ class ComponentShowcaseViewModel : ViewModel() {
                 name = "Media Carousel",
                 description = "Horizontally swipeable carousel for images and videos",
                 components = listOf("Image Preview", "Video Playback", "Page Indicator", "Crop Integration")
+            ),
+            ComponentCategory(
+                name = "Location",
+                description = "Location services",
+                components = listOf("Get Current Location with address")
             )
         )
         _state.update { it.copy(categories = categories) }
