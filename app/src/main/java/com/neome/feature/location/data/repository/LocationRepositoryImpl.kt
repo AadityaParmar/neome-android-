@@ -1,20 +1,16 @@
 package com.neome.feature.location.data.repository
 
-import android.annotation.SuppressLint
 import android.content.Context
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.Priority
 import com.neome.BuildConfig
 import com.neome.core.common.Resource
 import com.neome.feature.location.data.remote.GeocodingApiService
 import com.neome.feature.location.data.remote.findByType
-import com.neome.feature.location.domain.model.GeoPoint
 import com.neome.feature.location.domain.model.Location
 import com.neome.feature.location.domain.repository.LocationRepository
+import com.neome.feature.utils.captureLocation
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.tasks.await
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -22,44 +18,32 @@ import javax.inject.Inject
 
 /**
  * Implementation of LocationRepository
- * Uses FusedLocationProviderClient for location and Google Geocoding API for address
+ * Uses LocationUtils for location capture and Google Geocoding API for address
  */
 class LocationRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val geocodingApi: GeocodingApiService
 ) : LocationRepository {
 
-    private val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
-
-    @SuppressLint("MissingPermission")
     override fun getCurrentLocationWithAddress(): Flow<Resource<Location>> = flow {
         emit(Resource.Loading)
 
         try {
-            // Get current location using FusedLocationProviderClient
-            val locationResult = fusedLocationClient.getCurrentLocation(
-                Priority.PRIORITY_HIGH_ACCURACY,
-                null
-            ).await()
+            // Use captureLocation utility function to get current location
+            val geoPoint = captureLocation(context)
 
-            if (locationResult == null) {
+            if (geoPoint == null) {
                 emit(Resource.Error("Unable to get current location. Please check if location services are enabled."))
                 return@flow
             }
-
-            val latitude = locationResult.latitude
-            val longitude = locationResult.longitude
 
             // Current timestamp in ISO format
             val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
             val currentDateTime = dateFormat.format(Date())
 
-            // Create GeoPoint
-            val geoPoint = GeoPoint(lat = latitude, lng = longitude)
-
             // Get address from coordinates using Geocoding API
             try {
-                val latlng = "$latitude,$longitude"
+                val latlng = "${geoPoint.lat},${geoPoint.lng}"
                 val geocodingResponse = geocodingApi.reverseGeocode(
                     latlng = latlng,
                     key = BuildConfig.GOOGLE_API_KEY

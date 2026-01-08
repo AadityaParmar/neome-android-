@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import com.neome.feature.componentshowcase.presentation.showcase.ComponentShowcaseScreen
 import com.neome.feature.componentshowcase.presentation.testing.ComponentTestingScreen
+import com.neome.feature.componentshowcase.presentation.searchlocation.SearchLocationScreen
 import com.neome.ui.theme.NeomeTheme
 
 @AndroidEntryPoint
@@ -46,6 +47,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun NeomeApp() {
     var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.HOME) }
+    var showSearchLocation by rememberSaveable { mutableStateOf(false) }
 
     NavigationSuiteScaffold(
         navigationSuiteItems = {
@@ -59,25 +61,35 @@ fun NeomeApp() {
                     },
                     label = { Text(it.label) },
                     selected = it == currentDestination,
-                    onClick = { currentDestination = it }
+                    onClick = {
+                        currentDestination = it
+                        showSearchLocation = false
+                    }
                 )
             }
         }
     ) {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            when (currentDestination) {
-                AppDestinations.HOME -> ComponentShowcaseScreen(
-                    onNavigateBack = {}
+            if (showSearchLocation) {
+                SearchLocationScreen(
+                    onNavigateBack = { showSearchLocation = false }
                 )
+            } else {
+                when (currentDestination) {
+                    AppDestinations.HOME -> ComponentShowcaseScreen(
+                        onNavigateBack = {},
+                        onNavigateToSearchLocation = { showSearchLocation = true }
+                    )
 
-                AppDestinations.TESTING -> {
-                    ComponentTestingScreen()
+                    AppDestinations.TESTING -> {
+                        ComponentTestingScreen()
+                    }
+
+                    else -> Greeting(
+                        currentDestination.label,
+                        modifier = Modifier.padding(innerPadding)
+                    )
                 }
-
-                else -> Greeting(
-                    currentDestination.label,
-                    modifier = Modifier.padding(innerPadding)
-                )
             }
         }
     }

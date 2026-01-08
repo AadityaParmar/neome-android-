@@ -51,14 +51,16 @@ import com.neome.feature.componentshowcase.domain.model.ComponentCategory
 @Composable
 fun ComponentShowcaseScreen(
     viewModel: ComponentShowcaseViewModel = viewModel(),
-    onNavigateBack: () -> Unit = {}
+    onNavigateBack: () -> Unit = {},
+    onNavigateToSearchLocation: () -> Unit = {}
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     ComponentShowcaseContent(
         state = state,
         onEvent = viewModel::onEvent,
-        onNavigateBack = onNavigateBack
+        onNavigateBack = onNavigateBack,
+        onNavigateToSearchLocation = onNavigateToSearchLocation
     )
 }
 
@@ -68,6 +70,7 @@ private fun ComponentShowcaseContent(
     state: ComponentShowcaseState,
     onEvent: (ComponentShowcaseEvent) -> Unit,
     onNavigateBack: () -> Unit,
+    onNavigateToSearchLocation: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -150,7 +153,9 @@ private fun ComponentShowcaseContent(
                         10 -> ThumbnailPickerShowcase()
                         11 -> ImagePrimaryColorShowcase()
                         12 -> MediaCarouselShowcase()
-                        13 -> LocationShowcase()
+                        13 -> LocationShowcase(
+                            onNavigateToSearch = onNavigateToSearchLocation
+                        )
                     }
                 }
 

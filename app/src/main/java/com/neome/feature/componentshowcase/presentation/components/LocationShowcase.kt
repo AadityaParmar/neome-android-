@@ -44,6 +44,7 @@ import kotlinx.coroutines.delay
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun LocationShowcase(
+    onNavigateToSearch: () -> Unit = {},
     modifier: Modifier = Modifier,
     viewModel: LocationViewModel = hiltViewModel()
 ) {
@@ -67,6 +68,7 @@ fun LocationShowcase(
         onEvent = viewModel::onEvent,
         onRequestPermission = { locationPermissionsState.launchMultiplePermissionRequest() },
         permissionGranted = locationPermissionsState.allPermissionsGranted,
+        onNavigateToSearch = onNavigateToSearch,
         modifier = modifier
     )
 }
@@ -77,9 +79,10 @@ private fun LocationShowcaseContent(
     onEvent: (LocationEvent) -> Unit,
     onRequestPermission: () -> Unit,
     permissionGranted: Boolean,
+    onNavigateToSearch: () -> Unit,
     modifier: Modifier = Modifier
-) {
-    Column(
+)
+{Column(
         modifier = modifier.padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
@@ -180,17 +183,23 @@ private fun LocationShowcaseContent(
         HorizontalDivider()
 
         // Auto-load Location Card
-        AutoLoadLocationCard(
-            state = state,
-            onEvent = onEvent,
-            permissionGranted = permissionGranted
-        )
-    }
-}
+//        AutoLoadLocationCard(
+//            state = state,
+//            onEvent = onEvent,
+//            permissionGranted = permissionGranted
+//        )
+
+        // Search Location Button
+        Button(
+            onClick = onNavigateToSearch,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Search Location")
+        }
+    }}
 
 @Composable
-private fun CurrentLocationCard(
-)
+private fun CurrentLocationCard()
 {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -229,7 +238,8 @@ private fun LoadingIndicator()
 @Composable
 private fun PermissionRequestCard(
     onRequestPermission: () -> Unit,
-){
+)
+{
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -264,7 +274,8 @@ private fun CurrentLocationBtn(
     state: LocationState,
     onEvent: (LocationEvent) -> Unit,
     permissionGranted: Boolean,
-) {
+)
+{
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -294,7 +305,8 @@ private fun AutoLoadLocationCard(
     state: LocationState,
     onEvent: (LocationEvent) -> Unit,
     permissionGranted: Boolean
-) {
+)
+{
     var countdown by remember { mutableIntStateOf(5) }
     var hasTriggered by remember { mutableIntStateOf(0) }
 
@@ -385,7 +397,8 @@ private fun LocationInfoRow(
     label: String,
     value: String,
     modifier: Modifier = Modifier
-) {
+)
+{
     Row(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
