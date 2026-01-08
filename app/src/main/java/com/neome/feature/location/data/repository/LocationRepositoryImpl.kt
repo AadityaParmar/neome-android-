@@ -8,12 +8,16 @@ import com.neome.BuildConfig
 import com.neome.core.common.Resource
 import com.neome.feature.location.data.remote.GeocodingApiService
 import com.neome.feature.location.data.remote.findByType
+import com.neome.feature.location.domain.model.GeoPoint
 import com.neome.feature.location.domain.model.Location
 import com.neome.feature.location.domain.repository.LocationRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 /**
@@ -45,7 +49,13 @@ class LocationRepositoryImpl @Inject constructor(
 
             val latitude = locationResult.latitude
             val longitude = locationResult.longitude
-            val accuracy = locationResult.accuracy
+
+            // Current timestamp in ISO format
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+            val currentDateTime = dateFormat.format(Date())
+
+            // Create GeoPoint
+            val geoPoint = GeoPoint(lat = latitude, lng = longitude)
 
             // Get address from coordinates using Geocoding API
             try {
@@ -62,25 +72,23 @@ class LocationRepositoryImpl @Inject constructor(
                             val addressComponents = result.addressComponents
 
                             val location = Location(
-                                latitude = latitude,
-                                longitude = longitude,
-                                accuracy = accuracy,
                                 address = result.formattedAddress,
                                 city = addressComponents.findByType("locality")
                                     ?: addressComponents.findByType("administrative_area_level_2"),
-                                state = addressComponents.findByType("administrative_area_level_1"),
                                 country = addressComponents.findByType("country"),
-                                postalCode = addressComponents.findByType("postal_code")
+                                dateTime = currentDateTime,
+                                geoPoint = geoPoint
                             )
                             emit(Resource.Success(location))
                         } else {
                             // No results from geocoding, emit location without address
                             emit(Resource.Success(
                                 Location(
-                                    latitude = latitude,
-                                    longitude = longitude,
-                                    accuracy = accuracy,
-                                    address = "Address not found"
+                                    address = "Address not found",
+                                    city = null,
+                                    country = null,
+                                    dateTime = currentDateTime,
+                                    geoPoint = geoPoint
                                 )
                             ))
                         }
@@ -88,10 +96,11 @@ class LocationRepositoryImpl @Inject constructor(
                     "ZERO_RESULTS" -> {
                         emit(Resource.Success(
                             Location(
-                                latitude = latitude,
-                                longitude = longitude,
-                                accuracy = accuracy,
-                                address = "No address found for this location"
+                                address = "No address found for this location",
+                                city = null,
+                                country = null,
+                                dateTime = currentDateTime,
+                                geoPoint = geoPoint
                             )
                         ))
                     }

@@ -6,6 +6,7 @@ package com.neome.feature.componentshowcase.presentation.location
  */
 sealed interface LocationEvent {
     data object GetLocation : LocationEvent
+    data object GetAutoLoadLocation : LocationEvent
     data object ClearLocation : LocationEvent
     data class PermissionResult(val granted: Boolean) : LocationEvent
 }

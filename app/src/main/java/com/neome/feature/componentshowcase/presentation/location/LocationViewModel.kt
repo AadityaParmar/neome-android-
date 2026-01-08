@@ -36,6 +36,17 @@ class LocationViewModel @Inject constructor(
                     }
                 }
             }
+            is LocationEvent.GetAutoLoadLocation -> {
+                if (_state.value.permissionGranted) {
+                    getAutoLoadLocation()
+                } else {
+                    _state.update {
+                        it.copy(
+                            autoLoadError = "Location permission not granted. Please grant permission to access location."
+                        )
+                    }
+                }
+            }
             is LocationEvent.ClearLocation -> {
                 _state.update {
                     it.copy(
@@ -48,7 +59,7 @@ class LocationViewModel @Inject constructor(
                 _state.update { it.copy(permissionGranted = event.granted) }
                 if (event.granted) {
                     // Clear any previous permission error
-                    _state.update { it.copy(error = null) }
+                    _state.update { it.copy(error = null, autoLoadError = null) }
                 }
             }
         }
@@ -80,6 +91,40 @@ class LocationViewModel @Inject constructor(
                             it.copy(
                                 isLoading = false,
                                 error = resource.message
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getAutoLoadLocation() {
+        viewModelScope.launch {
+            getCurrentLocationUseCase().collect { resource ->
+                when (resource) {
+                    is Resource.Loading -> {
+                        _state.update {
+                            it.copy(
+                                isAutoLoading = true,
+                                autoLoadError = null
+                            )
+                        }
+                    }
+                    is Resource.Success -> {
+                        _state.update {
+                            it.copy(
+                                autoLoadedLocation = resource.data,
+                                isAutoLoading = false,
+                                autoLoadError = null
+                            )
+                        }
+                    }
+                    is Resource.Error -> {
+                        _state.update {
+                            it.copy(
+                                isAutoLoading = false,
+                                autoLoadError = resource.message
                             )
                         }
                     }
