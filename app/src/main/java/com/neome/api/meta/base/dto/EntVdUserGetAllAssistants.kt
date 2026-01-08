@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.EntVdUserGetHierarchy
 
-open class EntVdUserGetAllAssistants : EntVdUserGetHierarchy()
+interface EntVdUserGetAllAssistants : EntVdUserGetHierarchy
 {
 }

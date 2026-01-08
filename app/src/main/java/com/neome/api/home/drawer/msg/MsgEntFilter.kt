@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.EntId
 import com.neome.api.core.base.msg.MsgVersion
 import java.util.Set
 
-open class MsgEntFilter : MsgVersion()
+interface MsgEntFilter : MsgVersion
 {
-  var filterEntIdSet: Array<EntId>? = null
+  val filterEntIdSet: Array<EntId>?
 }

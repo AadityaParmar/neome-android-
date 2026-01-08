@@ -13,16 +13,16 @@ import com.neome.api.meta.base.dto.StudioFieldEditable
 import com.neome.api.meta.base.dto.StudioMapOfOption
 import com.neome.api.meta.base.dto.StudioMapOfOptionPermission
 
-open class StudioFieldPickText : StudioFieldEditable()
+interface StudioFieldPickText : StudioFieldEditable
 {
-  var defaultOptionFieldId: MetaIdField? = null
-  var defaultOptionId: String? = null
-  var optionPermissionMap: StudioMapOfOptionPermission? = null
-  var pluginApi: StudioDtoPluginApi? = null
-  var pluginErrorFieldId: MetaIdField? = null
-  var pluginInputMappingVarId: MetaIdVar? = null
-  var showAs: EnumDefnThemePickVariant? = null
-  var source: StudioMapOfOption? = null
-  var sourceFieldId: MetaIdField? = null
-  var sourceVarId: MetaIdVar? = null
+  val defaultOptionFieldId: MetaIdField?
+  val defaultOptionId: String?
+  val optionPermissionMap: StudioMapOfOptionPermission?
+  val pluginApi: StudioDtoPluginApi?
+  val pluginErrorFieldId: MetaIdField?
+  val pluginInputMappingVarId: MetaIdVar?
+  val showAs: EnumDefnThemePickVariant?
+  val source: StudioMapOfOption?
+  val sourceFieldId: MetaIdField?
+  val sourceVarId: MetaIdVar?
 }

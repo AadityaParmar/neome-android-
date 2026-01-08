@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.MetaIdForm
 
-open class DefnStudioMapOfPartition : DefnField()
+interface DefnStudioMapOfPartition : DefnField
 {
-  lateinit var formId: MetaIdForm
+  val formId: MetaIdForm
 }

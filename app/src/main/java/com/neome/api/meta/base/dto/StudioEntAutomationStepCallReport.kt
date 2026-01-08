@@ -13,17 +13,17 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntAutomationStepCallReport : StudioEntAutomationStep()
+interface StudioEntAutomationStepCallReport : StudioEntAutomationStep
 {
-  var errorFieldId: MetaIdField? = null
-  var errorRetryCountVarId: MetaIdVar? = null
-  var errorRetryDurationVarId: MetaIdVar? = null
-  var exposeOutputAsPipelineVariable: Boolean? = null
-  var inputFormPipelineVarId: MetaIdPipelineParam? = null
-  var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
-  var iterateOnGridId: MetaIdGrid? = null
-  var outputPipelineVarId: MetaIdPipelineParam? = null
-  var reportInputMappingVarId: MetaIdVar? = null
-  var reportOutputMappingVarId: MetaIdVar? = null
-  var targetReportId: MetaIdReport? = null
+  val errorFieldId: MetaIdField?
+  val errorRetryCountVarId: MetaIdVar?
+  val errorRetryDurationVarId: MetaIdVar?
+  val exposeOutputAsPipelineVariable: Boolean?
+  val inputFormPipelineVarId: MetaIdPipelineParam?
+  val iterateOnGridFilterVarId: StudioValueVarIdCondition?
+  val iterateOnGridId: MetaIdGrid?
+  val outputPipelineVarId: MetaIdPipelineParam?
+  val reportInputMappingVarId: MetaIdVar?
+  val reportOutputMappingVarId: MetaIdVar?
+  val targetReportId: MetaIdReport?
 }

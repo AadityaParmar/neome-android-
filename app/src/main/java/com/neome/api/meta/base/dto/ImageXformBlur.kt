@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.ImageXform
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 
-open class ImageXformBlur : ImageXform()
+interface ImageXformBlur : ImageXform
 {
-  var value: StudioBuildArgBinder? = null
+  val value: StudioBuildArgBinder?
 }

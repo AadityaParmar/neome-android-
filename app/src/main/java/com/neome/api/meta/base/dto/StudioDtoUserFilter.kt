@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 
-open class StudioDtoUserFilter : StudioBase()
+interface StudioDtoUserFilter : StudioBase
 {
-  var userPipelineParamId: MetaIdPipelineParam? = null
-  var userVarId: MetaIdVar? = null
-  var users: StudioBuildArgBinder? = null
+  val userPipelineParamId: MetaIdPipelineParam?
+  val userVarId: MetaIdVar?
+  val users: StudioBuildArgBinder?
 }

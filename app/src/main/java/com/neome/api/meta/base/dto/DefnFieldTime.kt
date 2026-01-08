@@ -9,19 +9,19 @@ import com.neome.api.meta.base.dto.DefnBuildTime
 import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldTime : DefnFieldEditable()
+interface DefnFieldTime : DefnFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: DefnBuildTime? = null
-  var defaultVar: DefnBuildTime? = null
-  var displayDateFormat: String? = null
-  var max: DefnBuildTime? = null
-  var maxFieldId: MetaIdField? = null
-  var maxVar: DefnBuildTime? = null
-  var min: DefnBuildTime? = null
-  var minFieldId: MetaIdField? = null
-  var minVar: DefnBuildTime? = null
-  var showSecond: Boolean? = null
-  var showSecondFieldId: MetaIdField? = null
-  var showSecondVar: Boolean? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: DefnBuildTime?
+  val defaultVar: DefnBuildTime?
+  val displayDateFormat: String?
+  val max: DefnBuildTime?
+  val maxFieldId: MetaIdField?
+  val maxVar: DefnBuildTime?
+  val min: DefnBuildTime?
+  val minFieldId: MetaIdField?
+  val minVar: DefnBuildTime?
+  val showSecond: Boolean?
+  val showSecondFieldId: MetaIdField?
+  val showSecondVar: Boolean?
 }

@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnDtoOption
 import com.neome.api.meta.base.dto.DefnField
 
-open class DefnStudioBuildOptionPermissionMatrix : DefnField()
+interface DefnStudioBuildOptionPermissionMatrix : DefnField
 {
-  var optionSet: Array<DefnDtoOption>? = null
+  val optionSet: Array<DefnDtoOption>?
 }

@@ -12,21 +12,21 @@ import com.neome.api.meta.base.Types.EnumDefnMapPinShape
 import com.neome.api.meta.base.dto.FieldDtoImage
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnDtoLayoutLocmapPin
+interface DefnDtoLayoutLocmapPin
 {
-  var avatar: FieldDtoImage? = null
-  var avatarFieldId: MetaIdField? = null
-  var avatarVar: FieldDtoImage? = null
-  var color: DefnDtoColor? = null
-  var colorFieldId: MetaIdField? = null
-  var colorVar: DefnDtoColor? = null
-  var label: String? = null
-  var labelFieldId: MetaIdField? = null
-  var labelVar: DefnDtoText? = null
-  var shape: EnumDefnMapPinShape? = null
-  var shapeFieldId: MetaIdField? = null
-  var shapeVar: EnumDefnMapPinShape? = null
-  var toolTip: String? = null
-  var toolTipFieldId: MetaIdField? = null
-  var toolTipVar: DefnDtoParagraph? = null
+  val avatar: FieldDtoImage?
+  val avatarFieldId: MetaIdField?
+  val avatarVar: FieldDtoImage?
+  val color: DefnDtoColor?
+  val colorFieldId: MetaIdField?
+  val colorVar: DefnDtoColor?
+  val label: String?
+  val labelFieldId: MetaIdField?
+  val labelVar: DefnDtoText?
+  val shape: EnumDefnMapPinShape?
+  val shapeFieldId: MetaIdField?
+  val shapeVar: EnumDefnMapPinShape?
+  val toolTip: String?
+  val toolTipFieldId: MetaIdField?
+  val toolTipVar: DefnDtoParagraph?
 }

@@ -9,14 +9,14 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.EnumDefnDocFileExt
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldDocument : DefnFieldEditable()
+interface DefnFieldDocument : DefnFieldEditable
 {
-  var disablePreview: Boolean? = null
-  var fileTypeSet: Array<EnumDefnDocFileExt>? = null
-  var maxSize: Number? = null
-  var maxSizeFieldId: MetaIdField? = null
-  var maxSizeVar: Number? = null
-  var showSize: Boolean? = null
-  var showSizeFieldId: MetaIdField? = null
-  var showSizeVar: Boolean? = null
+  val disablePreview: Boolean?
+  val fileTypeSet: Array<EnumDefnDocFileExt>?
+  val maxSize: Long?
+  val maxSizeFieldId: MetaIdField?
+  val maxSizeVar: Long?
+  val showSize: Boolean?
+  val showSizeFieldId: MetaIdField?
+  val showSizeVar: Boolean?
 }

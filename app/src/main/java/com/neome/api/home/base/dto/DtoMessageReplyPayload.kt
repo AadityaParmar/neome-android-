@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.home.base.Types.EnumMessageType
 import com.neome.api.meta.base.Types.MessageId
 
-open class DtoMessageReplyPayload
+interface DtoMessageReplyPayload
 {
-  lateinit var messageId: MessageId
-  lateinit var messageType: EnumMessageType
-  lateinit var senderId: EntUserId
+  val messageId: MessageId
+  val messageType: EnumMessageType
+  val senderId: EntUserId
 }

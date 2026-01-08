@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdModule
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioModule : StudioBase()
+interface StudioModule : StudioBase
 {
-  lateinit var metaId: MetaIdModule
-  lateinit var name: String
+  val metaId: MetaIdModule
+  val name: String
 }

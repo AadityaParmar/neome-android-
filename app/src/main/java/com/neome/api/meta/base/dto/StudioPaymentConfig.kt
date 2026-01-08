@@ -10,16 +10,16 @@ import com.neome.api.meta.base.Types.EnumDefnPaymentMethodKind
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioPaymentConfig : StudioBase()
+interface StudioPaymentConfig : StudioBase
 {
-  var allowedPaymentMethodSet: Array<EnumDefnPaymentMethodKind>? = null
-  var amountFieldId: MetaIdField? = null
-  var currency: CurrencyKey? = null
-  var currencyFieldId: MetaIdField? = null
-  var customerContactFieldId: MetaIdField? = null
-  var customerEmailFieldId: MetaIdField? = null
-  var customerNameFieldId: MetaIdField? = null
-  var descriptionFieldId: MetaIdField? = null
-  var enablePayment: Boolean? = null
-  var referenceIdFieldId: MetaIdField? = null
+  val allowedPaymentMethodSet: Array<EnumDefnPaymentMethodKind>?
+  val amountFieldId: MetaIdField?
+  val currency: CurrencyKey?
+  val currencyFieldId: MetaIdField?
+  val customerContactFieldId: MetaIdField?
+  val customerEmailFieldId: MetaIdField?
+  val customerNameFieldId: MetaIdField?
+  val descriptionFieldId: MetaIdField?
+  val enablePayment: Boolean?
+  val referenceIdFieldId: MetaIdField?
 }

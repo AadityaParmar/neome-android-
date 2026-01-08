@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioEntDeeplinkWithHeader
 
-open class StudioEntDeeplinkSpreadsheetRow : StudioEntDeeplinkWithHeader()
+interface StudioEntDeeplinkSpreadsheetRow : StudioEntDeeplinkWithHeader
 {
-  var formContentLayoutId: MetaIdLayoutForm? = null
-  var formTemplateLayoutId: MetaIdLayoutForm? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
+  val formContentLayoutId: MetaIdLayoutForm?
+  val formTemplateLayoutId: MetaIdLayoutForm?
+  val spreadsheetId: MetaIdSpreadsheet?
 }

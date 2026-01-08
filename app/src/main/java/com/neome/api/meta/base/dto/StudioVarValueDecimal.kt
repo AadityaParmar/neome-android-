@@ -5,10 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-import kotlin.properties.Delegates
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioVarValueDecimal : StudioBase()
+interface StudioVarValueDecimal : StudioBase
 {
-  var value: Number by Delegates.notNull<Number>()
+  val value: Long?
 }

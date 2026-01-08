@@ -7,10 +7,10 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumLogTableTextStyle
 
-open class DtoLogTableCell
+interface DtoLogTableCell
 {
-  var bgColor: String? = null
-  var color: String? = null
-  var style: EnumLogTableTextStyle? = null
-  lateinit var text: String
+  val bgColor: String?
+  val color: String?
+  val style: EnumLogTableTextStyle?
+  val text: String
 }

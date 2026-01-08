@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdAutoStep
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-open class EntVdBranchSwitchCase : EntVdAutoStep()
+interface EntVdBranchSwitchCase : EntVdAutoStep
 {
-  var field: StudioDtoArgValueParameter? = null
+  val field: StudioDtoArgValueParameter?
 }

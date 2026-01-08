@@ -11,12 +11,12 @@ import com.neome.api.meta.base.Types.EnumDefnEjectionPolicy
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-open class DefnFieldRefSet : DefnFieldEditable()
+interface DefnFieldRefSet : DefnFieldEditable
 {
-  var allowDuplicateValues: Boolean? = null
-  var displayFieldId: MetaIdField? = null
-  var ejectionPolicy: EnumDefnEjectionPolicy? = null
-  var layoutSpreadsheet: DefnLayoutGrid? = null
-  var maxSize: Number? = null
-  lateinit var spreadsheetId: MetaIdSpreadsheet
+  val allowDuplicateValues: Boolean?
+  val displayFieldId: MetaIdField?
+  val ejectionPolicy: EnumDefnEjectionPolicy?
+  val layoutSpreadsheet: DefnLayoutGrid?
+  val maxSize: Long?
+  val spreadsheetId: MetaIdSpreadsheet
 }

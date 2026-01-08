@@ -7,12 +7,12 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.DefnDtoColor
 
-open class DefnDtoOption
+interface DefnDtoOption
 {
-  var color: DefnDtoColor? = null
-  var disabled: Boolean? = null
-  var hint: String? = null
-  var isRemoved: Boolean? = null
-  lateinit var metaId: String
-  lateinit var value: String
+  val color: DefnDtoColor?
+  val disabled: Boolean?
+  val hint: String?
+  val isRemoved: Boolean?
+  val metaId: String
+  val value: String
 }

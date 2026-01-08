@@ -8,8 +8,8 @@ package com.neome.api.ent.base.dto
 import com.neome.api.ent.base.Types.EnumFieldFilterValueType
 import com.neome.api.meta.base.Types.MetaIdComp
 
-open class SpreadsheetFilterValue
+interface SpreadsheetFilterValue
 {
-  lateinit var metaIdField: MetaIdComp
-  lateinit var type: EnumFieldFilterValueType
+  val metaIdField: MetaIdComp
+  val type: EnumFieldFilterValueType
 }

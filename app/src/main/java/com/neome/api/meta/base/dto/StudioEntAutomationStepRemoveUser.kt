@@ -11,10 +11,10 @@ import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntAutomationStepRemoveUser : StudioEntAutomationStep()
+interface StudioEntAutomationStepRemoveUser : StudioEntAutomationStep
 {
-  var inputFormPipelineVarId: MetaIdPipelineParam? = null
-  var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
-  var iterateOnGridId: MetaIdGrid? = null
-  var removeUserFieldId: MetaIdField? = null
+  val inputFormPipelineVarId: MetaIdPipelineParam?
+  val iterateOnGridFilterVarId: StudioValueVarIdCondition?
+  val iterateOnGridId: MetaIdGrid?
+  val removeUserFieldId: MetaIdField?
 }

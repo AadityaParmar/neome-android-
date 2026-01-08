@@ -11,13 +11,13 @@ import com.neome.api.meta.base.Types.EnumDefnTextStyle
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdHeader
 
-open class DefnDtoTableHeader
+interface DefnDtoTableHeader
 {
-  var bgColor: DefnDtoColor? = null
-  lateinit var displayText: String
-  lateinit var fieldIdSet: Array<MetaIdField>
-  lateinit var metaId: MetaIdHeader
-  var textColor: DefnDtoColor? = null
-  var textSize: EnumDefnTextSize? = null
-  var textStyleSet: Array<EnumDefnTextStyle>? = null
+  val bgColor: DefnDtoColor?
+  val displayText: String
+  val fieldIdSet: Array<MetaIdField>
+  val metaId: MetaIdHeader
+  val textColor: DefnDtoColor?
+  val textSize: EnumDefnTextSize?
+  val textStyleSet: Array<EnumDefnTextStyle>?
 }

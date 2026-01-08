@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 import com.neome.api.meta.base.dto.StudioMapOfFormula
 
-open class StudioEntAutomationStepCalculateFormulas : StudioEntAutomationStep()
+interface StudioEntAutomationStepCalculateFormulas : StudioEntAutomationStep
 {
-  var formulaFormPipelineVarId: MetaIdPipelineParam? = null
-  var newFormulaMap: StudioMapOfFormula? = null
-  var recalculateFormFormulas: Boolean? = null
+  val formulaFormPipelineVarId: MetaIdPipelineParam?
+  val newFormulaMap: StudioMapOfFormula?
+  val recalculateFormFormulas: Boolean?
 }

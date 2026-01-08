@@ -12,13 +12,13 @@ import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.RowId
 
-open class FieldDtoGridRow
+interface FieldDtoGridRow
 {
-  var createdBy: EntUserId? = null
-  var createdOn: String? = null
-  lateinit var rowId: RowId
-  var rowOrder: String? = null
-  var updatedBy: EntUserId? = null
-  var updatedOn: String? = null
-  var valueMap: Map<MetaIdField, Any>? = null
+  val createdBy: EntUserId?
+  val createdOn: String?
+  val rowId: RowId
+  val rowOrder: String?
+  val updatedBy: EntUserId?
+  val updatedOn: String?
+  val valueMap: Map<MetaIdField, Any>?
 }

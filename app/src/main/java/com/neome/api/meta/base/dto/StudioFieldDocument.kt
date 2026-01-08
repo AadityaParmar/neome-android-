@@ -10,13 +10,13 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldDocument : StudioFieldEditable()
+interface StudioFieldDocument : StudioFieldEditable
 {
-  var fileTypeSet: Array<EnumDefnDocFileExt>? = null
-  var maxSize: Number? = null
-  var maxSizeFieldId: MetaIdField? = null
-  var maxSizeVarId: MetaIdVar? = null
-  var showSize: Boolean? = null
-  var showSizeFieldId: MetaIdField? = null
-  var showSizeVarId: MetaIdVar? = null
+  val fileTypeSet: Array<EnumDefnDocFileExt>?
+  val maxSize: Long?
+  val maxSizeFieldId: MetaIdField?
+  val maxSizeVarId: MetaIdVar?
+  val showSize: Boolean?
+  val showSizeFieldId: MetaIdField?
+  val showSizeVarId: MetaIdVar?
 }

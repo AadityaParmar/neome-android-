@@ -9,10 +9,10 @@ import com.neome.api.meta.base.dto.EntVdAutoStep
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-open class EntVdBotAddPromptToHistory : EntVdAutoStep()
+interface EntVdBotAddPromptToHistory : EntVdAutoStep
 {
-  var documentAttachment: StudioDtoArgValueParameter? = null
-  var imageAttachment: StudioDtoArgValueParameter? = null
-  var label: StudioBuildArgBinder? = null
-  var promptField: StudioDtoArgValueParameter? = null
+  val documentAttachment: StudioDtoArgValueParameter?
+  val imageAttachment: StudioDtoArgValueParameter?
+  val label: StudioBuildArgBinder?
+  val promptField: StudioDtoArgValueParameter?
 }

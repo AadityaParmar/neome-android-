@@ -7,8 +7,8 @@ package com.neome.api.home.base.dto
 
 import java.util.Date
 
-open class DtoMessageReaction
+interface DtoMessageReaction
 {
-  lateinit var reaction: String
-  lateinit var updatedOn: String
+  val reaction: String
+  val updatedOn: String
 }

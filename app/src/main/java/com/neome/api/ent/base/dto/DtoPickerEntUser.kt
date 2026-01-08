@@ -11,10 +11,10 @@ import java.util.Map
 import com.neome.api.meta.base.Types.MediaId
 import com.neome.api.meta.base.Types.MetaIdVar
 
-open class DtoPickerEntUser
+interface DtoPickerEntUser
 {
-  var avatarId: MediaId? = null
-  lateinit var entUserId: EntUserId
-  lateinit var nickName: String
-  var userSettingValueMap: Map<MetaIdVar, Any>? = null
+  val avatarId: MediaId?
+  val entUserId: EntUserId
+  val nickName: String
+  val userSettingValueMap: Map<MetaIdVar, Any>?
 }

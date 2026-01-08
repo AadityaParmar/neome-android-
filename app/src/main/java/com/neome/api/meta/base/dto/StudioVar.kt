@@ -11,10 +11,10 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDetails
 
-open class StudioVar : StudioBase()
+interface StudioVar : StudioBase
 {
-  lateinit var deploy: EnumDefnDeploy
-  lateinit var details: StudioDetails
-  lateinit var kind: EnumStudioVarKind
-  lateinit var metaId: MetaIdVar
+  val deploy: EnumDefnDeploy
+  val details: StudioDetails
+  val kind: EnumStudioVarKind
+  val metaId: MetaIdVar
 }

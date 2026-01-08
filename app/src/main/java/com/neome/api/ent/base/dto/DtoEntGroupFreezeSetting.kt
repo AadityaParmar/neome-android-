@@ -7,9 +7,9 @@ package com.neome.api.ent.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnFreezeAvatarKind
 
-open class DtoEntGroupFreezeSetting
+interface DtoEntGroupFreezeSetting
 {
-  var freeze: Boolean? = null
-  var freezeAvatarKind: EnumDefnFreezeAvatarKind? = null
-  var freezeSortName: String? = null
+  val freeze: Boolean?
+  val freezeAvatarKind: EnumDefnFreezeAvatarKind?
+  val freezeSortName: String?
 }

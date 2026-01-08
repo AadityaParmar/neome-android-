@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdEvent
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-open class EntVdEventSpreadsheet : EntVdEvent()
+interface EntVdEventSpreadsheet : EntVdEvent
 {
-  var spreadsheetId: MetaIdSpreadsheet? = null
+  val spreadsheetId: MetaIdSpreadsheet?
 }

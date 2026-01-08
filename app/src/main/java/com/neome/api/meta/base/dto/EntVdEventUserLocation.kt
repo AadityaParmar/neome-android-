@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdEvent
 import com.neome.api.meta.base.dto.StudioDtoLocationCapture
 
-open class EntVdEventUserLocation : EntVdEvent()
+interface EntVdEventUserLocation : EntVdEvent
 {
-  var locationCapture: StudioDtoLocationCapture? = null
+  val locationCapture: StudioDtoLocationCapture?
 }

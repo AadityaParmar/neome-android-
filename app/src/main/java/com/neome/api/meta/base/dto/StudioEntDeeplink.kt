@@ -18,19 +18,19 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioModuleSelection
 import com.neome.api.meta.base.Symbol
 
-open class StudioEntDeeplink : StudioBase()
+interface StudioEntDeeplink : StudioBase
 {
-  var creationRoles: Array<MetaIdRole>? = null
-  var description: String? = null
-  var expiry: EnumDefnDeeplinkExpiry? = null
-  lateinit var kind: EnumDefnKindDeeplink
-  var makeUserDefaultRoles: Array<MetaIdRole>? = null
-  lateinit var metaId: MetaIdDeeplink
-  var modules: StudioModuleSelection? = null
-  lateinit var name: Symbol
-  var showEnterpriseImageInLinkPreview: Boolean? = null
-  var targetUserHandleFieldId: MetaIdField? = null
-  var targetUserSpreadsheetId: MetaIdSpreadsheet? = null
-  var userFieldMap: Map<EnumDefnUserProps, MetaIdField>? = null
-  var visibilityConstraint: EnumDefnDeeplinkConstraint? = null
+  val creationRoles: Array<MetaIdRole>?
+  val description: String?
+  val expiry: EnumDefnDeeplinkExpiry?
+  val kind: EnumDefnKindDeeplink
+  val makeUserDefaultRoles: Array<MetaIdRole>?
+  val metaId: MetaIdDeeplink
+  val modules: StudioModuleSelection?
+  val name: Symbol
+  val showEnterpriseImageInLinkPreview: Boolean?
+  val targetUserHandleFieldId: MetaIdField?
+  val targetUserSpreadsheetId: MetaIdSpreadsheet?
+  val userFieldMap: Map<EnumDefnUserProps, MetaIdField>?
+  val visibilityConstraint: EnumDefnDeeplinkConstraint?
 }

@@ -12,16 +12,16 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdPlugin
 
-open class DefnStudioVarIdTextEditor : DefnField()
+interface DefnStudioVarIdTextEditor : DefnField
 {
-  var argBinderFilterVarKindSet: Array<EnumStudioVarKind>? = null
-  var argBinderFormId: MetaIdForm? = null
-  var excludeFieldIdSet: Array<MetaIdField>? = null
-  var filterContextOptionSet: Array<String>? = null
-  var filterKindSet: Array<EnumDefnArgBinder>? = null
-  var filterVarKindSet: Array<EnumStudioVarKind>? = null
-  var inputFormId: MetaIdForm? = null
-  var pluginConfigFormId: MetaIdForm? = null
-  var pluginId: MetaIdPlugin? = null
-  var showAsEdit: Boolean? = null
+  val argBinderFilterVarKindSet: Array<EnumStudioVarKind>?
+  val argBinderFormId: MetaIdForm?
+  val excludeFieldIdSet: Array<MetaIdField>?
+  val filterContextOptionSet: Array<String>?
+  val filterKindSet: Array<EnumDefnArgBinder>?
+  val filterVarKindSet: Array<EnumStudioVarKind>?
+  val inputFormId: MetaIdForm?
+  val pluginConfigFormId: MetaIdForm?
+  val pluginId: MetaIdPlugin?
+  val showAsEdit: Boolean?
 }

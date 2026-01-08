@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.EntVdAi
 
-open class EntVdAiFormToSentiment : EntVdAi()
+interface EntVdAiFormToSentiment : EntVdAi
 {
 }

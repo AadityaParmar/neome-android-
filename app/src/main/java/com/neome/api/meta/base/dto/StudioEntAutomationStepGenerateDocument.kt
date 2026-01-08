@@ -13,14 +13,14 @@ import com.neome.api.meta.base.dto.StudioEntAutomationStep
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 import com.neome.api.meta.base.dto.StudioValueVarIdText
 
-open class StudioEntAutomationStepGenerateDocument : StudioEntAutomationStep()
+interface StudioEntAutomationStepGenerateDocument : StudioEntAutomationStep
 {
-  var contentLayoutId: MetaIdLayoutForm? = null
-  var fileNameVarId: StudioValueVarIdText? = null
-  var inputFormMappingVarId: MetaIdVar? = null
-  var inputFormPipelineVarId: MetaIdPipelineParam? = null
-  var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
-  var iterateOnGridId: MetaIdGrid? = null
-  var outputFormPipelineVarId: MetaIdPipelineParam? = null
-  var templateLayoutId: MetaIdLayoutForm? = null
+  val contentLayoutId: MetaIdLayoutForm?
+  val fileNameVarId: StudioValueVarIdText?
+  val inputFormMappingVarId: MetaIdVar?
+  val inputFormPipelineVarId: MetaIdPipelineParam?
+  val iterateOnGridFilterVarId: StudioValueVarIdCondition?
+  val iterateOnGridId: MetaIdGrid?
+  val outputFormPipelineVarId: MetaIdPipelineParam?
+  val templateLayoutId: MetaIdLayoutForm?
 }

@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-open class FieldSetOfString
+interface FieldSetOfString
 {
-  lateinit var valueSet: Array<String>
+  val valueSet: Array<String>
 }

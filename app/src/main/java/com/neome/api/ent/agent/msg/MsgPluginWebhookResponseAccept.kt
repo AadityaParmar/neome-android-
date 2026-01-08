@@ -11,10 +11,10 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgPluginWebhookResponseAccept : Msg()
+interface MsgPluginWebhookResponseAccept : Msg
 {
-  lateinit var entId: EntId
-  lateinit var formId: MetaIdForm
-  lateinit var pluginId: MetaIdPlugin
-  lateinit var responseFormValue: FormValueRaw
+  val entId: EntId
+  val formId: MetaIdForm
+  val pluginId: MetaIdPlugin
+  val responseFormValue: FormValueRaw
 }

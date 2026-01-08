@@ -11,9 +11,9 @@ import com.neome.api.meta.base.Types.PluginApiId
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioPluginApi
 
-open class StudioPluginApiMap : StudioBase()
+interface StudioPluginApiMap : StudioBase
 {
-  lateinit var keys: Array<PluginApiId>
-  lateinit var map: Map<PluginApiId, StudioPluginApi>
-  var pluginConfigFormId: MetaIdForm? = null
+  val keys: Array<PluginApiId>
+  val map: Map<PluginApiId, StudioPluginApi>
+  val pluginConfigFormId: MetaIdForm?
 }

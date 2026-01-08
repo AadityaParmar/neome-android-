@@ -12,11 +12,11 @@ import com.neome.api.home.base.dto.DtoMessageReplyPayload
 import com.neome.api.meta.base.Types.MessageId
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgMessageSend : Msg()
+interface MsgMessageSend : Msg
 {
-  lateinit var chatId: ChatId
-  var chatMessageOffset: DtoChatMessageOffset? = null
-  lateinit var messageId: MessageId
-  lateinit var payload: DtoMessagePayload
-  var replyPayload: DtoMessageReplyPayload? = null
+  val chatId: ChatId
+  val chatMessageOffset: DtoChatMessageOffset?
+  val messageId: MessageId
+  val payload: DtoMessagePayload
+  val replyPayload: DtoMessageReplyPayload?
 }

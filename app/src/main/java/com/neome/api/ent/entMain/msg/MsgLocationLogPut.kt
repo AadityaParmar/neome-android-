@@ -8,9 +8,9 @@ package com.neome.api.ent.entMain.msg
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgLocationLogPut : Msg()
+interface MsgLocationLogPut : Msg
 {
-  lateinit var entIdSet: Array<EntId>
-  lateinit var name: String
-  lateinit var summary: Object
+  val entIdSet: Array<EntId>
+  val name: String
+  val summary: Object
 }

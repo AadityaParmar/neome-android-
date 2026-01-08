@@ -12,13 +12,13 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoColor
 import com.neome.api.meta.base.Symbol
 
-open class StudioDtoChartXAxis : StudioBase()
+interface StudioDtoChartXAxis : StudioBase
 {
-  var color: StudioDtoColor? = null
-  var colorFieldId: MetaIdField? = null
-  var colorVarId: MetaIdVar? = null
-  var label: String? = null
-  lateinit var metaId: MetaIdChartXAxis
-  var name: Symbol? = null
-  var valueOptionId: String? = null
+  val color: StudioDtoColor?
+  val colorFieldId: MetaIdField?
+  val colorVarId: MetaIdVar?
+  val label: String?
+  val metaId: MetaIdChartXAxis
+  val name: Symbol?
+  val valueOptionId: String?
 }

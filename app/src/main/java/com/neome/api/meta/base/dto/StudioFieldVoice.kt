@@ -10,13 +10,13 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldVoice : StudioFieldEditable()
+interface StudioFieldVoice : StudioFieldEditable
 {
-  var captureLocation: Boolean? = null
-  var captureTime: Boolean? = null
-  var captureUser: Boolean? = null
-  var maxSize: Number? = null
-  var maxSizeFieldId: MetaIdField? = null
-  var maxSizeVarId: MetaIdVar? = null
-  var showCapturedValuesOnAside: Array<EnumDefnCaptureValueKind>? = null
+  val captureLocation: Boolean?
+  val captureTime: Boolean?
+  val captureUser: Boolean?
+  val maxSize: Long?
+  val maxSizeFieldId: MetaIdField?
+  val maxSizeVarId: MetaIdVar?
+  val showCapturedValuesOnAside: Array<EnumDefnCaptureValueKind>?
 }

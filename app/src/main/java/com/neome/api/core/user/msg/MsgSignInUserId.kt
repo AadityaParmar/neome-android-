@@ -5,16 +5,15 @@
 
 package com.neome.api.core.user.msg
 
-import kotlin.properties.Delegates
 import com.neome.api.meta.base.Types.EnumDeviceType
 import com.neome.api.nucleus.base.msg.Msg
 import com.neome.api.meta.base.Types.UserId
 
-open class MsgSignInUserId : Msg()
+interface MsgSignInUserId : Msg
 {
-  lateinit var deviceName: String
-  lateinit var deviceType: EnumDeviceType
-  lateinit var password: String
-  var rememberMe: Boolean by Delegates.notNull<Boolean>()
-  lateinit var userId: UserId
+  val deviceName: String
+  val deviceType: EnumDeviceType
+  val password: String
+  val rememberMe: Boolean
+  val userId: UserId
 }

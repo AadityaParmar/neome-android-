@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.EntVdAutoStepWithError
 import com.neome.api.meta.base.dto.EntVdPromptMap
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-open class EntVdBranchSwitchPrompt : EntVdAutoStepWithError()
+interface EntVdBranchSwitchPrompt : EntVdAutoStepWithError
 {
-  var field: StudioDtoArgValueParameter? = null
-  var promptMap: EntVdPromptMap? = null
+  val field: StudioDtoArgValueParameter?
+  val promptMap: EntVdPromptMap?
 }

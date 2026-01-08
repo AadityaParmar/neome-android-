@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.AnyTime
 import com.neome.api.meta.base.dto.StudioBuildRepeatSetting
 
-open class StudioBuildRepeatSettingDays : StudioBuildRepeatSetting()
+interface StudioBuildRepeatSettingDays : StudioBuildRepeatSetting
 {
-  var setOfTime: Array<AnyTime>? = null
+  val setOfTime: Array<AnyTime>?
 }

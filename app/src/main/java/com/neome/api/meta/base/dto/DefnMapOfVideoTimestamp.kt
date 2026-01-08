@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.DefnDtoVideoTimestamp
 import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdVideoTimestamp
 
-open class DefnMapOfVideoTimestamp
+interface DefnMapOfVideoTimestamp
 {
-  lateinit var keys: Array<MetaIdVideoTimestamp>
-  lateinit var map: Map<MetaIdVideoTimestamp, DefnDtoVideoTimestamp>
+  val keys: Array<MetaIdVideoTimestamp>
+  val map: Map<MetaIdVideoTimestamp, DefnDtoVideoTimestamp>
 }

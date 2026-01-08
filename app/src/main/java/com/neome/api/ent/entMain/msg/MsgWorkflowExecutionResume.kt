@@ -9,9 +9,9 @@ import com.neome.api.ent.base.Types.EnumWorkflowDebugActionKind
 import com.neome.api.nucleus.base.msg.Msg
 import com.neome.api.meta.base.Types.WorkflowExecutionId
 
-open class MsgWorkflowExecutionResume : Msg()
+interface MsgWorkflowExecutionResume : Msg
 {
-  var debugAction: EnumWorkflowDebugActionKind? = null
-  lateinit var executionId: WorkflowExecutionId
-  var userOption: String? = null
+  val debugAction: EnumWorkflowDebugActionKind?
+  val executionId: WorkflowExecutionId
+  val userOption: String?
 }

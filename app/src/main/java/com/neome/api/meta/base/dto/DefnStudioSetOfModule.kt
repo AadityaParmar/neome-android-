@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.DefnField
 
-open class DefnStudioSetOfModule : DefnField()
+interface DefnStudioSetOfModule : DefnField
 {
 }

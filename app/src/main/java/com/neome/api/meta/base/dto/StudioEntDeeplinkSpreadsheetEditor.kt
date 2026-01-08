@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioEntDeeplinkWithHeader
 
-open class StudioEntDeeplinkSpreadsheetEditor : StudioEntDeeplinkWithHeader()
+interface StudioEntDeeplinkSpreadsheetEditor : StudioEntDeeplinkWithHeader
 {
-  var layoutSpreadsheetId: MetaIdLayoutGrid? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
+  val layoutSpreadsheetId: MetaIdLayoutGrid?
+  val spreadsheetId: MetaIdSpreadsheet?
 }

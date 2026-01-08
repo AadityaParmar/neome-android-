@@ -10,7 +10,7 @@ import com.neome.api.meta.base.Types.GeoPoint
 import java.util.Map
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigReverseGeocode : Sig()
+interface SigReverseGeocode : Sig
 {
-  lateinit var map: Map<GeoPoint, FieldDtoLocation>
+  val map: Map<GeoPoint, FieldDtoLocation>
 }

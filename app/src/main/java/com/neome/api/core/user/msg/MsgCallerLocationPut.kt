@@ -8,7 +8,7 @@ package com.neome.api.core.user.msg
 import com.neome.api.core.base.dto.DtoGeoPoint
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgCallerLocationPut : Msg()
+interface MsgCallerLocationPut : Msg
 {
-  lateinit var geoPoints: Array<DtoGeoPoint>
+  val geoPoints: Array<DtoGeoPoint>
 }

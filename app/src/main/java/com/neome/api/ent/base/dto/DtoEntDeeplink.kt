@@ -10,11 +10,11 @@ import com.neome.api.meta.base.Types.MetaIdDeeplink
 import com.neome.api.meta.base.dto.StudioModuleSelection
 import com.neome.api.meta.base.Symbol
 
-open class DtoEntDeeplink
+interface DtoEntDeeplink
 {
-  lateinit var deepLinkId: MetaIdDeeplink
-  var description: String? = null
-  lateinit var kind: EnumDefnKindDeeplink
-  var modules: StudioModuleSelection? = null
-  lateinit var name: Symbol
+  val deepLinkId: MetaIdDeeplink
+  val description: String?
+  val kind: EnumDefnKindDeeplink
+  val modules: StudioModuleSelection?
+  val name: Symbol
 }

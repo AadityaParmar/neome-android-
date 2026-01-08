@@ -10,9 +10,9 @@ import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.nucleus.base.msg.Msg
 import com.neome.api.meta.base.Types.RequestId
 
-open class MsgPluginApiResponse : Msg()
+interface MsgPluginApiResponse : Msg
 {
-  var pluginError: EnvError? = null
-  lateinit var requestId: RequestId
-  var responseFormValue: FormValueRaw? = null
+  val pluginError: EnvError?
+  val requestId: RequestId
+  val responseFormValue: FormValueRaw?
 }

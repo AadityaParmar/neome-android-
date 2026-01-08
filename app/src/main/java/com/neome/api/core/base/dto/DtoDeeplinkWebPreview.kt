@@ -8,13 +8,13 @@ package com.neome.api.core.base.dto
 import com.neome.api.core.base.Types.EnumDeeplinkActionType
 import com.neome.api.meta.base.Types.MediaIdAvatar
 
-open class DtoDeeplinkWebPreview
+interface DtoDeeplinkWebPreview
 {
-  var avatarId: MediaIdAvatar? = null
-  var deeplinkActionType: EnumDeeplinkActionType? = null
-  var desc: String? = null
-  var info: String? = null
-  var senderName: String? = null
-  var targetName: String? = null
-  var title: String? = null
+  val avatarId: MediaIdAvatar?
+  val deeplinkActionType: EnumDeeplinkActionType?
+  val desc: String?
+  val info: String?
+  val senderName: String?
+  val targetName: String?
+  val title: String?
 }

@@ -11,11 +11,11 @@ import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.nucleus.base.msg.Msg
 import java.util.Set
 
-open class MsgGroupCreate : Msg()
+interface MsgGroupCreate : Msg
 {
-  var about: String? = null
-  var mediaIdAvatar: MediaIdAvatar? = null
-  lateinit var members: Array<EntUserId>
-  lateinit var name: String
-  lateinit var settings: DtoGroupSettings
+  val about: String?
+  val mediaIdAvatar: MediaIdAvatar?
+  val members: Array<EntUserId>
+  val name: String
+  val settings: DtoGroupSettings
 }

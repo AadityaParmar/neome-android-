@@ -9,10 +9,10 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioModuleSelection
 import com.neome.api.meta.base.Symbol
 
-open class StudioDetails : StudioBase()
+interface StudioDetails : StudioBase
 {
-  var description: String? = null
-  var label: String? = null
-  var modules: StudioModuleSelection? = null
-  lateinit var name: Symbol
+  val description: String?
+  val label: String?
+  val modules: StudioModuleSelection?
+  val name: Symbol
 }

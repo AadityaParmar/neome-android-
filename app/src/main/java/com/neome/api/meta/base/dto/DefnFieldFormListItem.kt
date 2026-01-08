@@ -9,9 +9,9 @@ import com.neome.api.meta.base.dto.DefnDtoLayoutCardItem
 import com.neome.api.meta.base.dto.DefnFieldLabel
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldFormListItem : DefnFieldLabel()
+interface DefnFieldFormListItem : DefnFieldLabel
 {
-  var editableFieldIdSet: Array<MetaIdField>? = null
-  var isCard: Boolean? = null
-  var layout: DefnDtoLayoutCardItem? = null
+  val editableFieldIdSet: Array<MetaIdField>?
+  val isCard: Boolean?
+  val layout: DefnDtoLayoutCardItem?
 }

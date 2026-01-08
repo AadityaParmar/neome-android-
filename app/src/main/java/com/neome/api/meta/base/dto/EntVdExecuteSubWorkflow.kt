@@ -11,8 +11,8 @@ import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdPipelineVar
 import com.neome.api.meta.base.Types.MetaIdVdAutoNode
 
-open class EntVdExecuteSubWorkflow : EntVdAutoStepWithOutputAndError()
+interface EntVdExecuteSubWorkflow : EntVdAutoStepWithOutputAndError
 {
-  var sharedParamMap: Map<MetaIdPipelineVar, MetaIdPipelineParam>? = null
-  var startNodeId: MetaIdVdAutoNode? = null
+  val sharedParamMap: Map<MetaIdPipelineVar, MetaIdPipelineParam>?
+  val startNodeId: MetaIdVdAutoNode?
 }

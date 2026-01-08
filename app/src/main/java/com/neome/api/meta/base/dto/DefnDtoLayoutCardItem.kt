@@ -12,20 +12,20 @@ import com.neome.api.meta.base.Types.EnumDefnThemeImageCorner
 import com.neome.api.meta.base.Types.EnumDefnThemeImageRenderingMode
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnDtoLayoutCardItem
+interface DefnDtoLayoutCardItem
 {
-  var fifthLine: DefnDtoLayoutCardItemLine? = null
-  var firstLine: DefnDtoLayoutCardItemLine? = null
-  var fourthLine: DefnDtoLayoutCardItemLine? = null
-  var imageBackgroundColor: DefnDtoColor? = null
-  var imageCornerVar: EnumDefnThemeImageCorner? = null
-  var imageHeight: Number? = null
-  var imageHeightVar: Number? = null
-  var imageRenderingMode: EnumDefnThemeImageRenderingMode? = null
-  var imageWidth: Number? = null
-  var imageWidthVar: Number? = null
-  var mediaFieldIdSet: Array<MetaIdField>? = null
-  var mediaVarSet: Array<DefnDtoMedia>? = null
-  var secondLine: DefnDtoLayoutCardItemLine? = null
-  var thirdLine: DefnDtoLayoutCardItemLine? = null
+  val fifthLine: DefnDtoLayoutCardItemLine?
+  val firstLine: DefnDtoLayoutCardItemLine?
+  val fourthLine: DefnDtoLayoutCardItemLine?
+  val imageBackgroundColor: DefnDtoColor?
+  val imageCornerVar: EnumDefnThemeImageCorner?
+  val imageHeight: Long?
+  val imageHeightVar: Long?
+  val imageRenderingMode: EnumDefnThemeImageRenderingMode?
+  val imageWidth: Long?
+  val imageWidthVar: Long?
+  val mediaFieldIdSet: Array<MetaIdField>?
+  val mediaVarSet: Array<DefnDtoMedia>?
+  val secondLine: DefnDtoLayoutCardItemLine?
+  val thirdLine: DefnDtoLayoutCardItemLine?
 }

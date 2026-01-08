@@ -5,12 +5,11 @@
 
 package com.neome.api.nucleus.base.dto
 
-import kotlin.properties.Delegates
 import com.neome.api.meta.base.Types.ServiceName
 
-open class SpecSig
+interface SpecSig
 {
-  lateinit var module: String
-  var serverPush: Boolean by Delegates.notNull<Boolean>()
-  lateinit var serviceName: ServiceName
+  val module: String
+  val serverPush: Boolean
+  val serviceName: ServiceName
 }

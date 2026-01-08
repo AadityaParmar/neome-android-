@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioForm
 
-open class StudioFormMap : StudioBase()
+interface StudioFormMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdForm>
-  lateinit var map: Map<MetaIdForm, StudioForm>
+  val keys: Array<MetaIdForm>
+  val map: Map<MetaIdForm, StudioForm>
 }

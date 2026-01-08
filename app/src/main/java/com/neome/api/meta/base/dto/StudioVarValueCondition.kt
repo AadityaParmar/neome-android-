@@ -11,12 +11,12 @@ import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioMapOfCondition
 
-open class StudioVarValueCondition : StudioBase()
+interface StudioVarValueCondition : StudioBase
 {
-  var inputFormId: MetaIdForm? = null
-  var inputPluginId: MetaIdPlugin? = null
-  var node: StudioMapOfCondition? = null
-  var sourceFormId: MetaIdForm? = null
-  var sourceGridId: MetaIdGrid? = null
-  var sourcePluginId: MetaIdPlugin? = null
+  val inputFormId: MetaIdForm?
+  val inputPluginId: MetaIdPlugin?
+  val node: StudioMapOfCondition?
+  val sourceFormId: MetaIdForm?
+  val sourceGridId: MetaIdGrid?
+  val sourcePluginId: MetaIdPlugin?
 }

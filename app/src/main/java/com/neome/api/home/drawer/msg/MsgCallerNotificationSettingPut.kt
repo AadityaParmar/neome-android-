@@ -8,7 +8,7 @@ package com.neome.api.home.drawer.msg
 import com.neome.api.core.base.dto.DtoNotificationSetting
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgCallerNotificationSettingPut : Msg()
+interface MsgCallerNotificationSettingPut : Msg
 {
-  lateinit var notificationSetting: DtoNotificationSetting
+  val notificationSetting: DtoNotificationSetting
 }

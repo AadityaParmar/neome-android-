@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldPickRole : StudioFieldEditable()
+interface StudioFieldPickRole : StudioFieldEditable
 {
-  var defaultRoleFieldId: MetaIdField? = null
-  var defaultRoleId: MetaIdRole? = null
-  var showAs: EnumDefnThemePickVariant? = null
+  val defaultRoleFieldId: MetaIdField?
+  val defaultRoleId: MetaIdRole?
+  val showAs: EnumDefnThemePickVariant?
 }

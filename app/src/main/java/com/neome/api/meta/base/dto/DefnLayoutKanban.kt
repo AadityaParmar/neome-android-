@@ -11,15 +11,15 @@ import com.neome.api.meta.base.Types.EnumDefnSortOrder
 import com.neome.api.meta.base.Types.EnumDefnTextSize
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnLayoutKanban : DefnLayoutGrid()
+interface DefnLayoutKanban : DefnLayoutGrid
 {
-  var kanbanFieldId: MetaIdField? = null
-  var showCommentCount: Boolean? = null
-  var showFieldIdSet: Array<MetaIdField>? = null
-  var showFooter: Boolean? = null
-  var showSectionName: Boolean? = null
-  var sortByFieldIdSet: Array<MetaIdField>? = null
-  var sortOrder: EnumDefnSortOrder? = null
-  var swimlaneMap: DefnStudioMapOfSwimlane? = null
-  var textSize: EnumDefnTextSize? = null
+  val kanbanFieldId: MetaIdField?
+  val showCommentCount: Boolean?
+  val showFieldIdSet: Array<MetaIdField>?
+  val showFooter: Boolean?
+  val showSectionName: Boolean?
+  val sortByFieldIdSet: Array<MetaIdField>?
+  val sortOrder: EnumDefnSortOrder?
+  val swimlaneMap: DefnStudioMapOfSwimlane?
+  val textSize: EnumDefnTextSize?
 }

@@ -9,9 +9,9 @@ import com.neome.api.nucleus.base.Types.AppVersion
 import com.neome.api.nucleus.base.msg.Msg
 import com.neome.api.meta.base.Types.TabId
 
-open class MsgGrantBearerToken : Msg()
+interface MsgGrantBearerToken : Msg
 {
-  lateinit var appVersion: AppVersion
-  var sendCaller: Boolean? = null
-  lateinit var tabId: TabId
+  val appVersion: AppVersion
+  val sendCaller: Boolean?
+  val tabId: TabId
 }

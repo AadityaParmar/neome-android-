@@ -10,16 +10,16 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioBuildDate
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldDate : StudioFieldEditable()
+interface StudioFieldDate : StudioFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: StudioBuildDate? = null
-  var defaultVarId: MetaIdVar? = null
-  var displayDateFormat: String? = null
-  var max: StudioBuildDate? = null
-  var maxFieldId: MetaIdField? = null
-  var maxVarId: MetaIdVar? = null
-  var min: StudioBuildDate? = null
-  var minFieldId: MetaIdField? = null
-  var minVarId: MetaIdVar? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: StudioBuildDate?
+  val defaultVarId: MetaIdVar?
+  val displayDateFormat: String?
+  val max: StudioBuildDate?
+  val maxFieldId: MetaIdField?
+  val maxVarId: MetaIdVar?
+  val min: StudioBuildDate?
+  val minFieldId: MetaIdField?
+  val minVarId: MetaIdVar?
 }

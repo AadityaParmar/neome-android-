@@ -12,13 +12,13 @@ import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdReport
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldPickReportRow : StudioFieldEditable()
+interface StudioFieldPickReportRow : StudioFieldEditable
 {
-  var copyFieldMap: Map<MetaIdField, MetaIdField>? = null
-  var editableFieldIdSet: Array<MetaIdField>? = null
-  var gridDisplayFieldId: MetaIdField? = null
-  var reportId: MetaIdReport? = null
-  var reportOutputFormGridId: MetaIdGrid? = null
-  var reportOutputFormGridLayoutId: MetaIdLayoutGrid? = null
-  var showAsDropdown: Boolean? = null
+  val copyFieldMap: Map<MetaIdField, MetaIdField>?
+  val editableFieldIdSet: Array<MetaIdField>?
+  val gridDisplayFieldId: MetaIdField?
+  val reportId: MetaIdReport?
+  val reportOutputFormGridId: MetaIdGrid?
+  val reportOutputFormGridLayoutId: MetaIdLayoutGrid?
+  val showAsDropdown: Boolean?
 }

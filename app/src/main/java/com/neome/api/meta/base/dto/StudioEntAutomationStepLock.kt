@@ -12,13 +12,13 @@ import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 
-open class StudioEntAutomationStepLock : StudioEntAutomationStep()
+interface StudioEntAutomationStepLock : StudioEntAutomationStep
 {
-  var errorFieldId: MetaIdField? = null
-  var errorRetryCountVarId: MetaIdVar? = null
-  var errorRetryDurationVarId: MetaIdVar? = null
-  var lockDuration: FieldDtoDuration? = null
-  var lockKeyFieldId: MetaIdField? = null
-  var operation: EnumDefnLockOperation? = null
-  var sourcePipelineVarId: MetaIdPipelineParam? = null
+  val errorFieldId: MetaIdField?
+  val errorRetryCountVarId: MetaIdVar?
+  val errorRetryDurationVarId: MetaIdVar?
+  val lockDuration: FieldDtoDuration?
+  val lockKeyFieldId: MetaIdField?
+  val operation: EnumDefnLockOperation?
+  val sourcePipelineVarId: MetaIdPipelineParam?
 }

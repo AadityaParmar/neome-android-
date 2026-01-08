@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.DefnForm
 import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigSpreadsheetHistoryFormValue : Sig()
+interface SigSpreadsheetHistoryFormValue : Sig
 {
-  lateinit var defnForm: DefnForm
-  lateinit var formValue: FormValueRaw
+  val defnForm: DefnForm
+  val formValue: FormValueRaw
 }

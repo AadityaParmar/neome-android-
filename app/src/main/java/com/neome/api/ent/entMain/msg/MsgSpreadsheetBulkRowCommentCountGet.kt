@@ -9,7 +9,7 @@ import java.util.Map
 import com.neome.api.core.base.msg.MsgVersion
 import com.neome.api.meta.base.Types.RowId
 
-open class MsgSpreadsheetBulkRowCommentCountGet : MsgVersion()
+interface MsgSpreadsheetBulkRowCommentCountGet : MsgVersion
 {
-  lateinit var rowIdCommentVersionMap: Map<RowId, String>
+  val rowIdCommentVersionMap: Map<RowId, String>
 }

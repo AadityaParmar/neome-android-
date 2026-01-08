@@ -12,11 +12,11 @@ import com.neome.api.meta.base.dto.StudioValueCodeJavascript
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 import com.neome.api.meta.base.Symbol
 
-open class StudioDtoFormula : StudioBase()
+interface StudioDtoFormula : StudioBase
 {
-  lateinit var assignToFieldId: MetaIdField
-  var conditionVarId: StudioValueVarIdCondition? = null
-  var formula: StudioValueCodeJavascript? = null
-  lateinit var metaId: MetaIdFormula
-  var name: Symbol? = null
+  val assignToFieldId: MetaIdField
+  val conditionVarId: StudioValueVarIdCondition?
+  val formula: StudioValueCodeJavascript?
+  val metaId: MetaIdFormula
+  val name: Symbol?
 }

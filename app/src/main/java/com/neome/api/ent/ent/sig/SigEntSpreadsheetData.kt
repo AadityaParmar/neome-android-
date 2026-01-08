@@ -10,8 +10,8 @@ import java.util.Map
 import com.neome.api.meta.base.Types.RowId
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigEntSpreadsheetData : Sig()
+interface SigEntSpreadsheetData : Sig
 {
-  lateinit var rowMap: Map<RowId, FormValueRaw>
-  var topGridVer: String? = null
+  val rowMap: Map<RowId, FormValueRaw>
+  val topGridVer: String?
 }

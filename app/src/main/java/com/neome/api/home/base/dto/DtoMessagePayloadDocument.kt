@@ -5,14 +5,13 @@
 
 package com.neome.api.home.base.dto
 
-import kotlin.properties.Delegates
 import com.neome.api.home.base.dto.DtoMessagePayload
 import com.neome.api.meta.base.Types.MediaIdDocument
 
-open class DtoMessagePayloadDocument : DtoMessagePayload()
+interface DtoMessagePayloadDocument : DtoMessagePayload
 {
-  lateinit var fileExt: String
-  lateinit var fileName: String
-  var fileSize: Number by Delegates.notNull<Number>()
-  lateinit var mediaIdDocument: MediaIdDocument
+  val fileExt: String
+  val fileName: String
+  val fileSize: Long?
+  val mediaIdDocument: MediaIdDocument
 }

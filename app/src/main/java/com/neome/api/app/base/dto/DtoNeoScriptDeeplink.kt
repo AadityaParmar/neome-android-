@@ -8,7 +8,7 @@ package com.neome.api.app.base.dto
 import com.neome.api.app.base.dto.DtoNeoScript
 import com.neome.api.meta.base.Types.MetaIdDeeplink
 
-open class DtoNeoScriptDeeplink : DtoNeoScript()
+interface DtoNeoScriptDeeplink : DtoNeoScript
 {
-  var deeplinkId: MetaIdDeeplink? = null
+  val deeplinkId: MetaIdDeeplink?
 }

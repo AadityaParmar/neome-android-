@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.GroupId
 import com.neome.api.core.base.msg.MsgVersion
 import java.util.Set
 
-open class MsgGroupMembersRemove : MsgVersion()
+interface MsgGroupMembersRemove : MsgVersion
 {
-  lateinit var groupId: GroupId
-  var removeAdminSet: Array<EntUserId>? = null
-  var removeMemberSet: Array<EntUserId>? = null
+  val groupId: GroupId
+  val removeAdminSet: Array<EntUserId>?
+  val removeMemberSet: Array<EntUserId>?
 }

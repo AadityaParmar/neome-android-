@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.ContactId
 import com.neome.api.home.base.Types.EnumMessageType
 import java.util.Map
 
-open class DtoMessagePayload
+interface DtoMessagePayload
 {
-  var isForwarded: Boolean? = null
-  var mentionMap: Map<String, ContactId>? = null
-  lateinit var messageType: EnumMessageType
+  val isForwarded: Boolean?
+  val mentionMap: Map<String, ContactId>?
+  val messageType: EnumMessageType
 }

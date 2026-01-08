@@ -5,6 +5,7 @@
 
 package com.neome.api.meta.base
 
+import kotlinx.serialization.SerialName
 
 
 object Types
@@ -370,7 +371,8 @@ object Types
   enum class EnumDefnArgBinder(val value: String)
   {
     argument("argument"),
-    context_("context"),
+    @SerialName("context")
+    Context("context"),
     derived("derived"),
     field("field"),
     input("input"),
@@ -424,7 +426,8 @@ object Types
   {
     about("about"),
     id("id"),
-    name_("name"),
+    @SerialName("name")
+    Name("name"),
     timeZone("timeZone"),
     displayDateFormat("displayDateFormat"),
     systemEntUserId("systemEntUserId")
@@ -433,7 +436,8 @@ object Types
   enum class EnumDefnArgBinderContextForm(val value: String)
   {
     id("id"),
-    name_("name"),
+    @SerialName("name")
+    Name("name"),
     label("label")
   }
 
@@ -441,7 +445,8 @@ object Types
   {
     about("about"),
     id("id"),
-    name_("name")
+    @SerialName("name")
+    Name("name")
   }
 
   enum class EnumDefnArgBinderContextRow(val value: String)
@@ -662,6 +667,7 @@ object Types
     enumLocationAccuracy("enumLocationAccuracy"),
     enumKindAutoEdge("enumKindAutoEdge"),
     enumKindAutoNode("enumKindAutoNode"),
+    enumKindSpreadsheetUniqueness("enumKindSpreadsheetUniqueness"),
     enumLayoutCardFilterKind("enumLayoutCardFilterKind"),
     enumLayoutGridKind("enumLayoutGridKind"),
     enumThemeButtonSize("enumThemeButtonSize"),
@@ -1022,7 +1028,8 @@ object Types
   enum class EnumDefnDriveSheetFieldLayoutOn(val value: String)
   {
     column("column"),
-    header_("header")
+    @SerialName("header")
+    Header("header")
   }
 
   enum class EnumDefnDriveSheetLayoutFor(val value: String)
@@ -1055,7 +1062,12 @@ object Types
     hasNoValue("hasNoValue"),
     hasValue("hasValue"),
     equalTo("equalTo"),
-    notEqualTo("notEqualTo")
+    notEqualTo("notEqualTo"),
+    greaterThan("greaterThan"),
+    lessThan("lessThan"),
+    greaterThanOrEqualTo("greaterThanOrEqualTo"),
+    lessThanOrEqualTo("lessThanOrEqualTo"),
+    contains("contains")
   }
 
   enum class EnumDefnEditorLayoutRenderingMode(val value: String)
@@ -1111,13 +1123,20 @@ object Types
 
   enum class EnumDefnFields(val value: String)
   {
-    _CreatedBy("\$CreatedBy"),
-    _CreatedOn("\$CreatedOn"),
-    _RowId("\$RowId"),
-    _RowOrder("\$RowOrder"),
-    _UpdatedBy("\$UpdatedBy"),
-    _UpdatedOn("\$UpdatedOn"),
-    _ParentRowId("\$ParentRowId")
+    @SerialName("\$CreatedBy")
+    CreatedBy("\$CreatedBy"),
+    @SerialName("\$CreatedOn")
+    CreatedOn("\$CreatedOn"),
+    @SerialName("\$RowId")
+    RowId("\$RowId"),
+    @SerialName("\$RowOrder")
+    RowOrder("\$RowOrder"),
+    @SerialName("\$UpdatedBy")
+    UpdatedBy("\$UpdatedBy"),
+    @SerialName("\$UpdatedOn")
+    UpdatedOn("\$UpdatedOn"),
+    @SerialName("\$ParentRowId")
+    ParentRowId("\$ParentRowId")
   }
 
   enum class EnumDefnFormLayoutType(val value: String)
@@ -1129,27 +1148,48 @@ object Types
 
   enum class EnumDefnForms(val value: String)
   {
-    _FormMapOfOptions("\$FormMapOfOptions"),
-    _FormPickTree("\$FormPickTree"),
-    _FormSetOfUser("\$FormSetOfUser"),
-    _FormPluginConfig("\$FormPluginConfig"),
-    _FormSchedule("\$FormSchedule"),
-    _FormPaymentReceipt("\$FormPaymentReceipt"),
-    _FormUserSession("\$FormUserSession"),
-    _FormRowComment("\$FormRowComment"),
-    _FormLocation("\$FormLocation"),
-    _FormEntAdmin("\$FormEntAdmin"),
-    _FormEntUser("\$FormEntUser"),
-    _FormEntAuditRecord("\$FormEntAuditRecord"),
-    _FormPrompt("\$FormPrompt"),
-    _FormRagPromptResponse("\$FormRagPromptResponse"),
-    _FormRowEditHistory("\$FormRowEditHistory"),
-    _FormHumanLink("\$FormHumanLink"),
-    _FormUserMembership("\$FormUserMembership"),
-    _FormCrawl("\$FormCrawl"),
-    _FormSearch("\$FormSearch"),
-    _FormBotResponse("\$FormBotResponse"),
-    _FormBotHistory("\$FormBotHistory")
+    @SerialName("\$FormMapOfOptions")
+    FormMapOfOptions("\$FormMapOfOptions"),
+    @SerialName("\$FormPickTree")
+    FormPickTree("\$FormPickTree"),
+    @SerialName("\$FormSetOfUser")
+    FormSetOfUser("\$FormSetOfUser"),
+    @SerialName("\$FormPluginConfig")
+    FormPluginConfig("\$FormPluginConfig"),
+    @SerialName("\$FormSchedule")
+    FormSchedule("\$FormSchedule"),
+    @SerialName("\$FormPaymentReceipt")
+    FormPaymentReceipt("\$FormPaymentReceipt"),
+    @SerialName("\$FormUserSession")
+    FormUserSession("\$FormUserSession"),
+    @SerialName("\$FormRowComment")
+    FormRowComment("\$FormRowComment"),
+    @SerialName("\$FormLocation")
+    FormLocation("\$FormLocation"),
+    @SerialName("\$FormEntAdmin")
+    FormEntAdmin("\$FormEntAdmin"),
+    @SerialName("\$FormEntUser")
+    FormEntUser("\$FormEntUser"),
+    @SerialName("\$FormEntAuditRecord")
+    FormEntAuditRecord("\$FormEntAuditRecord"),
+    @SerialName("\$FormPrompt")
+    FormPrompt("\$FormPrompt"),
+    @SerialName("\$FormRagPromptResponse")
+    FormRagPromptResponse("\$FormRagPromptResponse"),
+    @SerialName("\$FormRowEditHistory")
+    FormRowEditHistory("\$FormRowEditHistory"),
+    @SerialName("\$FormHumanLink")
+    FormHumanLink("\$FormHumanLink"),
+    @SerialName("\$FormUserMembership")
+    FormUserMembership("\$FormUserMembership"),
+    @SerialName("\$FormCrawl")
+    FormCrawl("\$FormCrawl"),
+    @SerialName("\$FormSearch")
+    FormSearch("\$FormSearch"),
+    @SerialName("\$FormBotResponse")
+    FormBotResponse("\$FormBotResponse"),
+    @SerialName("\$FormBotHistory")
+    FormBotHistory("\$FormBotHistory")
   }
 
   enum class EnumDefnFreezeAvatarKind(val value: String)
@@ -1215,10 +1255,10 @@ object Types
   {
     ERROR("ERROR"),
     EXPIRY("EXPIRY"),
-    FALSE_("FALSE"),
+    FALSE("FALSE"),
     ITERATE("ITERATE"),
     NEXT("NEXT"),
-    TRUE_("TRUE"),
+    TRUE("TRUE"),
     VALUE("VALUE")
   }
 
@@ -1562,7 +1602,8 @@ object Types
   {
     roles("roles"),
     fields("fields"),
-    context_("context")
+    @SerialName("context")
+    Context("context")
   }
 
   enum class EnumDefnKindSpreadsheetEvent(val value: String)
@@ -1741,12 +1782,18 @@ object Types
 
   enum class EnumDefnPipelineSystem(val value: String)
   {
-    _Curr("\$Curr"),
-    _Iter("\$Iter"),
-    _Out("\$Out"),
-    _Prev("\$Prev"),
-    _Prior("\$Prior"),
-    _Sys("\$Sys")
+    @SerialName("\$Curr")
+    Curr("\$Curr"),
+    @SerialName("\$Iter")
+    Iter("\$Iter"),
+    @SerialName("\$Out")
+    Out("\$Out"),
+    @SerialName("\$Prev")
+    Prev("\$Prev"),
+    @SerialName("\$Prior")
+    Prior("\$Prior"),
+    @SerialName("\$Sys")
+    Sys("\$Sys")
   }
 
   enum class EnumDefnPlacement(val value: String)
@@ -1878,13 +1925,20 @@ object Types
 
   enum class EnumDefnRoles(val value: String)
   {
-    _Public("\$Public"),
-    _Manager("\$Manager"),
-    _GrandManager("\$GrandManager"),
-    _AllManagers("\$AllManagers"),
-    _Assistants("\$Assistants"),
-    _AllAssistants("\$AllAssistants"),
-    _Self("\$Self")
+    @SerialName("\$Public")
+    Public("\$Public"),
+    @SerialName("\$Manager")
+    Manager("\$Manager"),
+    @SerialName("\$GrandManager")
+    GrandManager("\$GrandManager"),
+    @SerialName("\$AllManagers")
+    AllManagers("\$AllManagers"),
+    @SerialName("\$Assistants")
+    Assistants("\$Assistants"),
+    @SerialName("\$AllAssistants")
+    AllAssistants("\$AllAssistants"),
+    @SerialName("\$Self")
+    Self("\$Self")
   }
 
   enum class EnumDefnRowAuditTrail(val value: String)
@@ -2158,6 +2212,12 @@ object Types
     now("now")
   }
 
+  enum class EnumDefnUniquenessMode(val value: String)
+  {
+    individual("individual"),
+    combined("combined")
+  }
+
   enum class EnumDefnUpdateVariant(val value: String)
   {
     updateForced("updateForced"),
@@ -2237,7 +2297,12 @@ object Types
     hasValue("hasValue"),
     equalTo("equalTo"),
     notEqualTo("notEqualTo"),
-    hasChanged("hasChanged")
+    hasChanged("hasChanged"),
+    greaterThan("greaterThan"),
+    lessThan("lessThan"),
+    greaterThanOrEqualTo("greaterThanOrEqualTo"),
+    lessThanOrEqualTo("lessThanOrEqualTo"),
+    contains("contains")
   }
 
   enum class EnumDefnWizardNavigationMode(val value: String)

@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 
-open class StudioDtoFieldDynamicCondition : StudioBase()
+interface StudioDtoFieldDynamicCondition : StudioBase
 {
-  lateinit var lhs: MetaIdField
-  lateinit var operator: EnumDefnDynamicOperator
-  var rhs: StudioBuildArgBinder? = null
+  val lhs: MetaIdField
+  val operator: EnumDefnDynamicOperator
+  val rhs: StudioBuildArgBinder?
 }

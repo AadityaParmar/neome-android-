@@ -14,18 +14,18 @@ import com.neome.api.meta.base.Types.PluginApiId
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntAutomationStepCallPlugin : StudioEntAutomationStep()
+interface StudioEntAutomationStepCallPlugin : StudioEntAutomationStep
 {
-  var errorFieldId: MetaIdField? = null
-  var errorRetryCountVarId: MetaIdVar? = null
-  var errorRetryDurationVarId: MetaIdVar? = null
-  var exposeOutputAsPipelineVariable: Boolean? = null
-  var inputFormPipelineVarId: MetaIdPipelineParam? = null
-  var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
-  var iterateOnGridId: MetaIdGrid? = null
-  var outputFormPipelineVarId: MetaIdPipelineParam? = null
-  var pluginInputMappingVarId: MetaIdVar? = null
-  var pluginOutputMappingVarId: MetaIdVar? = null
-  var targetPluginApiId: PluginApiId? = null
-  var targetPluginId: MetaIdPlugin? = null
+  val errorFieldId: MetaIdField?
+  val errorRetryCountVarId: MetaIdVar?
+  val errorRetryDurationVarId: MetaIdVar?
+  val exposeOutputAsPipelineVariable: Boolean?
+  val inputFormPipelineVarId: MetaIdPipelineParam?
+  val iterateOnGridFilterVarId: StudioValueVarIdCondition?
+  val iterateOnGridId: MetaIdGrid?
+  val outputFormPipelineVarId: MetaIdPipelineParam?
+  val pluginInputMappingVarId: MetaIdVar?
+  val pluginOutputMappingVarId: MetaIdVar?
+  val targetPluginApiId: PluginApiId?
+  val targetPluginId: MetaIdPlugin?
 }

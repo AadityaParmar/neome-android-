@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.EntVdAutoNode
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-open class EntVdUserGetHierarchy : EntVdAutoNode()
+interface EntVdUserGetHierarchy : EntVdAutoNode
 {
-  var outputField: StudioDtoArgValueParameter? = null
-  var user: StudioBuildArgBinder? = null
+  val outputField: StudioDtoArgValueParameter?
+  val user: StudioBuildArgBinder?
 }

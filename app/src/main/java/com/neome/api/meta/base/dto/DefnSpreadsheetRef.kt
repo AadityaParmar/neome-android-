@@ -12,12 +12,12 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.MetaIdSpreadsheetRef
 
-open class DefnSpreadsheetRef : DefnComp()
+interface DefnSpreadsheetRef : DefnComp
 {
-  lateinit var layoutSpreadsheet: DefnLayoutGrid
-  var maxRecords: Number? = null
-  lateinit var metaId: MetaIdSpreadsheetRef
-  var refTargetFieldId: MetaIdField? = null
-  var rowActionPermissionMap: DefnStudioMapOfActionPermission? = null
-  lateinit var spreadsheetId: MetaIdSpreadsheet
+  val layoutSpreadsheet: DefnLayoutGrid
+  val maxRecords: Long?
+  val metaId: MetaIdSpreadsheetRef
+  val refTargetFieldId: MetaIdField?
+  val rowActionPermissionMap: DefnStudioMapOfActionPermission?
+  val spreadsheetId: MetaIdSpreadsheet
 }

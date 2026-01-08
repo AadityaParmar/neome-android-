@@ -14,15 +14,15 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEnt
 import com.neome.api.meta.base.dto.StudioPluginBundle
 
-open class StoreItem : StudioBase()
+interface StoreItem : StudioBase
 {
-  lateinit var artifactKind: EnumStoreItemArtifact
-  var createdBy: AdminId? = null
-  var createdOn: String? = null
-  var pluginBundle: StudioPluginBundle? = null
-  var seedEntId: EntId? = null
-  lateinit var storeItemId: StoreItemId
-  var studioEnt: StudioEnt? = null
-  var updatedBy: AdminId? = null
-  var updatedOn: String? = null
+  val artifactKind: EnumStoreItemArtifact
+  val createdBy: AdminId?
+  val createdOn: String?
+  val pluginBundle: StudioPluginBundle?
+  val seedEntId: EntId?
+  val storeItemId: StoreItemId
+  val studioEnt: StudioEnt?
+  val updatedBy: AdminId?
+  val updatedOn: String?
 }

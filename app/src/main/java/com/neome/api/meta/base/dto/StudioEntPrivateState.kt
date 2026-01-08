@@ -16,13 +16,13 @@ import com.neome.api.meta.base.Types.SheetId
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntSpreadsheetRefTokenMap
 
-open class StudioEntPrivateState : StudioBase()
+interface StudioEntPrivateState : StudioBase
 {
-  var cliSeedId: Number? = null
-  var eventSchedulerTaskIdMapping: Map<Key, SchedulerTaskId>? = null
-  var groupIdMappingMap: Map<MetaIdGroup, GroupId>? = null
-  var refTokenSet: Array<String>? = null
-  var schedulerTaskIdMappingMap: Map<MetaIdAutomation, SchedulerTaskId>? = null
-  var sheetIdMappingMap: Map<MetaIdSpreadsheet, SheetId>? = null
-  var spreadsheetRefTokenMap: Map<MetaIdSpreadsheet, StudioEntSpreadsheetRefTokenMap>? = null
+  val cliSeedId: Long?
+  val eventSchedulerTaskIdMapping: Map<Key, SchedulerTaskId>?
+  val groupIdMappingMap: Map<MetaIdGroup, GroupId>?
+  val refTokenSet: Array<String>?
+  val schedulerTaskIdMappingMap: Map<MetaIdAutomation, SchedulerTaskId>?
+  val sheetIdMappingMap: Map<MetaIdSpreadsheet, SheetId>?
+  val spreadsheetRefTokenMap: Map<MetaIdSpreadsheet, StudioEntSpreadsheetRefTokenMap>?
 }

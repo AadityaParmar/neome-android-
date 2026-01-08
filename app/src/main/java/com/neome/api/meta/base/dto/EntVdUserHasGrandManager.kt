@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdAutoNode
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 
-open class EntVdUserHasGrandManager : EntVdAutoNode()
+interface EntVdUserHasGrandManager : EntVdAutoNode
 {
-  var user: StudioBuildArgBinder? = null
+  val user: StudioBuildArgBinder?
 }

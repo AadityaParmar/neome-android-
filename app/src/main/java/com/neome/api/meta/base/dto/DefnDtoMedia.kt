@@ -9,9 +9,9 @@ import com.neome.api.meta.base.dto.DefnDtoHyperLink
 import com.neome.api.meta.base.dto.DefnDtoParagraph
 import com.neome.api.meta.base.dto.FieldDtoImage
 
-open class DefnDtoMedia
+interface DefnDtoMedia
 {
-  var html: DefnDtoParagraph? = null
-  var hyperlink: DefnDtoHyperLink? = null
-  var image: FieldDtoImage? = null
+  val html: DefnDtoParagraph?
+  val hyperlink: DefnDtoHyperLink?
+  val image: FieldDtoImage?
 }

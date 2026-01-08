@@ -9,8 +9,8 @@ import java.util.Map
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 
-open class StudioMapOfArgBinder : StudioBase()
+interface StudioMapOfArgBinder : StudioBase
 {
-  lateinit var keys: Array<String>
-  lateinit var map: Map<String, StudioBuildArgBinder>
+  val keys: Array<String>
+  val map: Map<String, StudioBuildArgBinder>
 }

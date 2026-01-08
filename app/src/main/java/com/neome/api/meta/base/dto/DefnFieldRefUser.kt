@@ -12,13 +12,13 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
 
-open class DefnFieldRefUser : DefnFieldEditable()
+interface DefnFieldRefUser : DefnFieldEditable
 {
-  var copyFieldVarMap: Map<MetaIdField, MetaIdVar>? = null
-  var dataSourceVarId: MetaIdVar? = null
-  var defaultValue: MetaIdRole? = null
-  var defaultValueFieldId: MetaIdField? = null
-  var pluginApi: DefnDtoPluginApi? = null
-  var pluginErrorFieldId: MetaIdField? = null
-  var roleIdDataSource: Array<MetaIdRole>? = null
+  val copyFieldVarMap: Map<MetaIdField, MetaIdVar>?
+  val dataSourceVarId: MetaIdVar?
+  val defaultValue: MetaIdRole?
+  val defaultValueFieldId: MetaIdField?
+  val pluginApi: DefnDtoPluginApi?
+  val pluginErrorFieldId: MetaIdField?
+  val roleIdDataSource: Array<MetaIdRole>?
 }

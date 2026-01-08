@@ -9,8 +9,8 @@ import com.neome.api.home.base.Types.EnumReceiptStatus
 import com.neome.api.meta.base.Types.MessageId
 import com.neome.api.core.session.sig.SigTopic
 
-open class SigTopicMessageProps : SigTopic()
+interface SigTopicMessageProps : SigTopic
 {
-  lateinit var messageId: MessageId
-  lateinit var receiptStatus: EnumReceiptStatus
+  val messageId: MessageId
+  val receiptStatus: EnumReceiptStatus
 }

@@ -10,15 +10,15 @@ import com.neome.api.meta.base.sig.ISig
 import com.neome.api.meta.base.Types.RequestId
 import com.neome.api.meta.base.Types.ServiceName
 
-open class EnvSignal<S : ISig>
+interface EnvSignal<S : ISig>
 {
-  var cookieRememberMe: Boolean? = null
-  var cookieValue: String? = null
-  var error: EnvError? = null
-  var requestId: RequestId? = null
-  var serverName: String? = null
-  var serverTime: Number? = null
-  var serviceName: ServiceName? = null
-  var sig: S? = null
-  var sigName: String? = null
+  val cookieRememberMe: Boolean?
+  val cookieValue: String?
+  val error: EnvError?
+  val requestId: RequestId?
+  val serverName: String?
+  val serverTime: Long?
+  val serviceName: ServiceName?
+  val sig: S?
+  val sigName: String?
 }

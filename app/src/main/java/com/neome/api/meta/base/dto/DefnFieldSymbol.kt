@@ -9,9 +9,9 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Symbol
 
-open class DefnFieldSymbol : DefnFieldEditable()
+interface DefnFieldSymbol : DefnFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: Symbol? = null
-  var defaultVar: Symbol? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: Symbol?
+  val defaultVar: Symbol?
 }

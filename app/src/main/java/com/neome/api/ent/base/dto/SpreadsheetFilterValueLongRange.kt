@@ -7,8 +7,8 @@ package com.neome.api.ent.base.dto
 
 import com.neome.api.ent.base.dto.SpreadsheetFilterValue
 
-open class SpreadsheetFilterValueLongRange : SpreadsheetFilterValue()
+interface SpreadsheetFilterValueLongRange : SpreadsheetFilterValue
 {
-  var max: Number? = null
-  var min: Number? = null
+  val max: Long?
+  val min: Long?
 }

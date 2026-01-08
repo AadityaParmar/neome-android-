@@ -11,14 +11,14 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioValueVarIdText
 
-open class StudioDtoLayoutFormWatermark : StudioBase()
+interface StudioDtoLayoutFormWatermark : StudioBase
 {
-  var bgImage: FieldDtoImage? = null
-  var bgImageHorizontalPosition: EnumDefnContentAlignment? = null
-  var bgImageVarId: MetaIdVar? = null
-  var bgImageVerticalPosition: EnumDefnContentAlignment? = null
-  var textOpacityVarId: MetaIdVar? = null
-  var textPatternVarId: StudioValueVarIdText? = null
-  var textPositionVarId: MetaIdVar? = null
-  var textSizeVarId: MetaIdVar? = null
+  val bgImage: FieldDtoImage?
+  val bgImageHorizontalPosition: EnumDefnContentAlignment?
+  val bgImageVarId: MetaIdVar?
+  val bgImageVerticalPosition: EnumDefnContentAlignment?
+  val textOpacityVarId: MetaIdVar?
+  val textPatternVarId: StudioValueVarIdText?
+  val textPositionVarId: MetaIdVar?
+  val textSizeVarId: MetaIdVar?
 }

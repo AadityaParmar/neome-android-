@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.GhostId
 import java.util.Map
 import com.neome.api.meta.base.dto.StudioBase
 
-open class EntVdAiAgentControlMap : StudioBase()
+interface EntVdAiAgentControlMap : StudioBase
 {
-  lateinit var keys: Array<GhostId>
-  lateinit var map: Map<GhostId, EntVdAiAgentControl>
+  val keys: Array<GhostId>
+  val map: Map<GhostId, EntVdAiAgentControl>
 }

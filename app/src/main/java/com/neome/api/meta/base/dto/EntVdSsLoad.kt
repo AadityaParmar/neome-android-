@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdAutoStep
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-open class EntVdSsLoad : EntVdAutoStep()
+interface EntVdSsLoad : EntVdAutoStep
 {
-  var spreadsheetId: MetaIdSpreadsheet? = null
+  val spreadsheetId: MetaIdSpreadsheet?
 }

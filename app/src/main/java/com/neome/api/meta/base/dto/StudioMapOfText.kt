@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioBuildArgBinderHolder
 
-open class StudioMapOfText : StudioBase()
+interface StudioMapOfText : StudioBase
 {
-  lateinit var keys: Array<String>
-  lateinit var map: Map<String, StudioBuildArgBinderHolder>
-  var sourceFormId: MetaIdForm? = null
+  val keys: Array<String>
+  val map: Map<String, StudioBuildArgBinderHolder>
+  val sourceFormId: MetaIdForm?
 }

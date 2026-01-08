@@ -7,6 +7,6 @@ package com.neome.api.home.base.dto
 
 import com.neome.api.home.base.dto.DtoMessagePayload
 
-open class DtoMessagePayloadSpreadsheetRowDeleted : DtoMessagePayload()
+interface DtoMessagePayloadSpreadsheetRowDeleted : DtoMessagePayload
 {
 }

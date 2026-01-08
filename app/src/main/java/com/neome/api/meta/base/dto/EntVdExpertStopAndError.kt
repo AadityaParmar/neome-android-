@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdAutoStep
 import com.neome.api.meta.base.dto.StudioValueParagraph
 
-open class EntVdExpertStopAndError : EntVdAutoStep()
+interface EntVdExpertStopAndError : EntVdAutoStep
 {
-  var message: StudioValueParagraph? = null
+  val message: StudioValueParagraph?
 }

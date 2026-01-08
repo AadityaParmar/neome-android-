@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdAutoStep
 import com.neome.api.meta.base.dto.StudioValueText
 
-open class EntVdExpertReleaseLock : EntVdAutoStep()
+interface EntVdExpertReleaseLock : EntVdAutoStep
 {
-  var lockKey: StudioValueText? = null
+  val lockKey: StudioValueText?
 }

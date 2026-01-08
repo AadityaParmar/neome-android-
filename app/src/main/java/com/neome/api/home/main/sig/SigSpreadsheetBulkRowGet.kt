@@ -11,9 +11,9 @@ import java.util.Set
 import com.neome.api.nucleus.base.sig.Sig
 import com.neome.api.home.main.sig.SigSpreadsheetRow
 
-open class SigSpreadsheetBulkRowGet : Sig()
+interface SigSpreadsheetBulkRowGet : Sig
 {
-  var expiredRowIdSet: Array<RowId>? = null
-  var inProgressRowIdSet: Array<RowId>? = null
-  var rowMap: Map<RowId, SigSpreadsheetRow>? = null
+  val expiredRowIdSet: Array<RowId>?
+  val inProgressRowIdSet: Array<RowId>?
+  val rowMap: Map<RowId, SigSpreadsheetRow>?
 }

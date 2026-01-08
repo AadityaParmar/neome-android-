@@ -9,7 +9,7 @@ import com.neome.api.ent.base.dto.DtoEntGroup
 import com.neome.api.meta.base.Types.GroupId
 import java.util.Map
 
-open class DtoEntGroupMap
+interface DtoEntGroupMap
 {
-  lateinit var entGroupMap: Map<GroupId, DtoEntGroup>
+  val entGroupMap: Map<GroupId, DtoEntGroup>
 }

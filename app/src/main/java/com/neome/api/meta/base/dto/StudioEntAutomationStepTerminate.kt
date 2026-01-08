@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 
-open class StudioEntAutomationStepTerminate : StudioEntAutomationStep()
+interface StudioEntAutomationStepTerminate : StudioEntAutomationStep
 {
 }

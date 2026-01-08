@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.GroupId
 import com.neome.api.core.base.msg.MsgVersion
 import java.util.Set
 
-open class MsgGroupMembersAdd : MsgVersion()
+interface MsgGroupMembersAdd : MsgVersion
 {
-  lateinit var groupId: GroupId
-  var insertAdminSet: Array<EntUserId>? = null
-  var insertMemberSet: Array<EntUserId>? = null
+  val groupId: GroupId
+  val insertAdminSet: Array<EntUserId>?
+  val insertMemberSet: Array<EntUserId>?
 }

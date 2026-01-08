@@ -7,9 +7,9 @@ package com.neome.api.nucleus.base.dto
 
 import com.neome.api.nucleus.base.dto.DescApiType
 
-open class DescApiTypeSysId : DescApiType()
+interface DescApiTypeSysId : DescApiType
 {
-  var importRef: String? = null
-  lateinit var superClass: String
-  lateinit var value: String
+  val importRef: String?
+  val superClass: String
+  val value: String
 }

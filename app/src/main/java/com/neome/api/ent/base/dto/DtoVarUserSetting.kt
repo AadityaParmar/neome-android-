@@ -11,13 +11,13 @@ import com.google.gson.JsonElement
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.Symbol
 
-open class DtoVarUserSetting
+interface DtoVarUserSetting
 {
-  var description: String? = null
-  lateinit var kind: EnumDefnUserSettingOptions
-  var label: String? = null
-  lateinit var name: Symbol
-  var optionMap: DefnStudioMapOfDtoOption? = null
-  var value: Any? = null
-  lateinit var varId: MetaIdVar
+  val description: String?
+  val kind: EnumDefnUserSettingOptions
+  val label: String?
+  val name: Symbol
+  val optionMap: DefnStudioMapOfDtoOption?
+  val value: Any?
+  val varId: MetaIdVar
 }

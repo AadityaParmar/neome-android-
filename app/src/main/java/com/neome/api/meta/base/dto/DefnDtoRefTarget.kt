@@ -9,9 +9,9 @@ import com.neome.api.meta.base.dto.DefnLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-open class DefnDtoRefTarget
+interface DefnDtoRefTarget
 {
-  lateinit var displayFieldIdSet: Array<MetaIdField>
-  lateinit var metaId: MetaIdSpreadsheet
-  lateinit var overrideLayoutSpreadsheet: DefnLayoutGrid
+  val displayFieldIdSet: Array<MetaIdField>
+  val metaId: MetaIdSpreadsheet
+  val overrideLayoutSpreadsheet: DefnLayoutGrid
 }

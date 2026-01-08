@@ -10,12 +10,12 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioBuildDate
 import com.neome.api.meta.base.dto.StudioFieldDate
 
-open class StudioFieldDateRange : StudioFieldDate()
+interface StudioFieldDateRange : StudioFieldDate
 {
-  var fromDefault: StudioBuildDate? = null
-  var fromDefaultFieldId: MetaIdField? = null
-  var fromDefaultVarId: MetaIdVar? = null
-  var toDefault: StudioBuildDate? = null
-  var toDefaultFieldId: MetaIdField? = null
-  var toDefaultVarId: MetaIdVar? = null
+  val fromDefault: StudioBuildDate?
+  val fromDefaultFieldId: MetaIdField?
+  val fromDefaultVarId: MetaIdVar?
+  val toDefault: StudioBuildDate?
+  val toDefaultFieldId: MetaIdField?
+  val toDefaultVarId: MetaIdVar?
 }

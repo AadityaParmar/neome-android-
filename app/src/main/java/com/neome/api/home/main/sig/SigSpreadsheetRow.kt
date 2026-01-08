@@ -14,12 +14,12 @@ import com.neome.api.home.main.sig.SigSpreadsheetRowCommentCount
 import com.neome.api.nucleus.base.sig.SigVersion
 import com.neome.api.meta.base.Types.SpreadsheetPartitionId
 
-open class SigSpreadsheetRow : SigVersion()
+interface SigSpreadsheetRow : SigVersion
 {
-  lateinit var formId: MetaIdForm
-  var formValue: FormValueRaw? = null
-  var rowCommentCount: SigSpreadsheetRowCommentCount? = null
-  lateinit var spreadsheetId: MetaIdSpreadsheet
-  lateinit var spreadsheetPartitionId: SpreadsheetPartitionId
-  var updatedKeySet: Array<MetaIdComp>? = null
+  val formId: MetaIdForm
+  val formValue: FormValueRaw?
+  val rowCommentCount: SigSpreadsheetRowCommentCount?
+  val spreadsheetId: MetaIdSpreadsheet
+  val spreadsheetPartitionId: SpreadsheetPartitionId
+  val updatedKeySet: Array<MetaIdComp>?
 }

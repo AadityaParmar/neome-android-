@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.StudioFieldCounter
 
-open class StudioFieldSlider : StudioFieldCounter()
+interface StudioFieldSlider : StudioFieldCounter
 {
-  var allowRangePicker: Boolean? = null
-  var showAsInputBox: Boolean? = null
+  val allowRangePicker: Boolean?
+  val showAsInputBox: Boolean?
 }

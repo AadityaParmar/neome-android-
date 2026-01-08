@@ -10,16 +10,16 @@ import com.neome.api.meta.base.dto.DefnDtoText
 import com.neome.api.meta.base.Types.EnumDefnTextSize
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnDtoLayoutCardItemLineSegment
+interface DefnDtoLayoutCardItemLineSegment
 {
-  var color: DefnDtoColor? = null
-  var colorFieldId: MetaIdField? = null
-  var colorVar: DefnDtoColor? = null
-  var line: String? = null
-  var lineFieldIdSet: Array<MetaIdField>? = null
-  var lineVar: DefnDtoText? = null
-  var showLabels: Boolean? = null
-  var textSize: EnumDefnTextSize? = null
-  var textSizeFieldId: MetaIdField? = null
-  var textSizeVar: EnumDefnTextSize? = null
+  val color: DefnDtoColor?
+  val colorFieldId: MetaIdField?
+  val colorVar: DefnDtoColor?
+  val line: String?
+  val lineFieldIdSet: Array<MetaIdField>?
+  val lineVar: DefnDtoText?
+  val showLabels: Boolean?
+  val textSize: EnumDefnTextSize?
+  val textSizeFieldId: MetaIdField?
+  val textSizeVar: EnumDefnTextSize?
 }

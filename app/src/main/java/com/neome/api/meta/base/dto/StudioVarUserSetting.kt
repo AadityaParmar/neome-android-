@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioBuildUserSetting
 import com.neome.api.meta.base.dto.StudioVar
 
-open class StudioVarUserSetting : StudioVar()
+interface StudioVarUserSetting : StudioVar
 {
-  var value: StudioBuildUserSetting? = null
+  val value: StudioBuildUserSetting?
 }

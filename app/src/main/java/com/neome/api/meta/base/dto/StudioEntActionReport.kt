@@ -9,10 +9,10 @@ import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdReport
 import com.neome.api.meta.base.dto.StudioEntAction
 
-open class StudioEntActionReport : StudioEntAction()
+interface StudioEntActionReport : StudioEntAction
 {
-  var outputFormContentLayoutId: MetaIdLayoutForm? = null
-  var outputFormTemplateLayoutId: MetaIdLayoutForm? = null
-  var reportId: MetaIdReport? = null
-  var sendMessageToInbox: Boolean? = null
+  val outputFormContentLayoutId: MetaIdLayoutForm?
+  val outputFormTemplateLayoutId: MetaIdLayoutForm?
+  val reportId: MetaIdReport?
+  val sendMessageToInbox: Boolean?
 }

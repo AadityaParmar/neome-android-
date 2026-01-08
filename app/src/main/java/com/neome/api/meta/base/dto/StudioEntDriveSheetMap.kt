@@ -14,14 +14,14 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntDriveSheet
 import com.neome.api.meta.base.Symbol
 
-open class StudioEntDriveSheetMap : StudioBase()
+interface StudioEntDriveSheetMap : StudioBase
 {
-  var addressBookExportKindSet: Array<EnumDefnDataExportKind>? = null
-  var beginningOfTheYear: EnumDefnMonth? = null
-  var driveFolderName: Symbol? = null
-  lateinit var keys: Array<MetaIdDriveSheet>
-  var manageAdmins: Boolean? = null
-  var manageUsers: Boolean? = null
-  lateinit var map: Map<MetaIdDriveSheet, StudioEntDriveSheet>
-  var syncMode: EnumDefnSyncMode? = null
+  val addressBookExportKindSet: Array<EnumDefnDataExportKind>?
+  val beginningOfTheYear: EnumDefnMonth?
+  val driveFolderName: Symbol?
+  val keys: Array<MetaIdDriveSheet>
+  val manageAdmins: Boolean?
+  val manageUsers: Boolean?
+  val map: Map<MetaIdDriveSheet, StudioEntDriveSheet>
+  val syncMode: EnumDefnSyncMode?
 }

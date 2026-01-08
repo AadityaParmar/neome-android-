@@ -8,7 +8,7 @@ package com.neome.api.ent.ent.msg
 import com.neome.api.meta.base.Types.DemoAppId
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgDemoApp : Msg()
+interface MsgDemoApp : Msg
 {
-  lateinit var demoAppId: DemoAppId
+  val demoAppId: DemoAppId
 }

@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnMonth
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioSetOfMonth : StudioBase()
+interface StudioSetOfMonth : StudioBase
 {
-  lateinit var valueSet: Array<EnumDefnMonth>
+  val valueSet: Array<EnumDefnMonth>
 }

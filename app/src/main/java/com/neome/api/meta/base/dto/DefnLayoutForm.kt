@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.EnumDefnFormLayoutType
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Symbol
 
-open class DefnLayoutForm
+interface DefnLayoutForm
 {
-  lateinit var metaId: MetaIdLayoutForm
-  lateinit var name: Symbol
-  var type: EnumDefnFormLayoutType? = null
+  val metaId: MetaIdLayoutForm
+  val name: Symbol
+  val type: EnumDefnFormLayoutType?
 }

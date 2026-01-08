@@ -8,7 +8,7 @@ package com.neome.api.ent.entAside.sig
 import com.neome.api.meta.base.Types.EnumDefnPaymentStatus
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigPaymentStatus : Sig()
+interface SigPaymentStatus : Sig
 {
-  lateinit var paymentStatus: EnumDefnPaymentStatus
+  val paymentStatus: EnumDefnPaymentStatus
 }

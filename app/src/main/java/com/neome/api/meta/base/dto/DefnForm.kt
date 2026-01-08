@@ -25,28 +25,28 @@ import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Symbol
 
-open class DefnForm
+interface DefnForm
 {
-  var actionPermissionMap: DefnStudioMapOfActionPermission? = null
-  var allowToPrintForm: Boolean? = null
-  var calculateFormulaMode: EnumDefnCalculateFormulaMode? = null
-  var chatBubbleFieldIdSet: Array<MetaIdField>? = null
-  var chatLabelFieldId: MetaIdField? = null
-  var chatLabelPatternVar: DefnDtoText? = null
-  var chatPatternVar: DefnDtoParagraph? = null
-  var commentReadOnlyRoleSet: Array<MetaIdRole>? = null
-  var commentRoleSet: Array<MetaIdRole>? = null
-  lateinit var compMap: Map<MetaIdComp, DefnComp>
-  var configForm: Boolean? = null
-  lateinit var displayCompositeId: MetaIdComposite
-  var formulaFieldIdSet: Array<MetaIdField>? = null
-  var gridLookupMap: Map<MetaIdLayoutGrid, MetaIdGrid>? = null
-  var label: String? = null
-  var layoutMap: DefnLayoutFormMap? = null
-  lateinit var metaId: MetaIdForm
-  lateinit var name: Symbol
-  var paymentConfig: DefnPaymentConfig? = null
-  var permissionMatrix: DefnDtoPermissionMatrix? = null
-  var theme: DefnDtoFormTheme? = null
-  var visibilityRuleMap: DefnVisibilityRuleMap? = null
+  val actionPermissionMap: DefnStudioMapOfActionPermission?
+  val allowToPrintForm: Boolean?
+  val calculateFormulaMode: EnumDefnCalculateFormulaMode?
+  val chatBubbleFieldIdSet: Array<MetaIdField>?
+  val chatLabelFieldId: MetaIdField?
+  val chatLabelPatternVar: DefnDtoText?
+  val chatPatternVar: DefnDtoParagraph?
+  val commentReadOnlyRoleSet: Array<MetaIdRole>?
+  val commentRoleSet: Array<MetaIdRole>?
+  val compMap: Map<MetaIdComp, DefnComp>
+  val configForm: Boolean?
+  val displayCompositeId: MetaIdComposite
+  val formulaFieldIdSet: Array<MetaIdField>?
+  val gridLookupMap: Map<MetaIdLayoutGrid, MetaIdGrid>?
+  val label: String?
+  val layoutMap: DefnLayoutFormMap?
+  val metaId: MetaIdForm
+  val name: Symbol
+  val paymentConfig: DefnPaymentConfig?
+  val permissionMatrix: DefnDtoPermissionMatrix?
+  val theme: DefnDtoFormTheme?
+  val visibilityRuleMap: DefnVisibilityRuleMap?
 }

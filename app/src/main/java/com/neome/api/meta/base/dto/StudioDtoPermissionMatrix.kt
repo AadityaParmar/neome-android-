@@ -10,9 +10,9 @@ import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioDtoPermissionMatrix : StudioBase()
+interface StudioDtoPermissionMatrix : StudioBase
 {
-  var defaultPermission: EnumDefnPermission? = null
-  lateinit var keys: Array<MetaIdRole>
-  lateinit var map: Map<MetaIdRole, EnumDefnPermission>
+  val defaultPermission: EnumDefnPermission?
+  val keys: Array<MetaIdRole>
+  val map: Map<MetaIdRole, EnumDefnPermission>
 }

@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioEntReport
 import com.neome.api.meta.base.dto.StudioValueCodeNeoQL
 
-open class StudioEntReportQuery : StudioEntReport()
+interface StudioEntReportQuery : StudioEntReport
 {
-  var fromSpreadsheetIdSet: Array<MetaIdSpreadsheet>? = null
-  var neoQL: StudioValueCodeNeoQL? = null
+  val fromSpreadsheetIdSet: Array<MetaIdSpreadsheet>?
+  val neoQL: StudioValueCodeNeoQL?
 }

@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldChipSetDate : StudioFieldEditable()
+interface StudioFieldChipSetDate : StudioFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: Array<String>? = null
-  var defaultVarId: MetaIdVar? = null
-  var displayDateFormat: String? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: Array<String>?
+  val defaultVarId: MetaIdVar?
+  val displayDateFormat: String?
 }

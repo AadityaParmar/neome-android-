@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.AnyTime
 import com.neome.api.meta.base.Types.EnumDefnDateOccurrence
 import com.neome.api.meta.base.dto.StudioBuildRepeatSetting
 
-open class StudioBuildRepeatSettingMonths : StudioBuildRepeatSetting()
+interface StudioBuildRepeatSettingMonths : StudioBuildRepeatSetting
 {
-  var customDateSet: Array<Number>? = null
-  var dateOccurrence: EnumDefnDateOccurrence? = null
-  var setOfTime: Array<AnyTime>? = null
+  val customDateSet: Array<Number>?
+  val dateOccurrence: EnumDefnDateOccurrence?
+  val setOfTime: Array<AnyTime>?
 }

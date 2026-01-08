@@ -5,9 +5,9 @@
 
 package com.neome.api.ent.base.dto
 
-open class DtoFieldFilterOption
+interface DtoFieldFilterOption
 {
-  var childFilters: Array<DtoFieldFilterOption>? = null
-  lateinit var label: String
-  lateinit var value: String
+  val childFilters: Array<DtoFieldFilterOption>?
+  val label: String
+  val value: String
 }

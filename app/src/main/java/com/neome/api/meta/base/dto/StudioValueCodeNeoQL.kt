@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.StudioValueCode
 
-open class StudioValueCodeNeoQL : StudioValueCode()
+interface StudioValueCodeNeoQL : StudioValueCode
 {
-  var value: String? = null
+  val value: String?
 }

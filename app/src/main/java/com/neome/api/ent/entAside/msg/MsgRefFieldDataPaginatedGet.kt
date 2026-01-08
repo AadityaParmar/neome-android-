@@ -16,20 +16,20 @@ import com.neome.api.nucleus.base.msg.Msg
 import com.neome.api.meta.base.Types.RowId
 import com.neome.api.ent.base.dto.SpreadsheetFilterComposite
 
-open class MsgRefFieldDataPaginatedGet : Msg()
+interface MsgRefFieldDataPaginatedGet : Msg
 {
-  var ascOrder: Boolean? = null
-  var filterValue: SpreadsheetFilterComposite? = null
-  lateinit var formId: MetaIdForm
-  var includeFilters: Boolean? = null
-  var inputFormCompositeId: MetaIdComposite? = null
-  var inputFormGridRowId: RowId? = null
-  lateinit var inputFormValueRaw: FormValueRaw
-  var layoutSpreadsheetId: MetaIdLayoutGrid? = null
-  var orderByFieldId: MetaIdField? = null
-  var pageNumber: Number? = null
-  var pageSize: Number? = null
-  lateinit var refFieldId: MetaIdComp
-  var searchText: String? = null
-  var targetSpreadsheetId: MetaIdSpreadsheet? = null
+  val ascOrder: Boolean?
+  val filterValue: SpreadsheetFilterComposite?
+  val formId: MetaIdForm
+  val includeFilters: Boolean?
+  val inputFormCompositeId: MetaIdComposite?
+  val inputFormGridRowId: RowId?
+  val inputFormValueRaw: FormValueRaw
+  val layoutSpreadsheetId: MetaIdLayoutGrid?
+  val orderByFieldId: MetaIdField?
+  val pageNumber: Long?
+  val pageSize: Long?
+  val refFieldId: MetaIdComp
+  val searchText: String?
+  val targetSpreadsheetId: MetaIdSpreadsheet?
 }

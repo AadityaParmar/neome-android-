@@ -11,10 +11,10 @@ import com.neome.api.meta.base.Types.MetaIdVdAutoNode
 import com.neome.api.nucleus.base.msg.Msg
 import com.neome.api.meta.base.Types.WorkflowExecutionId
 
-open class MsgWorkflowExecutionParamUpdate : Msg()
+interface MsgWorkflowExecutionParamUpdate : Msg
 {
-  lateinit var branchNodeId: MetaIdVdAutoNode
-  lateinit var executionId: WorkflowExecutionId
-  lateinit var formValue: FormValueRaw
-  lateinit var paramId: MetaIdPipelineParam
+  val branchNodeId: MetaIdVdAutoNode
+  val executionId: WorkflowExecutionId
+  val formValue: FormValueRaw
+  val paramId: MetaIdPipelineParam
 }

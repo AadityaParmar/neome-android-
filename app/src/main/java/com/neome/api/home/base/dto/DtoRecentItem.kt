@@ -8,9 +8,9 @@ package com.neome.api.home.base.dto
 import com.neome.api.meta.base.Types.ChatId
 import com.neome.api.meta.base.Types.EntId
 
-open class DtoRecentItem
+interface DtoRecentItem
 {
-  lateinit var chatId: ChatId
-  lateinit var entId: EntId
-  var isPinned: Boolean? = null
+  val chatId: ChatId
+  val entId: EntId
+  val isPinned: Boolean?
 }

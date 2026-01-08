@@ -10,12 +10,12 @@ import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 import com.neome.api.meta.base.dto.StudioDtoUserFilter
 import com.neome.api.meta.base.dto.StudioMapOfValueText
 
-open class EntVdSendWhatsappTemplate : EntVdAutoStep()
+interface EntVdSendWhatsappTemplate : EntVdAutoStep
 {
-  var buttonIdVarMap: StudioMapOfValueText? = null
-  var carouselCardVarMap: StudioMapOfValueText? = null
-  var templateGroupId: String? = null
-  var templateMediaField: StudioDtoArgValueParameter? = null
-  var templateVarMap: StudioMapOfValueText? = null
-  var toUsers: StudioDtoUserFilter? = null
+  val buttonIdVarMap: StudioMapOfValueText?
+  val carouselCardVarMap: StudioMapOfValueText?
+  val templateGroupId: String?
+  val templateMediaField: StudioDtoArgValueParameter?
+  val templateVarMap: StudioMapOfValueText?
+  val toUsers: StudioDtoUserFilter?
 }

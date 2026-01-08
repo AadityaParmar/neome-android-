@@ -10,9 +10,9 @@ import com.neome.api.meta.base.dto.FormRefKey
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioValueCodeNeoQL
 
-open class EntVdSsExecuteQuery : EntVdAutoStepWithOutput()
+interface EntVdSsExecuteQuery : EntVdAutoStepWithOutput
 {
-  var neoQL: StudioValueCodeNeoQL? = null
-  var outputForm: FormRefKey? = null
-  var spreadsheetIdSet: Array<MetaIdSpreadsheet>? = null
+  val neoQL: StudioValueCodeNeoQL?
+  val outputForm: FormRefKey?
+  val spreadsheetIdSet: Array<MetaIdSpreadsheet>?
 }

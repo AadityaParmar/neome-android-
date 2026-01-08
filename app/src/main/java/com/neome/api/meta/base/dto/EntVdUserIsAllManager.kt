@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.EntVdAutoNode
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-open class EntVdUserIsAllManager : EntVdAutoNode()
+interface EntVdUserIsAllManager : EntVdAutoNode
 {
-  var managerField: StudioDtoArgValueParameter? = null
-  var user: StudioBuildArgBinder? = null
+  val managerField: StudioDtoArgValueParameter?
+  val user: StudioBuildArgBinder?
 }

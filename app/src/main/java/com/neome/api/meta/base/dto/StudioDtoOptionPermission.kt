@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.Symbol
 
-open class StudioDtoOptionPermission : StudioBase()
+interface StudioDtoOptionPermission : StudioBase
 {
-  lateinit var metaId: MetaIdRole
-  var name: Symbol? = null
-  lateinit var optionIdSet: Array<String>
+  val metaId: MetaIdRole
+  val name: Symbol?
+  val optionIdSet: Array<String>
 }

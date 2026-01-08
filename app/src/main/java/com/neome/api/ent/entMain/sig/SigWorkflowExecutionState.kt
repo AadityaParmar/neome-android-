@@ -14,15 +14,15 @@ import com.neome.api.nucleus.base.sig.SigVersion
 import com.neome.api.meta.base.Types.WorkflowExecutionId
 import com.neome.api.ent.base.dto.WorkflowStepSummary
 
-open class SigWorkflowExecutionState : SigVersion()
+interface SigWorkflowExecutionState : SigVersion
 {
-  lateinit var createdOn: String
-  var currNodeId: MetaIdVdAutoNode? = null
-  lateinit var currStateKind: EnumWorkflowResultKind
-  lateinit var executionId: WorkflowExecutionId
-  var executionPathList: Array<MetaIdVdAutoNode>? = null
-  var parameters: Array<DtoWorkflowParameterInfo>? = null
-  var summaryList: Array<WorkflowStepSummary>? = null
-  lateinit var updatedOn: String
-  lateinit var workflowPointer: EntVdWorkflowPointer
+  val createdOn: String
+  val currNodeId: MetaIdVdAutoNode?
+  val currStateKind: EnumWorkflowResultKind
+  val executionId: WorkflowExecutionId
+  val executionPathList: Array<MetaIdVdAutoNode>?
+  val parameters: Array<DtoWorkflowParameterInfo>?
+  val summaryList: Array<WorkflowStepSummary>?
+  val updatedOn: String
+  val workflowPointer: EntVdWorkflowPointer
 }

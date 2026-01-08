@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnThemeButtonVariant
 import com.neome.api.meta.base.dto.StudioVar
 
-open class StudioVarButtonVariant : StudioVar()
+interface StudioVarButtonVariant : StudioVar
 {
-  var value: EnumDefnThemeButtonVariant? = null
+  val value: EnumDefnThemeButtonVariant?
 }

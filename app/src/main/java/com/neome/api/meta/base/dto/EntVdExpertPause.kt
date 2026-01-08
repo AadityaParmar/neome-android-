@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioValueParagraph
 import com.neome.api.meta.base.dto.StudioValueText
 
-open class EntVdExpertPause : EntVdAutoStep()
+interface EntVdExpertPause : EntVdAutoStep
 {
-  var canAdminResume: Boolean? = null
-  var message: StudioValueParagraph? = null
-  var option: MetaIdVar? = null
-  var pauseKey: StudioValueText? = null
+  val canAdminResume: Boolean?
+  val message: StudioValueParagraph?
+  val option: MetaIdVar?
+  val pauseKey: StudioValueText?
 }

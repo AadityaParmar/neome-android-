@@ -7,8 +7,8 @@ package com.neome.api.home.base.dto
 
 import java.util.Date
 
-open class DtoReceipt
+interface DtoReceipt
 {
-  var deliveredOn: String? = null
-  var readOn: String? = null
+  val deliveredOn: String?
+  val readOn: String?
 }

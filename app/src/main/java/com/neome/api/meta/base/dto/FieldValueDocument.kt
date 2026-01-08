@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.FieldDtoDocument
 
-open class FieldValueDocument
+interface FieldValueDocument
 {
-  lateinit var value: FieldDtoDocument
+  val value: FieldDtoDocument
 }

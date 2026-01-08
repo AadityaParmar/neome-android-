@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.EnumDefnPaymentStatus
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldPaymentStatus : StudioFieldEditable()
+interface StudioFieldPaymentStatus : StudioFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: EnumDefnPaymentStatus? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: EnumDefnPaymentStatus?
 }

@@ -13,14 +13,14 @@ import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDetails
 
-open class StudioEntAction : StudioBase()
+interface StudioEntAction : StudioBase
 {
-  var aiInstructions: String? = null
-  var defaultValueMap: Map<MetaIdComp, Any>? = null
-  lateinit var details: StudioDetails
-  var icon: String? = null
-  var increaseAsideWidth: Boolean? = null
-  lateinit var kind: EnumDefnKindAction
-  lateinit var metaId: MetaIdAction
-  var tooltip: String? = null
+  val aiInstructions: String?
+  val defaultValueMap: Map<MetaIdComp, Any>?
+  val details: StudioDetails
+  val icon: String?
+  val increaseAsideWidth: Boolean?
+  val kind: EnumDefnKindAction
+  val metaId: MetaIdAction
+  val tooltip: String?
 }

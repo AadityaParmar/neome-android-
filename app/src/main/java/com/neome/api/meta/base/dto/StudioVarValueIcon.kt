@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-open class StudioVarValueIcon
+interface StudioVarValueIcon
 {
-  lateinit var value: String
+  val value: String
 }

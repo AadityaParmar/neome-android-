@@ -12,12 +12,12 @@ import com.neome.api.meta.base.Types.EnumDefnUpdateVariant
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.dto.StudioDtoMappingFieldMapBase
 
-open class StudioDtoMappingFieldMap : StudioDtoMappingFieldMapBase()
+interface StudioDtoMappingFieldMap : StudioDtoMappingFieldMapBase
 {
-  var emptyFieldVariant: EnumDefnEmptyFieldVariant? = null
-  var fromKey: MetaIdField? = null
-  var insertVariant: EnumDefnInsertVariant? = null
-  var removeVariant: EnumDefnRemoveVariant? = null
-  var toKey: MetaIdField? = null
-  var updateVariant: EnumDefnUpdateVariant? = null
+  val emptyFieldVariant: EnumDefnEmptyFieldVariant?
+  val fromKey: MetaIdField?
+  val insertVariant: EnumDefnInsertVariant?
+  val removeVariant: EnumDefnRemoveVariant?
+  val toKey: MetaIdField?
+  val updateVariant: EnumDefnUpdateVariant?
 }

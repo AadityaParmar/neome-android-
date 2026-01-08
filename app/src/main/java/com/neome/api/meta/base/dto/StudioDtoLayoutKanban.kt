@@ -11,15 +11,15 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.dto.StudioDtoLayoutGrid
 import com.neome.api.meta.base.dto.StudioMapOfSwimlane
 
-open class StudioDtoLayoutKanban : StudioDtoLayoutGrid()
+interface StudioDtoLayoutKanban : StudioDtoLayoutGrid
 {
-  var kanbanFieldId: MetaIdField? = null
-  var showCommentCount: Boolean? = null
-  var showFieldIdSet: Array<MetaIdField>? = null
-  var showFooter: Boolean? = null
-  var showSectionName: Boolean? = null
-  var sortByFieldIdSet: Array<MetaIdField>? = null
-  var sortOrder: EnumDefnSortOrder? = null
-  var swimlaneMap: StudioMapOfSwimlane? = null
-  var textSize: EnumDefnTextSize? = null
+  val kanbanFieldId: MetaIdField?
+  val showCommentCount: Boolean?
+  val showFieldIdSet: Array<MetaIdField>?
+  val showFooter: Boolean?
+  val showSectionName: Boolean?
+  val sortByFieldIdSet: Array<MetaIdField>?
+  val sortOrder: EnumDefnSortOrder?
+  val swimlaneMap: StudioMapOfSwimlane?
+  val textSize: EnumDefnTextSize?
 }

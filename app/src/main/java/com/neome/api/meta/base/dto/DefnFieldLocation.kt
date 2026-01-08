@@ -11,14 +11,14 @@ import com.neome.api.meta.base.Types.EnumDefnCaptureValueKind
 import com.neome.api.meta.base.dto.FieldDtoLocation
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldLocation : DefnFieldEditable()
+interface DefnFieldLocation : DefnFieldEditable
 {
-  var captureMode: EnumDefnCaptureMode? = null
-  var captureTime: Boolean? = null
-  var captureUser: Boolean? = null
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: FieldDtoLocation? = null
-  var defaultVar: FieldDtoLocation? = null
-  var showCapturedValuesOnAside: Array<EnumDefnCaptureValueKind>? = null
-  var showProgressBar: Boolean? = null
+  val captureMode: EnumDefnCaptureMode?
+  val captureTime: Boolean?
+  val captureUser: Boolean?
+  val defaultFieldId: MetaIdField?
+  val defaultValue: FieldDtoLocation?
+  val defaultVar: FieldDtoLocation?
+  val showCapturedValuesOnAside: Array<EnumDefnCaptureValueKind>?
+  val showProgressBar: Boolean?
 }

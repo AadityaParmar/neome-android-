@@ -10,16 +10,16 @@ import com.neome.api.meta.base.Types.EnumDefnPaymentMethod
 import com.neome.api.meta.base.Types.EnumDefnPaymentPlan
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioEntDeployPayment : StudioBase()
+interface StudioEntDeployPayment : StudioBase
 {
-  var communityMemId: String? = null
-  var currency: String? = null
-  var currentPlan: EnumDefnPaymentPlan? = null
-  var freeTrialDate: String? = null
-  var maximumMessagesPerMonth: Number? = null
-  var messagesPerSecond: Number? = null
-  var paymentGatewayToken: String? = null
-  var paymentMethod: EnumDefnPaymentMethod? = null
-  var totalPricePerMonth: Number? = null
-  var totalStorageGB: Number? = null
+  val communityMemId: String?
+  val currency: String?
+  val currentPlan: EnumDefnPaymentPlan?
+  val freeTrialDate: String?
+  val maximumMessagesPerMonth: Long?
+  val messagesPerSecond: Long?
+  val paymentGatewayToken: String?
+  val paymentMethod: EnumDefnPaymentMethod?
+  val totalPricePerMonth: Long?
+  val totalStorageGB: Long?
 }

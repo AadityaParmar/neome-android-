@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioVar
 import com.neome.api.meta.base.dto.StudioVarValueCondition
 
-open class StudioVarCondition : StudioVar()
+interface StudioVarCondition : StudioVar
 {
-  var value: StudioVarValueCondition? = null
+  val value: StudioVarValueCondition?
 }

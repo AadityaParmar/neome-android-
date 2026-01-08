@@ -11,13 +11,13 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioFieldEditable
 import com.neome.api.meta.base.dto.StudioValueVarIdParagraph
 
-open class StudioFieldShowCode : StudioFieldEditable()
+interface StudioFieldShowCode : StudioFieldEditable
 {
-  var codeType: EnumDefnCodeType? = null
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: String? = null
-  var defaultVarId: StudioValueVarIdParagraph? = null
-  var showLabel: Boolean? = null
-  var showLabelFieldId: MetaIdField? = null
-  var showLabelVarId: MetaIdVar? = null
+  val codeType: EnumDefnCodeType?
+  val defaultFieldId: MetaIdField?
+  val defaultValue: String?
+  val defaultVarId: StudioValueVarIdParagraph?
+  val showLabel: Boolean?
+  val showLabelFieldId: MetaIdField?
+  val showLabelVarId: MetaIdVar?
 }

@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.EntVdAutoStep
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioValueText
 
-open class EntVdExpertResume : EntVdAutoStep()
+interface EntVdExpertResume : EntVdAutoStep
 {
-  var option: StudioBuildArgBinder? = null
-  var pauseKey: StudioValueText? = null
+  val option: StudioBuildArgBinder?
+  val pauseKey: StudioValueText?
 }

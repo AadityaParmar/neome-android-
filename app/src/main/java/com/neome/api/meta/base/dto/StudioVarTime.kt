@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioBuildTime
 import com.neome.api.meta.base.dto.StudioVar
 
-open class StudioVarTime : StudioVar()
+interface StudioVarTime : StudioVar
 {
-  var value: StudioBuildTime? = null
+  val value: StudioBuildTime?
 }

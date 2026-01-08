@@ -12,18 +12,18 @@ import com.neome.api.ent.base.Types.EnumLogType
 import com.neome.api.nucleus.base.dto.EnvError
 import com.neome.api.meta.base.dto.FormValueRaw
 
-open class DtoDebuggerLogEntry
+interface DtoDebuggerLogEntry
 {
-  var caller: String? = null
-  var dateTime: String? = null
-  var envError: EnvError? = null
-  var inputForm: DefnForm? = null
-  var inputFormLogTree: DtoLogTree? = null
-  var inputFormValue: FormValueRaw? = null
-  var logType: EnumLogType? = null
-  var name: String? = null
-  var outputForm: DefnForm? = null
-  var outputFormLogTree: DtoLogTree? = null
-  var outputFormValue: FormValueRaw? = null
-  var summary: Object? = null
+  val caller: String?
+  val dateTime: String?
+  val envError: EnvError?
+  val inputForm: DefnForm?
+  val inputFormLogTree: DtoLogTree?
+  val inputFormValue: FormValueRaw?
+  val logType: EnumLogType?
+  val name: String?
+  val outputForm: DefnForm?
+  val outputFormLogTree: DtoLogTree?
+  val outputFormValue: FormValueRaw?
+  val summary: Object?
 }

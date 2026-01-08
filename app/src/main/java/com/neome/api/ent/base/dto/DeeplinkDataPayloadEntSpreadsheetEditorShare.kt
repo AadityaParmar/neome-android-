@@ -11,10 +11,10 @@ import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-open class DeeplinkDataPayloadEntSpreadsheetEditorShare : DeeplinkDataPayloadEnt()
+interface DeeplinkDataPayloadEntSpreadsheetEditorShare : DeeplinkDataPayloadEnt
 {
-  lateinit var entId: EntId
-  lateinit var layoutSpreadsheetId: MetaIdLayoutGrid
-  lateinit var metaIdAction: MetaIdAction
-  lateinit var metaIdSpreadsheet: MetaIdSpreadsheet
+  val entId: EntId
+  val layoutSpreadsheetId: MetaIdLayoutGrid
+  val metaIdAction: MetaIdAction
+  val metaIdSpreadsheet: MetaIdSpreadsheet
 }

@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.EnumDefnAdminPermissionType
 
-open class DefnStudioSetOfAdminDoNotOption : DefnField()
+interface DefnStudioSetOfAdminDoNotOption : DefnField
 {
-  var adminPermissionType: EnumDefnAdminPermissionType? = null
+  val adminPermissionType: EnumDefnAdminPermissionType?
 }

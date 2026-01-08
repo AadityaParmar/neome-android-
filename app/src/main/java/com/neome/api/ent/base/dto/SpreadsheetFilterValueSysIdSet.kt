@@ -9,7 +9,7 @@ import java.util.Set
 import com.neome.api.ent.base.dto.SpreadsheetFilterValue
 import com.neome.api.meta.base.SysId
 
-open class SpreadsheetFilterValueSysIdSet : SpreadsheetFilterValue()
+interface SpreadsheetFilterValueSysIdSet : SpreadsheetFilterValue
 {
-  lateinit var valueSet: Array<SysId>
+  val valueSet: Array<SysId>
 }

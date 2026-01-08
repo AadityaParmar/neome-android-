@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdEvent
 import com.neome.api.meta.base.dto.StudioVarValueScheduler
 
-open class EntVdEventSchedule : EntVdEvent()
+interface EntVdEventSchedule : EntVdEvent
 {
-  var scheduler: StudioVarValueScheduler? = null
+  val scheduler: StudioVarValueScheduler?
 }

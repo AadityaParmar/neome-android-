@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.ChatId
 import java.util.Map
 import com.neome.api.home.main.sig.SigMessage
 
-open class DtoChatMessageListMap
+interface DtoChatMessageListMap
 {
-  var chatMessageListMap: Map<ChatId, Array<SigMessage>>? = null
+  val chatMessageListMap: Map<ChatId, Array<SigMessage>>?
 }

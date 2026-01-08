@@ -14,14 +14,14 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdReport
 
-open class DtoEntActionReport : DtoEntAction()
+interface DtoEntActionReport : DtoEntAction
 {
-  var defaultValueMap: Map<MetaIdComp, Any>? = null
-  var inputFormId: MetaIdForm? = null
-  var outputFormContentLayoutId: MetaIdLayoutForm? = null
-  lateinit var outputFormId: MetaIdForm
-  var outputFormTemplateLayoutId: MetaIdLayoutForm? = null
-  lateinit var reportId: MetaIdReport
-  lateinit var reportKind: EnumDefnKindReport
-  var sendMessageToInbox: Boolean? = null
+  val defaultValueMap: Map<MetaIdComp, Any>?
+  val inputFormId: MetaIdForm?
+  val outputFormContentLayoutId: MetaIdLayoutForm?
+  val outputFormId: MetaIdForm
+  val outputFormTemplateLayoutId: MetaIdLayoutForm?
+  val reportId: MetaIdReport
+  val reportKind: EnumDefnKindReport
+  val sendMessageToInbox: Boolean?
 }

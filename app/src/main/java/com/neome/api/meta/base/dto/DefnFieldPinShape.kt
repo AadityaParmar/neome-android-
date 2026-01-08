@@ -9,9 +9,9 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.EnumDefnMapPinShape
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldPinShape : DefnFieldEditable()
+interface DefnFieldPinShape : DefnFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: EnumDefnMapPinShape? = null
-  var defaultVar: EnumDefnMapPinShape? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: EnumDefnMapPinShape?
+  val defaultVar: EnumDefnMapPinShape?
 }

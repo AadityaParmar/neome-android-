@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdEvent
 import com.neome.api.meta.base.dto.StudioDtoPluginApi
 
-open class EntVdEventPluginWebhook : EntVdEvent()
+interface EntVdEventPluginWebhook : EntVdEvent
 {
-  var pluginApi: StudioDtoPluginApi? = null
+  val pluginApi: StudioDtoPluginApi?
 }

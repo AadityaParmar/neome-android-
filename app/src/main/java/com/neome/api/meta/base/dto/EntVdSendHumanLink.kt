@@ -13,16 +13,16 @@ import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioValueParagraph
 import com.neome.api.meta.base.dto.StudioValueText
 
-open class EntVdSendHumanLink : EntVdAutoStepWithOutputAndError()
+interface EntVdSendHumanLink : EntVdAutoStepWithOutputAndError
 {
-  var embedFormParamId: MetaIdPipelineParam? = null
-  var expiryDatetime: FieldDtoDuration? = null
-  var fromHandle: StudioBuildArgBinder? = null
-  var maxClicks: Number? = null
-  var message: StudioValueParagraph? = null
-  var reminders: Number? = null
-  var sender: StudioBuildArgBinder? = null
-  var targetChannels: Array<EnumDefnKindChannelType>? = null
-  var title: StudioValueText? = null
-  var toHandle: StudioBuildArgBinder? = null
+  val embedFormParamId: MetaIdPipelineParam?
+  val expiryDatetime: FieldDtoDuration?
+  val fromHandle: StudioBuildArgBinder?
+  val maxClicks: Long?
+  val message: StudioValueParagraph?
+  val reminders: Long?
+  val sender: StudioBuildArgBinder?
+  val targetChannels: Array<EnumDefnKindChannelType>?
+  val title: StudioValueText?
+  val toHandle: StudioBuildArgBinder?
 }

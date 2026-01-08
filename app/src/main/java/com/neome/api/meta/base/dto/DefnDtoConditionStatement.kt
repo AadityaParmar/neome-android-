@@ -9,10 +9,10 @@ import com.neome.api.meta.base.Types.EnumDefnConditionOperator
 import com.neome.api.meta.base.dto.FieldDtoArg
 import com.neome.api.meta.base.Types.MetaIdCondition
 
-open class DefnDtoConditionStatement
+interface DefnDtoConditionStatement
 {
-  lateinit var lhs: FieldDtoArg
-  lateinit var metaId: MetaIdCondition
-  var operator: EnumDefnConditionOperator? = null
-  var rhs: FieldDtoArg? = null
+  val lhs: FieldDtoArg
+  val metaId: MetaIdCondition
+  val operator: EnumDefnConditionOperator?
+  val rhs: FieldDtoArg?
 }

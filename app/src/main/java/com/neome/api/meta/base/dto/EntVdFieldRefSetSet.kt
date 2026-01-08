@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.EnumDefnRefSetOperationKind
 import com.neome.api.meta.base.Types.EnumDefnSortOrder
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-open class EntVdFieldRefSetSet : EntVdAutoStep()
+interface EntVdFieldRefSetSet : EntVdAutoStep
 {
-  var inputField: StudioDtoArgValueParameter? = null
-  var operation: EnumDefnRefSetOperationKind? = null
-  var outputField: StudioDtoArgValueParameter? = null
-  var outputSortOrder: EnumDefnSortOrder? = null
+  val inputField: StudioDtoArgValueParameter?
+  val operation: EnumDefnRefSetOperationKind?
+  val outputField: StudioDtoArgValueParameter?
+  val outputSortOrder: EnumDefnSortOrder?
 }

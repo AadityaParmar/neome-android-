@@ -9,14 +9,14 @@ import com.neome.api.meta.base.Types.EnumDefnKindAction
 import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.Symbol
 
-open class DtoEntAction
+interface DtoEntAction
 {
-  lateinit var actionId: MetaIdAction
-  var description: String? = null
-  var icon: String? = null
-  var increaseAsideWidth: Boolean? = null
-  lateinit var kind: EnumDefnKindAction
-  var label: String? = null
-  lateinit var name: Symbol
-  var tooltip: String? = null
+  val actionId: MetaIdAction
+  val description: String?
+  val icon: String?
+  val increaseAsideWidth: Boolean?
+  val kind: EnumDefnKindAction
+  val label: String?
+  val name: Symbol
+  val tooltip: String?
 }

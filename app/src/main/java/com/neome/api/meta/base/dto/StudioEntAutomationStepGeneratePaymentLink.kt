@@ -13,18 +13,18 @@ import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntAutomationStepGeneratePaymentLink : StudioEntAutomationStep()
+interface StudioEntAutomationStepGeneratePaymentLink : StudioEntAutomationStep
 {
-  var allowedPaymentMethodSet: Array<EnumDefnPaymentMethodKind>? = null
-  var amountValue: StudioBuildArgBinder? = null
-  var currencyValue: StudioBuildArgBinder? = null
-  var descriptionValue: StudioBuildArgBinder? = null
-  var expiryDurationValue: StudioBuildArgBinder? = null
-  var inputFormPipelineVarId: MetaIdPipelineParam? = null
-  var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
-  var iterateOnGridId: MetaIdGrid? = null
-  var outputFormPipelineVarId: MetaIdPipelineParam? = null
-  var paymentLinkFieldId: MetaIdField? = null
-  var referenceIdFieldId: MetaIdField? = null
-  var spreadsheetRowIdFieldId: MetaIdField? = null
+  val allowedPaymentMethodSet: Array<EnumDefnPaymentMethodKind>?
+  val amountValue: StudioBuildArgBinder?
+  val currencyValue: StudioBuildArgBinder?
+  val descriptionValue: StudioBuildArgBinder?
+  val expiryDurationValue: StudioBuildArgBinder?
+  val inputFormPipelineVarId: MetaIdPipelineParam?
+  val iterateOnGridFilterVarId: StudioValueVarIdCondition?
+  val iterateOnGridId: MetaIdGrid?
+  val outputFormPipelineVarId: MetaIdPipelineParam?
+  val paymentLinkFieldId: MetaIdField?
+  val referenceIdFieldId: MetaIdField?
+  val spreadsheetRowIdFieldId: MetaIdField?
 }

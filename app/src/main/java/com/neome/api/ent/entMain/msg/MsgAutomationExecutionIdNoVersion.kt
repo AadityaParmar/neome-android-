@@ -8,7 +8,7 @@ package com.neome.api.ent.entMain.msg
 import com.neome.api.meta.base.Types.AutomationExecutionId
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgAutomationExecutionIdNoVersion : Msg()
+interface MsgAutomationExecutionIdNoVersion : Msg
 {
-  lateinit var automationExecutionId: AutomationExecutionId
+  val automationExecutionId: AutomationExecutionId
 }

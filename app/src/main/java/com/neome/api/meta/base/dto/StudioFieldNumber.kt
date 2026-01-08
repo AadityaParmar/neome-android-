@@ -9,17 +9,17 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldNumber : StudioFieldEditable()
+interface StudioFieldNumber : StudioFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: Number? = null
-  var defaultVarId: MetaIdVar? = null
-  var max: Number? = null
-  var maxFieldId: MetaIdField? = null
-  var maxVarId: MetaIdVar? = null
-  var min: Number? = null
-  var minDisplayValue: Number? = null
-  var minFieldId: MetaIdField? = null
-  var minVarId: MetaIdVar? = null
-  var numberFormat: String? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: Long?
+  val defaultVarId: MetaIdVar?
+  val max: Long?
+  val maxFieldId: MetaIdField?
+  val maxVarId: MetaIdVar?
+  val min: Long?
+  val minDisplayValue: Long?
+  val minFieldId: MetaIdField?
+  val minVarId: MetaIdVar?
+  val numberFormat: String?
 }

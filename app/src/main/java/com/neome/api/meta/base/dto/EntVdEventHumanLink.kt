@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdEvent
 import com.neome.api.meta.base.dto.FormRefKey
 
-open class EntVdEventHumanLink : EntVdEvent()
+interface EntVdEventHumanLink : EntVdEvent
 {
-  var sendForm: FormRefKey? = null
+  val sendForm: FormRefKey?
 }

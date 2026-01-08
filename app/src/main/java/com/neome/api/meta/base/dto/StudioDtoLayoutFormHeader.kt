@@ -11,17 +11,17 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoColor
 
-open class StudioDtoLayoutFormHeader : StudioBase()
+interface StudioDtoLayoutFormHeader : StudioBase
 {
-  var backgroundColor: StudioDtoColor? = null
-  var backgroundColorVarId: MetaIdVar? = null
-  var formLayoutId: MetaIdLayoutForm? = null
-  var headerImage: FieldDtoImage? = null
-  var headerImageHeight: Number? = null
-  var headerImageVarId: MetaIdVar? = null
-  var hyperlinkVarIdSet: Array<MetaIdVar>? = null
-  var showEnterprise: Boolean? = null
-  var showSeparator: Boolean? = null
-  var textColor: StudioDtoColor? = null
-  var textColorVarId: MetaIdVar? = null
+  val backgroundColor: StudioDtoColor?
+  val backgroundColorVarId: MetaIdVar?
+  val formLayoutId: MetaIdLayoutForm?
+  val headerImage: FieldDtoImage?
+  val headerImageHeight: Long?
+  val headerImageVarId: MetaIdVar?
+  val hyperlinkVarIdSet: Array<MetaIdVar>?
+  val showEnterprise: Boolean?
+  val showSeparator: Boolean?
+  val textColor: StudioDtoColor?
+  val textColorVarId: MetaIdVar?
 }

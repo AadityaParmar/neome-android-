@@ -12,10 +12,10 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.nucleus.base.msg.Msg
 import java.util.Set
 
-open class MsgEntUserPickerCandidateListGet : Msg()
+interface MsgEntUserPickerCandidateListGet : Msg
 {
-  var formValueRaw: FormValueRaw? = null
-  var roleIdSet: Array<MetaIdRole>? = null
-  var setOfUserVarId: MetaIdVar? = null
-  lateinit var sourceFormId: MetaIdForm
+  val formValueRaw: FormValueRaw?
+  val roleIdSet: Array<MetaIdRole>?
+  val setOfUserVarId: MetaIdVar?
+  val sourceFormId: MetaIdForm
 }

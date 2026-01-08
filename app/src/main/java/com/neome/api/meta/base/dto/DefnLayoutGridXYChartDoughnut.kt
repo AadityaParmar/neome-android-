@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.DefnLayoutGridXYChart
 
-open class DefnLayoutGridXYChartDoughnut : DefnLayoutGridXYChart()
+interface DefnLayoutGridXYChartDoughnut : DefnLayoutGridXYChart
 {
-  var alwaysShowSliceValues: Boolean? = null
+  val alwaysShowSliceValues: Boolean?
 }

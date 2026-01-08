@@ -7,8 +7,8 @@ package com.neome.api.home.base.dto
 
 import com.neome.api.home.base.dto.DtoMessageReplyPayload
 
-open class DtoMessageReplyPayloadLinkText : DtoMessageReplyPayload()
+interface DtoMessageReplyPayloadLinkText : DtoMessageReplyPayload
 {
-  var imageUrl: String? = null
-  lateinit var textSummary: String
+  val imageUrl: String?
+  val textSummary: String
 }

@@ -10,7 +10,7 @@ import java.util.Map
 import com.neome.api.home.drawer.sig.SigUserAvatar
 import com.neome.api.nucleus.base.sig.SigVersion
 
-open class SigEntUserAvatarListGet : SigVersion()
+interface SigEntUserAvatarListGet : SigVersion
 {
-  lateinit var avatarMap: Map<EntUserId, SigUserAvatar>
+  val avatarMap: Map<EntUserId, SigUserAvatar>
 }

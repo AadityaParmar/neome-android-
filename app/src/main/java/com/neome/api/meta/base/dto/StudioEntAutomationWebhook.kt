@@ -11,10 +11,10 @@ import com.neome.api.meta.base.dto.StudioDtoLocationCapture
 import com.neome.api.meta.base.dto.StudioEntAutomation
 import com.neome.api.meta.base.dto.StudioEntAutomationWebhookEventMap
 
-open class StudioEntAutomationWebhook : StudioEntAutomation()
+interface StudioEntAutomationWebhook : StudioEntAutomation
 {
-  lateinit var callbackKind: EnumDefnAutomationWebhookKind
-  lateinit var eventMap: StudioEntAutomationWebhookEventMap
-  var locationConfig: StudioDtoLocationCapture? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
+  val callbackKind: EnumDefnAutomationWebhookKind
+  val eventMap: StudioEntAutomationWebhookEventMap
+  val locationConfig: StudioDtoLocationCapture?
+  val spreadsheetId: MetaIdSpreadsheet?
 }

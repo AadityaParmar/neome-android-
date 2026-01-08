@@ -10,11 +10,11 @@ import com.neome.api.meta.base.Types.MetaIdVisibilityCondition
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoVisibilityCondition
 
-open class StudioMapOfVisibilityCondition : StudioBase()
+interface StudioMapOfVisibilityCondition : StudioBase
 {
-  var andOr: Boolean? = null
-  var keys: Array<MetaIdVisibilityCondition>? = null
-  var map: Map<MetaIdVisibilityCondition, StudioMapOfVisibilityCondition>? = null
-  lateinit var metaId: MetaIdVisibilityCondition
-  var statement: StudioDtoVisibilityCondition? = null
+  val andOr: Boolean?
+  val keys: Array<MetaIdVisibilityCondition>?
+  val map: Map<MetaIdVisibilityCondition, StudioMapOfVisibilityCondition>?
+  val metaId: MetaIdVisibilityCondition
+  val statement: StudioDtoVisibilityCondition?
 }

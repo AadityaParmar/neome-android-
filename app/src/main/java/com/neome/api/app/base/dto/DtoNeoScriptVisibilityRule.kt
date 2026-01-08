@@ -9,8 +9,8 @@ import com.neome.api.app.base.dto.DtoNeoScript
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdVisibilityRule
 
-open class DtoNeoScriptVisibilityRule : DtoNeoScript()
+interface DtoNeoScriptVisibilityRule : DtoNeoScript
 {
-  var formId: MetaIdForm? = null
-  var visibilityRuleId: MetaIdVisibilityRule? = null
+  val formId: MetaIdForm?
+  val visibilityRuleId: MetaIdVisibilityRule?
 }

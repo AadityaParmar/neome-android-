@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 
-open class StudioDtoRowIdPointer : StudioBase()
+interface StudioDtoRowIdPointer : StudioBase
 {
-  var rowId: StudioBuildArgBinder? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
+  val rowId: StudioBuildArgBinder?
+  val spreadsheetId: MetaIdSpreadsheet?
 }

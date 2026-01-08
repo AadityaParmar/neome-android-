@@ -7,8 +7,8 @@ package com.neome.api.home.main.sig
 
 import com.neome.api.nucleus.base.sig.SigVersion
 
-open class SigSpreadsheetRowCommentCount : SigVersion()
+interface SigSpreadsheetRowCommentCount : SigVersion
 {
-  var commentCount: Number? = null
-  var unreadCommentCount: Number? = null
+  val commentCount: Long?
+  val unreadCommentCount: Long?
 }

@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.MetaIdComposite
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.dto.StudioDtoArgValue
 
-open class StudioDtoArgValueOutput : StudioDtoArgValue()
+interface StudioDtoArgValueOutput : StudioDtoArgValue
 {
-  var compositeId: MetaIdComposite? = null
-  var fieldId: MetaIdField? = null
+  val compositeId: MetaIdComposite?
+  val fieldId: MetaIdField?
 }

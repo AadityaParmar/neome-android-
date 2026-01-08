@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.DtoLogItem
 
-open class DtoLogItemList
+interface DtoLogItemList
 {
-  var children: Array<DtoLogItem>? = null
+  val children: Array<DtoLogItem>?
 }

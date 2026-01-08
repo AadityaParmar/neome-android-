@@ -10,14 +10,14 @@ import com.neome.api.meta.base.Types.MetaIdLayoutUser
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Symbol
 
-open class DefnLayoutUser
+interface DefnLayoutUser
 {
-  var allowToSwitchLayoutIdSet: Array<MetaIdLayoutUser>? = null
-  var excludeRoleIdSet: Array<MetaIdRole>? = null
-  var includeRoleIdSet: Array<MetaIdRole>? = null
-  lateinit var kind: EnumDefnLayoutUserKind
-  var label: String? = null
-  lateinit var metaId: MetaIdLayoutUser
-  lateinit var name: Symbol
-  var showMyAssistantsOnly: Boolean? = null
+  val allowToSwitchLayoutIdSet: Array<MetaIdLayoutUser>?
+  val excludeRoleIdSet: Array<MetaIdRole>?
+  val includeRoleIdSet: Array<MetaIdRole>?
+  val kind: EnumDefnLayoutUserKind
+  val label: String?
+  val metaId: MetaIdLayoutUser
+  val name: Symbol
+  val showMyAssistantsOnly: Boolean?
 }

@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.EntVdAi
 import com.neome.api.meta.base.dto.EntVdFormMap
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-open class EntVdBranchSwitchForm : EntVdAi()
+interface EntVdBranchSwitchForm : EntVdAi
 {
-  var field: StudioDtoArgValueParameter? = null
-  var formMap: EntVdFormMap? = null
+  val field: StudioDtoArgValueParameter?
+  val formMap: EntVdFormMap?
 }

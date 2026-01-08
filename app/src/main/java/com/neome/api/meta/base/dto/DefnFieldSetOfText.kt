@@ -12,15 +12,15 @@ import com.neome.api.meta.base.dto.DefnStudioMapOfOptionPermission
 import com.neome.api.meta.base.Types.EnumDefnThemePickMultiVariant
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldSetOfText : DefnFieldEditable()
+interface DefnFieldSetOfText : DefnFieldEditable
 {
-  var defaultValue: Array<String>? = null
-  var defaultValueFieldId: MetaIdField? = null
-  var optionFieldId: MetaIdField? = null
-  var optionMap: DefnStudioMapOfDtoOption? = null
-  var optionPermissionMap: DefnStudioMapOfOptionPermission? = null
-  var pageSize: Number? = null
-  var pluginApi: DefnDtoPluginApi? = null
-  var pluginErrorFieldId: MetaIdField? = null
-  var showAs: EnumDefnThemePickMultiVariant? = null
+  val defaultValue: Array<String>?
+  val defaultValueFieldId: MetaIdField?
+  val optionFieldId: MetaIdField?
+  val optionMap: DefnStudioMapOfDtoOption?
+  val optionPermissionMap: DefnStudioMapOfOptionPermission?
+  val pageSize: Long?
+  val pluginApi: DefnDtoPluginApi?
+  val pluginErrorFieldId: MetaIdField?
+  val showAs: EnumDefnThemePickMultiVariant?
 }

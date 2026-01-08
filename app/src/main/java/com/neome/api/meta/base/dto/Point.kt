@@ -5,8 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-open class Point
+interface Point
 {
-  var x: Number? = null
-  var y: Number? = null
+  val x: Long?
+  val y: Long?
 }

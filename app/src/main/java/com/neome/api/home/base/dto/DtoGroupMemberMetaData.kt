@@ -7,7 +7,7 @@ package com.neome.api.home.base.dto
 
 import java.util.Date
 
-open class DtoGroupMemberMetaData
+interface DtoGroupMemberMetaData
 {
-  lateinit var date: String
+  val date: String
 }

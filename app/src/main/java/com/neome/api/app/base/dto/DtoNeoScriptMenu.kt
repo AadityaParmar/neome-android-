@@ -9,8 +9,8 @@ import com.neome.api.app.base.dto.DtoNeoScript
 import com.neome.api.meta.base.Types.MetaIdComposite
 import com.neome.api.meta.base.Types.MetaIdForm
 
-open class DtoNeoScriptMenu : DtoNeoScript()
+interface DtoNeoScriptMenu : DtoNeoScript
 {
-  var compositeId: MetaIdComposite? = null
-  var formId: MetaIdForm? = null
+  val compositeId: MetaIdComposite?
+  val formId: MetaIdForm?
 }

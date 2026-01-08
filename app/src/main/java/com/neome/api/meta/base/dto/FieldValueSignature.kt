@@ -9,11 +9,11 @@ import java.util.Date
 import com.neome.api.meta.base.dto.FieldValueEntUserId
 import com.neome.api.meta.base.dto.FieldValueLocation
 
-open class FieldValueSignature
+interface FieldValueSignature
 {
-  var captureLocation: FieldValueLocation? = null
-  var captureTime: String? = null
-  var captureUser: FieldValueEntUserId? = null
-  lateinit var handle: String
-  lateinit var signature: String
+  val captureLocation: FieldValueLocation?
+  val captureTime: String?
+  val captureUser: FieldValueEntUserId?
+  val handle: String
+  val signature: String
 }

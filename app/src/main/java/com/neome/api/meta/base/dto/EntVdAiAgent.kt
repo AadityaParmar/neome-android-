@@ -10,10 +10,10 @@ import com.neome.api.meta.base.dto.EntVdAiWithOutput
 import com.neome.api.meta.base.dto.FormRefKey
 import com.neome.api.meta.base.dto.StudioValueParagraph
 
-open class EntVdAiAgent : EntVdAiWithOutput()
+interface EntVdAiAgent : EntVdAiWithOutput
 {
-  var agentControlMap: EntVdAiAgentControlMap? = null
-  var outputForm: FormRefKey? = null
-  var systemMessage: StudioValueParagraph? = null
-  var userMessage: StudioValueParagraph? = null
+  val agentControlMap: EntVdAiAgentControlMap?
+  val outputForm: FormRefKey?
+  val systemMessage: StudioValueParagraph?
+  val userMessage: StudioValueParagraph?
 }

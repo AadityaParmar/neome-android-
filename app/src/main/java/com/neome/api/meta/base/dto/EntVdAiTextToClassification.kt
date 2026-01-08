@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.EntVdAi
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-open class EntVdAiTextToClassification : EntVdAi()
+interface EntVdAiTextToClassification : EntVdAi
 {
-  var classificationVarId: MetaIdVar? = null
-  var inputField: StudioDtoArgValueParameter? = null
+  val classificationVarId: MetaIdVar?
+  val inputField: StudioDtoArgValueParameter?
 }

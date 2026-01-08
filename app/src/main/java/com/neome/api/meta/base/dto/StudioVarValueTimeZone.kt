@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.TimeZoneKey
 
-open class StudioVarValueTimeZone
+interface StudioVarValueTimeZone
 {
-  lateinit var value: TimeZoneKey
+  val value: TimeZoneKey
 }

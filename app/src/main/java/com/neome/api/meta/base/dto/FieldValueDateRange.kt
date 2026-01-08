@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import java.util.Date
 
-open class FieldValueDateRange
+interface FieldValueDateRange
 {
-  var from: String? = null
-  var to: String? = null
+  val from: String?
+  val to: String?
 }

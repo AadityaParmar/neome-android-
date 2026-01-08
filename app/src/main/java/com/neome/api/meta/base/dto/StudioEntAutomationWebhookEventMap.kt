@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdEvent
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntAutomationWebhookEvent
 
-open class StudioEntAutomationWebhookEventMap : StudioBase()
+interface StudioEntAutomationWebhookEventMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdEvent>
-  lateinit var map: Map<MetaIdEvent, StudioEntAutomationWebhookEvent>
+  val keys: Array<MetaIdEvent>
+  val map: Map<MetaIdEvent, StudioEntAutomationWebhookEvent>
 }

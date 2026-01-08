@@ -10,9 +10,9 @@ import com.neome.api.meta.base.dto.StudioPluginDev
 import com.neome.api.meta.base.dto.StudioPluginJar
 import com.neome.api.meta.base.dto.StudioPluginRpc
 
-open class StudioPluginResourceMap : StudioBase()
+interface StudioPluginResourceMap : StudioBase
 {
-  var dev: StudioPluginDev? = null
-  var jar: StudioPluginJar? = null
-  var rpc: StudioPluginRpc? = null
+  val dev: StudioPluginDev?
+  val jar: StudioPluginJar?
+  val rpc: StudioPluginRpc?
 }

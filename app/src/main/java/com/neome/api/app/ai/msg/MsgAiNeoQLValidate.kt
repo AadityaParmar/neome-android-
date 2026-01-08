@@ -11,11 +11,11 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.nucleus.base.msg.Msg
 import java.util.Set
 
-open class MsgAiNeoQLValidate : Msg()
+interface MsgAiNeoQLValidate : Msg
 {
-  var inputFormRefKey: FormRefKey? = null
-  lateinit var neoQL: String
-  var outputFormRefKey: FormRefKey? = null
-  var paramMap: Map<String, FormRefKey>? = null
-  lateinit var spreadsheetIdSet: Array<MetaIdSpreadsheet>
+  val inputFormRefKey: FormRefKey?
+  val neoQL: String
+  val outputFormRefKey: FormRefKey?
+  val paramMap: Map<String, FormRefKey>?
+  val spreadsheetIdSet: Array<MetaIdSpreadsheet>
 }

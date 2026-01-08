@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.ArtifactId
 import com.neome.api.nucleus.base.sig.Sig
 import com.neome.api.meta.base.SysId
 
-open class SigNeoScriptGet : Sig()
+interface SigNeoScriptGet : Sig
 {
-  lateinit var artifactId: ArtifactId
-  var metaId: SysId? = null
-  var neoScript: String? = null
+  val artifactId: ArtifactId
+  val metaId: SysId?
+  val neoScript: String?
 }

@@ -7,6 +7,6 @@ package com.neome.api.nucleus.base.sig
 
 import com.neome.api.nucleus.base.sig.SigCallback
 
-open class SigDone : SigCallback()
+interface SigDone : SigCallback
 {
 }

@@ -5,11 +5,14 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.FormRefKey
+import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdForm
 
-open class DefnStudioDtoCodeEditor
+interface DefnStudioDtoCodeEditor
 {
-  var aliasSpreadsheetIdSet: Array<MetaIdForm>? = null
-  var inputFormId: MetaIdForm? = null
-  var outputFormId: MetaIdForm? = null
+  val aliasSpreadsheetIdSet: Array<MetaIdForm>?
+  val inputFormId: MetaIdForm?
+  val outputFormId: MetaIdForm?
+  val paramMap: Map<String, FormRefKey>?
 }

@@ -19,20 +19,20 @@ import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-open class DeeplinkDataPayloadEntSpreadsheetInsertShare : DeeplinkDataPayloadEnt()
+interface DeeplinkDataPayloadEntSpreadsheetInsertShare : DeeplinkDataPayloadEnt
 {
-  var chatId: ChatId? = null
-  lateinit var defnForm: DefnForm
-  lateinit var entId: EntId
-  var formEditorLayoutId: MetaIdLayoutForm? = null
-  var metaIdAction: MetaIdAction? = null
-  var mobileFormEditorLayoutId: MetaIdLayoutForm? = null
-  var repeatButtonLabel: String? = null
-  var sendMessageToInbox: Boolean? = null
-  var showRepeatButton: Boolean? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
-  lateinit var successMessage: DefnDtoParagraph
-  var successMessageBgColor: DefnDtoColor? = null
-  var successMessageTextSize: EnumDefnTextSize? = null
-  var valueMap: Map<MetaIdComp, Any>? = null
+  val chatId: ChatId?
+  val defnForm: DefnForm
+  val entId: EntId
+  val formEditorLayoutId: MetaIdLayoutForm?
+  val metaIdAction: MetaIdAction?
+  val mobileFormEditorLayoutId: MetaIdLayoutForm?
+  val repeatButtonLabel: String?
+  val sendMessageToInbox: Boolean?
+  val showRepeatButton: Boolean?
+  val spreadsheetId: MetaIdSpreadsheet?
+  val successMessage: DefnDtoParagraph
+  val successMessageBgColor: DefnDtoColor?
+  val successMessageTextSize: EnumDefnTextSize?
+  val valueMap: Map<MetaIdComp, Any>?
 }

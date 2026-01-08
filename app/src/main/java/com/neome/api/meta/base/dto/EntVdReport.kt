@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.MetaIdVdRegion
 import com.neome.api.meta.base.dto.Point
 import com.neome.api.meta.base.dto.StudioBase
 
-open class EntVdReport : StudioBase()
+interface EntVdReport : StudioBase
 {
-  var expanded: Boolean? = null
-  var parentRegionId: MetaIdVdRegion? = null
-  var point: Point? = null
-  lateinit var reportId: MetaIdReport
+  val expanded: Boolean?
+  val parentRegionId: MetaIdVdRegion?
+  val point: Point?
+  val reportId: MetaIdReport
 }

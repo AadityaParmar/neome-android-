@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.EntVdAiWithOutput
 import com.neome.api.meta.base.dto.FormRefKey
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-open class EntVdAiXMLToForm : EntVdAiWithOutput()
+interface EntVdAiXMLToForm : EntVdAiWithOutput
 {
-  var inputField: StudioDtoArgValueParameter? = null
-  var outputForm: FormRefKey? = null
+  val inputField: StudioDtoArgValueParameter?
+  val outputForm: FormRefKey?
 }

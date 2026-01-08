@@ -8,12 +8,12 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.EnumDefnCaptureValueKind
 
-open class DefnFieldScanCode : DefnFieldEditable()
+interface DefnFieldScanCode : DefnFieldEditable
 {
-  var barCode: Boolean? = null
-  var captureLocation: Boolean? = null
-  var captureTime: Boolean? = null
-  var captureUser: Boolean? = null
-  var qrCode: Boolean? = null
-  var showCapturedValuesOnAside: Array<EnumDefnCaptureValueKind>? = null
+  val barCode: Boolean?
+  val captureLocation: Boolean?
+  val captureTime: Boolean?
+  val captureUser: Boolean?
+  val qrCode: Boolean?
+  val showCapturedValuesOnAside: Array<EnumDefnCaptureValueKind>?
 }

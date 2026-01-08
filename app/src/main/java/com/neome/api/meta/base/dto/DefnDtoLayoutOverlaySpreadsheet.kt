@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.DefnDtoLayoutCardItem
 
-open class DefnDtoLayoutOverlaySpreadsheet
+interface DefnDtoLayoutOverlaySpreadsheet
 {
-  var item: DefnDtoLayoutCardItem? = null
+  val item: DefnDtoLayoutCardItem?
 }

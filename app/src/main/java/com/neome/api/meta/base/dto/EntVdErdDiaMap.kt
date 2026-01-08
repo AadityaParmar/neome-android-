@@ -10,8 +10,8 @@ import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdVdErdDia
 import com.neome.api.meta.base.dto.StudioBase
 
-open class EntVdErdDiaMap : StudioBase()
+interface EntVdErdDiaMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdVdErdDia>
-  lateinit var map: Map<MetaIdVdErdDia, EntVdErdDia>
+  val keys: Array<MetaIdVdErdDia>
+  val map: Map<MetaIdVdErdDia, EntVdErdDia>
 }

@@ -9,9 +9,9 @@ import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdGrid
 
-open class DefnStudioMapOfLayoutGrid : DefnField()
+interface DefnStudioMapOfLayoutGrid : DefnField
 {
-  lateinit var formId: MetaIdForm
-  lateinit var gridId: MetaIdGrid
-  var isPluginForm: Boolean? = null
+  val formId: MetaIdForm
+  val gridId: MetaIdGrid
+  val isPluginForm: Boolean?
 }

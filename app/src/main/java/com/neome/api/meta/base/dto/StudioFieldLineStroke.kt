@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldLineStroke : StudioFieldEditable()
+interface StudioFieldLineStroke : StudioFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: EnumDefnThemeStroke? = null
-  var defaultVarId: MetaIdVar? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: EnumDefnThemeStroke?
+  val defaultVarId: MetaIdVar?
 }

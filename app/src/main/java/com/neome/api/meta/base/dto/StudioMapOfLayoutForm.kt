@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoLayoutForm
 
-open class StudioMapOfLayoutForm : StudioBase()
+interface StudioMapOfLayoutForm : StudioBase
 {
-  var asideDefaultLayoutId: MetaIdLayoutForm? = null
-  lateinit var keys: Array<MetaIdLayoutForm>
-  lateinit var map: Map<MetaIdLayoutForm, StudioDtoLayoutForm>
-  var mobileDefaultLayoutId: MetaIdLayoutForm? = null
+  val asideDefaultLayoutId: MetaIdLayoutForm?
+  val keys: Array<MetaIdLayoutForm>
+  val map: Map<MetaIdLayoutForm, StudioDtoLayoutForm>
+  val mobileDefaultLayoutId: MetaIdLayoutForm?
 }

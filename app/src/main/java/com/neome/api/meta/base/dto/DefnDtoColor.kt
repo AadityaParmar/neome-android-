@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnThemeColor
 import com.neome.api.meta.base.Types.EnumDefnThemeColorShade
 
-open class DefnDtoColor
+interface DefnDtoColor
 {
-  var shade: EnumDefnThemeColorShade? = null
-  var value: EnumDefnThemeColor? = null
+  val shade: EnumDefnThemeColorShade?
+  val value: EnumDefnThemeColor?
 }

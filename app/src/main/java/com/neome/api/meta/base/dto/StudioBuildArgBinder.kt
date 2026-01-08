@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.EnumDefnArgBinder
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoArgValue
 
-open class StudioBuildArgBinder : StudioBase()
+interface StudioBuildArgBinder : StudioBase
 {
-  lateinit var argName: String
-  lateinit var kind: EnumDefnArgBinder
-  lateinit var value: StudioDtoArgValue
+  val argName: String
+  val kind: EnumDefnArgBinder
+  val value: StudioDtoArgValue
 }

@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioVar
 import com.neome.api.meta.base.dto.StudioVarValueDecimal
 
-open class StudioVarDecimal : StudioVar()
+interface StudioVarDecimal : StudioVar
 {
-  var value: StudioVarValueDecimal? = null
+  val value: StudioVarValueDecimal?
 }

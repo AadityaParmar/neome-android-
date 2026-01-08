@@ -8,7 +8,7 @@ package com.neome.api.home.base.dto
 import com.neome.api.meta.base.Types.ChatId
 import java.util.Map
 
-open class DtoChatBadgeMap
+interface DtoChatBadgeMap
 {
-  var chatBadgeMap: Map<ChatId, Number>? = null
+  val chatBadgeMap: Map<ChatId, Number>?
 }

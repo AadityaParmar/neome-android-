@@ -5,11 +5,14 @@
 
 package com.neome.api.home.base
 
+import kotlinx.serialization.SerialName
+
 object Types
 {
   enum class EnumGroupPatchPropName(val value: String)
   {
-    name_("name"),
+    @SerialName("name")
+    Name("name"),
     about("about"),
     mediaIdAvatar("mediaIdAvatar"),
     settings("settings")

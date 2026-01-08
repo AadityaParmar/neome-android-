@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 
-open class StudioEntAutomationStepExecuteAsync : StudioEntAutomationStep()
+interface StudioEntAutomationStepExecuteAsync : StudioEntAutomationStep
 {
-  var automationId: MetaIdAutomation? = null
-  var inputFormPipelineVarId: MetaIdPipelineParam? = null
-  var sourceToTargetMappingVarId: MetaIdVar? = null
+  val automationId: MetaIdAutomation?
+  val inputFormPipelineVarId: MetaIdPipelineParam?
+  val sourceToTargetMappingVarId: MetaIdVar?
 }

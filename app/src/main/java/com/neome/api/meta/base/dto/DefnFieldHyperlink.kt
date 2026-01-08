@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.DefnDtoHyperLink
 import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldHyperlink : DefnFieldEditable()
+interface DefnFieldHyperlink : DefnFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultVar: DefnDtoHyperLink? = null
+  val defaultFieldId: MetaIdField?
+  val defaultVar: DefnDtoHyperLink?
 }

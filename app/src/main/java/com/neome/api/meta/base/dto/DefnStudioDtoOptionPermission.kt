@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdRole
 
-open class DefnStudioDtoOptionPermission
+interface DefnStudioDtoOptionPermission
 {
-  lateinit var metaId: MetaIdRole
-  lateinit var optionIdSet: Array<String>
+  val metaId: MetaIdRole
+  val optionIdSet: Array<String>
 }

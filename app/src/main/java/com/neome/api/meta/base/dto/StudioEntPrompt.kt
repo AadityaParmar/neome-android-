@@ -14,16 +14,16 @@ import com.neome.api.meta.base.dto.StudioModuleSelection
 import com.neome.api.meta.base.dto.StudioValueCodeJavascript
 import com.neome.api.meta.base.Symbol
 
-open class StudioEntPrompt : StudioBase()
+interface StudioEntPrompt : StudioBase
 {
-  var actionId: MetaIdAction? = null
-  lateinit var metaId: MetaIdPrompt
-  var modules: StudioModuleSelection? = null
-  lateinit var name: Symbol
-  var permissionRoleIdSet: Array<MetaIdRole>? = null
-  var promptAttachmentFormat: EnumDefnPromptAttachmentFormat? = null
-  var promptText: StudioValueCodeJavascript? = null
-  var reviewBeforeExecuting: Boolean? = null
-  var sendReviewDeeplinkOnError: Boolean? = null
-  var sendSuccessDeeplink: Boolean? = null
+  val actionId: MetaIdAction?
+  val metaId: MetaIdPrompt
+  val modules: StudioModuleSelection?
+  val name: Symbol
+  val permissionRoleIdSet: Array<MetaIdRole>?
+  val promptAttachmentFormat: EnumDefnPromptAttachmentFormat?
+  val promptText: StudioValueCodeJavascript?
+  val reviewBeforeExecuting: Boolean?
+  val sendReviewDeeplinkOnError: Boolean?
+  val sendSuccessDeeplink: Boolean?
 }

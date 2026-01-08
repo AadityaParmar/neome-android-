@@ -10,14 +10,14 @@ import com.neome.api.meta.base.Types.LanguageKey
 import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgCallerProfilePatch : Msg()
+interface MsgCallerProfilePatch : Msg
 {
-  var about: String? = null
-  var enterIsSendDesktop: Boolean? = null
-  var enterIsSendMobile: Boolean? = null
-  lateinit var firstName: String
-  var globalNotificationSetting: DtoNotificationSetting? = null
-  var languageKey: LanguageKey? = null
-  lateinit var lastName: String
-  var mediaIdAvatar: MediaIdAvatar? = null
+  val about: String?
+  val enterIsSendDesktop: Boolean?
+  val enterIsSendMobile: Boolean?
+  val firstName: String
+  val globalNotificationSetting: DtoNotificationSetting?
+  val languageKey: LanguageKey?
+  val lastName: String
+  val mediaIdAvatar: MediaIdAvatar?
 }

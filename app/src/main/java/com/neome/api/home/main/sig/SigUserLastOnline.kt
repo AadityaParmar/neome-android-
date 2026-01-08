@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigUserLastOnline : Sig()
+interface SigUserLastOnline : Sig
 {
-  lateinit var entId: EntId
-  lateinit var entUserId: EntUserId
-  var lastOnline: String? = null
-  var online: Boolean? = null
+  val entId: EntId
+  val entUserId: EntUserId
+  val lastOnline: String?
+  val online: Boolean?
 }

@@ -12,13 +12,13 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 import com.neome.api.meta.base.dto.StudioMapOfCondition
 
-open class EntVdAiSpreadsheetToField : EntVdAi()
+interface EntVdAiSpreadsheetToField : EntVdAi
 {
-  var ascendingOrder: EnumDefnSortOrder? = null
-  var filterCondition: StudioMapOfCondition? = null
-  var numberOfRows: Number? = null
-  var orderByFieldIds: Array<MetaIdField>? = null
-  var outputField: StudioDtoArgValueParameter? = null
-  var selectFieldIds: Array<MetaIdField>? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
+  val ascendingOrder: EnumDefnSortOrder?
+  val filterCondition: StudioMapOfCondition?
+  val numberOfRows: Long?
+  val orderByFieldIds: Array<MetaIdField>?
+  val outputField: StudioDtoArgValueParameter?
+  val selectFieldIds: Array<MetaIdField>?
+  val spreadsheetId: MetaIdSpreadsheet?
 }

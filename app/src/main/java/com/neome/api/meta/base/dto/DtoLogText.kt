@@ -9,20 +9,20 @@ import com.neome.api.meta.base.dto.DtoLogItem
 import com.neome.api.meta.base.Types.EnumFormContentPosition
 import com.neome.api.meta.base.Types.EnumLogTextType
 
-open class DtoLogText : DtoLogItem()
+interface DtoLogText : DtoLogItem
 {
-  lateinit var bgColor: String
-  var bold: Boolean? = null
-  var caption: String? = null
-  var child: DtoLogItem? = null
-  var contentPosition: EnumFormContentPosition? = null
-  var executable: Boolean? = null
-  var iconEnd: String? = null
-  var iconEndColor: String? = null
-  var iconStart: String? = null
-  var iconStartColor: String? = null
-  var showChildDivider: Boolean? = null
-  lateinit var text: String
-  var textColor: String? = null
-  var textType: EnumLogTextType? = null
+  val bgColor: String
+  val bold: Boolean?
+  val caption: String?
+  val child: DtoLogItem?
+  val contentPosition: EnumFormContentPosition?
+  val executable: Boolean?
+  val iconEnd: String?
+  val iconEndColor: String?
+  val iconStart: String?
+  val iconStartColor: String?
+  val showChildDivider: Boolean?
+  val text: String
+  val textColor: String?
+  val textType: EnumLogTextType?
 }

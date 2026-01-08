@@ -11,11 +11,11 @@ import com.neome.api.meta.base.Types.MetaIdVdRegion
 import com.neome.api.meta.base.dto.Point
 import com.neome.api.meta.base.dto.VdBase
 
-open class EntVdReportIOForm : VdBase()
+interface EntVdReportIOForm : VdBase
 {
-  var expanded: Boolean? = null
-  var expandedCompositeIdSet: Array<MetaIdComposite>? = null
-  lateinit var formId: MetaIdForm
-  var parentRegionId: MetaIdVdRegion? = null
-  var point: Point? = null
+  val expanded: Boolean?
+  val expandedCompositeIdSet: Array<MetaIdComposite>?
+  val formId: MetaIdForm
+  val parentRegionId: MetaIdVdRegion?
+  val point: Point?
 }

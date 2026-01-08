@@ -10,11 +10,11 @@ import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.Symbol
 
-open class DtoFieldFilter
+interface DtoFieldFilter
 {
-  lateinit var defnFieldType: EnumDefnCompType
-  var label: String? = null
-  lateinit var metaIdField: MetaIdComp
-  lateinit var name: Symbol
-  var valueList: Array<DtoFieldFilterOption>? = null
+  val defnFieldType: EnumDefnCompType
+  val label: String?
+  val metaIdField: MetaIdComp
+  val name: Symbol
+  val valueList: Array<DtoFieldFilterOption>?
 }

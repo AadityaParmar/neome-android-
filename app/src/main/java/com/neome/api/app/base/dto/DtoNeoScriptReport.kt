@@ -8,7 +8,7 @@ package com.neome.api.app.base.dto
 import com.neome.api.app.base.dto.DtoNeoScript
 import com.neome.api.meta.base.Types.MetaIdReport
 
-open class DtoNeoScriptReport : DtoNeoScript()
+interface DtoNeoScriptReport : DtoNeoScript
 {
-  var reportId: MetaIdReport? = null
+  val reportId: MetaIdReport?
 }

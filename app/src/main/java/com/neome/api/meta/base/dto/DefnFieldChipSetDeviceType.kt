@@ -9,9 +9,9 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.EnumDeviceType
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldChipSetDeviceType : DefnFieldEditable()
+interface DefnFieldChipSetDeviceType : DefnFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: Array<EnumDeviceType>? = null
-  var defaultVar: EnumDeviceType? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: Array<EnumDeviceType>?
+  val defaultVar: EnumDeviceType?
 }

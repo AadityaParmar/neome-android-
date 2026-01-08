@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.StudioBuildRepeatSetting
 
-open class StudioBuildRepeatSettingMinutes : StudioBuildRepeatSetting()
+interface StudioBuildRepeatSettingMinutes : StudioBuildRepeatSetting
 {
 }

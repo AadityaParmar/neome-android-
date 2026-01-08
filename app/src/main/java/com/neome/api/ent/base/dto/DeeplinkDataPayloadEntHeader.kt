@@ -7,10 +7,10 @@ package com.neome.api.ent.base.dto
 
 import com.neome.api.meta.base.dto.DefnDtoHyperLink
 
-open class DeeplinkDataPayloadEntHeader
+interface DeeplinkDataPayloadEntHeader
 {
-  var hyperLinkSet: Array<DefnDtoHyperLink>? = null
-  var showEnterprise: Boolean? = null
-  var showHeader: Boolean? = null
-  var showSeparator: Boolean? = null
+  val hyperLinkSet: Array<DefnDtoHyperLink>?
+  val showEnterprise: Boolean?
+  val showHeader: Boolean?
+  val showSeparator: Boolean?
 }

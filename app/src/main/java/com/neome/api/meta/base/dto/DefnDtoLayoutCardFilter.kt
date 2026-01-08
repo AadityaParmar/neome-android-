@@ -9,12 +9,12 @@ import com.neome.api.meta.base.Types.EnumDefnLayoutCardFilterKind
 import com.neome.api.meta.base.Types.EnumDefnSortOrder
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnDtoLayoutCardFilter
+interface DefnDtoLayoutCardFilter
 {
-  var advanceFilterFieldIdSet: Array<MetaIdField>? = null
-  var categoryFieldIdSet: Array<MetaIdField>? = null
-  var kind: EnumDefnLayoutCardFilterKind? = null
-  var showSearchBar: Boolean? = null
-  var sortByFieldIdSet: Array<MetaIdField>? = null
-  var sortOrder: EnumDefnSortOrder? = null
+  val advanceFilterFieldIdSet: Array<MetaIdField>?
+  val categoryFieldIdSet: Array<MetaIdField>?
+  val kind: EnumDefnLayoutCardFilterKind?
+  val showSearchBar: Boolean?
+  val sortByFieldIdSet: Array<MetaIdField>?
+  val sortOrder: EnumDefnSortOrder?
 }

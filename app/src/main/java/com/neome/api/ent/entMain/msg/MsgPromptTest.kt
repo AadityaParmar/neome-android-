@@ -7,8 +7,8 @@ package com.neome.api.ent.entMain.msg
 
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgPromptTest : Msg()
+interface MsgPromptTest : Msg
 {
-  lateinit var handle: String
-  lateinit var promptText: String
+  val handle: String
+  val promptText: String
 }

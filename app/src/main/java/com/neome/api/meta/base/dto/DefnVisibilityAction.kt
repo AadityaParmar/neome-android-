@@ -15,15 +15,15 @@ import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.Types.MetaIdVisibilityAction
 
-open class DefnVisibilityAction
+interface DefnVisibilityAction
 {
-  var actionId: MetaIdAction? = null
-  var compIdSet: Array<MetaIdComp>? = null
-  var groupIdSet: Array<MetaIdGroup>? = null
-  var layoutIdSet: Array<MetaIdLayoutForm>? = null
-  var mappingVarId: MetaIdVar? = null
-  lateinit var metaId: MetaIdVisibilityAction
-  var source: FieldDtoArg? = null
-  lateinit var visibilityAction: EnumDefnVisibilityAction
-  var visibilityActionOn: EnumDefnVisibilityActionOn? = null
+  val actionId: MetaIdAction?
+  val compIdSet: Array<MetaIdComp>?
+  val groupIdSet: Array<MetaIdGroup>?
+  val layoutIdSet: Array<MetaIdLayoutForm>?
+  val mappingVarId: MetaIdVar?
+  val metaId: MetaIdVisibilityAction
+  val source: FieldDtoArg?
+  val visibilityAction: EnumDefnVisibilityAction
+  val visibilityActionOn: EnumDefnVisibilityActionOn?
 }

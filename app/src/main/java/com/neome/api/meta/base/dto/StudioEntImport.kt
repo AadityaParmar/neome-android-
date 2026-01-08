@@ -11,11 +11,11 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioModuleSelection
 import com.neome.api.meta.base.Symbol
 
-open class StudioEntImport : StudioBase()
+interface StudioEntImport : StudioBase
 {
-  var description: String? = null
-  var kind: EnumDefnKindImport? = null
-  lateinit var metaId: MetaIdPlugin
-  var modules: StudioModuleSelection? = null
-  var name: Symbol? = null
+  val description: String?
+  val kind: EnumDefnKindImport?
+  val metaId: MetaIdPlugin
+  val modules: StudioModuleSelection?
+  val name: Symbol?
 }

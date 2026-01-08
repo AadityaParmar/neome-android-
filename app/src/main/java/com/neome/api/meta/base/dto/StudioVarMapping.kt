@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioVar
 import com.neome.api.meta.base.dto.StudioVarValueMapping
 
-open class StudioVarMapping : StudioVar()
+interface StudioVarMapping : StudioVar
 {
-  var value: StudioVarValueMapping? = null
+  val value: StudioVarValueMapping?
 }

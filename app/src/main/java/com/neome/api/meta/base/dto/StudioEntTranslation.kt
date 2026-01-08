@@ -12,12 +12,12 @@ import com.neome.api.meta.base.Types.MetaIdTranslation
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.Symbol
 
-open class StudioEntTranslation : StudioBase()
+interface StudioEntTranslation : StudioBase
 {
-  var doNotShareWithPublicLibrary: Boolean? = null
-  lateinit var metaId: MetaIdTranslation
-  var name: Symbol? = null
-  lateinit var phrase: String
-  var translationMap: Map<LanguageKey, String>? = null
-  lateinit var type: EnumDefnKindTranslation
+  val doNotShareWithPublicLibrary: Boolean?
+  val metaId: MetaIdTranslation
+  val name: Symbol?
+  val phrase: String
+  val translationMap: Map<LanguageKey, String>?
+  val type: EnumDefnKindTranslation
 }

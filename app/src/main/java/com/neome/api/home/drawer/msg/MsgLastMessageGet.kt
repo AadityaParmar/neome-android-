@@ -8,7 +8,7 @@ package com.neome.api.home.drawer.msg
 import com.neome.api.meta.base.Types.ContactId
 import com.neome.api.core.base.msg.MsgVersion
 
-open class MsgLastMessageGet : MsgVersion()
+interface MsgLastMessageGet : MsgVersion
 {
-  lateinit var chatId: ContactId
+  val chatId: ContactId
 }

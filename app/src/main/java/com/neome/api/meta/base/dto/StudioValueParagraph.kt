@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.StudioValueVarIdBase
 
-open class StudioValueParagraph : StudioValueVarIdBase()
+interface StudioValueParagraph : StudioValueVarIdBase
 {
-  var paramSet: Array<String>? = null
-  lateinit var value: String
+  val paramSet: Array<String>?
+  val value: String
 }

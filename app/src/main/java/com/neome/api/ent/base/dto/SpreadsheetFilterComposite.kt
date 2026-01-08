@@ -7,9 +7,9 @@ package com.neome.api.ent.base.dto
 
 import com.neome.api.ent.base.dto.SpreadsheetFilterValue
 
-open class SpreadsheetFilterComposite
+interface SpreadsheetFilterComposite
 {
-  var andOr: Boolean? = null
-  var filter: SpreadsheetFilterValue? = null
-  var filterList: Array<SpreadsheetFilterComposite>? = null
+  val andOr: Boolean?
+  val filter: SpreadsheetFilterValue?
+  val filterList: Array<SpreadsheetFilterComposite>?
 }

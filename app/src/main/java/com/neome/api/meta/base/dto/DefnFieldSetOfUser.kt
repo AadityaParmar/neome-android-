@@ -12,16 +12,16 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
 
-open class DefnFieldSetOfUser : DefnFieldEditable()
+interface DefnFieldSetOfUser : DefnFieldEditable
 {
-  var dataSourceVarId: MetaIdVar? = null
-  var defaultValue: MetaIdRole? = null
-  var defaultValueFieldId: MetaIdField? = null
-  var pluginApi: DefnDtoPluginApi? = null
-  var pluginErrorFieldId: MetaIdField? = null
-  var roleIdDataSource: Array<MetaIdRole>? = null
-  var setOfEntUserId: FieldSetOfEntUserId? = null
-  var showAsDropdown: Boolean? = null
-  var showAsDropdownFieldId: MetaIdField? = null
-  var showAsDropdownVar: Boolean? = null
+  val dataSourceVarId: MetaIdVar?
+  val defaultValue: MetaIdRole?
+  val defaultValueFieldId: MetaIdField?
+  val pluginApi: DefnDtoPluginApi?
+  val pluginErrorFieldId: MetaIdField?
+  val roleIdDataSource: Array<MetaIdRole>?
+  val setOfEntUserId: FieldSetOfEntUserId?
+  val showAsDropdown: Boolean?
+  val showAsDropdownFieldId: MetaIdField?
+  val showAsDropdownVar: Boolean?
 }

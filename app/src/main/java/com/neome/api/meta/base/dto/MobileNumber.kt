@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.GsonCto
 
-open class MobileNumber : GsonCto()
+interface MobileNumber : GsonCto
 {
-  var countryCode: Number? = null
-  var nationalNumber: Number? = null
+  val countryCode: Long?
+  val nationalNumber: Long?
 }

@@ -8,10 +8,10 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnStudioCompArray : DefnField()
+interface DefnStudioCompArray : DefnField
 {
-  var fieldIdSet: Array<MetaIdField>? = null
-  var hideAddDeleteBtn: Boolean? = null
-  var selectedIndex: Number? = null
-  var showSeparator: Boolean? = null
+  val fieldIdSet: Array<MetaIdField>?
+  val hideAddDeleteBtn: Boolean?
+  val selectedIndex: Long?
+  val showSeparator: Boolean?
 }

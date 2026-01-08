@@ -11,9 +11,9 @@ import com.neome.api.meta.base.Types.MetaIdLayoutDriveSheet
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoLayoutDriveSheet
 
-open class StudioMapOfLayoutDriveSheet : StudioBase()
+interface StudioMapOfLayoutDriveSheet : StudioBase
 {
-  var includeMetaFieldIdSet: Array<MetaIdField>? = null
-  lateinit var keys: Array<MetaIdLayoutDriveSheet>
-  lateinit var map: Map<MetaIdLayoutDriveSheet, StudioDtoLayoutDriveSheet>
+  val includeMetaFieldIdSet: Array<MetaIdField>?
+  val keys: Array<MetaIdLayoutDriveSheet>
+  val map: Map<MetaIdLayoutDriveSheet, StudioDtoLayoutDriveSheet>
 }

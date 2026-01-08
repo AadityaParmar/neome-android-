@@ -12,14 +12,14 @@ import com.neome.api.meta.base.dto.StudioComposite
 import com.neome.api.meta.base.dto.StudioMapOfActionPermission
 import com.neome.api.meta.base.dto.StudioMapOfLayoutGrid
 
-open class StudioGrid : StudioComposite()
+interface StudioGrid : StudioComposite
 {
-  var layoutGridMap: StudioMapOfLayoutGrid? = null
-  var maxRows: Number? = null
-  var maxRowsVarId: MetaIdVar? = null
-  lateinit var metaId: MetaIdGrid
-  var minRows: Number? = null
-  var minRowsVarId: MetaIdVar? = null
-  var rowActionPermissionMap: StudioMapOfActionPermission? = null
-  var showAllRowsFieldId: MetaIdField? = null
+  val layoutGridMap: StudioMapOfLayoutGrid?
+  val maxRows: Long?
+  val maxRowsVarId: MetaIdVar?
+  val metaId: MetaIdGrid
+  val minRows: Long?
+  val minRowsVarId: MetaIdVar?
+  val rowActionPermissionMap: StudioMapOfActionPermission?
+  val showAllRowsFieldId: MetaIdField?
 }

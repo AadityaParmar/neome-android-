@@ -8,7 +8,7 @@ package com.neome.api.meta.base
 // AnyValue base class placeholder
 
 abstract class AnyValue : Comparable<AnyValue?> {
-    open var value: String? = null
+    var value: String? = null
 
     override fun hashCode(): Int {
         return if (value == null)

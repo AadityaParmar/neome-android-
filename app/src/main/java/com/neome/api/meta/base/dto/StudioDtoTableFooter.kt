@@ -14,16 +14,16 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoColor
 import com.neome.api.meta.base.Symbol
 
-open class StudioDtoTableFooter : StudioBase()
+interface StudioDtoTableFooter : StudioBase
 {
-  var alignment: EnumDefnPlacement? = null
-  var bgColor: StudioDtoColor? = null
-  var displayFieldId: MetaIdField? = null
-  lateinit var fieldIdSet: Array<MetaIdField>
-  lateinit var metaId: MetaIdFooter
-  var name: Symbol? = null
-  var showLabel: Boolean? = null
-  var textColor: StudioDtoColor? = null
-  var textSize: EnumDefnTextSize? = null
-  var textStyleSet: Array<EnumDefnTextStyle>? = null
+  val alignment: EnumDefnPlacement?
+  val bgColor: StudioDtoColor?
+  val displayFieldId: MetaIdField?
+  val fieldIdSet: Array<MetaIdField>
+  val metaId: MetaIdFooter
+  val name: Symbol?
+  val showLabel: Boolean?
+  val textColor: StudioDtoColor?
+  val textSize: EnumDefnTextSize?
+  val textStyleSet: Array<EnumDefnTextStyle>?
 }

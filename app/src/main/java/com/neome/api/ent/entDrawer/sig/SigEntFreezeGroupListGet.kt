@@ -10,7 +10,7 @@ import com.neome.api.meta.base.Types.EntId
 import java.util.Map
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigEntFreezeGroupListGet : Sig()
+interface SigEntFreezeGroupListGet : Sig
 {
-  lateinit var entMap: Map<EntId, DtoEntGroupFreezeSettingMap>
+  val entMap: Map<EntId, DtoEntGroupFreezeSettingMap>
 }

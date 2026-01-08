@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdAutomation
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntAutomation
 
-open class StudioEntAutomationMap : StudioBase()
+interface StudioEntAutomationMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdAutomation>
-  lateinit var map: Map<MetaIdAutomation, StudioEntAutomation>
+  val keys: Array<MetaIdAutomation>
+  val map: Map<MetaIdAutomation, StudioEntAutomation>
 }

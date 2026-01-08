@@ -11,13 +11,13 @@ import com.neome.api.meta.base.dto.StudioDtoUserFilter
 import com.neome.api.meta.base.dto.StudioValueParagraph
 import com.neome.api.meta.base.dto.StudioValueText
 
-open class EntVdSendEmail : EntVdAutoStepWithError()
+interface EntVdSendEmail : EntVdAutoStepWithError
 {
-  var attachmentField: StudioDtoArgValueParameter? = null
-  var bccUsers: StudioDtoUserFilter? = null
-  var ccUsers: StudioDtoUserFilter? = null
-  var message: StudioValueParagraph? = null
-  var replyToUsers: StudioDtoUserFilter? = null
-  var subject: StudioValueText? = null
-  var toUsers: StudioDtoUserFilter? = null
+  val attachmentField: StudioDtoArgValueParameter?
+  val bccUsers: StudioDtoUserFilter?
+  val ccUsers: StudioDtoUserFilter?
+  val message: StudioValueParagraph?
+  val replyToUsers: StudioDtoUserFilter?
+  val subject: StudioValueText?
+  val toUsers: StudioDtoUserFilter?
 }

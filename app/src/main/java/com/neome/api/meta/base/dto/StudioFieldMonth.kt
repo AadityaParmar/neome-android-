@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldMonth : StudioFieldEditable()
+interface StudioFieldMonth : StudioFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: EnumDefnMonth? = null
-  var defaultVarId: MetaIdVar? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: EnumDefnMonth?
+  val defaultVarId: MetaIdVar?
 }

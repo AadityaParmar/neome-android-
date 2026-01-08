@@ -11,15 +11,15 @@ import com.neome.api.meta.base.Types.EnumDefnThemePickMultiVariant
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
 
-open class DefnFieldSetOfRole : DefnFieldEditable()
+interface DefnFieldSetOfRole : DefnFieldEditable
 {
-  var allowSystemRoles: Boolean? = null
-  var callerRoleMap: DefnStudioMapOfDtoOption? = null
-  var defaultRoleFieldId: MetaIdField? = null
-  var defaultRoleIdSet: Array<MetaIdRole>? = null
-  var excludeRoleIdSet: Array<MetaIdRole>? = null
-  var filterRoleIdSet: Array<MetaIdRole>? = null
-  var includeOptionMap: DefnStudioMapOfDtoOption? = null
-  var pageSize: Number? = null
-  var showAs: EnumDefnThemePickMultiVariant? = null
+  val allowSystemRoles: Boolean?
+  val callerRoleMap: DefnStudioMapOfDtoOption?
+  val defaultRoleFieldId: MetaIdField?
+  val defaultRoleIdSet: Array<MetaIdRole>?
+  val excludeRoleIdSet: Array<MetaIdRole>?
+  val filterRoleIdSet: Array<MetaIdRole>?
+  val includeOptionMap: DefnStudioMapOfDtoOption?
+  val pageSize: Long?
+  val showAs: EnumDefnThemePickMultiVariant?
 }

@@ -13,15 +13,15 @@ import com.neome.api.meta.base.Types.EnumDefnRenderingKind
 import com.neome.api.meta.base.Types.EnumDefnShowBorderKind
 import com.neome.api.meta.base.Types.EnumDefnThemeDividerKind
 
-open class DefnLayoutFormTemplate : DefnLayoutForm()
+interface DefnLayoutFormTemplate : DefnLayoutForm
 {
-  var borderPositionSet: Array<EnumDefnShowBorderKind>? = null
-  var footer: DefnLayoutFormFooter? = null
-  var header: DefnLayoutFormHeader? = null
-  var paddingPositionSet: Array<EnumDefnShowBorderKind>? = null
-  var paddingSize: EnumDefnThemeDividerKind? = null
-  var paperHeight: Number? = null
-  var paperSize: EnumDefnRenderingKind? = null
-  var paperWidth: Number? = null
-  var watermark: DefnLayoutFormWatermark? = null
+  val borderPositionSet: Array<EnumDefnShowBorderKind>?
+  val footer: DefnLayoutFormFooter?
+  val header: DefnLayoutFormHeader?
+  val paddingPositionSet: Array<EnumDefnShowBorderKind>?
+  val paddingSize: EnumDefnThemeDividerKind?
+  val paperHeight: Long?
+  val paperSize: EnumDefnRenderingKind?
+  val paperWidth: Long?
+  val watermark: DefnLayoutFormWatermark?
 }

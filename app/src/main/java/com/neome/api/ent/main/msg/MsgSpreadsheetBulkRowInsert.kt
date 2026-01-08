@@ -11,8 +11,8 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.nucleus.base.msg.Msg
 import com.neome.api.meta.base.Types.RowId
 
-open class MsgSpreadsheetBulkRowInsert : Msg()
+interface MsgSpreadsheetBulkRowInsert : Msg
 {
-  lateinit var rowMap: Map<RowId, FormValueRaw>
-  lateinit var spreadsheetId: MetaIdSpreadsheet
+  val rowMap: Map<RowId, FormValueRaw>
+  val spreadsheetId: MetaIdSpreadsheet
 }

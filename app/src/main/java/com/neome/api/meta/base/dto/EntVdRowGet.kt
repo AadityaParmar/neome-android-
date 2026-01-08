@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdAutoStepWithOutputAndError
 import com.neome.api.meta.base.dto.StudioDtoRowIdPointer
 
-open class EntVdRowGet : EntVdAutoStepWithOutputAndError()
+interface EntVdRowGet : EntVdAutoStepWithOutputAndError
 {
-  var rowIdPointer: StudioDtoRowIdPointer? = null
+  val rowIdPointer: StudioDtoRowIdPointer?
 }

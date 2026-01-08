@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.FieldDtoTree
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioBuildTree : StudioBase()
+interface StudioBuildTree : StudioBase
 {
-  lateinit var dtoTree: FieldDtoTree
+  val dtoTree: FieldDtoTree
 }

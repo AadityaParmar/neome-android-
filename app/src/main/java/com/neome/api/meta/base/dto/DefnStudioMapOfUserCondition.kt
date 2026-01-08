@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdPlugin
 
-open class DefnStudioMapOfUserCondition : DefnField()
+interface DefnStudioMapOfUserCondition : DefnField
 {
-  var formId: MetaIdForm? = null
-  var pluginId: MetaIdPlugin? = null
+  val formId: MetaIdForm?
+  val pluginId: MetaIdPlugin?
 }

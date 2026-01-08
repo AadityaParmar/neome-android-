@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.EnumDefnVisibilityOperator
 import com.neome.api.meta.base.dto.FieldDtoArg
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnVisibilityCondition
+interface DefnVisibilityCondition
 {
-  lateinit var lhs: MetaIdField
-  lateinit var operator: EnumDefnVisibilityOperator
-  var rhs: FieldDtoArg? = null
+  val lhs: MetaIdField
+  val operator: EnumDefnVisibilityOperator
+  val rhs: FieldDtoArg?
 }

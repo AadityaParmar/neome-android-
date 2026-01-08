@@ -8,9 +8,9 @@ package com.neome.api.ent.agent.msg
 import com.neome.api.ent.base.dto.DtoAgentEntUserImport
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgAgentEntUserImport : Msg()
+interface MsgAgentEntUserImport : Msg
 {
-  var ignoreManager: Boolean? = null
-  var ignoreUserSettings: Boolean? = null
-  lateinit var users: Array<DtoAgentEntUserImport>
+  val ignoreManager: Boolean?
+  val ignoreUserSettings: Boolean?
+  val users: Array<DtoAgentEntUserImport>
 }

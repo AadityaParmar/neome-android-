@@ -9,12 +9,12 @@ import com.neome.api.meta.base.Types.EnumDeviceType
 import com.neome.api.meta.base.Types.EnumIdentityProviderKind
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgSocialSignIn : Msg()
+interface MsgSocialSignIn : Msg
 {
-  lateinit var deviceName: String
-  lateinit var deviceType: EnumDeviceType
-  lateinit var identityProviderKind: EnumIdentityProviderKind
-  var nickName: String? = null
-  var rememberMe: Boolean? = null
-  lateinit var token: String
+  val deviceName: String
+  val deviceType: EnumDeviceType
+  val identityProviderKind: EnumIdentityProviderKind
+  val nickName: String?
+  val rememberMe: Boolean?
+  val token: String
 }

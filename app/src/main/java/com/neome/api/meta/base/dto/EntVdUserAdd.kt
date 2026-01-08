@@ -10,11 +10,11 @@ import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 import com.neome.api.meta.base.dto.StudioDtoUserFilter
 
-open class EntVdUserAdd : EntVdAutoStepWithError()
+interface EntVdUserAdd : EntVdAutoStepWithError
 {
-  var outputField: StudioDtoArgValueParameter? = null
-  var userHandleField: StudioDtoArgValueParameter? = null
-  var userManager: StudioDtoUserFilter? = null
-  var userNameField: StudioDtoArgValueParameter? = null
-  var userRoles: StudioBuildArgBinder? = null
+  val outputField: StudioDtoArgValueParameter?
+  val userHandleField: StudioDtoArgValueParameter?
+  val userManager: StudioDtoUserFilter?
+  val userNameField: StudioDtoArgValueParameter?
+  val userRoles: StudioBuildArgBinder?
 }

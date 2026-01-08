@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdAutoNode
 import com.neome.api.meta.base.dto.EntVdPipelineVarMap
 
-open class EntVdEvent : EntVdAutoNode()
+interface EntVdEvent : EntVdAutoNode
 {
-  var pipelineVarMap: EntVdPipelineVarMap? = null
+  val pipelineVarMap: EntVdPipelineVarMap?
 }

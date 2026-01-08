@@ -9,7 +9,7 @@ import com.neome.api.ent.base.dto.DtoEntGroupFreezeSetting
 import com.neome.api.meta.base.Types.GroupId
 import java.util.Map
 
-open class DtoEntGroupFreezeSettingMap
+interface DtoEntGroupFreezeSettingMap
 {
-  lateinit var groupMap: Map<GroupId, DtoEntGroupFreezeSetting>
+  val groupMap: Map<GroupId, DtoEntGroupFreezeSetting>
 }

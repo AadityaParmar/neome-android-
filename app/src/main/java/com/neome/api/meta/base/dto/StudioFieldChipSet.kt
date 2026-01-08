@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldChipSet : StudioFieldEditable()
+interface StudioFieldChipSet : StudioFieldEditable
 {
-  var allowDuplicate: Boolean? = null
+  val allowDuplicate: Boolean?
 }

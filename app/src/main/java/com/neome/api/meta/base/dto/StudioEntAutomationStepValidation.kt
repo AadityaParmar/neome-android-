@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntAutomationStepValidation : StudioEntAutomationStep()
+interface StudioEntAutomationStepValidation : StudioEntAutomationStep
 {
-  var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
-  var iterateOnGridId: MetaIdGrid? = null
-  var sourcePipelineVarId: MetaIdPipelineParam? = null
-  var validationConditionVarId: StudioValueVarIdCondition? = null
+  val iterateOnGridFilterVarId: StudioValueVarIdCondition?
+  val iterateOnGridId: MetaIdGrid?
+  val sourcePipelineVarId: MetaIdPipelineParam?
+  val validationConditionVarId: StudioValueVarIdCondition?
 }

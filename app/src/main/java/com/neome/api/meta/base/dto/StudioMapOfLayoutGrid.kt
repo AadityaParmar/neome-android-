@@ -12,11 +12,11 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoLayoutGrid
 import com.neome.api.meta.base.dto.StudioDtoPlaceHolder
 
-open class StudioMapOfLayoutGrid : StudioBase()
+interface StudioMapOfLayoutGrid : StudioBase
 {
-  var asideDefaultLayoutId: MetaIdLayoutGrid? = null
-  lateinit var keys: Array<MetaIdLayoutGrid>
-  lateinit var map: Map<MetaIdLayoutGrid, StudioDtoLayoutGrid>
-  var placeholder: StudioDtoPlaceHolder? = null
-  var showBorderSet: Array<EnumDefnShowBorderKind>? = null
+  val asideDefaultLayoutId: MetaIdLayoutGrid?
+  val keys: Array<MetaIdLayoutGrid>
+  val map: Map<MetaIdLayoutGrid, StudioDtoLayoutGrid>
+  val placeholder: StudioDtoPlaceHolder?
+  val showBorderSet: Array<EnumDefnShowBorderKind>?
 }

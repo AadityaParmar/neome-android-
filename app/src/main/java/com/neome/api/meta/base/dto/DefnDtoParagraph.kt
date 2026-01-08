@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-open class DefnDtoParagraph
+interface DefnDtoParagraph
 {
-  var value: Array<String>? = null
+  val value: Array<String>?
 }

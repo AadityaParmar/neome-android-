@@ -9,8 +9,8 @@ import java.util.Date
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioPluginRpc : StudioBase()
+interface StudioPluginRpc : StudioBase
 {
-  lateinit var lastUpdateTime: String
-  var pluginConfigFormId: MetaIdForm? = null
+  val lastUpdateTime: String
+  val pluginConfigFormId: MetaIdForm?
 }

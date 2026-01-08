@@ -8,7 +8,7 @@ package com.neome.api.ent.entAside.sig
 import com.neome.api.ent.base.dto.DtoPickerEntUser
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigEntUserPickerCandidateListGet : Sig()
+interface SigEntUserPickerCandidateListGet : Sig
 {
-  lateinit var candidateList: Array<DtoPickerEntUser>
+  val candidateList: Array<DtoPickerEntUser>
 }

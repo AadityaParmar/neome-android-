@@ -7,9 +7,9 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.DefnDtoLayoutCardItemLineSegment
 
-open class DefnDtoLayoutCardItemLine
+interface DefnDtoLayoutCardItemLine
 {
-  var caption: DefnDtoLayoutCardItemLineSegment? = null
-  var first: DefnDtoLayoutCardItemLineSegment? = null
-  var middle: DefnDtoLayoutCardItemLineSegment? = null
+  val caption: DefnDtoLayoutCardItemLineSegment?
+  val first: DefnDtoLayoutCardItemLineSegment?
+  val middle: DefnDtoLayoutCardItemLineSegment?
 }

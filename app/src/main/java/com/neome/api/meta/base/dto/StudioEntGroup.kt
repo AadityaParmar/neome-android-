@@ -14,22 +14,22 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDetails
 import com.neome.api.meta.base.dto.StudioMapOfActionPermission
 
-open class StudioEntGroup : StudioBase()
+interface StudioEntGroup : StudioBase
 {
-  var actionPermissionMap: StudioMapOfActionPermission? = null
-  var allowPromptAssistant: Boolean? = null
-  var avatarId: MediaIdAvatar? = null
-  var chatPermissionSet: Array<MetaIdRole>? = null
-  var defaultActionId: MetaIdAction? = null
-  lateinit var details: StudioDetails
-  var freeze: Boolean? = null
-  var freezeAvatarKind: EnumDefnFreezeAvatarKind? = null
-  var freezeSortName: String? = null
-  var groupPermissionSet: Array<MetaIdRole>? = null
-  var hideActionMenu: Boolean? = null
-  var hideMembers: Boolean? = null
-  lateinit var metaId: MetaIdGroup
-  var pinnedActionIdSet: Array<MetaIdAction>? = null
-  var pinnedActionIdSetMobile: Array<MetaIdAction>? = null
-  var removeMessagePermissionSet: Array<MetaIdRole>? = null
+  val actionPermissionMap: StudioMapOfActionPermission?
+  val allowPromptAssistant: Boolean?
+  val avatarId: MediaIdAvatar?
+  val chatPermissionSet: Array<MetaIdRole>?
+  val defaultActionId: MetaIdAction?
+  val details: StudioDetails
+  val freeze: Boolean?
+  val freezeAvatarKind: EnumDefnFreezeAvatarKind?
+  val freezeSortName: String?
+  val groupPermissionSet: Array<MetaIdRole>?
+  val hideActionMenu: Boolean?
+  val hideMembers: Boolean?
+  val metaId: MetaIdGroup
+  val pinnedActionIdSet: Array<MetaIdAction>?
+  val pinnedActionIdSetMobile: Array<MetaIdAction>?
+  val removeMessagePermissionSet: Array<MetaIdRole>?
 }

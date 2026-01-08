@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.dto.DefnMapOfRefTarget
 
-open class DefnFieldRefTarget : DefnField()
+interface DefnFieldRefTarget : DefnField
 {
-  lateinit var refTargetSpreadsheetMap: DefnMapOfRefTarget
+  val refTargetSpreadsheetMap: DefnMapOfRefTarget
 }

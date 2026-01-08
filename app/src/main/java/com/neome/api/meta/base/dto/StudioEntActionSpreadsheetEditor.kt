@@ -15,17 +15,17 @@ import com.neome.api.meta.base.dto.StudioEntAction
 import com.neome.api.meta.base.dto.StudioMapOfActionPermission
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntActionSpreadsheetEditor : StudioEntAction()
+interface StudioEntActionSpreadsheetEditor : StudioEntAction
 {
-  var actionPermissionMap: StudioMapOfActionPermission? = null
-  var bulkInsertRoleSet: Array<MetaIdRole>? = null
-  var bulkUpdateFieldIdSet: Array<MetaIdField>? = null
-  var bulkUpdateRoleSet: Array<MetaIdRole>? = null
-  var doNotOpenAside: Boolean? = null
-  var filterConditionVarId: StudioValueVarIdCondition? = null
-  var inputFormId: MetaIdForm? = null
-  var layoutSpreadsheetId: MetaIdLayoutGrid? = null
-  var readOnly: Boolean? = null
-  var sendMessageToGroupId: MetaIdGroup? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
+  val actionPermissionMap: StudioMapOfActionPermission?
+  val bulkInsertRoleSet: Array<MetaIdRole>?
+  val bulkUpdateFieldIdSet: Array<MetaIdField>?
+  val bulkUpdateRoleSet: Array<MetaIdRole>?
+  val doNotOpenAside: Boolean?
+  val filterConditionVarId: StudioValueVarIdCondition?
+  val inputFormId: MetaIdForm?
+  val layoutSpreadsheetId: MetaIdLayoutGrid?
+  val readOnly: Boolean?
+  val sendMessageToGroupId: MetaIdGroup?
+  val spreadsheetId: MetaIdSpreadsheet?
 }

@@ -7,7 +7,7 @@ package com.neome.api.core.deeplink.sig
 
 import com.neome.api.core.deeplink.sig.SigUrl
 
-open class SigUrlPassword : SigUrl()
+interface SigUrlPassword : SigUrl
 {
-  var password: String? = null
+  val password: String?
 }

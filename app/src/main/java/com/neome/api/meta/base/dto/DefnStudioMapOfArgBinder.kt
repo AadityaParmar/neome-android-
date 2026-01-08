@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.MetaIdForm
 
-open class DefnStudioMapOfArgBinder : DefnField()
+interface DefnStudioMapOfArgBinder : DefnField
 {
-  var formId: MetaIdForm? = null
-  var pluginConfigFormId: MetaIdForm? = null
+  val formId: MetaIdForm?
+  val pluginConfigFormId: MetaIdForm?
 }

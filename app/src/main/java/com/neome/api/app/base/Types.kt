@@ -5,6 +5,8 @@
 
 package com.neome.api.app.base
 
+import kotlinx.serialization.SerialName
+
 object Types
 {
   enum class EnumKindAiAssist(val value: String)
@@ -12,7 +14,8 @@ object Types
     module("module"),
     plugin("plugin"),
     role("role"),
-    var_("var"),
+    @SerialName("var")
+    Var("var"),
     form("form"),
     composite("composite"),
     field("field"),
@@ -49,7 +52,8 @@ object Types
     role("role"),
     spreadsheet("spreadsheet"),
     translation("translation"),
-    var_("var"),
+    @SerialName("var")
+    Var("var"),
     visibilityRule("visibilityRule")
   }
 }

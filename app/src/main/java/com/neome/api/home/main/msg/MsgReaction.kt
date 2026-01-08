@@ -8,8 +8,8 @@ package com.neome.api.home.main.msg
 import com.neome.api.core.base.dto.DtoChatMessageOffset
 import com.neome.api.home.main.msg.MsgOffset
 
-open class MsgReaction : MsgOffset()
+interface MsgReaction : MsgOffset
 {
-  var chatMessageOffset: DtoChatMessageOffset? = null
-  var reaction: String? = null
+  val chatMessageOffset: DtoChatMessageOffset?
+  val reaction: String?
 }

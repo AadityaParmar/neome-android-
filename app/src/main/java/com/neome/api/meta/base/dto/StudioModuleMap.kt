@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdModule
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioModule
 
-open class StudioModuleMap : StudioBase()
+interface StudioModuleMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdModule>
-  lateinit var map: Map<MetaIdModule, StudioModule>
+  val keys: Array<MetaIdModule>
+  val map: Map<MetaIdModule, StudioModule>
 }

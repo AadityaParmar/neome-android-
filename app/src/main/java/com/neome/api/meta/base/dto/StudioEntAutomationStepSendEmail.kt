@@ -11,16 +11,16 @@ import com.neome.api.meta.base.dto.StudioEntAutomationStepSendMessageBase
 import com.neome.api.meta.base.dto.StudioValueVarIdParagraph
 import com.neome.api.meta.base.dto.StudioValueVarIdText
 
-open class StudioEntAutomationStepSendEmail : StudioEntAutomationStepSendMessageBase()
+interface StudioEntAutomationStepSendEmail : StudioEntAutomationStepSendMessageBase
 {
-  var bccFieldIdSet: Array<MetaIdField>? = null
-  var bccSetOfUserVarId: MetaIdVar? = null
-  var ccFieldIdSet: Array<MetaIdField>? = null
-  var ccSetOfUserVarId: MetaIdVar? = null
-  var mediaFieldId: MetaIdField? = null
-  var messageVarId: StudioValueVarIdParagraph? = null
-  var replyToFieldId: MetaIdField? = null
-  var replyToSetOfUserVarId: MetaIdVar? = null
-  var subjectVarId: StudioValueVarIdText? = null
-  var toFieldIdSet: Array<MetaIdField>? = null
+  val bccFieldIdSet: Array<MetaIdField>?
+  val bccSetOfUserVarId: MetaIdVar?
+  val ccFieldIdSet: Array<MetaIdField>?
+  val ccSetOfUserVarId: MetaIdVar?
+  val mediaFieldId: MetaIdField?
+  val messageVarId: StudioValueVarIdParagraph?
+  val replyToFieldId: MetaIdField?
+  val replyToSetOfUserVarId: MetaIdVar?
+  val subjectVarId: StudioValueVarIdText?
+  val toFieldIdSet: Array<MetaIdField>?
 }

@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdGroup
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntGroup
 
-open class StudioEntGroupMap : StudioBase()
+interface StudioEntGroupMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdGroup>
-  lateinit var map: Map<MetaIdGroup, StudioEntGroup>
+  val keys: Array<MetaIdGroup>
+  val map: Map<MetaIdGroup, StudioEntGroup>
 }

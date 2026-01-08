@@ -10,7 +10,7 @@ import java.util.Map
 import com.neome.api.meta.base.Types.RowId
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigSpreadsheetRowRemove : Sig()
+interface SigSpreadsheetRowRemove : Sig
 {
-  lateinit var errorMap: Map<RowId, EnvValidationError>
+  val errorMap: Map<RowId, EnvValidationError>
 }

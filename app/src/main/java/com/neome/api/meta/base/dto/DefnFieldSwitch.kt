@@ -11,21 +11,21 @@ import com.neome.api.meta.base.Types.EnumDefnCaptureValueKind
 import com.neome.api.meta.base.Types.EnumDefnPlacement
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldSwitch : DefnFieldEditable()
+interface DefnFieldSwitch : DefnFieldEditable
 {
-  var captureLocation: Boolean? = null
-  var captureTime: Boolean? = null
-  var captureUser: Boolean? = null
-  var checkboxLabelVar: DefnDtoText? = null
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: Boolean? = null
-  var defaultVar: Boolean? = null
-  var labelPlacement: EnumDefnPlacement? = null
-  var labelPlacementVar: EnumDefnPlacement? = null
-  var position: EnumDefnPlacement? = null
-  var positionVar: EnumDefnPlacement? = null
-  var showAsCheckbox: Boolean? = null
-  var showAsCheckboxFieldId: MetaIdField? = null
-  var showAsCheckboxVar: Boolean? = null
-  var showCapturedValuesOnAside: Array<EnumDefnCaptureValueKind>? = null
+  val captureLocation: Boolean?
+  val captureTime: Boolean?
+  val captureUser: Boolean?
+  val checkboxLabelVar: DefnDtoText?
+  val defaultFieldId: MetaIdField?
+  val defaultValue: Boolean?
+  val defaultVar: Boolean?
+  val labelPlacement: EnumDefnPlacement?
+  val labelPlacementVar: EnumDefnPlacement?
+  val position: EnumDefnPlacement?
+  val positionVar: EnumDefnPlacement?
+  val showAsCheckbox: Boolean?
+  val showAsCheckboxFieldId: MetaIdField?
+  val showAsCheckboxVar: Boolean?
+  val showCapturedValuesOnAside: Array<EnumDefnCaptureValueKind>?
 }

@@ -9,17 +9,17 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioFieldEditableText
 
-open class StudioFieldPassword : StudioFieldEditableText()
+interface StudioFieldPassword : StudioFieldEditableText
 {
-  var maxCharCount: Number? = null
-  var maxCharCountFieldId: MetaIdField? = null
-  var maxCharCountVarId: MetaIdVar? = null
-  var minCharCount: Number? = null
-  var minCharCountFieldId: MetaIdField? = null
-  var minCharCountVarId: MetaIdVar? = null
-  var requireLowerCaseChar: Boolean? = null
-  var requireNumericChar: Boolean? = null
-  var requireSpecialChar: Boolean? = null
-  var requireUpperCaseChar: Boolean? = null
-  var securePassword: Boolean? = null
+  val maxCharCount: Long?
+  val maxCharCountFieldId: MetaIdField?
+  val maxCharCountVarId: MetaIdVar?
+  val minCharCount: Long?
+  val minCharCountFieldId: MetaIdField?
+  val minCharCountVarId: MetaIdVar?
+  val requireLowerCaseChar: Boolean?
+  val requireNumericChar: Boolean?
+  val requireSpecialChar: Boolean?
+  val requireUpperCaseChar: Boolean?
+  val securePassword: Boolean?
 }

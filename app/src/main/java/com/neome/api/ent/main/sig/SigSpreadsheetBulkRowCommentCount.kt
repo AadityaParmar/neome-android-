@@ -11,8 +11,8 @@ import com.neome.api.meta.base.Types.RowId
 import com.neome.api.nucleus.base.sig.Sig
 import com.neome.api.home.main.sig.SigSpreadsheetRowCommentCount
 
-open class SigSpreadsheetBulkRowCommentCount : Sig()
+interface SigSpreadsheetBulkRowCommentCount : Sig
 {
-  var errorMap: Map<RowId, EnvValidationError>? = null
-  var rowCommentCountMap: Map<RowId, SigSpreadsheetRowCommentCount>? = null
+  val errorMap: Map<RowId, EnvValidationError>?
+  val rowCommentCountMap: Map<RowId, SigSpreadsheetRowCommentCount>?
 }

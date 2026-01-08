@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioDtoColor
 import com.neome.api.meta.base.dto.StudioField
 
-open class StudioFieldDivider : StudioField()
+interface StudioFieldDivider : StudioField
 {
-  var color: StudioDtoColor? = null
-  var colorVarId: MetaIdVar? = null
-  var dividerKind: EnumDefnThemeDividerKind? = null
-  var dividerKindVarId: MetaIdVar? = null
+  val color: StudioDtoColor?
+  val colorVarId: MetaIdVar?
+  val dividerKind: EnumDefnThemeDividerKind?
+  val dividerKindVarId: MetaIdVar?
 }

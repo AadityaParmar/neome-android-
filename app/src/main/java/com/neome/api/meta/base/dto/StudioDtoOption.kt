@@ -8,10 +8,10 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoColor
 
-open class StudioDtoOption : StudioBase()
+interface StudioDtoOption : StudioBase
 {
-  var color: StudioDtoColor? = null
-  var disabled: Boolean? = null
-  lateinit var metaId: String
-  lateinit var value: String
+  val color: StudioDtoColor?
+  val disabled: Boolean?
+  val metaId: String
+  val value: String
 }

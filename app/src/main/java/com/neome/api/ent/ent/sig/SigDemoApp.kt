@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.DemoAppId
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigDemoApp : Sig()
+interface SigDemoApp : Sig
 {
-  lateinit var app: Object
-  lateinit var demoAppId: DemoAppId
-  lateinit var entId: EntId
+  val app: Object
+  val demoAppId: DemoAppId
+  val entId: EntId
 }

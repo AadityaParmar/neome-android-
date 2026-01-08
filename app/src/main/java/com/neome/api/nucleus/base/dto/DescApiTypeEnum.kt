@@ -8,7 +8,7 @@ package com.neome.api.nucleus.base.dto
 import com.neome.api.nucleus.base.dto.DescApiType
 import java.util.Set
 
-open class DescApiTypeEnum : DescApiType()
+interface DescApiTypeEnum : DescApiType
 {
-  lateinit var valueSet: Array<String>
+  val valueSet: Array<String>
 }

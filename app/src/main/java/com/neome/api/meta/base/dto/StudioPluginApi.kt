@@ -16,20 +16,20 @@ import com.neome.api.meta.base.dto.StudioPluginApiBody
 import com.neome.api.meta.base.dto.StudioValueVarIdText
 import com.neome.api.meta.base.Symbol
 
-open class StudioPluginApi : StudioBase()
+interface StudioPluginApi : StudioBase
 {
-  lateinit var apiType: EnumDefnPluginApiMethod
-  var baseURLVarId: StudioValueVarIdText? = null
-  lateinit var creationDate: String
-  var description: String? = null
-  var guaranteedInvocation: Boolean? = null
-  var headerParamMap: StudioMapOfArgBinder? = null
-  var inputFormId: MetaIdForm? = null
-  lateinit var metaId: PluginApiId
-  var modules: StudioModuleSelection? = null
-  lateinit var name: Symbol
-  var outputFormId: MetaIdForm? = null
-  var queryParamMap: StudioMapOfArgBinder? = null
-  var requestBody: StudioPluginApiBody? = null
-  var responseBody: StudioPluginApiBody? = null
+  val apiType: EnumDefnPluginApiMethod
+  val baseURLVarId: StudioValueVarIdText?
+  val creationDate: String
+  val description: String?
+  val guaranteedInvocation: Boolean?
+  val headerParamMap: StudioMapOfArgBinder?
+  val inputFormId: MetaIdForm?
+  val metaId: PluginApiId
+  val modules: StudioModuleSelection?
+  val name: Symbol
+  val outputFormId: MetaIdForm?
+  val queryParamMap: StudioMapOfArgBinder?
+  val requestBody: StudioPluginApiBody?
+  val responseBody: StudioPluginApiBody?
 }

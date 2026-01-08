@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdComposite
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioComposite
 
-open class StudioCompositeMap : StudioBase()
+interface StudioCompositeMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdComposite>
-  lateinit var map: Map<MetaIdComposite, StudioComposite>
+  val keys: Array<MetaIdComposite>
+  val map: Map<MetaIdComposite, StudioComposite>
 }

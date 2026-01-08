@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.CurrencyKey
 import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldCurrency : DefnFieldEditable()
+interface DefnFieldCurrency : DefnFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: CurrencyKey? = null
-  var defaultVar: CurrencyKey? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: CurrencyKey?
+  val defaultVar: CurrencyKey?
 }

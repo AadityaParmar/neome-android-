@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdFooter
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoTableFooter
 
-open class StudioMapOfTableFooter : StudioBase()
+interface StudioMapOfTableFooter : StudioBase
 {
-  lateinit var keys: Array<MetaIdFooter>
-  lateinit var map: Map<MetaIdFooter, StudioDtoTableFooter>
+  val keys: Array<MetaIdFooter>
+  val map: Map<MetaIdFooter, StudioDtoTableFooter>
 }

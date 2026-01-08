@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaId
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioSetOfMetaId : StudioBase()
+interface StudioSetOfMetaId : StudioBase
 {
-  lateinit var valueSet: Array<MetaId>
+  val valueSet: Array<MetaId>
 }

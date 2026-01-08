@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioVar
 import com.neome.api.meta.base.dto.StudioVarValueLanguage
 
-open class StudioVarLanguage : StudioVar()
+interface StudioVarLanguage : StudioVar
 {
-  var value: StudioVarValueLanguage? = null
+  val value: StudioVarValueLanguage?
 }

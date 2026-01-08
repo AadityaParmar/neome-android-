@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.FormRefKey
 import com.neome.api.meta.base.Types.GhostId
 import com.neome.api.meta.base.dto.StudioBase
 
-open class EntVdForm : StudioBase()
+interface EntVdForm : StudioBase
 {
-  var form: FormRefKey? = null
-  lateinit var metaId: GhostId
+  val form: FormRefKey?
+  val metaId: GhostId
 }

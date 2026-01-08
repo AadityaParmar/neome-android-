@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgSpreadsheetPartitionSend : Msg()
+interface MsgSpreadsheetPartitionSend : Msg
 {
-  lateinit var actionId: MetaIdAction
-  lateinit var formId: MetaIdForm
-  lateinit var toGroupId: GroupId
+  val actionId: MetaIdAction
+  val formId: MetaIdForm
+  val toGroupId: GroupId
 }

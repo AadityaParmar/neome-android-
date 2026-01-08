@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.GhostId
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioValueCodeJavascript
 
-open class EntVdPrompt : StudioBase()
+interface EntVdPrompt : StudioBase
 {
-  lateinit var metaId: GhostId
-  var prompt: StudioValueCodeJavascript? = null
-  var promptForm: FormRefKey? = null
+  val metaId: GhostId
+  val prompt: StudioValueCodeJavascript?
+  val promptForm: FormRefKey?
 }

@@ -9,7 +9,7 @@ import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.dto.SchemaGrid
 
-open class SchemaGridMap
+interface SchemaGridMap
 {
-  lateinit var map: Map<MetaIdGrid, SchemaGrid>
+  val map: Map<MetaIdGrid, SchemaGrid>
 }

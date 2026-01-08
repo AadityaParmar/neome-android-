@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoActionPermission
 
-open class StudioMapOfActionPermission : StudioBase()
+interface StudioMapOfActionPermission : StudioBase
 {
-  lateinit var keys: Array<MetaIdAction>
-  lateinit var map: Map<MetaIdAction, StudioDtoActionPermission>
+  val keys: Array<MetaIdAction>
+  val map: Map<MetaIdAction, StudioDtoActionPermission>
 }

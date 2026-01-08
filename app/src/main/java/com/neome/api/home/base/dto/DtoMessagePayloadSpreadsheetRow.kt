@@ -12,11 +12,11 @@ import com.neome.api.meta.base.Types.RowId
 import com.neome.api.home.main.sig.SigSpreadsheetRow
 import com.neome.api.meta.base.Types.SpreadsheetPartitionId
 
-open class DtoMessagePayloadSpreadsheetRow : DtoMessagePayload()
+interface DtoMessagePayloadSpreadsheetRow : DtoMessagePayload
 {
-  lateinit var formId: MetaIdForm
-  lateinit var rowId: RowId
-  lateinit var spreadsheetId: MetaIdSpreadsheet
-  lateinit var spreadsheetPartitionId: SpreadsheetPartitionId
-  var spreadsheetRow: SigSpreadsheetRow? = null
+  val formId: MetaIdForm
+  val rowId: RowId
+  val spreadsheetId: MetaIdSpreadsheet
+  val spreadsheetPartitionId: SpreadsheetPartitionId
+  val spreadsheetRow: SigSpreadsheetRow?
 }

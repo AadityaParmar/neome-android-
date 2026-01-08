@@ -13,16 +13,16 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntPrompt
 
-open class StudioEntPromptMap : StudioBase()
+interface StudioEntPromptMap : StudioBase
 {
-  var adhocPromptMappingVarId: MetaIdVar? = null
-  var adhocPromptSpreadsheetId: MetaIdSpreadsheet? = null
-  var fieldSeparatorSet: Array<String>? = null
-  lateinit var keys: Array<MetaIdPrompt>
-  var lineSeparator: String? = null
-  lateinit var map: Map<MetaIdPrompt, StudioEntPrompt>
-  var promptAttachmentFormat: EnumDefnPromptAttachmentFormat? = null
-  var reviewBeforeExecuting: Boolean? = null
-  var sendReviewDeeplinkOnError: Boolean? = null
-  var sendSuccessDeeplink: Boolean? = null
+  val adhocPromptMappingVarId: MetaIdVar?
+  val adhocPromptSpreadsheetId: MetaIdSpreadsheet?
+  val fieldSeparatorSet: Array<String>?
+  val keys: Array<MetaIdPrompt>
+  val lineSeparator: String?
+  val map: Map<MetaIdPrompt, StudioEntPrompt>
+  val promptAttachmentFormat: EnumDefnPromptAttachmentFormat?
+  val reviewBeforeExecuting: Boolean?
+  val sendReviewDeeplinkOnError: Boolean?
+  val sendSuccessDeeplink: Boolean?
 }

@@ -9,13 +9,16 @@ import com.neome.api.meta.base.dto.Point
 import com.neome.api.meta.base.dto.Size
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoColor
+import com.neome.api.meta.base.Symbol
 
-open class EntVdRect : StudioBase()
+interface EntVdRect : StudioBase
 {
-  var bgClr: StudioDtoColor? = null
-  var borderClr: StudioDtoColor? = null
-  var fgClr: StudioDtoColor? = null
-  var point: Point? = null
-  var size: Size? = null
-  var textClr: StudioDtoColor? = null
+  val bgClr: StudioDtoColor?
+  val borderClr: StudioDtoColor?
+  val fgClr: StudioDtoColor?
+  val label: String?
+  val name: Symbol?
+  val point: Point?
+  val size: Size?
+  val textClr: StudioDtoColor?
 }

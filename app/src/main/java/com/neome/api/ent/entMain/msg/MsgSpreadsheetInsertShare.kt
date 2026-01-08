@@ -10,10 +10,10 @@ import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgSpreadsheetInsertShare : Msg()
+interface MsgSpreadsheetInsertShare : Msg
 {
-  lateinit var actionId: MetaIdAction
-  lateinit var chatId: ChatId
-  var formValueRaw: FormValueRaw? = null
-  var reset: Boolean? = null
+  val actionId: MetaIdAction
+  val chatId: ChatId
+  val formValueRaw: FormValueRaw?
+  val reset: Boolean?
 }

@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.MetaIdField
 import java.util.Set
 import com.neome.api.ent.entMain.sig.SigFormValue
 
-open class SigOutputFormValue : SigFormValue()
+interface SigOutputFormValue : SigFormValue
 {
-  var outputFieldIdSet: Array<MetaIdField>? = null
+  val outputFieldIdSet: Array<MetaIdField>?
 }

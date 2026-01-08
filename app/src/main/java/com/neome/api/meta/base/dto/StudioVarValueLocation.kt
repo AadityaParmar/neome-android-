@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.FieldDtoLocation
 
-open class StudioVarValueLocation
+interface StudioVarValueLocation
 {
-  lateinit var value: FieldDtoLocation
+  val value: FieldDtoLocation
 }

@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.EnumContactCopyField
 import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldRefContact : DefnField()
+interface DefnFieldRefContact : DefnField
 {
-  var copyFieldMap: Map<MetaIdField, EnumContactCopyField>? = null
-  var editableContactFieldSet: Array<EnumContactCopyField>? = null
+  val copyFieldMap: Map<MetaIdField, EnumContactCopyField>?
+  val editableContactFieldSet: Array<EnumContactCopyField>?
 }

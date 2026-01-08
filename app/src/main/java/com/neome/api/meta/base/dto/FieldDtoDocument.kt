@@ -5,14 +5,13 @@
 
 package com.neome.api.meta.base.dto
 
-import kotlin.properties.Delegates
 import com.neome.api.meta.base.Types.EnumDefnDocFileExt
 import com.neome.api.meta.base.Types.MediaIdDocument
 
-open class FieldDtoDocument
+interface FieldDtoDocument
 {
-  lateinit var fileExt: EnumDefnDocFileExt
-  lateinit var fileName: String
-  var fileSize: Number by Delegates.notNull<Number>()
-  lateinit var mediaIdDocument: MediaIdDocument
+  val fileExt: EnumDefnDocFileExt
+  val fileName: String
+  val fileSize: Long?
+  val mediaIdDocument: MediaIdDocument
 }

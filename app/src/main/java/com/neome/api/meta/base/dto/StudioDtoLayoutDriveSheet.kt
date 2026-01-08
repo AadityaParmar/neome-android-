@@ -19,21 +19,21 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.Symbol
 
-open class StudioDtoLayoutDriveSheet : StudioBase()
+interface StudioDtoLayoutDriveSheet : StudioBase
 {
-  var alignment: EnumDefnContentAlignment? = null
-  var bgColor: DefnDtoColor? = null
-  var borderSet: Array<EnumDefnShowBorderKind>? = null
-  var compositeId: MetaIdComposite? = null
-  var conditionOperator: EnumDefnConditionOperator? = null
-  var conditionValue: StudioBuildArgBinder? = null
-  var fieldId: MetaIdField? = null
-  var fieldLayoutOn: EnumDefnDriveSheetFieldLayoutOn? = null
-  var fontSize: Number? = null
-  lateinit var layoutFor: EnumDefnDriveSheetLayoutFor
-  lateinit var metaId: MetaIdLayoutDriveSheet
-  var name: Symbol? = null
-  var textColor: DefnDtoColor? = null
-  var textStyleSet: Array<EnumDefnTextStyle>? = null
-  var width: Number? = null
+  val alignment: EnumDefnContentAlignment?
+  val bgColor: DefnDtoColor?
+  val borderSet: Array<EnumDefnShowBorderKind>?
+  val compositeId: MetaIdComposite?
+  val conditionOperator: EnumDefnConditionOperator?
+  val conditionValue: StudioBuildArgBinder?
+  val fieldId: MetaIdField?
+  val fieldLayoutOn: EnumDefnDriveSheetFieldLayoutOn?
+  val fontSize: Long?
+  val layoutFor: EnumDefnDriveSheetLayoutFor
+  val metaId: MetaIdLayoutDriveSheet
+  val name: Symbol?
+  val textColor: DefnDtoColor?
+  val textStyleSet: Array<EnumDefnTextStyle>?
+  val width: Long?
 }

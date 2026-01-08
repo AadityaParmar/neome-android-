@@ -14,13 +14,13 @@ import com.neome.api.meta.base.Types.RowId
 import com.neome.api.home.main.sig.SigSpreadsheetRow
 import com.neome.api.meta.base.Types.SpreadsheetPartitionId
 
-open class DtoMessagePayloadSpreadsheetPartition : DtoMessagePayload()
+interface DtoMessagePayloadSpreadsheetPartition : DtoMessagePayload
 {
-  lateinit var chatBubbleHeader: DtoChatBubbleHeader
-  lateinit var formId: MetaIdForm
-  var partitionList: Array<DtoPartition>? = null
-  var rowId: RowId? = null
-  lateinit var spreadsheetId: MetaIdSpreadsheet
-  lateinit var spreadsheetPartitionId: SpreadsheetPartitionId
-  var spreadsheetRow: SigSpreadsheetRow? = null
+  val chatBubbleHeader: DtoChatBubbleHeader
+  val formId: MetaIdForm
+  val partitionList: Array<DtoPartition>?
+  val rowId: RowId?
+  val spreadsheetId: MetaIdSpreadsheet
+  val spreadsheetPartitionId: SpreadsheetPartitionId
+  val spreadsheetRow: SigSpreadsheetRow?
 }

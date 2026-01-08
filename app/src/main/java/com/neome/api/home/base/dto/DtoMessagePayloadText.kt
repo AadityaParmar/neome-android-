@@ -7,8 +7,8 @@ package com.neome.api.home.base.dto
 
 import com.neome.api.home.base.dto.DtoMessagePayload
 
-open class DtoMessagePayloadText : DtoMessagePayload()
+interface DtoMessagePayloadText : DtoMessagePayload
 {
-  var isUpdated: Boolean? = null
-  lateinit var text: String
+  val isUpdated: Boolean?
+  val text: String
 }

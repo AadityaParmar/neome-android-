@@ -11,10 +11,10 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioDtoChatBubbleHeader
 
-open class EntVdRowInsertPartitionRequest : EntVdAutoStep()
+interface EntVdRowInsertPartitionRequest : EntVdAutoStep
 {
-  var fromSender: StudioBuildArgBinder? = null
-  var requestBubbleHeader: StudioDtoChatBubbleHeader? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
-  var toGroupIdSet: Array<MetaIdGroup>? = null
+  val fromSender: StudioBuildArgBinder?
+  val requestBubbleHeader: StudioDtoChatBubbleHeader?
+  val spreadsheetId: MetaIdSpreadsheet?
+  val toGroupIdSet: Array<MetaIdGroup>?
 }

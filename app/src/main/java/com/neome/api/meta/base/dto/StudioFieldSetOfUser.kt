@@ -11,16 +11,16 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioDtoPluginApi
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldSetOfUser : StudioFieldEditable()
+interface StudioFieldSetOfUser : StudioFieldEditable
 {
-  var dataSourceVarId: MetaIdVar? = null
-  var defaultValue: MetaIdRole? = null
-  var defaultValueFieldId: MetaIdField? = null
-  var pluginApi: StudioDtoPluginApi? = null
-  var pluginErrorFieldId: MetaIdField? = null
-  var pluginInputMappingVarId: MetaIdVar? = null
-  var roleIdDataSource: Array<MetaIdRole>? = null
-  var showAsDropdown: Boolean? = null
-  var showAsDropdownFieldId: MetaIdField? = null
-  var showAsDropdownVarId: MetaIdVar? = null
+  val dataSourceVarId: MetaIdVar?
+  val defaultValue: MetaIdRole?
+  val defaultValueFieldId: MetaIdField?
+  val pluginApi: StudioDtoPluginApi?
+  val pluginErrorFieldId: MetaIdField?
+  val pluginInputMappingVarId: MetaIdVar?
+  val roleIdDataSource: Array<MetaIdRole>?
+  val showAsDropdown: Boolean?
+  val showAsDropdownFieldId: MetaIdField?
+  val showAsDropdownVarId: MetaIdVar?
 }

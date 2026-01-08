@@ -11,12 +11,12 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoColor
 import com.neome.api.meta.base.Symbol
 
-open class StudioDtoSwimlane : StudioBase()
+interface StudioDtoSwimlane : StudioBase
 {
-  var color: StudioDtoColor? = null
-  var colorVarId: MetaIdVar? = null
-  var label: String? = null
-  lateinit var metaId: MetaIdSwimlane
-  var name: Symbol? = null
-  var valueOptionId: String? = null
+  val color: StudioDtoColor?
+  val colorVarId: MetaIdVar?
+  val label: String?
+  val metaId: MetaIdSwimlane
+  val name: Symbol?
+  val valueOptionId: String?
 }

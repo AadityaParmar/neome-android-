@@ -5,7 +5,6 @@
 
 package com.neome.api.ent.base.dto
 
-import kotlin.properties.Delegates
 import com.neome.api.meta.base.dto.DefnLayoutGridMap
 import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdForm
@@ -13,20 +12,20 @@ import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdSpreadsheetRef
 import com.neome.api.meta.base.Symbol
 
-open class DtoEntSpreadsheet
+interface DtoEntSpreadsheet
 {
-  var canClear: Boolean by Delegates.notNull<Boolean>()
-  var canExpire: Boolean by Delegates.notNull<Boolean>()
-  lateinit var forwardRoleIdSet: Array<MetaIdRole>
-  var hasPartition: Boolean by Delegates.notNull<Boolean>()
-  lateinit var insertRoleIdSet: Array<MetaIdRole>
-  var label: String? = null
-  var layoutMap: DefnLayoutGridMap? = null
-  lateinit var name: Symbol
-  lateinit var removeRoleIdSet: Array<MetaIdRole>
-  lateinit var sheetIdHash: String
-  lateinit var spreadsheetFormId: MetaIdForm
-  var spreadsheetRefTokenMap: Map<MetaIdSpreadsheetRef, String>? = null
-  var supportOffline: Boolean by Delegates.notNull<Boolean>()
-  lateinit var updateRoleIdSet: Array<MetaIdRole>
+  val canClear: Boolean
+  val canExpire: Boolean
+  val forwardRoleIdSet: Array<MetaIdRole>
+  val hasPartition: Boolean
+  val insertRoleIdSet: Array<MetaIdRole>
+  val label: String?
+  val layoutMap: DefnLayoutGridMap?
+  val name: Symbol
+  val removeRoleIdSet: Array<MetaIdRole>
+  val sheetIdHash: String
+  val spreadsheetFormId: MetaIdForm
+  val spreadsheetRefTokenMap: Map<MetaIdSpreadsheetRef, String>?
+  val supportOffline: Boolean
+  val updateRoleIdSet: Array<MetaIdRole>
 }

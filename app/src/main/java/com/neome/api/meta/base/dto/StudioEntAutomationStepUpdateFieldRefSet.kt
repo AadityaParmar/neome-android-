@@ -13,14 +13,14 @@ import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntAutomationStepUpdateFieldRefSet : StudioEntAutomationStep()
+interface StudioEntAutomationStepUpdateFieldRefSet : StudioEntAutomationStep
 {
-  var inputFormPipelineVarId: MetaIdPipelineParam? = null
-  var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
-  var iterateOnGridId: MetaIdGrid? = null
-  var operation: EnumDefnRefSetOperationKind? = null
-  var outputFormPipelineVarId: MetaIdPipelineParam? = null
-  var sortOrder: EnumDefnSortOrder? = null
-  var sourceFieldId: MetaIdField? = null
-  var targetFieldId: MetaIdField? = null
+  val inputFormPipelineVarId: MetaIdPipelineParam?
+  val iterateOnGridFilterVarId: StudioValueVarIdCondition?
+  val iterateOnGridId: MetaIdGrid?
+  val operation: EnumDefnRefSetOperationKind?
+  val outputFormPipelineVarId: MetaIdPipelineParam?
+  val sortOrder: EnumDefnSortOrder?
+  val sourceFieldId: MetaIdField?
+  val targetFieldId: MetaIdField?
 }

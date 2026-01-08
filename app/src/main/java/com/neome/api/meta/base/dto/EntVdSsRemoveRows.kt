@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.EntVdAutoStep
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioMapOfCondition
 
-open class EntVdSsRemoveRows : EntVdAutoStep()
+interface EntVdSsRemoveRows : EntVdAutoStep
 {
-  var filterCondition: StudioMapOfCondition? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
+  val filterCondition: StudioMapOfCondition?
+  val spreadsheetId: MetaIdSpreadsheet?
 }

@@ -10,7 +10,7 @@ import com.neome.api.meta.base.Types.EntId
 import java.util.Map
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigEntDeployListGet : Sig()
+interface SigEntDeployListGet : Sig
 {
-  lateinit var entMap: Map<EntId, DtoEntDeploy>
+  val entMap: Map<EntId, DtoEntDeploy>
 }

@@ -7,9 +7,9 @@ package com.neome.api.core.extn.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigExtnGstinDetails : Sig()
+interface SigExtnGstinDetails : Sig
 {
-  var data: Object? = null
-  var errorCode: Number? = null
-  var errorMessage: String? = null
+  val data: Object?
+  val errorCode: Long?
+  val errorMessage: String?
 }

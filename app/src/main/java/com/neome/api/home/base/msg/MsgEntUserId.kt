@@ -8,7 +8,7 @@ package com.neome.api.home.base.msg
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.core.base.msg.MsgVersion
 
-open class MsgEntUserId : MsgVersion()
+interface MsgEntUserId : MsgVersion
 {
-  lateinit var entUserId: EntUserId
+  val entUserId: EntUserId
 }

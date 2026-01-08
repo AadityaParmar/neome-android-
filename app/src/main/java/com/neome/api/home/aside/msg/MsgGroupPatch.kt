@@ -12,12 +12,12 @@ import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.core.base.msg.MsgVersion
 import java.util.Set
 
-open class MsgGroupPatch : MsgVersion()
+interface MsgGroupPatch : MsgVersion
 {
-  var about: String? = null
-  lateinit var groupId: GroupId
-  var mediaIdAvatar: MediaIdAvatar? = null
-  var name: String? = null
-  lateinit var patchPropNameSet: Array<EnumGroupPatchPropName>
-  var settings: DtoGroupSettings? = null
+  val about: String?
+  val groupId: GroupId
+  val mediaIdAvatar: MediaIdAvatar?
+  val name: String?
+  val patchPropNameSet: Array<EnumGroupPatchPropName>
+  val settings: DtoGroupSettings?
 }

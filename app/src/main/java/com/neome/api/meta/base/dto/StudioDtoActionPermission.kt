@@ -13,17 +13,17 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.Symbol
 
-open class StudioDtoActionPermission : StudioBase()
+interface StudioDtoActionPermission : StudioBase
 {
-  var deviceSizeSet: Array<EnumDefnDeviceSize>? = null
-  var groupIdSet: Array<MetaIdGroup>? = null
-  var hidden: Boolean? = null
-  var inputMappingVarId: MetaIdVar? = null
-  var menuGroup: String? = null
-  lateinit var metaId: MetaIdAction
-  var name: Symbol? = null
-  var notAllowedRoleIdSet: Array<MetaIdRole>? = null
-  var outputMappingVarId: MetaIdVar? = null
-  lateinit var roleIdSet: Array<MetaIdRole>
-  var showMessageTooltip: Boolean? = null
+  val deviceSizeSet: Array<EnumDefnDeviceSize>?
+  val groupIdSet: Array<MetaIdGroup>?
+  val hidden: Boolean?
+  val inputMappingVarId: MetaIdVar?
+  val menuGroup: String?
+  val metaId: MetaIdAction
+  val name: Symbol?
+  val notAllowedRoleIdSet: Array<MetaIdRole>?
+  val outputMappingVarId: MetaIdVar?
+  val roleIdSet: Array<MetaIdRole>
+  val showMessageTooltip: Boolean?
 }

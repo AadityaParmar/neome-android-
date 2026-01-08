@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdAutoStepWithError
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-open class EntVdUserRemove : EntVdAutoStepWithError()
+interface EntVdUserRemove : EntVdAutoStepWithError
 {
-  var userIdField: StudioDtoArgValueParameter? = null
+  val userIdField: StudioDtoArgValueParameter?
 }

@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EntUserId
 
-open class FieldValueEntUserId
+interface FieldValueEntUserId
 {
-  var displayField: String? = null
-  lateinit var value: EntUserId
+  val displayField: String?
+  val value: EntUserId
 }

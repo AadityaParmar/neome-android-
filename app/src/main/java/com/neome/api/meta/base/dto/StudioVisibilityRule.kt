@@ -11,12 +11,12 @@ import com.neome.api.meta.base.dto.StudioMapOfVisibilityCondition
 import com.neome.api.meta.base.dto.StudioVisibilityActionMap
 import com.neome.api.meta.base.Symbol
 
-open class StudioVisibilityRule : StudioBase()
+interface StudioVisibilityRule : StudioBase
 {
-  lateinit var actionMapIfFalse: StudioVisibilityActionMap
-  lateinit var actionMapIfTrue: StudioVisibilityActionMap
-  var description: String? = null
-  lateinit var metaId: MetaIdVisibilityRule
-  lateinit var name: Symbol
-  var visibilityCondMap: StudioMapOfVisibilityCondition? = null
+  val actionMapIfFalse: StudioVisibilityActionMap
+  val actionMapIfTrue: StudioVisibilityActionMap
+  val description: String?
+  val metaId: MetaIdVisibilityRule
+  val name: Symbol
+  val visibilityCondMap: StudioMapOfVisibilityCondition?
 }

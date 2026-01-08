@@ -10,8 +10,8 @@ import com.neome.api.meta.base.dto.EntVdAutoStep
 import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdVdAutoFunc
 
-open class EntVdApplyTransforms : EntVdAutoStep()
+interface EntVdApplyTransforms : EntVdAutoStep
 {
-  lateinit var keys: Array<MetaIdVdAutoFunc>
-  lateinit var map: Map<MetaIdVdAutoFunc, AutoXform>
+  val keys: Array<MetaIdVdAutoFunc>
+  val map: Map<MetaIdVdAutoFunc, AutoXform>
 }

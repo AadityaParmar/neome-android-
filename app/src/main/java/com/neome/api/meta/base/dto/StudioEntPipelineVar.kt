@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.MetaIdPipelineVar
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.Symbol
 
-open class StudioEntPipelineVar : StudioBase()
+interface StudioEntPipelineVar : StudioBase
 {
-  var formId: MetaIdForm? = null
-  lateinit var metaId: MetaIdPipelineVar
-  lateinit var name: Symbol
+  val formId: MetaIdForm?
+  val metaId: MetaIdPipelineVar
+  val name: Symbol
 }

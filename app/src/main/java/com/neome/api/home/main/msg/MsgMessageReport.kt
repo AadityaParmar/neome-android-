@@ -5,16 +5,15 @@
 
 package com.neome.api.home.main.msg
 
-import kotlin.properties.Delegates
 import com.neome.api.meta.base.Types.ChatId
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.Types.MessageId
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgMessageReport : Msg()
+interface MsgMessageReport : Msg
 {
-  lateinit var chatId: ChatId
-  lateinit var entId: EntId
-  lateinit var messageId: MessageId
-  var offset: Number by Delegates.notNull<Number>()
+  val chatId: ChatId
+  val entId: EntId
+  val messageId: MessageId
+  val offset: Long?
 }

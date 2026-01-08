@@ -9,7 +9,7 @@ import com.neome.api.meta.base.dto.EnvValidationError
 import java.util.Map
 import com.neome.api.meta.base.Types.RowId
 
-open class DtoBulkOperationResult
+interface DtoBulkOperationResult
 {
-  lateinit var errorMap: Map<RowId, EnvValidationError>
+  val errorMap: Map<RowId, EnvValidationError>
 }

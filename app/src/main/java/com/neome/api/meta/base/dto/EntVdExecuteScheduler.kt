@@ -13,10 +13,10 @@ import com.neome.api.meta.base.Types.MetaIdVdAutoNode
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-open class EntVdExecuteScheduler : EntVdAutoStepWithError()
+interface EntVdExecuteScheduler : EntVdAutoStepWithError
 {
-  var forRemoveSchedulerIdField: StudioDtoArgValueParameter? = null
-  var scheduleTrigger: StudioBuildArgBinder? = null
-  var sharedParamMap: Map<MetaIdPipelineVar, MetaIdPipelineParam>? = null
-  var startNodeId: MetaIdVdAutoNode? = null
+  val forRemoveSchedulerIdField: StudioDtoArgValueParameter?
+  val scheduleTrigger: StudioBuildArgBinder?
+  val sharedParamMap: Map<MetaIdPipelineVar, MetaIdPipelineParam>?
+  val startNodeId: MetaIdVdAutoNode?
 }

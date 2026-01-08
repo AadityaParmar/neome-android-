@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldAudio : StudioFieldEditable()
+interface StudioFieldAudio : StudioFieldEditable
 {
-  var audioFormatType: EnumDefnAudioFormat? = null
-  var maxSize: Number? = null
-  var maxSizeFieldId: MetaIdField? = null
-  var maxSizeVarId: MetaIdVar? = null
+  val audioFormatType: EnumDefnAudioFormat?
+  val maxSize: Long?
+  val maxSizeFieldId: MetaIdField?
+  val maxSizeVarId: MetaIdVar?
 }

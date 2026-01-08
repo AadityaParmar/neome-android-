@@ -9,7 +9,7 @@ import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdSpreadsheetRef
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioEntSpreadsheetRefTokenMap : StudioBase()
+interface StudioEntSpreadsheetRefTokenMap : StudioBase
 {
-  var refTokenMap: Map<MetaIdSpreadsheetRef, String>? = null
+  val refTokenMap: Map<MetaIdSpreadsheetRef, String>?
 }

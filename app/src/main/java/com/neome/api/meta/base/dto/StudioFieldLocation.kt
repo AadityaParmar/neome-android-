@@ -12,13 +12,13 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldLocation : StudioFieldEditable()
+interface StudioFieldLocation : StudioFieldEditable
 {
-  var captureMode: EnumDefnCaptureMode? = null
-  var captureTime: Boolean? = null
-  var captureUser: Boolean? = null
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: FieldDtoLocation? = null
-  var defaultVarId: MetaIdVar? = null
-  var showCapturedValuesOnAside: Array<EnumDefnCaptureValueKind>? = null
+  val captureMode: EnumDefnCaptureMode?
+  val captureTime: Boolean?
+  val captureUser: Boolean?
+  val defaultFieldId: MetaIdField?
+  val defaultValue: FieldDtoLocation?
+  val defaultVarId: MetaIdVar?
+  val showCapturedValuesOnAside: Array<EnumDefnCaptureValueKind>?
 }

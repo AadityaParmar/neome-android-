@@ -12,25 +12,25 @@ import com.neome.api.meta.base.dto.StudioFieldLabel
 import com.neome.api.meta.base.dto.StudioValueVarIdParagraph
 import com.neome.api.meta.base.dto.StudioValueVarIdText
 
-open class StudioFieldInfo : StudioFieldLabel()
+interface StudioFieldInfo : StudioFieldLabel
 {
-  var bottomPadding: EnumDefnThemeDividerKind? = null
-  var bottomPaddingVarId: MetaIdVar? = null
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: String? = null
-  var defaultVarId: StudioValueVarIdParagraph? = null
-  var flexGrow: Boolean? = null
-  var labelPatternVarId: StudioValueVarIdText? = null
-  var leftPadding: EnumDefnThemeDividerKind? = null
-  var leftPaddingVarId: MetaIdVar? = null
-  var lineCount: Number? = null
-  var lineCountFieldId: MetaIdField? = null
-  var lineCountVarId: MetaIdVar? = null
-  var rightPadding: EnumDefnThemeDividerKind? = null
-  var rightPaddingVarId: MetaIdVar? = null
-  var showBorder: Boolean? = null
-  var showCloseButton: Boolean? = null
-  var showLabel: Boolean? = null
-  var topPadding: EnumDefnThemeDividerKind? = null
-  var topPaddingVarId: MetaIdVar? = null
+  val bottomPadding: EnumDefnThemeDividerKind?
+  val bottomPaddingVarId: MetaIdVar?
+  val defaultFieldId: MetaIdField?
+  val defaultValue: String?
+  val defaultVarId: StudioValueVarIdParagraph?
+  val flexGrow: Boolean?
+  val labelPatternVarId: StudioValueVarIdText?
+  val leftPadding: EnumDefnThemeDividerKind?
+  val leftPaddingVarId: MetaIdVar?
+  val lineCount: Long?
+  val lineCountFieldId: MetaIdField?
+  val lineCountVarId: MetaIdVar?
+  val rightPadding: EnumDefnThemeDividerKind?
+  val rightPaddingVarId: MetaIdVar?
+  val showBorder: Boolean?
+  val showCloseButton: Boolean?
+  val showLabel: Boolean?
+  val topPadding: EnumDefnThemeDividerKind?
+  val topPaddingVarId: MetaIdVar?
 }

@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntAutomationStepRemoveSpreadsheetRows : StudioEntAutomationStep()
+interface StudioEntAutomationStepRemoveSpreadsheetRows : StudioEntAutomationStep
 {
-  var conditionVarId: StudioValueVarIdCondition? = null
-  var inputFormPipelineVarId: MetaIdPipelineParam? = null
-  var targetSpreadsheetId: MetaIdSpreadsheet? = null
+  val conditionVarId: StudioValueVarIdCondition?
+  val inputFormPipelineVarId: MetaIdPipelineParam?
+  val targetSpreadsheetId: MetaIdSpreadsheet?
 }

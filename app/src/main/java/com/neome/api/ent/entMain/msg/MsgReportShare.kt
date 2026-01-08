@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.Types.MetaIdReport
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgReportShare : Msg()
+interface MsgReportShare : Msg
 {
-  lateinit var actionId: MetaIdAction
-  var inputFormValueRaw: FormValueRaw? = null
-  lateinit var reportId: MetaIdReport
-  var reset: Boolean? = null
+  val actionId: MetaIdAction
+  val inputFormValueRaw: FormValueRaw?
+  val reportId: MetaIdReport
+  val reset: Boolean?
 }

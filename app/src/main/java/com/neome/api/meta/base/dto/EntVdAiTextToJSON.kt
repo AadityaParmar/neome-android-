@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdAi
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-open class EntVdAiTextToJSON : EntVdAi()
+interface EntVdAiTextToJSON : EntVdAi
 {
-  var inputField: StudioDtoArgValueParameter? = null
-  var outputField: StudioDtoArgValueParameter? = null
+  val inputField: StudioDtoArgValueParameter?
+  val outputField: StudioDtoArgValueParameter?
 }

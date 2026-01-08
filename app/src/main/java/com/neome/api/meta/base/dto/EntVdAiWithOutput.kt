@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdAi
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 
-open class EntVdAiWithOutput : EntVdAi()
+interface EntVdAiWithOutput : EntVdAi
 {
-  var outputParamId: MetaIdPipelineParam? = null
-  var outputParamName: String? = null
+  val outputParamId: MetaIdPipelineParam?
+  val outputParamName: String?
 }

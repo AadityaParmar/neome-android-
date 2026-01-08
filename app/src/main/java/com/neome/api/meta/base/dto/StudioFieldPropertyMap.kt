@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldPropertyMap : StudioFieldEditable()
+interface StudioFieldPropertyMap : StudioFieldEditable
 {
-  var defaultVarId: MetaIdVar? = null
+  val defaultVarId: MetaIdVar?
 }

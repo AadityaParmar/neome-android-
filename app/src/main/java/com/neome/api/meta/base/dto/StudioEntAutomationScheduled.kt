@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.StudioEntAutomation
 import com.neome.api.meta.base.dto.StudioEntAutomationScheduledEventMap
 import com.neome.api.meta.base.dto.StudioVarValueScheduler
 
-open class StudioEntAutomationScheduled : StudioEntAutomation()
+interface StudioEntAutomationScheduled : StudioEntAutomation
 {
-  lateinit var eventMap: StudioEntAutomationScheduledEventMap
-  var scheduler: StudioVarValueScheduler? = null
+  val eventMap: StudioEntAutomationScheduledEventMap
+  val scheduler: StudioVarValueScheduler?
 }

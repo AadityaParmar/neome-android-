@@ -10,11 +10,11 @@ import com.neome.api.meta.base.Types.MetaIdFieldDynamicCondition
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoFieldDynamicCondition
 
-open class StudioMapOfFieldDynamicCondition : StudioBase()
+interface StudioMapOfFieldDynamicCondition : StudioBase
 {
-  var andOr: Boolean? = null
-  var keys: Array<MetaIdFieldDynamicCondition>? = null
-  var map: Map<MetaIdFieldDynamicCondition, StudioMapOfFieldDynamicCondition>? = null
-  lateinit var metaId: MetaIdFieldDynamicCondition
-  var statement: StudioDtoFieldDynamicCondition? = null
+  val andOr: Boolean?
+  val keys: Array<MetaIdFieldDynamicCondition>?
+  val map: Map<MetaIdFieldDynamicCondition, StudioMapOfFieldDynamicCondition>?
+  val metaId: MetaIdFieldDynamicCondition
+  val statement: StudioDtoFieldDynamicCondition?
 }

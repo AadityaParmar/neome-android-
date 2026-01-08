@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.AnyTime
 import com.neome.api.meta.base.Types.EnumDefnDay
 import com.neome.api.meta.base.dto.StudioBuildRepeatSetting
 
-open class StudioBuildRepeatSettingWeeks : StudioBuildRepeatSetting()
+interface StudioBuildRepeatSettingWeeks : StudioBuildRepeatSetting
 {
-  var setOfRepeatDay: Array<EnumDefnDay>? = null
-  var setOfTime: Array<AnyTime>? = null
+  val setOfRepeatDay: Array<EnumDefnDay>?
+  val setOfTime: Array<AnyTime>?
 }

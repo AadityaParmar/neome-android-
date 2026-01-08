@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdMapping
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoMappingGrid
 
-open class StudioDtoMappingGridMap : StudioBase()
+interface StudioDtoMappingGridMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdMapping>
-  lateinit var map: Map<MetaIdMapping, StudioDtoMappingGrid>
+  val keys: Array<MetaIdMapping>
+  val map: Map<MetaIdMapping, StudioDtoMappingGrid>
 }

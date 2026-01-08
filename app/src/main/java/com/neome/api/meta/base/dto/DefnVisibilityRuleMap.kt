@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.DefnVisibilityRule
 import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdVisibilityRule
 
-open class DefnVisibilityRuleMap
+interface DefnVisibilityRuleMap
 {
-  lateinit var keys: Array<MetaIdVisibilityRule>
-  lateinit var map: Map<MetaIdVisibilityRule, DefnVisibilityRule>
+  val keys: Array<MetaIdVisibilityRule>
+  val map: Map<MetaIdVisibilityRule, DefnVisibilityRule>
 }

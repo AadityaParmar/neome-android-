@@ -11,16 +11,16 @@ import com.neome.api.meta.base.Types.MetaIdGroup
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
 
-open class DefnStudioDtoActionPermission
+interface DefnStudioDtoActionPermission
 {
-  var deviceSizeSet: Array<EnumDefnDeviceSize>? = null
-  var groupIdSet: Array<MetaIdGroup>? = null
-  var hidden: Boolean? = null
-  var inputMappingVarId: MetaIdVar? = null
-  var menuGroup: String? = null
-  lateinit var metaId: MetaIdAction
-  var notAllowedRoleIdSet: Array<MetaIdRole>? = null
-  var outputMappingVarId: MetaIdVar? = null
-  lateinit var roleIdSet: Array<MetaIdRole>
-  var showMessageTooltip: Boolean? = null
+  val deviceSizeSet: Array<EnumDefnDeviceSize>?
+  val groupIdSet: Array<MetaIdGroup>?
+  val hidden: Boolean?
+  val inputMappingVarId: MetaIdVar?
+  val menuGroup: String?
+  val metaId: MetaIdAction
+  val notAllowedRoleIdSet: Array<MetaIdRole>?
+  val outputMappingVarId: MetaIdVar?
+  val roleIdSet: Array<MetaIdRole>
+  val showMessageTooltip: Boolean?
 }

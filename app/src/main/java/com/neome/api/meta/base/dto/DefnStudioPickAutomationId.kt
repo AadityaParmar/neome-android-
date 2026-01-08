@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.EnumDefnKindAutomation
 
-open class DefnStudioPickAutomationId : DefnField()
+interface DefnStudioPickAutomationId : DefnField
 {
-  var filterAutomationKindSet: Array<EnumDefnKindAutomation>? = null
+  val filterAutomationKindSet: Array<EnumDefnKindAutomation>?
 }

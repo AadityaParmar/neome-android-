@@ -9,12 +9,12 @@ import java.util.Date
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.GeoPoint
 
-open class FieldDtoLocation
+interface FieldDtoLocation
 {
-  var address: String? = null
-  var city: String? = null
-  var country: String? = null
-  var dateTime: String? = null
-  var entUserId: EntUserId? = null
-  lateinit var geoPoint: GeoPoint
+  val address: String?
+  val city: String?
+  val country: String?
+  val dateTime: String?
+  val entUserId: EntUserId?
+  val geoPoint: GeoPoint
 }

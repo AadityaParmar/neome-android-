@@ -11,11 +11,11 @@ import com.neome.api.meta.base.Types.EnumDefnThemeColor
 import com.neome.api.meta.base.Types.EnumDefnThemeDirection
 import com.neome.api.meta.base.Types.EnumDefnThemeDividerKind
 
-open class DefnFieldDivider : DefnField()
+interface DefnFieldDivider : DefnField
 {
-  var color: DefnDtoColor? = null
-  var colorVar: EnumDefnThemeColor? = null
-  var dividerKind: EnumDefnThemeDividerKind? = null
-  var dividerKindVar: EnumDefnThemeDividerKind? = null
-  var sectionDirection: EnumDefnThemeDirection? = null
+  val color: DefnDtoColor?
+  val colorVar: EnumDefnThemeColor?
+  val dividerKind: EnumDefnThemeDividerKind?
+  val dividerKindVar: EnumDefnThemeDividerKind?
+  val sectionDirection: EnumDefnThemeDirection?
 }

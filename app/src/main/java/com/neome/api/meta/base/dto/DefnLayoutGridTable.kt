@@ -19,27 +19,27 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 
-open class DefnLayoutGridTable : DefnLayoutGrid()
+interface DefnLayoutGridTable : DefnLayoutGrid
 {
-  var allowCustomFilters: Boolean? = null
-  var columnAlignmentArray: Array<String>? = null
-  var columnSizeSet: Array<String>? = null
-  var footer: DefnStudioMapOfTableFooter? = null
-  var freezeFieldIdSet: Array<MetaIdField>? = null
-  var header: DefnStudioMapOfTableHeader? = null
-  var hideHeaders: Boolean? = null
-  var hideRowSeparator: Boolean? = null
-  var indexColumnName: String? = null
-  var masterDetailGridLayoutMap: Map<MetaIdComposite, MetaIdLayoutGrid>? = null
-  var pagination: Boolean? = null
-  var renderingMode: EnumDefnGridRenderingMode? = null
-  var rowsPerPage: Number? = null
-  var showCommentCount: Boolean? = null
-  var showCompIdSet: Array<MetaIdComp>? = null
-  var showSearchBar: Boolean? = null
-  var sortByFieldIdSet: Array<MetaIdField>? = null
-  var sortOrder: EnumDefnSortOrder? = null
-  var sparklineLayoutMap: Map<MetaIdGrid, MetaIdLayoutGrid>? = null
-  var styleMap: DefnMapOfTableStyle? = null
-  var theme: EnumDefnTableLayoutTheme? = null
+  val allowCustomFilters: Boolean?
+  val columnAlignmentArray: Array<String>?
+  val columnSizeSet: Array<String>?
+  val footer: DefnStudioMapOfTableFooter?
+  val freezeFieldIdSet: Array<MetaIdField>?
+  val header: DefnStudioMapOfTableHeader?
+  val hideHeaders: Boolean?
+  val hideRowSeparator: Boolean?
+  val indexColumnName: String?
+  val masterDetailGridLayoutMap: Map<MetaIdComposite, MetaIdLayoutGrid>?
+  val pagination: Boolean?
+  val renderingMode: EnumDefnGridRenderingMode?
+  val rowsPerPage: Long?
+  val showCommentCount: Boolean?
+  val showCompIdSet: Array<MetaIdComp>?
+  val showSearchBar: Boolean?
+  val sortByFieldIdSet: Array<MetaIdField>?
+  val sortOrder: EnumDefnSortOrder?
+  val sparklineLayoutMap: Map<MetaIdGrid, MetaIdLayoutGrid>?
+  val styleMap: DefnMapOfTableStyle?
+  val theme: EnumDefnTableLayoutTheme?
 }

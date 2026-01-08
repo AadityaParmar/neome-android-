@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioField
 
-open class StudioFieldMap : StudioBase()
+interface StudioFieldMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdField>
-  lateinit var map: Map<MetaIdField, StudioField>
+  val keys: Array<MetaIdField>
+  val map: Map<MetaIdField, StudioField>
 }

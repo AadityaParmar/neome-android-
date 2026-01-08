@@ -10,11 +10,11 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioDtoArgValue
 
-open class StudioDtoArgValueSpreadsheet : StudioDtoArgValue()
+interface StudioDtoArgValueSpreadsheet : StudioDtoArgValue
 {
-  var compositeId: MetaIdComposite? = null
-  var fieldId: MetaIdField? = null
-  var spreadsheetAlias: String? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
-  var valuePathArray: Array<String>? = null
+  val compositeId: MetaIdComposite?
+  val fieldId: MetaIdField?
+  val spreadsheetAlias: String?
+  val spreadsheetId: MetaIdSpreadsheet?
+  val valuePathArray: Array<String>?
 }

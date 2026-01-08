@@ -8,8 +8,8 @@ package com.neome.api.home.session.sig
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.core.session.sig.SigTopic
 
-open class SigTopicGroupTyping : SigTopic()
+interface SigTopicGroupTyping : SigTopic
 {
-  lateinit var targetEntUserId: EntUserId
-  lateinit var targetUserText: String
+  val targetEntUserId: EntUserId
+  val targetUserText: String
 }

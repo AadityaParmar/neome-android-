@@ -14,11 +14,11 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioValueParagraph
 import com.neome.api.meta.base.dto.StudioValueText
 
-open class EntVdAiAgentControl : StudioBase()
+interface EntVdAiAgentControl : StudioBase
 {
-  var description: StudioValueParagraph? = null
-  lateinit var metaId: GhostId
-  var name: StudioValueText? = null
-  var sharedParamMap: Map<MetaIdPipelineVar, MetaIdPipelineParam>? = null
-  var startNodeId: MetaIdVdAutoNode? = null
+  val description: StudioValueParagraph?
+  val metaId: GhostId
+  val name: StudioValueText?
+  val sharedParamMap: Map<MetaIdPipelineVar, MetaIdPipelineParam>?
+  val startNodeId: MetaIdVdAutoNode?
 }

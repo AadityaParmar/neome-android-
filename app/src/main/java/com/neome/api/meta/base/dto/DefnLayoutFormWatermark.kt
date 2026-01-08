@@ -11,14 +11,14 @@ import com.neome.api.meta.base.Types.EnumDefnPlacement
 import com.neome.api.meta.base.Types.EnumDefnTextSize
 import com.neome.api.meta.base.dto.FieldDtoImage
 
-open class DefnLayoutFormWatermark
+interface DefnLayoutFormWatermark
 {
-  var bgImage: FieldDtoImage? = null
-  var bgImageHorizontalPosition: EnumDefnContentAlignment? = null
-  var bgImageVar: FieldDtoImage? = null
-  var bgImageVerticalPosition: EnumDefnContentAlignment? = null
-  var textOpacityVar: Number? = null
-  var textPatternVar: DefnDtoText? = null
-  var textPositionVar: EnumDefnPlacement? = null
-  var textSizeVar: EnumDefnTextSize? = null
+  val bgImage: FieldDtoImage?
+  val bgImageHorizontalPosition: EnumDefnContentAlignment?
+  val bgImageVar: FieldDtoImage?
+  val bgImageVerticalPosition: EnumDefnContentAlignment?
+  val textOpacityVar: Long?
+  val textPatternVar: DefnDtoText?
+  val textPositionVar: EnumDefnPlacement?
+  val textSizeVar: EnumDefnTextSize?
 }

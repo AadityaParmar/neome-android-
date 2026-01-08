@@ -5,8 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-open class Size
+interface Size
 {
-  var h: Number? = null
-  var w: Number? = null
+  val h: Long?
+  val w: Long?
 }

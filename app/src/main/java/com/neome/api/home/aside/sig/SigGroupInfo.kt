@@ -15,17 +15,17 @@ import java.util.Map
 import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.nucleus.base.sig.SigVersion
 
-open class SigGroupInfo : SigVersion()
+interface SigGroupInfo : SigVersion
 {
-  lateinit var about: String
-  lateinit var adminMap: Map<EntUserId, DtoGroupMemberMetaData>
-  var allowPromptAssistant: Boolean? = null
-  var avatarId: MediaIdAvatar? = null
-  lateinit var entId: EntId
-  lateinit var groupConfiguration: DtoUserGroupConfiguration
-  lateinit var groupId: GroupId
-  var label: String? = null
-  lateinit var memberMap: Map<EntUserId, DtoGroupMemberMetaData>
-  lateinit var name: String
-  lateinit var settings: DtoGroupSettings
+  val about: String
+  val adminMap: Map<EntUserId, DtoGroupMemberMetaData>
+  val allowPromptAssistant: Boolean?
+  val avatarId: MediaIdAvatar?
+  val entId: EntId
+  val groupConfiguration: DtoUserGroupConfiguration
+  val groupId: GroupId
+  val label: String?
+  val memberMap: Map<EntUserId, DtoGroupMemberMetaData>
+  val name: String
+  val settings: DtoGroupSettings
 }

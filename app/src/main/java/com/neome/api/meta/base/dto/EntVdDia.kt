@@ -14,11 +14,11 @@ import com.neome.api.meta.base.Types.MetaIdVdNote
 import com.neome.api.meta.base.Types.MetaIdVdRegion
 import com.neome.api.meta.base.dto.StudioBase
 
-open class EntVdDia : StudioBase()
+interface EntVdDia : StudioBase
 {
-  var isDefault: Boolean? = null
-  var moduleId: MetaIdModule? = null
-  lateinit var noteMap: Map<MetaIdVdNote, EntVdNote>
-  lateinit var regionMap: Map<MetaIdVdRegion, EntVdRegion>
-  var viewport: EntVdViewport? = null
+  val isDefault: Boolean?
+  val moduleId: MetaIdModule?
+  val noteMap: Map<MetaIdVdNote, EntVdNote>
+  val regionMap: Map<MetaIdVdRegion, EntVdRegion>
+  val viewport: EntVdViewport?
 }

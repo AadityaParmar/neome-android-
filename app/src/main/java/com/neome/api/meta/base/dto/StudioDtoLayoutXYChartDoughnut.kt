@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.StudioDtoLayoutXYChart
 
-open class StudioDtoLayoutXYChartDoughnut : StudioDtoLayoutXYChart()
+interface StudioDtoLayoutXYChartDoughnut : StudioDtoLayoutXYChart
 {
-  var alwaysShowSliceValues: Boolean? = null
+  val alwaysShowSliceValues: Boolean?
 }

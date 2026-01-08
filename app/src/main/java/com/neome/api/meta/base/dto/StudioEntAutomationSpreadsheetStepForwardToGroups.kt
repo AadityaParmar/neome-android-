@@ -12,13 +12,13 @@ import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 
-open class StudioEntAutomationSpreadsheetStepForwardToGroups : StudioEntAutomationStep()
+interface StudioEntAutomationSpreadsheetStepForwardToGroups : StudioEntAutomationStep
 {
-  var dataSourceRoleIdSet: Array<MetaIdRole>? = null
-  var formDataSourcePipelineVarId: MetaIdPipelineParam? = null
-  var groupIdSet: Array<MetaIdGroup>? = null
-  var senderFieldId: MetaIdField? = null
-  var senderFormPipelineVarId: MetaIdPipelineParam? = null
-  var senderRoleId: MetaIdRole? = null
-  var setOfUserVarId: MetaIdVar? = null
+  val dataSourceRoleIdSet: Array<MetaIdRole>?
+  val formDataSourcePipelineVarId: MetaIdPipelineParam?
+  val groupIdSet: Array<MetaIdGroup>?
+  val senderFieldId: MetaIdField?
+  val senderFormPipelineVarId: MetaIdPipelineParam?
+  val senderRoleId: MetaIdRole?
+  val setOfUserVarId: MetaIdVar?
 }

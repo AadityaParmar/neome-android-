@@ -11,11 +11,11 @@ import com.neome.api.meta.base.Types.MetaIdComposite
 import com.neome.api.meta.base.Types.MetaIdLayoutFormEditorComposite
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 
-open class DefnLayoutFormEditorComposite
+interface DefnLayoutFormEditorComposite
 {
-  lateinit var compositeId: MetaIdComposite
-  var gridLayoutId: MetaIdLayoutGrid? = null
-  lateinit var metaId: MetaIdLayoutFormEditorComposite
-  var sectionDirection: EnumDefnThemeDirection? = null
-  var sectionVariant: EnumDefnThemeSectionVariant? = null
+  val compositeId: MetaIdComposite
+  val gridLayoutId: MetaIdLayoutGrid?
+  val metaId: MetaIdLayoutFormEditorComposite
+  val sectionDirection: EnumDefnThemeDirection?
+  val sectionVariant: EnumDefnThemeSectionVariant?
 }

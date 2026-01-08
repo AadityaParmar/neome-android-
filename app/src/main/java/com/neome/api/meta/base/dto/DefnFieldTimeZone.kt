@@ -9,9 +9,9 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.TimeZoneKey
 
-open class DefnFieldTimeZone : DefnFieldEditable()
+interface DefnFieldTimeZone : DefnFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: TimeZoneKey? = null
-  var defaultVar: TimeZoneKey? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: TimeZoneKey?
+  val defaultVar: TimeZoneKey?
 }

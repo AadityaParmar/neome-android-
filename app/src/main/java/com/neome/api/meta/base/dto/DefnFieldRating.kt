@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.EnumDefnKindRating
 
-open class DefnFieldRating : DefnFieldEditable()
+interface DefnFieldRating : DefnFieldEditable
 {
-  var ratingKind: EnumDefnKindRating? = null
-  var ratingKindVar: EnumDefnKindRating? = null
+  val ratingKind: EnumDefnKindRating?
+  val ratingKindVar: EnumDefnKindRating?
 }

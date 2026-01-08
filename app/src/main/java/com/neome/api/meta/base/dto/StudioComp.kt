@@ -13,14 +13,14 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDetails
 import com.neome.api.meta.base.dto.StudioDtoPermissionMatrix
 
-open class StudioComp : StudioBase()
+interface StudioComp : StudioBase
 {
-  var aiInstructions: String? = null
-  lateinit var details: StudioDetails
-  var disabled: Boolean? = null
-  var disabledFieldId: MetaIdField? = null
-  var disabledRoleIdSet: Array<MetaIdRole>? = null
-  var disabledVarId: MetaIdVar? = null
-  var permissionMatrix: StudioDtoPermissionMatrix? = null
-  var type: EnumStudioCompType? = null
+  val aiInstructions: String?
+  val details: StudioDetails
+  val disabled: Boolean?
+  val disabledFieldId: MetaIdField?
+  val disabledRoleIdSet: Array<MetaIdRole>?
+  val disabledVarId: MetaIdVar?
+  val permissionMatrix: StudioDtoPermissionMatrix?
+  val type: EnumStudioCompType?
 }

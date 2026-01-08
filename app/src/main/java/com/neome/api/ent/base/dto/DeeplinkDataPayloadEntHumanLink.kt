@@ -10,15 +10,15 @@ import com.neome.api.meta.base.dto.DefnForm
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.dto.FormValueRaw
 
-open class DeeplinkDataPayloadEntHumanLink : DeeplinkDataPayloadEnt()
+interface DeeplinkDataPayloadEntHumanLink : DeeplinkDataPayloadEnt
 {
-  lateinit var embedFormDefn: DefnForm
-  var embedFormValue: FormValueRaw? = null
-  lateinit var entId: EntId
-  lateinit var message: String
-  var senderHandle: String? = null
-  var senderName: String? = null
-  var targetHandle: String? = null
-  var targetName: String? = null
-  lateinit var title: String
+  val embedFormDefn: DefnForm
+  val embedFormValue: FormValueRaw?
+  val entId: EntId
+  val message: String
+  val senderHandle: String?
+  val senderName: String?
+  val targetHandle: String?
+  val targetName: String?
+  val title: String
 }

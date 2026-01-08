@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdAiWithOutput
 import com.neome.api.meta.base.dto.FormRefKey
 
-open class EntVdAiFormToForm : EntVdAiWithOutput()
+interface EntVdAiFormToForm : EntVdAiWithOutput
 {
-  var outputForm: FormRefKey? = null
+  val outputForm: FormRefKey?
 }

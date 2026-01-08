@@ -9,10 +9,10 @@ import com.neome.api.meta.base.Types.EnumDefnUserSettingOptions
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioBuildUserSetting : StudioBase()
+interface StudioBuildUserSetting : StudioBase
 {
-  var doNotShowOnUserSettings: Boolean? = null
-  var doNotShowValueToAdmin: Boolean? = null
-  var optionDataSourceVarId: MetaIdVar? = null
-  lateinit var userSettingOptionKind: EnumDefnUserSettingOptions
+  val doNotShowOnUserSettings: Boolean?
+  val doNotShowValueToAdmin: Boolean?
+  val optionDataSourceVarId: MetaIdVar?
+  val userSettingOptionKind: EnumDefnUserSettingOptions
 }

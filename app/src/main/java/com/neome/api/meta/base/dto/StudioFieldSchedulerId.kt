@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldSchedulerId : StudioFieldEditable()
+interface StudioFieldSchedulerId : StudioFieldEditable
 {
 }

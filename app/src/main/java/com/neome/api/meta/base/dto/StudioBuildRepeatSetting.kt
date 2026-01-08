@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.EnumDefnRepeatFrequencyKind
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioBuildRepeatSetting : StudioBase()
+interface StudioBuildRepeatSetting : StudioBase
 {
-  var endDateTime: String? = null
-  var excludeSetOfDateVarId: MetaIdVar? = null
-  var frequency: Number? = null
-  lateinit var repeatFrequencyKind: EnumDefnRepeatFrequencyKind
+  val endDateTime: String?
+  val excludeSetOfDateVarId: MetaIdVar?
+  val frequency: Long?
+  val repeatFrequencyKind: EnumDefnRepeatFrequencyKind
 }

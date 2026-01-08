@@ -8,7 +8,7 @@ package com.neome.api.app.base.dto
 import com.neome.api.app.base.dto.DtoNeoScript
 import com.neome.api.meta.base.Types.MetaIdTranslation
 
-open class DtoNeoScriptTranslation : DtoNeoScript()
+interface DtoNeoScriptTranslation : DtoNeoScript
 {
-  var translationId: MetaIdTranslation? = null
+  val translationId: MetaIdTranslation?
 }

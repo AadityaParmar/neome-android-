@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdStep
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 
-open class StudioEntAutomationStepMap : StudioBase()
+interface StudioEntAutomationStepMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdStep>
-  lateinit var map: Map<MetaIdStep, StudioEntAutomationStep>
+  val keys: Array<MetaIdStep>
+  val map: Map<MetaIdStep, StudioEntAutomationStep>
 }

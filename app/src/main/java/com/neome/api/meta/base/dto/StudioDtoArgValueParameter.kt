@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.dto.StudioDtoArgValueField
 
-open class StudioDtoArgValueParameter : StudioDtoArgValueField()
+interface StudioDtoArgValueParameter : StudioDtoArgValueField
 {
-  lateinit var paramId: MetaIdPipelineParam
+  val paramId: MetaIdPipelineParam
 }

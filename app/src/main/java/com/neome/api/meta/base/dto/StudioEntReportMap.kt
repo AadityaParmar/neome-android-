@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdReport
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntReport
 
-open class StudioEntReportMap : StudioBase()
+interface StudioEntReportMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdReport>
-  lateinit var map: Map<MetaIdReport, StudioEntReport>
+  val keys: Array<MetaIdReport>
+  val map: Map<MetaIdReport, StudioEntReport>
 }

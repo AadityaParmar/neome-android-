@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntPlugin
 
-open class StudioEntPluginMap : StudioBase()
+interface StudioEntPluginMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdPlugin>
-  lateinit var map: Map<MetaIdPlugin, StudioEntPlugin>
+  val keys: Array<MetaIdPlugin>
+  val map: Map<MetaIdPlugin, StudioEntPlugin>
 }

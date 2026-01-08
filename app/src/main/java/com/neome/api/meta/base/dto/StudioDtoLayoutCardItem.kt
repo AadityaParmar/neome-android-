@@ -12,20 +12,20 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoColor
 import com.neome.api.meta.base.dto.StudioDtoLayoutCardItemLine
 
-open class StudioDtoLayoutCardItem : StudioBase()
+interface StudioDtoLayoutCardItem : StudioBase
 {
-  var fifthLine: StudioDtoLayoutCardItemLine? = null
-  var firstLine: StudioDtoLayoutCardItemLine? = null
-  var fourthLine: StudioDtoLayoutCardItemLine? = null
-  var imageBackgroundColor: StudioDtoColor? = null
-  var imageCornerVarId: MetaIdVar? = null
-  var imageHeight: Number? = null
-  var imageHeightVarId: MetaIdVar? = null
-  var imageRenderingMode: EnumDefnThemeImageRenderingMode? = null
-  var imageWidth: Number? = null
-  var imageWidthVarId: MetaIdVar? = null
-  var mediaFieldIdSet: Array<MetaIdField>? = null
-  var mediaVarIdSet: Array<MetaIdVar>? = null
-  var secondLine: StudioDtoLayoutCardItemLine? = null
-  var thirdLine: StudioDtoLayoutCardItemLine? = null
+  val fifthLine: StudioDtoLayoutCardItemLine?
+  val firstLine: StudioDtoLayoutCardItemLine?
+  val fourthLine: StudioDtoLayoutCardItemLine?
+  val imageBackgroundColor: StudioDtoColor?
+  val imageCornerVarId: MetaIdVar?
+  val imageHeight: Long?
+  val imageHeightVarId: MetaIdVar?
+  val imageRenderingMode: EnumDefnThemeImageRenderingMode?
+  val imageWidth: Long?
+  val imageWidthVarId: MetaIdVar?
+  val mediaFieldIdSet: Array<MetaIdField>?
+  val mediaVarIdSet: Array<MetaIdVar>?
+  val secondLine: StudioDtoLayoutCardItemLine?
+  val thirdLine: StudioDtoLayoutCardItemLine?
 }

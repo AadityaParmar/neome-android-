@@ -9,13 +9,13 @@ import com.neome.api.meta.base.dto.DefnBuildDateTime
 import com.neome.api.meta.base.dto.DefnFieldDateTime
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldDateTimeRange : DefnFieldDateTime()
+interface DefnFieldDateTimeRange : DefnFieldDateTime
 {
-  var allowSingleDate: Boolean? = null
-  var fromDefault: DefnBuildDateTime? = null
-  var fromDefaultFieldId: MetaIdField? = null
-  var fromDefaultVar: DefnBuildDateTime? = null
-  var toDefault: DefnBuildDateTime? = null
-  var toDefaultFieldId: MetaIdField? = null
-  var toDefaultVar: DefnBuildDateTime? = null
+  val allowSingleDate: Boolean?
+  val fromDefault: DefnBuildDateTime?
+  val fromDefaultFieldId: MetaIdField?
+  val fromDefaultVar: DefnBuildDateTime?
+  val toDefault: DefnBuildDateTime?
+  val toDefaultFieldId: MetaIdField?
+  val toDefaultVar: DefnBuildDateTime?
 }

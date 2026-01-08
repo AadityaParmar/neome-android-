@@ -12,13 +12,13 @@ import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.dto.StudioFieldEditable
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioFieldPickGridRow : StudioFieldEditable()
+interface StudioFieldPickGridRow : StudioFieldEditable
 {
-  var copyFieldMap: Map<MetaIdField, MetaIdField>? = null
-  var editableFieldIdSet: Array<MetaIdField>? = null
-  var filterConditionVarId: StudioValueVarIdCondition? = null
-  var gridDisplayFieldId: MetaIdField? = null
-  var gridId: MetaIdGrid? = null
-  var gridLayoutId: MetaIdLayoutGrid? = null
-  var showAsDropdown: Boolean? = null
+  val copyFieldMap: Map<MetaIdField, MetaIdField>?
+  val editableFieldIdSet: Array<MetaIdField>?
+  val filterConditionVarId: StudioValueVarIdCondition?
+  val gridDisplayFieldId: MetaIdField?
+  val gridId: MetaIdGrid?
+  val gridLayoutId: MetaIdLayoutGrid?
+  val showAsDropdown: Boolean?
 }

@@ -8,10 +8,10 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnDocFileExt
 import com.neome.api.meta.base.Types.MediaIdDocument
 
-open class FieldSetOfDocument
+interface FieldSetOfDocument
 {
-  lateinit var fileExtSet: Array<EnumDefnDocFileExt>
-  lateinit var fileNameSet: Array<String>
-  lateinit var fileSizeSet: Array<Number>
-  lateinit var mediaIdDocumentSet: Array<MediaIdDocument>
+  val fileExtSet: Array<EnumDefnDocFileExt>
+  val fileNameSet: Array<String>
+  val fileSizeSet: Array<Number>
+  val mediaIdDocumentSet: Array<MediaIdDocument>
 }

@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.EntVdEvent
 
-open class EntVdEventUserOnline : EntVdEvent()
+interface EntVdEventUserOnline : EntVdEvent
 {
 }

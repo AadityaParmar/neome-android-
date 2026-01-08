@@ -5,20 +5,19 @@
 
 package com.neome.api.home.base.dto
 
-import kotlin.properties.Delegates
 import com.neome.api.home.base.dto.DtoMessagePayloadText
 import com.neome.api.meta.base.Types.MediaIdImage
 import com.neome.api.meta.base.Types.MediaIdVideo
 
-open class DtoMessagePayloadVideo : DtoMessagePayloadText()
+interface DtoMessagePayloadVideo : DtoMessagePayloadText
 {
-  var durationMs: Number by Delegates.notNull<Number>()
-  lateinit var fileName: String
-  var fileSize: Number by Delegates.notNull<Number>()
-  var height: Number by Delegates.notNull<Number>()
-  lateinit var mediaId: MediaIdImage
-  lateinit var mediaIdBlurImage: MediaIdImage
-  lateinit var mediaIdVideo: MediaIdVideo
-  lateinit var primaryColor: String
-  var width: Number by Delegates.notNull<Number>()
+  val durationMs: Long?
+  val fileName: String
+  val fileSize: Long?
+  val height: Long?
+  val mediaId: MediaIdImage
+  val mediaIdBlurImage: MediaIdImage
+  val mediaIdVideo: MediaIdVideo
+  val primaryColor: String
+  val width: Long?
 }

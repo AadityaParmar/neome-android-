@@ -10,11 +10,11 @@ import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.Types.GroupId
 import com.neome.api.meta.base.Types.MediaIdAvatar
 
-open class DtoMessagePayloadGroup : DtoMessagePayload()
+interface DtoMessagePayloadGroup : DtoMessagePayload
 {
-  var about: String? = null
-  var entId: EntId? = null
-  var groupId: GroupId? = null
-  var mediaIdAvatar: MediaIdAvatar? = null
-  var name: String? = null
+  val about: String?
+  val entId: EntId?
+  val groupId: GroupId?
+  val mediaIdAvatar: MediaIdAvatar?
+  val name: String?
 }

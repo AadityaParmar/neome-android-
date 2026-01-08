@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.StudioPlugin
 
-open class StudioPluginDraft
+interface StudioPluginDraft
 {
-  var studioPlugin: StudioPlugin? = null
+  val studioPlugin: StudioPlugin?
 }

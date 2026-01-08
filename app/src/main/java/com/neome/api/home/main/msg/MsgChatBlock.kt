@@ -5,12 +5,11 @@
 
 package com.neome.api.home.main.msg
 
-import kotlin.properties.Delegates
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgChatBlock : Msg()
+interface MsgChatBlock : Msg
 {
-  var block: Boolean by Delegates.notNull<Boolean>()
-  lateinit var chatId: EntUserId
+  val block: Boolean
+  val chatId: EntUserId
 }

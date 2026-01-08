@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 import com.neome.api.meta.base.dto.StudioValueText
 
-open class EntVdGenerateImage : EntVdAutoStep()
+interface EntVdGenerateImage : EntVdAutoStep
 {
-  var contentLayoutId: MetaIdLayoutForm? = null
-  var fileName: StudioValueText? = null
-  var outputField: StudioDtoArgValueParameter? = null
-  var templateLayoutId: MetaIdLayoutForm? = null
+  val contentLayoutId: MetaIdLayoutForm?
+  val fileName: StudioValueText?
+  val outputField: StudioDtoArgValueParameter?
+  val templateLayoutId: MetaIdLayoutForm?
 }

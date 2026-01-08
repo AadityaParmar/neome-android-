@@ -7,9 +7,9 @@ package com.neome.api.app.ai.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigAiNeoScriptGen : Sig()
+interface SigAiNeoScriptGen : Sig
 {
-  var error: String? = null
-  var neoScripts: Array<String>? = null
-  var userMessage: String? = null
+  val error: String?
+  val neoScripts: Array<String>?
+  val userMessage: String?
 }

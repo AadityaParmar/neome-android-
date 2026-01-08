@@ -14,13 +14,13 @@ import com.neome.api.meta.base.dto.StudioValueParagraph
 import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.dto.VdBase
 
-open class EntVdAutoNode : VdBase()
+interface EntVdAutoNode : VdBase
 {
-  lateinit var kind: EnumDefnKindAutoNode
-  var logMsg: StudioValueParagraph? = null
-  lateinit var metaId: MetaIdVdAutoNode
-  lateinit var name: Symbol
-  var parentRegionId: MetaIdVdRegion? = null
-  var point: Point? = null
-  var size: Size? = null
+  val kind: EnumDefnKindAutoNode
+  val logMsg: StudioValueParagraph?
+  val metaId: MetaIdVdAutoNode
+  val name: Symbol
+  val parentRegionId: MetaIdVdRegion?
+  val point: Point?
+  val size: Size?
 }

@@ -8,7 +8,7 @@ package com.neome.api.home.drawer.msg
 import com.neome.api.meta.base.Types.GroupId
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgGroupCandidateListGet : Msg()
+interface MsgGroupCandidateListGet : Msg
 {
-  var groupId: GroupId? = null
+  val groupId: GroupId?
 }

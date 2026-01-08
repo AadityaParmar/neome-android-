@@ -10,10 +10,10 @@ import com.neome.api.meta.base.dto.EntVdWorkflowPointer
 import com.neome.api.meta.base.dto.FormRefKey
 import com.neome.api.meta.base.Types.MetaIdPipelineVar
 
-open class EntVdEventSubWorkflow : EntVdEvent()
+interface EntVdEventSubWorkflow : EntVdEvent
 {
-  var inputForm: FormRefKey? = null
-  var outputForm: FormRefKey? = null
-  var sharedParameterSet: Array<MetaIdPipelineVar>? = null
-  var workflowPointer: EntVdWorkflowPointer? = null
+  val inputForm: FormRefKey?
+  val outputForm: FormRefKey?
+  val sharedParameterSet: Array<MetaIdPipelineVar>?
+  val workflowPointer: EntVdWorkflowPointer?
 }

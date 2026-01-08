@@ -7,7 +7,7 @@ package com.neome.api.ent.base.dto
 
 import com.neome.api.ent.base.Types.EnumGuaranteedRequestType
 
-open class DtoGuaranteedRequest
+interface DtoGuaranteedRequest
 {
-  lateinit var type: EnumGuaranteedRequestType
+  val type: EnumGuaranteedRequestType
 }

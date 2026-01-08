@@ -5,8 +5,8 @@
 
 package com.neome.api.nucleus.base.dto
 
-open class DtoTreeNode
+interface DtoTreeNode
 {
-  var children: Array<DtoTreeNode>? = null
-  lateinit var name: String
+  val children: Array<DtoTreeNode>?
+  val name: String
 }

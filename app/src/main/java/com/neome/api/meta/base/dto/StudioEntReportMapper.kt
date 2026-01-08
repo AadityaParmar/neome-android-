@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioEntReport
 
-open class StudioEntReportMapper : StudioEntReport()
+interface StudioEntReportMapper : StudioEntReport
 {
-  var inputFormMappingVarId: MetaIdVar? = null
-  var mappedReportId: MetaIdReport? = null
-  var outputFormMappingVarId: MetaIdVar? = null
-  var saveToSpreadsheetId: MetaIdSpreadsheet? = null
+  val inputFormMappingVarId: MetaIdVar?
+  val mappedReportId: MetaIdReport?
+  val outputFormMappingVarId: MetaIdVar?
+  val saveToSpreadsheetId: MetaIdSpreadsheet?
 }

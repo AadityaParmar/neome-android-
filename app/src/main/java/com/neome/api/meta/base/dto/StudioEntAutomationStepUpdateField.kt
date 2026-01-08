@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.dto.StudioBuildArgBinderHolder
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 
-open class StudioEntAutomationStepUpdateField : StudioEntAutomationStep()
+interface StudioEntAutomationStepUpdateField : StudioEntAutomationStep
 {
-  var assignValueFieldId: MetaIdField? = null
-  var value: StudioBuildArgBinderHolder? = null
+  val assignValueFieldId: MetaIdField?
+  val value: StudioBuildArgBinderHolder?
 }

@@ -11,11 +11,11 @@ import com.neome.api.meta.base.dto.StudioDtoLayoutGrid
 import com.neome.api.meta.base.dto.StudioDtoLayoutLocmapLineStroke
 import com.neome.api.meta.base.dto.StudioDtoLayoutLocmapPin
 
-open class StudioDtoLayoutLocmap : StudioDtoLayoutGrid()
+interface StudioDtoLayoutLocmap : StudioDtoLayoutGrid
 {
-  var lineStroke: StudioDtoLayoutLocmapLineStroke? = null
-  var liveLocationPin: StudioDtoLayoutLocmapPin? = null
-  var locationFieldId: MetaIdField? = null
-  var mapPin: StudioDtoLayoutLocmapPin? = null
-  var renderingMode: EnumDefnMapRenderingMode? = null
+  val lineStroke: StudioDtoLayoutLocmapLineStroke?
+  val liveLocationPin: StudioDtoLayoutLocmapPin?
+  val locationFieldId: MetaIdField?
+  val mapPin: StudioDtoLayoutLocmapPin?
+  val renderingMode: EnumDefnMapRenderingMode?
 }

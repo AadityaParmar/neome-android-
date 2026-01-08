@@ -8,8 +8,8 @@ package com.neome.api.nucleus.base.dto
 import java.util.Map
 import com.neome.api.meta.base.Types.ServiceName
 
-open class DescApiPushSigs
+interface DescApiPushSigs
 {
-  lateinit var importMap: Map<String, String>
-  lateinit var pushSigs: Map<String, ServiceName>
+  val importMap: Map<String, String>
+  val pushSigs: Map<String, ServiceName>
 }

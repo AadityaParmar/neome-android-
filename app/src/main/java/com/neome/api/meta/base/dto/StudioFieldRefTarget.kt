@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioField
 import com.neome.api.meta.base.dto.StudioMapOfRefTarget
 
-open class StudioFieldRefTarget : StudioField()
+interface StudioFieldRefTarget : StudioField
 {
-  var refTargetSpreadsheetMap: StudioMapOfRefTarget? = null
+  val refTargetSpreadsheetMap: StudioMapOfRefTarget?
 }

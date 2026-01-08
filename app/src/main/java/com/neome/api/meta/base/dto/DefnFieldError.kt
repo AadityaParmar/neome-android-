@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.DefnFieldEditable
 
-open class DefnFieldError : DefnFieldEditable()
+interface DefnFieldError : DefnFieldEditable
 {
-  var showCloseButton: Boolean? = null
+  val showCloseButton: Boolean?
 }

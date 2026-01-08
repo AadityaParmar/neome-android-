@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.EnumDefnFuncArg
 import com.neome.api.meta.base.dto.StudioMapOfFuncArg
 import com.neome.api.meta.base.dto.StudioValueCodeJavascript
 
-open class StudioVarValueFunc
+interface StudioVarValueFunc
 {
-  var inputFuncArgMap: StudioMapOfFuncArg? = null
-  var javascript: StudioValueCodeJavascript? = null
-  var outputKind: EnumDefnFuncArg? = null
+  val inputFuncArgMap: StudioMapOfFuncArg?
+  val javascript: StudioValueCodeJavascript?
+  val outputKind: EnumDefnFuncArg?
 }

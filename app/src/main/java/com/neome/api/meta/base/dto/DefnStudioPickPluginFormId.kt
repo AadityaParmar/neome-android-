@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.DefnStudioPickFormId
 import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.Types.PluginApiId
 
-open class DefnStudioPickPluginFormId : DefnStudioPickFormId()
+interface DefnStudioPickPluginFormId : DefnStudioPickFormId
 {
-  var pluginApiId: PluginApiId? = null
-  var pluginId: MetaIdPlugin? = null
+  val pluginApiId: PluginApiId?
+  val pluginId: MetaIdPlugin?
 }

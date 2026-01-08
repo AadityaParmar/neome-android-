@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 
-open class StudioBuildArgBinderHolder : StudioBase()
+interface StudioBuildArgBinderHolder : StudioBase
 {
-  var argBinder: StudioBuildArgBinder? = null
+  val argBinder: StudioBuildArgBinder?
 }

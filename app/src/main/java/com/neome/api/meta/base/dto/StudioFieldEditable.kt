@@ -12,28 +12,28 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioField
 import com.neome.api.meta.base.dto.StudioValueVarIdText
 
-open class StudioFieldEditable : StudioField()
+interface StudioFieldEditable : StudioField
 {
-  var autoFill: Boolean? = null
-  var autoFocus: Boolean? = null
-  var helperText: String? = null
-  var helperTextFieldId: MetaIdField? = null
-  var helperTextVarId: StudioValueVarIdText? = null
-  var hideLabel: Boolean? = null
-  var icon: String? = null
-  var iconVarId: MetaIdVar? = null
-  var labelFieldId: MetaIdField? = null
-  var placeHolder: String? = null
-  var placeHolderFieldId: MetaIdField? = null
-  var placeHolderVarId: StudioValueVarIdText? = null
-  var prefix: String? = null
-  var prefixVarId: StudioValueVarIdText? = null
-  var refFieldId: MetaIdField? = null
-  var refTargetId: MetaId? = null
-  var required: Boolean? = null
-  var requiredFieldId: MetaIdField? = null
-  var requiredRoleIdSet: Array<MetaIdRole>? = null
-  var requiredVarId: MetaIdVar? = null
-  var suffix: String? = null
-  var suffixVarId: StudioValueVarIdText? = null
+  val autoFill: Boolean?
+  val autoFocus: Boolean?
+  val helperText: String?
+  val helperTextFieldId: MetaIdField?
+  val helperTextVarId: StudioValueVarIdText?
+  val hideLabel: Boolean?
+  val icon: String?
+  val iconVarId: MetaIdVar?
+  val labelFieldId: MetaIdField?
+  val placeHolder: String?
+  val placeHolderFieldId: MetaIdField?
+  val placeHolderVarId: StudioValueVarIdText?
+  val prefix: String?
+  val prefixVarId: StudioValueVarIdText?
+  val refFieldId: MetaIdField?
+  val refTargetId: MetaId?
+  val required: Boolean?
+  val requiredFieldId: MetaIdField?
+  val requiredRoleIdSet: Array<MetaIdRole>?
+  val requiredVarId: MetaIdVar?
+  val suffix: String?
+  val suffixVarId: StudioValueVarIdText?
 }

@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.EntVdAutoStepWithOutput
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-open class EntVdBotBuildResponse : EntVdAutoStepWithOutput()
+interface EntVdBotBuildResponse : EntVdAutoStepWithOutput
 {
-  var attachmentField: StudioDtoArgValueParameter? = null
-  var contentField: StudioBuildArgBinder? = null
+  val attachmentField: StudioDtoArgValueParameter?
+  val contentField: StudioBuildArgBinder?
 }

@@ -15,17 +15,17 @@ import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSection
 
-open class DefnSection : DefnComp()
+interface DefnSection : DefnComp
 {
-  var actionPermissionMap: DefnStudioMapOfActionPermission? = null
-  var fieldIdSet: Array<MetaIdField>? = null
-  var fieldSpanMap: Map<MetaIdField, Number>? = null
-  var flexGrow: Boolean? = null
-  var justifyContent: EnumDefnPlacement? = null
-  lateinit var metaId: MetaIdSection
-  var overflowHidden: Boolean? = null
-  var propertyEditorLabel: String? = null
-  var reportLayout: FieldDtoSectionLayout? = null
-  var sectionDirection: EnumDefnThemeDirection? = null
-  var sectionVariant: EnumDefnThemeSectionVariant? = null
+  val actionPermissionMap: DefnStudioMapOfActionPermission?
+  val fieldIdSet: Array<MetaIdField>?
+  val fieldSpanMap: Map<MetaIdField, Number>?
+  val flexGrow: Boolean?
+  val justifyContent: EnumDefnPlacement?
+  val metaId: MetaIdSection
+  val overflowHidden: Boolean?
+  val propertyEditorLabel: String?
+  val reportLayout: FieldDtoSectionLayout?
+  val sectionDirection: EnumDefnThemeDirection?
+  val sectionVariant: EnumDefnThemeSectionVariant?
 }

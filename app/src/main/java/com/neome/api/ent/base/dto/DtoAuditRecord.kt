@@ -13,19 +13,19 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.RowId
 
-open class DtoAuditRecord
+interface DtoAuditRecord
 {
-  var auditAction: EnumAuditAction? = null
-  var dateTime: String? = null
-  var entId: EntId? = null
-  var entUserId: EntUserId? = null
-  var formId: MetaIdForm? = null
-  var formValueRefKey: String? = null
-  var historyFieldLabelSet: Array<String>? = null
-  var historyFieldValueSet: Array<String>? = null
-  var offset: String? = null
-  var rowId: RowId? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
-  var spreadsheetName: String? = null
-  var version: String? = null
+  val auditAction: EnumAuditAction?
+  val dateTime: String?
+  val entId: EntId?
+  val entUserId: EntUserId?
+  val formId: MetaIdForm?
+  val formValueRefKey: String?
+  val historyFieldLabelSet: Array<String>?
+  val historyFieldValueSet: Array<String>?
+  val offset: String?
+  val rowId: RowId?
+  val spreadsheetId: MetaIdSpreadsheet?
+  val spreadsheetName: String?
+  val version: String?
 }

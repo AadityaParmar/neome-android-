@@ -9,11 +9,11 @@ import com.neome.api.meta.base.Types.CurrencyKey
 import com.neome.api.meta.base.Types.EnumDefnPaymentMethodKind
 import com.neome.api.meta.base.dto.StudioEntPaymentProvider
 
-open class StudioEntPaymentProviderRazorPay : StudioEntPaymentProvider()
+interface StudioEntPaymentProviderRazorPay : StudioEntPaymentProvider
 {
-  var allowedPaymentMethodSet: Array<EnumDefnPaymentMethodKind>? = null
-  var apiKey: String? = null
-  var apiSecret: String? = null
-  var defaultCurrency: CurrencyKey? = null
-  var webhookSecret: String? = null
+  val allowedPaymentMethodSet: Array<EnumDefnPaymentMethodKind>?
+  val apiKey: String?
+  val apiSecret: String?
+  val defaultCurrency: CurrencyKey?
+  val webhookSecret: String?
 }

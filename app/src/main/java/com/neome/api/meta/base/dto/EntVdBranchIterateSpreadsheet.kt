@@ -11,12 +11,12 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioMapOfCondition
 
-open class EntVdBranchIterateSpreadsheet : EntVdAutoStep()
+interface EntVdBranchIterateSpreadsheet : EntVdAutoStep
 {
-  var ascendingOrder: EnumDefnSortOrder? = null
-  var filterCondition: StudioMapOfCondition? = null
-  var numberOfRows: Number? = null
-  var orderByFieldIds: Array<MetaIdField>? = null
-  var selectFieldIds: Array<MetaIdField>? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
+  val ascendingOrder: EnumDefnSortOrder?
+  val filterCondition: StudioMapOfCondition?
+  val numberOfRows: Long?
+  val orderByFieldIds: Array<MetaIdField>?
+  val selectFieldIds: Array<MetaIdField>?
+  val spreadsheetId: MetaIdSpreadsheet?
 }

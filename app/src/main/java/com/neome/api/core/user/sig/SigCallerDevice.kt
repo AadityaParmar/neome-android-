@@ -9,12 +9,12 @@ import java.util.Date
 import com.neome.api.meta.base.Types.DeviceId
 import com.neome.api.nucleus.base.sig.SigVersion
 
-open class SigCallerDevice : SigVersion()
+interface SigCallerDevice : SigVersion
 {
-  lateinit var creationTime: String
-  lateinit var deviceId: DeviceId
-  var deviceName: String? = null
-  var deviceToken: String? = null
-  lateinit var randomColor: String
-  lateinit var refreshTokenExpiry: String
+  val creationTime: String
+  val deviceId: DeviceId
+  val deviceName: String?
+  val deviceToken: String?
+  val randomColor: String
+  val refreshTokenExpiry: String
 }

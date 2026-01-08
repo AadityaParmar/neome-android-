@@ -13,15 +13,17 @@ import com.neome.api.meta.base.Types.MetaIdReport
 import com.neome.api.meta.base.dto.StudioDtoLayoutOverlaySpreadsheet
 import com.neome.api.meta.base.dto.StudioField
 
-open class StudioFieldRefReport : StudioField()
+interface StudioFieldRefReport : StudioField
 {
-  var copyFieldMap: Map<MetaIdField, MetaIdField>? = null
-  var editableFieldIdSet: Array<MetaIdField>? = null
-  var forceOpenOnFormCreate: Boolean? = null
-  var forceOpenOnGridRowCreate: Boolean? = null
-  var gridId: MetaIdGrid? = null
-  var keyFieldIdSet: Array<MetaIdField>? = null
-  var layoutGridId: MetaIdLayoutGrid? = null
-  var overlayLayoutGrid: StudioDtoLayoutOverlaySpreadsheet? = null
-  var reportId: MetaIdReport? = null
+  val copyFieldMap: Map<MetaIdField, MetaIdField>?
+  val editableFieldIdSet: Array<MetaIdField>?
+  val forceOpenOnFormCreate: Boolean?
+  val forceOpenOnGridRowCreate: Boolean?
+  val gridId: MetaIdGrid?
+  val keyFieldIdSet: Array<MetaIdField>?
+  val layoutGridId: MetaIdLayoutGrid?
+  val mobileLayoutGridId: MetaIdLayoutGrid?
+  val mobileOverlayLayoutGrid: StudioDtoLayoutOverlaySpreadsheet?
+  val overlayLayoutGrid: StudioDtoLayoutOverlaySpreadsheet?
+  val reportId: MetaIdReport?
 }

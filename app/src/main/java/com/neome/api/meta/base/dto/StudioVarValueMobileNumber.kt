@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.MobileNumber
 
-open class StudioVarValueMobileNumber
+interface StudioVarValueMobileNumber
 {
-  var value: MobileNumber? = null
+  val value: MobileNumber?
 }

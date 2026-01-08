@@ -8,7 +8,7 @@ package com.neome.api.home.drawer.sig
 import com.neome.api.core.base.dto.DtoDevice
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigCallerDeviceList : Sig()
+interface SigCallerDeviceList : Sig
 {
-  lateinit var deviceList: Array<DtoDevice>
+  val deviceList: Array<DtoDevice>
 }

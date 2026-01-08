@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.EnumDefnDynamicOperator
 import com.neome.api.meta.base.dto.FieldDtoArg
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnDtoDynamicCondition
+interface DefnDtoDynamicCondition
 {
-  lateinit var lhs: MetaIdField
-  lateinit var operator: EnumDefnDynamicOperator
-  var rhs: FieldDtoArg? = null
+  val lhs: MetaIdField
+  val operator: EnumDefnDynamicOperator
+  val rhs: FieldDtoArg?
 }

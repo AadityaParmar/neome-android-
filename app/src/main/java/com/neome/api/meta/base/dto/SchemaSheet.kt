@@ -10,10 +10,10 @@ import com.neome.api.meta.base.dto.SchemaFieldMap
 import com.neome.api.meta.base.dto.SchemaGridMap
 import com.neome.api.meta.base.Types.SymbolGrid
 
-open class SchemaSheet
+interface SchemaSheet
 {
-  lateinit var fieldMap: SchemaFieldMap
-  lateinit var formSymbol: SymbolGrid
-  lateinit var gridMap: SchemaGridMap
-  lateinit var metaId: MetaIdForm
+  val fieldMap: SchemaFieldMap
+  val formSymbol: SymbolGrid
+  val gridMap: SchemaGridMap
+  val metaId: MetaIdForm
 }

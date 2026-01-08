@@ -10,13 +10,13 @@ import com.neome.api.meta.base.Types.MediaId
 import com.neome.api.meta.base.Types.MetaIdRole
 import java.util.Set
 
-open class DtoEntUserInfo
+interface DtoEntUserInfo
 {
-  var avatarId: MediaId? = null
-  lateinit var entUserId: EntUserId
-  var handle: String? = null
-  var managerId: EntUserId? = null
-  lateinit var nickName: String
-  var roleIdSet: Array<MetaIdRole>? = null
-  lateinit var userColor: String
+  val avatarId: MediaId?
+  val entUserId: EntUserId
+  val handle: String?
+  val managerId: EntUserId?
+  val nickName: String
+  val roleIdSet: Array<MetaIdRole>?
+  val userColor: String
 }

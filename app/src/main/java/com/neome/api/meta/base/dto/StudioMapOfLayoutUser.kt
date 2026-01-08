@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.MetaIdLayoutUser
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoLayoutUser
 
-open class StudioMapOfLayoutUser : StudioBase()
+interface StudioMapOfLayoutUser : StudioBase
 {
-  lateinit var keys: Array<MetaIdLayoutUser>
-  lateinit var map: Map<MetaIdLayoutUser, StudioDtoLayoutUser>
-  var mobileDefaultLayoutId: MetaIdLayoutUser? = null
-  var webDefaultLayoutId: MetaIdLayoutUser? = null
+  val keys: Array<MetaIdLayoutUser>
+  val map: Map<MetaIdLayoutUser, StudioDtoLayoutUser>
+  val mobileDefaultLayoutId: MetaIdLayoutUser?
+  val webDefaultLayoutId: MetaIdLayoutUser?
 }

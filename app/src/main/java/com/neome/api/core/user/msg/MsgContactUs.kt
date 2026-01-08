@@ -8,13 +8,13 @@ package com.neome.api.core.user.msg
 import java.util.Map
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgContactUs : Msg()
+interface MsgContactUs : Msg
 {
-  var attrMap: Map<String, String>? = null
-  var companyName: String? = null
-  var content: String? = null
-  var email: String? = null
-  var fullName: String? = null
-  var mobileNumber: String? = null
-  var pageName: String? = null
+  val attrMap: Map<String, String>?
+  val companyName: String?
+  val content: String?
+  val email: String?
+  val fullName: String?
+  val mobileNumber: String?
+  val pageName: String?
 }

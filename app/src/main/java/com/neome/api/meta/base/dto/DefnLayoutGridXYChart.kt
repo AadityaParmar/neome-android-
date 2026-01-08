@@ -10,10 +10,10 @@ import com.neome.api.meta.base.dto.DefnStudioMapOfChartXAxis
 import com.neome.api.meta.base.dto.DefnStudioMapOfChartYAxis
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnLayoutGridXYChart : DefnLayoutGrid()
+interface DefnLayoutGridXYChart : DefnLayoutGrid
 {
-  var hideLegend: Boolean? = null
-  lateinit var xAxis: MetaIdField
-  var xAxisMap: DefnStudioMapOfChartXAxis? = null
-  var yAxisMap: DefnStudioMapOfChartYAxis? = null
+  val hideLegend: Boolean?
+  val xAxis: MetaIdField
+  val xAxisMap: DefnStudioMapOfChartXAxis?
+  val yAxisMap: DefnStudioMapOfChartYAxis?
 }

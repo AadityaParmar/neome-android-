@@ -7,11 +7,11 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdVideoTimestamp
 
-open class DefnDtoVideoTimestamp
+interface DefnDtoVideoTimestamp
 {
-  var metaId: MetaIdVideoTimestamp? = null
-  var startTimeMinutes: Number? = null
-  var startTimeSeconds: Number? = null
-  var style: String? = null
-  var title: String? = null
+  val metaId: MetaIdVideoTimestamp?
+  val startTimeMinutes: Long?
+  val startTimeSeconds: Long?
+  val style: String?
+  val title: String?
 }

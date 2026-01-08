@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoOptionPermission
 
-open class StudioMapOfOptionPermission : StudioBase()
+interface StudioMapOfOptionPermission : StudioBase
 {
-  lateinit var keys: Array<MetaIdRole>
-  lateinit var map: Map<MetaIdRole, StudioDtoOptionPermission>
+  val keys: Array<MetaIdRole>
+  val map: Map<MetaIdRole, StudioDtoOptionPermission>
 }

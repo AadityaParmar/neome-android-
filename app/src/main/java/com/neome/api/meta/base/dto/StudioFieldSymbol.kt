@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioFieldEditable
 import com.neome.api.meta.base.Symbol
 
-open class StudioFieldSymbol : StudioFieldEditable()
+interface StudioFieldSymbol : StudioFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: Symbol? = null
-  var defaultVarId: MetaIdVar? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: Symbol?
+  val defaultVarId: MetaIdVar?
 }

@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.EnumDefnRowProperty
 import com.neome.api.meta.base.Types.EnumDefnUserProperty
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldUserId : StudioFieldEditable()
+interface StudioFieldUserId : StudioFieldEditable
 {
-  var defaultValue: EnumDefnRowProperty? = null
-  var displayProperty: EnumDefnUserProperty? = null
+  val defaultValue: EnumDefnRowProperty?
+  val displayProperty: EnumDefnUserProperty?
 }

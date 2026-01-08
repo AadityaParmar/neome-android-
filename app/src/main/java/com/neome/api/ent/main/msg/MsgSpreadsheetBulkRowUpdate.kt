@@ -12,9 +12,9 @@ import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.nucleus.base.msg.Msg
 import com.neome.api.meta.base.Types.RowId
 
-open class MsgSpreadsheetBulkRowUpdate : Msg()
+interface MsgSpreadsheetBulkRowUpdate : Msg
 {
-  lateinit var actionId: MetaIdAction
-  lateinit var rowIdSet: Array<RowId>
-  lateinit var valueMap: Map<MetaIdComp, Any>
+  val actionId: MetaIdAction
+  val rowIdSet: Array<RowId>
+  val valueMap: Map<MetaIdComp, Any>
 }

@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntAction
 
-open class StudioEntActionMap : StudioBase()
+interface StudioEntActionMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdAction>
-  lateinit var map: Map<MetaIdAction, StudioEntAction>
+  val keys: Array<MetaIdAction>
+  val map: Map<MetaIdAction, StudioEntAction>
 }

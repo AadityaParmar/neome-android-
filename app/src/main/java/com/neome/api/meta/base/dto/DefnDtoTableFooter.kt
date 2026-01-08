@@ -12,15 +12,15 @@ import com.neome.api.meta.base.Types.EnumDefnTextStyle
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdFooter
 
-open class DefnDtoTableFooter
+interface DefnDtoTableFooter
 {
-  var alignment: EnumDefnPlacement? = null
-  var bgColor: DefnDtoColor? = null
-  lateinit var displayFieldId: MetaIdField
-  lateinit var fieldIdSet: Array<MetaIdField>
-  lateinit var metaId: MetaIdFooter
-  var showLabel: Boolean? = null
-  var textColor: DefnDtoColor? = null
-  var textSize: EnumDefnTextSize? = null
-  var textStyleSet: Array<EnumDefnTextStyle>? = null
+  val alignment: EnumDefnPlacement?
+  val bgColor: DefnDtoColor?
+  val displayFieldId: MetaIdField
+  val fieldIdSet: Array<MetaIdField>
+  val metaId: MetaIdFooter
+  val showLabel: Boolean?
+  val textColor: DefnDtoColor?
+  val textSize: EnumDefnTextSize?
+  val textStyleSet: Array<EnumDefnTextStyle>?
 }

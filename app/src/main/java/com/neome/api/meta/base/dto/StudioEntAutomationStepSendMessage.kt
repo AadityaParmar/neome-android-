@@ -11,11 +11,11 @@ import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.dto.StudioEntAutomationStepSendMessageBase
 import com.neome.api.meta.base.dto.StudioValueVarIdParagraph
 
-open class StudioEntAutomationStepSendMessage : StudioEntAutomationStepSendMessageBase()
+interface StudioEntAutomationStepSendMessage : StudioEntAutomationStepSendMessageBase
 {
-  var groupIdSet: Array<MetaIdGroup>? = null
-  var messageVarId: StudioValueVarIdParagraph? = null
-  var sendAsComment: Boolean? = null
-  var senderFieldId: MetaIdField? = null
-  var senderRoleId: MetaIdRole? = null
+  val groupIdSet: Array<MetaIdGroup>?
+  val messageVarId: StudioValueVarIdParagraph?
+  val sendAsComment: Boolean?
+  val senderFieldId: MetaIdField?
+  val senderRoleId: MetaIdRole?
 }

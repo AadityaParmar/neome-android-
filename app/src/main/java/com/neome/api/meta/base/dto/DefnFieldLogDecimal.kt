@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnFieldDecimal
 import com.neome.api.meta.base.Types.MetaIdRole
 
-open class DefnFieldLogDecimal : DefnFieldDecimal()
+interface DefnFieldLogDecimal : DefnFieldDecimal
 {
-  var hideInfo: Boolean? = null
-  var logReadRoleSet: Array<MetaIdRole>? = null
+  val hideInfo: Boolean?
+  val logReadRoleSet: Array<MetaIdRole>?
 }

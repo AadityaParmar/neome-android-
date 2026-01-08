@@ -10,7 +10,7 @@ import com.neome.api.meta.base.Types.EntId
 import java.util.Map
 import com.neome.api.nucleus.base.sig.SigVersion
 
-open class SigBadgeMap : SigVersion()
+interface SigBadgeMap : SigVersion
 {
-  lateinit var entChatBadgeMap: Map<EntId, DtoChatBadgeMap>
+  val entChatBadgeMap: Map<EntId, DtoChatBadgeMap>
 }

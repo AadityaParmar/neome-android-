@@ -12,9 +12,9 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.ent.entDrawer.sig.SigEntAvatarUser
 import com.neome.api.meta.base.dto.StudioEntRole
 
-open class DtoEntDeploy
+interface DtoEntDeploy
 {
-  lateinit var avatar: SigEntAvatarUser
-  lateinit var roleMap: Map<MetaIdRole, StudioEntRole>
-  lateinit var userSettingVarMap: Map<MetaIdVar, DtoVarUserSetting>
+  val avatar: SigEntAvatarUser
+  val roleMap: Map<MetaIdRole, StudioEntRole>
+  val userSettingVarMap: Map<MetaIdVar, DtoVarUserSetting>
 }

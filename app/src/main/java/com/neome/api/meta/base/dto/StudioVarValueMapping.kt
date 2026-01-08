@@ -9,10 +9,10 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.dto.StudioDtoMapping
 
-open class StudioVarValueMapping : StudioDtoMapping()
+interface StudioVarValueMapping : StudioDtoMapping
 {
-  var fromFormId: MetaIdForm? = null
-  var fromPluginId: MetaIdPlugin? = null
-  var toFormId: MetaIdForm? = null
-  var toPluginId: MetaIdPlugin? = null
+  val fromFormId: MetaIdForm?
+  val fromPluginId: MetaIdPlugin?
+  val toFormId: MetaIdForm?
+  val toPluginId: MetaIdPlugin?
 }

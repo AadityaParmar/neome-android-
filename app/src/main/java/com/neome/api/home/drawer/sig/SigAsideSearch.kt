@@ -5,12 +5,11 @@
 
 package com.neome.api.home.drawer.sig
 
-import kotlin.properties.Delegates
 import com.neome.api.home.main.sig.SigMessage
 import com.neome.api.nucleus.base.sig.SigVersion
 
-open class SigAsideSearch : SigVersion()
+interface SigAsideSearch : SigVersion
 {
-  lateinit var messageList: Array<SigMessage>
-  var totalMessageCount: Number by Delegates.notNull<Number>()
+  val messageList: Array<SigMessage>
+  val totalMessageCount: Long?
 }

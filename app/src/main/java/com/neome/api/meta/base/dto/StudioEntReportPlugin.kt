@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioDtoPluginApi
 import com.neome.api.meta.base.dto.StudioEntReport
 
-open class StudioEntReportPlugin : StudioEntReport()
+interface StudioEntReportPlugin : StudioEntReport
 {
-  var inputFormMappingVarId: MetaIdVar? = null
-  var outputFormMappingVarId: MetaIdVar? = null
-  var pluginApi: StudioDtoPluginApi? = null
+  val inputFormMappingVarId: MetaIdVar?
+  val outputFormMappingVarId: MetaIdVar?
+  val pluginApi: StudioDtoPluginApi?
 }

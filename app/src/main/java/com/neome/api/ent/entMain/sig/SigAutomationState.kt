@@ -10,9 +10,9 @@ import com.neome.api.ent.base.dto.AutomationStepSummary
 import com.neome.api.ent.base.dto.DtoAutomationVariableInfo
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigAutomationState : Sig()
+interface SigAutomationState : Sig
 {
-  lateinit var executionId: AutomationExecutionId
-  var summaryList: Array<AutomationStepSummary>? = null
-  var variables: Array<DtoAutomationVariableInfo>? = null
+  val executionId: AutomationExecutionId
+  val summaryList: Array<AutomationStepSummary>?
+  val variables: Array<DtoAutomationVariableInfo>?
 }

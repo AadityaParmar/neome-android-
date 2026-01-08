@@ -14,18 +14,18 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntWallpaper
 import com.neome.api.meta.base.Types.TimeZoneKey
 
-open class StudioEntDetails : StudioBase()
+interface StudioEntDetails : StudioBase
 {
-  var about: String? = null
-  var avatarId: MediaIdAvatar? = null
-  var displayDateFormat: String? = null
-  var hideAddressBook: Boolean? = null
-  var languageSet: Array<LanguageKey>? = null
-  var locationAccuracy: EnumDefnLocationAccuracy? = null
-  lateinit var name: String
-  var storeAbout: String? = null
-  var storeItemType: EnumDefnStoreItem? = null
-  var storeLabelSet: Array<EnumStoreLabel>? = null
-  var timeZone: TimeZoneKey? = null
-  var wallpaper: StudioEntWallpaper? = null
+  val about: String?
+  val avatarId: MediaIdAvatar?
+  val displayDateFormat: String?
+  val hideAddressBook: Boolean?
+  val languageSet: Array<LanguageKey>?
+  val locationAccuracy: EnumDefnLocationAccuracy?
+  val name: String
+  val storeAbout: String?
+  val storeItemType: EnumDefnStoreItem?
+  val storeLabelSet: Array<EnumStoreLabel>?
+  val timeZone: TimeZoneKey?
+  val wallpaper: StudioEntWallpaper?
 }

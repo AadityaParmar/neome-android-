@@ -10,7 +10,7 @@ import com.neome.api.meta.base.Types.HandleKey
 import java.util.Map
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigAgentEntUserImport : Sig()
+interface SigAgentEntUserImport : Sig
 {
-  lateinit var errorMap: Map<HandleKey, EnvValidationError>
+  val errorMap: Map<HandleKey, EnvValidationError>
 }

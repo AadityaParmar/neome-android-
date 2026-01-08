@@ -13,17 +13,17 @@ import com.neome.api.meta.base.dto.StudioMapOfArgBinder
 import com.neome.api.meta.base.dto.StudioPluginApiBody
 import com.neome.api.meta.base.Symbol
 
-open class StudioEntPluginApi : StudioBase()
+interface StudioEntPluginApi : StudioBase
 {
-  lateinit var apiType: EnumDefnPluginApiMethod
-  var baseURL: String? = null
-  var guaranteedInvocation: Boolean? = null
-  var headerParamMap: StudioMapOfArgBinder? = null
-  var inputFormId: MetaIdForm? = null
-  lateinit var name: Symbol
-  var outputFormId: MetaIdForm? = null
-  lateinit var pluginApiId: PluginApiId
-  var queryParamMap: StudioMapOfArgBinder? = null
-  var requestBody: StudioPluginApiBody? = null
-  var responseBody: StudioPluginApiBody? = null
+  val apiType: EnumDefnPluginApiMethod
+  val baseURL: String?
+  val guaranteedInvocation: Boolean?
+  val headerParamMap: StudioMapOfArgBinder?
+  val inputFormId: MetaIdForm?
+  val name: Symbol
+  val outputFormId: MetaIdForm?
+  val pluginApiId: PluginApiId
+  val queryParamMap: StudioMapOfArgBinder?
+  val requestBody: StudioPluginApiBody?
+  val responseBody: StudioPluginApiBody?
 }

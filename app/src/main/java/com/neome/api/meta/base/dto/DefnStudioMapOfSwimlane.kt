@@ -10,8 +10,8 @@ import com.neome.api.meta.base.dto.DefnField
 import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdSwimlane
 
-open class DefnStudioMapOfSwimlane : DefnField()
+interface DefnStudioMapOfSwimlane : DefnField
 {
-  var keys: Array<MetaIdSwimlane>? = null
-  lateinit var map: Map<MetaIdSwimlane, DefnDtoSwimlane>
+  val keys: Array<MetaIdSwimlane>?
+  val map: Map<MetaIdSwimlane, DefnDtoSwimlane>
 }

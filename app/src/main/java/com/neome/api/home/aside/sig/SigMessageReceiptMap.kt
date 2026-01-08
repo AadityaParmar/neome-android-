@@ -10,7 +10,7 @@ import com.neome.api.meta.base.Types.EntUserId
 import java.util.Map
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigMessageReceiptMap : Sig()
+interface SigMessageReceiptMap : Sig
 {
-  lateinit var entUserReceiptMap: Map<EntUserId, DtoReceipt>
+  val entUserReceiptMap: Map<EntUserId, DtoReceipt>
 }

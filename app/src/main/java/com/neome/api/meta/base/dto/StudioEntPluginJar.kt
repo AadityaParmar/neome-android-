@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioMapOfJarFile
 
-open class StudioEntPluginJar : StudioBase()
+interface StudioEntPluginJar : StudioBase
 {
-  var packageNameVar: String? = null
-  var pluginConfigFormId: MetaIdForm? = null
-  var uploadJarMap: StudioMapOfJarFile? = null
+  val packageNameVar: String?
+  val pluginConfigFormId: MetaIdForm?
+  val uploadJarMap: StudioMapOfJarFile?
 }

@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.EntVdAi
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-open class EntVdAiXMLToSpreadsheet : EntVdAi()
+interface EntVdAiXMLToSpreadsheet : EntVdAi
 {
-  var inputField: StudioDtoArgValueParameter? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
+  val inputField: StudioDtoArgValueParameter?
+  val spreadsheetId: MetaIdSpreadsheet?
 }

@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntSpreadsheet
 
-open class StudioEntSpreadsheetMap : StudioBase()
+interface StudioEntSpreadsheetMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdSpreadsheet>
-  lateinit var map: Map<MetaIdSpreadsheet, StudioEntSpreadsheet>
+  val keys: Array<MetaIdSpreadsheet>
+  val map: Map<MetaIdSpreadsheet, StudioEntSpreadsheet>
 }

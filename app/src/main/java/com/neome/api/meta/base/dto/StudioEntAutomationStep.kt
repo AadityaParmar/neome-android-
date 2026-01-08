@@ -14,15 +14,15 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 import com.neome.api.meta.base.Symbol
 
-open class StudioEntAutomationStep : StudioBase()
+interface StudioEntAutomationStep : StudioBase
 {
-  var description: String? = null
-  var executionConditionInputPipelineVarId: MetaIdPipelineParam? = null
-  var executionConditionVarId: StudioValueVarIdCondition? = null
-  lateinit var kind: EnumDefnKindAutomationStep
-  lateinit var metaId: MetaIdStep
-  lateinit var name: Symbol
-  var skipUpdateSpreadsheetTrigger: Boolean? = null
-  var terminateFieldId: MetaIdField? = null
-  var terminateKind: EnumDefnAutomationTerminateKind? = null
+  val description: String?
+  val executionConditionInputPipelineVarId: MetaIdPipelineParam?
+  val executionConditionVarId: StudioValueVarIdCondition?
+  val kind: EnumDefnKindAutomationStep
+  val metaId: MetaIdStep
+  val name: Symbol
+  val skipUpdateSpreadsheetTrigger: Boolean?
+  val terminateFieldId: MetaIdField?
+  val terminateKind: EnumDefnAutomationTerminateKind?
 }

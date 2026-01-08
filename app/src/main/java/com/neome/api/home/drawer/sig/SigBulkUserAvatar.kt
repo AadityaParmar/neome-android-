@@ -11,8 +11,8 @@ import java.util.Map
 import com.neome.api.nucleus.base.sig.Sig
 import com.neome.api.home.drawer.sig.SigUserAvatar
 
-open class SigBulkUserAvatar : Sig()
+interface SigBulkUserAvatar : Sig
 {
-  var errorMap: Map<EntUserId, EnvValidationError>? = null
-  var resultMap: Map<EntUserId, SigUserAvatar>? = null
+  val errorMap: Map<EntUserId, EnvValidationError>?
+  val resultMap: Map<EntUserId, SigUserAvatar>?
 }

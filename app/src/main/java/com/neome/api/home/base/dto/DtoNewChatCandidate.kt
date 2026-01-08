@@ -8,8 +8,8 @@ package com.neome.api.home.base.dto
 import com.neome.api.home.drawer.sig.SigGroupAvatar
 import com.neome.api.home.drawer.sig.SigUserAvatar
 
-open class DtoNewChatCandidate
+interface DtoNewChatCandidate
 {
-  var groupAvatar: SigGroupAvatar? = null
-  var userAvatar: SigUserAvatar? = null
+  val groupAvatar: SigGroupAvatar?
+  val userAvatar: SigUserAvatar?
 }

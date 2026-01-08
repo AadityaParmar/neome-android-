@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.EnumDefnKindRating
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldRating : StudioFieldEditable()
+interface StudioFieldRating : StudioFieldEditable
 {
-  var ratingKind: EnumDefnKindRating? = null
-  var ratingKindVarId: MetaIdVar? = null
+  val ratingKind: EnumDefnKindRating?
+  val ratingKindVarId: MetaIdVar?
 }

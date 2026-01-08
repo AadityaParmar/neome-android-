@@ -9,9 +9,9 @@ import com.neome.api.meta.base.dto.DefnDtoText
 import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldEditableText : DefnFieldEditable()
+interface DefnFieldEditableText : DefnFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: String? = null
-  var defaultVar: DefnDtoText? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: String?
+  val defaultVar: DefnDtoText?
 }

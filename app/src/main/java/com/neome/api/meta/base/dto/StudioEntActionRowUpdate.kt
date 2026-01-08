@@ -11,10 +11,10 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioEntAction
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntActionRowUpdate : StudioEntAction()
+interface StudioEntActionRowUpdate : StudioEntAction
 {
-  var filterConditionVarId: StudioValueVarIdCondition? = null
-  var layoutSpreadsheetId: MetaIdLayoutGrid? = null
-  var lookupFieldId: MetaIdField? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
+  val filterConditionVarId: StudioValueVarIdCondition?
+  val layoutSpreadsheetId: MetaIdLayoutGrid?
+  val lookupFieldId: MetaIdField?
+  val spreadsheetId: MetaIdSpreadsheet?
 }

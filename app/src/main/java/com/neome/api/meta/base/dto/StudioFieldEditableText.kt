@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.dto.StudioFieldEditable
 import com.neome.api.meta.base.dto.StudioValueVarIdText
 
-open class StudioFieldEditableText : StudioFieldEditable()
+interface StudioFieldEditableText : StudioFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: String? = null
-  var defaultVarId: StudioValueVarIdText? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: String?
+  val defaultVarId: StudioValueVarIdText?
 }

@@ -35,38 +35,38 @@ import com.neome.api.meta.base.dto.StudioModuleMap
 import com.neome.api.meta.base.dto.StudioStoreItemDetailMap
 import com.neome.api.meta.base.dto.StudioVarMap
 
-open class StudioEnt : StudioDeployUnit()
+interface StudioEnt : StudioDeployUnit
 {
-  lateinit var actionMap: StudioEntActionMap
-  lateinit var autoDiaMap: EntVdAutoDiaMap
-  lateinit var automationMap: StudioEntAutomationMap
-  var createdBy: AdminId? = null
-  var creationTime: String? = null
-  lateinit var deeplinkMap: StudioEntDeeplinkMap
-  lateinit var demoAppId: DemoAppId
-  lateinit var deployVarMap: StudioEntDeployVarMap
-  lateinit var details: StudioEntDetails
-  lateinit var driveSheetMap: StudioEntDriveSheetMap
-  lateinit var entId: EntId
-  lateinit var erdDiaMap: EntVdErdDiaMap
-  lateinit var formMap: StudioFormMap
-  lateinit var groupMap: StudioEntGroupMap
-  var lastUpdateBy: AdminId? = null
-  var lastUpdateTime: String? = null
-  var layoutUserMap: StudioMapOfLayoutUser? = null
-  var layoutUserMenuActionMap: StudioMapOfActionPermission? = null
-  lateinit var moduleMap: StudioModuleMap
-  var nameCounterMap: StudioEntNameCounterMap? = null
-  lateinit var pluginMap: StudioEntPluginMap
-  lateinit var promptMap: StudioEntPromptMap
-  lateinit var reportDiaMap: EntVdReportDiaMap
-  lateinit var reportMap: StudioEntReportMap
-  lateinit var roleMap: StudioEntRoleMap
-  lateinit var spreadsheetMap: StudioEntSpreadsheetMap
-  var storeItemDetailMap: StudioStoreItemDetailMap? = null
-  lateinit var translationMap: StudioEntTranslationMap
-  var trash: StudioEntTrash? = null
-  lateinit var varMap: StudioVarMap
-  var version: String? = null
-  var versionCode: Number? = null
+  val actionMap: StudioEntActionMap
+  val autoDiaMap: EntVdAutoDiaMap
+  val automationMap: StudioEntAutomationMap
+  val createdBy: AdminId?
+  val creationTime: String?
+  val deeplinkMap: StudioEntDeeplinkMap
+  val demoAppId: DemoAppId
+  val deployVarMap: StudioEntDeployVarMap
+  val details: StudioEntDetails
+  val driveSheetMap: StudioEntDriveSheetMap
+  val entId: EntId
+  val erdDiaMap: EntVdErdDiaMap
+  val formMap: StudioFormMap
+  val groupMap: StudioEntGroupMap
+  val lastUpdateBy: AdminId?
+  val lastUpdateTime: String?
+  val layoutUserMap: StudioMapOfLayoutUser?
+  val layoutUserMenuActionMap: StudioMapOfActionPermission?
+  val moduleMap: StudioModuleMap
+  val nameCounterMap: StudioEntNameCounterMap?
+  val pluginMap: StudioEntPluginMap
+  val promptMap: StudioEntPromptMap
+  val reportDiaMap: EntVdReportDiaMap
+  val reportMap: StudioEntReportMap
+  val roleMap: StudioEntRoleMap
+  val spreadsheetMap: StudioEntSpreadsheetMap
+  val storeItemDetailMap: StudioStoreItemDetailMap?
+  val translationMap: StudioEntTranslationMap
+  val trash: StudioEntTrash?
+  val varMap: StudioVarMap
+  val version: String?
+  val versionCode: Long?
 }

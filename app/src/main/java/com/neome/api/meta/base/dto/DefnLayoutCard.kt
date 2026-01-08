@@ -11,13 +11,13 @@ import com.neome.api.meta.base.dto.DefnLayoutGrid
 import com.neome.api.meta.base.Types.EnumDefnGridRenderingMode
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnLayoutCard : DefnLayoutGrid()
+interface DefnLayoutCard : DefnLayoutGrid
 {
-  var filter: DefnDtoLayoutCardFilter? = null
-  var groupByFieldId: MetaIdField? = null
-  var hideBorders: Boolean? = null
-  lateinit var item: DefnDtoLayoutCardItem
-  var numOfColumns: Number? = null
-  var renderingMode: EnumDefnGridRenderingMode? = null
-  var showSearchBar: Boolean? = null
+  val filter: DefnDtoLayoutCardFilter?
+  val groupByFieldId: MetaIdField?
+  val hideBorders: Boolean?
+  val item: DefnDtoLayoutCardItem
+  val numOfColumns: Long?
+  val renderingMode: EnumDefnGridRenderingMode?
+  val showSearchBar: Boolean?
 }

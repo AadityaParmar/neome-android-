@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.DefnDtoDynamicRule
 import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdFieldDynamicRule
 
-open class DefnMapOfDynamicRule
+interface DefnMapOfDynamicRule
 {
-  lateinit var keys: Array<MetaIdFieldDynamicRule>
-  lateinit var map: Map<MetaIdFieldDynamicRule, DefnDtoDynamicRule>
+  val keys: Array<MetaIdFieldDynamicRule>
+  val map: Map<MetaIdFieldDynamicRule, DefnDtoDynamicRule>
 }

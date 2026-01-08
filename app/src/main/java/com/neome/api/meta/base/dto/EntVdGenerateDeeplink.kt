@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.Types.MetaIdDeeplink
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-open class EntVdGenerateDeeplink : EntVdAutoStep()
+interface EntVdGenerateDeeplink : EntVdAutoStep
 {
-  var deeplinkId: MetaIdDeeplink? = null
-  var outputField: StudioDtoArgValueParameter? = null
-  var spreadsheetEditorActionId: MetaIdAction? = null
+  val deeplinkId: MetaIdDeeplink?
+  val outputField: StudioDtoArgValueParameter?
+  val spreadsheetEditorActionId: MetaIdAction?
 }

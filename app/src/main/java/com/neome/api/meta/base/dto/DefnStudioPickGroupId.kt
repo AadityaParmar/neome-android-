@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.DefnFieldEditable
 
-open class DefnStudioPickGroupId : DefnFieldEditable()
+interface DefnStudioPickGroupId : DefnFieldEditable
 {
 }

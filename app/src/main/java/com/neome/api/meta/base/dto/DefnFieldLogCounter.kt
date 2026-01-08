@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnFieldCounter
 import com.neome.api.meta.base.Types.MetaIdRole
 
-open class DefnFieldLogCounter : DefnFieldCounter()
+interface DefnFieldLogCounter : DefnFieldCounter
 {
-  var hideInfo: Boolean? = null
-  var logReadRoleSet: Array<MetaIdRole>? = null
+  val hideInfo: Boolean?
+  val logReadRoleSet: Array<MetaIdRole>?
 }

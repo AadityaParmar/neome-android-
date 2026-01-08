@@ -9,11 +9,11 @@ import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.MetaIdRole
 import java.util.Set
 
-open class DtoAgentEntUser
+interface DtoAgentEntUser
 {
-  lateinit var entUserId: EntUserId
-  lateinit var handle: String
-  lateinit var nickName: String
-  var roleIdSet: Array<MetaIdRole>? = null
-  lateinit var userColor: String
+  val entUserId: EntUserId
+  val handle: String
+  val nickName: String
+  val roleIdSet: Array<MetaIdRole>?
+  val userColor: String
 }

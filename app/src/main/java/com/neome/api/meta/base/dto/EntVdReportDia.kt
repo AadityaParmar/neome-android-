@@ -14,11 +14,11 @@ import com.neome.api.meta.base.Types.MetaIdReport
 import com.neome.api.meta.base.Types.MetaIdVdReportDia
 import com.neome.api.meta.base.Symbol
 
-open class EntVdReportDia : EntVdDia()
+interface EntVdReportDia : EntVdDia
 {
-  var ioFormMap: Map<MetaIdForm, EntVdReportIOForm>? = null
-  var label: String? = null
-  lateinit var metaId: MetaIdVdReportDia
-  lateinit var name: Symbol
-  var reportMap: Map<MetaIdReport, EntVdReport>? = null
+  val ioFormMap: Map<MetaIdForm, EntVdReportIOForm>?
+  val label: String?
+  val metaId: MetaIdVdReportDia
+  val name: Symbol
+  val reportMap: Map<MetaIdReport, EntVdReport>?
 }

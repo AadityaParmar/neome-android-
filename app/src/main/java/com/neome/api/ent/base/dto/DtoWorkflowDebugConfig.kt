@@ -11,8 +11,8 @@ import com.neome.api.meta.base.Types.MetaIdVdAutoDia
 import com.neome.api.meta.base.Types.MetaIdVdAutoNode
 import java.util.Set
 
-open class DtoWorkflowDebugConfig
+interface DtoWorkflowDebugConfig
 {
-  lateinit var breakpointMap: Map<MetaIdVdAutoDia, Array<MetaIdVdAutoNode>>
-  var defaultDebugEntUserId: EntUserId? = null
+  val breakpointMap: Map<MetaIdVdAutoDia, Array<MetaIdVdAutoNode>>
+  val defaultDebugEntUserId: EntUserId?
 }

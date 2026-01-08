@@ -10,9 +10,9 @@ import com.neome.api.meta.base.dto.EntVdWorkflowPointer
 import com.neome.api.meta.base.Types.MetaIdAutomation
 import com.neome.api.meta.base.Types.MetaIdForm
 
-open class DtoEntActionExecuteWorkflow : DtoEntAction()
+interface DtoEntActionExecuteWorkflow : DtoEntAction
 {
-  var automationFormId: MetaIdForm? = null
-  var automationId: MetaIdAutomation? = null
-  var workflowPointer: EntVdWorkflowPointer? = null
+  val automationFormId: MetaIdForm?
+  val automationId: MetaIdAutomation?
+  val workflowPointer: EntVdWorkflowPointer?
 }

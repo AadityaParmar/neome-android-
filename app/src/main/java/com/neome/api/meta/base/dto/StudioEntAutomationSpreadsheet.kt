@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioEntAutomation
 import com.neome.api.meta.base.dto.StudioEntAutomationSpreadsheetEventMap
 
-open class StudioEntAutomationSpreadsheet : StudioEntAutomation()
+interface StudioEntAutomationSpreadsheet : StudioEntAutomation
 {
-  lateinit var eventMap: StudioEntAutomationSpreadsheetEventMap
-  lateinit var spreadsheetId: MetaIdSpreadsheet
+  val eventMap: StudioEntAutomationSpreadsheetEventMap
+  val spreadsheetId: MetaIdSpreadsheet
 }

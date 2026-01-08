@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.StoreItemId
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioStoreItemDetail
 
-open class StudioStoreItemDetailMap : StudioBase()
+interface StudioStoreItemDetailMap : StudioBase
 {
-  lateinit var keys: Array<StoreItemId>
-  lateinit var map: Map<StoreItemId, StudioStoreItemDetail>
+  val keys: Array<StoreItemId>
+  val map: Map<StoreItemId, StudioStoreItemDetail>
 }

@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdAutoStep
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 
-open class EntVdParamCalc : EntVdAutoStep()
+interface EntVdParamCalc : EntVdAutoStep
 {
-  var pipelineParamId: MetaIdPipelineParam? = null
+  val pipelineParamId: MetaIdPipelineParam?
 }

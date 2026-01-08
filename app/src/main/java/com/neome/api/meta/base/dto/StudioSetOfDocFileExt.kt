@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnDocFileExt
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioSetOfDocFileExt : StudioBase()
+interface StudioSetOfDocFileExt : StudioBase
 {
-  lateinit var valueSet: Array<EnumDefnDocFileExt>
+  val valueSet: Array<EnumDefnDocFileExt>
 }

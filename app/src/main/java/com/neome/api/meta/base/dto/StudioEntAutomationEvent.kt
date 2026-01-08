@@ -13,14 +13,14 @@ import com.neome.api.meta.base.dto.StudioEntPipelineVarMap
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 import com.neome.api.meta.base.Symbol
 
-open class StudioEntAutomationEvent : StudioBase()
+interface StudioEntAutomationEvent : StudioBase
 {
-  var description: String? = null
-  var executionConditionInputPipelineVarId: MetaIdPipelineParam? = null
-  var executionConditionVarId: StudioValueVarIdCondition? = null
-  lateinit var metaId: MetaIdEvent
-  lateinit var name: Symbol
-  var pipelineVarMap: StudioEntPipelineVarMap? = null
-  var secondary: String? = null
-  lateinit var stepMap: StudioEntAutomationStepMap
+  val description: String?
+  val executionConditionInputPipelineVarId: MetaIdPipelineParam?
+  val executionConditionVarId: StudioValueVarIdCondition?
+  val metaId: MetaIdEvent
+  val name: Symbol
+  val pipelineVarMap: StudioEntPipelineVarMap?
+  val secondary: String?
+  val stepMap: StudioEntAutomationStepMap
 }

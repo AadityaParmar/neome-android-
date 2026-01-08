@@ -10,7 +10,7 @@ import com.neome.api.home.base.dto.DtoNewChatCandidate
 import java.util.Map
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigChatCandidateMap : Sig()
+interface SigChatCandidateMap : Sig
 {
-  lateinit var candidateMap: Map<AnyPrefixKey, Array<DtoNewChatCandidate>>
+  val candidateMap: Map<AnyPrefixKey, Array<DtoNewChatCandidate>>
 }

@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import java.util.Date
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioSetOfDate : StudioBase()
+interface StudioSetOfDate : StudioBase
 {
-  lateinit var valueSet: Array<String>
+  val valueSet: Array<String>
 }

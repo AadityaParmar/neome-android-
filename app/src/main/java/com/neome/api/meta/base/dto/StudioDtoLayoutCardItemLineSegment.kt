@@ -12,16 +12,16 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoColor
 import com.neome.api.meta.base.dto.StudioValueVarIdText
 
-open class StudioDtoLayoutCardItemLineSegment : StudioBase()
+interface StudioDtoLayoutCardItemLineSegment : StudioBase
 {
-  var color: StudioDtoColor? = null
-  var colorFieldId: MetaIdField? = null
-  var colorVarId: MetaIdVar? = null
-  var line: String? = null
-  var lineFieldIdSet: Array<MetaIdField>? = null
-  var lineVarId: StudioValueVarIdText? = null
-  var showLabels: Boolean? = null
-  var textSize: EnumDefnTextSize? = null
-  var textSizeFieldId: MetaIdField? = null
-  var textSizeVarId: MetaIdVar? = null
+  val color: StudioDtoColor?
+  val colorFieldId: MetaIdField?
+  val colorVarId: MetaIdVar?
+  val line: String?
+  val lineFieldIdSet: Array<MetaIdField>?
+  val lineVarId: StudioValueVarIdText?
+  val showLabels: Boolean?
+  val textSize: EnumDefnTextSize?
+  val textSizeFieldId: MetaIdField?
+  val textSizeVarId: MetaIdVar?
 }

@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioDtoColor
 import com.neome.api.meta.base.dto.StudioVar
 
-open class StudioVarColor : StudioVar()
+interface StudioVarColor : StudioVar
 {
-  var value: StudioDtoColor? = null
+  val value: StudioDtoColor?
 }

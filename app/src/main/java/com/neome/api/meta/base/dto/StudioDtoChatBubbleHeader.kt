@@ -7,9 +7,9 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.FieldDtoImage
 
-open class StudioDtoChatBubbleHeader
+interface StudioDtoChatBubbleHeader
 {
-  var image: FieldDtoImage? = null
-  var subTitle: String? = null
-  var title: String? = null
+  val image: FieldDtoImage?
+  val subTitle: String?
+  val title: String?
 }

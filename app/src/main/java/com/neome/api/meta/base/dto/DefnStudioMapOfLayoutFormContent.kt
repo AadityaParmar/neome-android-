@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 
-open class DefnStudioMapOfLayoutFormContent : DefnField()
+interface DefnStudioMapOfLayoutFormContent : DefnField
 {
-  var defaultId: MetaIdLayoutForm? = null
-  lateinit var formId: MetaIdForm
+  val defaultId: MetaIdLayoutForm?
+  val formId: MetaIdForm
 }

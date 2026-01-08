@@ -13,12 +13,12 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntAutomationStepUpdateSpreadsheet : StudioEntAutomationStep()
+interface StudioEntAutomationStepUpdateSpreadsheet : StudioEntAutomationStep
 {
-  var inputFormPipelineVarId: MetaIdPipelineParam? = null
-  var iterateOnGridFilterVarId: StudioValueVarIdCondition? = null
-  var iterateOnGridId: MetaIdGrid? = null
-  var rowIdFieldId: MetaIdField? = null
-  var sourceToTargetMappingVarId: MetaIdVar? = null
-  var targetSpreadsheetId: MetaIdSpreadsheet? = null
+  val inputFormPipelineVarId: MetaIdPipelineParam?
+  val iterateOnGridFilterVarId: StudioValueVarIdCondition?
+  val iterateOnGridId: MetaIdGrid?
+  val rowIdFieldId: MetaIdField?
+  val sourceToTargetMappingVarId: MetaIdVar?
+  val targetSpreadsheetId: MetaIdSpreadsheet?
 }

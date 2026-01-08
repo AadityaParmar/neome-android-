@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntRole
 
-open class StudioEntRoleMap : StudioBase()
+interface StudioEntRoleMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdRole>
-  lateinit var map: Map<MetaIdRole, StudioEntRole>
+  val keys: Array<MetaIdRole>
+  val map: Map<MetaIdRole, StudioEntRole>
 }

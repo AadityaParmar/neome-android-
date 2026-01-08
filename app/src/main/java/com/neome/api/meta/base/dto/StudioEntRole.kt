@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDetails
 
-open class StudioEntRole : StudioBase()
+interface StudioEntRole : StudioBase
 {
-  lateinit var details: StudioDetails
-  lateinit var metaId: MetaIdRole
+  val details: StudioDetails
+  val metaId: MetaIdRole
 }

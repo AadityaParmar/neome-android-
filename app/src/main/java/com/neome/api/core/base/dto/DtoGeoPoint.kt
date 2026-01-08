@@ -8,9 +8,9 @@ package com.neome.api.core.base.dto
 import java.util.Date
 import com.neome.api.meta.base.Types.GeoPoint
 
-open class DtoGeoPoint
+interface DtoGeoPoint
 {
-  var accuracy: Number? = null
-  lateinit var dateTime: String
-  lateinit var geoPoint: GeoPoint
+  val accuracy: Long?
+  val dateTime: String
+  val geoPoint: GeoPoint
 }

@@ -9,12 +9,12 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldMobileNumber : StudioFieldEditable()
+interface StudioFieldMobileNumber : StudioFieldEditable
 {
-  var autoPickSelf: Boolean? = null
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: String? = null
-  var defaultVarId: MetaIdVar? = null
-  var invalidCountryCodeSetVarId: MetaIdVar? = null
-  var validCountryCodeSetVarId: MetaIdVar? = null
+  val autoPickSelf: Boolean?
+  val defaultFieldId: MetaIdField?
+  val defaultValue: String?
+  val defaultVarId: MetaIdVar?
+  val invalidCountryCodeSetVarId: MetaIdVar?
+  val validCountryCodeSetVarId: MetaIdVar?
 }

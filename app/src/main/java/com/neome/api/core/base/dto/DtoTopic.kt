@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.ArtifactId
 import com.neome.api.core.base.Types.EnumTopicType
 import com.neome.api.meta.base.SysId
 
-open class DtoTopic
+interface DtoTopic
 {
-  lateinit var aboutId: SysId
-  lateinit var artifactId: ArtifactId
-  lateinit var type: EnumTopicType
+  val aboutId: SysId
+  val artifactId: ArtifactId
+  val type: EnumTopicType
 }

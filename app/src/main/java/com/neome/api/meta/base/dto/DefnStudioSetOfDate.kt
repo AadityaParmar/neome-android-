@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.DefnField
 
-open class DefnStudioSetOfDate : DefnField()
+interface DefnStudioSetOfDate : DefnField
 {
 }

@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.DtoLogTableCell
 
-open class DtoLogTableRow
+interface DtoLogTableRow
 {
-  var cellArray: Array<DtoLogTableCell>? = null
+  val cellArray: Array<DtoLogTableCell>?
 }

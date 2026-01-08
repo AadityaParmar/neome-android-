@@ -5,8 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-open class FieldValueOptionId
+interface FieldValueOptionId
 {
-  lateinit var optionId: String
-  var value: String? = null
+  val optionId: String
+  val value: String?
 }

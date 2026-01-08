@@ -9,10 +9,10 @@ import com.neome.api.meta.base.Types.AnyTime
 import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldChipSetTime : DefnFieldEditable()
+interface DefnFieldChipSetTime : DefnFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: Array<AnyTime>? = null
-  var defaultVar: Array<AnyTime>? = null
-  var displayDateFormat: String? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: Array<AnyTime>?
+  val defaultVar: Array<AnyTime>?
+  val displayDateFormat: String?
 }

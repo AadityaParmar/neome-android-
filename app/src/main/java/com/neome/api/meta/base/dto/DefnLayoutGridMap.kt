@@ -11,11 +11,11 @@ import com.neome.api.meta.base.Types.EnumDefnShowBorderKind
 import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 
-open class DefnLayoutGridMap
+interface DefnLayoutGridMap
 {
-  var asideDefaultLayoutId: MetaIdLayoutGrid? = null
-  lateinit var keys: Array<MetaIdLayoutGrid>
-  lateinit var map: Map<MetaIdLayoutGrid, DefnLayoutGrid>
-  var placeholder: DefnDtoPlaceholder? = null
-  var showBorderSet: Array<EnumDefnShowBorderKind>? = null
+  val asideDefaultLayoutId: MetaIdLayoutGrid?
+  val keys: Array<MetaIdLayoutGrid>
+  val map: Map<MetaIdLayoutGrid, DefnLayoutGrid>
+  val placeholder: DefnDtoPlaceholder?
+  val showBorderSet: Array<EnumDefnShowBorderKind>?
 }

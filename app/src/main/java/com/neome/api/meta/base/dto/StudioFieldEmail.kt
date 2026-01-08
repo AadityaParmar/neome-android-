@@ -10,12 +10,12 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldEmail : StudioFieldEditable()
+interface StudioFieldEmail : StudioFieldEditable
 {
-  var autoPickSelf: Boolean? = null
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: AnyEmailId? = null
-  var defaultVarId: MetaIdVar? = null
-  var invalidDomainVarId: MetaIdVar? = null
-  var validDomainVarId: MetaIdVar? = null
+  val autoPickSelf: Boolean?
+  val defaultFieldId: MetaIdField?
+  val defaultValue: AnyEmailId?
+  val defaultVarId: MetaIdVar?
+  val invalidDomainVarId: MetaIdVar?
+  val validDomainVarId: MetaIdVar?
 }

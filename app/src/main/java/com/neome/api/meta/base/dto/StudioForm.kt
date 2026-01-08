@@ -22,26 +22,26 @@ import com.neome.api.meta.base.dto.StudioValueVarIdParagraph
 import com.neome.api.meta.base.dto.StudioValueVarIdText
 import com.neome.api.meta.base.dto.StudioVisibilityRuleMap
 
-open class StudioForm : StudioBase()
+interface StudioForm : StudioBase
 {
-  var actionPermissionMap: StudioMapOfActionPermission? = null
-  var aiInstructions: String? = null
-  var allowToPrintForm: Boolean? = null
-  var calculateFormulaMode: EnumDefnCalculateFormulaMode? = null
-  var chatBubbleFieldIdSet: Array<MetaIdField>? = null
-  var chatLabelFieldId: MetaIdField? = null
-  var chatLabelPatternVarId: StudioValueVarIdText? = null
-  var chatPatternVarId: StudioValueVarIdParagraph? = null
-  var commentReadOnlyRoleSet: Array<MetaIdRole>? = null
-  var commentRoleSet: Array<MetaIdRole>? = null
-  lateinit var compositeMap: StudioCompositeMap
-  var configForm: Boolean? = null
-  lateinit var details: StudioDetails
-  var formulaMap: StudioMapOfFormula? = null
-  var layoutMap: StudioMapOfLayoutForm? = null
-  lateinit var metaId: MetaIdForm
-  var payment: StudioPaymentConfig? = null
-  var permissionMatrix: StudioDtoPermissionMatrix? = null
-  var tabVariant: EnumDefnThemeTabVariant? = null
-  var visibilityRuleMap: StudioVisibilityRuleMap? = null
+  val actionPermissionMap: StudioMapOfActionPermission?
+  val aiInstructions: String?
+  val allowToPrintForm: Boolean?
+  val calculateFormulaMode: EnumDefnCalculateFormulaMode?
+  val chatBubbleFieldIdSet: Array<MetaIdField>?
+  val chatLabelFieldId: MetaIdField?
+  val chatLabelPatternVarId: StudioValueVarIdText?
+  val chatPatternVarId: StudioValueVarIdParagraph?
+  val commentReadOnlyRoleSet: Array<MetaIdRole>?
+  val commentRoleSet: Array<MetaIdRole>?
+  val compositeMap: StudioCompositeMap
+  val configForm: Boolean?
+  val details: StudioDetails
+  val formulaMap: StudioMapOfFormula?
+  val layoutMap: StudioMapOfLayoutForm?
+  val metaId: MetaIdForm
+  val payment: StudioPaymentConfig?
+  val permissionMatrix: StudioDtoPermissionMatrix?
+  val tabVariant: EnumDefnThemeTabVariant?
+  val visibilityRuleMap: StudioVisibilityRuleMap?
 }

@@ -9,9 +9,9 @@ import com.neome.api.meta.base.Types.EnumDefnConditionOperator
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 
-open class StudioDtoConditionStatement : StudioBase()
+interface StudioDtoConditionStatement : StudioBase
 {
-  var lhs: StudioBuildArgBinder? = null
-  var operator: EnumDefnConditionOperator? = null
-  var rhs: StudioBuildArgBinder? = null
+  val lhs: StudioBuildArgBinder?
+  val operator: EnumDefnConditionOperator?
+  val rhs: StudioBuildArgBinder?
 }

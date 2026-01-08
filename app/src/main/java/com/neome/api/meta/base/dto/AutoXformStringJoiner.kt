@@ -10,9 +10,9 @@ import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 import com.neome.api.meta.base.dto.StudioMapOfArgBinder
 
-open class AutoXformStringJoiner : AutoXform()
+interface AutoXformStringJoiner : AutoXform
 {
-  var outputField: StudioDtoArgValueParameter? = null
-  var separator: StudioBuildArgBinder? = null
-  var sourceFieldMap: StudioMapOfArgBinder? = null
+  val outputField: StudioDtoArgValueParameter?
+  val separator: StudioBuildArgBinder?
+  val sourceFieldMap: StudioMapOfArgBinder?
 }

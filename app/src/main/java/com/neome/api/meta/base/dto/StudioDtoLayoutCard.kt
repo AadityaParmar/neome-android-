@@ -11,13 +11,13 @@ import com.neome.api.meta.base.dto.StudioDtoLayoutCardFilter
 import com.neome.api.meta.base.dto.StudioDtoLayoutCardItem
 import com.neome.api.meta.base.dto.StudioDtoLayoutGrid
 
-open class StudioDtoLayoutCard : StudioDtoLayoutGrid()
+interface StudioDtoLayoutCard : StudioDtoLayoutGrid
 {
-  var filter: StudioDtoLayoutCardFilter? = null
-  var groupByFieldId: MetaIdField? = null
-  var hideBorders: Boolean? = null
-  var item: StudioDtoLayoutCardItem? = null
-  var numOfColumns: Number? = null
-  var renderingMode: EnumDefnGridRenderingMode? = null
-  var showSearchBar: Boolean? = null
+  val filter: StudioDtoLayoutCardFilter?
+  val groupByFieldId: MetaIdField?
+  val hideBorders: Boolean?
+  val item: StudioDtoLayoutCardItem?
+  val numOfColumns: Long?
+  val renderingMode: EnumDefnGridRenderingMode?
+  val showSearchBar: Boolean?
 }

@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdField
 import java.util.Set
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigPluginApiOutput : Sig()
+interface SigPluginApiOutput : Sig
 {
-  lateinit var formValueRaw: FormValueRaw
-  var outputFieldIdSet: Array<MetaIdField>? = null
+  val formValueRaw: FormValueRaw
+  val outputFieldIdSet: Array<MetaIdField>?
 }

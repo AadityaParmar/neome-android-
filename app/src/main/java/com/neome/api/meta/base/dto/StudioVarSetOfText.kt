@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioMapOfOption
 import com.neome.api.meta.base.dto.StudioVar
 
-open class StudioVarSetOfText : StudioVar()
+interface StudioVarSetOfText : StudioVar
 {
-  var value: StudioMapOfOption? = null
+  val value: StudioMapOfOption?
 }

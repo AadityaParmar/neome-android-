@@ -10,9 +10,9 @@ import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.meta.base.dto.GsonCto
 import com.neome.api.meta.base.Types.MetaIdForm
 
-open class DtoEntFormExportExcel : GsonCto()
+interface DtoEntFormExportExcel : GsonCto
 {
-  lateinit var formId: MetaIdForm
-  lateinit var formValueRaw: FormValueRaw
-  lateinit var layoutRefKeyList: Array<DtoGridLayoutRefKey>
+  val formId: MetaIdForm
+  val formValueRaw: FormValueRaw
+  val layoutRefKeyList: Array<DtoGridLayoutRefKey>
 }

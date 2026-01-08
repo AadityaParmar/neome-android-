@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.dto.DefnStudioBuildArgBinder
 import com.neome.api.meta.base.dto.DefnStudioPickPluginFieldId
 
-open class DefnStudioBuildMapping : DefnField()
+interface DefnStudioBuildMapping : DefnField
 {
-  var from: DefnStudioBuildArgBinder? = null
-  var to: DefnStudioPickPluginFieldId? = null
+  val from: DefnStudioBuildArgBinder?
+  val to: DefnStudioPickPluginFieldId?
 }

@@ -7,8 +7,8 @@ package com.neome.api.ent.base.dto
 
 import java.util.Date
 
-open class WorkflowStepSummary
+interface WorkflowStepSummary
 {
-  lateinit var date: String
-  lateinit var message: String
+  val date: String
+  val message: String
 }

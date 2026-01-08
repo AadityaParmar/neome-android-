@@ -12,13 +12,13 @@ import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.Types.RowId
 
-open class FormValue
+interface FormValue
 {
-  var createdBy: EntUserId? = null
-  var createdOn: String? = null
-  lateinit var rowId: RowId
-  var rowOrder: String? = null
-  var updatedBy: EntUserId? = null
-  var updatedOn: String? = null
-  lateinit var valueMap: Map<MetaIdComp, Any>
+  val createdBy: EntUserId?
+  val createdOn: String?
+  val rowId: RowId
+  val rowOrder: String?
+  val updatedBy: EntUserId?
+  val updatedOn: String?
+  val valueMap: Map<MetaIdComp, Any>
 }

@@ -7,9 +7,9 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.RowId
 
-open class FieldSetOfRef
+interface FieldSetOfRef
 {
-  lateinit var displaySet: Array<String>
-  lateinit var valueSet: Array<RowId>
-  lateinit var versionSet: Array<String>
+  val displaySet: Array<String>
+  val valueSet: Array<RowId>
+  val versionSet: Array<String>
 }

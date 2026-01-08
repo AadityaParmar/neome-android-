@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.DefnFieldEditable
 
-open class DefnFieldMessageType : DefnFieldEditable()
+interface DefnFieldMessageType : DefnFieldEditable
 {
 }

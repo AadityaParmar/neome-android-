@@ -8,7 +8,7 @@ package com.neome.api.nucleus.api.sig
 import com.neome.api.nucleus.base.dto.DtoTreeNode
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigClassTree : Sig()
+interface SigClassTree : Sig
 {
-  var root: DtoTreeNode? = null
+  val root: DtoTreeNode?
 }

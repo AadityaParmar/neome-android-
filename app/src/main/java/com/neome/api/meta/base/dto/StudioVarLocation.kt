@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioVar
 import com.neome.api.meta.base.dto.StudioVarValueLocation
 
-open class StudioVarLocation : StudioVar()
+interface StudioVarLocation : StudioVar
 {
-  var value: StudioVarValueLocation? = null
+  val value: StudioVarValueLocation?
 }

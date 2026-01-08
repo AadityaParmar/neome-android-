@@ -14,21 +14,21 @@ import com.neome.api.meta.base.dto.StudioDtoColor
 import com.neome.api.meta.base.dto.StudioValueVarIdParagraph
 import com.neome.api.meta.base.dto.StudioValueVarIdText
 
-open class StudioDtoLayoutLocmapPin : StudioBase()
+interface StudioDtoLayoutLocmapPin : StudioBase
 {
-  var avatar: FieldDtoImage? = null
-  var avatarFieldId: MetaIdField? = null
-  var avatarVarId: MetaIdVar? = null
-  var color: StudioDtoColor? = null
-  var colorFieldId: MetaIdField? = null
-  var colorVarId: MetaIdVar? = null
-  var label: String? = null
-  var labelFieldId: MetaIdField? = null
-  var labelVarId: StudioValueVarIdText? = null
-  var shape: EnumDefnMapPinShape? = null
-  var shapeFieldId: MetaIdField? = null
-  var shapeVarId: MetaIdVar? = null
-  var toolTip: String? = null
-  var toolTipFieldId: MetaIdField? = null
-  var toolTipVarId: StudioValueVarIdParagraph? = null
+  val avatar: FieldDtoImage?
+  val avatarFieldId: MetaIdField?
+  val avatarVarId: MetaIdVar?
+  val color: StudioDtoColor?
+  val colorFieldId: MetaIdField?
+  val colorVarId: MetaIdVar?
+  val label: String?
+  val labelFieldId: MetaIdField?
+  val labelVarId: StudioValueVarIdText?
+  val shape: EnumDefnMapPinShape?
+  val shapeFieldId: MetaIdField?
+  val shapeVarId: MetaIdVar?
+  val toolTip: String?
+  val toolTipFieldId: MetaIdField?
+  val toolTipVarId: StudioValueVarIdParagraph?
 }

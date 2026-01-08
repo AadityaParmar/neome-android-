@@ -8,9 +8,9 @@ package com.neome.api.nucleus.base.dto
 import java.util.Map
 import com.neome.api.nucleus.base.dto.SpecApi
 
-open class DescApiCall
+interface DescApiCall
 {
-  var call: Map<String, SpecApi>? = null
-  var importMap: Map<String, String>? = null
-  lateinit var pathSeg: String
+  val call: Map<String, SpecApi>?
+  val importMap: Map<String, String>?
+  val pathSeg: String
 }

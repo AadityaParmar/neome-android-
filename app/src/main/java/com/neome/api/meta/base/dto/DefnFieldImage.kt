@@ -9,23 +9,23 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.dto.FieldDtoImage
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldImage : DefnFieldEditable()
+interface DefnFieldImage : DefnFieldEditable
 {
-  var defaultImage: FieldDtoImage? = null
-  var defaultImageFieldId: MetaIdField? = null
-  var defaultImageVar: FieldDtoImage? = null
-  var flexWidth: Boolean? = null
-  var height: Number? = null
-  var maxSize: Number? = null
-  var maxSizeFieldId: MetaIdField? = null
-  var maxSizeVar: Number? = null
-  var showLabel: Boolean? = null
-  var showLabelFieldId: MetaIdField? = null
-  var showLabelVar: Boolean? = null
-  var showPreview: Boolean? = null
-  var showPreviewFieldId: MetaIdField? = null
-  var showPreviewVar: Boolean? = null
-  var showSize: Boolean? = null
-  var showSizeFieldId: MetaIdField? = null
-  var showSizeVar: Boolean? = null
+  val defaultImage: FieldDtoImage?
+  val defaultImageFieldId: MetaIdField?
+  val defaultImageVar: FieldDtoImage?
+  val flexWidth: Boolean?
+  val height: Long?
+  val maxSize: Long?
+  val maxSizeFieldId: MetaIdField?
+  val maxSizeVar: Long?
+  val showLabel: Boolean?
+  val showLabelFieldId: MetaIdField?
+  val showLabelVar: Boolean?
+  val showPreview: Boolean?
+  val showPreviewFieldId: MetaIdField?
+  val showPreviewVar: Boolean?
+  val showSize: Boolean?
+  val showSizeFieldId: MetaIdField?
+  val showSizeVar: Boolean?
 }

@@ -10,13 +10,13 @@ import com.neome.api.meta.base.Types.EnumDefnDay
 import com.neome.api.meta.base.Types.EnumDefnLocationCapturingMode
 import com.neome.api.meta.base.Types.MetaIdRole
 
-open class StudioDtoLocationCapture
+interface StudioDtoLocationCapture
 {
-  var excludeDaysSet: Array<EnumDefnDay>? = null
-  var frequencyBasedOnDistance: Number? = null
-  var frequencyBasedOnTime: Number? = null
-  var fromTime: AnyTime? = null
-  var roleIdSet: Array<MetaIdRole>? = null
-  var toTime: AnyTime? = null
-  var type: EnumDefnLocationCapturingMode? = null
+  val excludeDaysSet: Array<EnumDefnDay>?
+  val frequencyBasedOnDistance: Long?
+  val frequencyBasedOnTime: Long?
+  val fromTime: AnyTime?
+  val roleIdSet: Array<MetaIdRole>?
+  val toTime: AnyTime?
+  val type: EnumDefnLocationCapturingMode?
 }

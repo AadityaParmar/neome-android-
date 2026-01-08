@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.PluginId
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioPlugin
 
-open class StudioPluginMap : StudioBase()
+interface StudioPluginMap : StudioBase
 {
-  lateinit var keys: Array<PluginId>
-  lateinit var map: Map<PluginId, StudioPlugin>
+  val keys: Array<PluginId>
+  val map: Map<PluginId, StudioPlugin>
 }

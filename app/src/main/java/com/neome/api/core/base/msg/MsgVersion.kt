@@ -7,7 +7,7 @@ package com.neome.api.core.base.msg
 
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgVersion : Msg()
+interface MsgVersion : Msg
 {
-  var version: String? = null
+  val version: String?
 }

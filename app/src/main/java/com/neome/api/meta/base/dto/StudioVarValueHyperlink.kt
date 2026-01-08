@@ -9,11 +9,11 @@ import com.neome.api.meta.base.Types.EnumDefnKindHyperlink
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioDtoColor
 
-open class StudioVarValueHyperlink
+interface StudioVarValueHyperlink
 {
-  var color: StudioDtoColor? = null
-  var colorVarId: MetaIdVar? = null
-  var displayText: String? = null
-  var kind: EnumDefnKindHyperlink? = null
-  var value: String? = null
+  val color: StudioDtoColor?
+  val colorVarId: MetaIdVar?
+  val displayText: String?
+  val kind: EnumDefnKindHyperlink?
+  val value: String?
 }

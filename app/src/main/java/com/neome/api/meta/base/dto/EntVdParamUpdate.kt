@@ -11,10 +11,10 @@ import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioDtoMapping
 
-open class EntVdParamUpdate : EntVdAutoStep()
+interface EntVdParamUpdate : EntVdAutoStep
 {
-  var option: EnumDefnKindPipelineUpdate? = null
-  var outputMapping: StudioDtoMapping? = null
-  var outputMappingVarId: MetaIdVar? = null
-  var pipelineParamId: MetaIdPipelineParam? = null
+  val option: EnumDefnKindPipelineUpdate?
+  val outputMapping: StudioDtoMapping?
+  val outputMappingVarId: MetaIdVar?
+  val pipelineParamId: MetaIdPipelineParam?
 }

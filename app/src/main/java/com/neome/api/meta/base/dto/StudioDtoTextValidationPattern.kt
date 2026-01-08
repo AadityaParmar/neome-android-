@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnTextValidationPattern
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioDtoTextValidationPattern : StudioBase()
+interface StudioDtoTextValidationPattern : StudioBase
 {
-  var customValue: String? = null
-  var value: EnumDefnTextValidationPattern? = null
+  val customValue: String?
+  val value: EnumDefnTextValidationPattern?
 }

@@ -9,10 +9,10 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.EnumDefnDeviceSize
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldChipSetDeviceSize : DefnFieldEditable()
+interface DefnFieldChipSetDeviceSize : DefnFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: Array<EnumDefnDeviceSize>? = null
-  var defaultVar: EnumDefnDeviceSize? = null
-  var filterKindSet: Array<EnumDefnDeviceSize>? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: Array<EnumDefnDeviceSize>?
+  val defaultVar: EnumDefnDeviceSize?
+  val filterKindSet: Array<EnumDefnDeviceSize>?
 }

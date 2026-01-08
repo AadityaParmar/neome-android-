@@ -13,15 +13,15 @@ import com.neome.api.meta.base.dto.StudioDtoLayoutFormFooter
 import com.neome.api.meta.base.dto.StudioDtoLayoutFormHeader
 import com.neome.api.meta.base.dto.StudioDtoLayoutFormWatermark
 
-open class StudioDtoLayoutFormTemplate : StudioDtoLayoutForm()
+interface StudioDtoLayoutFormTemplate : StudioDtoLayoutForm
 {
-  var borderPositionSet: Array<EnumDefnShowBorderKind>? = null
-  var footer: StudioDtoLayoutFormFooter? = null
-  var header: StudioDtoLayoutFormHeader? = null
-  var paddingPositionSet: Array<EnumDefnShowBorderKind>? = null
-  var paddingSize: EnumDefnThemeDividerKind? = null
-  var paperHeight: Number? = null
-  var paperSize: EnumDefnRenderingKind? = null
-  var paperWidth: Number? = null
-  var watermark: StudioDtoLayoutFormWatermark? = null
+  val borderPositionSet: Array<EnumDefnShowBorderKind>?
+  val footer: StudioDtoLayoutFormFooter?
+  val header: StudioDtoLayoutFormHeader?
+  val paddingPositionSet: Array<EnumDefnShowBorderKind>?
+  val paddingSize: EnumDefnThemeDividerKind?
+  val paperHeight: Long?
+  val paperSize: EnumDefnRenderingKind?
+  val paperWidth: Long?
+  val watermark: StudioDtoLayoutFormWatermark?
 }

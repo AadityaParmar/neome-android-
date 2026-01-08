@@ -10,17 +10,17 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldVideo : StudioFieldEditable()
+interface StudioFieldVideo : StudioFieldEditable
 {
-  var allowPickVideo: Boolean? = null
-  var maxSize: Number? = null
-  var maxSizeFieldId: MetaIdField? = null
-  var maxSizeVarId: MetaIdVar? = null
-  var showPreview: Boolean? = null
-  var showPreviewFieldId: MetaIdField? = null
-  var showPreviewVarId: MetaIdVar? = null
-  var showSize: Boolean? = null
-  var showSizeFieldId: MetaIdField? = null
-  var showSizeVarId: MetaIdVar? = null
-  var videoFormatType: EnumDefnVideoFormat? = null
+  val allowPickVideo: Boolean?
+  val maxSize: Long?
+  val maxSizeFieldId: MetaIdField?
+  val maxSizeVarId: MetaIdVar?
+  val showPreview: Boolean?
+  val showPreviewFieldId: MetaIdField?
+  val showPreviewVarId: MetaIdVar?
+  val showSize: Boolean?
+  val showSizeFieldId: MetaIdField?
+  val showSizeVarId: MetaIdVar?
+  val videoFormatType: EnumDefnVideoFormat?
 }

@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnKindImageXform
 import com.neome.api.meta.base.dto.StudioBase
 
-open class ImageXform : StudioBase()
+interface ImageXform : StudioBase
 {
-  var kind: EnumDefnKindImageXform? = null
+  val kind: EnumDefnKindImageXform?
 }

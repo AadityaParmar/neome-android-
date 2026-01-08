@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdSwimlane
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoSwimlane
 
-open class StudioMapOfSwimlane : StudioBase()
+interface StudioMapOfSwimlane : StudioBase
 {
-  var keys: Array<MetaIdSwimlane>? = null
-  lateinit var map: Map<MetaIdSwimlane, StudioDtoSwimlane>
+  val keys: Array<MetaIdSwimlane>?
+  val map: Map<MetaIdSwimlane, StudioDtoSwimlane>
 }

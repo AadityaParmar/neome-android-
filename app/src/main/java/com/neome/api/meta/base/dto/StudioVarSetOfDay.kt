@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioVar
 import com.neome.api.meta.base.dto.StudioVarValueSetOfDay
 
-open class StudioVarSetOfDay : StudioVar()
+interface StudioVarSetOfDay : StudioVar
 {
-  var value: StudioVarValueSetOfDay? = null
+  val value: StudioVarValueSetOfDay?
 }

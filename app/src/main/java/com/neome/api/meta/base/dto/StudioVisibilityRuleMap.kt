@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdVisibilityRule
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioVisibilityRule
 
-open class StudioVisibilityRuleMap : StudioBase()
+interface StudioVisibilityRuleMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdVisibilityRule>
-  lateinit var map: Map<MetaIdVisibilityRule, StudioVisibilityRule>
+  val keys: Array<MetaIdVisibilityRule>
+  val map: Map<MetaIdVisibilityRule, StudioVisibilityRule>
 }

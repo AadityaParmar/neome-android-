@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdAutoStepWithOutputAndError
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 
-open class EntVdUserGet : EntVdAutoStepWithOutputAndError()
+interface EntVdUserGet : EntVdAutoStepWithOutputAndError
 {
-  var user: StudioBuildArgBinder? = null
+  val user: StudioBuildArgBinder?
 }

@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.DefnStudioDtoActionPermission
 import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdAction
 
-open class DefnStudioMapOfActionPermission
+interface DefnStudioMapOfActionPermission
 {
-  lateinit var keys: Array<MetaIdAction>
-  lateinit var map: Map<MetaIdAction, DefnStudioDtoActionPermission>
+  val keys: Array<MetaIdAction>
+  val map: Map<MetaIdAction, DefnStudioDtoActionPermission>
 }

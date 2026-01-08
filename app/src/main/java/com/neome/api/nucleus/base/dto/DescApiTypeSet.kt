@@ -8,8 +8,8 @@ package com.neome.api.nucleus.base.dto
 import java.util.Map
 import java.util.Set
 
-open class DescApiTypeSet
+interface DescApiTypeSet
 {
-  lateinit var fileName: String
-  lateinit var setMap: Map<String, Array<String>>
+  val fileName: String
+  val setMap: Map<String, Array<String>>
 }

@@ -12,11 +12,11 @@ import com.neome.api.meta.base.Types.MetaIdPipelineVar
 import com.neome.api.meta.base.Types.MetaIdVdAutoNode
 import com.neome.api.meta.base.dto.StudioBase
 
-open class EntVdWorkflowControl : StudioBase()
+interface EntVdWorkflowControl : StudioBase
 {
-  var inputParamId: MetaIdPipelineParam? = null
-  lateinit var metaId: GhostId
-  var outputParamId: MetaIdPipelineVar? = null
-  var sharedParamMap: Map<MetaIdPipelineVar, MetaIdPipelineParam>? = null
-  var startNodeId: MetaIdVdAutoNode? = null
+  val inputParamId: MetaIdPipelineParam?
+  val metaId: GhostId
+  val outputParamId: MetaIdPipelineVar?
+  val sharedParamMap: Map<MetaIdPipelineVar, MetaIdPipelineParam>?
+  val startNodeId: MetaIdVdAutoNode?
 }

@@ -10,11 +10,11 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.nucleus.base.msg.Msg
 import com.neome.api.meta.base.Types.RowId
 
-open class MsgSpreadsheetRowRemove : Msg()
+interface MsgSpreadsheetRowRemove : Msg
 {
-  lateinit var formId: MetaIdForm
-  var rowId: RowId? = null
-  var rowIdSet: Array<RowId>? = null
-  lateinit var spreadsheetId: MetaIdSpreadsheet
-  var transactionId: String? = null
+  val formId: MetaIdForm
+  val rowId: RowId?
+  val rowIdSet: Array<RowId>?
+  val spreadsheetId: MetaIdSpreadsheet
+  val transactionId: String?
 }

@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.MetaIdVdAutoDia
 import com.neome.api.meta.base.Types.MetaIdVdAutoNode
 import com.neome.api.meta.base.dto.StudioBase
 
-open class EntVdWorkflowPointer : StudioBase()
+interface EntVdWorkflowPointer : StudioBase
 {
-  var autoDiaId: MetaIdVdAutoDia? = null
-  var startNodeId: MetaIdVdAutoNode? = null
+  val autoDiaId: MetaIdVdAutoDia?
+  val startNodeId: MetaIdVdAutoNode?
 }

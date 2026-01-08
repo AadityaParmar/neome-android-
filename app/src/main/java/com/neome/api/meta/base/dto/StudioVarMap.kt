@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioVar
 
-open class StudioVarMap : StudioBase()
+interface StudioVarMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdVar>
-  lateinit var map: Map<MetaIdVar, StudioVar>
+  val keys: Array<MetaIdVar>
+  val map: Map<MetaIdVar, StudioVar>
 }

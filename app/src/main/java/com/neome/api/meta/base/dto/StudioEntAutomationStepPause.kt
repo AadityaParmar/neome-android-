@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 import com.neome.api.meta.base.dto.StudioValueVarIdParagraph
 
-open class StudioEntAutomationStepPause : StudioEntAutomationStep()
+interface StudioEntAutomationStepPause : StudioEntAutomationStep
 {
-  var messageVarId: StudioValueVarIdParagraph? = null
-  var sourcePipelineVarId: MetaIdPipelineParam? = null
+  val messageVarId: StudioValueVarIdParagraph?
+  val sourcePipelineVarId: MetaIdPipelineParam?
 }

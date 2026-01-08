@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.ChatId
 import java.util.Map
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgMessageBulkGet : Msg()
+interface MsgMessageBulkGet : Msg
 {
-  lateinit var chatId: ChatId
-  lateinit var offsetMap: Map<Number, String>
+  val chatId: ChatId
+  val offsetMap: Map<Number, String>
 }

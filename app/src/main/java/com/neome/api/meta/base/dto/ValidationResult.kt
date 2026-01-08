@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.EnvValidationError
 import java.util.Map
 import com.neome.api.meta.base.Types.SearchPath
 
-open class ValidationResult
+interface ValidationResult
 {
-  var errorCountMap: Map<SearchPath, Number>? = null
-  var errorMap: Map<SearchPath, EnvValidationError>? = null
+  val errorCountMap: Map<SearchPath, Number>?
+  val errorMap: Map<SearchPath, EnvValidationError>?
 }

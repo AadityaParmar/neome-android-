@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldSetOfLanguageKeys : StudioFieldEditable()
+interface StudioFieldSetOfLanguageKeys : StudioFieldEditable
 {
 }

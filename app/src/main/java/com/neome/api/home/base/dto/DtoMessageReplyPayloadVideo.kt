@@ -5,16 +5,15 @@
 
 package com.neome.api.home.base.dto
 
-import kotlin.properties.Delegates
 import com.neome.api.home.base.dto.DtoMessageReplyPayload
 import com.neome.api.meta.base.Types.MediaIdImage
 import com.neome.api.meta.base.Types.MediaIdVideo
 
-open class DtoMessageReplyPayloadVideo : DtoMessageReplyPayload()
+interface DtoMessageReplyPayloadVideo : DtoMessageReplyPayload
 {
-  var durationMs: Number by Delegates.notNull<Number>()
-  lateinit var mediaId: MediaIdImage
-  lateinit var mediaIdBlurImage: MediaIdImage
-  lateinit var mediaIdVideo: MediaIdVideo
-  lateinit var primaryColor: String
+  val durationMs: Long?
+  val mediaId: MediaIdImage
+  val mediaIdBlurImage: MediaIdImage
+  val mediaIdVideo: MediaIdVideo
+  val primaryColor: String
 }

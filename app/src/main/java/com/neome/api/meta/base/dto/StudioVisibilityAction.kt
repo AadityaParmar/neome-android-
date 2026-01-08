@@ -17,16 +17,16 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.Symbol
 
-open class StudioVisibilityAction : StudioBase()
+interface StudioVisibilityAction : StudioBase
 {
-  var actionId: MetaIdAction? = null
-  var compIdSet: Array<MetaIdComp>? = null
-  var groupIdSet: Array<MetaIdGroup>? = null
-  var layoutIdSet: Array<MetaIdLayoutForm>? = null
-  var mappingVarId: MetaIdVar? = null
-  lateinit var metaId: MetaIdVisibilityAction
-  lateinit var name: Symbol
-  var source: StudioBuildArgBinder? = null
-  lateinit var visibilityAction: EnumDefnVisibilityAction
-  var visibilityActionOn: EnumDefnVisibilityActionOn? = null
+  val actionId: MetaIdAction?
+  val compIdSet: Array<MetaIdComp>?
+  val groupIdSet: Array<MetaIdGroup>?
+  val layoutIdSet: Array<MetaIdLayoutForm>?
+  val mappingVarId: MetaIdVar?
+  val metaId: MetaIdVisibilityAction
+  val name: Symbol
+  val source: StudioBuildArgBinder?
+  val visibilityAction: EnumDefnVisibilityAction
+  val visibilityActionOn: EnumDefnVisibilityActionOn?
 }

@@ -8,13 +8,13 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.dto.StudioDtoLayoutGrid
 
-open class StudioDtoLayoutCalendar : StudioDtoLayoutGrid()
+interface StudioDtoLayoutCalendar : StudioDtoLayoutGrid
 {
-  var colorFieldId: MetaIdField? = null
-  var fromDateFieldId: MetaIdField? = null
-  var fromTimeFieldId: MetaIdField? = null
-  var showFieldIdSet: Array<MetaIdField>? = null
-  var titleFieldId: MetaIdField? = null
-  var toDateFieldId: MetaIdField? = null
-  var toTimeFieldId: MetaIdField? = null
+  val colorFieldId: MetaIdField?
+  val fromDateFieldId: MetaIdField?
+  val fromTimeFieldId: MetaIdField?
+  val showFieldIdSet: Array<MetaIdField>?
+  val titleFieldId: MetaIdField?
+  val toDateFieldId: MetaIdField?
+  val toTimeFieldId: MetaIdField?
 }

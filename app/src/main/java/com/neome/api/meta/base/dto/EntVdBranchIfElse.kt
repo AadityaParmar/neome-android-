@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.EnumDefnKindBranchIfElse
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioMapOfCondition
 
-open class EntVdBranchIfElse : EntVdAutoStep()
+interface EntVdBranchIfElse : EntVdAutoStep
 {
-  var condition: StudioMapOfCondition? = null
-  var conditionVarId: MetaIdVar? = null
-  var option: EnumDefnKindBranchIfElse? = null
+  val condition: StudioMapOfCondition?
+  val conditionVarId: MetaIdVar?
+  val option: EnumDefnKindBranchIfElse?
 }

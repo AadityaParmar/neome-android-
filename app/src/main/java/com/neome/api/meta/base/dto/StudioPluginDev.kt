@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioPluginDev : StudioBase()
+interface StudioPluginDev : StudioBase
 {
-  lateinit var lastUpdateTime: String
-  var packageNameVarId: MetaIdVar? = null
-  var pluginConfigFormId: MetaIdForm? = null
+  val lastUpdateTime: String
+  val packageNameVarId: MetaIdVar?
+  val pluginConfigFormId: MetaIdForm?
 }

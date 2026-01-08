@@ -9,10 +9,10 @@ import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.msg.Msg
 import java.util.Set
 
-open class MsgDrawerSearch : Msg()
+interface MsgDrawerSearch : Msg
 {
-  var filterEntIdSet: Array<EntId>? = null
-  var pageSize: Number? = null
-  lateinit var searchId: String
-  lateinit var searchQuery: String
+  val filterEntIdSet: Array<EntId>?
+  val pageSize: Long?
+  val searchId: String
+  val searchQuery: String
 }

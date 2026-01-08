@@ -9,12 +9,12 @@ import com.neome.api.meta.base.dto.DefnDtoColor
 import com.neome.api.meta.base.Types.MetaIdChartYAxis
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnDtoChartYAxis
+interface DefnDtoChartYAxis
 {
-  var color: DefnDtoColor? = null
-  var colorFieldId: MetaIdField? = null
-  var colorVar: DefnDtoColor? = null
-  lateinit var fieldId: MetaIdField
-  var label: String? = null
-  lateinit var metaId: MetaIdChartYAxis
+  val color: DefnDtoColor?
+  val colorFieldId: MetaIdField?
+  val colorVar: DefnDtoColor?
+  val fieldId: MetaIdField
+  val label: String?
+  val metaId: MetaIdChartYAxis
 }

@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdTableStyle
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoTableStyle
 
-open class StudioMapOfTableStyle : StudioBase()
+interface StudioMapOfTableStyle : StudioBase
 {
-  lateinit var keys: Array<MetaIdTableStyle>
-  lateinit var map: Map<MetaIdTableStyle, StudioDtoTableStyle>
+  val keys: Array<MetaIdTableStyle>
+  val map: Map<MetaIdTableStyle, StudioDtoTableStyle>
 }

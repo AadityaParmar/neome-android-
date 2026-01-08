@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdAutoStepWithOutputAndError
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-open class EntVdRowInsert : EntVdAutoStepWithOutputAndError()
+interface EntVdRowInsert : EntVdAutoStepWithOutputAndError
 {
-  var spreadsheetId: MetaIdSpreadsheet? = null
+  val spreadsheetId: MetaIdSpreadsheet?
 }

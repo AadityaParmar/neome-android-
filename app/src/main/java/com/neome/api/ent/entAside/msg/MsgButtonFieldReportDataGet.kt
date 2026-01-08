@@ -12,11 +12,11 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.nucleus.base.msg.Msg
 import com.neome.api.meta.base.Types.RowId
 
-open class MsgButtonFieldReportDataGet : Msg()
+interface MsgButtonFieldReportDataGet : Msg
 {
-  lateinit var buttonFieldId: MetaIdField
-  lateinit var formId: MetaIdForm
-  lateinit var formValue: FormValueRaw
-  var fromCompositeId: MetaIdComposite? = null
-  var fromGridRowId: RowId? = null
+  val buttonFieldId: MetaIdField
+  val formId: MetaIdForm
+  val formValue: FormValueRaw
+  val fromCompositeId: MetaIdComposite?
+  val fromGridRowId: RowId?
 }

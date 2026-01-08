@@ -12,15 +12,15 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioEntDeeplinkWithHeader
 import com.neome.api.meta.base.dto.StudioValueVarIdParagraph
 
-open class StudioEntDeeplinkSpreadsheetInsert : StudioEntDeeplinkWithHeader()
+interface StudioEntDeeplinkSpreadsheetInsert : StudioEntDeeplinkWithHeader
 {
-  var formEditorLayoutId: MetaIdLayoutForm? = null
-  var mobileFormEditorLayoutId: MetaIdLayoutForm? = null
-  var repeatButtonLabel: String? = null
-  var showRepeatButton: Boolean? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
-  var successDeeplinkId: MetaIdDeeplink? = null
-  var successMessageBgColorVarId: MetaIdVar? = null
-  var successMessageTextSizeVarId: MetaIdVar? = null
-  var successMessageVarId: StudioValueVarIdParagraph? = null
+  val formEditorLayoutId: MetaIdLayoutForm?
+  val mobileFormEditorLayoutId: MetaIdLayoutForm?
+  val repeatButtonLabel: String?
+  val showRepeatButton: Boolean?
+  val spreadsheetId: MetaIdSpreadsheet?
+  val successDeeplinkId: MetaIdDeeplink?
+  val successMessageBgColorVarId: MetaIdVar?
+  val successMessageTextSizeVarId: MetaIdVar?
+  val successMessageVarId: StudioValueVarIdParagraph?
 }

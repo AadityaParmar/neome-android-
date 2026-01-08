@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioField
 import com.neome.api.meta.base.dto.StudioMapOfDynamicRule
 
-open class StudioFieldDynamic : StudioField()
+interface StudioFieldDynamic : StudioField
 {
-  var ruleMap: StudioMapOfDynamicRule? = null
+  val ruleMap: StudioMapOfDynamicRule?
 }

@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnComp
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnField : DefnComp()
+interface DefnField : DefnComp
 {
-  lateinit var metaId: MetaIdField
+  val metaId: MetaIdField
 }

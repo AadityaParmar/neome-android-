@@ -7,9 +7,9 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.FieldDtoImage
 
-open class DefnDtoPlaceholder
+interface DefnDtoPlaceholder
 {
-  var image: FieldDtoImage? = null
-  var primaryText: String? = null
-  var secondaryText: String? = null
+  val image: FieldDtoImage?
+  val primaryText: String?
+  val secondaryText: String?
 }

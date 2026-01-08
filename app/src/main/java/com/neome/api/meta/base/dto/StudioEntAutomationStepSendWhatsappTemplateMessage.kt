@@ -9,11 +9,11 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.dto.StudioEntAutomationStepSendMessageBase
 import com.neome.api.meta.base.dto.StudioMapOfVarIdText
 
-open class StudioEntAutomationStepSendWhatsappTemplateMessage : StudioEntAutomationStepSendMessageBase()
+interface StudioEntAutomationStepSendWhatsappTemplateMessage : StudioEntAutomationStepSendMessageBase
 {
-  var carouselCardMessageVarMap: StudioMapOfVarIdText? = null
-  var dataSourceFieldId: MetaIdField? = null
-  var mediaFieldId: MetaIdField? = null
-  var messageVarMap: StudioMapOfVarIdText? = null
-  var templateGroupId: String? = null
+  val carouselCardMessageVarMap: StudioMapOfVarIdText?
+  val dataSourceFieldId: MetaIdField?
+  val mediaFieldId: MetaIdField?
+  val messageVarMap: StudioMapOfVarIdText?
+  val templateGroupId: String?
 }

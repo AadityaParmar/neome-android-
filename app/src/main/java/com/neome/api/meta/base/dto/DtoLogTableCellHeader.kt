@@ -8,9 +8,9 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DtoLogTableCell
 import com.neome.api.meta.base.Types.EnumLogTableAlignment
 
-open class DtoLogTableCellHeader : DtoLogTableCell()
+interface DtoLogTableCellHeader : DtoLogTableCell
 {
-  var flexWeight: Number? = null
-  var headerAlignment: EnumLogTableAlignment? = null
-  var rowAlignment: EnumLogTableAlignment? = null
+  val flexWeight: Long?
+  val headerAlignment: EnumLogTableAlignment?
+  val rowAlignment: EnumLogTableAlignment?
 }

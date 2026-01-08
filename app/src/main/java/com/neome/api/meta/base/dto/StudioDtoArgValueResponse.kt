@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.StudioDtoArgValue
 
-open class StudioDtoArgValueResponse : StudioDtoArgValue()
+interface StudioDtoArgValueResponse : StudioDtoArgValue
 {
-  lateinit var valuePath: String
+  val valuePath: String
 }

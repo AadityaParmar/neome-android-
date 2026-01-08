@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioSetOfNumber
 import com.neome.api.meta.base.dto.StudioVar
 
-open class StudioVarSetOfNumber : StudioVar()
+interface StudioVarSetOfNumber : StudioVar
 {
-  var value: StudioSetOfNumber? = null
+  val value: StudioSetOfNumber?
 }

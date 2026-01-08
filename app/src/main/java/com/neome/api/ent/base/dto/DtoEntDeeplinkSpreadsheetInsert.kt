@@ -10,10 +10,10 @@ import com.neome.api.meta.base.Types.MetaIdDeeplink
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-open class DtoEntDeeplinkSpreadsheetInsert : DtoEntDeeplink()
+interface DtoEntDeeplinkSpreadsheetInsert : DtoEntDeeplink
 {
-  var formEditorLayoutId: MetaIdLayoutForm? = null
-  var mobileFormEditorLayoutId: MetaIdLayoutForm? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
-  var successDeeplinkId: MetaIdDeeplink? = null
+  val formEditorLayoutId: MetaIdLayoutForm?
+  val mobileFormEditorLayoutId: MetaIdLayoutForm?
+  val spreadsheetId: MetaIdSpreadsheet?
+  val successDeeplinkId: MetaIdDeeplink?
 }

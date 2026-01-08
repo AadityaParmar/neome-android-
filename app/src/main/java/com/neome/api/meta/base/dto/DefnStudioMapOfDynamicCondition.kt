@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.MetaIdForm
 
-open class DefnStudioMapOfDynamicCondition : DefnField()
+interface DefnStudioMapOfDynamicCondition : DefnField
 {
-  var formId: MetaIdForm? = null
+  val formId: MetaIdForm?
 }

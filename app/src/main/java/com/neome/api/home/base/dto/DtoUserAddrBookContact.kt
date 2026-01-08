@@ -8,10 +8,10 @@ package com.neome.api.home.base.dto
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.MediaIdAvatar
 
-open class DtoUserAddrBookContact
+interface DtoUserAddrBookContact
 {
-  lateinit var entUserId: EntUserId
-  lateinit var handle: String
-  var mediaIdAvatar: MediaIdAvatar? = null
-  lateinit var nickName: String
+  val entUserId: EntUserId
+  val handle: String
+  val mediaIdAvatar: MediaIdAvatar?
+  val nickName: String
 }

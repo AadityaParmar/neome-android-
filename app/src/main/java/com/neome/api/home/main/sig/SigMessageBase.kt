@@ -5,7 +5,6 @@
 
 package com.neome.api.home.main.sig
 
-import kotlin.properties.Delegates
 import java.util.Date
 import com.neome.api.home.base.dto.DtoMessagePayload
 import com.neome.api.home.base.dto.DtoMessageReaction
@@ -15,14 +14,14 @@ import java.util.Map
 import com.neome.api.meta.base.Types.MessageId
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigMessageBase : Sig()
+interface SigMessageBase : Sig
 {
-  lateinit var creationTime: String
-  var isCallerSender: Boolean? = null
-  lateinit var messageId: MessageId
-  var messageOffset: Number by Delegates.notNull<Number>()
-  lateinit var payload: DtoMessagePayload
-  var reactionMap: Map<EntUserId, DtoMessageReaction>? = null
-  var replyPayload: DtoMessageReplyPayload? = null
-  lateinit var senderId: EntUserId
+  val creationTime: String
+  val isCallerSender: Boolean?
+  val messageId: MessageId
+  val messageOffset: Long?
+  val payload: DtoMessagePayload
+  val reactionMap: Map<EntUserId, DtoMessageReaction>?
+  val replyPayload: DtoMessageReplyPayload?
+  val senderId: EntUserId
 }

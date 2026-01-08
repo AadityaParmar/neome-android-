@@ -7,9 +7,9 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumLogTreeItemType
 
-open class DtoLogTreeItem
+interface DtoLogTreeItem
 {
-  var bgColor: String? = null
-  lateinit var id: String
-  lateinit var type: EnumLogTreeItemType
+  val bgColor: String?
+  val id: String
+  val type: EnumLogTreeItemType
 }

@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioDeployUnit : StudioBase()
+interface StudioDeployUnit : StudioBase
 {
 }

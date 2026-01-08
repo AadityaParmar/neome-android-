@@ -12,11 +12,11 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioMapOfFieldDynamicCondition
 import com.neome.api.meta.base.Symbol
 
-open class StudioDtoDynamicRule : StudioBase()
+interface StudioDtoDynamicRule : StudioBase
 {
-  var conditionNode: StudioMapOfFieldDynamicCondition? = null
-  lateinit var fieldType: EnumStudioCompType
-  lateinit var metaId: MetaIdFieldDynamicRule
-  lateinit var name: Symbol
-  var sourceVarId: MetaIdVar? = null
+  val conditionNode: StudioMapOfFieldDynamicCondition?
+  val fieldType: EnumStudioCompType
+  val metaId: MetaIdFieldDynamicRule
+  val name: Symbol
+  val sourceVarId: MetaIdVar?
 }

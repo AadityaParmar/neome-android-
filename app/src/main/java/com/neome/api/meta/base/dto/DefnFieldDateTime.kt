@@ -10,17 +10,17 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.TimeZoneKey
 
-open class DefnFieldDateTime : DefnFieldEditable()
+interface DefnFieldDateTime : DefnFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: DefnBuildDateTime? = null
-  var defaultVar: DefnBuildDateTime? = null
-  var displayDateFormat: String? = null
-  var max: DefnBuildDateTime? = null
-  var maxFieldId: MetaIdField? = null
-  var maxVar: DefnBuildDateTime? = null
-  var min: DefnBuildDateTime? = null
-  var minFieldId: MetaIdField? = null
-  var minVar: DefnBuildDateTime? = null
-  var timeZone: TimeZoneKey? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: DefnBuildDateTime?
+  val defaultVar: DefnBuildDateTime?
+  val displayDateFormat: String?
+  val max: DefnBuildDateTime?
+  val maxFieldId: MetaIdField?
+  val maxVar: DefnBuildDateTime?
+  val min: DefnBuildDateTime?
+  val minFieldId: MetaIdField?
+  val minVar: DefnBuildDateTime?
+  val timeZone: TimeZoneKey?
 }

@@ -7,7 +7,7 @@ package com.neome.api.home.drawer.msg
 
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgUserNotificationId : Msg()
+interface MsgUserNotificationId : Msg
 {
-  var notificationId: String? = null
+  val notificationId: String?
 }

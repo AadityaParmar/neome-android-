@@ -8,15 +8,15 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DtoLogTreeItem
 import com.neome.api.meta.base.Types.DtoLogTreeKeyValueType
 
-open class DtoLogTreeKeyValue : DtoLogTreeItem()
+interface DtoLogTreeKeyValue : DtoLogTreeItem
 {
-  var children: Array<DtoLogTreeKeyValue>? = null
-  var keyColor: String? = null
-  lateinit var keyText: String
-  var keyTooltip: Boolean? = null
-  var keyWidth: Number? = null
-  var value: String? = null
-  var valueColor: String? = null
-  var valueTooltip: Boolean? = null
-  var valueType: DtoLogTreeKeyValueType? = null
+  val children: Array<DtoLogTreeKeyValue>?
+  val keyColor: String?
+  val keyText: String
+  val keyTooltip: Boolean?
+  val keyWidth: Long?
+  val value: String?
+  val valueColor: String?
+  val valueTooltip: Boolean?
+  val valueType: DtoLogTreeKeyValueType?
 }

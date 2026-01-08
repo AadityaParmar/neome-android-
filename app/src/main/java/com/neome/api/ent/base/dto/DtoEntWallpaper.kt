@@ -7,8 +7,8 @@ package com.neome.api.ent.base.dto
 
 import com.neome.api.meta.base.Types.MediaIdImage
 
-open class DtoEntWallpaper
+interface DtoEntWallpaper
 {
-  var repeatTile: Boolean? = null
-  var wallpaperImageId: MediaIdImage? = null
+  val repeatTile: Boolean?
+  val wallpaperImageId: MediaIdImage?
 }

@@ -13,32 +13,32 @@ import com.neome.api.meta.base.dto.StudioDtoColor
 import com.neome.api.meta.base.dto.StudioField
 import com.neome.api.meta.base.dto.StudioValueVarIdText
 
-open class StudioFieldLabel : StudioField()
+interface StudioFieldLabel : StudioField
 {
-  var bgColor: StudioDtoColor? = null
-  var bgColorVarId: MetaIdVar? = null
-  var bold: Boolean? = null
-  var boldFieldId: MetaIdField? = null
-  var boldVarId: MetaIdVar? = null
-  var colorVarId: MetaIdVar? = null
-  var italic: Boolean? = null
-  var italicFieldId: MetaIdField? = null
-  var italicVarId: MetaIdVar? = null
-  var justifyText: EnumDefnPlacement? = null
-  var justifyTextVarId: MetaIdVar? = null
-  var opacity: Number? = null
-  var opacityFieldId: MetaIdField? = null
-  var opacityVarId: MetaIdVar? = null
-  var strikeThrough: Boolean? = null
-  var strikeThroughFieldId: MetaIdField? = null
-  var strikeThroughVarId: MetaIdVar? = null
-  var textPattern: String? = null
-  var textPatternFieldId: MetaIdField? = null
-  var textPatternVarId: StudioValueVarIdText? = null
-  var textSize: EnumDefnTextSize? = null
-  var textSizeFieldId: MetaIdField? = null
-  var textSizeVarId: MetaIdVar? = null
-  var underline: Boolean? = null
-  var underlineFieldId: MetaIdField? = null
-  var underlineVarId: MetaIdVar? = null
+  val bgColor: StudioDtoColor?
+  val bgColorVarId: MetaIdVar?
+  val bold: Boolean?
+  val boldFieldId: MetaIdField?
+  val boldVarId: MetaIdVar?
+  val colorVarId: MetaIdVar?
+  val italic: Boolean?
+  val italicFieldId: MetaIdField?
+  val italicVarId: MetaIdVar?
+  val justifyText: EnumDefnPlacement?
+  val justifyTextVarId: MetaIdVar?
+  val opacity: Long?
+  val opacityFieldId: MetaIdField?
+  val opacityVarId: MetaIdVar?
+  val strikeThrough: Boolean?
+  val strikeThroughFieldId: MetaIdField?
+  val strikeThroughVarId: MetaIdVar?
+  val textPattern: String?
+  val textPatternFieldId: MetaIdField?
+  val textPatternVarId: StudioValueVarIdText?
+  val textSize: EnumDefnTextSize?
+  val textSizeFieldId: MetaIdField?
+  val textSizeVarId: MetaIdVar?
+  val underline: Boolean?
+  val underlineFieldId: MetaIdField?
+  val underlineVarId: MetaIdVar?
 }

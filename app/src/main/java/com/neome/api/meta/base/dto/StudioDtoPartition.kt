@@ -11,10 +11,10 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioValueCodeJavascript
 import com.neome.api.meta.base.Symbol
 
-open class StudioDtoPartition : StudioBase()
+interface StudioDtoPartition : StudioBase
 {
-  lateinit var assignPartitionFieldId: MetaIdField
-  lateinit var formula: StudioValueCodeJavascript
-  lateinit var metaId: MetaIdPartition
-  lateinit var name: Symbol
+  val assignPartitionFieldId: MetaIdField
+  val formula: StudioValueCodeJavascript
+  val metaId: MetaIdPartition
+  val name: Symbol
 }

@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.EntVdAutoStepWithError
 import com.neome.api.meta.base.Types.EnumDefnKindAiProvider
 import com.neome.api.meta.base.dto.StudioValueParagraph
 
-open class EntVdAi : EntVdAutoStepWithError()
+interface EntVdAi : EntVdAutoStepWithError
 {
-  var aiInstructions: StudioValueParagraph? = null
-  var aiProvider: EnumDefnKindAiProvider? = null
+  val aiInstructions: StudioValueParagraph?
+  val aiProvider: EnumDefnKindAiProvider?
 }

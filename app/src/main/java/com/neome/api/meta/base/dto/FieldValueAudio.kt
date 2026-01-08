@@ -5,13 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
-import kotlin.properties.Delegates
 import com.neome.api.meta.base.Types.MediaIdAudio
 
-open class FieldValueAudio
+interface FieldValueAudio
 {
-  var durationMs: Number by Delegates.notNull<Number>()
-  lateinit var fileName: String
-  var fileSize: Number by Delegates.notNull<Number>()
-  lateinit var mediaIdAudio: MediaIdAudio
+  val durationMs: Long?
+  val fileName: String
+  val fileSize: Long?
+  val mediaIdAudio: MediaIdAudio
 }

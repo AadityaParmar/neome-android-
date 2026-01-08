@@ -7,6 +7,6 @@ package com.neome.api.home.base.dto
 
 import com.neome.api.home.base.dto.DtoMessageReplyPayload
 
-open class DtoMessageReplyPayloadSpreadsheetRow : DtoMessageReplyPayload()
+interface DtoMessageReplyPayloadSpreadsheetRow : DtoMessageReplyPayload
 {
 }

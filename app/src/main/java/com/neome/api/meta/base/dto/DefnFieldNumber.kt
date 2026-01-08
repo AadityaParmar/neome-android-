@@ -8,17 +8,17 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldNumber : DefnFieldEditable()
+interface DefnFieldNumber : DefnFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: Number? = null
-  var defaultVar: Number? = null
-  var max: Number? = null
-  var maxFieldId: MetaIdField? = null
-  var maxVar: Number? = null
-  var min: Number? = null
-  var minDisplayValue: Number? = null
-  var minFieldId: MetaIdField? = null
-  var minVar: Number? = null
-  var numberFormat: String? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: Long?
+  val defaultVar: Long?
+  val max: Long?
+  val maxFieldId: MetaIdField?
+  val maxVar: Long?
+  val min: Long?
+  val minDisplayValue: Long?
+  val minFieldId: MetaIdField?
+  val minVar: Long?
+  val numberFormat: String?
 }

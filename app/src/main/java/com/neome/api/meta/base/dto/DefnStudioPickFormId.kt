@@ -9,10 +9,10 @@ import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.dto.DefnStudioMapOfDtoOption
 import com.neome.api.meta.base.Types.MetaIdForm
 
-open class DefnStudioPickFormId : DefnField()
+interface DefnStudioPickFormId : DefnField
 {
-  var alias: String? = null
-  var allowSystemForms: Boolean? = null
-  var excludeFormIdSet: Array<MetaIdForm>? = null
-  var includeOptionMap: DefnStudioMapOfDtoOption? = null
+  val alias: String?
+  val allowSystemForms: Boolean?
+  val excludeFormIdSet: Array<MetaIdForm>?
+  val includeOptionMap: DefnStudioMapOfDtoOption?
 }

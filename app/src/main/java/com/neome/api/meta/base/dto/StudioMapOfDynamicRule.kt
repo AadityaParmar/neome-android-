@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdFieldDynamicRule
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoDynamicRule
 
-open class StudioMapOfDynamicRule : StudioBase()
+interface StudioMapOfDynamicRule : StudioBase
 {
-  lateinit var keys: Array<MetaIdFieldDynamicRule>
-  lateinit var map: Map<MetaIdFieldDynamicRule, StudioDtoDynamicRule>
+  val keys: Array<MetaIdFieldDynamicRule>
+  val map: Map<MetaIdFieldDynamicRule, StudioDtoDynamicRule>
 }

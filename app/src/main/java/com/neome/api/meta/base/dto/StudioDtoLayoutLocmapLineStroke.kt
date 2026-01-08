@@ -11,13 +11,13 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoColor
 
-open class StudioDtoLayoutLocmapLineStroke : StudioBase()
+interface StudioDtoLayoutLocmapLineStroke : StudioBase
 {
-  var color: StudioDtoColor? = null
-  var colorFieldId: MetaIdField? = null
-  var colorVarId: MetaIdVar? = null
-  var groupByFieldId: MetaIdField? = null
-  var stroke: EnumDefnThemeStroke? = null
-  var strokeFieldId: MetaIdField? = null
-  var strokeVarId: MetaIdVar? = null
+  val color: StudioDtoColor?
+  val colorFieldId: MetaIdField?
+  val colorVarId: MetaIdVar?
+  val groupByFieldId: MetaIdField?
+  val stroke: EnumDefnThemeStroke?
+  val strokeFieldId: MetaIdField?
+  val strokeVarId: MetaIdVar?
 }

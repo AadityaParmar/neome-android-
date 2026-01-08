@@ -10,9 +10,9 @@ import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioDtoUserFilter
 import com.neome.api.meta.base.dto.StudioValueParagraph
 
-open class EntVdSendMessageToUsers : EntVdAutoStep()
+interface EntVdSendMessageToUsers : EntVdAutoStep
 {
-  var message: StudioValueParagraph? = null
-  var sender: StudioBuildArgBinder? = null
-  var toUsers: StudioDtoUserFilter? = null
+  val message: StudioValueParagraph?
+  val sender: StudioBuildArgBinder?
+  val toUsers: StudioDtoUserFilter?
 }

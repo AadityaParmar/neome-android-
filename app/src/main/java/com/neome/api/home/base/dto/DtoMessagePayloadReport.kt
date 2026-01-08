@@ -12,13 +12,13 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdReport
 import com.neome.api.meta.base.Types.RowId
 
-open class DtoMessagePayloadReport : DtoMessagePayload()
+interface DtoMessagePayloadReport : DtoMessagePayload
 {
-  lateinit var actionId: MetaIdAction
-  var formValueRaw: FormValueRaw? = null
-  var inputFormId: MetaIdForm? = null
-  var reportId: MetaIdReport? = null
-  var reportLabel: String? = null
-  var reportName: String? = null
-  var rowId: RowId? = null
+  val actionId: MetaIdAction
+  val formValueRaw: FormValueRaw?
+  val inputFormId: MetaIdForm?
+  val reportId: MetaIdReport?
+  val reportLabel: String?
+  val reportName: String?
+  val rowId: RowId?
 }

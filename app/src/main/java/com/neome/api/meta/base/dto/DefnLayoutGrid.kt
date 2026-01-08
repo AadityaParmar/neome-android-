@@ -10,14 +10,14 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Symbol
 
-open class DefnLayoutGrid
+interface DefnLayoutGrid
 {
-  var allowToSwitchLayoutIdSet: Array<MetaIdLayoutGrid>? = null
-  var bgColorFieldId: MetaIdField? = null
-  var description: String? = null
-  lateinit var kind: EnumDefnLayoutGridKind
-  var label: String? = null
-  lateinit var metaId: MetaIdLayoutGrid
-  lateinit var name: Symbol
-  var toolTipFieldId: MetaIdField? = null
+  val allowToSwitchLayoutIdSet: Array<MetaIdLayoutGrid>?
+  val bgColorFieldId: MetaIdField?
+  val description: String?
+  val kind: EnumDefnLayoutGridKind
+  val label: String?
+  val metaId: MetaIdLayoutGrid
+  val name: Symbol
+  val toolTipFieldId: MetaIdField?
 }

@@ -9,13 +9,13 @@ import com.neome.api.meta.base.dto.DefnDtoColor
 import com.neome.api.meta.base.Types.EnumDefnThemeStroke
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnDtoLayoutLocmapLineStroke
+interface DefnDtoLayoutLocmapLineStroke
 {
-  var color: DefnDtoColor? = null
-  var colorFieldId: MetaIdField? = null
-  var colorVar: DefnDtoColor? = null
-  var groupByFieldId: MetaIdField? = null
-  var stroke: EnumDefnThemeStroke? = null
-  var strokeFieldId: MetaIdField? = null
-  var strokeVar: EnumDefnThemeStroke? = null
+  val color: DefnDtoColor?
+  val colorFieldId: MetaIdField?
+  val colorVar: DefnDtoColor?
+  val groupByFieldId: MetaIdField?
+  val stroke: EnumDefnThemeStroke?
+  val strokeFieldId: MetaIdField?
+  val strokeVar: EnumDefnThemeStroke?
 }

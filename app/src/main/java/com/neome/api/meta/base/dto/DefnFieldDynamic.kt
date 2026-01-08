@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.dto.DefnMapOfDynamicRule
 
-open class DefnFieldDynamic : DefnField()
+interface DefnFieldDynamic : DefnField
 {
-  var ruleMap: DefnMapOfDynamicRule? = null
+  val ruleMap: DefnMapOfDynamicRule?
 }

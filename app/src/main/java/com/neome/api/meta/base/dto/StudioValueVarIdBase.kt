@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioMapOfArgBinder
 
-open class StudioValueVarIdBase : StudioBase()
+interface StudioValueVarIdBase : StudioBase
 {
-  var argBinderMap: StudioMapOfArgBinder? = null
+  val argBinderMap: StudioMapOfArgBinder?
 }

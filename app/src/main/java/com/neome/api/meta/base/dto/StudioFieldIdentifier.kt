@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioFieldEditable
 import com.neome.api.meta.base.dto.StudioValueVarIdText
 
-open class StudioFieldIdentifier : StudioFieldEditable()
+interface StudioFieldIdentifier : StudioFieldEditable
 {
-  var setOnSend: Boolean? = null
-  var textPatternVarId: StudioValueVarIdText? = null
+  val setOnSend: Boolean?
+  val textPatternVarId: StudioValueVarIdText?
 }

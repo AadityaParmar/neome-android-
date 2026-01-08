@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdRect
 import com.neome.api.meta.base.Types.MetaIdVdRegion
 
-open class EntVdRegion : EntVdRect()
+interface EntVdRegion : EntVdRect
 {
-  lateinit var metaId: MetaIdVdRegion
+  val metaId: MetaIdVdRegion
 }

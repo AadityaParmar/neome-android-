@@ -15,19 +15,19 @@ import java.util.Map
 import com.neome.api.meta.base.Types.ServiceName
 import java.util.Set
 
-open class DescApiService
+interface DescApiService
 {
-  lateinit var basic: Map<String, DescApiTypeBasic>
-  lateinit var consts: Map<String, String>
-  lateinit var dto: Map<String, DescApiTypeDto>
-  lateinit var enums: Map<String, DescApiTypeEnum>
-  lateinit var msg: Map<String, DescApiTypeDto>
-  lateinit var rpc: DescApiCall
-  var serviceNames: Array<ServiceName>? = null
-  lateinit var sets: Map<String, DescApiTypeSet>
-  lateinit var sig: Map<String, DescApiTypeDto>
-  lateinit var symbols: Map<String, String>
-  lateinit var sysId: Map<String, DescApiTypeSysId>
-  lateinit var sysIdPrefix: Map<String, String>
-  lateinit var wsoc: DescApiCall
+  val basic: Map<String, DescApiTypeBasic>
+  val consts: Map<String, String>
+  val dto: Map<String, DescApiTypeDto>
+  val enums: Map<String, DescApiTypeEnum>
+  val msg: Map<String, DescApiTypeDto>
+  val rpc: DescApiCall
+  val serviceNames: Array<ServiceName>?
+  val sets: Map<String, DescApiTypeSet>
+  val sig: Map<String, DescApiTypeDto>
+  val symbols: Map<String, String>
+  val sysId: Map<String, DescApiTypeSysId>
+  val sysIdPrefix: Map<String, String>
+  val wsoc: DescApiCall
 }

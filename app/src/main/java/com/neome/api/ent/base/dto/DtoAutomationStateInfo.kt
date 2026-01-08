@@ -11,17 +11,17 @@ import com.neome.api.ent.base.Types.EnumAutomationStateKind
 import com.neome.api.meta.base.Types.EnumDefnKindAutomation
 import com.neome.api.meta.base.dto.EnvValidationError
 
-open class DtoAutomationStateInfo
+interface DtoAutomationStateInfo
 {
-  lateinit var callerName: String
-  var createdOn: String? = null
-  lateinit var eventName: String
-  lateinit var executionId: AutomationExecutionId
-  var failureError: EnvValidationError? = null
-  lateinit var kind: EnumDefnKindAutomation
-  var message: String? = null
-  lateinit var name: String
-  lateinit var stateKind: EnumAutomationStateKind
-  lateinit var stepName: String
-  var updatedOn: String? = null
+  val callerName: String
+  val createdOn: String?
+  val eventName: String
+  val executionId: AutomationExecutionId
+  val failureError: EnvValidationError?
+  val kind: EnumDefnKindAutomation
+  val message: String?
+  val name: String
+  val stateKind: EnumAutomationStateKind
+  val stepName: String
+  val updatedOn: String?
 }

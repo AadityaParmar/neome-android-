@@ -12,11 +12,11 @@ import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioDtoRowIdPointer
 import com.neome.api.meta.base.dto.StudioValueText
 
-open class EntVdRowUpdateFieldLogNumber : EntVdAutoStepWithError()
+interface EntVdRowUpdateFieldLogNumber : EntVdAutoStepWithError
 {
-  var inputField: StudioBuildArgBinder? = null
-  var operation: EnumDefnLogOperationKind? = null
-  var operationMessage: StudioValueText? = null
-  var outputLogNumberFieldId: MetaIdField? = null
-  var rowIdPointer: StudioDtoRowIdPointer? = null
+  val inputField: StudioBuildArgBinder?
+  val operation: EnumDefnLogOperationKind?
+  val operationMessage: StudioValueText?
+  val outputLogNumberFieldId: MetaIdField?
+  val rowIdPointer: StudioDtoRowIdPointer?
 }

@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.EntVdAutoStepWithOutputAndError
 import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.Types.PluginApiId
 
-open class EntVdExecutePlugin : EntVdAutoStepWithOutputAndError()
+interface EntVdExecutePlugin : EntVdAutoStepWithOutputAndError
 {
-  var pluginApiId: PluginApiId? = null
-  var pluginId: MetaIdPlugin? = null
+  val pluginApiId: PluginApiId?
+  val pluginId: MetaIdPlugin?
 }

@@ -10,14 +10,14 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.dto.FieldDtoTree
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldPickTree : DefnFieldEditable()
+interface DefnFieldPickTree : DefnFieldEditable
 {
-  var autoPickSingleChild: Boolean? = null
-  var defaultOptionFieldId: MetaIdField? = null
-  var defaultOptionId: String? = null
-  var forceLeafSelection: Boolean? = null
-  var includeAllChildrenInReport: Boolean? = null
-  var pluginApi: DefnDtoPluginApi? = null
-  var pluginErrorFieldId: MetaIdField? = null
-  var sourceVar: FieldDtoTree? = null
+  val autoPickSingleChild: Boolean?
+  val defaultOptionFieldId: MetaIdField?
+  val defaultOptionId: String?
+  val forceLeafSelection: Boolean?
+  val includeAllChildrenInReport: Boolean?
+  val pluginApi: DefnDtoPluginApi?
+  val pluginErrorFieldId: MetaIdField?
+  val sourceVar: FieldDtoTree?
 }

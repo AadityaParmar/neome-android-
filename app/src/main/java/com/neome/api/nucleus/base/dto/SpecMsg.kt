@@ -8,9 +8,9 @@ package com.neome.api.nucleus.base.dto
 import java.util.Map
 import com.neome.api.meta.base.Types.ServiceName
 
-open class SpecMsg
+interface SpecMsg
 {
-  lateinit var module: String
-  var paramMap: Map<String, String>? = null
-  lateinit var serviceName: ServiceName
+  val module: String
+  val paramMap: Map<String, String>?
+  val serviceName: ServiceName
 }

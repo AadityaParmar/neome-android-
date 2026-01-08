@@ -10,11 +10,11 @@ import com.neome.api.meta.base.Types.MetaIdUserCondition
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoUserConditionStatement
 
-open class StudioMapOfUserCondition : StudioBase()
+interface StudioMapOfUserCondition : StudioBase
 {
-  var andOr: Boolean? = null
-  var keys: Array<MetaIdUserCondition>? = null
-  var map: Map<MetaIdUserCondition, StudioMapOfUserCondition>? = null
-  lateinit var metaId: MetaIdUserCondition
-  var statement: StudioDtoUserConditionStatement? = null
+  val andOr: Boolean?
+  val keys: Array<MetaIdUserCondition>?
+  val map: Map<MetaIdUserCondition, StudioMapOfUserCondition>?
+  val metaId: MetaIdUserCondition
+  val statement: StudioDtoUserConditionStatement?
 }

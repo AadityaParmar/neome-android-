@@ -5,7 +5,6 @@
 
 package com.neome.api.nucleus.base.dto
 
-import kotlin.properties.Delegates
 import com.neome.api.nucleus.base.Types.EnumApiMethod
 import com.neome.api.nucleus.base.Types.EnumApiToken
 import com.neome.api.nucleus.base.Types.EnumApiVer
@@ -22,39 +21,39 @@ import java.util.Set
 import com.neome.api.nucleus.base.dto.SpecMsg
 import com.neome.api.nucleus.base.dto.SpecSig
 
-open class SpecApi
+interface SpecApi
 {
-  lateinit var allowedConnTypes: Array<EnumConnType>
-  lateinit var allowedDeployKinds: Array<EnumDeployKind>
-  lateinit var allowedDeviceTypes: Array<EnumDeviceType>
-  var apiDesc: String? = null
-  lateinit var apiMethod: EnumApiMethod
-  lateinit var apiName: String
-  lateinit var apiVer: EnumApiVer
-  lateinit var artifactMembers: Array<EnumArtifactMemberType>
-  var canBeAccessedViaDeeplink: Boolean by Delegates.notNull<Boolean>()
-  var internal: Boolean by Delegates.notNull<Boolean>()
-  var isDeprecated: Boolean? = null
-  var logMsg: Boolean by Delegates.notNull<Boolean>()
-  lateinit var module: String
-  var msgClassName: String? = null
-  var msgSchema: String? = null
-  var msgSpec: SpecMsg? = null
-  lateinit var publishes: Array<String>
-  var rateLimitPerSec: Number by Delegates.notNull<Number>()
-  lateinit var requiredEntAdminScopes: Array<EnumDefnAdminDoNotOptionEnt>
-  lateinit var requiredPluginAdminScopes: Array<EnumDefnAdminDoNotOptionPlugin>
-  lateinit var requiredStoreAdminScopes: Array<EnumDefnAdminDoNotOptionStoreItem>
-  lateinit var rpcUri: String
-  lateinit var scope: EnumScopeType
-  lateinit var serviceName: ServiceName
-  var sigClassName: String? = null
-  var sigSchema: String? = null
-  lateinit var sigSpec: SpecSig
-  var skipEntLockCheck: Boolean? = null
-  var skipEntUserAuthorization: Boolean by Delegates.notNull<Boolean>()
-  var skipInputValidation: Boolean by Delegates.notNull<Boolean>()
-  var sla: Number by Delegates.notNull<Number>()
-  var timeout: Number by Delegates.notNull<Number>()
-  lateinit var token: EnumApiToken
+  val allowedConnTypes: Array<EnumConnType>
+  val allowedDeployKinds: Array<EnumDeployKind>
+  val allowedDeviceTypes: Array<EnumDeviceType>
+  val apiDesc: String?
+  val apiMethod: EnumApiMethod
+  val apiName: String
+  val apiVer: EnumApiVer
+  val artifactMembers: Array<EnumArtifactMemberType>
+  val canBeAccessedViaDeeplink: Boolean
+  val internal: Boolean
+  val isDeprecated: Boolean?
+  val logMsg: Boolean
+  val module: String
+  val msgClassName: String?
+  val msgSchema: String?
+  val msgSpec: SpecMsg?
+  val publishes: Array<String>
+  val rateLimitPerSec: Long?
+  val requiredEntAdminScopes: Array<EnumDefnAdminDoNotOptionEnt>
+  val requiredPluginAdminScopes: Array<EnumDefnAdminDoNotOptionPlugin>
+  val requiredStoreAdminScopes: Array<EnumDefnAdminDoNotOptionStoreItem>
+  val rpcUri: String
+  val scope: EnumScopeType
+  val serviceName: ServiceName
+  val sigClassName: String?
+  val sigSchema: String?
+  val sigSpec: SpecSig
+  val skipEntLockCheck: Boolean?
+  val skipEntUserAuthorization: Boolean
+  val skipInputValidation: Boolean
+  val sla: Long?
+  val timeout: Long?
+  val token: EnumApiToken
 }

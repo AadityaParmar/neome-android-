@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnDurationUnit
 
-open class FieldDtoDuration
+interface FieldDtoDuration
 {
-  var unit: EnumDefnDurationUnit? = null
-  var value: Number? = null
+  val unit: EnumDefnDurationUnit?
+  val value: Long?
 }

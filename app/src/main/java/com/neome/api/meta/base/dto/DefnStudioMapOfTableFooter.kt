@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.DefnDtoTableFooter
 import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdFooter
 
-open class DefnStudioMapOfTableFooter
+interface DefnStudioMapOfTableFooter
 {
-  lateinit var keys: Array<MetaIdFooter>
-  lateinit var map: Map<MetaIdFooter, DefnDtoTableFooter>
+  val keys: Array<MetaIdFooter>
+  val map: Map<MetaIdFooter, DefnDtoTableFooter>
 }

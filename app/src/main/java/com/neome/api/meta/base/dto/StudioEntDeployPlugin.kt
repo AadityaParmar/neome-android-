@@ -13,10 +13,10 @@ import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.Symbol
 
-open class StudioEntDeployPlugin : StudioBase()
+interface StudioEntDeployPlugin : StudioBase
 {
-  lateinit var metaId: MetaIdPlugin
-  lateinit var name: Symbol
-  var pluginConfigFormValueMap: Map<MetaIdComp, Any>? = null
-  var pluginType: EnumDefnPluginResources? = null
+  val metaId: MetaIdPlugin
+  val name: Symbol
+  val pluginConfigFormValueMap: Map<MetaIdComp, Any>?
+  val pluginType: EnumDefnPluginResources?
 }

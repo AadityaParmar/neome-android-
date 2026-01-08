@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntUserIdTuple
 import com.neome.api.meta.base.Types.UserId
 
-open class EntUserIdTriple : EntUserIdTuple()
+interface EntUserIdTriple : EntUserIdTuple
 {
-  var userId: UserId? = null
+  val userId: UserId?
 }

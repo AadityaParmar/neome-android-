@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnArgBinderContextRow
 import com.neome.api.meta.base.dto.StudioDtoArgValueContext
 
-open class StudioDtoArgValueContextRow : StudioDtoArgValueContext()
+interface StudioDtoArgValueContextRow : StudioDtoArgValueContext
 {
-  lateinit var attribute: EnumDefnArgBinderContextRow
-  var fromAlias: String? = null
+  val attribute: EnumDefnArgBinderContextRow
+  val fromAlias: String?
 }

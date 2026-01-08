@@ -11,13 +11,13 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioModuleSelection
 import com.neome.api.meta.base.Symbol
 
-open class StudioEntAutomation : StudioBase()
+interface StudioEntAutomation : StudioBase
 {
-  var active: Boolean? = null
-  var description: String? = null
-  lateinit var kind: EnumDefnKindAutomation
-  lateinit var metaId: MetaIdAutomation
-  var modules: StudioModuleSelection? = null
-  lateinit var name: Symbol
-  var secondary: String? = null
+  val active: Boolean?
+  val description: String?
+  val kind: EnumDefnKindAutomation
+  val metaId: MetaIdAutomation
+  val modules: StudioModuleSelection?
+  val name: Symbol
+  val secondary: String?
 }

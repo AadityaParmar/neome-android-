@@ -8,7 +8,7 @@ package com.neome.api.ent.base.dto
 import java.util.Set
 import com.neome.api.ent.base.dto.SpreadsheetFilterValue
 
-open class SpreadsheetFilterValueStringSet : SpreadsheetFilterValue()
+interface SpreadsheetFilterValueStringSet : SpreadsheetFilterValue
 {
-  lateinit var valueSet: Array<String>
+  val valueSet: Array<String>
 }

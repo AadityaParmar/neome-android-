@@ -11,10 +11,10 @@ import com.neome.api.meta.base.dto.FormRefKey
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioDtoMapping
 
-open class EntVdParamCreate : EntVdAutoStepWithOutput()
+interface EntVdParamCreate : EntVdAutoStepWithOutput
 {
-  var option: EnumDefnKindPipelineUpdate? = null
-  var outputForm: FormRefKey? = null
-  var outputMapping: StudioDtoMapping? = null
-  var outputMappingVarId: MetaIdVar? = null
+  val option: EnumDefnKindPipelineUpdate?
+  val outputForm: FormRefKey?
+  val outputMapping: StudioDtoMapping?
+  val outputMappingVarId: MetaIdVar?
 }

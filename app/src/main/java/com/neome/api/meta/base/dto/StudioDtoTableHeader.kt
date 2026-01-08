@@ -13,14 +13,14 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoColor
 import com.neome.api.meta.base.Symbol
 
-open class StudioDtoTableHeader : StudioBase()
+interface StudioDtoTableHeader : StudioBase
 {
-  var bgColor: StudioDtoColor? = null
-  lateinit var displayText: String
-  lateinit var fieldIdSet: Array<MetaIdField>
-  lateinit var metaId: MetaIdHeader
-  var name: Symbol? = null
-  var textColor: StudioDtoColor? = null
-  var textSize: EnumDefnTextSize? = null
-  var textStyleSet: Array<EnumDefnTextStyle>? = null
+  val bgColor: StudioDtoColor?
+  val displayText: String
+  val fieldIdSet: Array<MetaIdField>
+  val metaId: MetaIdHeader
+  val name: Symbol?
+  val textColor: StudioDtoColor?
+  val textSize: EnumDefnTextSize?
+  val textStyleSet: Array<EnumDefnTextStyle>?
 }

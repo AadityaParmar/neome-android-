@@ -13,14 +13,14 @@ import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 
-open class DefnDtoLayoutFormContentItem
+interface DefnDtoLayoutFormContentItem
 {
-  var borderColorVar: DefnDtoColor? = null
-  var borderPositionSet: Array<EnumDefnShowBorderKind>? = null
-  var fieldIdSet: Array<MetaIdField>? = null
-  var formLayoutIdSet: Array<MetaIdLayoutForm>? = null
-  var gridLayoutIdSet: Array<MetaIdLayoutGrid>? = null
-  var paddingPositionSet: Array<EnumDefnShowBorderKind>? = null
-  var paddingSize: EnumDefnThemeDividerKind? = null
-  var showGridSwitcher: Array<MetaIdGrid>? = null
+  val borderColorVar: DefnDtoColor?
+  val borderPositionSet: Array<EnumDefnShowBorderKind>?
+  val fieldIdSet: Array<MetaIdField>?
+  val formLayoutIdSet: Array<MetaIdLayoutForm>?
+  val gridLayoutIdSet: Array<MetaIdLayoutGrid>?
+  val paddingPositionSet: Array<EnumDefnShowBorderKind>?
+  val paddingSize: EnumDefnThemeDividerKind?
+  val showGridSwitcher: Array<MetaIdGrid>?
 }

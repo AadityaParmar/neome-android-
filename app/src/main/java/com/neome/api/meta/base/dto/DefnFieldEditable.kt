@@ -10,26 +10,26 @@ import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
 
-open class DefnFieldEditable : DefnField()
+interface DefnFieldEditable : DefnField
 {
-  var autoFill: Boolean? = null
-  var autoFocus: Boolean? = null
-  var helperText: String? = null
-  var helperTextFieldId: MetaIdField? = null
-  var helperTextVar: DefnDtoText? = null
-  var hideLabel: Boolean? = null
-  var icon: String? = null
-  var iconVar: String? = null
-  var labelFieldId: MetaIdField? = null
-  var placeHolder: String? = null
-  var placeHolderFieldId: MetaIdField? = null
-  var placeHolderVar: DefnDtoText? = null
-  var prefix: String? = null
-  var prefixVar: DefnDtoText? = null
-  var required: Boolean? = null
-  var requiredFieldId: MetaIdField? = null
-  var requiredRoleIdSet: Array<MetaIdRole>? = null
-  var requiredVar: Boolean? = null
-  var suffix: String? = null
-  var suffixVar: DefnDtoText? = null
+  val autoFill: Boolean?
+  val autoFocus: Boolean?
+  val helperText: String?
+  val helperTextFieldId: MetaIdField?
+  val helperTextVar: DefnDtoText?
+  val hideLabel: Boolean?
+  val icon: String?
+  val iconVar: String?
+  val labelFieldId: MetaIdField?
+  val placeHolder: String?
+  val placeHolderFieldId: MetaIdField?
+  val placeHolderVar: DefnDtoText?
+  val prefix: String?
+  val prefixVar: DefnDtoText?
+  val required: Boolean?
+  val requiredFieldId: MetaIdField?
+  val requiredRoleIdSet: Array<MetaIdRole>?
+  val requiredVar: Boolean?
+  val suffix: String?
+  val suffixVar: DefnDtoText?
 }

@@ -11,10 +11,10 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioMapOfJarFile
 
-open class StudioPluginJar : StudioBase()
+interface StudioPluginJar : StudioBase
 {
-  lateinit var lastUpdateTime: String
-  var packageNameVarId: MetaIdVar? = null
-  var pluginConfigFormId: MetaIdForm? = null
-  var uploadJarMap: StudioMapOfJarFile? = null
+  val lastUpdateTime: String
+  val packageNameVarId: MetaIdVar?
+  val pluginConfigFormId: MetaIdForm?
+  val uploadJarMap: StudioMapOfJarFile?
 }

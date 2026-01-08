@@ -7,7 +7,7 @@ package com.neome.api.nucleus.base.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigVersion : Sig()
+interface SigVersion : Sig
 {
-  lateinit var version: String
+  val version: String
 }

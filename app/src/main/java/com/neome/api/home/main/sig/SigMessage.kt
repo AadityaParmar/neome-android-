@@ -8,8 +8,8 @@ package com.neome.api.home.main.sig
 import com.neome.api.home.base.Types.EnumReceiptStatus
 import com.neome.api.home.main.sig.SigMessageBase
 
-open class SigMessage : SigMessageBase()
+interface SigMessage : SigMessageBase
 {
-  var receiptStatus: EnumReceiptStatus? = null
-  var version: String? = null
+  val receiptStatus: EnumReceiptStatus?
+  val version: String?
 }

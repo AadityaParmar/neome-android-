@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.EntVdAutoStepWithOutput
 
-open class EntVdBotGetHistory : EntVdAutoStepWithOutput()
+interface EntVdBotGetHistory : EntVdAutoStepWithOutput
 {
 }

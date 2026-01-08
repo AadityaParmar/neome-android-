@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.MetaIdPaymentProvider
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.Symbol
 
-open class StudioEntPaymentProvider : StudioBase()
+interface StudioEntPaymentProvider : StudioBase
 {
-  lateinit var kind: EnumPaymentProviderKind
-  lateinit var metaId: MetaIdPaymentProvider
-  var name: Symbol? = null
+  val kind: EnumPaymentProviderKind
+  val metaId: MetaIdPaymentProvider
+  val name: Symbol?
 }

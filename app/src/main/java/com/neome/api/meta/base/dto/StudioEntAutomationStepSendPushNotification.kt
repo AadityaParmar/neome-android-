@@ -9,9 +9,9 @@ import com.neome.api.meta.base.dto.StudioEntAutomationStepSendMessageBase
 import com.neome.api.meta.base.dto.StudioValueVarIdParagraph
 import com.neome.api.meta.base.dto.StudioValueVarIdText
 
-open class StudioEntAutomationStepSendPushNotification : StudioEntAutomationStepSendMessageBase()
+interface StudioEntAutomationStepSendPushNotification : StudioEntAutomationStepSendMessageBase
 {
-  var messageVarId: StudioValueVarIdParagraph? = null
-  var sendCustomMessage: Boolean? = null
-  var titleVarId: StudioValueVarIdText? = null
+  val messageVarId: StudioValueVarIdParagraph?
+  val sendCustomMessage: Boolean?
+  val titleVarId: StudioValueVarIdText?
 }

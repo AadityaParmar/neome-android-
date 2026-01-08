@@ -7,7 +7,7 @@ package com.neome.api.ent.main.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigTaskId : Sig()
+interface SigTaskId : Sig
 {
-  var taskId: String? = null
+  val taskId: String?
 }

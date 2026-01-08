@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.DefnFieldCounter
 
-open class DefnFieldSlider : DefnFieldCounter()
+interface DefnFieldSlider : DefnFieldCounter
 {
-  var allowRangePicker: Boolean? = null
-  var showAsInputBox: Boolean? = null
+  val allowRangePicker: Boolean?
+  val showAsInputBox: Boolean?
 }

@@ -13,17 +13,17 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.RowId
 
-open class NotificationCustomData
+interface NotificationCustomData
 {
-  var chatId: ChatId? = null
-  var entId: EntId? = null
-  var formId: MetaIdForm? = null
-  var isEntInvite: Boolean? = null
-  var messageId: MessageId? = null
-  var messageType: String? = null
-  var parentChatId: ChatId? = null
-  var parentMessageId: MessageId? = null
-  var rowId: RowId? = null
-  var senderId: EntUserId? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
+  val chatId: ChatId?
+  val entId: EntId?
+  val formId: MetaIdForm?
+  val isEntInvite: Boolean?
+  val messageId: MessageId?
+  val messageType: String?
+  val parentChatId: ChatId?
+  val parentMessageId: MessageId?
+  val rowId: RowId?
+  val senderId: EntUserId?
+  val spreadsheetId: MetaIdSpreadsheet?
 }

@@ -21,31 +21,31 @@ import com.neome.api.nucleus.base.sig.SigVersion
 import com.neome.api.meta.base.Types.StoreItemId
 import com.neome.api.meta.base.Types.UserId
 
-open class SigCaller : SigVersion()
+interface SigCaller : SigVersion
 {
-  var about: String? = null
-  var allowCluster: Boolean? = null
-  var allowStorePublish: Boolean? = null
-  var allowStudio: Boolean? = null
-  var chatNotificationSettingMap: Map<EntId, DtoEntChatNotificationSetting>? = null
-  lateinit var creationTime: String
-  lateinit var entAdminIdMap: Map<EntId, AdminId>
-  lateinit var entUserIdMap: Map<EntId, EntUserId>
-  var enterIsSendDesktop: Boolean? = null
-  var enterIsSendMobile: Boolean? = null
-  var firstName: String? = null
-  var fromCache: Boolean? = null
-  var globalNotificationSetting: DtoNotificationSetting? = null
-  lateinit var groupIdSet: Array<GroupId>
-  var handle: String? = null
-  var languageKey: LanguageKey? = null
-  var lastName: String? = null
-  lateinit var lastUpdate: String
-  var mediaIdAvatar: MediaIdAvatar? = null
-  lateinit var pluginAdminIdMap: Map<PluginBundleId, AdminId>
-  var resetPassword: Boolean? = null
-  lateinit var storeItemAdminIdMap: Map<StoreItemId, AdminId>
-  var updateProfile: Boolean? = null
-  lateinit var userId: UserId
-  lateinit var userIdHash: String
+  val about: String?
+  val allowCluster: Boolean?
+  val allowStorePublish: Boolean?
+  val allowStudio: Boolean?
+  val chatNotificationSettingMap: Map<EntId, DtoEntChatNotificationSetting>?
+  val creationTime: String
+  val entAdminIdMap: Map<EntId, AdminId>
+  val entUserIdMap: Map<EntId, EntUserId>
+  val enterIsSendDesktop: Boolean?
+  val enterIsSendMobile: Boolean?
+  val firstName: String?
+  val fromCache: Boolean?
+  val globalNotificationSetting: DtoNotificationSetting?
+  val groupIdSet: Array<GroupId>
+  val handle: String?
+  val languageKey: LanguageKey?
+  val lastName: String?
+  val lastUpdate: String
+  val mediaIdAvatar: MediaIdAvatar?
+  val pluginAdminIdMap: Map<PluginBundleId, AdminId>
+  val resetPassword: Boolean?
+  val storeItemAdminIdMap: Map<StoreItemId, AdminId>
+  val updateProfile: Boolean?
+  val userId: UserId
+  val userIdHash: String
 }

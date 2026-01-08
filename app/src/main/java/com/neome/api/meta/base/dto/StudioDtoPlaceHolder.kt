@@ -8,9 +8,9 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.FieldDtoImage
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioDtoPlaceHolder : StudioBase()
+interface StudioDtoPlaceHolder : StudioBase
 {
-  var image: FieldDtoImage? = null
-  var primaryText: String? = null
-  var secondaryText: String? = null
+  val image: FieldDtoImage?
+  val primaryText: String?
+  val secondaryText: String?
 }

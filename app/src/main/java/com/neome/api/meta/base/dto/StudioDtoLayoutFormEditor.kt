@@ -12,16 +12,16 @@ import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.dto.StudioDtoLayoutForm
 import com.neome.api.meta.base.dto.StudioMapOfLayoutFormEditorComposite
 
-open class StudioDtoLayoutFormEditor : StudioDtoLayoutForm()
+interface StudioDtoLayoutFormEditor : StudioDtoLayoutForm
 {
-  var allowToSwitchLayoutIdSet: Array<MetaIdLayoutForm>? = null
-  var editorLayoutRenderingMode: EnumDefnEditorLayoutRenderingMode? = null
-  var formEditorLayoutIdSet: Array<MetaIdLayoutForm>? = null
-  var hideLabelCompositeIdSet: Array<MetaIdComposite>? = null
-  var label: String? = null
-  var layoutCompositeMap: StudioMapOfLayoutFormEditorComposite? = null
-  var navigationMode: EnumDefnWizardNavigationMode? = null
-  var nextButtonLabel: String? = null
-  var prevButtonLabel: String? = null
-  var showStepper: Boolean? = null
+  val allowToSwitchLayoutIdSet: Array<MetaIdLayoutForm>?
+  val editorLayoutRenderingMode: EnumDefnEditorLayoutRenderingMode?
+  val formEditorLayoutIdSet: Array<MetaIdLayoutForm>?
+  val hideLabelCompositeIdSet: Array<MetaIdComposite>?
+  val label: String?
+  val layoutCompositeMap: StudioMapOfLayoutFormEditorComposite?
+  val navigationMode: EnumDefnWizardNavigationMode?
+  val nextButtonLabel: String?
+  val prevButtonLabel: String?
+  val showStepper: Boolean?
 }

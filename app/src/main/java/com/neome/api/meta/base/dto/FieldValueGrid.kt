@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.FieldDtoGridRow
 import java.util.Map
 import com.neome.api.meta.base.Types.RowId
 
-open class FieldValueGrid
+interface FieldValueGrid
 {
-  lateinit var keys: Array<RowId>
-  lateinit var map: Map<RowId, FieldDtoGridRow>
+  val keys: Array<RowId>
+  val map: Map<RowId, FieldDtoGridRow>
 }

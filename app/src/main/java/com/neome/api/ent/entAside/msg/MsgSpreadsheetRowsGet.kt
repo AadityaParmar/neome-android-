@@ -14,17 +14,17 @@ import com.neome.api.nucleus.base.msg.Msg
 import com.neome.api.meta.base.Types.RowId
 import com.neome.api.ent.base.dto.SpreadsheetFilterComposite
 
-open class MsgSpreadsheetRowsGet : Msg()
+interface MsgSpreadsheetRowsGet : Msg
 {
-  lateinit var actionId: MetaIdAction
-  var ascOrder: Boolean? = null
-  var dateFieldId: MetaIdField? = null
-  var filterValue: SpreadsheetFilterComposite? = null
-  var groupByFieldId: MetaIdField? = null
-  var inputFormCompositeId: MetaIdComposite? = null
-  var inputFormGridRowId: RowId? = null
-  var inputFormValueRaw: FormValueRaw? = null
-  var searchText: String? = null
-  var sortByFieldIdSet: Array<MetaIdField>? = null
-  lateinit var spreadsheetId: MetaIdSpreadsheet
+  val actionId: MetaIdAction
+  val ascOrder: Boolean?
+  val dateFieldId: MetaIdField?
+  val filterValue: SpreadsheetFilterComposite?
+  val groupByFieldId: MetaIdField?
+  val inputFormCompositeId: MetaIdComposite?
+  val inputFormGridRowId: RowId?
+  val inputFormValueRaw: FormValueRaw?
+  val searchText: String?
+  val sortByFieldIdSet: Array<MetaIdField>?
+  val spreadsheetId: MetaIdSpreadsheet
 }

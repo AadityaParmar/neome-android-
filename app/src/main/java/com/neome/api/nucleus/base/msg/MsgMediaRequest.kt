@@ -13,17 +13,17 @@ import com.neome.api.nucleus.base.msg.Msg
 import com.neome.api.meta.base.Types.RequestId
 import com.neome.api.meta.base.Types.UserId
 
-open class MsgMediaRequest : Msg()
+interface MsgMediaRequest : Msg
 {
-  var callerDeviceId: DeviceId? = null
-  var callerId: UserId? = null
-  var cmd: String? = null
-  var entId: EntId? = null
-  var entUserId: EntUserId? = null
-  var expiry: Number? = null
-  var fileName: String? = null
-  var length: Number? = null
-  var mediaId: MediaId? = null
-  var offset: Number? = null
-  var requestId: RequestId? = null
+  val callerDeviceId: DeviceId?
+  val callerId: UserId?
+  val cmd: String?
+  val entId: EntId?
+  val entUserId: EntUserId?
+  val expiry: Long?
+  val fileName: String?
+  val length: Long?
+  val mediaId: MediaId?
+  val offset: Long?
+  val requestId: RequestId?
 }

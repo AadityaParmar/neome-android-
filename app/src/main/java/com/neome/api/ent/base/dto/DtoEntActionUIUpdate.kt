@@ -9,8 +9,8 @@ import com.neome.api.ent.base.dto.DtoEntAction
 import com.neome.api.meta.base.Types.EnumDefnKindActionUIUpdate
 import com.neome.api.meta.base.Types.MetaIdGroup
 
-open class DtoEntActionUIUpdate : DtoEntAction()
+interface DtoEntActionUIUpdate : DtoEntAction
 {
-  var groupId: MetaIdGroup? = null
-  lateinit var updateKind: EnumDefnKindActionUIUpdate
+  val groupId: MetaIdGroup?
+  val updateKind: EnumDefnKindActionUIUpdate
 }

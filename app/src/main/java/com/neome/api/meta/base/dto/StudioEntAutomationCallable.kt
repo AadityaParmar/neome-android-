@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.dto.StudioEntAutomation
 import com.neome.api.meta.base.dto.StudioEntAutomationCallableEventMap
 
-open class StudioEntAutomationCallable : StudioEntAutomation()
+interface StudioEntAutomationCallable : StudioEntAutomation
 {
-  lateinit var eventMap: StudioEntAutomationCallableEventMap
-  lateinit var formId: MetaIdForm
-  var metaIdPlugin: MetaIdPlugin? = null
+  val eventMap: StudioEntAutomationCallableEventMap
+  val formId: MetaIdForm
+  val metaIdPlugin: MetaIdPlugin?
 }

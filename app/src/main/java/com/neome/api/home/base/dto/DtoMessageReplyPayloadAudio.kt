@@ -5,12 +5,11 @@
 
 package com.neome.api.home.base.dto
 
-import kotlin.properties.Delegates
 import com.neome.api.home.base.dto.DtoMessageReplyPayload
 import com.neome.api.meta.base.Types.MediaIdAudio
 
-open class DtoMessageReplyPayloadAudio : DtoMessageReplyPayload()
+interface DtoMessageReplyPayloadAudio : DtoMessageReplyPayload
 {
-  var durationMs: Number by Delegates.notNull<Number>()
-  lateinit var mediaIdAudio: MediaIdAudio
+  val durationMs: Long?
+  val mediaIdAudio: MediaIdAudio
 }

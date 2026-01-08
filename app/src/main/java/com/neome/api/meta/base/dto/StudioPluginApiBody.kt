@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioValueCodeJavascript
 
-open class StudioPluginApiBody : StudioBase()
+interface StudioPluginApiBody : StudioBase
 {
-  var declarative: StudioValueCodeJavascript? = null
-  var script: StudioValueCodeJavascript? = null
+  val declarative: StudioValueCodeJavascript?
+  val script: StudioValueCodeJavascript?
 }

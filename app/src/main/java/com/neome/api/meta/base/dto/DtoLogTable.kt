@@ -10,16 +10,16 @@ import com.neome.api.meta.base.dto.DtoLogTableCellHeader
 import com.neome.api.meta.base.dto.DtoLogTableRow
 import com.neome.api.meta.base.Types.EnumLogTableTextStyle
 
-open class DtoLogTable : DtoLogItem()
+interface DtoLogTable : DtoLogItem
 {
-  var header: Array<DtoLogTableCellHeader>? = null
-  lateinit var headerBgColor: String
-  lateinit var headerColor: String
-  lateinit var headerStyle: EnumLogTableTextStyle
-  var label: String? = null
-  lateinit var rowBgColor: String
-  lateinit var rowColor: String
-  lateinit var rowStyle: EnumLogTableTextStyle
-  var rows: Array<DtoLogTableRow>? = null
-  var showRows: Number? = null
+  val header: Array<DtoLogTableCellHeader>?
+  val headerBgColor: String
+  val headerColor: String
+  val headerStyle: EnumLogTableTextStyle
+  val label: String?
+  val rowBgColor: String
+  val rowColor: String
+  val rowStyle: EnumLogTableTextStyle
+  val rows: Array<DtoLogTableRow>?
+  val showRows: Long?
 }

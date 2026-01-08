@@ -13,13 +13,13 @@ import com.neome.api.meta.base.dto.StudioBuildArgBinderHolder
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 import com.neome.api.meta.base.dto.StudioValueVarIdText
 
-open class StudioEntAutomationStepUpdateFieldLogNumber : StudioEntAutomationStep()
+interface StudioEntAutomationStepUpdateFieldLogNumber : StudioEntAutomationStep
 {
-  var customMessageVarId: StudioValueVarIdText? = null
-  var operation: EnumDefnLogOperationKind? = null
-  var rowFieldId: MetaIdField? = null
-  var sourcePipelineVarId: MetaIdPipelineParam? = null
-  var targetFieldId: MetaIdField? = null
-  var targetSpreadsheetId: MetaIdSpreadsheet? = null
-  var value: StudioBuildArgBinderHolder? = null
+  val customMessageVarId: StudioValueVarIdText?
+  val operation: EnumDefnLogOperationKind?
+  val rowFieldId: MetaIdField?
+  val sourcePipelineVarId: MetaIdPipelineParam?
+  val targetFieldId: MetaIdField?
+  val targetSpreadsheetId: MetaIdSpreadsheet?
+  val value: StudioBuildArgBinderHolder?
 }

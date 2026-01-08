@@ -11,11 +11,11 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioDtoUserConditionStatement : StudioBase()
+interface StudioDtoUserConditionStatement : StudioBase
 {
-  var derivedRoleIdSet: Array<MetaIdRole>? = null
-  var fieldIdSet: Array<MetaIdField>? = null
-  var kind: EnumDefnKindSetOfUser? = null
-  var roleIdSet: Array<MetaIdRole>? = null
-  var userContextSet: Array<EnumDefnUserContext>? = null
+  val derivedRoleIdSet: Array<MetaIdRole>?
+  val fieldIdSet: Array<MetaIdField>?
+  val kind: EnumDefnKindSetOfUser?
+  val roleIdSet: Array<MetaIdRole>?
+  val userContextSet: Array<EnumDefnUserContext>?
 }

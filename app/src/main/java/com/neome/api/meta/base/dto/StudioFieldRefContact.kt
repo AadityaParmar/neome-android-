@@ -10,8 +10,8 @@ import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.dto.StudioField
 
-open class StudioFieldRefContact : StudioField()
+interface StudioFieldRefContact : StudioField
 {
-  var copyFieldMap: Map<MetaIdField, EnumContactCopyField>? = null
-  var editableContactFieldSet: Array<EnumContactCopyField>? = null
+  val copyFieldMap: Map<MetaIdField, EnumContactCopyField>?
+  val editableContactFieldSet: Array<EnumContactCopyField>?
 }

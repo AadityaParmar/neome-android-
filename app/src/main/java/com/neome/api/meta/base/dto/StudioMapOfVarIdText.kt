@@ -9,8 +9,8 @@ import java.util.Map
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioValueVarIdText
 
-open class StudioMapOfVarIdText : StudioBase()
+interface StudioMapOfVarIdText : StudioBase
 {
-  lateinit var keys: Array<String>
-  lateinit var map: Map<String, StudioValueVarIdText>
+  val keys: Array<String>
+  val map: Map<String, StudioValueVarIdText>
 }

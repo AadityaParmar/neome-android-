@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioVar
 import com.neome.api.meta.base.dto.StudioVarValueLong
 
-open class StudioVarSequence : StudioVar()
+interface StudioVarSequence : StudioVar
 {
-  var value: StudioVarValueLong? = null
+  val value: StudioVarValueLong?
 }

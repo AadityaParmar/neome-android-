@@ -5,11 +5,10 @@
 
 package com.neome.api.ent.base.dto
 
-import kotlin.properties.Delegates
 import com.neome.api.ent.base.dto.DtoGuaranteedRequest
 
-open class GuaranteedRequest
+interface GuaranteedRequest
 {
-  var offset: Number by Delegates.notNull<Number>()
-  lateinit var payload: DtoGuaranteedRequest
+  val offset: Long?
+  val payload: DtoGuaranteedRequest
 }

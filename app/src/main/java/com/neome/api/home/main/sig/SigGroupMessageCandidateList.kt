@@ -10,7 +10,7 @@ import java.util.Map
 import com.neome.api.nucleus.base.sig.Sig
 import com.neome.api.home.drawer.sig.SigGroupAvatar
 
-open class SigGroupMessageCandidateList : Sig()
+interface SigGroupMessageCandidateList : Sig
 {
-  lateinit var candidateMap: Map<AnyPrefixKey, Array<SigGroupAvatar>>
+  val candidateMap: Map<AnyPrefixKey, Array<SigGroupAvatar>>
 }

@@ -8,7 +8,7 @@ package com.neome.api.ent.entMain.msg
 import com.neome.api.nucleus.base.msg.Msg
 import com.neome.api.meta.base.Types.WorkflowExecutionId
 
-open class MsgWorkflowExecutionIdNoVersion : Msg()
+interface MsgWorkflowExecutionIdNoVersion : Msg
 {
-  lateinit var executionId: WorkflowExecutionId
+  val executionId: WorkflowExecutionId
 }

@@ -9,9 +9,9 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.EnumDefnMonth
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldMonth : DefnFieldEditable()
+interface DefnFieldMonth : DefnFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: EnumDefnMonth? = null
-  var defaultVar: EnumDefnMonth? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: EnumDefnMonth?
+  val defaultVar: EnumDefnMonth?
 }

@@ -9,12 +9,12 @@ import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.dto.DefnStudioMapOfDtoOption
 import com.neome.api.meta.base.Types.MetaIdAction
 
-open class DefnStudioBuildActionPermission : DefnField()
+interface DefnStudioBuildActionPermission : DefnField
 {
-  var allowGrouping: Boolean? = null
-  var allowShowMessageTooltip: Boolean? = null
-  var allowSystemRoles: Boolean? = null
-  var includeActionIdSet: Array<MetaIdAction>? = null
-  var includeOptionMap: DefnStudioMapOfDtoOption? = null
-  var isGroupAction: Boolean? = null
+  val allowGrouping: Boolean?
+  val allowShowMessageTooltip: Boolean?
+  val allowSystemRoles: Boolean?
+  val includeActionIdSet: Array<MetaIdAction>?
+  val includeOptionMap: DefnStudioMapOfDtoOption?
+  val isGroupAction: Boolean?
 }

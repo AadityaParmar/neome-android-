@@ -7,7 +7,7 @@ package com.neome.api.ent.agent.msg
 
 import com.neome.api.ent.agent.msg.MsgPluginApiResponse
 
-open class MsgPluginApiResponseAccept : MsgPluginApiResponse()
+interface MsgPluginApiResponseAccept : MsgPluginApiResponse
 {
-  lateinit var responseActorPath: String
+  val responseActorPath: String
 }

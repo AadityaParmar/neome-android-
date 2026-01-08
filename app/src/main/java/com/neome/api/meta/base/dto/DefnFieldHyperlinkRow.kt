@@ -10,9 +10,9 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-open class DefnFieldHyperlinkRow : DefnFieldEditable()
+interface DefnFieldHyperlinkRow : DefnFieldEditable
 {
-  var displayTextVar: DefnDtoText? = null
-  var hyperlinkFieldIdSet: Array<MetaIdField>? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
+  val displayTextVar: DefnDtoText?
+  val hyperlinkFieldIdSet: Array<MetaIdField>?
+  val spreadsheetId: MetaIdSpreadsheet?
 }

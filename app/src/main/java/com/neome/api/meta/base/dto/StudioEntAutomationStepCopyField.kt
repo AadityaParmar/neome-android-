@@ -11,11 +11,11 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntAutomationStepCopyField : StudioEntAutomationStep()
+interface StudioEntAutomationStepCopyField : StudioEntAutomationStep
 {
-  var mappingVarId: MetaIdVar? = null
-  var sourceGridFilterVarId: StudioValueVarIdCondition? = null
-  var sourceGridId: MetaIdGrid? = null
-  var sourcePipelineVarId: MetaIdPipelineParam? = null
-  var targetPipelineVarId: MetaIdPipelineParam? = null
+  val mappingVarId: MetaIdVar?
+  val sourceGridFilterVarId: StudioValueVarIdCondition?
+  val sourceGridId: MetaIdGrid?
+  val sourcePipelineVarId: MetaIdPipelineParam?
+  val targetPipelineVarId: MetaIdPipelineParam?
 }

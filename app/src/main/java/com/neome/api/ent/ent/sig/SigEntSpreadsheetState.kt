@@ -7,11 +7,11 @@ package com.neome.api.ent.ent.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigEntSpreadsheetState : Sig()
+interface SigEntSpreadsheetState : Sig
 {
-  lateinit var gridRemoveVer: String
-  lateinit var gridVer: String
-  lateinit var rowCountVer: String
-  lateinit var rowOrderVer: String
-  lateinit var sheetIdHash: String
+  val gridRemoveVer: String
+  val gridVer: String
+  val rowCountVer: String
+  val rowOrderVer: String
+  val sheetIdHash: String
 }

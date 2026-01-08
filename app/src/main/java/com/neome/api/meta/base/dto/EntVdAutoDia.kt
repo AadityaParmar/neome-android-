@@ -14,12 +14,12 @@ import com.neome.api.meta.base.Types.MetaIdVdAutoEdge
 import com.neome.api.meta.base.Types.MetaIdVdAutoNode
 import com.neome.api.meta.base.Symbol
 
-open class EntVdAutoDia : EntVdDia()
+interface EntVdAutoDia : EntVdDia
 {
-  var description: String? = null
-  lateinit var edgeMap: Map<MetaIdVdAutoEdge, EntVdAutoEdge>
-  var label: String? = null
-  lateinit var metaId: MetaIdVdAutoDia
-  lateinit var name: Symbol
-  lateinit var nodeMap: Map<MetaIdVdAutoNode, EntVdAutoNode>
+  val description: String?
+  val edgeMap: Map<MetaIdVdAutoEdge, EntVdAutoEdge>
+  val label: String?
+  val metaId: MetaIdVdAutoDia
+  val name: Symbol
+  val nodeMap: Map<MetaIdVdAutoNode, EntVdAutoNode>
 }

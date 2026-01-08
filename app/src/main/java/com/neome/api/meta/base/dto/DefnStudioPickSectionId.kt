@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdSection
 
-open class DefnStudioPickSectionId : DefnFieldEditable()
+interface DefnStudioPickSectionId : DefnFieldEditable
 {
-  var excludeSectionIdSet: Array<MetaIdSection>? = null
-  lateinit var formId: MetaIdForm
+  val excludeSectionIdSet: Array<MetaIdSection>?
+  val formId: MetaIdForm
 }

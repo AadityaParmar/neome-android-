@@ -8,8 +8,8 @@ package com.neome.api.home.base.dto
 import com.neome.api.home.base.dto.DtoGroupMemberKey
 import com.neome.api.home.base.dto.DtoMessagePayload
 
-open class DtoMessagePayloadGroupMemberRemove : DtoMessagePayload()
+interface DtoMessagePayloadGroupMemberRemove : DtoMessagePayload
 {
-  lateinit var initiatorMember: DtoGroupMemberKey
-  lateinit var targetMember: DtoGroupMemberKey
+  val initiatorMember: DtoGroupMemberKey
+  val targetMember: DtoGroupMemberKey
 }

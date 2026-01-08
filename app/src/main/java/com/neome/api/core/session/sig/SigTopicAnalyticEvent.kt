@@ -8,7 +8,7 @@ package com.neome.api.core.session.sig
 import com.neome.api.nucleus.base.Types.EnumAnalyticEventFilterKind
 import com.neome.api.core.session.sig.SigTopic
 
-open class SigTopicAnalyticEvent : SigTopic()
+interface SigTopicAnalyticEvent : SigTopic
 {
-  lateinit var analyticEvent: EnumAnalyticEventFilterKind
+  val analyticEvent: EnumAnalyticEventFilterKind
 }

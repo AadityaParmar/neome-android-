@@ -8,8 +8,8 @@ package com.neome.api.home.base.dto
 import com.neome.api.home.base.dto.DtoMessageReplyPayload
 import com.neome.api.meta.base.Types.MediaIdAvatar
 
-open class DtoMessageReplyPayloadUser : DtoMessageReplyPayload()
+interface DtoMessageReplyPayloadUser : DtoMessageReplyPayload
 {
-  var mediaIdAvatar: MediaIdAvatar? = null
-  lateinit var userName: String
+  val mediaIdAvatar: MediaIdAvatar?
+  val userName: String
 }

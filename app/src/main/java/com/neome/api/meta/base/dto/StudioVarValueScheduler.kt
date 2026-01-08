@@ -9,9 +9,9 @@ import java.util.Date
 import com.neome.api.meta.base.dto.StudioBuildRepeatSetting
 import com.neome.api.meta.base.Types.TimeZoneKey
 
-open class StudioVarValueScheduler
+interface StudioVarValueScheduler
 {
-  var repeatSetting: StudioBuildRepeatSetting? = null
-  var startDateTime: String? = null
-  var timeZone: TimeZoneKey? = null
+  val repeatSetting: StudioBuildRepeatSetting?
+  val startDateTime: String?
+  val timeZone: TimeZoneKey?
 }

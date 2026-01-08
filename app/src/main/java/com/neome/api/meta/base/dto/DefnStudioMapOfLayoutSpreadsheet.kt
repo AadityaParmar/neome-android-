@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-open class DefnStudioMapOfLayoutSpreadsheet : DefnField()
+interface DefnStudioMapOfLayoutSpreadsheet : DefnField
 {
-  lateinit var spreadsheetId: MetaIdSpreadsheet
+  val spreadsheetId: MetaIdSpreadsheet
 }

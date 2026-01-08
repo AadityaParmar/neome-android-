@@ -12,11 +12,11 @@ import com.neome.api.meta.base.Types.KeychainId
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.dto.StudioValueText
 
-open class EntVdExecuteRpc : EntVdAutoStepWithOutputAndError()
+interface EntVdExecuteRpc : EntVdAutoStepWithOutputAndError
 {
-  var apiMethod: EnumDefnHttpMethod? = null
-  var apiName: StudioValueText? = null
-  var inputParamId: MetaIdPipelineParam? = null
-  var outputForm: FormRefKey? = null
-  var sendKeychainId: KeychainId? = null
+  val apiMethod: EnumDefnHttpMethod?
+  val apiName: StudioValueText?
+  val inputParamId: MetaIdPipelineParam?
+  val outputForm: FormRefKey?
+  val sendKeychainId: KeychainId?
 }

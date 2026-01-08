@@ -19,22 +19,22 @@ import com.neome.api.meta.base.dto.StudioEntPluginApi
 import com.neome.api.meta.base.dto.StudioEntPluginResourceMap
 import com.neome.api.meta.base.dto.StudioVar
 
-open class StudioEntPlugin : StudioEntImport()
+interface StudioEntPlugin : StudioEntImport
 {
-  lateinit var mode: EnumDefnPluginMode
-  var pluginAbout: String? = null
-  lateinit var pluginApiIdKeys: Array<PluginApiId>
-  lateinit var pluginApiIdMap: Map<PluginApiId, StudioEntPluginApi>
-  var pluginAvatarId: MediaIdAvatar? = null
-  lateinit var pluginBundleId: PluginBundleId
-  var pluginConfigFormId: MetaIdForm? = null
-  lateinit var pluginFormKeys: Array<MetaIdForm>
-  lateinit var pluginFormMap: Map<MetaIdForm, DefnForm>
-  lateinit var pluginId: PluginId
-  lateinit var pluginName: String
-  var pluginResourceMap: StudioEntPluginResourceMap? = null
-  lateinit var pluginVarKeys: Array<MetaIdVar>
-  lateinit var pluginVarMap: Map<MetaIdVar, StudioVar>
-  lateinit var pluginVersion: String
-  var singleton: Boolean? = null
+  val mode: EnumDefnPluginMode
+  val pluginAbout: String?
+  val pluginApiIdKeys: Array<PluginApiId>
+  val pluginApiIdMap: Map<PluginApiId, StudioEntPluginApi>
+  val pluginAvatarId: MediaIdAvatar?
+  val pluginBundleId: PluginBundleId
+  val pluginConfigFormId: MetaIdForm?
+  val pluginFormKeys: Array<MetaIdForm>
+  val pluginFormMap: Map<MetaIdForm, DefnForm>
+  val pluginId: PluginId
+  val pluginName: String
+  val pluginResourceMap: StudioEntPluginResourceMap?
+  val pluginVarKeys: Array<MetaIdVar>
+  val pluginVarMap: Map<MetaIdVar, StudioVar>
+  val pluginVersion: String
+  val singleton: Boolean?
 }

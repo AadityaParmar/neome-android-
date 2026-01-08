@@ -5,7 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-open class FieldValueEmail
+interface FieldValueEmail
 {
-  lateinit var value: String
+  val value: String
 }

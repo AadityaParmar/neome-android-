@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.EnumDefnRowProperty
 import com.neome.api.meta.base.Types.EnumDefnUserProperty
 
-open class DefnFieldUserId : DefnFieldEditable()
+interface DefnFieldUserId : DefnFieldEditable
 {
-  var defaultValue: EnumDefnRowProperty? = null
-  var displayProperty: EnumDefnUserProperty? = null
+  val defaultValue: EnumDefnRowProperty?
+  val displayProperty: EnumDefnUserProperty?
 }

@@ -9,7 +9,7 @@ import java.util.Map
 import com.neome.api.meta.base.Types.SearchPath
 import java.util.Set
 
-open class SearchResult
+interface SearchResult
 {
-  var result: Map<SearchPath, Array<String>>? = null
+  val result: Map<SearchPath, Array<String>>?
 }

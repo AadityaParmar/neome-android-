@@ -9,9 +9,9 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.EnumDefnTextSize
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldTextSize : DefnFieldEditable()
+interface DefnFieldTextSize : DefnFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: EnumDefnTextSize? = null
-  var defaultVar: EnumDefnTextSize? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: EnumDefnTextSize?
+  val defaultVar: EnumDefnTextSize?
 }

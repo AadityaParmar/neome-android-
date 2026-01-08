@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.dto.StudioEntAutomationStepSendMessageBase
 import com.neome.api.meta.base.dto.StudioValueVarIdParagraph
 
-open class StudioEntAutomationStepSendWhatsappDynamicMessage : StudioEntAutomationStepSendMessageBase()
+interface StudioEntAutomationStepSendWhatsappDynamicMessage : StudioEntAutomationStepSendMessageBase
 {
-  var dataSourceFieldId: MetaIdField? = null
-  var messageVarId: StudioValueVarIdParagraph? = null
+  val dataSourceFieldId: MetaIdField?
+  val messageVarId: StudioValueVarIdParagraph?
 }

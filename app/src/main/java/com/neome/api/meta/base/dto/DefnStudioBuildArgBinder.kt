@@ -18,34 +18,34 @@ import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.Types.MetaIdVar
 
-open class DefnStudioBuildArgBinder : DefnField()
+interface DefnStudioBuildArgBinder : DefnField
 {
-  var compositeIdSet: Array<MetaIdComposite>? = null
-  var derivedCompositeIdSet: Array<MetaIdComposite>? = null
-  var derivedFormId: MetaIdForm? = null
-  var derivedPluginId: MetaIdPlugin? = null
-  var direction: EnumDefnThemeDirection? = null
-  var excludeFieldIdSet: Array<MetaIdField>? = null
-  var excludeVarIdSet: Array<MetaIdVar>? = null
-  var filterConstantFieldTypeSet: Array<EnumDefnCompType>? = null
-  var filterContextCallerSet: Array<String>? = null
-  var filterContextCallerSettingSet: Array<String>? = null
-  var filterContextEntSet: Array<String>? = null
-  var filterContextOptionSet: Array<String>? = null
-  var filterContextRowSet: Array<String>? = null
-  var filterDerivedFieldTypeSet: Array<EnumDefnCompType>? = null
-  var filterFieldTypeSet: Array<EnumDefnCompType>? = null
-  var filterKindSet: Array<EnumDefnArgBinder>? = null
-  var filterVarKindSet: Array<EnumStudioVarKind>? = null
-  var formId: MetaIdForm? = null
-  var gridId: MetaIdGrid? = null
-  var includeOptionMap: DefnStudioMapOfDtoOption? = null
-  var inputFormId: MetaIdForm? = null
-  var peerFieldId: MetaIdField? = null
-  var peerKind: EnumDefnArgBinder? = null
-  var pluginConfigFormId: MetaIdForm? = null
-  var pluginId: MetaIdPlugin? = null
-  var refTargetFieldId: MetaIdField? = null
-  var refTargetFormId: MetaIdForm? = null
-  var required: Boolean? = null
+  val compositeIdSet: Array<MetaIdComposite>?
+  val derivedCompositeIdSet: Array<MetaIdComposite>?
+  val derivedFormId: MetaIdForm?
+  val derivedPluginId: MetaIdPlugin?
+  val direction: EnumDefnThemeDirection?
+  val excludeFieldIdSet: Array<MetaIdField>?
+  val excludeVarIdSet: Array<MetaIdVar>?
+  val filterConstantFieldTypeSet: Array<EnumDefnCompType>?
+  val filterContextCallerSet: Array<String>?
+  val filterContextCallerSettingSet: Array<String>?
+  val filterContextEntSet: Array<String>?
+  val filterContextOptionSet: Array<String>?
+  val filterContextRowSet: Array<String>?
+  val filterDerivedFieldTypeSet: Array<EnumDefnCompType>?
+  val filterFieldTypeSet: Array<EnumDefnCompType>?
+  val filterKindSet: Array<EnumDefnArgBinder>?
+  val filterVarKindSet: Array<EnumStudioVarKind>?
+  val formId: MetaIdForm?
+  val gridId: MetaIdGrid?
+  val includeOptionMap: DefnStudioMapOfDtoOption?
+  val inputFormId: MetaIdForm?
+  val peerFieldId: MetaIdField?
+  val peerKind: EnumDefnArgBinder?
+  val pluginConfigFormId: MetaIdForm?
+  val pluginId: MetaIdPlugin?
+  val refTargetFieldId: MetaIdField?
+  val refTargetFormId: MetaIdForm?
+  val required: Boolean?
 }

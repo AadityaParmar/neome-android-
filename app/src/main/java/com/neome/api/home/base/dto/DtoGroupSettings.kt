@@ -5,11 +5,9 @@
 
 package com.neome.api.home.base.dto
 
-import kotlin.properties.Delegates
-
-open class DtoGroupSettings
+interface DtoGroupSettings
 {
-  var anyOneCanJoin: Boolean by Delegates.notNull<Boolean>()
-  var onlyAdminCanSendMessages: Boolean by Delegates.notNull<Boolean>()
-  var onlyAdminCanUpdateGroupInfo: Boolean by Delegates.notNull<Boolean>()
+  val anyOneCanJoin: Boolean
+  val onlyAdminCanSendMessages: Boolean
+  val onlyAdminCanUpdateGroupInfo: Boolean
 }

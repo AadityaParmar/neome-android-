@@ -9,12 +9,12 @@ import com.neome.api.meta.base.AnyEmailId
 import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldEmail : DefnFieldEditable()
+interface DefnFieldEmail : DefnFieldEditable
 {
-  var autoPickSelf: Boolean? = null
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: AnyEmailId? = null
-  var defaultVar: AnyEmailId? = null
-  var invalidDomainSetVar: Array<String>? = null
-  var validDomainSetVar: Array<String>? = null
+  val autoPickSelf: Boolean?
+  val defaultFieldId: MetaIdField?
+  val defaultValue: AnyEmailId?
+  val defaultVar: AnyEmailId?
+  val invalidDomainSetVar: Array<String>?
+  val validDomainSetVar: Array<String>?
 }

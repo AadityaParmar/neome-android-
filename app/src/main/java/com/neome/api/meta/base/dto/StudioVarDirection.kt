@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnThemeDirection
 import com.neome.api.meta.base.dto.StudioVar
 
-open class StudioVarDirection : StudioVar()
+interface StudioVarDirection : StudioVar
 {
-  var value: EnumDefnThemeDirection? = null
+  val value: EnumDefnThemeDirection?
 }

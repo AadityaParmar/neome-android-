@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import java.util.Date
 
-open class FieldValueDate
+interface FieldValueDate
 {
-  lateinit var value: String
+  val value: String
 }

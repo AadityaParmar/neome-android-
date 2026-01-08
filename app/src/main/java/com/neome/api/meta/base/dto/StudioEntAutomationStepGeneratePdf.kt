@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioEntAutomationStepGenerateDocument
 
-open class StudioEntAutomationStepGeneratePdf : StudioEntAutomationStepGenerateDocument()
+interface StudioEntAutomationStepGeneratePdf : StudioEntAutomationStepGenerateDocument
 {
-  var pdfFieldId: MetaIdField? = null
-  var pdfFormId: MetaIdForm? = null
-  var pdfFormMappingVarId: MetaIdVar? = null
+  val pdfFieldId: MetaIdField?
+  val pdfFormId: MetaIdForm?
+  val pdfFormMappingVarId: MetaIdVar?
 }

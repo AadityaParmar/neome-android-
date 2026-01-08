@@ -8,9 +8,9 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoLayoutCardItemLineSegment
 
-open class StudioDtoLayoutCardItemLine : StudioBase()
+interface StudioDtoLayoutCardItemLine : StudioBase
 {
-  var caption: StudioDtoLayoutCardItemLineSegment? = null
-  var first: StudioDtoLayoutCardItemLineSegment? = null
-  var middle: StudioDtoLayoutCardItemLineSegment? = null
+  val caption: StudioDtoLayoutCardItemLineSegment?
+  val first: StudioDtoLayoutCardItemLineSegment?
+  val middle: StudioDtoLayoutCardItemLineSegment?
 }

@@ -11,11 +11,11 @@ import com.neome.api.meta.base.Types.MetaIdReport
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDetails
 
-open class StudioEntReport : StudioBase()
+interface StudioEntReport : StudioBase
 {
-  lateinit var details: StudioDetails
-  var inputFormId: MetaIdForm? = null
-  lateinit var kind: EnumDefnKindReport
-  lateinit var metaId: MetaIdReport
-  var outputFormId: MetaIdForm? = null
+  val details: StudioDetails
+  val inputFormId: MetaIdForm?
+  val kind: EnumDefnKindReport
+  val metaId: MetaIdReport
+  val outputFormId: MetaIdForm?
 }

@@ -10,9 +10,9 @@ import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioDtoRowIdPointer
 import com.neome.api.meta.base.dto.StudioValueParagraph
 
-open class EntVdRowSendComment : EntVdAutoStepWithError()
+interface EntVdRowSendComment : EntVdAutoStepWithError
 {
-  var message: StudioValueParagraph? = null
-  var rowIdPointer: StudioDtoRowIdPointer? = null
-  var sender: StudioBuildArgBinder? = null
+  val message: StudioValueParagraph?
+  val rowIdPointer: StudioDtoRowIdPointer?
+  val sender: StudioBuildArgBinder?
 }

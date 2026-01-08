@@ -9,8 +9,8 @@ import com.neome.api.app.base.dto.DtoNeoScript
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-open class DtoNeoScriptLayoutSpreadsheet : DtoNeoScript()
+interface DtoNeoScriptLayoutSpreadsheet : DtoNeoScript
 {
-  var spreadsheetId: MetaIdSpreadsheet? = null
-  var spreadsheetLayoutId: MetaIdLayoutGrid? = null
+  val spreadsheetId: MetaIdSpreadsheet?
+  val spreadsheetLayoutId: MetaIdLayoutGrid?
 }

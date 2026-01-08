@@ -10,7 +10,7 @@ import com.neome.api.meta.base.Types.EntUserId
 import java.util.Map
 import com.neome.api.nucleus.base.sig.SigVersion
 
-open class SigAgentEntUserList : SigVersion()
+interface SigAgentEntUserList : SigVersion
 {
-  lateinit var entUserMap: Map<EntUserId, DtoAgentEntUser>
+  val entUserMap: Map<EntUserId, DtoAgentEntUser>
 }

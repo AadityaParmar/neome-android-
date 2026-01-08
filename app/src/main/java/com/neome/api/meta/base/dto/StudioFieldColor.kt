@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldColor : StudioFieldEditable()
+interface StudioFieldColor : StudioFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: String? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: String?
 }

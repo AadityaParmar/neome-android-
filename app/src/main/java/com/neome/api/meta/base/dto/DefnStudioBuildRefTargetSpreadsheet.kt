@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.MetaIdForm
 
-open class DefnStudioBuildRefTargetSpreadsheet : DefnField()
+interface DefnStudioBuildRefTargetSpreadsheet : DefnField
 {
-  var excludeFormId: MetaIdForm? = null
+  val excludeFormId: MetaIdForm?
 }

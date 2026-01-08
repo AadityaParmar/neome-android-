@@ -9,12 +9,12 @@ import com.neome.api.ent.base.dto.DtoEntActionPermission
 import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdAction
 
-open class DtoEntGroupActionPermissionMap
+interface DtoEntGroupActionPermissionMap
 {
-  var defaultActionId: MetaIdAction? = null
-  var defaultPinnedActionIdSet: Array<MetaIdAction>? = null
-  var hideActionMenu: Boolean? = null
-  lateinit var keys: Array<MetaIdAction>
-  lateinit var map: Map<MetaIdAction, DtoEntActionPermission>
-  var mobilePinnedActionIdSet: Array<MetaIdAction>? = null
+  val defaultActionId: MetaIdAction?
+  val defaultPinnedActionIdSet: Array<MetaIdAction>?
+  val hideActionMenu: Boolean?
+  val keys: Array<MetaIdAction>
+  val map: Map<MetaIdAction, DtoEntActionPermission>
+  val mobilePinnedActionIdSet: Array<MetaIdAction>?
 }

@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.AutoXform
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-open class AutoXformStringIsEmail : AutoXform()
+interface AutoXformStringIsEmail : AutoXform
 {
-  var outputField: StudioDtoArgValueParameter? = null
-  var sourceField: StudioBuildArgBinder? = null
+  val outputField: StudioDtoArgValueParameter?
+  val sourceField: StudioBuildArgBinder?
 }

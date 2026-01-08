@@ -14,11 +14,11 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.MetaIdVdErdDia
 import com.neome.api.meta.base.Symbol
 
-open class EntVdErdDia : EntVdDia()
+interface EntVdErdDia : EntVdDia
 {
-  var entityMap: Map<MetaIdSpreadsheet, EntVdErdEntity>? = null
-  var label: String? = null
-  lateinit var metaId: MetaIdVdErdDia
-  lateinit var name: Symbol
-  var refMap: Map<MetaIdField, EntVdErdRef>? = null
+  val entityMap: Map<MetaIdSpreadsheet, EntVdErdEntity>?
+  val label: String?
+  val metaId: MetaIdVdErdDia
+  val name: Symbol
+  val refMap: Map<MetaIdField, EntVdErdRef>?
 }

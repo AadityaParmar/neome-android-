@@ -7,9 +7,9 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumNeatPathCaption
 
-open class NeatPath
+interface NeatPath
 {
-  var caption: EnumNeatPathCaption? = null
-  var primary: Array<String>? = null
-  var secondary: String? = null
+  val caption: EnumNeatPathCaption?
+  val primary: Array<String>?
+  val secondary: String?
 }

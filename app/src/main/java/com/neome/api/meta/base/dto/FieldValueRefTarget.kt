@@ -7,10 +7,10 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.RowId
 
-open class FieldValueRefTarget
+interface FieldValueRefTarget
 {
-  var displayValue: String? = null
-  lateinit var token: String
-  lateinit var value: RowId
-  var version: String? = null
+  val displayValue: String?
+  val token: String
+  val value: RowId
+  val version: String?
 }

@@ -13,13 +13,13 @@ import com.neome.api.meta.base.Types.MetaIdEvent
 import com.neome.api.meta.base.Types.MetaIdPipelineVar
 import com.neome.api.meta.base.Types.MetaIdStep
 
-open class DefnStudioPickPipelineVarId : DefnFieldEditable()
+interface DefnStudioPickPipelineVarId : DefnFieldEditable
 {
-  var automationEventId: MetaIdEvent? = null
-  var automationId: MetaIdAutomation? = null
-  var automationStepId: MetaIdStep? = null
-  var excludePipelineVarIdSet: Array<MetaIdPipelineVar>? = null
-  var includeOptionMap: DefnStudioMapOfDtoOption? = null
-  var multiSelect: Boolean? = null
-  var pipelineFormKind: EnumDefnPipelineFormKind? = null
+  val automationEventId: MetaIdEvent?
+  val automationId: MetaIdAutomation?
+  val automationStepId: MetaIdStep?
+  val excludePipelineVarIdSet: Array<MetaIdPipelineVar>?
+  val includeOptionMap: DefnStudioMapOfDtoOption?
+  val multiSelect: Boolean?
+  val pipelineFormKind: EnumDefnPipelineFormKind?
 }

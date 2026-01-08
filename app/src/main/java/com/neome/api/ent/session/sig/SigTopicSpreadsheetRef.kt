@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheetRef
 import com.neome.api.meta.base.Types.RowId
 import com.neome.api.core.session.sig.SigTopic
 
-open class SigTopicSpreadsheetRef : SigTopic()
+interface SigTopicSpreadsheetRef : SigTopic
 {
-  lateinit var metaIdSpreadsheetRef: MetaIdSpreadsheetRef
-  lateinit var targetRowId: RowId
+  val metaIdSpreadsheetRef: MetaIdSpreadsheetRef
+  val targetRowId: RowId
 }

@@ -8,8 +8,8 @@ package com.neome.api.home.base.dto
 import com.neome.api.home.base.dto.DtoGroupMemberKey
 import com.neome.api.home.base.dto.DtoMessagePayload
 
-open class DtoMessagePayloadGroupNameChange : DtoMessagePayload()
+interface DtoMessagePayloadGroupNameChange : DtoMessagePayload
 {
-  lateinit var initiatorMember: DtoGroupMemberKey
-  lateinit var newSubject: String
+  val initiatorMember: DtoGroupMemberKey
+  val newSubject: String
 }

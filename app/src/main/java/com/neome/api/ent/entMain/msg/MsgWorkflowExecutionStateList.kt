@@ -9,9 +9,9 @@ import java.util.Date
 import com.neome.api.ent.base.Types.EnumWorkflowResultKind
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgWorkflowExecutionStateList : Msg()
+interface MsgWorkflowExecutionStateList : Msg
 {
-  var filterWorkflowStateSet: Array<EnumWorkflowResultKind>? = null
-  var from: String? = null
-  var limit: Number? = null
+  val filterWorkflowStateSet: Array<EnumWorkflowResultKind>?
+  val from: String?
+  val limit: Long?
 }

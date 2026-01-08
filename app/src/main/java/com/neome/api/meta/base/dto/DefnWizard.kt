@@ -10,11 +10,11 @@ import com.neome.api.meta.base.Types.EnumDefnWizardNavigationMode
 import com.neome.api.meta.base.Types.MetaIdComposite
 import com.neome.api.meta.base.Types.MetaIdWizard
 
-open class DefnWizard : DefnComp()
+interface DefnWizard : DefnComp
 {
-  var compositeIdSet: Array<MetaIdComposite>? = null
-  lateinit var metaId: MetaIdWizard
-  var navigationMode: EnumDefnWizardNavigationMode? = null
-  var nextButtonLabel: String? = null
-  var prevButtonLabel: String? = null
+  val compositeIdSet: Array<MetaIdComposite>?
+  val metaId: MetaIdWizard
+  val navigationMode: EnumDefnWizardNavigationMode?
+  val nextButtonLabel: String?
+  val prevButtonLabel: String?
 }

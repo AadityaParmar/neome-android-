@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.StudioBase
 
-open class StudioPluginDeploy : StudioBase()
+interface StudioPluginDeploy : StudioBase
 {
-  var changes: String? = null
-  lateinit var pluginVersion: String
+  val changes: String?
+  val pluginVersion: String
 }

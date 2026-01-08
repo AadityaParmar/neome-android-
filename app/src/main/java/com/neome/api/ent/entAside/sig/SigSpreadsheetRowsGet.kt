@@ -11,10 +11,10 @@ import com.neome.api.meta.base.Types.RowId
 import java.util.Set
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigSpreadsheetRowsGet : Sig()
+interface SigSpreadsheetRowsGet : Sig
 {
-  var dateRowIdSetMap: Map<String, Array<RowId>>? = null
-  var groupByRowIdSetMap: Map<String, Array<RowId>>? = null
-  lateinit var outputFormId: MetaIdForm
-  var rowIdSet: Array<RowId>? = null
+  val dateRowIdSetMap: Map<String, Array<RowId>>?
+  val groupByRowIdSetMap: Map<String, Array<RowId>>?
+  val outputFormId: MetaIdForm
+  val rowIdSet: Array<RowId>?
 }

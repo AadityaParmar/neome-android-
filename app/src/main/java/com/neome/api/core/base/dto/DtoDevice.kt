@@ -8,13 +8,13 @@ package com.neome.api.core.base.dto
 import java.util.Date
 import com.neome.api.meta.base.Types.DeviceId
 
-open class DtoDevice
+interface DtoDevice
 {
-  lateinit var creationTime: String
-  lateinit var deviceId: DeviceId
-  var deviceName: String? = null
-  var isCurrentDevice: Boolean? = null
-  var isOnline: Boolean? = null
-  var lastOnlineTime: String? = null
-  lateinit var state: Object
+  val creationTime: String
+  val deviceId: DeviceId
+  val deviceName: String?
+  val isCurrentDevice: Boolean?
+  val isOnline: Boolean?
+  val lastOnlineTime: String?
+  val state: Object
 }

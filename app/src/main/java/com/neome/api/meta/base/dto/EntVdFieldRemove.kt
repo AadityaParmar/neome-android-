@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdAutoStep
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-open class EntVdFieldRemove : EntVdAutoStep()
+interface EntVdFieldRemove : EntVdAutoStep
 {
-  var field: StudioDtoArgValueParameter? = null
+  val field: StudioDtoArgValueParameter?
 }

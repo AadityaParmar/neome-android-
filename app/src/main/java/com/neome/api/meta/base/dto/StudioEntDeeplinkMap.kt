@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdDeeplink
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntDeeplink
 
-open class StudioEntDeeplinkMap : StudioBase()
+interface StudioEntDeeplinkMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdDeeplink>
-  lateinit var map: Map<MetaIdDeeplink, StudioEntDeeplink>
+  val keys: Array<MetaIdDeeplink>
+  val map: Map<MetaIdDeeplink, StudioEntDeeplink>
 }

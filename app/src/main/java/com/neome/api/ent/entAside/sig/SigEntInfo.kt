@@ -12,13 +12,13 @@ import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.nucleus.base.sig.SigVersion
 import com.neome.api.meta.base.Types.TimeZoneKey
 
-open class SigEntInfo : SigVersion()
+interface SigEntInfo : SigVersion
 {
-  lateinit var about: String
-  var avatarId: MediaIdAvatar? = null
-  lateinit var demoAppId: DemoAppId
-  var entUserAvatarList: Array<DtoEntUserAvatar>? = null
-  var languageSet: Array<LanguageKey>? = null
-  lateinit var name: String
-  lateinit var timeZone: TimeZoneKey
+  val about: String
+  val avatarId: MediaIdAvatar?
+  val demoAppId: DemoAppId
+  val entUserAvatarList: Array<DtoEntUserAvatar>?
+  val languageSet: Array<LanguageKey>?
+  val name: String
+  val timeZone: TimeZoneKey
 }

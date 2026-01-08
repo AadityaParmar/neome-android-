@@ -12,14 +12,14 @@ import com.neome.api.meta.base.Types.EnumDefnThemeFieldSize
 import com.neome.api.meta.base.Types.EnumDefnThemeFieldVariant
 import com.neome.api.meta.base.Types.EnumDefnThemeFormVariant
 
-open class DefnDtoFormTheme
+interface DefnDtoFormTheme
 {
-  var buttonSize: EnumDefnThemeButtonSize? = null
-  var buttonVariant: EnumDefnThemeButtonVariant? = null
-  var colSpacing: Number? = null
-  var fieldMargin: EnumDefnThemeFieldMargin? = null
-  var fieldSize: EnumDefnThemeFieldSize? = null
-  var fieldVariant: EnumDefnThemeFieldVariant? = null
-  var formVariant: EnumDefnThemeFormVariant? = null
-  var rowSpacing: Number? = null
+  val buttonSize: EnumDefnThemeButtonSize?
+  val buttonVariant: EnumDefnThemeButtonVariant?
+  val colSpacing: Long?
+  val fieldMargin: EnumDefnThemeFieldMargin?
+  val fieldSize: EnumDefnThemeFieldSize?
+  val fieldVariant: EnumDefnThemeFieldVariant?
+  val formVariant: EnumDefnThemeFormVariant?
+  val rowSpacing: Long?
 }

@@ -8,7 +8,7 @@ package com.neome.api.ent.entAside.sig
 import com.neome.api.ent.base.dto.DtoEntLogNumberFieldTransaction
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigEntLogNumberFieldDataGet : Sig()
+interface SigEntLogNumberFieldDataGet : Sig
 {
-  lateinit var transactionList: Array<DtoEntLogNumberFieldTransaction>
+  val transactionList: Array<DtoEntLogNumberFieldTransaction>
 }

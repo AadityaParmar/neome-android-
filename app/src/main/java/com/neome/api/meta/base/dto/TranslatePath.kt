@@ -7,8 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.NeatPath
 
-open class TranslatePath
+interface TranslatePath
 {
-  var neatPath: NeatPath? = null
-  var searchPath: String? = null
+  val neatPath: NeatPath?
+  val searchPath: String?
 }

@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnKindCallableEvent
 import com.neome.api.meta.base.dto.StudioEntAutomationEvent
 
-open class StudioEntAutomationCallableEvent : StudioEntAutomationEvent()
+interface StudioEntAutomationCallableEvent : StudioEntAutomationEvent
 {
-  lateinit var fire: EnumDefnKindCallableEvent
+  val fire: EnumDefnKindCallableEvent
 }

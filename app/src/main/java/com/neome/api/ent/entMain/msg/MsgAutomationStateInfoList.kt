@@ -9,9 +9,9 @@ import java.util.Date
 import com.neome.api.ent.base.Types.EnumAutomationStateFilterKind
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgAutomationStateInfoList : Msg()
+interface MsgAutomationStateInfoList : Msg
 {
-  var filterAutomationStateSet: Array<EnumAutomationStateFilterKind>? = null
-  var from: String? = null
-  var limit: Number? = null
+  val filterAutomationStateSet: Array<EnumAutomationStateFilterKind>?
+  val from: String?
+  val limit: Long?
 }

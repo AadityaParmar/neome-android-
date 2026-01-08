@@ -16,23 +16,23 @@ import com.neome.api.meta.base.dto.StudioDtoColor
 import com.neome.api.meta.base.dto.StudioDtoLayoutForm
 import com.neome.api.meta.base.dto.StudioDtoLayoutFormContentItem
 
-open class StudioDtoLayoutFormContent : StudioDtoLayoutForm()
+interface StudioDtoLayoutFormContent : StudioDtoLayoutForm
 {
-  var allowToSwitchLayoutIdSet: Array<MetaIdLayoutForm>? = null
-  var backgroundColor: StudioDtoColor? = null
-  var backgroundColorVarId: MetaIdVar? = null
-  var borderColor: StudioDtoColor? = null
-  var borderColorVarId: MetaIdVar? = null
-  var borderPositionSet: Array<EnumDefnShowBorderKind>? = null
-  var borderRadiusSet: Array<EnumDefnShowBorderRadiusKind>? = null
-  var borderRadiusSize: EnumDefnThemeDividerKind? = null
-  var direction: EnumDefnThemeDirection? = null
-  var displayLabel: String? = null
-  var end: StudioDtoLayoutFormContentItem? = null
-  var flexCenter: StudioDtoLayoutFormContentItem? = null
-  var paddingPositionSet: Array<EnumDefnShowBorderKind>? = null
-  var paddingSize: EnumDefnThemeDividerKind? = null
-  var renderingMode: EnumDefnRenderingKind? = null
-  var rootLayout: Boolean? = null
-  var start: StudioDtoLayoutFormContentItem? = null
+  val allowToSwitchLayoutIdSet: Array<MetaIdLayoutForm>?
+  val backgroundColor: StudioDtoColor?
+  val backgroundColorVarId: MetaIdVar?
+  val borderColor: StudioDtoColor?
+  val borderColorVarId: MetaIdVar?
+  val borderPositionSet: Array<EnumDefnShowBorderKind>?
+  val borderRadiusSet: Array<EnumDefnShowBorderRadiusKind>?
+  val borderRadiusSize: EnumDefnThemeDividerKind?
+  val direction: EnumDefnThemeDirection?
+  val displayLabel: String?
+  val end: StudioDtoLayoutFormContentItem?
+  val flexCenter: StudioDtoLayoutFormContentItem?
+  val paddingPositionSet: Array<EnumDefnShowBorderKind>?
+  val paddingSize: EnumDefnThemeDividerKind?
+  val renderingMode: EnumDefnRenderingKind?
+  val rootLayout: Boolean?
+  val start: StudioDtoLayoutFormContentItem?
 }

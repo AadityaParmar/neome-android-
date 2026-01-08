@@ -11,12 +11,12 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioEntReport
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-open class StudioEntReportSpreadsheet : StudioEntReport()
+interface StudioEntReportSpreadsheet : StudioEntReport
 {
-  var ascOrder: Boolean? = null
-  var filterConditionVarId: StudioValueVarIdCondition? = null
-  var fromSpreadsheetId: MetaIdSpreadsheet? = null
-  var limit: Number? = null
-  var orderByFieldId: MetaIdField? = null
-  var outputFormMappingVarId: MetaIdVar? = null
+  val ascOrder: Boolean?
+  val filterConditionVarId: StudioValueVarIdCondition?
+  val fromSpreadsheetId: MetaIdSpreadsheet?
+  val limit: Long?
+  val orderByFieldId: MetaIdField?
+  val outputFormMappingVarId: MetaIdVar?
 }

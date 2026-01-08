@@ -10,13 +10,13 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.EnumDefnCodeType
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldShowCode : DefnFieldEditable()
+interface DefnFieldShowCode : DefnFieldEditable
 {
-  var codeType: EnumDefnCodeType? = null
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: String? = null
-  var defaultVar: DefnDtoParagraph? = null
-  var showLabel: Boolean? = null
-  var showLabelFieldId: MetaIdField? = null
-  var showLabelVar: Boolean? = null
+  val codeType: EnumDefnCodeType?
+  val defaultFieldId: MetaIdField?
+  val defaultValue: String?
+  val defaultVar: DefnDtoParagraph?
+  val showLabel: Boolean?
+  val showLabelFieldId: MetaIdField?
+  val showLabelVar: Boolean?
 }

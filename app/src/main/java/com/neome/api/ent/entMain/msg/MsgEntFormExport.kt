@@ -12,14 +12,14 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgEntFormExport : Msg()
+interface MsgEntFormExport : Msg
 {
-  lateinit var contentLayoutId: MetaIdLayoutForm
-  lateinit var entId: EntId
-  lateinit var exportType: EnumFormExportType
-  lateinit var formId: MetaIdForm
-  lateinit var formValueRaw: FormValueRaw
-  var height: Number? = null
-  var templateLayoutId: MetaIdLayoutForm? = null
-  var width: Number? = null
+  val contentLayoutId: MetaIdLayoutForm
+  val entId: EntId
+  val exportType: EnumFormExportType
+  val formId: MetaIdForm
+  val formValueRaw: FormValueRaw
+  val height: Long?
+  val templateLayoutId: MetaIdLayoutForm?
+  val width: Long?
 }

@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.GeoPoint
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldGeoPoint : StudioFieldEditable()
+interface StudioFieldGeoPoint : StudioFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: GeoPoint? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: GeoPoint?
 }

@@ -12,11 +12,11 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 import com.neome.api.meta.base.Symbol
 
-open class StudioDtoRefTarget : StudioBase()
+interface StudioDtoRefTarget : StudioBase
 {
-  var displayFieldIdSet: Array<MetaIdField>? = null
-  var filterConditionVarId: StudioValueVarIdCondition? = null
-  lateinit var metaId: MetaIdSpreadsheet
-  var name: Symbol? = null
-  var overrideLayoutSpreadsheetId: MetaIdLayoutGrid? = null
+  val displayFieldIdSet: Array<MetaIdField>?
+  val filterConditionVarId: StudioValueVarIdCondition?
+  val metaId: MetaIdSpreadsheet
+  val name: Symbol?
+  val overrideLayoutSpreadsheetId: MetaIdLayoutGrid?
 }

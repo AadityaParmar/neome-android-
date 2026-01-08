@@ -10,14 +10,14 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.dto.StudioDtoPluginApi
 import com.neome.api.meta.base.dto.StudioFieldEditable
 
-open class StudioFieldPickTree : StudioFieldEditable()
+interface StudioFieldPickTree : StudioFieldEditable
 {
-  var defaultOptionFieldId: MetaIdField? = null
-  var defaultOptionId: String? = null
-  var forceLeafSelection: Boolean? = null
-  var includeAllChildrenInReport: Boolean? = null
-  var pluginApi: StudioDtoPluginApi? = null
-  var pluginErrorFieldId: MetaIdField? = null
-  var pluginInputMappingVarId: MetaIdVar? = null
-  var sourceVarId: MetaIdVar? = null
+  val defaultOptionFieldId: MetaIdField?
+  val defaultOptionId: String?
+  val forceLeafSelection: Boolean?
+  val includeAllChildrenInReport: Boolean?
+  val pluginApi: StudioDtoPluginApi?
+  val pluginErrorFieldId: MetaIdField?
+  val pluginInputMappingVarId: MetaIdVar?
+  val sourceVarId: MetaIdVar?
 }

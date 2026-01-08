@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.StudioVar
 import com.neome.api.meta.base.dto.StudioVarValueCurrency
 
-open class StudioVarCurrency : StudioVar()
+interface StudioVarCurrency : StudioVar
 {
-  var value: StudioVarValueCurrency? = null
+  val value: StudioVarValueCurrency?
 }

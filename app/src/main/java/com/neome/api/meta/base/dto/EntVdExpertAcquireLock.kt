@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.EntVdAutoStepWithError
 import com.neome.api.meta.base.dto.FieldDtoDuration
 import com.neome.api.meta.base.dto.StudioValueText
 
-open class EntVdExpertAcquireLock : EntVdAutoStepWithError()
+interface EntVdExpertAcquireLock : EntVdAutoStepWithError
 {
-  var duration: FieldDtoDuration? = null
-  var lockKey: StudioValueText? = null
+  val duration: FieldDtoDuration?
+  val lockKey: StudioValueText?
 }

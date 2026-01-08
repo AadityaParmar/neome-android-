@@ -13,12 +13,12 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioDtoChatBubbleHeader
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 
-open class StudioEntAutomationStepPartitionSend : StudioEntAutomationStep()
+interface StudioEntAutomationStepPartitionSend : StudioEntAutomationStep
 {
-  var chatBubbleHeader: StudioDtoChatBubbleHeader? = null
-  var senderFieldId: MetaIdField? = null
-  var senderFormPipelineVarId: MetaIdPipelineParam? = null
-  var senderRoleId: MetaIdRole? = null
-  var targetGroupIdSet: Array<MetaIdGroup>? = null
-  var targetSpreadsheetId: MetaIdSpreadsheet? = null
+  val chatBubbleHeader: StudioDtoChatBubbleHeader?
+  val senderFieldId: MetaIdField?
+  val senderFormPipelineVarId: MetaIdPipelineParam?
+  val senderRoleId: MetaIdRole?
+  val targetGroupIdSet: Array<MetaIdGroup>?
+  val targetSpreadsheetId: MetaIdSpreadsheet?
 }

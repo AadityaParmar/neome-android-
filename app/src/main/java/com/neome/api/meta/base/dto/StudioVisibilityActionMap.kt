@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdVisibilityAction
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioVisibilityAction
 
-open class StudioVisibilityActionMap : StudioBase()
+interface StudioVisibilityActionMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdVisibilityAction>
-  lateinit var map: Map<MetaIdVisibilityAction, StudioVisibilityAction>
+  val keys: Array<MetaIdVisibilityAction>
+  val map: Map<MetaIdVisibilityAction, StudioVisibilityAction>
 }

@@ -32,19 +32,19 @@ import com.neome.api.meta.base.dto.StudioField
 import com.neome.api.meta.base.dto.StudioForm
 import com.neome.api.meta.base.dto.StudioVar
 
-open class StudioEntTrash
+interface StudioEntTrash
 {
-  var actionMap: Map<MetaIdAction, StudioEntAction>? = null
-  var compositeMap: Map<MetaIdComposite, StudioComposite>? = null
-  var contentMap: Map<MetaIdLayoutForm, StudioDtoLayoutForm>? = null
-  var fieldMap: Map<MetaIdField, StudioField>? = null
-  var formMap: Map<MetaIdForm, StudioForm>? = null
-  var groupMap: Map<MetaIdGroup, StudioEntGroup>? = null
-  var layoutGridMap: Map<MetaIdLayoutGrid, StudioDtoLayoutGrid>? = null
-  var layoutUserMap: Map<MetaIdLayoutUser, StudioDtoLayoutUser>? = null
-  var moduleMap: Map<MetaIdModule, String>? = null
-  var reportMap: Map<MetaIdReport, StudioEntReport>? = null
-  var roleMap: Map<MetaIdRole, StudioEntRole>? = null
-  var spreadsheetMap: Map<MetaIdSpreadsheet, StudioEntSpreadsheet>? = null
-  var varMap: Map<MetaIdVar, StudioVar>? = null
+  val actionMap: Map<MetaIdAction, StudioEntAction>?
+  val compositeMap: Map<MetaIdComposite, StudioComposite>?
+  val contentMap: Map<MetaIdLayoutForm, StudioDtoLayoutForm>?
+  val fieldMap: Map<MetaIdField, StudioField>?
+  val formMap: Map<MetaIdForm, StudioForm>?
+  val groupMap: Map<MetaIdGroup, StudioEntGroup>?
+  val layoutGridMap: Map<MetaIdLayoutGrid, StudioDtoLayoutGrid>?
+  val layoutUserMap: Map<MetaIdLayoutUser, StudioDtoLayoutUser>?
+  val moduleMap: Map<MetaIdModule, String>?
+  val reportMap: Map<MetaIdReport, StudioEntReport>?
+  val roleMap: Map<MetaIdRole, StudioEntRole>?
+  val spreadsheetMap: Map<MetaIdSpreadsheet, StudioEntSpreadsheet>?
+  val varMap: Map<MetaIdVar, StudioVar>?
 }

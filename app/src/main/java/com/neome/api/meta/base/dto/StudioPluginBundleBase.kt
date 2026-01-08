@@ -11,13 +11,13 @@ import com.neome.api.meta.base.Types.PluginBundleId
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioPluginMap
 
-open class StudioPluginBundleBase : StudioBase()
+interface StudioPluginBundleBase : StudioBase
 {
-  lateinit var createdBy: AdminId
-  lateinit var creationTime: String
-  var deployMap: StudioPluginMap? = null
-  lateinit var pluginBundleId: PluginBundleId
-  lateinit var updateBy: AdminId
-  lateinit var updateTime: String
-  lateinit var version: String
+  val createdBy: AdminId
+  val creationTime: String
+  val deployMap: StudioPluginMap?
+  val pluginBundleId: PluginBundleId
+  val updateBy: AdminId
+  val updateTime: String
+  val version: String
 }

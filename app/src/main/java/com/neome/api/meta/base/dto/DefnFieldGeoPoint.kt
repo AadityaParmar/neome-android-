@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.GeoPoint
 import com.neome.api.meta.base.Types.MetaIdField
 
-open class DefnFieldGeoPoint : DefnFieldEditable()
+interface DefnFieldGeoPoint : DefnFieldEditable
 {
-  var defaultFieldId: MetaIdField? = null
-  var defaultValue: GeoPoint? = null
+  val defaultFieldId: MetaIdField?
+  val defaultValue: GeoPoint?
 }

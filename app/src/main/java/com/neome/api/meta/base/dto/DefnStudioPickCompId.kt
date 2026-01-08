@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.api.meta.base.Types.MetaIdComposite
 import com.neome.api.meta.base.Types.MetaIdForm
 
-open class DefnStudioPickCompId : DefnFieldEditable()
+interface DefnStudioPickCompId : DefnFieldEditable
 {
-  var excludeCompositeIdSet: Array<MetaIdComposite>? = null
-  var filterCompTypeSet: Array<EnumDefnCompType>? = null
-  lateinit var formId: MetaIdForm
+  val excludeCompositeIdSet: Array<MetaIdComposite>?
+  val filterCompTypeSet: Array<EnumDefnCompType>?
+  val formId: MetaIdForm
 }

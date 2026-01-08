@@ -10,12 +10,12 @@ import com.neome.api.meta.base.Types.EnumDefnUserSettingOptions
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.Symbol
 
-open class DefnUserSettingVar
+interface DefnUserSettingVar
 {
-  var description: String? = null
-  lateinit var kind: EnumDefnUserSettingOptions
-  var label: String? = null
-  lateinit var name: Symbol
-  var optionMap: DefnStudioMapOfDtoOption? = null
-  lateinit var varId: MetaIdVar
+  val description: String?
+  val kind: EnumDefnUserSettingOptions
+  val label: String?
+  val name: Symbol
+  val optionMap: DefnStudioMapOfDtoOption?
+  val varId: MetaIdVar
 }

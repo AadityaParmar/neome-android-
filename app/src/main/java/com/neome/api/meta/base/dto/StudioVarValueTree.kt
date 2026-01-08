@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.FieldDtoTree
 
-open class StudioVarValueTree
+interface StudioVarValueTree
 {
-  var value: FieldDtoTree? = null
+  val value: FieldDtoTree?
 }

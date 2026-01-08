@@ -7,8 +7,8 @@ package com.neome.api.nucleus.base.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigPong : Sig()
+interface SigPong : Sig
 {
-  lateinit var randomText: String
-  var triggerPing: Boolean? = null
+  val randomText: String
+  val triggerPing: Boolean?
 }

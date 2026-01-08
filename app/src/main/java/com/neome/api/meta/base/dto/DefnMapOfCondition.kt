@@ -9,11 +9,11 @@ import com.neome.api.meta.base.dto.DefnDtoConditionStatement
 import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdCondition
 
-open class DefnMapOfCondition
+interface DefnMapOfCondition
 {
-  var andOr: Boolean? = null
-  var keys: Array<MetaIdCondition>? = null
-  var map: Map<MetaIdCondition, DefnMapOfCondition>? = null
-  lateinit var metaId: MetaIdCondition
-  var statement: DefnDtoConditionStatement? = null
+  val andOr: Boolean?
+  val keys: Array<MetaIdCondition>?
+  val map: Map<MetaIdCondition, DefnMapOfCondition>?
+  val metaId: MetaIdCondition
+  val statement: DefnDtoConditionStatement?
 }

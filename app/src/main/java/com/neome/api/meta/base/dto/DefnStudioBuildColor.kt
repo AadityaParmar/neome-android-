@@ -8,8 +8,8 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.EnumDefnThemeDirection
 
-open class DefnStudioBuildColor : DefnField()
+interface DefnStudioBuildColor : DefnField
 {
-  var allowShades: Boolean? = null
-  var direction: EnumDefnThemeDirection? = null
+  val allowShades: Boolean?
+  val direction: EnumDefnThemeDirection?
 }

@@ -7,6 +7,6 @@ package com.neome.api.home.base.dto
 
 import com.neome.api.home.base.dto.DtoMessagePayloadAudio
 
-open class DtoMessagePayloadVoice : DtoMessagePayloadAudio()
+interface DtoMessagePayloadVoice : DtoMessagePayloadAudio
 {
 }

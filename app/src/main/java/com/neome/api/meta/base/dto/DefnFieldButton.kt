@@ -26,62 +26,62 @@ import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.meta.base.Types.MetaIdVdAutoDia
 import com.neome.api.meta.base.Types.MetaIdVdAutoNode
 
-open class DefnFieldButton : DefnFieldEditable()
+interface DefnFieldButton : DefnFieldEditable
 {
-  var actionClickButtonFieldIdArray: Array<MetaIdField>? = null
-  var actionCloseAside: Boolean? = null
-  var actionCustomHandlerId: String? = null
-  var actionDisableFieldIdArray: Array<MetaIdField>? = null
-  var actionEnableFieldIdArray: Array<MetaIdField>? = null
-  var actionGroupIdSet: Array<MetaIdGroup>? = null
-  var actionId: MetaIdAction? = null
-  var actionInputMappingVarId: MetaIdVar? = null
-  var actionInvisibleFieldIdArray: Array<MetaIdField>? = null
-  var actionInvokePluginApi: DefnDtoPluginApi? = null
-  var actionOpenLinkInNewTabFieldId: MetaIdField? = null
-  var actionOpenLinkInNewTabVar: DefnDtoHyperLink? = null
-  var actionOpenLinkInSameTabFieldId: MetaIdField? = null
-  var actionOpenLinkInSameTabVar: DefnDtoHyperLink? = null
-  var actionOutputMappingVarId: MetaIdVar? = null
-  var actionSetDefaultFieldIdArray: Array<MetaIdField>? = null
-  var actionToggleBooleanFieldIdArray: Array<MetaIdField>? = null
-  var actionVisibleFieldIdArray: Array<MetaIdField>? = null
-  var automationId: MetaIdAutomation? = null
-  var automationInputMappingVarId: MetaIdVar? = null
-  var bgColor: DefnDtoColor? = null
-  var bgColorVar: DefnDtoColor? = null
-  var btnPosDoNotInline: Boolean? = null
-  var btnPosFloating: Boolean? = null
-  var btnPosFooter: Boolean? = null
-  var btnPosMenu: Boolean? = null
-  var btnPosToolbar: Boolean? = null
-  var buttonKind: EnumDefnKindButton? = null
-  var buttonPosition: EnumDefnPlacement? = null
-  var buttonPositionVar: EnumDefnPlacement? = null
-  var buttonVariant: EnumDefnThemeButtonVariant? = null
-  var buttonVariantVar: EnumDefnThemeButtonVariant? = null
-  var disableElevationFieldId: MetaIdField? = null
-  var disableElevationVar: Boolean? = null
-  var disabledElevation: Boolean? = null
-  var executeActionsAfterTargetSuccess: Boolean? = null
-  var iconPosition: EnumDefnPlacement? = null
-  var iconPositionVar: EnumDefnPlacement? = null
-  var justifyContent: EnumDefnPlacement? = null
-  var pluginErrorFieldId: MetaIdField? = null
-  var reportId: MetaIdReport? = null
-  var reportInputMappingVarId: MetaIdVar? = null
-  var reportOutputMappingVarId: MetaIdVar? = null
-  var spreadsheetId: MetaIdSpreadsheet? = null
-  var spreadsheetMappingVarId: MetaIdVar? = null
-  var targetType: EnumDefnButtonTargetType? = null
-  var textSize: EnumDefnTextSize? = null
-  var textSizeFieldId: MetaIdField? = null
-  var textSizeVar: EnumDefnTextSize? = null
-  var toastMessageOnClickVar: DefnDtoText? = null
-  var toolTip: String? = null
-  var whatsAppHandleFieldId: MetaIdField? = null
-  var whatsAppMessage: DefnDtoParagraph? = null
-  var workflowDiagramId: MetaIdVdAutoDia? = null
-  var workflowInputMappingVarId: MetaIdVar? = null
-  var workflowStartNodeId: MetaIdVdAutoNode? = null
+  val actionClickButtonFieldIdArray: Array<MetaIdField>?
+  val actionCloseAside: Boolean?
+  val actionCustomHandlerId: String?
+  val actionDisableFieldIdArray: Array<MetaIdField>?
+  val actionEnableFieldIdArray: Array<MetaIdField>?
+  val actionGroupIdSet: Array<MetaIdGroup>?
+  val actionId: MetaIdAction?
+  val actionInputMappingVarId: MetaIdVar?
+  val actionInvisibleFieldIdArray: Array<MetaIdField>?
+  val actionInvokePluginApi: DefnDtoPluginApi?
+  val actionOpenLinkInNewTabFieldId: MetaIdField?
+  val actionOpenLinkInNewTabVar: DefnDtoHyperLink?
+  val actionOpenLinkInSameTabFieldId: MetaIdField?
+  val actionOpenLinkInSameTabVar: DefnDtoHyperLink?
+  val actionOutputMappingVarId: MetaIdVar?
+  val actionSetDefaultFieldIdArray: Array<MetaIdField>?
+  val actionToggleBooleanFieldIdArray: Array<MetaIdField>?
+  val actionVisibleFieldIdArray: Array<MetaIdField>?
+  val automationId: MetaIdAutomation?
+  val automationInputMappingVarId: MetaIdVar?
+  val bgColor: DefnDtoColor?
+  val bgColorVar: DefnDtoColor?
+  val btnPosDoNotInline: Boolean?
+  val btnPosFloating: Boolean?
+  val btnPosFooter: Boolean?
+  val btnPosMenu: Boolean?
+  val btnPosToolbar: Boolean?
+  val buttonKind: EnumDefnKindButton?
+  val buttonPosition: EnumDefnPlacement?
+  val buttonPositionVar: EnumDefnPlacement?
+  val buttonVariant: EnumDefnThemeButtonVariant?
+  val buttonVariantVar: EnumDefnThemeButtonVariant?
+  val disableElevationFieldId: MetaIdField?
+  val disableElevationVar: Boolean?
+  val disabledElevation: Boolean?
+  val executeActionsAfterTargetSuccess: Boolean?
+  val iconPosition: EnumDefnPlacement?
+  val iconPositionVar: EnumDefnPlacement?
+  val justifyContent: EnumDefnPlacement?
+  val pluginErrorFieldId: MetaIdField?
+  val reportId: MetaIdReport?
+  val reportInputMappingVarId: MetaIdVar?
+  val reportOutputMappingVarId: MetaIdVar?
+  val spreadsheetId: MetaIdSpreadsheet?
+  val spreadsheetMappingVarId: MetaIdVar?
+  val targetType: EnumDefnButtonTargetType?
+  val textSize: EnumDefnTextSize?
+  val textSizeFieldId: MetaIdField?
+  val textSizeVar: EnumDefnTextSize?
+  val toastMessageOnClickVar: DefnDtoText?
+  val toolTip: String?
+  val whatsAppHandleFieldId: MetaIdField?
+  val whatsAppMessage: DefnDtoParagraph?
+  val workflowDiagramId: MetaIdVdAutoDia?
+  val workflowInputMappingVarId: MetaIdVar?
+  val workflowStartNodeId: MetaIdVdAutoNode?
 }

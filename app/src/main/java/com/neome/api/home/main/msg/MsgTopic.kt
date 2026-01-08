@@ -9,8 +9,8 @@ import com.neome.api.core.base.Types.EnumTopicType
 import com.neome.api.nucleus.base.msg.Msg
 import com.neome.api.meta.base.SysId
 
-open class MsgTopic : Msg()
+interface MsgTopic : Msg
 {
-  lateinit var aboutId: SysId
-  lateinit var type: EnumTopicType
+  val aboutId: SysId
+  val type: EnumTopicType
 }

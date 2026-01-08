@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.GhostId
 import java.util.Map
 import com.neome.api.meta.base.dto.StudioBase
 
-open class EntVdFormMap : StudioBase()
+interface EntVdFormMap : StudioBase
 {
-  lateinit var keys: Array<GhostId>
-  lateinit var map: Map<GhostId, EntVdForm>
+  val keys: Array<GhostId>
+  val map: Map<GhostId, EntVdForm>
 }

@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import java.util.Map
 import com.neome.api.meta.base.dto.TranslatePath
 
-open class TranslateResult
+interface TranslateResult
 {
-  lateinit var translateMap: Map<String, Array<TranslatePath>>
+  val translateMap: Map<String, Array<TranslatePath>>
 }

@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.AnyTime
 
-open class FieldChipSetTime
+interface FieldChipSetTime
 {
-  lateinit var valueSet: Array<AnyTime>
+  val valueSet: Array<AnyTime>
 }

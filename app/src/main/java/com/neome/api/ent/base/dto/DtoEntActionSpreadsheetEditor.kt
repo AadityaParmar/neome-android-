@@ -18,18 +18,18 @@ import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-open class DtoEntActionSpreadsheetEditor : DtoEntAction()
+interface DtoEntActionSpreadsheetEditor : DtoEntAction
 {
-  var actionPermissionMap: Map<MetaIdAction, DtoEntActionPermission>? = null
-  var bulkInsertRoleSet: Array<MetaIdRole>? = null
-  var bulkUpdateFieldIdSet: Array<MetaIdField>? = null
-  var bulkUpdateRoleSet: Array<MetaIdRole>? = null
-  var defaultValueMap: Map<MetaIdComp, Any>? = null
-  var doNotOpenAside: Boolean? = null
-  var inputFormId: MetaIdForm? = null
-  lateinit var layoutSpreadsheetId: MetaIdLayoutGrid
-  var readOnly: Boolean? = null
-  var sendMessageToGroupId: MetaIdGroup? = null
-  lateinit var spreadsheetFormId: MetaIdForm
-  lateinit var spreadsheetId: MetaIdSpreadsheet
+  val actionPermissionMap: Map<MetaIdAction, DtoEntActionPermission>?
+  val bulkInsertRoleSet: Array<MetaIdRole>?
+  val bulkUpdateFieldIdSet: Array<MetaIdField>?
+  val bulkUpdateRoleSet: Array<MetaIdRole>?
+  val defaultValueMap: Map<MetaIdComp, Any>?
+  val doNotOpenAside: Boolean?
+  val inputFormId: MetaIdForm?
+  val layoutSpreadsheetId: MetaIdLayoutGrid
+  val readOnly: Boolean?
+  val sendMessageToGroupId: MetaIdGroup?
+  val spreadsheetFormId: MetaIdForm
+  val spreadsheetId: MetaIdSpreadsheet
 }

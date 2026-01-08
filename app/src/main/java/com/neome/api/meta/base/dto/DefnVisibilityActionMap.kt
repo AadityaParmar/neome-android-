@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.DefnVisibilityAction
 import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdVisibilityAction
 
-open class DefnVisibilityActionMap
+interface DefnVisibilityActionMap
 {
-  lateinit var keys: Array<MetaIdVisibilityAction>
-  lateinit var map: Map<MetaIdVisibilityAction, DefnVisibilityAction>
+  val keys: Array<MetaIdVisibilityAction>
+  val map: Map<MetaIdVisibilityAction, DefnVisibilityAction>
 }

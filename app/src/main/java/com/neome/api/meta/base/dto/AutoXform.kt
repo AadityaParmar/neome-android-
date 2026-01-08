@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnKindAutoXform
 import com.neome.api.meta.base.dto.StudioBase
 
-open class AutoXform : StudioBase()
+interface AutoXform : StudioBase
 {
-  var kind: EnumDefnKindAutoXform? = null
+  val kind: EnumDefnKindAutoXform?
 }

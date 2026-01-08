@@ -9,9 +9,9 @@ import com.neome.api.meta.base.dto.EntVdAutoStepWithOutput
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 
-open class EntVdSsSearch : EntVdAutoStepWithOutput()
+interface EntVdSsSearch : EntVdAutoStepWithOutput
 {
-  var maxResultCount: Number? = null
-  var searchSpreadsheetIdSet: Array<MetaIdSpreadsheet>? = null
-  var searchText: StudioBuildArgBinder? = null
+  val maxResultCount: Long?
+  val searchSpreadsheetIdSet: Array<MetaIdSpreadsheet>?
+  val searchText: StudioBuildArgBinder?
 }

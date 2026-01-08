@@ -5,15 +5,14 @@
 
 package com.neome.api.ent.entMain.sig
 
-import kotlin.properties.Delegates
 import com.neome.api.meta.base.Types.EnumDefnDocFileExt
 import com.neome.api.meta.base.Types.MediaId
 import com.neome.api.nucleus.base.sig.Sig
 
-open class SigPdfMerge : Sig()
+interface SigPdfMerge : Sig
 {
-  lateinit var fileExt: EnumDefnDocFileExt
-  var fileLength: Number by Delegates.notNull<Number>()
-  lateinit var fileName: String
-  lateinit var mediaId: MediaId
+  val fileExt: EnumDefnDocFileExt
+  val fileLength: Long?
+  val fileName: String
+  val mediaId: MediaId
 }

@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdChartYAxis
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoChartYAxis
 
-open class StudioMapOfChartYAxis : StudioBase()
+interface StudioMapOfChartYAxis : StudioBase
 {
-  lateinit var keys: Array<MetaIdChartYAxis>
-  lateinit var map: Map<MetaIdChartYAxis, StudioDtoChartYAxis>
+  val keys: Array<MetaIdChartYAxis>
+  val map: Map<MetaIdChartYAxis, StudioDtoChartYAxis>
 }

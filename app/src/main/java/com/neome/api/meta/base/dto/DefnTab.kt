@@ -10,12 +10,12 @@ import com.neome.api.meta.base.Types.EnumDefnThemeTabVariant
 import com.neome.api.meta.base.Types.MetaIdComposite
 import com.neome.api.meta.base.Types.MetaIdTab
 
-open class DefnTab : DefnComp()
+interface DefnTab : DefnComp
 {
-  lateinit var metaId: MetaIdTab
-  var showAsTree: Boolean? = null
-  var showDivider: Boolean? = null
-  var showSingleTab: Boolean? = null
-  var tabIdSet: Array<MetaIdComposite>? = null
-  var tabVariant: EnumDefnThemeTabVariant? = null
+  val metaId: MetaIdTab
+  val showAsTree: Boolean?
+  val showDivider: Boolean?
+  val showSingleTab: Boolean?
+  val tabIdSet: Array<MetaIdComposite>?
+  val tabVariant: EnumDefnThemeTabVariant?
 }

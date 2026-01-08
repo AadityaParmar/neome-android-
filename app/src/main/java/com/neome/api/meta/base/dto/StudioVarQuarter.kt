@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnQuarter
 import com.neome.api.meta.base.dto.StudioVar
 
-open class StudioVarQuarter : StudioVar()
+interface StudioVarQuarter : StudioVar
 {
-  var value: EnumDefnQuarter? = null
+  val value: EnumDefnQuarter?
 }

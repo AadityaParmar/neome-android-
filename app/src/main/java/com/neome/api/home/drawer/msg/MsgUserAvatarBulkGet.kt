@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.EntUserId
 import java.util.Map
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgUserAvatarBulkGet : Msg()
+interface MsgUserAvatarBulkGet : Msg
 {
-  lateinit var userIdVersionMap: Map<EntUserId, String>
+  val userIdVersionMap: Map<EntUserId, String>
 }

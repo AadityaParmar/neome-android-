@@ -11,11 +11,11 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.nucleus.base.msg.Msg
 
-open class MsgSpreadsheetRowSend : Msg()
+interface MsgSpreadsheetRowSend : Msg
 {
-  var actionId: MetaIdAction? = null
-  lateinit var formValueRaw: FormValueRaw
-  var mappingVarId: MetaIdVar? = null
-  var targetSpreadsheetId: MetaIdSpreadsheet? = null
-  var transactionId: String? = null
+  val actionId: MetaIdAction?
+  val formValueRaw: FormValueRaw
+  val mappingVarId: MetaIdVar?
+  val targetSpreadsheetId: MetaIdSpreadsheet?
+  val transactionId: String?
 }

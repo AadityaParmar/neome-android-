@@ -9,8 +9,8 @@ import com.neome.api.meta.base.dto.EntVdWorkflowPointer
 import com.neome.api.meta.base.Types.MetaIdAutomation
 import com.neome.api.meta.base.dto.StudioEntAction
 
-open class StudioEntActionExecuteWorkflow : StudioEntAction()
+interface StudioEntActionExecuteWorkflow : StudioEntAction
 {
-  var automationId: MetaIdAutomation? = null
-  var workflowPointer: EntVdWorkflowPointer? = null
+  val automationId: MetaIdAutomation?
+  val workflowPointer: EntVdWorkflowPointer?
 }

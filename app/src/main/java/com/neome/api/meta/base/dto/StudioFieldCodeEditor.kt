@@ -8,11 +8,11 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnCodeEditorLanguage
 import com.neome.api.meta.base.dto.StudioFieldParagraph
 
-open class StudioFieldCodeEditor : StudioFieldParagraph()
+interface StudioFieldCodeEditor : StudioFieldParagraph
 {
-  var enableLineNumbers: Boolean? = null
-  var enableMiniMap: Boolean? = null
-  var language: EnumDefnCodeEditorLanguage? = null
-  var showExpandBtn: Boolean? = null
-  var title: String? = null
+  val enableLineNumbers: Boolean?
+  val enableMiniMap: Boolean?
+  val language: EnumDefnCodeEditorLanguage?
+  val showExpandBtn: Boolean?
+  val title: String?
 }

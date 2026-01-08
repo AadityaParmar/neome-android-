@@ -11,11 +11,11 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.Symbol
 
-open class StudioDtoMappingField : StudioBase()
+interface StudioDtoMappingField : StudioBase
 {
-  lateinit var from: StudioBuildArgBinder
-  lateinit var metaId: MetaIdMapping
-  var name: Symbol? = null
-  var primary: Boolean? = null
-  lateinit var to: MetaIdField
+  val from: StudioBuildArgBinder
+  val metaId: MetaIdMapping
+  val name: Symbol?
+  val primary: Boolean?
+  val to: MetaIdField
 }

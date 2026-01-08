@@ -11,9 +11,9 @@ import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntDeployPlugin
 
-open class StudioEntDeployPluginMap : StudioBase()
+interface StudioEntDeployPluginMap : StudioBase
 {
-  lateinit var keys: Array<MetaIdPlugin>
-  lateinit var map: Map<MetaIdPlugin, StudioEntDeployPlugin>
-  var singletonPluginsAdminId: AdminId? = null
+  val keys: Array<MetaIdPlugin>
+  val map: Map<MetaIdPlugin, StudioEntDeployPlugin>
+  val singletonPluginsAdminId: AdminId?
 }

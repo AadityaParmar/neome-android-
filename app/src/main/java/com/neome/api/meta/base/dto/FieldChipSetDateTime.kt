@@ -7,7 +7,7 @@ package com.neome.api.meta.base.dto
 
 import java.util.Date
 
-open class FieldChipSetDateTime
+interface FieldChipSetDateTime
 {
-  lateinit var valueSet: Array<String>
+  val valueSet: Array<String>
 }

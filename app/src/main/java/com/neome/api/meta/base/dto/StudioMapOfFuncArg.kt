@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdFuncArg
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoFuncArg
 
-open class StudioMapOfFuncArg : StudioBase()
+interface StudioMapOfFuncArg : StudioBase
 {
-  var keys: Array<MetaIdFuncArg>? = null
-  lateinit var map: Map<MetaIdFuncArg, StudioDtoFuncArg>
+  val keys: Array<MetaIdFuncArg>?
+  val map: Map<MetaIdFuncArg, StudioDtoFuncArg>
 }

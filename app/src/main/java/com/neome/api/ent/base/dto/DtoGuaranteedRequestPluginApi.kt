@@ -8,7 +8,7 @@ package com.neome.api.ent.base.dto
 import com.neome.api.ent.base.dto.DtoGuaranteedRequest
 import com.neome.api.ent.base.dto.DtoPluginApiRequestPayload
 
-open class DtoGuaranteedRequestPluginApi : DtoGuaranteedRequest()
+interface DtoGuaranteedRequestPluginApi : DtoGuaranteedRequest
 {
-  lateinit var pluginApiRequest: DtoPluginApiRequestPayload
+  val pluginApiRequest: DtoPluginApiRequestPayload
 }

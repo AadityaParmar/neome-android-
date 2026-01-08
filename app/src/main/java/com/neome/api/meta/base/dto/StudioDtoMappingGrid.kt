@@ -16,17 +16,17 @@ import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoMappingFieldMapBase
 import com.neome.api.meta.base.Symbol
 
-open class StudioDtoMappingGrid : StudioBase()
+interface StudioDtoMappingGrid : StudioBase
 {
-  var emptyFieldVariant: EnumDefnEmptyFieldVariant? = null
-  var fieldMappingMap: StudioDtoMappingFieldMapBase? = null
-  var fromGridId: MetaIdGrid? = null
-  var fromGridKey: MetaIdField? = null
-  var insertVariant: EnumDefnInsertVariant? = null
-  lateinit var metaId: MetaIdMapping
-  var name: Symbol? = null
-  var removeVariant: EnumDefnRemoveVariant? = null
-  var toGridId: MetaIdGrid? = null
-  var toGridKey: MetaIdField? = null
-  var updateVariant: EnumDefnUpdateVariant? = null
+  val emptyFieldVariant: EnumDefnEmptyFieldVariant?
+  val fieldMappingMap: StudioDtoMappingFieldMapBase?
+  val fromGridId: MetaIdGrid?
+  val fromGridKey: MetaIdField?
+  val insertVariant: EnumDefnInsertVariant?
+  val metaId: MetaIdMapping
+  val name: Symbol?
+  val removeVariant: EnumDefnRemoveVariant?
+  val toGridId: MetaIdGrid?
+  val toGridKey: MetaIdField?
+  val updateVariant: EnumDefnUpdateVariant?
 }

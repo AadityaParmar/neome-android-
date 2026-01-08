@@ -10,9 +10,9 @@ import com.neome.api.meta.base.Types.MetaIdPaymentProvider
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntPaymentProvider
 
-open class StudioEntDeployPaymentProviderMap : StudioBase()
+interface StudioEntDeployPaymentProviderMap : StudioBase
 {
-  var defaultPaymentProviderId: MetaIdPaymentProvider? = null
-  lateinit var keys: Array<MetaIdPaymentProvider>
-  lateinit var map: Map<MetaIdPaymentProvider, StudioEntPaymentProvider>
+  val defaultPaymentProviderId: MetaIdPaymentProvider?
+  val keys: Array<MetaIdPaymentProvider>
+  val map: Map<MetaIdPaymentProvider, StudioEntPaymentProvider>
 }

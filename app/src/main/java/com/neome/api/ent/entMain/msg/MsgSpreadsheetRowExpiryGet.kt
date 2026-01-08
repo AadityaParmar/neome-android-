@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.core.base.msg.MsgVersion
 import com.neome.api.meta.base.Types.SpreadsheetPartitionId
 
-open class MsgSpreadsheetRowExpiryGet : MsgVersion()
+interface MsgSpreadsheetRowExpiryGet : MsgVersion
 {
-  lateinit var spreadsheetId: MetaIdSpreadsheet
-  lateinit var spreadsheetPartitionId: SpreadsheetPartitionId
+  val spreadsheetId: MetaIdSpreadsheet
+  val spreadsheetPartitionId: SpreadsheetPartitionId
 }

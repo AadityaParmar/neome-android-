@@ -7,7 +7,7 @@ package com.neome.api.home.base.dto
 
 import com.neome.api.home.base.dto.DtoMessageReplyPayload
 
-open class DtoMessageReplyPayloadText : DtoMessageReplyPayload()
+interface DtoMessageReplyPayloadText : DtoMessageReplyPayload
 {
-  lateinit var textSummary: String
+  val textSummary: String
 }

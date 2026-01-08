@@ -5,9 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-import kotlin.properties.Delegates
-
-open class FieldValueDecimal
+interface FieldValueDecimal
 {
-  var value: Number by Delegates.notNull<Number>()
+  val value: Long?
 }

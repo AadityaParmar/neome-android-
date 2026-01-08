@@ -10,8 +10,8 @@ import com.neome.api.meta.base.Types.MetaIdFormula
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoFormula
 
-open class StudioMapOfFormula : StudioBase()
+interface StudioMapOfFormula : StudioBase
 {
-  var keys: Array<MetaIdFormula>? = null
-  lateinit var map: Map<MetaIdFormula, StudioDtoFormula>
+  val keys: Array<MetaIdFormula>?
+  val map: Map<MetaIdFormula, StudioDtoFormula>
 }

@@ -9,10 +9,10 @@ import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.dto.StudioDtoMappingFieldMap
 import com.neome.api.meta.base.dto.StudioDtoMappingGridMap
 
-open class StudioDtoMapping
+interface StudioDtoMapping
 {
-  var fieldMappingMap: StudioDtoMappingFieldMap? = null
-  var fromGridId: MetaIdGrid? = null
-  var gridMappingMap: StudioDtoMappingGridMap? = null
-  var toGridId: MetaIdGrid? = null
+  val fieldMappingMap: StudioDtoMappingFieldMap?
+  val fromGridId: MetaIdGrid?
+  val gridMappingMap: StudioDtoMappingGridMap?
+  val toGridId: MetaIdGrid?
 }

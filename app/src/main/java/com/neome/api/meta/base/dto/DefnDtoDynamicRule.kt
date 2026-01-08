@@ -10,10 +10,10 @@ import com.neome.api.meta.base.dto.DefnStudioMapOfDtoOption
 import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.api.meta.base.Types.MetaIdFieldDynamicRule
 
-open class DefnDtoDynamicRule
+interface DefnDtoDynamicRule
 {
-  lateinit var conditionNode: DefnMapOfDynamicCondition
-  lateinit var fieldType: EnumDefnCompType
-  lateinit var metaId: MetaIdFieldDynamicRule
-  var optionMap: DefnStudioMapOfDtoOption? = null
+  val conditionNode: DefnMapOfDynamicCondition
+  val fieldType: EnumDefnCompType
+  val metaId: MetaIdFieldDynamicRule
+  val optionMap: DefnStudioMapOfDtoOption?
 }

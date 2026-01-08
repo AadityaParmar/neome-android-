@@ -9,11 +9,11 @@ import com.neome.api.ent.base.dto.DtoEntGroupActionPermissionMap
 import com.neome.api.meta.base.Types.EnumDefnFreezeAvatarKind
 import com.neome.api.meta.base.Types.MetaIdRole
 
-open class DtoEntGroup
+interface DtoEntGroup
 {
-  lateinit var actionPermissionMap: DtoEntGroupActionPermissionMap
-  var freeze: Boolean? = null
-  var freezeAvatarKind: EnumDefnFreezeAvatarKind? = null
-  var freezeSortName: String? = null
-  var removeMessagePermissionSet: Array<MetaIdRole>? = null
+  val actionPermissionMap: DtoEntGroupActionPermissionMap
+  val freeze: Boolean?
+  val freezeAvatarKind: EnumDefnFreezeAvatarKind?
+  val freezeSortName: String?
+  val removeMessagePermissionSet: Array<MetaIdRole>?
 }

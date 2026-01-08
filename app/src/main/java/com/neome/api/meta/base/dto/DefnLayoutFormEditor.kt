@@ -12,17 +12,17 @@ import com.neome.api.meta.base.Types.EnumDefnWizardNavigationMode
 import com.neome.api.meta.base.Types.MetaIdComposite
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 
-open class DefnLayoutFormEditor : DefnLayoutForm()
+interface DefnLayoutFormEditor : DefnLayoutForm
 {
-  var allowToSwitchLayoutIdSet: Array<MetaIdLayoutForm>? = null
-  var compositeIdSet: Array<MetaIdComposite>? = null
-  var editorLayoutRenderingMode: EnumDefnEditorLayoutRenderingMode? = null
-  var formEditorLayoutIdSet: Array<MetaIdLayoutForm>? = null
-  var hideLabelCompositeIdSet: Array<MetaIdComposite>? = null
-  var label: String? = null
-  var layoutCompositeMap: DefnMapOfLayoutFormEditorComposite? = null
-  var navigationMode: EnumDefnWizardNavigationMode? = null
-  var nextButtonLabel: String? = null
-  var prevButtonLabel: String? = null
-  var showStepper: Boolean? = null
+  val allowToSwitchLayoutIdSet: Array<MetaIdLayoutForm>?
+  val compositeIdSet: Array<MetaIdComposite>?
+  val editorLayoutRenderingMode: EnumDefnEditorLayoutRenderingMode?
+  val formEditorLayoutIdSet: Array<MetaIdLayoutForm>?
+  val hideLabelCompositeIdSet: Array<MetaIdComposite>?
+  val label: String?
+  val layoutCompositeMap: DefnMapOfLayoutFormEditorComposite?
+  val navigationMode: EnumDefnWizardNavigationMode?
+  val nextButtonLabel: String?
+  val prevButtonLabel: String?
+  val showStepper: Boolean?
 }

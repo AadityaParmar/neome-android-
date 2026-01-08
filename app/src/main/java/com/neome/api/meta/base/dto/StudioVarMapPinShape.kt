@@ -8,7 +8,7 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnMapPinShape
 import com.neome.api.meta.base.dto.StudioVar
 
-open class StudioVarMapPinShape : StudioVar()
+interface StudioVarMapPinShape : StudioVar
 {
-  var value: EnumDefnMapPinShape? = null
+  val value: EnumDefnMapPinShape?
 }

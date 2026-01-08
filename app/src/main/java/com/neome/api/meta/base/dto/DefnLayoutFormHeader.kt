@@ -12,18 +12,18 @@ import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdHyperlink
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 
-open class DefnLayoutFormHeader
+interface DefnLayoutFormHeader
 {
-  var backgroundColor: DefnDtoColor? = null
-  var backgroundColorVar: DefnDtoColor? = null
-  var formLayoutId: MetaIdLayoutForm? = null
-  var headerImage: FieldDtoImage? = null
-  var headerImageHeight: Number? = null
-  var headerImageVar: FieldDtoImage? = null
-  var hyperLinkMap: Map<MetaIdHyperlink, DefnDtoHyperLink>? = null
-  var hyperlinkKeys: Array<MetaIdHyperlink>? = null
-  var showEnterprise: Boolean? = null
-  var showSeparator: Boolean? = null
-  var textColor: DefnDtoColor? = null
-  var textColorVar: DefnDtoColor? = null
+  val backgroundColor: DefnDtoColor?
+  val backgroundColorVar: DefnDtoColor?
+  val formLayoutId: MetaIdLayoutForm?
+  val headerImage: FieldDtoImage?
+  val headerImageHeight: Long?
+  val headerImageVar: FieldDtoImage?
+  val hyperLinkMap: Map<MetaIdHyperlink, DefnDtoHyperLink>?
+  val hyperlinkKeys: Array<MetaIdHyperlink>?
+  val showEnterprise: Boolean?
+  val showSeparator: Boolean?
+  val textColor: DefnDtoColor?
+  val textColorVar: DefnDtoColor?
 }
