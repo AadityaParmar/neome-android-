@@ -93,39 +93,13 @@ private fun LocationShowcaseContent(
                 modifier = Modifier.padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Icon(
-                        Icons.Default.MyLocation,
-                        contentDescription = "Current Location",
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                    Text(
-                        "Current Location",
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                }
+                CurrentLocationCard()
 
                 HorizontalDivider()
 
                 // Loading indicator
                 if (state.isLoading) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 16.dp),
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        CircularProgressIndicator(modifier = Modifier.size(24.dp))
-                        Spacer(modifier = Modifier.padding(8.dp))
-                        Text(
-                            "Fetching location...",
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                    }
+                    LoadingIndicator()
                 }
 
                 // Location data
@@ -191,59 +165,17 @@ private fun LocationShowcaseContent(
 
         // Permission Request Card
         if (!permissionGranted) {
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.secondaryContainer
-                )
-            ) {
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(
-                        "Permission Required",
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSecondaryContainer
-                    )
-                    Text(
-                        "Location permission is required to get your current location.",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSecondaryContainer
-                    )
-                    Button(
-                        onClick = onRequestPermission,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text("Grant Permission")
-                    }
-                }
-            }
+            PermissionRequestCard(
+                onRequestPermission = onRequestPermission
+            )
         }
 
         // Action Buttons
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Button(
-                onClick = { onEvent(LocationEvent.GetLocation) },
-                modifier = Modifier.weight(1f),
-                enabled = !state.isLoading && permissionGranted
-            ) {
-                Icon(Icons.Default.LocationOn, contentDescription = null)
-                Spacer(modifier = Modifier.padding(4.dp))
-                Text(if (state.isLoading) "Loading..." else "Get Location")
-            }
-
-            FilledTonalButton(
-                onClick = { onEvent(LocationEvent.ClearLocation) },
-                modifier = Modifier.weight(1f),
-                enabled = state.location != null && !state.isLoading
-            ) {
-                Text("Clear")
-            }
-        }
+        CurrentLocationBtn(
+            state=state,
+            onEvent=onEvent,
+            permissionGranted=permissionGranted
+        )
 
         HorizontalDivider()
 
@@ -253,6 +185,107 @@ private fun LocationShowcaseContent(
             onEvent = onEvent,
             permissionGranted = permissionGranted
         )
+    }
+}
+
+@Composable
+private fun CurrentLocationCard(
+)
+{
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Icon(
+            Icons.Default.MyLocation,
+            contentDescription = "Current Location",
+            tint = MaterialTheme.colorScheme.primary
+        )
+        Text(
+            "Current Location",
+            style = MaterialTheme.typography.titleMedium
+        )
+    }
+}
+@Composable
+private fun LoadingIndicator()
+{
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 16.dp),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        CircularProgressIndicator(modifier = Modifier.size(24.dp))
+        Spacer(modifier = Modifier.padding(8.dp))
+        Text(
+            "Fetching location...",
+            style = MaterialTheme.typography.bodyMedium
+        )
+    }
+}
+
+@Composable
+private fun PermissionRequestCard(
+    onRequestPermission: () -> Unit,
+){
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer
+        )
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(
+                "Permission Required",
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSecondaryContainer
+            )
+            Text(
+                "Location permission is required to get your current location.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSecondaryContainer
+            )
+            Button(
+                onClick = onRequestPermission,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Grant Permission")
+            }
+        }
+    }
+}
+@Composable
+private fun CurrentLocationBtn(
+    state: LocationState,
+    onEvent: (LocationEvent) -> Unit,
+    permissionGranted: Boolean,
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Button(
+            onClick = { onEvent(LocationEvent.GetLocation) },
+            modifier = Modifier.weight(1f),
+            enabled = !state.isLoading && permissionGranted
+        ) {
+            Icon(Icons.Default.LocationOn, contentDescription = null)
+            Spacer(modifier = Modifier.padding(4.dp))
+            Text(if (state.isLoading) "Loading..." else "Get Location")
+        }
+
+        FilledTonalButton(
+            onClick = { onEvent(LocationEvent.ClearLocation) },
+            modifier = Modifier.weight(1f),
+            enabled = state.location != null && !state.isLoading
+        ) {
+            Text("Clear")
+        }
     }
 }
 
