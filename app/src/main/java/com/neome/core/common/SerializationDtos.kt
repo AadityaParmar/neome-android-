@@ -2,15 +2,18 @@ package com.neome.core.common
 
 import com.neome.api.home.base.Types.EnumMessageType
 import com.neome.api.home.base.Types.EnumReceiptStatus
+import com.neome.api.home.base.dto.DtoMessagePayload
+import com.neome.api.home.base.dto.DtoMessagePayloadImage
+import com.neome.api.home.base.dto.DtoMessagePayloadText
+import com.neome.api.home.base.dto.DtoMessageReaction
+import com.neome.api.home.base.dto.DtoMessageReplyPayload
+import com.neome.api.home.main.sig.SigMessage
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.ContactId
 import com.neome.api.meta.base.Types.MediaIdImage
-import com.neome.core.common.serializer.api.DefnDtoText
-import com.neome.core.common.serializer.api.DtoMessagePayload
-import com.neome.core.common.serializer.api.DtoMessagePayloadImage
-import com.neome.core.common.serializer.api.DtoMessagePayloadText
-import com.neome.core.common.serializer.api.SigMessage
+import com.neome.api.meta.base.dto.DefnDtoText
 import com.neome.core.common.serializer.sysId.ContactIdSer
+import com.neome.core.common.serializer.sysId.EntUserIdSer
 import com.neome.core.common.serializer.sysId.MediaIdImageSer
 import com.neome.core.common.serializer.sysId.MessageIdSer
 import kotlinx.serialization.DeserializationStrategy
@@ -63,7 +66,6 @@ data class DtoMessagePayloadTextData(
     override var messageType: EnumMessageType = EnumMessageType.text,
     override var isUpdated: Boolean? = null,
     override var text: String,
-    override var dtoText: DefnDtoTextData? = null,
 ) : DtoMessagePayloadSeal(), DtoMessagePayloadText
 
 @Serializable
@@ -81,18 +83,16 @@ data class DtoMessagePayloadImageData(
     override var mediaIdImage: MediaIdImage,
     override var primaryColor: String,
     override var width: Long? = null,
-    override var dtoText: DefnDtoTextData? = null,
 ) : DtoMessagePayloadSeal(), DtoMessagePayloadImage
 
 // Add more payload types as needed (audio, video, document, etc.)
 @Serializable
 data class DtoMessagePayloadAudioData(
-    override var isForwarded: Boolean? = null,
-    override var mentionMap: Map<String, @Serializable(with = ContactIdSer::class) ContactId>? = null,
-    override var messageType: EnumMessageType = EnumMessageType.audio,
-    override var isUpdated: Boolean? = null,
-    override var text: String = "",
-    override var dtoText: DefnDtoTextData? = null,
+    override val isForwarded: Boolean?,
+    override val mentionMap: Map<String, @Serializable(with = ContactIdSer::class) ContactId>?,
+    override val messageType: EnumMessageType,
+    override val isUpdated: Boolean?,
+    override val text: String,
 ) : DtoMessagePayloadSeal(), DtoMessagePayloadText
 
 @Serializable
@@ -103,9 +103,13 @@ data class SigMessageData(
     override var isCallerSender: Boolean? = null,
     @Serializable(with = MessageIdSer::class)
     override var messageId: Types.MessageId,
-    override var messageOffset: Int? = null,
+    override var messageOffset: Long? = null,
     @Serializable(with = DtoMessagePayloadSerializer::class)
-    override var payload: DtoMessagePayload
+    override var payload: DtoMessagePayload,
+    override val reactionMap: Map<@Serializable(with = EntUserIdSer::class) Types.EntUserId, DtoMessageReaction>?,
+    override val replyPayload: DtoMessageReplyPayload?,
+    @Serializable(with = EntUserIdSer::class)
+    override val senderId: Types.EntUserId
 ) : SigMessage
 
 

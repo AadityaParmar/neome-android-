@@ -6,8 +6,22 @@ import com.neome.api.meta.base.Types.EnumDefnCalculateFormulaMode
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
+import com.neome.api.meta.base.dto.DefnComp
+import com.neome.api.meta.base.dto.DefnDtoFormTheme
+import com.neome.api.meta.base.dto.DefnDtoParagraph
+import com.neome.api.meta.base.dto.DefnDtoPermissionMatrix
+import com.neome.api.meta.base.dto.DefnDtoTextValidationPattern
+import com.neome.api.meta.base.dto.DefnField
+import com.neome.api.meta.base.dto.DefnFieldEditable
+import com.neome.api.meta.base.dto.DefnFieldEditableText
+import com.neome.api.meta.base.dto.DefnFieldNumber
+import com.neome.api.meta.base.dto.DefnFieldText
+import com.neome.api.meta.base.dto.DefnForm
+import com.neome.api.meta.base.dto.DefnLayoutFormMap
+import com.neome.api.meta.base.dto.DefnPaymentConfig
+import com.neome.api.meta.base.dto.DefnStudioMapOfActionPermission
+import com.neome.api.meta.base.dto.DefnVisibilityRuleMap
 import com.neome.core.common.serializer.SymbolSer
-import com.neome.core.common.serializer.api.DefnDtoText
 import com.neome.core.common.serializer.sysId.MetaIdCompSer
 import com.neome.core.common.serializer.sysId.MetaIdCompositeSer
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
@@ -23,101 +37,6 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-interface DefnComp {
-    val disabled: Boolean?
-    val disabledFieldId: Types.MetaIdField?
-    val disabledRoleIdSet: Array<Types.MetaIdRole>?
-    val disabledVar: Boolean?
-    val hidden: Boolean?
-    val hideDirtyIndicator: Boolean?
-    val invisible: Boolean?
-    val label: String?
-    val maxWidth: Int?
-    val name: Symbol
-    val pb: Int?
-    val pl: Int?
-    val pr: Int?
-    val pt: Int?
-    val readOnly: Boolean?
-    val type: Types.EnumDefnCompType
-}
-
-interface DefnField : DefnComp {
-    val metaId: MetaIdField
-}
-
-
-interface DefnFieldEditable : DefnField {
-    val autoFill: Boolean?
-    val autoFocus: Boolean?
-    val helperText: String?
-    val helperTextFieldId: MetaIdField?
-    val helperTextVar: DefnDtoText?
-    val hideLabel: Boolean?
-    val icon: String?
-    val iconVar: String?
-    val labelFieldId: MetaIdField?
-    val placeHolder: String?
-    val placeHolderFieldId: MetaIdField?
-    val placeHolderVar: DefnDtoText?
-    val prefix: String?
-    val prefixVar: DefnDtoText?
-    val required: Boolean?
-    val requiredFieldId: MetaIdField?
-    val requiredRoleIdSet: Array<MetaIdRole>?
-    val requiredVar: Boolean?
-    val suffix: String?
-    val suffixVar: DefnDtoText?
-}
-
-interface DefnFieldEditableText : DefnFieldEditable {
-    val defaultFieldId: MetaIdField?
-    val defaultValue: String?
-    val defaultVar: DefnDtoText?
-}
-
-interface DefnFieldText : DefnFieldEditableText {
-    val maxCharCount: Int?
-    val maxCharCountFieldId: MetaIdField?
-    val maxCharCountVar: Int?
-    val minCharCount: Int?
-    val minCharCountFieldId: MetaIdField?
-    val minCharCountVar: Int?
-}
-
-
-interface DefnFieldNumber : DefnFieldEditable {
-    val defaultFieldId: MetaIdField?
-    val defaultValue: Int?
-    val defaultVar: Int?
-    val max: Int?
-    val maxFieldId: MetaIdField?
-    val maxVar: Int?
-    val min: Int?
-    val minDisplayValue: Int?
-    val minFieldId: MetaIdField?
-    val minVar: Int?
-    val numberFormat: String?
-}
-
-
-interface DefnForm {
-    val allowToPrintForm: Boolean?
-    val calculateFormulaMode: EnumDefnCalculateFormulaMode?
-    val chatBubbleFieldIdSet: Array<MetaIdField>?
-    val chatLabelFieldId: MetaIdField?
-    val chatLabelPatternVar: DefnDtoText?
-    val commentReadOnlyRoleSet: Array<MetaIdRole>?
-    val commentRoleSet: Array<MetaIdRole>?
-    val compMap: Map<MetaIdComp, DefnComp>
-    val configForm: Boolean?
-    val displayCompositeId: Types.MetaIdComposite
-    val formulaFieldIdSet: Array<MetaIdField>?
-    val gridLookupMap: Map<Types.MetaIdLayoutGrid, Types.MetaIdGrid>?
-    val label: String?
-    val metaId: Types.MetaIdForm
-    val name: Symbol
-}
 
 // ===== Serializable classes for polymorphic serialization =====
 
@@ -151,18 +70,10 @@ data class DefnFieldTextSer(
 
     override var label: String? = null,
 
-    override var maxWidth: Int? = null,
 
     @Serializable(with = SymbolSer::class)
     override var name: Symbol,
 
-    override var pb: Int? = null,
-
-    override var pl: Int? = null,
-
-    override var pr: Int? = null,
-
-    override var pt: Int? = null,
 
     override var readOnly: Boolean? = null,
 
@@ -230,19 +141,25 @@ data class DefnFieldTextSer(
 
 
     // DefnFieldText properties
-    override var maxCharCount: Int? = null,
 
     @Serializable(with = MetaIdFieldSer::class)
     override var maxCharCountFieldId: MetaIdField? = null,
 
-    override var maxCharCountVar: Int? = null,
-
-    override var minCharCount: Int? = null,
 
     @Serializable(with = MetaIdFieldSer::class)
     override var minCharCountFieldId: MetaIdField? = null,
 
-    override var minCharCountVar: Int? = null,
+    override val permissionMatrix: DefnDtoPermissionMatrix?,
+    override val maxWidth: Long?,
+    override val pb: Long?,
+    override val pl: Long?,
+    override val pr: Long?,
+    override val pt: Long?,
+    override val maxCharCount: Long?,
+    override val maxCharCountVar: Long?,
+    override val minCharCount: Long?,
+    override val minCharCountVar: Long?,
+    override val validationPattern: DefnDtoTextValidationPattern?,
 
     ) : DefnFieldEditableTextSeal(),
     DefnFieldText
@@ -269,18 +186,9 @@ data class DefnFieldNumberSer(
 
     override var label: String? = null,
 
-    override var maxWidth: Int? = null,
 
     @Serializable(with = SymbolSer::class)
     override var name: Symbol,
-
-    override var pb: Int? = null,
-
-    override var pl: Int? = null,
-
-    override var pr: Int? = null,
-
-    override var pt: Int? = null,
 
     override var readOnly: Boolean? = null,
 
@@ -342,27 +250,29 @@ data class DefnFieldNumberSer(
     @Serializable(with = MetaIdFieldSer::class)
     override var defaultFieldId: MetaIdField? = null,
 
-    override var defaultValue: Int? = null,
-
-    override var defaultVar: Int? = null,
-
-    override var max: Int? = null,
 
     @Serializable(with = MetaIdFieldSer::class)
     override var maxFieldId: MetaIdField? = null,
 
-    override var maxVar: Int? = null,
-
-    override var min: Int? = null,
-
-    override var minDisplayValue: Int? = null,
 
     @Serializable(with = MetaIdFieldSer::class)
     override var minFieldId: MetaIdField? = null,
 
-    override var minVar: Int? = null,
 
-    override var numberFormat: String? = null
+    override var numberFormat: String? = null,
+    override val maxWidth: Long?,
+    override val pb: Long?,
+    override val permissionMatrix: DefnDtoPermissionMatrix?,
+    override val pl: Long?,
+    override val pr: Long?,
+    override val pt: Long?,
+    override val defaultValue: Long?,
+    override val defaultVar: Long?,
+    override val max: Long?,
+    override val maxVar: Long?,
+    override val min: Long?,
+    override val minDisplayValue: Long?,
+    override val minVar: Long?
 ) : DefnFieldEditableSeal(),
     DefnFieldNumber
 
@@ -426,5 +336,12 @@ data class DefnFormSer(
     override var metaId: Types.MetaIdForm,
 
     @Serializable(with = SymbolSer::class)
-    override var name: Symbol
+    override var name: Symbol,
+    override val actionPermissionMap: DefnStudioMapOfActionPermission?,
+    override val chatPatternVar: DefnDtoParagraph?,
+    override val layoutMap: DefnLayoutFormMap?,
+    override val paymentConfig: DefnPaymentConfig?,
+    override val permissionMatrix: DefnDtoPermissionMatrix?,
+    override val theme: DefnDtoFormTheme?,
+    override val visibilityRuleMap: DefnVisibilityRuleMap?
 ) : DefnForm
