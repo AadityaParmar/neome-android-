@@ -16,11 +16,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AudioFile
 import androidx.compose.material.icons.filled.Camera
 import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Crop
 import androidx.compose.material.icons.filled.Image
+import androidx.compose.material.icons.filled.Mic
+import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -46,25 +49,37 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.neome.feature.audioplayer.presentation.AudioPlayerScreen
+import com.neome.feature.audiorecorder.domain.model.RecordedAudio
+import com.neome.feature.audiorecorder.presentation.AudioRecorderScreen
 import com.neome.feature.camera.domain.model.CapturedImage
 import com.neome.feature.camera.presentation.capture.CameraCaptureScreen
 import com.neome.feature.cropper.domain.model.CroppableImage
 import com.neome.feature.cropper.presentation.ImageCropScreen
 
 /**
- * Media showcase demonstrating camera features.
+ * Media showcase demonstrating camera and audio features.
  *
- * Two flows only:
+ * Camera flows:
  * 1. Simple Camera: Capture only, returns immediately
  * 2. Camera with Preview: Capture → Preview → (Optional Crop) → Done
+ *
+ * Audio flows:
+ * 3. Audio Recorder: Record audio with WAV output
+ * 4. Audio Player: Play recorded audio with controls
  */
 @Composable
 fun MediaShowcase() {
-    // Simple states - no boolean explosion
+    // Camera states
     var showSimpleCamera by remember { mutableStateOf(false) }
     var showCameraForPreview by remember { mutableStateOf(false) }
     var previewImage by remember { mutableStateOf<CapturedImage?>(null) }
     var finalImage by remember { mutableStateOf<CapturedImage?>(null) }
+
+    // Audio states
+    var showAudioRecorder by remember { mutableStateOf(false) }
+    var showAudioPlayer by remember { mutableStateOf(false) }
+    var recordedAudio by remember { mutableStateOf<RecordedAudio?>(null) }
 
     Column(
         modifier = Modifier
@@ -102,6 +117,42 @@ fun MediaShowcase() {
             buttonText = "Capture & Preview",
             onClick = { showCameraForPreview = true }
         )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(
+            text = "Audio Features",
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+
+        // Audio Recorder Card
+        MediaFeatureCard(
+            title = "Audio Recorder",
+            description = "Record audio with WAV output format. Supports pause/resume.",
+            icon = Icons.Default.Mic,
+            buttonText = "Record Audio",
+            onClick = { showAudioRecorder = true }
+        )
+
+        // Audio Player Card
+        MediaFeatureCard(
+            title = "Audio Player",
+            description = "Play audio files with waveform visualization and playback controls.",
+            icon = Icons.Default.PlayCircle,
+            buttonText = "Play Recording",
+            onClick = { showAudioPlayer = true },
+            enabled = recordedAudio != null
+        )
+
+        // Show recorded audio preview if available
+        recordedAudio?.let { audio ->
+            RecordedAudioPreviewCard(
+                audio = audio,
+                onClear = { recordedAudio = null },
+                onPlay = { showAudioPlayer = true }
+            )
+        }
 
         // Show final captured image if available
         finalImage?.let { image ->
@@ -173,6 +224,47 @@ fun MediaShowcase() {
             }
         )
     }
+
+    // Audio Recorder Dialog
+    if (showAudioRecorder) {
+        FullScreenDialog(
+            onDismiss = { showAudioRecorder = false }
+        ) {
+            AudioRecorderScreen(
+                onRecordingComplete = { audio ->
+                    recordedAudio = audio
+                    showAudioRecorder = false
+                },
+                onCancelled = {
+                    showAudioRecorder = false
+                },
+                onError = {
+                    showAudioRecorder = false
+                }
+            )
+        }
+    }
+
+    // Audio Player Dialog
+    if (showAudioPlayer && recordedAudio != null) {
+        FullScreenDialog(
+            onDismiss = { showAudioPlayer = false }
+        ) {
+            AudioPlayerScreen(
+                audioBytes = recordedAudio!!.bytes,
+                audioName = "Recording",
+                onPlaybackComplete = {
+                    // Optional: auto-close on completion
+                },
+                onError = {
+                    showAudioPlayer = false
+                },
+                onClose = {
+                    showAudioPlayer = false
+                }
+            )
+        }
+    }
 }
 
 @Composable
@@ -181,7 +273,8 @@ private fun MediaFeatureCard(
     description: String,
     icon: androidx.compose.ui.graphics.vector.ImageVector,
     buttonText: String,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    enabled: Boolean = true
 ) {
     ElevatedCard(
         modifier = Modifier.fillMaxWidth(),
@@ -200,11 +293,14 @@ private fun MediaFeatureCard(
                     imageVector = icon,
                     contentDescription = null,
                     modifier = Modifier.size(32.dp),
-                    tint = MaterialTheme.colorScheme.primary
+                    tint = if (enabled) MaterialTheme.colorScheme.primary
+                           else MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.titleMedium
+                    style = MaterialTheme.typography.titleMedium,
+                    color = if (enabled) MaterialTheme.colorScheme.onSurface
+                            else MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
@@ -220,10 +316,11 @@ private fun MediaFeatureCard(
 
             Button(
                 onClick = onClick,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                enabled = enabled
             ) {
                 Icon(
-                    imageVector = Icons.Default.Camera,
+                    imageVector = icon,
                     contentDescription = null,
                     modifier = Modifier.size(18.dp)
                 )
@@ -295,7 +392,108 @@ private fun CapturedImagePreviewCard(
 }
 
 @Composable
+private fun RecordedAudioPreviewCard(
+    audio: RecordedAudio,
+    onClear: () -> Unit,
+    onPlay: () -> Unit
+) {
+    ElevatedCard(
+        modifier = Modifier.fillMaxWidth(),
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 4.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.AudioFile,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Text(
+                        text = "Recorded Audio",
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                }
+                IconButton(onClick = onClear) {
+                    Icon(
+                        imageVector = Icons.Default.Close,
+                        contentDescription = "Clear"
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Duration: ${audio.formattedDuration}",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    text = "Size: ${audio.formattedFileSize}",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            FilledTonalButton(
+                onClick = onPlay,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Icon(
+                    imageVector = Icons.Default.PlayCircle,
+                    contentDescription = null,
+                    modifier = Modifier.size(18.dp)
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                Text("Play Recording")
+            }
+        }
+    }
+}
+
+@Composable
 private fun FullScreenCameraDialog(
+    onDismiss: () -> Unit,
+    content: @Composable () -> Unit
+) {
+    Dialog(
+        onDismissRequest = onDismiss,
+        properties = DialogProperties(
+            dismissOnBackPress = true,
+            dismissOnClickOutside = false,
+            usePlatformDefaultWidth = false
+        )
+    ) {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            content()
+        }
+    }
+}
+
+@Composable
+private fun FullScreenDialog(
     onDismiss: () -> Unit,
     content: @Composable () -> Unit
 ) {
