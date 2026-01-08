@@ -5,7 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.dto.SchemaGrid
 

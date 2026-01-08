@@ -5,7 +5,6 @@
 
 package com.neome.api.home.main.sig
 
-import java.util.Date
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.nucleus.base.sig.Sig

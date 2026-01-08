@@ -5,8 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-import java.util.Date
-
 interface FieldChipSetDateTime
 {
   val valueSet: Array<String>

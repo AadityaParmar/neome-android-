@@ -7,7 +7,6 @@ package com.neome.api.home.drawer.sig
 
 import com.neome.api.home.base.dto.DtoChatBadgeMap
 import com.neome.api.meta.base.Types.EntId
-import java.util.Map
 import com.neome.api.nucleus.base.sig.SigVersion
 
 interface SigBadgeMap : SigVersion

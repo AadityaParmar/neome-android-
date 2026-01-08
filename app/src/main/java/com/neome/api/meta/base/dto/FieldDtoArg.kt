@@ -5,9 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-import java.util.Date
 import com.neome.api.meta.base.Types.MetaIdField
-import java.util.Set
 import com.neome.api.meta.base.SysId
 
 interface FieldDtoArg

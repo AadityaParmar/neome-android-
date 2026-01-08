@@ -57,6 +57,20 @@ data class DefnDtoTextData(
 ) : DefnDtoText
 
 @Serializable
+data class DtoMessageReactionData(
+    override val reaction: String, override val updatedOn: String
+) : DtoMessageReaction
+
+@Serializable
+data class DtoMessageReplyPayloadData(
+    @Serializable(with = MessageIdSer::class)
+    override val messageId: Types.MessageId,
+    override val messageType: EnumMessageType,
+    @Serializable(with = EntUserIdSer::class)
+    override val senderId: Types.EntUserId
+) : DtoMessageReplyPayload
+
+@Serializable
 sealed class DtoMessagePayloadSeal : DtoMessagePayload
 
 @Serializable
@@ -106,8 +120,8 @@ data class SigMessageData(
     override var messageOffset: Long? = null,
     @Serializable(with = DtoMessagePayloadSerializer::class)
     override var payload: DtoMessagePayload,
-    override val reactionMap: Map<@Serializable(with = EntUserIdSer::class) Types.EntUserId, DtoMessageReaction>?,
-    override val replyPayload: DtoMessageReplyPayload?,
+    override val reactionMap: Map<@Serializable(with = EntUserIdSer::class) Types.EntUserId, DtoMessageReactionData>? = null,
+    override val replyPayload: DtoMessageReplyPayloadData? = null,
     @Serializable(with = EntUserIdSer::class)
     override val senderId: Types.EntUserId
 ) : SigMessage

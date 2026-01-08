@@ -8,7 +8,6 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnDtoPlaceholder
 import com.neome.api.meta.base.dto.DefnLayoutGrid
 import com.neome.api.meta.base.Types.EnumDefnShowBorderKind
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 
 interface DefnLayoutGridMap

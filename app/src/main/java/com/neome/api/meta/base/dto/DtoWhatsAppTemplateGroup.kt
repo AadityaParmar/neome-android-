@@ -7,7 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.DtoCarouselTemplateGroup
 import com.neome.api.meta.base.Types.EnumWhatsAppTemplateHeaderType
-import java.util.Set
 
 interface DtoWhatsAppTemplateGroup
 {

@@ -5,7 +5,6 @@
 
 package com.neome.api.core.user.sig
 
-import java.util.Date
 import com.neome.api.meta.base.Types.DeviceId
 import com.neome.api.nucleus.base.sig.SigVersion
 

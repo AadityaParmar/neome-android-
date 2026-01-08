@@ -6,7 +6,6 @@
 package com.neome.api.ent.base.dto
 
 import com.neome.api.meta.base.Types.AutomationExecutionId
-import java.util.Date
 import com.neome.api.ent.base.Types.EnumAutomationStateKind
 import com.neome.api.meta.base.Types.EnumDefnKindAutomation
 import com.neome.api.meta.base.dto.EnvValidationError

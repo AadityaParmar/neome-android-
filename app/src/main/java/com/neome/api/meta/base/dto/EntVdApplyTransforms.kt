@@ -7,7 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.AutoXform
 import com.neome.api.meta.base.dto.EntVdAutoStep
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdVdAutoFunc
 
 interface EntVdApplyTransforms : EntVdAutoStep

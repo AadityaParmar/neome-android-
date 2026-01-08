@@ -8,7 +8,6 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdDia
 import com.neome.api.meta.base.dto.EntVdErdEntity
 import com.neome.api.meta.base.dto.EntVdErdRef
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.Types.MetaIdVdErdDia

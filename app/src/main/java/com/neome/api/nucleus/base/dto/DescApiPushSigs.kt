@@ -5,7 +5,6 @@
 
 package com.neome.api.nucleus.base.dto
 
-import java.util.Map
 import com.neome.api.meta.base.Types.ServiceName
 
 interface DescApiPushSigs

@@ -7,7 +7,6 @@ package com.neome.api.ent.entMain.sig
 
 import com.neome.api.ent.base.dto.DtoEntUserInfo
 import com.neome.api.meta.base.Types.EntUserId
-import java.util.Map
 import com.neome.api.nucleus.base.sig.Sig
 
 interface SigUserActionResult : Sig

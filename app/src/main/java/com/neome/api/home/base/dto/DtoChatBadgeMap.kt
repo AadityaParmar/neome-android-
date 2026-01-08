@@ -6,7 +6,6 @@
 package com.neome.api.home.base.dto
 
 import com.neome.api.meta.base.Types.ChatId
-import java.util.Map
 
 interface DtoChatBadgeMap
 {

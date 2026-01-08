@@ -6,7 +6,6 @@
 package com.neome.api.ent.ent.sig
 
 import com.neome.api.meta.base.dto.FormValueRaw
-import java.util.Map
 import com.neome.api.meta.base.Types.RowId
 import com.neome.api.nucleus.base.sig.Sig
 

@@ -6,7 +6,6 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.DefnFieldEditable
-import java.util.Map
 
 interface DefnFieldPropertyMap : DefnFieldEditable
 {

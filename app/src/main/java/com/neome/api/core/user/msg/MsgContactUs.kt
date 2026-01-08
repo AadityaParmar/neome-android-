@@ -5,7 +5,6 @@
 
 package com.neome.api.core.user.msg
 
-import java.util.Map
 import com.neome.api.nucleus.base.msg.Msg
 
 interface MsgContactUs : Msg

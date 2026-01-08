@@ -6,7 +6,6 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.AdminId
-import java.util.Date
 import com.neome.api.meta.base.Types.DemoAppId
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.dto.EntVdAutoDiaMap

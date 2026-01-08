@@ -5,7 +5,6 @@
 
 package com.neome.api.core.deeplink.sig
 
-import java.util.Map
 import com.neome.api.nucleus.base.sig.Sig
 
 interface SigDeeplinkHtml : Sig

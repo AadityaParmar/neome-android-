@@ -7,7 +7,6 @@ package com.neome.api.home.main.msg
 
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.msg.Msg
-import java.util.Set
 
 interface MsgEntFilterNoVersion : Msg
 {

@@ -7,7 +7,6 @@ package com.neome.api.nucleus.api.sig
 
 import com.neome.api.nucleus.base.dto.DescApiModule
 import com.neome.api.nucleus.base.dto.DescApiPushSigs
-import java.util.Map
 import com.neome.api.nucleus.base.sig.Sig
 
 interface SigApiLib : Sig

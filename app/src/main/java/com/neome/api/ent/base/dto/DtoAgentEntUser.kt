@@ -7,7 +7,6 @@ package com.neome.api.ent.base.dto
 
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.MetaIdRole
-import java.util.Set
 
 interface DtoAgentEntUser
 {

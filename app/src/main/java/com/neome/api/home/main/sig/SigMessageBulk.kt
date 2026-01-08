@@ -6,7 +6,6 @@
 package com.neome.api.home.main.sig
 
 import com.neome.api.meta.base.dto.EnvValidationError
-import java.util.Map
 import com.neome.api.nucleus.base.sig.Sig
 import com.neome.api.home.main.sig.SigMessage
 

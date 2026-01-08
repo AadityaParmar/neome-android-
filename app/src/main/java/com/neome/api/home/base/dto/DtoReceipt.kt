@@ -5,8 +5,6 @@
 
 package com.neome.api.home.base.dto
 
-import java.util.Date
-
 interface DtoReceipt
 {
   val deliveredOn: String?

@@ -5,7 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-import java.util.Date
 import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.dto.StudioDtoArgValue

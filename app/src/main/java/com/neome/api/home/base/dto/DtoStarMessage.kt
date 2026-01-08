@@ -6,7 +6,6 @@
 package com.neome.api.home.base.dto
 
 import com.neome.api.meta.base.Types.ChatId
-import java.util.Date
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.MessageId

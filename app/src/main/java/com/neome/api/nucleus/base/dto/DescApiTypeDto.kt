@@ -6,7 +6,6 @@
 package com.neome.api.nucleus.base.dto
 
 import com.neome.api.nucleus.base.dto.DescApiType
-import java.util.Map
 
 interface DescApiTypeDto : DescApiType
 {

@@ -5,7 +5,6 @@
 
 package com.neome.api.core.base.dto
 
-import java.util.Date
 import com.neome.api.meta.base.Types.DeviceId
 
 interface DtoDevice

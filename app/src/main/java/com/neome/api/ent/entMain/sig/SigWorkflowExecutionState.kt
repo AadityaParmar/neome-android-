@@ -5,7 +5,6 @@
 
 package com.neome.api.ent.entMain.sig
 
-import java.util.Date
 import com.neome.api.ent.base.dto.DtoWorkflowParameterInfo
 import com.neome.api.meta.base.dto.EntVdWorkflowPointer
 import com.neome.api.ent.base.Types.EnumWorkflowResultKind

@@ -7,7 +7,6 @@ package com.neome.api.home.main.sig
 
 import com.neome.api.meta.base.dto.FieldDtoLocation
 import com.neome.api.meta.base.Types.GeoPoint
-import java.util.Map
 import com.neome.api.nucleus.base.sig.Sig
 
 interface SigReverseGeocode : Sig

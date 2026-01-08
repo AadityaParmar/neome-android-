@@ -8,7 +8,6 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.DefnDtoColor
 import com.neome.api.meta.base.dto.DefnDtoHyperLink
 import com.neome.api.meta.base.dto.FieldDtoImage
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdHyperlink
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 

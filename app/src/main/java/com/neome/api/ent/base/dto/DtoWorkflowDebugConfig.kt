@@ -6,10 +6,8 @@
 package com.neome.api.ent.base.dto
 
 import com.neome.api.meta.base.Types.EntUserId
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdVdAutoDia
 import com.neome.api.meta.base.Types.MetaIdVdAutoNode
-import java.util.Set
 
 interface DtoWorkflowDebugConfig
 {

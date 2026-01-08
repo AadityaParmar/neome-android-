@@ -6,7 +6,6 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnCompType
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.dto.SchemaColumn
 import com.neome.api.meta.base.Types.SymbolColumn

@@ -5,10 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-import java.util.Date
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.dto.IFieldValue
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.RowId
 

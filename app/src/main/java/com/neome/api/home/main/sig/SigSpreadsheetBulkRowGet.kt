@@ -5,9 +5,7 @@
 
 package com.neome.api.home.main.sig
 
-import java.util.Map
 import com.neome.api.meta.base.Types.RowId
-import java.util.Set
 import com.neome.api.nucleus.base.sig.Sig
 import com.neome.api.home.main.sig.SigSpreadsheetRow
 

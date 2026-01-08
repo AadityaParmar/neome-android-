@@ -6,7 +6,6 @@
 package com.neome.api.home.drawer.msg
 
 import com.neome.api.meta.base.Types.EntUserId
-import java.util.Map
 import com.neome.api.nucleus.base.msg.Msg
 
 interface MsgUserAvatarBulkGet : Msg

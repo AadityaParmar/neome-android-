@@ -8,7 +8,6 @@ package com.neome.api.ent.base.dto
 import com.neome.api.ent.base.dto.DtoEntAction
 import com.neome.api.meta.base.Types.EnumDefnKindReport
 import com.google.gson.JsonElement
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdLayoutForm

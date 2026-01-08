@@ -6,7 +6,6 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.EnvValidationError
-import java.util.Map
 import com.neome.api.meta.base.Types.SearchPath
 
 interface ValidationResult

@@ -5,7 +5,6 @@
 
 package com.neome.api.home.base.dto
 
-import java.util.Date
 import com.neome.api.core.base.dto.NotificationCustomData
 
 interface DtoUserNotification

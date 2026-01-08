@@ -8,7 +8,6 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdNote
 import com.neome.api.meta.base.dto.EntVdRegion
 import com.neome.api.meta.base.dto.EntVdViewport
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdModule
 import com.neome.api.meta.base.Types.MetaIdVdNote
 import com.neome.api.meta.base.Types.MetaIdVdRegion

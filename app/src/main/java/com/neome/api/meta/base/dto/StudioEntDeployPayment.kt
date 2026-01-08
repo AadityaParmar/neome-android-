@@ -5,7 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-import java.util.Date
 import com.neome.api.meta.base.Types.EnumDefnPaymentMethod
 import com.neome.api.meta.base.Types.EnumDefnPaymentPlan
 import com.neome.api.meta.base.dto.StudioBase

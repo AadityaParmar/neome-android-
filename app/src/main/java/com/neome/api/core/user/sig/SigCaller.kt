@@ -6,17 +6,14 @@
 package com.neome.api.core.user.sig
 
 import com.neome.api.meta.base.Types.AdminId
-import java.util.Date
 import com.neome.api.core.base.dto.DtoEntChatNotificationSetting
 import com.neome.api.core.base.dto.DtoNotificationSetting
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.GroupId
 import com.neome.api.meta.base.Types.LanguageKey
-import java.util.Map
 import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.meta.base.Types.PluginBundleId
-import java.util.Set
 import com.neome.api.nucleus.base.sig.SigVersion
 import com.neome.api.meta.base.Types.StoreItemId
 import com.neome.api.meta.base.Types.UserId

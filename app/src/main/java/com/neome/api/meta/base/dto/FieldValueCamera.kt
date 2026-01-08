@@ -5,7 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-import java.util.Date
 import com.neome.api.meta.base.dto.FieldValueEntUserId
 import com.neome.api.meta.base.dto.FieldValueImage
 import com.neome.api.meta.base.dto.FieldValueLocation

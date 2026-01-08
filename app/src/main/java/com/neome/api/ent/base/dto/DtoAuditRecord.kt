@@ -5,7 +5,6 @@
 
 package com.neome.api.ent.base.dto
 
-import java.util.Date
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.ent.base.Types.EnumAuditAction

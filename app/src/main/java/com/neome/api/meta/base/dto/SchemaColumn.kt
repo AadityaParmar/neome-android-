@@ -7,7 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.ColumnPath
 import com.neome.api.meta.base.Types.EnumSchemaColumnType
-import java.util.Map
 import com.neome.api.meta.base.Types.SymbolColumn
 
 interface SchemaColumn

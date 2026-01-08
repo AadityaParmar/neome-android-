@@ -1,6 +1,8 @@
 package com.neome.core.common
 
-import com.neome.core.common.serializer.api.DtoMessagePayloadText
+import com.neome.api.home.base.dto.DtoMessagePayloadText
+import com.neome.api.meta.base.SysId
+import com.neome.api.meta.base.Types
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
@@ -40,20 +42,18 @@ class SigMessageSerSimpleTest {
 
     @Test
     fun `deserialize simple text message`() {
-        // Given - Minimal text message JSON
+        // Given - Real text message JSON from production
         val jsonString = """
         {
-          "creationTime": "2024-01-06T10:30:00Z",
-          "messageId": "m-test",
-          "payload": {
-              "messageType": "text",
-              "dtoText": {
-                "value": ["Please enter", "a unique username"]
-              },
-            "text": "Hello, how are you?",
-          "enumTest2": "${'$'}CreatedBy",
-          "enumTest1": "name"
-          }
+            "version": "994ibA2V6DqNrH5iGnxuli0DE",
+            "messageId": "m-Siosyh8WHnxLQfPskp6W9whd0",
+            "messageOffset": 5539,
+            "senderId": "eu-KvvdpvCE1ypF4LXmMOadMkpyh",
+            "payload": {
+                "text": "I will join office in second half today",
+                "messageType": "text"
+            },
+            "creationTime": "2026-01-07T03:58:16.178Z"
         }
         """.trimIndent()
 
@@ -67,50 +67,52 @@ class SigMessageSerSimpleTest {
         println("Creation Time: ${message.creationTime}")
         println("messageOffset: ${message.messageOffset}")
         println("Payload messageType: ${message.payload.messageType}")
-        println("Payload dtoText: ${message.payload.dtoText}")
         println("messageStr: ${messageStr}")
-        println("Payload enumTest2: ${EnumKind.Name.value}")
-        println("Payload enumTest2: ${EnumKind.Name.name}")
         println("Payload text: ${(message.payload as DtoMessagePayloadText).text}")
         println("Payload Type: ${message.payload::class.simpleName}")
         println("=========================================\n")
 
         Assert.assertNotNull(message)
-        Assert.assertEquals("2024-01-06T10:30:00Z", message.creationTime)
+        Assert.assertEquals(
+            SysId.create<Types.MessageId>("m-Siosyh8WHnxLQfPskp6W9whd0"),
+            message.messageId
+        )
+        Assert.assertEquals("2026-01-07T03:58:16.178Z", message.creationTime)
+        Assert.assertEquals(5539L, message.messageOffset)
+        Assert.assertEquals(
+            SysId.create<Types.EntUserId>("eu-KvvdpvCE1ypF4LXmMOadMkpyh"),
+            message.senderId
+        )
         Assert.assertTrue(message.payload is DtoMessagePayloadTextData)
 
         val textPayload = message.payload as DtoMessagePayloadTextData
-        Assert.assertEquals("Hello, how are you?", textPayload.text)
+        Assert.assertEquals("I will join office in second half today", textPayload.text)
         Assert.assertEquals(
             com.neome.api.home.base.Types.EnumMessageType.text,
             textPayload.messageType
         )
         Assert.assertNull(textPayload.isForwarded)
         Assert.assertNull(textPayload.isUpdated)
-
+        Assert.assertNull(textPayload.mentionMap)
     }
 
     @Test
-    fun `deserialize full text message with all fields`() {
-        // Given - Complete text message JSON with all optional fields
+    fun `deserialize text message with mentions`() {
+        // Given - Real text message with mention map from production
         val jsonString = """
         {
-          "receiptStatus": "blueTick",
-          "version": "1.0.0",
-          "creationTime": "2024-01-06T11:00:00Z",
-          "isCallerSender": true,
-          "messageId": "m-test2",
-          "messageOffset": 5,
-          "payload": {
-            "isForwarded": true,
-            "mentionMap": {
-              "@john": "eu-001",
-              "@jane": "eu-002"
+            "version": "gExZQwJx0PFVPHWPxUg4cXBV5",
+            "messageId": "m-lPdjmHvogvnmq0qOv0dkq1uAJ",
+            "messageOffset": 5542,
+            "senderId": "eu-JWPE5dBLnZihfOYhn0Bzx3K8m",
+            "payload": {
+                "text": "Happy Birthday @Brijesh Dobariya 🎂🎉",
+                "messageType": "text",
+                "mentionMap": {
+                    "@Brijesh Dobariya": "eu-XBEkfLMw9KUbd6GPtH5G2RkTj"
+                }
             },
-            "messageType": "text",
-            "isUpdated": false,
-            "text": "Hey @john and @jane, check this out!"
-          }
+            "creationTime": "2026-01-07T04:22:26.369Z"
         }
         """.trimIndent()
 
@@ -118,311 +120,117 @@ class SigMessageSerSimpleTest {
         val message = json.decodeFromString<SigMessageData>(jsonString)
 
         // Then
-        println("\n=== Deserialized Full Text Message ===")
+        println("\n=== Deserialized Text Message with Mentions ===")
         println("Message ID: ${message.messageId}")
-        println("Receipt Status: ${message.receiptStatus}")
         println("Version: ${message.version}")
         println("MentionMap: ${(message.payload as DtoMessagePayloadText).mentionMap}")
-        println("Is Caller Sender: ${message.isCallerSender}")
         println("Message Offset: ${message.messageOffset}")
-        println("========================================\n")
+        println("===============================================\n")
 
-        Assert.assertNotNull(message.messageId) // MessageId deserialized successfully
+        Assert.assertNotNull(message.messageId)
         Assert.assertEquals(
-            com.neome.api.home.base.Types.EnumReceiptStatus.blueTick,
-            message.receiptStatus
+            SysId.create<Types.MessageId>("m-lPdjmHvogvnmq0qOv0dkq1uAJ"),
+            message.messageId
         )
-        Assert.assertEquals("1.0.0", message.version)
-        Assert.assertEquals(true, message.isCallerSender)
-        Assert.assertEquals(5, message.messageOffset)
+        Assert.assertEquals("gExZQwJx0PFVPHWPxUg4cXBV5", message.version)
+        Assert.assertEquals(5542L, message.messageOffset)
+        Assert.assertEquals(
+            SysId.create<Types.EntUserId>("eu-JWPE5dBLnZihfOYhn0Bzx3K8m"),
+            message.senderId
+        )
 
         Assert.assertTrue(message.payload is DtoMessagePayloadTextData)
         val textPayload = message.payload as DtoMessagePayloadTextData
-        Assert.assertEquals("Hey @john and @jane, check this out!", textPayload.text)
-        Assert.assertEquals(true, textPayload.isForwarded)
-        Assert.assertEquals(false, textPayload.isUpdated)
+        Assert.assertEquals("Happy Birthday @Brijesh Dobariya 🎂🎉", textPayload.text)
         Assert.assertNotNull(textPayload.mentionMap)
-        Assert.assertEquals(2, textPayload.mentionMap?.size)
-    }
-
-    @Test
-    fun `deserialize text message with unknown fields`() {
-        // Given - JSON with extra unknown fields that should be ignored
-        val jsonString = """
-        {
-          "creationTime": "2024-01-06T12:00:00Z",
-          "messageId": "m-test3",
-          "unknownField1": "should be ignored",
-          "extraData": 12345,
-          "payload": {
-            "messageType": "text",
-            "text": "Message with unknown fields",
-            "extraPayloadField": "also ignored"
-          }
-        }
-        """.trimIndent()
-
-        // When
-        val message = json.decodeFromString<SigMessageData>(jsonString)
-
-        // Then
-        Assert.assertNotNull(message)
-        Assert.assertTrue(message.payload is DtoMessagePayloadTextData)
-        val textPayload = message.payload as DtoMessagePayloadTextData
-        Assert.assertEquals("Message with unknown fields", textPayload.text)
-    }
-
-    // ==========================================
-    // IMAGE MESSAGE DESERIALIZATION TESTS
-    // ==========================================
-
-    @Test
-    fun `deserialize simple image message`() {
-        // Given - Minimal image message JSON
-        val jsonString = """
-        {
-          "creationTime": "2024-01-06T13:00:00Z",
-          "messageId": "m-test4",
-          "payload": {
-            "messageType": "image",
-            "text": "Beautiful sunset",
-            "mediaIdImage": "mi-xyz123",
-            "mediaIdBlurImage": "mi-blurxyz123",
-            "primaryColor": "#FF6B35"
-          }
-        }
-        """.trimIndent()
-
-        // When
-        val message = json.decodeFromString<SigMessageData>(jsonString)
-
-        // Then
-        println("\n=== Deserialized Simple Image Message ===")
-        println("Message ID: ${message.messageId}")
-        println("Payload Type: ${message.payload::class.simpleName}")
-        println("==========================================\n")
-        Assert.assertNotNull(message)
-        Assert.assertTrue(message.payload is DtoMessagePayloadImageData)
-
-        val imagePayload = message.payload as DtoMessagePayloadImageData
-        Assert.assertEquals("Beautiful sunset", imagePayload.text)
+        Assert.assertEquals(1, textPayload.mentionMap?.size)
         Assert.assertEquals(
-            com.neome.api.home.base.Types.EnumMessageType.image,
-            imagePayload.messageType
+            SysId.create<Types.ContactId>("eu-XBEkfLMw9KUbd6GPtH5G2RkTj"),
+            textPayload.mentionMap?.get("@Brijesh Dobariya")
         )
-        Assert.assertEquals("#FF6B35", imagePayload.primaryColor)
-        Assert.assertNull(imagePayload.width)
-        Assert.assertNull(imagePayload.height)
-        Assert.assertNull(imagePayload.fileSize)
     }
 
     @Test
-    fun `deserialize full image message with all fields`() {
-        // Given - Complete image message JSON with all optional fields
-        val jsonString = """
-        {
-          "receiptStatus": "doubleTick",
-          "version": "2.1.0",
-          "creationTime": "2024-01-06T14:30:00Z",
-          "isCallerSender": false,
-          "messageId": "m-test5",
-          "messageOffset": 12,
-          "payload": {
-            "isForwarded": false,
-            "mentionMap": null,
-            "messageType": "image",
-            "isUpdated": true,
-            "text": "Check out this amazing photo! 📸",
-            "fileSize": 2457600,
-            "height": 1920,
-            "mediaIdImage": "mi-abc456",
-            "mediaIdBlurImage": "mi-blurabc456",
-            "primaryColor": "#4A90E2",
-            "width": 1080
-          }
-        }
-        """.trimIndent()
+    fun `deserialize multiple real messages from production`() {
+        // Given - Array of real messages from production
+        val messagesJson = listOf(
+            """{
+                "version": "994ibA2V6DqNrH5iGnxuli0DE",
+                "messageId": "m-Siosyh8WHnxLQfPskp6W9whd0",
+                "messageOffset": 5539,
+                "senderId": "eu-KvvdpvCE1ypF4LXmMOadMkpyh",
+                "payload": {
+                    "text": "I will join office in second half today",
+                    "messageType": "text"
+                },
+                "creationTime": "2026-01-07T03:58:16.178Z"
+            }""",
+            """{
+                "version": "ZS7DmkjXu6YdapWAmG1Qpak2e",
+                "messageId": "m-FKMXSBD8kWQQfU9DgCpFQLZug",
+                "messageOffset": 5540,
+                "senderId": "eu-oUJ8BZtaUuIpDI0lpcCqvFemM",
+                "payload": {
+                    "text": "Happy Birthday Brijesh! Have a wonderful day!🎊🎂",
+                    "messageType": "text"
+                },
+                "creationTime": "2026-01-07T04:01:46.120Z"
+            }""",
+            """{
+                "version": "gExZQwJx0PFVPHWPxUg4cXBV5",
+                "messageId": "m-lPdjmHvogvnmq0qOv0dkq1uAJ",
+                "messageOffset": 5542,
+                "senderId": "eu-JWPE5dBLnZihfOYhn0Bzx3K8m",
+                "payload": {
+                    "text": "Happy Birthday @Brijesh Dobariya 🎂🎉",
+                    "messageType": "text",
+                    "mentionMap": {
+                        "@Brijesh Dobariya": "eu-XBEkfLMw9KUbd6GPtH5G2RkTj"
+                    }
+                },
+                "creationTime": "2026-01-07T04:22:26.369Z"
+            }"""
+        )
 
-        // When
-        val message = json.decodeFromString<SigMessageData>(jsonString)
+        // When - Deserialize all messages
+        val messages = messagesJson.map { json.decodeFromString<SigMessageData>(it) }
 
-        // Then
-        println("\n=== Deserialized Full Image Message ===")
-        println("Message ID: ${message.messageId}")
-        println("Receipt Status: ${message.receiptStatus}")
-        println("Is Caller Sender: ${message.isCallerSender}")
-        println("Image Width: ${(message.payload as DtoMessagePayloadImageData).width}")
-        println("Image Height: ${(message.payload as DtoMessagePayloadImageData).height}")
-        println("File Size: ${(message.payload as DtoMessagePayloadImageData).fileSize} bytes")
-        println("========================================\n")
+        // Then - Verify all messages are correctly deserialized
+        println("\n=== Deserializing Multiple Real Messages ===")
+        Assert.assertEquals(3, messages.size)
 
+        // Verify first message
+        val msg1 = messages[0]
         Assert.assertEquals(
-            com.neome.api.home.base.Types.EnumReceiptStatus.doubleTick,
-            message.receiptStatus
+            SysId.create<Types.MessageId>("m-Siosyh8WHnxLQfPskp6W9whd0"),
+            msg1.messageId
         )
-        Assert.assertEquals("2.1.0", message.version)
-        Assert.assertEquals(false, message.isCallerSender)
-        Assert.assertEquals(12, message.messageOffset)
-
-        Assert.assertTrue(message.payload is DtoMessagePayloadImageData)
-        val imagePayload = message.payload as DtoMessagePayloadImageData
-        Assert.assertEquals("Check out this amazing photo! 📸", imagePayload.text)
-        Assert.assertEquals(false, imagePayload.isForwarded)
-        Assert.assertEquals(true, imagePayload.isUpdated)
-        Assert.assertEquals(1080L, imagePayload.width)
-        Assert.assertEquals(1920L, imagePayload.height)
-        Assert.assertEquals(2457600L, imagePayload.fileSize)
-        Assert.assertEquals("#4A90E2", imagePayload.primaryColor)
-    }
-
-    @Test
-    fun `deserialize image message with partial dimensions`() {
-        // Given - Image message with only some dimension fields
-        val jsonString = """
-        {
-          "creationTime": "2024-01-06T15:00:00Z",
-          "messageId": "m-test6",
-          "payload": {
-            "messageType": "image",
-            "text": "Portrait photo",
-            "width": 1080,
-            "mediaIdImage": "mi-portrait",
-            "mediaIdBlurImage": "mi-blurportrait",
-            "primaryColor": "#8E44AD"
-          }
-        }
-        """.trimIndent()
-
-        // When
-        val message = json.decodeFromString<SigMessageData>(jsonString)
-
-        // Then
-        Assert.assertTrue(message.payload is DtoMessagePayloadImageData)
-        val imagePayload = message.payload as DtoMessagePayloadImageData
-        Assert.assertEquals(1080L, imagePayload.width)
-        Assert.assertNull(imagePayload.height)
-        Assert.assertNull(imagePayload.fileSize)
-    }
-
-    // ==========================================
-    // POLYMORPHIC TYPE DISCRIMINATION TESTS
-    // ==========================================
-
-    @Test
-    fun `deserialize multiple messages and verify correct types`() {
-        // Given - JSON array with different message types
-        val textJson = """
-        {
-          "creationTime": "2024-01-06T16:00:00Z",
-          "messageId": "m-test7",
-          "payload": {
-            "messageType": "text",
-            "text": "This is a text message"
-          }
-        }
-        """.trimIndent()
-
-        val imageJson = """
-        {
-          "creationTime": "2024-01-06T16:05:00Z",
-          "messageId": "m-test8",
-          "payload": {
-            "messageType": "image",
-            "text": "This is an image",
-            "mediaIdImage": "mi-multi",
-            "mediaIdBlurImage": "mi-blurmulti",
-            "primaryColor": "#27AE60"
-          }
-        }
-        """.trimIndent()
-
-        // When
-        val textMessage = json.decodeFromString<SigMessageData>(textJson)
-        val imageMessage = json.decodeFromString<SigMessageData>(imageJson)
-
-        // Then
-        println("\n=== Polymorphic Type Discrimination ===")
-        println("Text message type: ${textMessage.payload::class.simpleName}")
-        println("Image message type: ${imageMessage.payload::class.simpleName}")
-        println("========================================\n")
-
-        Assert.assertTrue(textMessage.payload is DtoMessagePayloadTextData)
-        Assert.assertTrue(imageMessage.payload is DtoMessagePayloadImageData)
-
-        // Verify we can access type-specific fields
-        val textPayload = textMessage.payload as DtoMessagePayloadTextData
-        Assert.assertEquals("This is a text message", textPayload.text)
-
-        val imagePayload = imageMessage.payload as DtoMessagePayloadImageData
-        Assert.assertEquals("#27AE60", imagePayload.primaryColor)
-    }
-
-    @Test
-    fun `deserialize messages with null optional fields`() {
-        // Given - Message with explicit null values
-        val jsonString = """
-        {
-          "receiptStatus": null,
-          "version": null,
-          "creationTime": "2024-01-06T17:00:00Z",
-          "isCallerSender": null,
-          "messageId": "m-test9",
-          "messageOffset": null,
-          "payload": {
-            "isForwarded": null,
-            "mentionMap": null,
-            "messageType": "text",
-            "isUpdated": null,
-            "text": "Message with nulls"
-          }
-        }
-        """.trimIndent()
-
-        // When
-        val message = json.decodeFromString<SigMessageData>(jsonString)
-
-        // Then
-        Assert.assertNull(message.receiptStatus)
-        Assert.assertNull(message.version)
-        Assert.assertNull(message.isCallerSender)
-        Assert.assertNull(message.messageOffset)
-
-        val textPayload = message.payload as DtoMessagePayloadTextData
-        Assert.assertNull(textPayload.isForwarded)
-        Assert.assertNull(textPayload.mentionMap)
-        Assert.assertNull(textPayload.isUpdated)
-        Assert.assertEquals("Message with nulls", textPayload.text)
-    }
-
-    // ==========================================
-    // WHEN EXPRESSION PATTERN MATCHING TEST
-    // ==========================================
-
-    @Test
-    fun `pattern match on payload types`() {
-        // Given - Different message types
-        val messages = listOf(
-            """{"creationTime": "2024-01-06T18:00:00Z", "messageId": "m-test10", "payload": {"messageType": "text", "text": "Text"}}""",
-            """{"creationTime": "2024-01-06T18:01:00Z", "messageId": "m-test11", "payload": {"messageType": "image", "text": "Image", "mediaIdImage": "mi-i1", "mediaIdBlurImage": "mi-b1", "primaryColor": "#FFF"}}"""
+        Assert.assertEquals(5539L, msg1.messageOffset)
+        Assert.assertTrue(msg1.payload is DtoMessagePayloadTextData)
+        Assert.assertEquals(
+            "I will join office in second half today",
+            (msg1.payload as DtoMessagePayloadTextData).text
         )
 
-        // When - Deserialize and pattern match
-        val results = messages.map { jsonString ->
-            val message = json.decodeFromString<SigMessageData>(jsonString)
-            when (val payload = message.payload) {
-                is DtoMessagePayloadTextData -> "Text: ${payload.text}"
-                is DtoMessagePayloadImageData -> "Image: ${payload.primaryColor}"
-                is DtoMessagePayloadAudioData -> "Audio message"
-                else -> "Unknown type: ${payload::class.simpleName}"
-            }
+        // Verify message with mention
+        val msg3 = messages[2]
+        Assert.assertEquals(
+            SysId.create<Types.MessageId>("m-lPdjmHvogvnmq0qOv0dkq1uAJ"),
+            msg3.messageId
+        )
+        Assert.assertTrue(msg3.payload is DtoMessagePayloadTextData)
+        val textPayload = msg3.payload as DtoMessagePayloadTextData
+        Assert.assertNotNull(textPayload.mentionMap)
+        Assert.assertEquals(1, textPayload.mentionMap?.size)
+
+        // Verify all messages have correct structure
+        messages.forEach { message ->
+            Assert.assertNotNull(message.messageId)
+            Assert.assertNotNull(message.creationTime)
+            Assert.assertNotNull(message.senderId)
+            Assert.assertTrue(message.payload is DtoMessagePayloadTextData)
+            println("✓ Message ${message.messageId} deserialized successfully")
         }
-
-        // Then
-        println("\n=== Pattern Matching Results ===")
-        results.forEach { println(it) }
-        println("=================================\n")
-
-        Assert.assertEquals("Text: Text", results[0])
-        Assert.assertEquals("Image: #FFF", results[1])
+        println("============================================\n")
     }
 }

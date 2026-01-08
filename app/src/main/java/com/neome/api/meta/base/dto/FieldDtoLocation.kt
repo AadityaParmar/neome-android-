@@ -5,7 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-import java.util.Date
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.GeoPoint
 

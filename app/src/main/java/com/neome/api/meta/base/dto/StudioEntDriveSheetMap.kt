@@ -8,7 +8,6 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnDataExportKind
 import com.neome.api.meta.base.Types.EnumDefnMonth
 import com.neome.api.meta.base.Types.EnumDefnSyncMode
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdDriveSheet
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntDriveSheet

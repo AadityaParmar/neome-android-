@@ -6,7 +6,6 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.EntVdReportDia
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdVdReportDia
 import com.neome.api.meta.base.dto.StudioBase
 

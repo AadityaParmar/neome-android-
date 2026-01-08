@@ -7,7 +7,6 @@ package com.neome.api.home.main.sig
 
 import com.neome.api.nucleus.base.Types.AnyPrefixKey
 import com.neome.api.home.base.dto.DtoNewChatCandidate
-import java.util.Map
 import com.neome.api.nucleus.base.sig.Sig
 
 interface SigChatCandidateMap : Sig

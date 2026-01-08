@@ -7,7 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.DefnDtoSwimlane
 import com.neome.api.meta.base.dto.DefnField
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdSwimlane
 
 interface DefnStudioMapOfSwimlane : DefnField

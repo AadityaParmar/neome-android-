@@ -9,7 +9,6 @@ import com.neome.api.home.base.dto.DtoGroupSettings
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.nucleus.base.msg.Msg
-import java.util.Set
 
 interface MsgGroupCreate : Msg
 {

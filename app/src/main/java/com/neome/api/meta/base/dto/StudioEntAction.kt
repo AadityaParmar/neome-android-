@@ -7,7 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnKindAction
 import com.google.gson.JsonElement
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.dto.StudioBase

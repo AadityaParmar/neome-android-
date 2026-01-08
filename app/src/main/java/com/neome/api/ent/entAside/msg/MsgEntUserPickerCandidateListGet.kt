@@ -10,7 +10,6 @@ import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
 import com.neome.api.nucleus.base.msg.Msg
-import java.util.Set
 
 interface MsgEntUserPickerCandidateListGet : Msg
 {

@@ -6,7 +6,6 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.FieldDtoTreeNode
-import java.util.Map
 
 interface FieldDtoTree
 {

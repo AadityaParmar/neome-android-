@@ -7,7 +7,6 @@ package com.neome.api.ent.base.dto
 
 import com.neome.api.meta.base.Types.EntUserId
 import com.google.gson.JsonElement
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
 

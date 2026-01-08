@@ -10,7 +10,6 @@ import com.neome.api.home.base.Types.EnumGroupPatchPropName
 import com.neome.api.meta.base.Types.GroupId
 import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.core.base.msg.MsgVersion
-import java.util.Set
 
 interface MsgGroupPatch : MsgVersion
 {

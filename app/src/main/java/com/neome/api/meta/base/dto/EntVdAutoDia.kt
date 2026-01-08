@@ -8,7 +8,6 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.dto.EntVdAutoEdge
 import com.neome.api.meta.base.dto.EntVdAutoNode
 import com.neome.api.meta.base.dto.EntVdDia
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdVdAutoDia
 import com.neome.api.meta.base.Types.MetaIdVdAutoEdge
 import com.neome.api.meta.base.Types.MetaIdVdAutoNode

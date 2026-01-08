@@ -7,7 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.GroupId
 import com.neome.api.meta.base.Types.Key
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdAutomation
 import com.neome.api.meta.base.Types.MetaIdGroup
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet

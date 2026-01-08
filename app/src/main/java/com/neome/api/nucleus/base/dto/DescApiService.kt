@@ -11,9 +11,7 @@ import com.neome.api.nucleus.base.dto.DescApiTypeDto
 import com.neome.api.nucleus.base.dto.DescApiTypeEnum
 import com.neome.api.nucleus.base.dto.DescApiTypeSet
 import com.neome.api.nucleus.base.dto.DescApiTypeSysId
-import java.util.Map
 import com.neome.api.meta.base.Types.ServiceName
-import java.util.Set
 
 interface DescApiService
 {

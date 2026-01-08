@@ -7,7 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.DefnForm
 import com.neome.api.meta.base.Types.EnumDefnPluginMode
-import java.util.Map
 import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdVar

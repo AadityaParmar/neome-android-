@@ -11,7 +11,6 @@ import com.neome.api.home.base.dto.DtoUserGroupConfiguration
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.GroupId
-import java.util.Map
 import com.neome.api.meta.base.Types.MediaIdAvatar
 import com.neome.api.nucleus.base.sig.SigVersion
 

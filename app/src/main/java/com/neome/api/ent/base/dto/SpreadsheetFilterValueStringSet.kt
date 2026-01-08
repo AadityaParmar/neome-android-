@@ -5,7 +5,6 @@
 
 package com.neome.api.ent.base.dto
 
-import java.util.Set
 import com.neome.api.ent.base.dto.SpreadsheetFilterValue
 
 interface SpreadsheetFilterValueStringSet : SpreadsheetFilterValue

@@ -6,7 +6,6 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.DefnStudioDtoOptionPermission
-import java.util.Map
 import com.neome.api.meta.base.Types.MetaIdRole
 
 interface DefnStudioMapOfOptionPermission
