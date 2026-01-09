@@ -43,8 +43,16 @@ class AudioPlayerViewModel @Inject constructor(
     private var positionUpdateJob: Job? = null
     private var tempAudioFile: File? = null
 
+    // Track if we're in a seek operation to ignore buffering state
+    private var isSeekingInternal = false
+    // Store state before seeking to restore after seek completes
+    private var stateBeforeSeek: AudioPlaybackState? = null
+
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
+            // Don't update state during seek
+            if (isSeekingInternal) return
+
             if (isPlaying) {
                 _state.update { it.copy(playbackState = AudioPlaybackState.PLAYING) }
                 startPositionUpdates()
@@ -57,11 +65,39 @@ class AudioPlayerViewModel @Inject constructor(
         override fun onPlaybackStateChanged(playbackState: Int) {
             when (playbackState) {
                 Player.STATE_BUFFERING -> {
-                    _state.update { it.copy(playbackState = AudioPlaybackState.LOADING) }
+                    // Only show loading for initial load, not for seek buffering
+                    // Check if audio was already loaded (not IDLE or LOADING)
+                    val currentState = _state.value.playbackState
+                    val isInitialLoad = currentState == AudioPlaybackState.IDLE ||
+                            currentState == AudioPlaybackState.LOADING
+
+                    if (isInitialLoad && !isSeekingInternal) {
+                        _state.update { it.copy(playbackState = AudioPlaybackState.LOADING) }
+                    }
+                    // During seek buffering, keep the current state
                 }
                 Player.STATE_READY -> {
                     val duration = exoPlayer?.duration ?: 0L
-                    if (_state.value.playbackState == AudioPlaybackState.LOADING) {
+
+                    if (isSeekingInternal) {
+                        // Seek complete - restore previous state or set to playing if was playing
+                        isSeekingInternal = false
+                        val restoredState = stateBeforeSeek ?: AudioPlaybackState.READY
+                        stateBeforeSeek = null
+
+                        _state.update {
+                            it.copy(
+                                playbackState = restoredState,
+                                durationMs = duration
+                            )
+                        }
+
+                        // Resume position updates if playing
+                        if (restoredState == AudioPlaybackState.PLAYING) {
+                            startPositionUpdates()
+                        }
+                    } else if (_state.value.playbackState == AudioPlaybackState.LOADING) {
+                        // Initial load complete
                         _state.update {
                             it.copy(
                                 playbackState = AudioPlaybackState.READY,
@@ -71,6 +107,8 @@ class AudioPlayerViewModel @Inject constructor(
                     }
                 }
                 Player.STATE_ENDED -> {
+                    isSeekingInternal = false
+                    stateBeforeSeek = null
                     _state.update {
                         it.copy(
                             playbackState = AudioPlaybackState.COMPLETED,
@@ -83,6 +121,8 @@ class AudioPlayerViewModel @Inject constructor(
                     }
                 }
                 Player.STATE_IDLE -> {
+                    isSeekingInternal = false
+                    stateBeforeSeek = null
                     _state.update { it.copy(playbackState = AudioPlaybackState.IDLE) }
                 }
             }
@@ -125,6 +165,9 @@ class AudioPlayerViewModel @Inject constructor(
             is AudioPlayerEvent.Stop -> stop()
             is AudioPlayerEvent.SeekTo -> seekTo(event.positionMs)
             is AudioPlayerEvent.SeekToProgress -> seekToProgress(event.progress)
+            is AudioPlayerEvent.SeekStarted -> onSeekStarted(event.progress)
+            is AudioPlayerEvent.SeekProgressChanged -> onSeekProgressChanged(event.progress)
+            is AudioPlayerEvent.SeekEnded -> onSeekEnded(event.progress)
             is AudioPlayerEvent.ToggleMute -> toggleMute()
             is AudioPlayerEvent.SetPlaybackSpeed -> setPlaybackSpeed(event.speed)
             is AudioPlayerEvent.Replay -> replay()
@@ -251,6 +294,53 @@ class AudioPlayerViewModel @Inject constructor(
     private fun seekToProgress(progress: Float) {
         val positionMs = (progress * _state.value.durationMs).toLong()
         seekTo(positionMs)
+    }
+
+    /**
+     * Called when user starts dragging the seek bar.
+     * Pauses position updates to prevent UI flicker.
+     */
+    private fun onSeekStarted(progress: Float) {
+        stopPositionUpdates()
+        val seekPositionMs = (progress * _state.value.durationMs).toLong()
+        _state.update {
+            it.copy(
+                isSeeking = true,
+                seekPositionMs = seekPositionMs
+            )
+        }
+    }
+
+    /**
+     * Called while user is dragging the seek bar.
+     * Updates display position without actually seeking the player.
+     */
+    private fun onSeekProgressChanged(progress: Float) {
+        val seekPositionMs = (progress * _state.value.durationMs).toLong()
+        _state.update { it.copy(seekPositionMs = seekPositionMs) }
+    }
+
+    /**
+     * Called when user releases the seek bar.
+     * Performs the actual seek and resumes position updates.
+     */
+    private fun onSeekEnded(progress: Float) {
+        val positionMs = (progress * _state.value.durationMs).toLong()
+        val clampedPosition = positionMs.coerceIn(0L, _state.value.durationMs)
+
+        // Set seeking flag and store state BEFORE seeking to handle buffering state
+        isSeekingInternal = true
+        stateBeforeSeek = _state.value.playbackState
+
+        exoPlayer?.seekTo(clampedPosition)
+
+        _state.update {
+            it.copy(
+                isSeeking = false,
+                seekPositionMs = 0L,
+                currentPositionMs = clampedPosition
+            )
+        }
     }
 
     private fun toggleMute() {

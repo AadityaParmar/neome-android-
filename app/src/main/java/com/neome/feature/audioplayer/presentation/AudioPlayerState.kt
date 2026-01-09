@@ -16,7 +16,10 @@ data class AudioPlayerState(
     val isMuted: Boolean = false,
     val playbackSpeed: Float = 1.0f,
     val waveformData: List<Float> = emptyList(),
-    val error: PlayerError? = null
+    val error: PlayerError? = null,
+    // Seeking state - managed by UI to prevent flicker
+    val isSeeking: Boolean = false,
+    val seekPositionMs: Long = 0L
 ) {
     val isPlaying: Boolean get() = playbackState == AudioPlaybackState.PLAYING
     val isPaused: Boolean get() = playbackState == AudioPlaybackState.PAUSED
@@ -25,15 +28,20 @@ data class AudioPlayerState(
     val isCompleted: Boolean get() = playbackState == AudioPlaybackState.COMPLETED
     val hasError: Boolean get() = playbackState == AudioPlaybackState.ERROR
 
+    // Use seek position when seeking, otherwise use actual position
+    val displayPositionMs: Long
+        get() = if (isSeeking) seekPositionMs else currentPositionMs
+
     val progress: Float
         get() = if (durationMs > 0) {
-            (currentPositionMs.toFloat() / durationMs).coerceIn(0f, 1f)
+            (displayPositionMs.toFloat() / durationMs).coerceIn(0f, 1f)
         } else 0f
 
     val formattedCurrentTime: String
         get() {
-            val seconds = (currentPositionMs / 1000) % 60
-            val minutes = (currentPositionMs / 1000) / 60
+            val positionMs = displayPositionMs
+            val seconds = (positionMs / 1000) % 60
+            val minutes = (positionMs / 1000) / 60
             return "%02d:%02d".format(minutes, seconds)
         }
 

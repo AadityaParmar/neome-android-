@@ -251,12 +251,13 @@ private fun PlayerContent(
             currentTime = state.formattedCurrentTime,
             duration = state.formattedDuration,
             enabled = state.canSeek,
-            onSeek = { progress -> onEvent(AudioPlayerEvent.SeekToProgress(progress)) },
+            onSeekStarted = { progress -> onEvent(AudioPlayerEvent.SeekStarted(progress)) },
+            onSeekChanged = { progress -> onEvent(AudioPlayerEvent.SeekProgressChanged(progress)) },
+            onSeekEnded = { progress -> onEvent(AudioPlayerEvent.SeekEnded(progress)) },
             modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(32.dp))
-
         // Playback controls
         PlaybackControls(
             isPlaying = state.isPlaying,

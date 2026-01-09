@@ -1,5 +1,7 @@
 package com.neome.feature.audioplayer.presentation.components
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,17 +12,16 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 
 /**
  * Seek bar with time labels for audio playback.
+ * Uses event-based seeking to prevent UI flicker during drag.
  */
 @Composable
 fun SeekBar(
@@ -28,24 +29,32 @@ fun SeekBar(
     currentTime: String,
     duration: String,
     enabled: Boolean,
-    onSeek: (Float) -> Unit,
+    onSeekStarted: (Float) -> Unit,
+    onSeekChanged: (Float) -> Unit,
+    onSeekEnded: (Float) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var isDragging by remember { mutableStateOf(false) }
-    var dragProgress by remember { mutableFloatStateOf(0f) }
+    val interactionSource = remember { MutableInteractionSource() }
+    val isDragging by interactionSource.collectIsDraggedAsState()
+
+    // Track drag state changes to notify ViewModel
+    LaunchedEffect(isDragging) {
+        if (isDragging) {
+            onSeekStarted(progress)
+        }
+    }
 
     Column(modifier = modifier.fillMaxWidth()) {
         Slider(
-            value = if (isDragging) dragProgress else progress,
+            value = progress,
             onValueChange = { value ->
-                isDragging = true
-                dragProgress = value
+                onSeekChanged(value)
             },
             onValueChangeFinished = {
-                onSeek(dragProgress)
-                isDragging = false
+                onSeekEnded(progress)
             },
             enabled = enabled,
+            interactionSource = interactionSource,
             colors = SliderDefaults.colors(
                 thumbColor = MaterialTheme.colorScheme.primary,
                 activeTrackColor = MaterialTheme.colorScheme.primary,

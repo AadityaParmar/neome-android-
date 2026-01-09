@@ -44,6 +44,15 @@ sealed interface AudioPlayerEvent {
     /** Seek to progress percentage (0-1) */
     data class SeekToProgress(val progress: Float) : AudioPlayerEvent
 
+    /** User started dragging seek bar - pause position updates */
+    data class SeekStarted(val progress: Float) : AudioPlayerEvent
+
+    /** User is dragging seek bar - update display position without seeking */
+    data class SeekProgressChanged(val progress: Float) : AudioPlayerEvent
+
+    /** User finished dragging seek bar - perform actual seek */
+    data class SeekEnded(val progress: Float) : AudioPlayerEvent
+
     /** Toggle mute state */
     data object ToggleMute : AudioPlayerEvent
 
