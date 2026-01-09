@@ -1,0 +1,55 @@
+package com.neome.core.common.serializer.api.meta.base.dto
+
+import com.neome.api.meta.base.Symbol
+import com.neome.api.meta.base.Types
+import com.neome.api.meta.base.Types.EnumDefnCompType
+import com.neome.api.meta.base.dto.DefnDtoLayoutCardItem
+import com.neome.api.meta.base.dto.DefnDtoPermissionMatrix
+import com.neome.api.meta.base.dto.DefnField
+import com.neome.api.meta.base.dto.DefnFieldFormList
+import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.sysId.MetaIdFieldSer
+import com.neome.core.common.serializer.sysId.MetaIdRoleSer
+import com.neome.core.common.serializer.sysId.MetaIdSectionSer
+import com.neome.core.common.serializer.sysId.SymbolSer
+import kotlinx.serialization.Serializable
+
+
+@Serializable
+sealed interface DefnFieldFormListSeal : DefnFieldFormList
+
+
+@Serializable
+data class DefnFieldFormListData(
+    override val disabled: Boolean? = null,
+    @Serializable(with = MetaIdFieldSer::class) override val disabledFieldId: Types.MetaIdField? = null,
+    override val disabledRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val disabledVar: Boolean? = null,
+    override val hidden: Boolean? = null,
+    override val hideDirtyIndicator: Boolean? = null,
+    override val invisible: Boolean? = null,
+    override val label: String? = null,
+    override val maxWidth: Long? = null,
+    @Serializable(with = SymbolSer::class) override val name: Symbol,
+    override val pb: Long? = null,
+    override val permissionMatrix: DefnDtoPermissionMatrix? = null,
+    override val pl: Long? = null,
+    override val pr: Long? = null,
+    override val pt: Long? = null,
+    override val readOnly: Boolean? = null,
+    override val type: EnumDefnCompType,
+    @Serializable(with = MetaIdFieldSer::class) override val metaId: Types.MetaIdField,
+    @Serializable(with = MetaIdFieldSer::class) override val bgColorFieldId: Types.MetaIdField? = null,
+    override val cardLayoutItemHideBorders: Boolean? = null,
+    override val cardLayoutNumOfColumns: Long? = null,
+    @Serializable(with = MetaIdFieldSer::class) override val displayItemId: Types.MetaIdField? = null,
+    @Serializable(with = MetaIdSectionSer::class) override val displaySectionId: Types.MetaIdSection? = null,
+    override val editableFieldIdSet: Array<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
+    override val hideMenu: Boolean? = null,
+    override val ignoreSelection: Boolean? = null,
+    override val isPickMany: Boolean? = null,
+    override val itemHeight: Long? = null,
+    override val layout: DefnDtoLayoutCardItem? = null,
+    override val pickRowOnFieldIdSet: Array<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
+    override val showAsCardLayout: Boolean? = null
+) : DefnCompSeal, DefnFieldFormList

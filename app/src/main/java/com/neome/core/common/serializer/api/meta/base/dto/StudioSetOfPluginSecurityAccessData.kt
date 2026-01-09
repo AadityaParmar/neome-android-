@@ -1,0 +1,12 @@
+package com.neome.core.common.serializer.api.meta.base.dto
+
+import com.neome.api.meta.base.Types.EnumDefnPluginSecurityAccess
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioSetOfPluginSecurityAccess
+import kotlinx.serialization.Serializable
+
+
+@Serializable
+data class StudioSetOfPluginSecurityAccessData(
+    override val valueSet: Array<EnumDefnPluginSecurityAccess>
+) : StudioSetOfPluginSecurityAccess

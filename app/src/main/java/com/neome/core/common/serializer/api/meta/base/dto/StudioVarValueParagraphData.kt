@@ -1,0 +1,11 @@
+package com.neome.core.common.serializer.api.meta.base.dto
+
+import com.neome.api.meta.base.dto.StudioVarValueParagraph
+import kotlinx.serialization.Serializable
+
+
+@Serializable
+data class StudioVarValueParagraphData(
+    override val paramSet: Array<String>? = null,
+    override val value: String? = null
+) : StudioVarValueParagraph

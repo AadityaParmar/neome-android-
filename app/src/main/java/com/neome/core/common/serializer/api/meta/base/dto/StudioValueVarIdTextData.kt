@@ -1,0 +1,15 @@
+package com.neome.core.common.serializer.api.meta.base.dto
+
+import com.neome.api.meta.base.Types
+import com.neome.api.meta.base.dto.StudioMapOfArgBinder
+import com.neome.api.meta.base.dto.StudioValueVarIdBase
+import com.neome.api.meta.base.dto.StudioValueVarIdText
+import com.neome.core.common.serializer.sysId.MetaIdVarSer
+import kotlinx.serialization.Serializable
+
+
+@Serializable
+data class StudioValueVarIdTextData(
+    override val argBinderMap: StudioMapOfArgBinder? = null,
+    @Serializable(with = MetaIdVarSer::class) override val argVarId: Types.MetaIdVar
+) : StudioValueVarIdText
