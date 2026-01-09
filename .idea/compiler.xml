@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="21" />
+    <bytecodeTargetLevel target="17" />
+    <compilationClasspath>
+      <entry name="$PROJECT_DIR$/app/build/generated/ap_generated_sources/debug/out" />
+    </compilationClasspath>
   </component>
 </project>

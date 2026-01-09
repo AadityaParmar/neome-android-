@@ -12,7 +12,7 @@ import com.neome.api.meta.base.Types.MetaIdField
 
 interface DefnFieldCarousel : DefnField
 {
-  val borderRadius: Array<Number>?
+  val borderRadius: Array<Long>?
   val fieldIdSet: Array<MetaIdField>?
   val height: Long?
   val imageCornerVar: EnumDefnThemeImageCorner?

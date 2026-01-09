@@ -10,6 +10,7 @@ import com.neome.api.meta.base.dto.DefnComp
 import com.neome.api.meta.base.dto.DefnDtoFormTheme
 import com.neome.api.meta.base.dto.DefnDtoParagraph
 import com.neome.api.meta.base.dto.DefnDtoPermissionMatrix
+import com.neome.api.meta.base.dto.DefnDtoText
 import com.neome.api.meta.base.dto.DefnDtoTextValidationPattern
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.dto.DefnFieldEditable
@@ -21,7 +22,6 @@ import com.neome.api.meta.base.dto.DefnLayoutFormMap
 import com.neome.api.meta.base.dto.DefnPaymentConfig
 import com.neome.api.meta.base.dto.DefnStudioMapOfActionPermission
 import com.neome.api.meta.base.dto.DefnVisibilityRuleMap
-import com.neome.core.common.serializer.SymbolSer
 import com.neome.core.common.serializer.sysId.MetaIdCompSer
 import com.neome.core.common.serializer.sysId.MetaIdCompositeSer
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
@@ -29,6 +29,7 @@ import com.neome.core.common.serializer.sysId.MetaIdFormSer
 import com.neome.core.common.serializer.sysId.MetaIdGridSer
 import com.neome.core.common.serializer.sysId.MetaIdLayoutGridSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer
+import com.neome.core.common.serializer.sysId.SymbolSer
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -40,6 +41,10 @@ import kotlinx.serialization.json.jsonPrimitive
 
 // ===== Serializable classes for polymorphic serialization =====
 
+@Serializable
+data class DefnDtoTextData(
+    override var value: Array<String>?
+) : DefnDtoText
 
 // Sealed class hierarchy for DefnComp
 @Serializable

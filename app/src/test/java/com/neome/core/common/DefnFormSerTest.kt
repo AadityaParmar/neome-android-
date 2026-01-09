@@ -1,8 +1,5 @@
 package com.neome.core.common
 
-import com.neome.api.meta.base.Symbol
-
-import com.neome.core.common.serializer.SymbolSer
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
@@ -30,7 +27,7 @@ class DefnFormSerTest {
                 // Register custom serializers for MetaId types
 
                 // Symbol and DefnDtoText serializers
-                contextual(Symbol::class, SymbolSer)
+//                contextual(Symbol::class, SymbolSer)
 //                contextual(DefnDtoText::class, DefnDtoTextSer)
 
                 // Note: DefnComp polymorphism is handled by DefnCompSerializer
@@ -150,3 +147,52 @@ class DefnFormSerTest {
         Assert.assertEquals(0, experienceField.defaultValue)
     }
 }
+
+
+//{
+//        "metaId": "mf-form003",
+//        "name": "registrationForm",
+//        "displayCompositeId": "mtb-composite003",
+//        "label": "User Registration",
+//        "compMap": {
+//          "mfd-field003": {
+//            "type": "text",
+//            "name": "username",
+//            "metaId": "mfd-field003",
+//            "label": "Username",
+//            "required": true,
+//            "minCharCount": 3,
+//            "maxCharCount": 20,
+//            "placeHolder": "Enter username",
+//            "helperTextVar": {
+//              "value": ["Please enter", "a unique username"]
+//            },
+//            "prefixVar": {
+//              "value": ["@"]
+//            }
+//          },
+//          "mfd-field004": {
+//            "type": "text",
+//            "name": "email",
+//            "metaId": "mfd-field004",
+//            "label": "Email",
+//            "required": true,
+//            "placeHolder": "you@example.com",
+//            "defaultVar": {
+//              "value": ["user", "@example.com"]
+//            },
+//            "suffixVar": {
+//              "value": [".com", ".org"]
+//            }
+//          },
+//          "mfd-field005": {
+//            "type": "number",
+//            "name": "experienceYears",
+//            "metaId": "mfd-field005",
+//            "label": "Years of Experience",
+//            "min": 0,
+//            "max": 50,
+//            "defaultValue": 0
+//          }
+//        }
+//      }

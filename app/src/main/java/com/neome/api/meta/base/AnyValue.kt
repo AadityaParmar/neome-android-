@@ -10,6 +10,29 @@ package com.neome.api.meta.base
 abstract class AnyValue : Comparable<AnyValue?> {
     var value: String? = null
 
+    companion object {
+        /**
+         * Creates an AnyValue from a string value
+         * @param id The string value
+         * @param clsAnyValue The class type to create
+         * @return The typed AnyValue or null if id is null
+         */
+        @Suppress("UNCHECKED_CAST")
+        fun <T : AnyValue> create(id: String?, clsAnyValue: Class<T>): T? {
+            if (id == null) {
+                return null
+            }
+
+            return try {
+                val instance = clsAnyValue.getDeclaredConstructor().newInstance()
+                instance.value = id
+                instance as T
+            } catch (e: Exception) {
+                throw AssertionError(e)
+            }
+        }
+    }
+
     override fun hashCode(): Int {
         return if (value == null)
             0
@@ -43,4 +66,6 @@ abstract class AnyValue : Comparable<AnyValue?> {
     override fun compareTo(other: AnyValue?): Int {
         return value!!.compareTo(other?.value!!)
     }
+
+
 }

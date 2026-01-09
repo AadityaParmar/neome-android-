@@ -9,5 +9,5 @@ import com.neome.api.meta.base.dto.StudioBase
 
 interface StudioSetOfNumber : StudioBase
 {
-  val valueSet: Array<Number>
+  val valueSet: Array<Long>
 }

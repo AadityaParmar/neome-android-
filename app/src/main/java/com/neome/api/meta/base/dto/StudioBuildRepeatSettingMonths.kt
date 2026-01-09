@@ -11,7 +11,7 @@ import com.neome.api.meta.base.dto.StudioBuildRepeatSetting
 
 interface StudioBuildRepeatSettingMonths : StudioBuildRepeatSetting
 {
-  val customDateSet: Array<Number>?
+  val customDateSet: Array<Long>?
   val dateOccurrence: EnumDefnDateOccurrence?
   val setOfTime: Array<AnyTime>?
 }

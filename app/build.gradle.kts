@@ -106,3 +106,37 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
+
+// ============================================
+// Custom Task: Generate Serializable Classes
+// ============================================
+
+tasks.register("generateSerializers") {
+    group = "code generation"
+    description = "Generate @Serializable data classes from API interfaces"
+
+    doLast {
+        val config = generator.GeneratorConfig(
+            apiPackageRoot = "com.neome.api",
+            apiSourceRoot = "app/src/main/java",
+            typesFilePath = "com.neome.api.meta.base.Types",
+            outputPackageRoot = "com.neome.core.common.api",
+            outputSourceRoot = "app/src/main/java",
+            serializerPackage = "com.neome.core.common.serializer.sysId",
+            polymorphicInterfaces = setOf("DtoMessagePayload"),
+            discriminatorFields = mapOf(
+                "DtoMessagePayload" to "messageType"
+            ),
+            typeMappings = mapOf(
+                "DtoMessagePayload" to mapOf(
+                    "DtoMessagePayloadText" to "text",
+                    "DtoMessagePayloadImage" to "image",
+                    "DtoMessagePayloadAudio" to "audio"
+                )
+            )
+        )
+
+        val generator = generator.SerializableClassGenerator(config, rootProject.projectDir)
+        generator.generate()
+    }
+}

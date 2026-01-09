@@ -12,6 +12,6 @@ interface FieldSetOfDocument
 {
   val fileExtSet: Array<EnumDefnDocFileExt>
   val fileNameSet: Array<String>
-  val fileSizeSet: Array<Number>
+  val fileSizeSet: Array<Long>
   val mediaIdDocumentSet: Array<MediaIdDocument>
 }

@@ -1,5 +1,6 @@
 package com.neome.core.common.serializer.sysId
 
+import com.neome.api.meta.base.AnyValue
 import com.neome.api.meta.base.SysId
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -24,3 +25,24 @@ open class SysIdSerializer<T : SysId>(descriptor: String) : KSerializer<T> {
             ?: throw IllegalArgumentException("Failed to create SysId from: $string")
     }
 }
+
+
+open class AnyValueSerializer<T : AnyValue>(
+    descriptor: String,
+    private val cls: Class<T>
+) : KSerializer<T> {
+
+    override val descriptor: SerialDescriptor =
+        PrimitiveSerialDescriptor(descriptor, PrimitiveKind.STRING)
+
+    override fun serialize(encoder: Encoder, value: T) {
+        encoder.encodeString(value.toString())
+    }
+
+    override fun deserialize(decoder: Decoder): T {
+        val string = decoder.decodeString()
+        return AnyValue.create(string, cls)
+            ?: throw IllegalArgumentException("Failed to create AnyValue from: $string")
+    }
+}
+

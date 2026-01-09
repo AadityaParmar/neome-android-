@@ -3,58 +3,34 @@ package com.neome.core.common
 import com.neome.api.home.base.Types.EnumMessageType
 import com.neome.api.home.base.Types.EnumReceiptStatus
 import com.neome.api.home.base.dto.DtoMessagePayload
+import com.neome.api.home.base.dto.DtoMessagePayloadAudio
 import com.neome.api.home.base.dto.DtoMessagePayloadImage
 import com.neome.api.home.base.dto.DtoMessagePayloadText
 import com.neome.api.home.base.dto.DtoMessageReaction
 import com.neome.api.home.base.dto.DtoMessageReplyPayload
 import com.neome.api.home.main.sig.SigMessage
+import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.ContactId
 import com.neome.api.meta.base.Types.MediaIdImage
-import com.neome.api.meta.base.dto.DefnDtoText
 import com.neome.core.common.serializer.sysId.ContactIdSer
 import com.neome.core.common.serializer.sysId.EntUserIdSer
+import com.neome.core.common.serializer.sysId.MediaIdAudioSer
 import com.neome.core.common.serializer.sysId.MediaIdImageSer
 import com.neome.core.common.serializer.sysId.MessageIdSer
+import com.neome.core.common.serializer.sysId.SymbolSer
 import kotlinx.serialization.DeserializationStrategy
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonContentPolymorphicSerializer
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-//enum class EnumKind1(val value: String) {
-//    @SerialName("\$CreatedBy")
-//    _CreatedBy("\$CreatedBy"),
-//
-//    @SerialName("header")
-//    header_("header"),
-//
-//    @SerialName("name")
-//    name_("name")
-//
-//}
-
-enum class EnumKind(val value: String) {
-    @SerialName("\$CreatedBy")
-    CreatedBy("\$CreatedBy"),
-
-    @SerialName("header")
-    Header("header"),
-
-    @SerialName("name")
-    Name("name")
-}
-
 
 // derived classes
+
 // Serializable sealed hierarchy for polymorphic deserialization
 
-@Serializable
-data class DefnDtoTextData(
-    override var value: Array<String>?
-) : DefnDtoText
 
 @Serializable
 data class DtoMessageReactionData(
@@ -70,8 +46,19 @@ data class DtoMessageReplyPayloadData(
     override val senderId: Types.EntUserId
 ) : DtoMessageReplyPayload
 
+
+@Serializable(with = DtoMessagePayloadSerializer::class)
+sealed interface DtoMessagePayloadSeal : DtoMessagePayload
+
 @Serializable
-sealed class DtoMessagePayloadSeal : DtoMessagePayload
+sealed interface DtoMessagePayloadTextSeal : DtoMessagePayloadText
+
+@Serializable
+sealed interface DtoMessagePayloadImageSeal : DtoMessagePayloadImage
+
+@Serializable
+sealed interface DtoMessagePayloadAudioSeal : DtoMessagePayloadAudio
+
 
 @Serializable
 data class DtoMessagePayloadTextData(
@@ -80,7 +67,7 @@ data class DtoMessagePayloadTextData(
     override var messageType: EnumMessageType = EnumMessageType.text,
     override var isUpdated: Boolean? = null,
     override var text: String,
-) : DtoMessagePayloadSeal(), DtoMessagePayloadText
+) : DtoMessagePayloadSeal, DtoMessagePayloadTextSeal
 
 @Serializable
 data class DtoMessagePayloadImageData(
@@ -97,7 +84,7 @@ data class DtoMessagePayloadImageData(
     override var mediaIdImage: MediaIdImage,
     override var primaryColor: String,
     override var width: Long? = null,
-) : DtoMessagePayloadSeal(), DtoMessagePayloadImage
+) : DtoMessagePayloadSeal, DtoMessagePayloadImageSeal
 
 // Add more payload types as needed (audio, video, document, etc.)
 @Serializable
@@ -107,10 +94,17 @@ data class DtoMessagePayloadAudioData(
     override val messageType: EnumMessageType,
     override val isUpdated: Boolean?,
     override val text: String,
-) : DtoMessagePayloadSeal(), DtoMessagePayloadText
+    override val durationMs: Long?,
+    override val fileSize: Long?,
+    @Serializable(with = MediaIdAudioSer::class)
+    override val mediaIdAudio: Types.MediaIdAudio,
+) : DtoMessagePayloadSeal, DtoMessagePayloadAudioSeal
 
 @Serializable
 data class SigMessageData(
+
+    @Serializable(with = SymbolSer::class)
+    var name: Symbol? = null,
     override var receiptStatus: EnumReceiptStatus? = null,
     override var version: String? = null,
     override var creationTime: String,
@@ -118,8 +112,7 @@ data class SigMessageData(
     @Serializable(with = MessageIdSer::class)
     override var messageId: Types.MessageId,
     override var messageOffset: Long? = null,
-    @Serializable(with = DtoMessagePayloadSerializer::class)
-    override var payload: DtoMessagePayload,
+    override var payload: DtoMessagePayloadSeal,
     override val reactionMap: Map<@Serializable(with = EntUserIdSer::class) Types.EntUserId, DtoMessageReactionData>? = null,
     override val replyPayload: DtoMessageReplyPayloadData? = null,
     @Serializable(with = EntUserIdSer::class)
@@ -127,10 +120,10 @@ data class SigMessageData(
 ) : SigMessage
 
 
-object DtoMessagePayloadSerializer : JsonContentPolymorphicSerializer<DtoMessagePayload>(
-    DtoMessagePayload::class
+object DtoMessagePayloadSerializer : JsonContentPolymorphicSerializer<DtoMessagePayloadSeal>(
+    DtoMessagePayloadSeal::class
 ) {
-    override fun selectDeserializer(element: JsonElement): DeserializationStrategy<DtoMessagePayload> {
+    override fun selectDeserializer(element: JsonElement): DeserializationStrategy<DtoMessagePayloadSeal> {
         val messageType = element.jsonObject["messageType"]?.jsonPrimitive?.content
         return when (messageType) {
             "text", EnumMessageType.text.value -> DtoMessagePayloadTextData.serializer()

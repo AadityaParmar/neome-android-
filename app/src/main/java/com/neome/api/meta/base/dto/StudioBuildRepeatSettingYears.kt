@@ -12,7 +12,7 @@ import com.neome.api.meta.base.dto.StudioBuildRepeatSetting
 
 interface StudioBuildRepeatSettingYears : StudioBuildRepeatSetting
 {
-  val customDateSet: Array<Number>?
+  val customDateSet: Array<Long>?
   val dateOccurrence: EnumDefnDateOccurrence?
   val setOfMonth: Array<EnumDefnMonth>?
   val setOfTime: Array<AnyTime>?

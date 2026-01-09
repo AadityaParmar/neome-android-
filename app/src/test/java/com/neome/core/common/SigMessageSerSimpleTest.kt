@@ -45,6 +45,7 @@ class SigMessageSerSimpleTest {
         // Given - Real text message JSON from production
         val jsonString = """
         {
+            "name": "Test",
             "version": "994ibA2V6DqNrH5iGnxuli0DE",
             "messageId": "m-Siosyh8WHnxLQfPskp6W9whd0",
             "messageOffset": 5539,
@@ -64,6 +65,7 @@ class SigMessageSerSimpleTest {
         // Then
         println("\n=== Deserialized Simple Text Message ===")
         println("Message ID: ${message.messageId}")
+        println("Message Name: ${message.name}")
         println("Creation Time: ${message.creationTime}")
         println("messageOffset: ${message.messageOffset}")
         println("Payload messageType: ${message.payload.messageType}")
@@ -234,3 +236,11 @@ class SigMessageSerSimpleTest {
         println("============================================\n")
     }
 }
+
+
+
+
+
+
+
+
