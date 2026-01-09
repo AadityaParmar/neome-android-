@@ -2,8 +2,11 @@ package com.neome.feature.location.di
 
 import android.content.Context
 import com.neome.feature.location.data.remote.GeocodingApiService
+import com.neome.feature.location.data.remote.PlacesApiService
 import com.neome.feature.location.data.repository.LocationRepositoryImpl
+import com.neome.feature.location.data.repository.SearchRepositoryImpl
 import com.neome.feature.location.domain.repository.LocationRepository
+import com.neome.feature.location.domain.repository.SearchRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -57,5 +60,24 @@ object LocationModule {
         geocodingApiService: GeocodingApiService
     ): LocationRepository {
         return LocationRepositoryImpl(context, geocodingApiService)
+    }
+
+    @Provides
+    @Singleton
+    fun providePlacesApiService(okHttpClient: OkHttpClient): PlacesApiService {
+        return Retrofit.Builder()
+            .baseUrl("https://maps.googleapis.com/maps/api/")
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(PlacesApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSearchRepository(
+        placesApiService: PlacesApiService
+    ): SearchRepository {
+        return SearchRepositoryImpl(placesApiService)
     }
 }
