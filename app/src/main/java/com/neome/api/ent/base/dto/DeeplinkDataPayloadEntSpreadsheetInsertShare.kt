@@ -5,6 +5,7 @@
 
 package com.neome.api.ent.base.dto
 
+import kotlinx.serialization.json.JsonElement
 import com.neome.api.meta.base.Types.ChatId
 import com.neome.api.ent.base.dto.DeeplinkDataPayloadEnt
 import com.neome.api.meta.base.dto.DefnDtoColor
@@ -12,7 +13,6 @@ import com.neome.api.meta.base.dto.DefnDtoParagraph
 import com.neome.api.meta.base.dto.DefnForm
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.meta.base.Types.EnumDefnTextSize
-import com.google.gson.JsonElement
 import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
@@ -33,5 +33,5 @@ interface DeeplinkDataPayloadEntSpreadsheetInsertShare : DeeplinkDataPayloadEnt
   val successMessage: DefnDtoParagraph
   val successMessageBgColor: DefnDtoColor?
   val successMessageTextSize: EnumDefnTextSize?
-  val valueMap: Map<MetaIdComp, Any>?
+  val valueMap: Map<MetaIdComp, JsonElement>?
 }

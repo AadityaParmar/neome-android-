@@ -18,7 +18,7 @@ interface DefnSection : DefnComp
 {
   val actionPermissionMap: DefnStudioMapOfActionPermission?
   val fieldIdSet: Array<MetaIdField>?
-  val fieldSpanMap: Map<MetaIdField, Number>?
+  val fieldSpanMap: Map<MetaIdField, Long>?
   val flexGrow: Boolean?
   val justifyContent: EnumDefnPlacement?
   val metaId: MetaIdSection

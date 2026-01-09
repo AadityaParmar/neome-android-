@@ -10,6 +10,6 @@ import com.neome.api.meta.base.Types.SearchPath
 
 interface ValidationResult
 {
-  val errorCountMap: Map<SearchPath, Number>?
+  val errorCountMap: Map<SearchPath, Long>?
   val errorMap: Map<SearchPath, EnvValidationError>?
 }

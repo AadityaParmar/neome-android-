@@ -5,8 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
+import kotlinx.serialization.json.JsonElement
 import com.neome.api.meta.base.Types.EnumDefnKindAction
-import com.google.gson.JsonElement
 import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.dto.StudioBase
@@ -15,7 +15,7 @@ import com.neome.api.meta.base.dto.StudioDetails
 interface StudioEntAction : StudioBase
 {
   val aiInstructions: String?
-  val defaultValueMap: Map<MetaIdComp, Any>?
+  val defaultValueMap: Map<MetaIdComp, JsonElement>?
   val details: StudioDetails
   val icon: String?
   val increaseAsideWidth: Boolean?

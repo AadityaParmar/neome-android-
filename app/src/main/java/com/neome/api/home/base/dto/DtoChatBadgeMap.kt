@@ -9,5 +9,5 @@ import com.neome.api.meta.base.Types.ChatId
 
 interface DtoChatBadgeMap
 {
-  val chatBadgeMap: Map<ChatId, Number>?
+  val chatBadgeMap: Map<ChatId, Long>?
 }

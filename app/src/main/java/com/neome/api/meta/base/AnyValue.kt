@@ -66,6 +66,4 @@ abstract class AnyValue : Comparable<AnyValue?> {
     override fun compareTo(other: AnyValue?): Int {
         return value!!.compareTo(other?.value!!)
     }
-
-
 }

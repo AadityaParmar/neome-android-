@@ -5,8 +5,8 @@
 
 package com.neome.api.ent.base.dto
 
+import kotlinx.serialization.json.JsonElement
 import com.neome.api.meta.base.Types.EntUserId
-import com.google.gson.JsonElement
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
 
@@ -17,5 +17,5 @@ interface DtoAgentEntUserImport
   val managerId: EntUserId?
   val nickName: String
   val roleIdSet: Array<MetaIdRole>?
-  val userVariableValueMap: Map<MetaIdVar, Any>?
+  val userVariableValueMap: Map<MetaIdVar, JsonElement>?
 }

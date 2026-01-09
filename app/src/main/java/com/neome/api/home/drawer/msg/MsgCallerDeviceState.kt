@@ -5,9 +5,10 @@
 
 package com.neome.api.home.drawer.msg
 
+import kotlinx.serialization.json.JsonElement
 import com.neome.api.nucleus.base.msg.Msg
 
 interface MsgCallerDeviceState : Msg
 {
-  val state: Object
+  val state: JsonElement
 }

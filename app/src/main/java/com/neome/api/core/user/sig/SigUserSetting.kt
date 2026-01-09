@@ -5,9 +5,10 @@
 
 package com.neome.api.core.user.sig
 
+import kotlinx.serialization.json.JsonElement
 import com.neome.api.nucleus.base.sig.SigVersion
 
 interface SigUserSetting : SigVersion
 {
-  val userSetting: Object?
+  val userSetting: JsonElement?
 }

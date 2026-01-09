@@ -5,9 +5,10 @@
 
 package com.neome.api.core.user.msg
 
+import kotlinx.serialization.json.JsonElement
 import com.neome.api.core.base.msg.MsgVersion
 
 interface MsgCallerSettingPut : MsgVersion
 {
-  val userSetting: Object
+  val userSetting: JsonElement
 }

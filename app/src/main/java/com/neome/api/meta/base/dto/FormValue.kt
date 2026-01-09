@@ -5,6 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
+import kotlinx.serialization.json.JsonElement
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.dto.IFieldValue
 import com.neome.api.meta.base.Types.MetaIdComp
@@ -18,5 +19,5 @@ interface FormValue
   val rowOrder: String?
   val updatedBy: EntUserId?
   val updatedOn: String?
-  val valueMap: Map<MetaIdComp, Any>
+  val valueMap: Map<MetaIdComp, JsonElement>
 }

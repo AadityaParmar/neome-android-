@@ -5,6 +5,7 @@
 
 package com.neome.api.core.base.dto
 
+import kotlinx.serialization.json.JsonElement
 import com.neome.api.meta.base.Types.DeviceId
 
 interface DtoDevice
@@ -15,5 +16,5 @@ interface DtoDevice
   val isCurrentDevice: Boolean?
   val isOnline: Boolean?
   val lastOnlineTime: String?
-  val state: Object
+  val state: JsonElement
 }

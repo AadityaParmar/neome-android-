@@ -5,8 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
+import kotlinx.serialization.json.JsonElement
 import com.neome.api.meta.base.Types.EnumDefnPluginResources
-import com.google.gson.JsonElement
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.Types.MetaIdPlugin
 import com.neome.api.meta.base.dto.StudioBase
@@ -16,6 +16,6 @@ interface StudioEntDeployPlugin : StudioBase
 {
   val metaId: MetaIdPlugin
   val name: Symbol
-  val pluginConfigFormValueMap: Map<MetaIdComp, Any>?
+  val pluginConfigFormValueMap: Map<MetaIdComp, JsonElement>?
   val pluginType: EnumDefnPluginResources?
 }

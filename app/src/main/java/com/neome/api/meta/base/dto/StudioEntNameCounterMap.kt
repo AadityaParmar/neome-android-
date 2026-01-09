@@ -10,5 +10,5 @@ import com.neome.api.meta.base.dto.StudioBase
 
 interface StudioEntNameCounterMap : StudioBase
 {
-  val vdAutoNameGenMap: Map<EnumDefnKindAutoNode, Number>
+  val vdAutoNameGenMap: Map<EnumDefnKindAutoNode, Long>
 }

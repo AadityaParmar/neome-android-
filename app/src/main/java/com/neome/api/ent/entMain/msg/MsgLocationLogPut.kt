@@ -5,6 +5,7 @@
 
 package com.neome.api.ent.entMain.msg
 
+import kotlinx.serialization.json.JsonElement
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.msg.Msg
 
@@ -12,5 +13,5 @@ interface MsgLocationLogPut : Msg
 {
   val entIdSet: Array<EntId>
   val name: String
-  val summary: Object
+  val summary: JsonElement
 }

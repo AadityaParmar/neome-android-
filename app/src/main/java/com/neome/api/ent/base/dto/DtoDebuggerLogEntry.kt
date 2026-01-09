@@ -5,6 +5,7 @@
 
 package com.neome.api.ent.base.dto
 
+import kotlinx.serialization.json.JsonElement
 import com.neome.api.meta.base.dto.DefnForm
 import com.neome.api.meta.base.dto.DtoLogTree
 import com.neome.api.ent.base.Types.EnumLogType
@@ -24,5 +25,5 @@ interface DtoDebuggerLogEntry
   val outputForm: DefnForm?
   val outputFormLogTree: DtoLogTree?
   val outputFormValue: FormValueRaw?
-  val summary: Object?
+  val summary: JsonElement?
 }

@@ -11,5 +11,5 @@ import com.neome.api.nucleus.base.msg.Msg
 interface MsgMessageBulkGet : Msg
 {
   val chatId: ChatId
-  val offsetMap: Map<Number, String>
+  val offsetMap: Map<Long, String>
 }

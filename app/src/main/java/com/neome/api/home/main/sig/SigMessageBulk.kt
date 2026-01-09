@@ -11,6 +11,6 @@ import com.neome.api.home.main.sig.SigMessage
 
 interface SigMessageBulk : Sig
 {
-  val errorMap: Map<Number, EnvValidationError>
-  val messageMap: Map<Number, SigMessage>
+  val errorMap: Map<Long, EnvValidationError>
+  val messageMap: Map<Long, SigMessage>
 }
