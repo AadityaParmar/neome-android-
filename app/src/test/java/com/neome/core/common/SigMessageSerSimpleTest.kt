@@ -3,6 +3,7 @@ package com.neome.core.common
 import com.neome.api.home.base.dto.DtoMessagePayloadText
 import com.neome.api.meta.base.SysId
 import com.neome.api.meta.base.Types
+import com.neome.core.common.serializer.api.home.main.sig.SigMessageData
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
@@ -46,6 +47,10 @@ class SigMessageSerSimpleTest {
         val jsonString = """
         {
             "name": "Test",
+            "jsonObject": {
+                "text": "I will join office in second half today",
+                "messageType": "text"
+            },
             "version": "994ibA2V6DqNrH5iGnxuli0DE",
             "messageId": "m-Siosyh8WHnxLQfPskp6W9whd0",
             "messageOffset": 5539,
@@ -59,13 +64,15 @@ class SigMessageSerSimpleTest {
         """.trimIndent()
 
         // When
-        val message = json.decodeFromString<SigMessageData>(jsonString)
+        val message =
+            json.decodeFromString<SigMessageData>(jsonString)
         val messageStr = json.encodeToString(message)
 
         // Then
         println("\n=== Deserialized Simple Text Message ===")
         println("Message ID: ${message.messageId}")
-        println("Message Name: ${message.name}")
+//        println("Message Name: ${message.name}")
+//        println("Message jsonObject: ${message.jsonObject}")
         println("Creation Time: ${message.creationTime}")
         println("messageOffset: ${message.messageOffset}")
         println("Payload messageType: ${message.payload.messageType}")
@@ -85,9 +92,10 @@ class SigMessageSerSimpleTest {
             SysId.create<Types.EntUserId>("eu-KvvdpvCE1ypF4LXmMOadMkpyh"),
             message.senderId
         )
-        Assert.assertTrue(message.payload is DtoMessagePayloadTextData)
+        Assert.assertTrue(message.payload is com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadTextData)
 
-        val textPayload = message.payload as DtoMessagePayloadTextData
+        val textPayload =
+            message.payload as com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadTextData
         Assert.assertEquals("I will join office in second half today", textPayload.text)
         Assert.assertEquals(
             com.neome.api.home.base.Types.EnumMessageType.text,
@@ -119,7 +127,8 @@ class SigMessageSerSimpleTest {
         """.trimIndent()
 
         // When
-        val message = json.decodeFromString<SigMessageData>(jsonString)
+        val message =
+            json.decodeFromString<SigMessageData>(jsonString)
 
         // Then
         println("\n=== Deserialized Text Message with Mentions ===")
@@ -141,8 +150,9 @@ class SigMessageSerSimpleTest {
             message.senderId
         )
 
-        Assert.assertTrue(message.payload is DtoMessagePayloadTextData)
-        val textPayload = message.payload as DtoMessagePayloadTextData
+        Assert.assertTrue(message.payload is com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadTextData)
+        val textPayload =
+            message.payload as com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadTextData
         Assert.assertEquals("Happy Birthday @Brijesh Dobariya 🎂🎉", textPayload.text)
         Assert.assertNotNull(textPayload.mentionMap)
         Assert.assertEquals(1, textPayload.mentionMap?.size)
@@ -208,10 +218,10 @@ class SigMessageSerSimpleTest {
             msg1.messageId
         )
         Assert.assertEquals(5539L, msg1.messageOffset)
-        Assert.assertTrue(msg1.payload is DtoMessagePayloadTextData)
+        Assert.assertTrue(msg1.payload is com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadTextData)
         Assert.assertEquals(
             "I will join office in second half today",
-            (msg1.payload as DtoMessagePayloadTextData).text
+            (msg1.payload as com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadTextData).text
         )
 
         // Verify message with mention
@@ -220,8 +230,8 @@ class SigMessageSerSimpleTest {
             SysId.create<Types.MessageId>("m-lPdjmHvogvnmq0qOv0dkq1uAJ"),
             msg3.messageId
         )
-        Assert.assertTrue(msg3.payload is DtoMessagePayloadTextData)
-        val textPayload = msg3.payload as DtoMessagePayloadTextData
+        Assert.assertTrue(msg3.payload is com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadTextData)
+        val textPayload = msg3.payload as com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadTextData
         Assert.assertNotNull(textPayload.mentionMap)
         Assert.assertEquals(1, textPayload.mentionMap?.size)
 
@@ -230,7 +240,7 @@ class SigMessageSerSimpleTest {
             Assert.assertNotNull(message.messageId)
             Assert.assertNotNull(message.creationTime)
             Assert.assertNotNull(message.senderId)
-            Assert.assertTrue(message.payload is DtoMessagePayloadTextData)
+            Assert.assertTrue(message.payload is com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadTextData)
             println("✓ Message ${message.messageId} deserialized successfully")
         }
         println("============================================\n")

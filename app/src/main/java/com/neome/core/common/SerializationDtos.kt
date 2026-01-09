@@ -105,6 +105,7 @@ data class SigMessageData(
 
     @Serializable(with = SymbolSer::class)
     var name: Symbol? = null,
+    var jsonObject: JsonElement? = null,
     override var receiptStatus: EnumReceiptStatus? = null,
     override var version: String? = null,
     override var creationTime: String,

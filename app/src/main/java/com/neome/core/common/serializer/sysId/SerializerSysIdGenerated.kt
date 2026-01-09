@@ -12,8 +12,9 @@ import com.neome.api.meta.base.AnyKey
 import com.neome.api.meta.base.AnyName
 import com.neome.api.meta.base.NanoId
 import com.neome.api.meta.base.Symbol
+import com.neome.api.meta.base.SysId
 
-// AnyValue class imports (from Types.kt classes)
+// AnyValue class imports (from meta/base/Types.kt)
 import com.neome.api.meta.base.Types.AnyTime
 import com.neome.api.meta.base.Types.ColumnPath
 import com.neome.api.meta.base.Types.CurrencyKey
@@ -148,19 +149,20 @@ object WorkflowGroupExecutionIdSer : SysIdSerializer<Types.WorkflowGroupExecutio
 object AnyEmailIdSer : AnyValueSerializer<AnyEmailId>("AnyEmailId", AnyEmailId::class.java)
 object AnyKeySer : AnyValueSerializer<AnyKey>("AnyKey", AnyKey::class.java)
 object AnyNameSer : AnyValueSerializer<AnyName>("AnyName", AnyName::class.java)
-object AnyOtpValueSer : AnyValueSerializer<AnyOtpValue>("AnyOtpValue", AnyOtpValue::class.java)
-object AnyPrefixKeySer : AnyValueSerializer<AnyPrefixKey>("AnyPrefixKey", AnyPrefixKey::class.java)
+object NanoIdSer : AnyValueSerializer<NanoId>("NanoId", NanoId::class.java)
+object SymbolSer : AnyValueSerializer<Symbol>("Symbol", Symbol::class.java)
+object SysIdSer : SysIdSerializer<SysId>("SysId")
 object AnyTimeSer : AnyValueSerializer<AnyTime>("AnyTime", AnyTime::class.java)
-object AppVersionSer : AnyValueSerializer<AppVersion>("AppVersion", AppVersion::class.java)
 object ColumnPathSer : AnyValueSerializer<ColumnPath>("ColumnPath", ColumnPath::class.java)
 object CurrencyKeySer : AnyValueSerializer<CurrencyKey>("CurrencyKey", CurrencyKey::class.java)
 object GeoPointSer : AnyValueSerializer<GeoPoint>("GeoPoint", GeoPoint::class.java)
 object HandleKeySer : AnyValueSerializer<HandleKey>("HandleKey", HandleKey::class.java)
 object KeySer : AnyValueSerializer<Key>("Key", Key::class.java)
 object LanguageKeySer : AnyValueSerializer<LanguageKey>("LanguageKey", LanguageKey::class.java)
-object NanoIdSer : AnyValueSerializer<NanoId>("NanoId", NanoId::class.java)
 object SearchPathSer : AnyValueSerializer<SearchPath>("SearchPath", SearchPath::class.java)
-object SymbolSer : AnyValueSerializer<Symbol>("Symbol", Symbol::class.java)
 object SymbolColumnSer : AnyValueSerializer<SymbolColumn>("SymbolColumn", SymbolColumn::class.java)
 object SymbolGridSer : AnyValueSerializer<SymbolGrid>("SymbolGrid", SymbolGrid::class.java)
 object TimeZoneKeySer : AnyValueSerializer<TimeZoneKey>("TimeZoneKey", TimeZoneKey::class.java)
+object AnyOtpValueSer : AnyValueSerializer<AnyOtpValue>("AnyOtpValue", AnyOtpValue::class.java)
+object AnyPrefixKeySer : AnyValueSerializer<AnyPrefixKey>("AnyPrefixKey", AnyPrefixKey::class.java)
+object AppVersionSer : AnyValueSerializer<AppVersion>("AppVersion", AppVersion::class.java)
