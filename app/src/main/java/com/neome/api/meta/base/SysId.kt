@@ -25,31 +25,31 @@ abstract class SysId : Comparable<SysId> {
             // Initialize system IDs for roles
             Types.EnumDefnRoles.entries.forEach { value ->
                 val sysId =
-                    createInternal<Types.MetaIdRole>(value.name, Types.MetaIdRole::class.java)
-                systemIdMap[value.name] = sysId
+                    createInternal<Types.MetaIdRole>(value.value, Types.MetaIdRole::class.java)
+                systemIdMap[value.value] = sysId
             }
 
             // Initialize system IDs for fields
             Types.EnumDefnFields.entries.forEach { value ->
                 val sysId =
-                    createInternal<Types.MetaIdField>(value.name, Types.MetaIdField::class.java)
-                systemIdMap[value.name] = sysId
+                    createInternal<Types.MetaIdField>(value.value, Types.MetaIdField::class.java)
+                systemIdMap[value.value] = sysId
             }
 
             // Initialize system IDs for forms
             Types.EnumDefnForms.entries.forEach { value ->
                 val sysId =
-                    createInternal<Types.MetaIdForm>(value.name, Types.MetaIdForm::class.java)
-                systemIdMap[value.name] = sysId
+                    createInternal<Types.MetaIdForm>(value.value, Types.MetaIdForm::class.java)
+                systemIdMap[value.value] = sysId
             }
 
             // Initialize system IDs for pipeline system
             Types.EnumDefnPipelineSystem.entries.forEach { value ->
                 val sysId = createInternal<Types.MetaIdPipelineSystem>(
-                    value.name,
+                    value.value,
                     Types.MetaIdPipelineSystem::class.java
                 )
-                systemIdMap[value.name] = sysId
+                systemIdMap[value.value] = sysId
             }
         }
 
