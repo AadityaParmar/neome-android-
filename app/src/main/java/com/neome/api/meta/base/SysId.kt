@@ -106,7 +106,7 @@ abstract class SysId : Comparable<SysId> {
         /**
          * Creates array of SysId from array of string IDs
          */
-        fun create(ids: List<String>?): List<SysId?>? {
+        fun create(ids: Array<String>?): Array<SysId?>? {
             if (ids == null) {
                 return null
             }
