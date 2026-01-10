@@ -5,10 +5,9 @@
 
 package com.neome.api.home.base.dto
 
-import com.neome.api.meta.base.Types.ChatId
 import com.neome.api.home.main.sig.SigMessage
+import com.neome.api.meta.base.Types.ChatId
 
-interface DtoChatMessageListMap
-{
-  val chatMessageListMap: Map<ChatId, Array<SigMessage>>?
+interface DtoChatMessageListMap {
+    val chatMessageListMap: Map<ChatId, List<SigMessage>>?
 }

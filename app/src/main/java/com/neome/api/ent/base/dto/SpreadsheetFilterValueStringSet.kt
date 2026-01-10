@@ -5,9 +5,6 @@
 
 package com.neome.api.ent.base.dto
 
-import com.neome.api.ent.base.dto.SpreadsheetFilterValue
-
-interface SpreadsheetFilterValueStringSet : SpreadsheetFilterValue
-{
-  val valueSet: Array<String>
+interface SpreadsheetFilterValueStringSet : SpreadsheetFilterValue {
+    val valueSet: List<String>
 }

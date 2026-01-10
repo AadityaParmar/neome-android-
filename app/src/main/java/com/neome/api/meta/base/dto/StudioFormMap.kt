@@ -6,11 +6,8 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdForm
-import com.neome.api.meta.base.dto.StudioBase
-import com.neome.api.meta.base.dto.StudioForm
 
-interface StudioFormMap : StudioBase
-{
-  val keys: Array<MetaIdForm>
-  val map: Map<MetaIdForm, StudioForm>
+interface StudioFormMap : StudioBase {
+    val keys: List<MetaIdForm>
+    val map: Map<MetaIdForm, StudioForm>
 }

@@ -5,10 +5,7 @@
 
 package com.neome.api.home.base.dto
 
-import com.neome.api.home.base.dto.DtoMessagePayload
-
-interface DtoMessagePayloadText : DtoMessagePayload
-{
-  val isUpdated: Boolean?
-  val text: String
+interface DtoMessagePayloadText : DtoMessagePayload {
+    val isUpdated: Boolean?
+    val text: String
 }

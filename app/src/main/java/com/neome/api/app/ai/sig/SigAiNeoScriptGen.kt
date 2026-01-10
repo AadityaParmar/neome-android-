@@ -7,9 +7,8 @@ package com.neome.api.app.ai.sig
 
 import com.neome.api.nucleus.base.sig.Sig
 
-interface SigAiNeoScriptGen : Sig
-{
-  val error: String?
-  val neoScripts: Array<String>?
-  val userMessage: String?
+interface SigAiNeoScriptGen : Sig {
+    val error: String?
+    val neoScripts: List<String>?
+    val userMessage: String?
 }

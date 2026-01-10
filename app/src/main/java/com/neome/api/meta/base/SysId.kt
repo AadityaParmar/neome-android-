@@ -25,29 +25,29 @@ abstract class SysId : Comparable<SysId> {
             // Initialize system IDs for roles
             Types.EnumDefnRoles.entries.forEach { value ->
                 val sysId =
-                        createInternal<Types.MetaIdRole>(value.name, Types.MetaIdRole::class.java)
+                    createInternal<Types.MetaIdRole>(value.name, Types.MetaIdRole::class.java)
                 systemIdMap[value.name] = sysId
             }
 
             // Initialize system IDs for fields
             Types.EnumDefnFields.entries.forEach { value ->
                 val sysId =
-                        createInternal<Types.MetaIdField>(value.name, Types.MetaIdField::class.java)
+                    createInternal<Types.MetaIdField>(value.name, Types.MetaIdField::class.java)
                 systemIdMap[value.name] = sysId
             }
 
             // Initialize system IDs for forms
             Types.EnumDefnForms.entries.forEach { value ->
                 val sysId =
-                        createInternal<Types.MetaIdForm>(value.name, Types.MetaIdForm::class.java)
+                    createInternal<Types.MetaIdForm>(value.name, Types.MetaIdForm::class.java)
                 systemIdMap[value.name] = sysId
             }
 
             // Initialize system IDs for pipeline system
             Types.EnumDefnPipelineSystem.entries.forEach { value ->
                 val sysId = createInternal<Types.MetaIdPipelineSystem>(
-                        value.name,
-                        Types.MetaIdPipelineSystem::class.java
+                    value.name,
+                    Types.MetaIdPipelineSystem::class.java
                 )
                 systemIdMap[value.name] = sysId
             }
@@ -93,7 +93,7 @@ abstract class SysId : Comparable<SysId> {
             }
 
             val clsSysId = Types.getSysIdClass(prefix)
-                    ?: throw IllegalArgumentException("Prefix not supported: $prefix")
+                ?: throw IllegalArgumentException("Prefix not supported: $prefix")
 
             val newPrefix = Types.getSysIdPrefix(clsSysId)
             if (newPrefix != null && prefix != newPrefix) {
@@ -106,7 +106,7 @@ abstract class SysId : Comparable<SysId> {
         /**
          * Creates array of SysId from array of string IDs
          */
-        fun create(ids: Array<String>?): Array<SysId?>? {
+        fun create(ids: List<String>?): List<SysId?>? {
             if (ids == null) {
                 return null
             }
@@ -152,7 +152,7 @@ abstract class SysId : Comparable<SysId> {
             requireNotNull(guid) { "guid must not be null" }
 
             val prefix = Types.getSysIdPrefix(clsSysId)
-                    ?: throw IllegalArgumentException("prefix must not be null")
+                ?: throw IllegalArgumentException("prefix must not be null")
 
             val id = if (ext != null) {
                 prefix + SEP_PREFIX + guid + SEP_EXT + ext

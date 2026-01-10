@@ -6,9 +6,7 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdModule
-import com.neome.api.meta.base.dto.StudioBase
 
-interface StudioModuleSelection : StudioBase
-{
-  val moduleIdSet: Array<MetaIdModule>
+interface StudioModuleSelection : StudioBase {
+    val moduleIdSet: List<MetaIdModule>
 }

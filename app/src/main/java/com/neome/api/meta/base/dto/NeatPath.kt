@@ -7,9 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumNeatPathCaption
 
-interface NeatPath
-{
-  val caption: EnumNeatPathCaption?
-  val primary: Array<String>?
-  val secondary: String?
+interface NeatPath {
+    val caption: EnumNeatPathCaption?
+    val primary: List<String>?
+    val secondary: String?
 }

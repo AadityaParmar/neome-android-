@@ -6,11 +6,8 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdVar
-import com.neome.api.meta.base.dto.StudioBase
-import com.neome.api.meta.base.dto.StudioEntDeployVar
 
-interface StudioEntDeployVarMap : StudioBase
-{
-  val keys: Array<MetaIdVar>
-  val map: Map<MetaIdVar, StudioEntDeployVar>
+interface StudioEntDeployVarMap : StudioBase {
+    val keys: List<MetaIdVar>
+    val map: Map<MetaIdVar, StudioEntDeployVar>
 }

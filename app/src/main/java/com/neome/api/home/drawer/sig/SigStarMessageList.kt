@@ -8,7 +8,6 @@ package com.neome.api.home.drawer.sig
 import com.neome.api.home.base.dto.DtoStarMessage
 import com.neome.api.nucleus.base.sig.SigVersion
 
-interface SigStarMessageList : SigVersion
-{
-  val starMessageList: Array<DtoStarMessage>
+interface SigStarMessageList : SigVersion {
+    val starMessageList: List<DtoStarMessage>
 }

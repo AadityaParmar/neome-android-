@@ -5,16 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.EntVdAutoStep
 import com.neome.api.meta.base.Types.MetaIdGroup
-import com.neome.api.meta.base.dto.StudioBuildArgBinder
-import com.neome.api.meta.base.dto.StudioDtoRowIdPointer
-import com.neome.api.meta.base.dto.StudioDtoUserFilter
 
-interface EntVdRowForward : EntVdAutoStep
-{
-  val fromSender: StudioBuildArgBinder?
-  val rowIdPointer: StudioDtoRowIdPointer?
-  val toGroupIdSet: Array<MetaIdGroup>?
-  val toUsers: StudioDtoUserFilter?
+interface EntVdRowForward : EntVdAutoStep {
+    val fromSender: StudioBuildArgBinder?
+    val rowIdPointer: StudioDtoRowIdPointer?
+    val toGroupIdSet: List<MetaIdGroup>?
+    val toUsers: StudioDtoUserFilter?
 }

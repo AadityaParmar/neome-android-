@@ -6,11 +6,8 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdChartXAxis
-import com.neome.api.meta.base.dto.StudioBase
-import com.neome.api.meta.base.dto.StudioDtoChartXAxis
 
-interface StudioMapOfChartXAxis : StudioBase
-{
-  val keys: Array<MetaIdChartXAxis>
-  val map: Map<MetaIdChartXAxis, StudioDtoChartXAxis>
+interface StudioMapOfChartXAxis : StudioBase {
+    val keys: List<MetaIdChartXAxis>
+    val map: Map<MetaIdChartXAxis, StudioDtoChartXAxis>
 }

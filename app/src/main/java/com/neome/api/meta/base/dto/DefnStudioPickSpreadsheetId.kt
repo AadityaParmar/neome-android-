@@ -5,11 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-interface DefnStudioPickSpreadsheetId : DefnFieldEditable
-{
-  val excludeSpreadsheetIdSet: Array<MetaIdSpreadsheet>?
-  val showAlias: Boolean?
+interface DefnStudioPickSpreadsheetId : DefnFieldEditable {
+    val excludeSpreadsheetIdSet: List<MetaIdSpreadsheet>?
+    val showAlias: Boolean?
 }

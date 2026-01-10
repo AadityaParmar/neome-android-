@@ -12,27 +12,23 @@ import com.neome.api.meta.base.Types.EnumDefnThemeDirection
 import com.neome.api.meta.base.Types.EnumDefnThemeDividerKind
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdVar
-import com.neome.api.meta.base.dto.StudioDtoColor
-import com.neome.api.meta.base.dto.StudioDtoLayoutForm
-import com.neome.api.meta.base.dto.StudioDtoLayoutFormContentItem
 
-interface StudioDtoLayoutFormContent : StudioDtoLayoutForm
-{
-  val allowToSwitchLayoutIdSet: Array<MetaIdLayoutForm>?
-  val backgroundColor: StudioDtoColor?
-  val backgroundColorVarId: MetaIdVar?
-  val borderColor: StudioDtoColor?
-  val borderColorVarId: MetaIdVar?
-  val borderPositionSet: Array<EnumDefnShowBorderKind>?
-  val borderRadiusSet: Array<EnumDefnShowBorderRadiusKind>?
-  val borderRadiusSize: EnumDefnThemeDividerKind?
-  val direction: EnumDefnThemeDirection?
-  val displayLabel: String?
-  val end: StudioDtoLayoutFormContentItem?
-  val flexCenter: StudioDtoLayoutFormContentItem?
-  val paddingPositionSet: Array<EnumDefnShowBorderKind>?
-  val paddingSize: EnumDefnThemeDividerKind?
-  val renderingMode: EnumDefnRenderingKind?
-  val rootLayout: Boolean?
-  val start: StudioDtoLayoutFormContentItem?
+interface StudioDtoLayoutFormContent : StudioDtoLayoutForm {
+    val allowToSwitchLayoutIdSet: List<MetaIdLayoutForm>?
+    val backgroundColor: StudioDtoColor?
+    val backgroundColorVarId: MetaIdVar?
+    val borderColor: StudioDtoColor?
+    val borderColorVarId: MetaIdVar?
+    val borderPositionSet: List<EnumDefnShowBorderKind>?
+    val borderRadiusSet: List<EnumDefnShowBorderRadiusKind>?
+    val borderRadiusSize: EnumDefnThemeDividerKind?
+    val direction: EnumDefnThemeDirection?
+    val displayLabel: String?
+    val end: StudioDtoLayoutFormContentItem?
+    val flexCenter: StudioDtoLayoutFormContentItem?
+    val paddingPositionSet: List<EnumDefnShowBorderKind>?
+    val paddingSize: EnumDefnThemeDividerKind?
+    val renderingMode: EnumDefnRenderingKind?
+    val rootLayout: Boolean?
+    val start: StudioDtoLayoutFormContentItem?
 }

@@ -5,13 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.DefnLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-interface DefnDtoRefTarget
-{
-  val displayFieldIdSet: Array<MetaIdField>
-  val metaId: MetaIdSpreadsheet
-  val overrideLayoutSpreadsheet: DefnLayoutGrid
+interface DefnDtoRefTarget {
+    val displayFieldIdSet: List<MetaIdField>
+    val metaId: MetaIdSpreadsheet
+    val overrideLayoutSpreadsheet: DefnLayoutGrid
 }

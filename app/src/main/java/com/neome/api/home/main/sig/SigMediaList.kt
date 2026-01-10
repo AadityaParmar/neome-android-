@@ -6,12 +6,10 @@
 package com.neome.api.home.main.sig
 
 import com.neome.api.nucleus.base.sig.Sig
-import com.neome.api.home.main.sig.SigMessageBase
 
-interface SigMediaList : Sig
-{
-  val documentList: Array<SigMessageBase>
-  val linkList: Array<SigMessageBase>
-  val mediaCount: Long?
-  val mediaList: Array<SigMessageBase>
+interface SigMediaList : Sig {
+    val documentList: List<SigMessageBase>
+    val linkList: List<SigMessageBase>
+    val mediaCount: Long?
+    val mediaList: List<SigMessageBase>
 }

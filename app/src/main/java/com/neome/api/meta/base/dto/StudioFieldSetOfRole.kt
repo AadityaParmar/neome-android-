@@ -8,11 +8,9 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnThemePickMultiVariant
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
-import com.neome.api.meta.base.dto.StudioFieldEditable
 
-interface StudioFieldSetOfRole : StudioFieldEditable
-{
-  val defaultRoleFieldId: MetaIdField?
-  val defaultRoleIdSet: Array<MetaIdRole>?
-  val showAs: EnumDefnThemePickMultiVariant?
+interface StudioFieldSetOfRole : StudioFieldEditable {
+    val defaultRoleFieldId: MetaIdField?
+    val defaultRoleIdSet: List<MetaIdRole>?
+    val showAs: EnumDefnThemePickMultiVariant?
 }

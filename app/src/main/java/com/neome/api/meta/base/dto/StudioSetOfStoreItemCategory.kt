@@ -6,9 +6,7 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumStoreLabel
-import com.neome.api.meta.base.dto.StudioBase
 
-interface StudioSetOfStoreItemCategory : StudioBase
-{
-  val valueSet: Array<EnumStoreLabel>
+interface StudioSetOfStoreItemCategory : StudioBase {
+    val valueSet: List<EnumStoreLabel>
 }

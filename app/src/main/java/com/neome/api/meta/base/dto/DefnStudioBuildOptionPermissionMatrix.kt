@@ -5,10 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.DefnDtoOption
-import com.neome.api.meta.base.dto.DefnField
-
-interface DefnStudioBuildOptionPermissionMatrix : DefnField
-{
-  val optionSet: Array<DefnDtoOption>?
+interface DefnStudioBuildOptionPermissionMatrix : DefnField {
+    val optionSet: List<DefnDtoOption>?
 }

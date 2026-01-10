@@ -6,13 +6,11 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.AnyTime
-import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdField
 
-interface DefnFieldChipSetTime : DefnFieldEditable
-{
-  val defaultFieldId: MetaIdField?
-  val defaultValue: Array<AnyTime>?
-  val defaultVar: Array<AnyTime>?
-  val displayDateFormat: String?
+interface DefnFieldChipSetTime : DefnFieldEditable {
+    val defaultFieldId: MetaIdField?
+    val defaultValue: List<AnyTime>?
+    val defaultVar: List<AnyTime>?
+    val displayDateFormat: String?
 }

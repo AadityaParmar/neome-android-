@@ -5,12 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.MetaIdGrid
 
-interface DefnStudioPickGridId : DefnFieldEditable
-{
-  val excludeGridIdSet: Array<MetaIdGrid>?
-  val formId: MetaIdForm
+interface DefnStudioPickGridId : DefnFieldEditable {
+    val excludeGridIdSet: List<MetaIdGrid>?
+    val formId: MetaIdForm
 }

@@ -5,11 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.DefnDtoRefTarget
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-interface DefnMapOfRefTarget
-{
-  val keys: Array<MetaIdSpreadsheet>
-  val map: Map<MetaIdSpreadsheet, DefnDtoRefTarget>
+interface DefnMapOfRefTarget {
+    val keys: List<MetaIdSpreadsheet>
+    val map: Map<MetaIdSpreadsheet, DefnDtoRefTarget>
 }

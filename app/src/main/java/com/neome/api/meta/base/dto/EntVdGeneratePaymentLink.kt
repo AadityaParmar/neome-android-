@@ -5,21 +5,17 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.EntVdAutoStepWithError
 import com.neome.api.meta.base.Types.EnumDefnPaymentMethodKind
 import com.neome.api.meta.base.Types.EnumPaymentProviderKind
-import com.neome.api.meta.base.dto.StudioBuildArgBinder
-import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
 
-interface EntVdGeneratePaymentLink : EntVdAutoStepWithError
-{
-  val allowedPaymentMethodSet: Array<EnumDefnPaymentMethodKind>?
-  val amount: StudioBuildArgBinder?
-  val currency: StudioBuildArgBinder?
-  val expiryDuration: StudioBuildArgBinder?
-  val outputField: StudioDtoArgValueParameter?
-  val paymentDescription: StudioBuildArgBinder?
-  val paymentProvider: EnumPaymentProviderKind?
-  val referenceIdField: StudioDtoArgValueParameter?
-  val spreadsheetRowIdField: StudioDtoArgValueParameter?
+interface EntVdGeneratePaymentLink : EntVdAutoStepWithError {
+    val allowedPaymentMethodSet: List<EnumDefnPaymentMethodKind>?
+    val amount: StudioBuildArgBinder?
+    val currency: StudioBuildArgBinder?
+    val expiryDuration: StudioBuildArgBinder?
+    val outputField: StudioDtoArgValueParameter?
+    val paymentDescription: StudioBuildArgBinder?
+    val paymentProvider: EnumPaymentProviderKind?
+    val referenceIdField: StudioDtoArgValueParameter?
+    val spreadsheetRowIdField: StudioDtoArgValueParameter?
 }

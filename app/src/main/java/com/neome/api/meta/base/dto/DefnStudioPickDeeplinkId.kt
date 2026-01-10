@@ -5,10 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdDeeplink
 
-interface DefnStudioPickDeeplinkId : DefnFieldEditable
-{
-  val includeDeeplinkIdSet: Array<MetaIdDeeplink>?
+interface DefnStudioPickDeeplinkId : DefnFieldEditable {
+    val includeDeeplinkIdSet: List<MetaIdDeeplink>?
 }

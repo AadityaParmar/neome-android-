@@ -5,8 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-interface FieldSetOfOptionId
-{
-  val displaySet: Array<String>?
-  val valueSet: Array<String>
+interface FieldSetOfOptionId {
+    val displaySet: List<String>?
+    val valueSet: List<String>
 }

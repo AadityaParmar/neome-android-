@@ -6,9 +6,7 @@
 package com.neome.api.ent.entMain.sig
 
 import com.neome.api.meta.base.Types.MetaIdField
-import com.neome.api.ent.entMain.sig.SigFormValue
 
-interface SigOutputFormValue : SigFormValue
-{
-  val outputFieldIdSet: Array<MetaIdField>?
+interface SigOutputFormValue : SigFormValue {
+    val outputFieldIdSet: List<MetaIdField>?
 }

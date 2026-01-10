@@ -7,7 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnDay
 
-interface FieldChipSetDay
-{
-  val valueSet: Array<EnumDefnDay>
+interface FieldChipSetDay {
+    val valueSet: List<EnumDefnDay>
 }

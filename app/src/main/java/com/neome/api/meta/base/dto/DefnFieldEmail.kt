@@ -6,15 +6,13 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.AnyEmailId
-import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdField
 
-interface DefnFieldEmail : DefnFieldEditable
-{
-  val autoPickSelf: Boolean?
-  val defaultFieldId: MetaIdField?
-  val defaultValue: AnyEmailId?
-  val defaultVar: AnyEmailId?
-  val invalidDomainSetVar: Array<String>?
-  val validDomainSetVar: Array<String>?
+interface DefnFieldEmail : DefnFieldEditable {
+    val autoPickSelf: Boolean?
+    val defaultFieldId: MetaIdField?
+    val defaultValue: AnyEmailId?
+    val defaultVar: AnyEmailId?
+    val invalidDomainSetVar: List<String>?
+    val validDomainSetVar: List<String>?
 }

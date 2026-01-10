@@ -8,17 +8,14 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
-import com.neome.api.meta.base.dto.StudioDtoPluginApi
-import com.neome.api.meta.base.dto.StudioFieldEditable
 
-interface StudioFieldRefUser : StudioFieldEditable
-{
-  val copyFieldVarMap: Map<MetaIdField, MetaIdVar>?
-  val dataSourceVarId: MetaIdVar?
-  val defaultValue: MetaIdRole?
-  val defaultValueFieldId: MetaIdField?
-  val pluginApi: StudioDtoPluginApi?
-  val pluginErrorFieldId: MetaIdField?
-  val pluginInputMappingVarId: MetaIdVar?
-  val roleIdDataSource: Array<MetaIdRole>?
+interface StudioFieldRefUser : StudioFieldEditable {
+    val copyFieldVarMap: Map<MetaIdField, MetaIdVar>?
+    val dataSourceVarId: MetaIdVar?
+    val defaultValue: MetaIdRole?
+    val defaultValueFieldId: MetaIdField?
+    val pluginApi: StudioDtoPluginApi?
+    val pluginErrorFieldId: MetaIdField?
+    val pluginInputMappingVarId: MetaIdVar?
+    val roleIdDataSource: List<MetaIdRole>?
 }

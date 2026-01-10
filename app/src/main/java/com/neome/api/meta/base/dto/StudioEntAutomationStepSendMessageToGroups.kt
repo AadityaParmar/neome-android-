@@ -6,9 +6,7 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdGroup
-import com.neome.api.meta.base.dto.StudioEntAutomationStepSendMessageWithSenderField
 
-interface StudioEntAutomationStepSendMessageToGroups : StudioEntAutomationStepSendMessageWithSenderField
-{
-  val groupIdSet: Array<MetaIdGroup>?
+interface StudioEntAutomationStepSendMessageToGroups : StudioEntAutomationStepSendMessageWithSenderField {
+    val groupIdSet: List<MetaIdGroup>?
 }

@@ -6,9 +6,7 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdReport
-import com.neome.api.meta.base.dto.StudioEntReport
 
-interface StudioEntReportComposite : StudioEntReport
-{
-  val mergeReportIdSet: Array<MetaIdReport>?
+interface StudioEntReportComposite : StudioEntReport {
+    val mergeReportIdSet: List<MetaIdReport>?
 }

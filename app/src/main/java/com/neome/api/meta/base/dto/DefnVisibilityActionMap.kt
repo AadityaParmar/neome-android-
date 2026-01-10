@@ -5,11 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.DefnVisibilityAction
 import com.neome.api.meta.base.Types.MetaIdVisibilityAction
 
-interface DefnVisibilityActionMap
-{
-  val keys: Array<MetaIdVisibilityAction>
-  val map: Map<MetaIdVisibilityAction, DefnVisibilityAction>
+interface DefnVisibilityActionMap {
+    val keys: List<MetaIdVisibilityAction>
+    val map: Map<MetaIdVisibilityAction, DefnVisibilityAction>
 }

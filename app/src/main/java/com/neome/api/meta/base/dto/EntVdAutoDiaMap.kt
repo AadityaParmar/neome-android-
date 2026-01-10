@@ -5,12 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.EntVdAutoDia
 import com.neome.api.meta.base.Types.MetaIdVdAutoDia
-import com.neome.api.meta.base.dto.StudioBase
 
-interface EntVdAutoDiaMap : StudioBase
-{
-  val keys: Array<MetaIdVdAutoDia>
-  val map: Map<MetaIdVdAutoDia, EntVdAutoDia>
+interface EntVdAutoDiaMap : StudioBase {
+    val keys: List<MetaIdVdAutoDia>
+    val map: Map<MetaIdVdAutoDia, EntVdAutoDia>
 }

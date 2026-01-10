@@ -6,11 +6,8 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdMapping
-import com.neome.api.meta.base.dto.StudioBase
-import com.neome.api.meta.base.dto.StudioDtoMappingField
 
-interface StudioDtoMappingFieldMapBase : StudioBase
-{
-  val keys: Array<MetaIdMapping>
-  val map: Map<MetaIdMapping, StudioDtoMappingField>
+interface StudioDtoMappingFieldMapBase : StudioBase {
+    val keys: List<MetaIdMapping>
+    val map: Map<MetaIdMapping, StudioDtoMappingField>
 }

@@ -6,9 +6,7 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdRole
-import com.neome.api.meta.base.dto.StudioFieldNumber
 
-interface StudioFieldLogNumber : StudioFieldNumber
-{
-  val logReadRoleSet: Array<MetaIdRole>?
+interface StudioFieldLogNumber : StudioFieldNumber {
+    val logReadRoleSet: List<MetaIdRole>?
 }

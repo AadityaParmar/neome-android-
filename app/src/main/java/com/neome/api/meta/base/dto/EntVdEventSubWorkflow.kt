@@ -5,15 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.EntVdEvent
-import com.neome.api.meta.base.dto.EntVdWorkflowPointer
-import com.neome.api.meta.base.dto.FormRefKey
 import com.neome.api.meta.base.Types.MetaIdPipelineVar
 
-interface EntVdEventSubWorkflow : EntVdEvent
-{
-  val inputForm: FormRefKey?
-  val outputForm: FormRefKey?
-  val sharedParameterSet: Array<MetaIdPipelineVar>?
-  val workflowPointer: EntVdWorkflowPointer?
+interface EntVdEventSubWorkflow : EntVdEvent {
+    val inputForm: FormRefKey?
+    val outputForm: FormRefKey?
+    val sharedParameterSet: List<MetaIdPipelineVar>?
+    val workflowPointer: EntVdWorkflowPointer?
 }

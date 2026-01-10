@@ -6,9 +6,7 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnPluginSecurityAccess
-import com.neome.api.meta.base.dto.StudioBase
 
-interface StudioSetOfPluginSecurityAccess : StudioBase
-{
-  val valueSet: Array<EnumDefnPluginSecurityAccess>
+interface StudioSetOfPluginSecurityAccess : StudioBase {
+    val valueSet: List<EnumDefnPluginSecurityAccess>
 }

@@ -5,16 +5,15 @@
 
 package com.neome.api.ent.entAside.sig
 
+import com.neome.api.home.main.sig.SigSpreadsheetRow
+import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.DefnForm
 import com.neome.api.meta.base.dto.DefnLayoutGridMap
-import com.neome.api.meta.base.Types.MetaIdSpreadsheet
-import com.neome.api.home.main.sig.SigSpreadsheetRow
 import com.neome.api.nucleus.base.sig.SigVersion
 
-interface SigSpreadsheetRefFieldData : SigVersion
-{
-  val outputForm: DefnForm
-  val rowList: Array<SigSpreadsheetRow>
-  val spreadSheetLayoutMap: DefnLayoutGridMap?
-  val spreadsheetId: MetaIdSpreadsheet?
+interface SigSpreadsheetRefFieldData : SigVersion {
+    val outputForm: DefnForm
+    val rowList: List<SigSpreadsheetRow>
+    val spreadSheetLayoutMap: DefnLayoutGridMap?
+    val spreadsheetId: MetaIdSpreadsheet?
 }

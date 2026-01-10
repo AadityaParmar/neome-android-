@@ -5,9 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.DtoLogTableCell
-
-interface DtoLogTableRow
-{
-  val cellArray: Array<DtoLogTableCell>?
+interface DtoLogTableRow {
+    val cellArray: List<DtoLogTableCell>?
 }

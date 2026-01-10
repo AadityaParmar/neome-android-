@@ -7,8 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EntUserId
 
-interface FieldSetOfEntUserId
-{
-  val displaySet: Array<String>?
-  val valueSet: Array<EntUserId>
+interface FieldSetOfEntUserId {
+    val displaySet: List<String>?
+    val valueSet: List<EntUserId>
 }

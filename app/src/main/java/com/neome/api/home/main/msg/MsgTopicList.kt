@@ -8,7 +8,6 @@ package com.neome.api.home.main.msg
 import com.neome.api.core.base.dto.DtoTopic
 import com.neome.api.nucleus.base.msg.Msg
 
-interface MsgTopicList : Msg
-{
-  val topicList: Array<DtoTopic>
+interface MsgTopicList : Msg {
+    val topicList: List<DtoTopic>
 }

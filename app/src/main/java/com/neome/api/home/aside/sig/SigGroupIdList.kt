@@ -8,7 +8,6 @@ package com.neome.api.home.aside.sig
 import com.neome.api.meta.base.Types.GroupId
 import com.neome.api.nucleus.base.sig.Sig
 
-interface SigGroupIdList : Sig
-{
-  val groupIdList: Array<GroupId>
+interface SigGroupIdList : Sig {
+    val groupIdList: List<GroupId>
 }

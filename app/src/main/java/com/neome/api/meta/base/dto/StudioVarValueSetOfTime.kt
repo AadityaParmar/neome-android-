@@ -7,7 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.AnyTime
 
-interface StudioVarValueSetOfTime
-{
-  val valueSet: Array<AnyTime>
+interface StudioVarValueSetOfTime {
+    val valueSet: List<AnyTime>
 }

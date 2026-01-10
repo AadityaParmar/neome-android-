@@ -5,7 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-interface FieldChipSetDateTime
-{
-  val valueSet: Array<String>
+interface FieldChipSetDateTime {
+    val valueSet: List<String>
 }

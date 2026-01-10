@@ -5,9 +5,6 @@
 
 package com.neome.api.ent.base.dto
 
-import kotlinx.serialization.json.JsonElement
-import com.neome.api.ent.base.dto.DtoEntAction
-import com.neome.api.ent.base.dto.DtoEntActionPermission
 import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.Types.MetaIdField
@@ -16,19 +13,19 @@ import com.neome.api.meta.base.Types.MetaIdGroup
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import kotlinx.serialization.json.JsonElement
 
-interface DtoEntActionSpreadsheetEditor : DtoEntAction
-{
-  val actionPermissionMap: Map<MetaIdAction, DtoEntActionPermission>?
-  val bulkInsertRoleSet: Array<MetaIdRole>?
-  val bulkUpdateFieldIdSet: Array<MetaIdField>?
-  val bulkUpdateRoleSet: Array<MetaIdRole>?
-  val defaultValueMap: Map<MetaIdComp, JsonElement>?
-  val doNotOpenAside: Boolean?
-  val inputFormId: MetaIdForm?
-  val layoutSpreadsheetId: MetaIdLayoutGrid
-  val readOnly: Boolean?
-  val sendMessageToGroupId: MetaIdGroup?
-  val spreadsheetFormId: MetaIdForm
-  val spreadsheetId: MetaIdSpreadsheet
+interface DtoEntActionSpreadsheetEditor : DtoEntAction {
+    val actionPermissionMap: Map<MetaIdAction, DtoEntActionPermission>?
+    val bulkInsertRoleSet: List<MetaIdRole>?
+    val bulkUpdateFieldIdSet: List<MetaIdField>?
+    val bulkUpdateRoleSet: List<MetaIdRole>?
+    val defaultValueMap: Map<MetaIdComp, JsonElement>?
+    val doNotOpenAside: Boolean?
+    val inputFormId: MetaIdForm?
+    val layoutSpreadsheetId: MetaIdLayoutGrid
+    val readOnly: Boolean?
+    val sendMessageToGroupId: MetaIdGroup?
+    val spreadsheetFormId: MetaIdForm
+    val spreadsheetId: MetaIdSpreadsheet
 }

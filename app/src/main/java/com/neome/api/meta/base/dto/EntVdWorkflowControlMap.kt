@@ -5,12 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.EntVdWorkflowControl
 import com.neome.api.meta.base.Types.GhostId
-import com.neome.api.meta.base.dto.StudioBase
 
-interface EntVdWorkflowControlMap : StudioBase
-{
-  val keys: Array<GhostId>
-  val map: Map<GhostId, EntVdWorkflowControl>
+interface EntVdWorkflowControlMap : StudioBase {
+    val keys: List<GhostId>
+    val map: Map<GhostId, EntVdWorkflowControl>
 }

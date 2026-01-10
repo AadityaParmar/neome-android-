@@ -5,7 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-interface FieldSetOfString
-{
-  val valueSet: Array<String>
+interface FieldSetOfString {
+    val valueSet: List<String>
 }

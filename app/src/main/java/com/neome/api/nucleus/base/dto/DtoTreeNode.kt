@@ -5,8 +5,7 @@
 
 package com.neome.api.nucleus.base.dto
 
-interface DtoTreeNode
-{
-  val children: Array<DtoTreeNode>?
-  val name: String
+interface DtoTreeNode {
+    val children: List<DtoTreeNode>?
+    val name: String
 }

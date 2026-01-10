@@ -5,9 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.StudioBase
-
-interface StudioSetOfNumber : StudioBase
-{
-  val valueSet: Array<Long>
+interface StudioSetOfNumber : StudioBase {
+    val valueSet: List<Long>
 }

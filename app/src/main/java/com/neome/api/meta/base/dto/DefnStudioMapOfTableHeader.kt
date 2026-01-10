@@ -5,11 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.DefnDtoTableHeader
 import com.neome.api.meta.base.Types.MetaIdHeader
 
-interface DefnStudioMapOfTableHeader
-{
-  val keys: Array<MetaIdHeader>
-  val map: Map<MetaIdHeader, DefnDtoTableHeader>
+interface DefnStudioMapOfTableHeader {
+    val keys: List<MetaIdHeader>
+    val map: Map<MetaIdHeader, DefnDtoTableHeader>
 }

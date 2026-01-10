@@ -5,12 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.EnumContactCopyField
 import com.neome.api.meta.base.Types.MetaIdField
 
-interface DefnFieldRefContact : DefnField
-{
-  val copyFieldMap: Map<MetaIdField, EnumContactCopyField>?
-  val editableContactFieldSet: Array<EnumContactCopyField>?
+interface DefnFieldRefContact : DefnField {
+    val copyFieldMap: Map<MetaIdField, EnumContactCopyField>?
+    val editableContactFieldSet: List<EnumContactCopyField>?
 }

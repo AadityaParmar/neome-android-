@@ -6,11 +6,8 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
-import com.neome.api.meta.base.dto.StudioBase
-import com.neome.api.meta.base.dto.StudioEntSpreadsheet
 
-interface StudioEntSpreadsheetMap : StudioBase
-{
-  val keys: Array<MetaIdSpreadsheet>
-  val map: Map<MetaIdSpreadsheet, StudioEntSpreadsheet>
+interface StudioEntSpreadsheetMap : StudioBase {
+    val keys: List<MetaIdSpreadsheet>
+    val map: Map<MetaIdSpreadsheet, StudioEntSpreadsheet>
 }

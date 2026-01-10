@@ -5,13 +5,12 @@
 
 package com.neome.api.home.aside.msg
 
+import com.neome.api.core.base.msg.MsgVersion
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.GroupId
-import com.neome.api.core.base.msg.MsgVersion
 
-interface MsgGroupMembersRemove : MsgVersion
-{
-  val groupId: GroupId
-  val removeAdminSet: Array<EntUserId>?
-  val removeMemberSet: Array<EntUserId>?
+interface MsgGroupMembersRemove : MsgVersion {
+    val groupId: GroupId
+    val removeAdminSet: List<EntUserId>?
+    val removeMemberSet: List<EntUserId>?
 }

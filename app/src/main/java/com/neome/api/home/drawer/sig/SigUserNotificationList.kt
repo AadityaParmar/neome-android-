@@ -8,7 +8,6 @@ package com.neome.api.home.drawer.sig
 import com.neome.api.home.base.dto.DtoUserNotification
 import com.neome.api.nucleus.base.sig.SigVersion
 
-interface SigUserNotificationList : SigVersion
-{
-  val notificationList: Array<DtoUserNotification>
+interface SigUserNotificationList : SigVersion {
+    val notificationList: List<DtoUserNotification>
 }

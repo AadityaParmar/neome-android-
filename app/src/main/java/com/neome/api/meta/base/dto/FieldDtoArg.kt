@@ -5,19 +5,18 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.SysId
+import com.neome.api.meta.base.Types.MetaIdField
 
-interface FieldDtoArg
-{
-  val valueBoolean: Boolean?
-  val valueDate: String?
-  val valueDouble: Long?
-  val valueFieldId: MetaIdField?
-  val valueLong: Long?
-  val valueSysId: SysId?
-  val valueSysIdArray: Array<SysId>?
-  val valueSysIdSet: Array<SysId>?
-  val valueText: String?
-  val valueTextArray: Array<String>?
+interface FieldDtoArg {
+    val valueBoolean: Boolean?
+    val valueDate: String?
+    val valueDouble: Long?
+    val valueFieldId: MetaIdField?
+    val valueLong: Long?
+    val valueSysId: SysId?
+    val valueSysIdArray: List<SysId>?
+    val valueSysIdSet: List<SysId>?
+    val valueText: String?
+    val valueTextArray: List<String>?
 }

@@ -5,9 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.TranslatePath
-
-interface TranslateResult
-{
-  val translateMap: Map<String, Array<TranslatePath>>
+interface TranslateResult {
+    val translateMap: Map<String, List<TranslatePath>>
 }

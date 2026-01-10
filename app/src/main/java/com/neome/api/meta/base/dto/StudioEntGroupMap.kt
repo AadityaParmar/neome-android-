@@ -6,11 +6,8 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdGroup
-import com.neome.api.meta.base.dto.StudioBase
-import com.neome.api.meta.base.dto.StudioEntGroup
 
-interface StudioEntGroupMap : StudioBase
-{
-  val keys: Array<MetaIdGroup>
-  val map: Map<MetaIdGroup, StudioEntGroup>
+interface StudioEntGroupMap : StudioBase {
+    val keys: List<MetaIdGroup>
+    val map: Map<MetaIdGroup, StudioEntGroup>
 }

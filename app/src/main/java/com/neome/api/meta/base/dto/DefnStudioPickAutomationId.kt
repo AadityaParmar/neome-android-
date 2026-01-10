@@ -5,10 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.EnumDefnKindAutomation
 
-interface DefnStudioPickAutomationId : DefnField
-{
-  val filterAutomationKindSet: Array<EnumDefnKindAutomation>?
+interface DefnStudioPickAutomationId : DefnField {
+    val filterAutomationKindSet: List<EnumDefnKindAutomation>?
 }

@@ -5,9 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.StudioBase
-
-interface StudioSetOfDate : StudioBase
-{
-  val valueSet: Array<String>
+interface StudioSetOfDate : StudioBase {
+    val valueSet: List<String>
 }

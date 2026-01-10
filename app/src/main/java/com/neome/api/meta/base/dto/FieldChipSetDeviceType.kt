@@ -7,7 +7,6 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDeviceType
 
-interface FieldChipSetDeviceType
-{
-  val valueSet: Array<EnumDeviceType>
+interface FieldChipSetDeviceType {
+    val valueSet: List<EnumDeviceType>
 }

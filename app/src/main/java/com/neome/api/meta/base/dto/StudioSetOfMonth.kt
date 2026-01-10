@@ -6,9 +6,7 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnMonth
-import com.neome.api.meta.base.dto.StudioBase
 
-interface StudioSetOfMonth : StudioBase
-{
-  val valueSet: Array<EnumDefnMonth>
+interface StudioSetOfMonth : StudioBase {
+    val valueSet: List<EnumDefnMonth>
 }

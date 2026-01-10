@@ -8,10 +8,9 @@ package com.neome.api.home.drawer.msg
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.msg.Msg
 
-interface MsgDrawerSearch : Msg
-{
-  val filterEntIdSet: Array<EntId>?
-  val pageSize: Long?
-  val searchId: String
-  val searchQuery: String
+interface MsgDrawerSearch : Msg {
+    val filterEntIdSet: List<EntId>?
+    val pageSize: Long?
+    val searchId: String
+    val searchQuery: String
 }

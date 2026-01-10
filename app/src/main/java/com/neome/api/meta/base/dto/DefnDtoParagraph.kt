@@ -5,7 +5,6 @@
 
 package com.neome.api.meta.base.dto
 
-interface DefnDtoParagraph
-{
-  val value: Array<String>?
+interface DefnDtoParagraph {
+    val value: List<String>?
 }

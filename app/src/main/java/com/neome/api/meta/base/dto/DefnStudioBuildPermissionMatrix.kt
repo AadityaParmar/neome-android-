@@ -5,10 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.Types.EnumDefnPermission
 
-interface DefnStudioBuildPermissionMatrix : DefnField
-{
-  val filterOptionSet: Array<EnumDefnPermission>?
+interface DefnStudioBuildPermissionMatrix : DefnField {
+    val filterOptionSet: List<EnumDefnPermission>?
 }

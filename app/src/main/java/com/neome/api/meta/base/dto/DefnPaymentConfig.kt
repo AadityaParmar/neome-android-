@@ -9,16 +9,15 @@ import com.neome.api.meta.base.Types.CurrencyKey
 import com.neome.api.meta.base.Types.EnumDefnPaymentMethodKind
 import com.neome.api.meta.base.Types.MetaIdField
 
-interface DefnPaymentConfig
-{
-  val allowedPaymentMethodSet: Array<EnumDefnPaymentMethodKind>?
-  val amountFieldId: MetaIdField?
-  val currency: CurrencyKey?
-  val currencyFieldId: MetaIdField?
-  val customerContactFieldId: MetaIdField?
-  val customerEmailFieldId: MetaIdField?
-  val customerNameFieldId: MetaIdField?
-  val descriptionFieldId: MetaIdField?
-  val enablePayment: Boolean?
-  val referenceIdFieldId: MetaIdField?
+interface DefnPaymentConfig {
+    val allowedPaymentMethodSet: List<EnumDefnPaymentMethodKind>?
+    val amountFieldId: MetaIdField?
+    val currency: CurrencyKey?
+    val currencyFieldId: MetaIdField?
+    val customerContactFieldId: MetaIdField?
+    val customerEmailFieldId: MetaIdField?
+    val customerNameFieldId: MetaIdField?
+    val descriptionFieldId: MetaIdField?
+    val enablePayment: Boolean?
+    val referenceIdFieldId: MetaIdField?
 }

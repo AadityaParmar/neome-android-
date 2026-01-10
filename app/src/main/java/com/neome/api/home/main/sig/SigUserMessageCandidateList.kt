@@ -5,11 +5,10 @@
 
 package com.neome.api.home.main.sig
 
+import com.neome.api.home.drawer.sig.SigUserAvatar
 import com.neome.api.nucleus.base.Types.AnyPrefixKey
 import com.neome.api.nucleus.base.sig.Sig
-import com.neome.api.home.drawer.sig.SigUserAvatar
 
-interface SigUserMessageCandidateList : Sig
-{
-  val candidateMap: Map<AnyPrefixKey, Array<SigUserAvatar>>
+interface SigUserMessageCandidateList : Sig {
+    val candidateMap: Map<AnyPrefixKey, List<SigUserAvatar>>
 }

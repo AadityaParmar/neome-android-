@@ -9,8 +9,7 @@ import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.MetaIdVdAutoDia
 import com.neome.api.meta.base.Types.MetaIdVdAutoNode
 
-interface DtoWorkflowDebugConfig
-{
-  val breakpointMap: Map<MetaIdVdAutoDia, Array<MetaIdVdAutoNode>>
-  val defaultDebugEntUserId: EntUserId?
+interface DtoWorkflowDebugConfig {
+    val breakpointMap: Map<MetaIdVdAutoDia, List<MetaIdVdAutoNode>>
+    val defaultDebugEntUserId: EntUserId?
 }
