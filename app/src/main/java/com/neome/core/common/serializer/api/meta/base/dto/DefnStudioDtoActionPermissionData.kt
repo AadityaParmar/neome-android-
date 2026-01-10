@@ -12,14 +12,14 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DefnStudioDtoActionPermissionData(
-    override val deviceSizeSet: Array<EnumDefnDeviceSize>? = null,
-    override val groupIdSet: Array<@Serializable(with = MetaIdGroupSer::class) Types.MetaIdGroup>? = null,
+    override val deviceSizeSet: List<EnumDefnDeviceSize>? = null,
+    override val groupIdSet: List<@Serializable(with = MetaIdGroupSer::class) Types.MetaIdGroup>? = null,
     override val hidden: Boolean? = null,
     @Serializable(with = MetaIdVarSer::class) override val inputMappingVarId: Types.MetaIdVar? = null,
     override val menuGroup: String? = null,
     @Serializable(with = MetaIdActionSer::class) override val metaId: Types.MetaIdAction,
-    override val notAllowedRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val notAllowedRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     @Serializable(with = MetaIdVarSer::class) override val outputMappingVarId: Types.MetaIdVar? = null,
-    override val roleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>,
+    override val roleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>,
     override val showMessageTooltip: Boolean? = null
 ) : DefnStudioDtoActionPermission

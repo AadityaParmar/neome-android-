@@ -13,6 +13,6 @@ import kotlinx.serialization.json.JsonElement
 @Serializable
 data class MsgSpreadsheetBulkRowUpdateData(
     @Serializable(with = MetaIdActionSer::class) override val actionId: Types.MetaIdAction,
-    override val rowIdSet: Array<@Serializable(with = RowIdSer::class) Types.RowId>,
+    override val rowIdSet: List<@Serializable(with = RowIdSer::class) Types.RowId>,
     override val valueMap: Map<@Serializable(with = MetaIdCompSer::class) Types.MetaIdComp, JsonElement>
 ) : MsgSpreadsheetBulkRowUpdate

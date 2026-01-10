@@ -12,7 +12,7 @@ data class DtoClusterItemMetricData(
     override val maxTime: Long? = null,
     override val medianTime: Long? = null,
     override val minTime: Long? = null,
-    override val name: Array<String>,
+    override val name: List<String>,
     override val p80Time: Long? = null,
     override val p90Time: Long? = null,
     override val p95Time: Long? = null,

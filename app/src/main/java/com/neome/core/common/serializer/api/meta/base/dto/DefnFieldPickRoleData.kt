@@ -10,6 +10,9 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.dto.DefnFieldPickRole
 import com.neome.api.meta.base.dto.DefnStudioMapOfDtoOption
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoTextData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfDtoOptionData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer
 import com.neome.core.common.serializer.sysId.SymbolSer
@@ -24,7 +27,7 @@ sealed interface DefnFieldPickRoleSeal : DefnFieldPickRole
 data class DefnFieldPickRoleData(
     override val disabled: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val disabledFieldId: Types.MetaIdField? = null,
-    override val disabledRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val disabledRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val disabledVar: Boolean? = null,
     override val hidden: Boolean? = null,
     override val hideDirtyIndicator: Boolean? = null,
@@ -33,7 +36,7 @@ data class DefnFieldPickRoleData(
     override val maxWidth: Long? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val pb: Long? = null,
-    override val permissionMatrix: DefnDtoPermissionMatrix? = null,
+    override val permissionMatrix: DefnDtoPermissionMatrixData? = null,
     override val pl: Long? = null,
     override val pr: Long? = null,
     override val pt: Long? = null,
@@ -44,29 +47,29 @@ data class DefnFieldPickRoleData(
     override val autoFocus: Boolean? = null,
     override val helperText: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val helperTextFieldId: Types.MetaIdField? = null,
-    override val helperTextVar: DefnDtoText? = null,
+    override val helperTextVar: DefnDtoTextData? = null,
     override val hideLabel: Boolean? = null,
     override val icon: String? = null,
     override val iconVar: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val labelFieldId: Types.MetaIdField? = null,
     override val placeHolder: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val placeHolderFieldId: Types.MetaIdField? = null,
-    override val placeHolderVar: DefnDtoText? = null,
+    override val placeHolderVar: DefnDtoTextData? = null,
     override val prefix: String? = null,
-    override val prefixVar: DefnDtoText? = null,
+    override val prefixVar: DefnDtoTextData? = null,
     override val required: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val requiredFieldId: Types.MetaIdField? = null,
-    override val requiredRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val requiredRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val requiredVar: Boolean? = null,
     override val suffix: String? = null,
-    override val suffixVar: DefnDtoText? = null,
+    override val suffixVar: DefnDtoTextData? = null,
     override val allowSystemRoles: Boolean? = null,
-    override val callerRoleMap: DefnStudioMapOfDtoOption? = null,
+    override val callerRoleMap: DefnStudioMapOfDtoOptionData? = null,
     @Serializable(with = MetaIdFieldSer::class) override val defaultRoleFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdRoleSer::class) override val defaultRoleId: Types.MetaIdRole? = null,
-    override val excludeRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
-    override val filterRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
-    override val includeOptionMap: DefnStudioMapOfDtoOption? = null,
+    override val excludeRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val filterRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val includeOptionMap: DefnStudioMapOfDtoOptionData? = null,
     override val pageSize: Long? = null,
     override val showAs: EnumDefnThemePickVariant? = null
 ) : DefnCompSeal, DefnFieldPickRole

@@ -11,6 +11,9 @@ import com.neome.api.meta.base.dto.StudioDtoLayoutTable
 import com.neome.api.meta.base.dto.StudioMapOfTableFooter
 import com.neome.api.meta.base.dto.StudioMapOfTableHeader
 import com.neome.api.meta.base.dto.StudioMapOfTableStyle
+import com.neome.core.common.serializer.api.meta.base.dto.StudioMapOfTableFooterData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioMapOfTableHeaderData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioMapOfTableStyleData
 import com.neome.core.common.serializer.sysId.MetaIdCompSer
 import com.neome.core.common.serializer.sysId.MetaIdCompositeSer
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
@@ -22,7 +25,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioDtoLayoutTableData(
-    override val allowToSwitchLayoutIdSet: Array<@Serializable(with = MetaIdLayoutGridSer::class) Types.MetaIdLayoutGrid>? = null,
+    override val allowToSwitchLayoutIdSet: List<@Serializable(with = MetaIdLayoutGridSer::class) Types.MetaIdLayoutGrid>? = null,
     @Serializable(with = MetaIdFieldSer::class) override val bgColorFieldId: Types.MetaIdField? = null,
     override val description: String? = null,
     override val kind: EnumDefnLayoutGridKind,
@@ -31,11 +34,11 @@ data class StudioDtoLayoutTableData(
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     @Serializable(with = MetaIdFieldSer::class) override val toolTipFieldId: Types.MetaIdField? = null,
     override val allowCustomFilters: Boolean? = null,
-    override val columnAlignmentArray: Array<String>? = null,
-    override val columnSizeSet: Array<String>? = null,
-    override val footer: StudioMapOfTableFooter? = null,
-    override val freezeFieldIdSet: Array<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
-    override val header: StudioMapOfTableHeader? = null,
+    override val columnAlignmentArray: List<String>? = null,
+    override val columnSizeSet: List<String>? = null,
+    override val footer: StudioMapOfTableFooterData? = null,
+    override val freezeFieldIdSet: List<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
+    override val header: StudioMapOfTableHeaderData? = null,
     override val hideHeaders: Boolean? = null,
     override val hideRowSeparator: Boolean? = null,
     override val indexColumnName: String? = null,
@@ -44,11 +47,11 @@ data class StudioDtoLayoutTableData(
     override val renderingMode: EnumDefnGridRenderingMode? = null,
     override val rowsPerPage: Long? = null,
     override val showCommentCount: Boolean? = null,
-    override val showCompIdSet: Array<@Serializable(with = MetaIdCompSer::class) Types.MetaIdComp>? = null,
+    override val showCompIdSet: List<@Serializable(with = MetaIdCompSer::class) Types.MetaIdComp>? = null,
     override val showSearchBar: Boolean? = null,
-    override val sortByFieldIdSet: Array<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
+    override val sortByFieldIdSet: List<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
     override val sortOrder: EnumDefnSortOrder? = null,
     override val sparklineLayoutMap: Map<@Serializable(with = MetaIdGridSer::class) Types.MetaIdGrid, @Serializable(with = MetaIdLayoutGridSer::class) Types.MetaIdLayoutGrid>? = null,
-    override val styleMap: StudioMapOfTableStyle? = null,
+    override val styleMap: StudioMapOfTableStyleData? = null,
     override val theme: EnumDefnTableLayoutTheme? = null
 ) : StudioDtoLayoutTable

@@ -10,6 +10,10 @@ import com.neome.api.meta.base.dto.StudioDtoPermissionMatrix
 import com.neome.api.meta.base.dto.StudioFieldMap
 import com.neome.api.meta.base.dto.StudioMapOfActionPermission
 import com.neome.api.meta.base.dto.StudioSection
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDetailsData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioFieldMapData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioMapOfActionPermissionData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer
 import com.neome.core.common.serializer.sysId.MetaIdSectionSer
@@ -20,15 +24,15 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class StudioSectionData(
     override val aiInstructions: String? = null,
-    override val details: StudioDetails,
+    override val details: StudioDetailsData,
     override val disabled: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val disabledFieldId: Types.MetaIdField? = null,
-    override val disabledRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val disabledRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     @Serializable(with = MetaIdVarSer::class) override val disabledVarId: Types.MetaIdVar? = null,
-    override val permissionMatrix: StudioDtoPermissionMatrix? = null,
+    override val permissionMatrix: StudioDtoPermissionMatrixData? = null,
     override val type: EnumStudioCompType? = null,
-    override val actionPermissionMap: StudioMapOfActionPermission? = null,
-    override val fieldMap: StudioFieldMap,
+    override val actionPermissionMap: StudioMapOfActionPermissionData? = null,
+    override val fieldMap: StudioFieldMapData,
     override val direction: EnumDefnThemeDirection? = null,
     @Serializable(with = MetaIdSectionSer::class) override val metaId: Types.MetaIdSection,
     @Serializable(with = MetaIdVarSer::class) override val propertyEditorLabelVarId: Types.MetaIdVar? = null,

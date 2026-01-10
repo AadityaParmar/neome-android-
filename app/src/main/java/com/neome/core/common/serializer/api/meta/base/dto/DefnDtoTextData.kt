@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DefnDtoTextData(
-    override val value: Array<String>? = null
+    override val value: List<String>? = null
 ) : DefnDtoText

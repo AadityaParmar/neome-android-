@@ -11,6 +11,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class DtoEntSpreadsheetExportExcelData(
     @Serializable(with = MetaIdLayoutGridSer::class) override val layoutSpreadsheetId: Types.MetaIdLayoutGrid? = null,
-    override val rowIdSet: Array<@Serializable(with = RowIdSer::class) Types.RowId>? = null,
+    override val rowIdSet: List<@Serializable(with = RowIdSer::class) Types.RowId>? = null,
     @Serializable(with = MetaIdActionSer::class) override val spreadsheetEditorActionId: Types.MetaIdAction
 ) : DtoEntSpreadsheetExportExcel

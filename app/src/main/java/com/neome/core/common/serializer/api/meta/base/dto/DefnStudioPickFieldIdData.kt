@@ -9,6 +9,9 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.dto.DefnStudioMapOfDtoOption
 import com.neome.api.meta.base.dto.DefnStudioPickFieldId
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoTextData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfDtoOptionData
 import com.neome.core.common.serializer.sysId.MetaIdCompositeSer
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdFormSer
@@ -25,7 +28,7 @@ sealed interface DefnStudioPickFieldIdSeal : DefnStudioPickFieldId
 data class DefnStudioPickFieldIdData(
     override val disabled: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val disabledFieldId: Types.MetaIdField? = null,
-    override val disabledRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val disabledRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val disabledVar: Boolean? = null,
     override val hidden: Boolean? = null,
     override val hideDirtyIndicator: Boolean? = null,
@@ -34,7 +37,7 @@ data class DefnStudioPickFieldIdData(
     override val maxWidth: Long? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val pb: Long? = null,
-    override val permissionMatrix: DefnDtoPermissionMatrix? = null,
+    override val permissionMatrix: DefnDtoPermissionMatrixData? = null,
     override val pl: Long? = null,
     override val pr: Long? = null,
     override val pt: Long? = null,
@@ -45,27 +48,27 @@ data class DefnStudioPickFieldIdData(
     override val autoFocus: Boolean? = null,
     override val helperText: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val helperTextFieldId: Types.MetaIdField? = null,
-    override val helperTextVar: DefnDtoText? = null,
+    override val helperTextVar: DefnDtoTextData? = null,
     override val hideLabel: Boolean? = null,
     override val icon: String? = null,
     override val iconVar: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val labelFieldId: Types.MetaIdField? = null,
     override val placeHolder: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val placeHolderFieldId: Types.MetaIdField? = null,
-    override val placeHolderVar: DefnDtoText? = null,
+    override val placeHolderVar: DefnDtoTextData? = null,
     override val prefix: String? = null,
-    override val prefixVar: DefnDtoText? = null,
+    override val prefixVar: DefnDtoTextData? = null,
     override val required: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val requiredFieldId: Types.MetaIdField? = null,
-    override val requiredRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val requiredRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val requiredVar: Boolean? = null,
     override val suffix: String? = null,
-    override val suffixVar: DefnDtoText? = null,
-    override val compositeIdSet: Array<@Serializable(with = MetaIdCompositeSer::class) Types.MetaIdComposite>? = null,
-    override val excludeFieldIdSet: Array<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
-    override val filterFieldTypeSet: Array<EnumDefnCompType>? = null,
+    override val suffixVar: DefnDtoTextData? = null,
+    override val compositeIdSet: List<@Serializable(with = MetaIdCompositeSer::class) Types.MetaIdComposite>? = null,
+    override val excludeFieldIdSet: List<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
+    override val filterFieldTypeSet: List<EnumDefnCompType>? = null,
     @Serializable(with = MetaIdFormSer::class) override val formId: Types.MetaIdForm,
-    override val includeFieldIdSet: Array<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
-    override val includeOptionMap: DefnStudioMapOfDtoOption? = null,
+    override val includeFieldIdSet: List<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
+    override val includeOptionMap: DefnStudioMapOfDtoOptionData? = null,
     override val showCompositeName: Boolean? = null
 ) : DefnCompSeal, DefnStudioPickFieldId

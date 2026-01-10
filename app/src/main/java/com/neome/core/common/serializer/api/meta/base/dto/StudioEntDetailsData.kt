@@ -7,6 +7,7 @@ import com.neome.api.meta.base.Types.EnumStoreLabel
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntDetails
 import com.neome.api.meta.base.dto.StudioEntWallpaper
+import com.neome.core.common.serializer.api.meta.base.dto.StudioEntWallpaperData
 import com.neome.core.common.serializer.sysId.LanguageKeySer
 import com.neome.core.common.serializer.sysId.MediaIdAvatarSer
 import com.neome.core.common.serializer.sysId.TimeZoneKeySer
@@ -19,12 +20,12 @@ data class StudioEntDetailsData(
     @Serializable(with = MediaIdAvatarSer::class) override val avatarId: Types.MediaIdAvatar? = null,
     override val displayDateFormat: String? = null,
     override val hideAddressBook: Boolean? = null,
-    override val languageSet: Array<@Serializable(with = LanguageKeySer::class) Types.LanguageKey>? = null,
+    override val languageSet: List<@Serializable(with = LanguageKeySer::class) Types.LanguageKey>? = null,
     override val locationAccuracy: EnumDefnLocationAccuracy? = null,
     override val name: String,
     override val storeAbout: String? = null,
     override val storeItemType: EnumDefnStoreItem? = null,
-    override val storeLabelSet: Array<EnumStoreLabel>? = null,
+    override val storeLabelSet: List<EnumStoreLabel>? = null,
     @Serializable(with = TimeZoneKeySer::class) override val timeZone: Types.TimeZoneKey? = null,
-    override val wallpaper: StudioEntWallpaper? = null
+    override val wallpaper: StudioEntWallpaperData? = null
 ) : StudioEntDetails

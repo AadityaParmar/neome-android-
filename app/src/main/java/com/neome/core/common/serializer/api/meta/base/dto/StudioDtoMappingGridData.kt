@@ -9,6 +9,7 @@ import com.neome.api.meta.base.Types.EnumDefnUpdateVariant
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoMappingFieldMapBase
 import com.neome.api.meta.base.dto.StudioDtoMappingGrid
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoMappingFieldMapBaseData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdGridSer
 import com.neome.core.common.serializer.sysId.MetaIdMappingSer
@@ -19,7 +20,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class StudioDtoMappingGridData(
     override val emptyFieldVariant: EnumDefnEmptyFieldVariant? = null,
-    override val fieldMappingMap: StudioDtoMappingFieldMapBase? = null,
+    override val fieldMappingMap: StudioDtoMappingFieldMapBaseData? = null,
     @Serializable(with = MetaIdGridSer::class) override val fromGridId: Types.MetaIdGrid? = null,
     @Serializable(with = MetaIdFieldSer::class) override val fromGridKey: Types.MetaIdField? = null,
     override val insertVariant: EnumDefnInsertVariant? = null,

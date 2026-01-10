@@ -6,6 +6,8 @@ import com.neome.api.meta.base.dto.StudioDetails
 import com.neome.api.meta.base.dto.StudioEntReport
 import com.neome.api.meta.base.dto.StudioEntReportQuery
 import com.neome.api.meta.base.dto.StudioValueCodeNeoQL
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDetailsData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioValueCodeNeoQLData
 import com.neome.core.common.serializer.sysId.MetaIdFormSer
 import com.neome.core.common.serializer.sysId.MetaIdReportSer
 import com.neome.core.common.serializer.sysId.MetaIdSpreadsheetSer
@@ -14,11 +16,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioEntReportQueryData(
-    override val details: StudioDetails,
+    override val details: StudioDetailsData,
     @Serializable(with = MetaIdFormSer::class) override val inputFormId: Types.MetaIdForm? = null,
     override val kind: EnumDefnKindReport,
     @Serializable(with = MetaIdReportSer::class) override val metaId: Types.MetaIdReport,
     @Serializable(with = MetaIdFormSer::class) override val outputFormId: Types.MetaIdForm? = null,
-    override val fromSpreadsheetIdSet: Array<@Serializable(with = MetaIdSpreadsheetSer::class) Types.MetaIdSpreadsheet>? = null,
-    override val neoQL: StudioValueCodeNeoQL? = null
+    override val fromSpreadsheetIdSet: List<@Serializable(with = MetaIdSpreadsheetSer::class) Types.MetaIdSpreadsheet>? = null,
+    override val neoQL: StudioValueCodeNeoQLData? = null
 ) : StudioEntReportQuery

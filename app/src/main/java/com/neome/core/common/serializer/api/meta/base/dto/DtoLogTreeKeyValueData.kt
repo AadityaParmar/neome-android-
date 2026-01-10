@@ -5,6 +5,7 @@ import com.neome.api.meta.base.Types.DtoLogTreeKeyValueType
 import com.neome.api.meta.base.Types.EnumLogTreeItemType
 import com.neome.api.meta.base.dto.DtoLogTreeItem
 import com.neome.api.meta.base.dto.DtoLogTreeKeyValue
+import com.neome.core.common.serializer.api.meta.base.dto.DtoLogTreeKeyValueData
 import kotlinx.serialization.Serializable
 
 
@@ -13,7 +14,7 @@ data class DtoLogTreeKeyValueData(
     override val bgColor: String? = null,
     override val id: String,
     override val type: EnumLogTreeItemType,
-    override val children: Array<DtoLogTreeKeyValue>? = null,
+    override val children: List<DtoLogTreeKeyValueData>? = null,
     override val keyColor: String? = null,
     override val keyText: String,
     override val keyTooltip: Boolean? = null,

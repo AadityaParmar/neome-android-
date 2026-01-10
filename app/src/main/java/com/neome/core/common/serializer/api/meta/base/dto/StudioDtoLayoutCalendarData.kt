@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioDtoLayoutCalendarData(
-    override val allowToSwitchLayoutIdSet: Array<@Serializable(with = MetaIdLayoutGridSer::class) Types.MetaIdLayoutGrid>? = null,
+    override val allowToSwitchLayoutIdSet: List<@Serializable(with = MetaIdLayoutGridSer::class) Types.MetaIdLayoutGrid>? = null,
     @Serializable(with = MetaIdFieldSer::class) override val bgColorFieldId: Types.MetaIdField? = null,
     override val description: String? = null,
     override val kind: EnumDefnLayoutGridKind,
@@ -24,7 +24,7 @@ data class StudioDtoLayoutCalendarData(
     @Serializable(with = MetaIdFieldSer::class) override val colorFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdFieldSer::class) override val fromDateFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdFieldSer::class) override val fromTimeFieldId: Types.MetaIdField? = null,
-    override val showFieldIdSet: Array<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
+    override val showFieldIdSet: List<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
     @Serializable(with = MetaIdFieldSer::class) override val titleFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdFieldSer::class) override val toDateFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdFieldSer::class) override val toTimeFieldId: Types.MetaIdField? = null

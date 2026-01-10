@@ -8,6 +8,9 @@ import com.neome.api.meta.base.dto.StudioEntAutomation
 import com.neome.api.meta.base.dto.StudioEntAutomationPluginWebhook
 import com.neome.api.meta.base.dto.StudioEntAutomationPluginWebhookEventMap
 import com.neome.api.meta.base.dto.StudioModuleSelection
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoPluginApiData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioEntAutomationPluginWebhookEventMapData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioModuleSelectionData
 import com.neome.core.common.serializer.sysId.MetaIdAutomationSer
 import com.neome.core.common.serializer.sysId.SymbolSer
 import kotlinx.serialization.Serializable
@@ -19,9 +22,9 @@ data class StudioEntAutomationPluginWebhookData(
     override val description: String? = null,
     override val kind: EnumDefnKindAutomation,
     @Serializable(with = MetaIdAutomationSer::class) override val metaId: Types.MetaIdAutomation,
-    override val modules: StudioModuleSelection? = null,
+    override val modules: StudioModuleSelectionData? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val secondary: String? = null,
-    override val eventMap: StudioEntAutomationPluginWebhookEventMap,
-    override val pluginApi: StudioDtoPluginApi
+    override val eventMap: StudioEntAutomationPluginWebhookEventMapData,
+    override val pluginApi: StudioDtoPluginApiData
 ) : StudioEntAutomationPluginWebhook

@@ -5,6 +5,7 @@ import com.neome.api.ent.base.dto.DtoAutomationStateInfo
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.EnumDefnKindAutomation
 import com.neome.api.meta.base.dto.EnvValidationError
+import com.neome.core.common.serializer.api.meta.base.dto.EnvValidationErrorData
 import com.neome.core.common.serializer.sysId.AutomationExecutionIdSer
 import kotlinx.serialization.Serializable
 
@@ -15,7 +16,7 @@ data class DtoAutomationStateInfoData(
     override val createdOn: String? = null,
     override val eventName: String,
     @Serializable(with = AutomationExecutionIdSer::class) override val executionId: Types.AutomationExecutionId,
-    override val failureError: EnvValidationError? = null,
+    override val failureError: EnvValidationErrorData? = null,
     override val kind: EnumDefnKindAutomation,
     override val message: String? = null,
     override val name: String,

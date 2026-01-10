@@ -7,6 +7,7 @@ import com.neome.api.meta.base.Types.EnumDefnVisibilityActionOn
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioVisibilityAction
+import com.neome.core.common.serializer.api.meta.base.dto.StudioBuildArgBinderData
 import com.neome.core.common.serializer.sysId.MetaIdActionSer
 import com.neome.core.common.serializer.sysId.MetaIdCompSer
 import com.neome.core.common.serializer.sysId.MetaIdGroupSer
@@ -20,13 +21,13 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class StudioVisibilityActionData(
     @Serializable(with = MetaIdActionSer::class) override val actionId: Types.MetaIdAction? = null,
-    override val compIdSet: Array<@Serializable(with = MetaIdCompSer::class) Types.MetaIdComp>? = null,
-    override val groupIdSet: Array<@Serializable(with = MetaIdGroupSer::class) Types.MetaIdGroup>? = null,
-    override val layoutIdSet: Array<@Serializable(with = MetaIdLayoutFormSer::class) Types.MetaIdLayoutForm>? = null,
+    override val compIdSet: List<@Serializable(with = MetaIdCompSer::class) Types.MetaIdComp>? = null,
+    override val groupIdSet: List<@Serializable(with = MetaIdGroupSer::class) Types.MetaIdGroup>? = null,
+    override val layoutIdSet: List<@Serializable(with = MetaIdLayoutFormSer::class) Types.MetaIdLayoutForm>? = null,
     @Serializable(with = MetaIdVarSer::class) override val mappingVarId: Types.MetaIdVar? = null,
     @Serializable(with = MetaIdVisibilityActionSer::class) override val metaId: Types.MetaIdVisibilityAction,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
-    override val source: StudioBuildArgBinder? = null,
+    override val source: StudioBuildArgBinderData? = null,
     override val visibilityAction: EnumDefnVisibilityAction,
     override val visibilityActionOn: EnumDefnVisibilityActionOn? = null
 ) : StudioVisibilityAction

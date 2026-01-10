@@ -14,5 +14,5 @@ data class StudioPluginDetailsData(
     @Serializable(with = MediaIdAvatarSer::class) override val avatarId: Types.MediaIdAvatar? = null,
     override val name: String,
     override val storeAbout: String? = null,
-    override val storeLabelSet: Array<EnumStoreLabel>? = null
+    override val storeLabelSet: List<EnumStoreLabel>? = null
 ) : StudioPluginDetails

@@ -5,6 +5,8 @@ import com.neome.api.core.base.dto.DtoNotificationSetting
 import com.neome.api.core.user.sig.SigCaller
 import com.neome.api.meta.base.Types
 import com.neome.api.nucleus.base.sig.SigVersion
+import com.neome.core.common.serializer.api.core.base.dto.DtoEntChatNotificationSettingData
+import com.neome.core.common.serializer.api.core.base.dto.DtoNotificationSettingData
 import com.neome.core.common.serializer.sysId.AdminIdSer
 import com.neome.core.common.serializer.sysId.EntIdSer
 import com.neome.core.common.serializer.sysId.EntUserIdSer
@@ -24,7 +26,7 @@ data class SigCallerData(
     override val allowCluster: Boolean? = null,
     override val allowStorePublish: Boolean? = null,
     override val allowStudio: Boolean? = null,
-    override val chatNotificationSettingMap: Map<@Serializable(with = EntIdSer::class) Types.EntId, DtoEntChatNotificationSetting>? = null,
+    override val chatNotificationSettingMap: Map<@Serializable(with = EntIdSer::class) Types.EntId, DtoEntChatNotificationSettingData>? = null,
     override val creationTime: String,
     override val entAdminIdMap: Map<@Serializable(with = EntIdSer::class) Types.EntId, @Serializable(with = AdminIdSer::class) Types.AdminId>,
     override val entUserIdMap: Map<@Serializable(with = EntIdSer::class) Types.EntId, @Serializable(with = EntUserIdSer::class) Types.EntUserId>,
@@ -32,8 +34,8 @@ data class SigCallerData(
     override val enterIsSendMobile: Boolean? = null,
     override val firstName: String? = null,
     override val fromCache: Boolean? = null,
-    override val globalNotificationSetting: DtoNotificationSetting? = null,
-    override val groupIdSet: Array<@Serializable(with = GroupIdSer::class) Types.GroupId>,
+    override val globalNotificationSetting: DtoNotificationSettingData? = null,
+    override val groupIdSet: List<@Serializable(with = GroupIdSer::class) Types.GroupId>,
     override val handle: String? = null,
     @Serializable(with = LanguageKeySer::class) override val languageKey: Types.LanguageKey? = null,
     override val lastName: String? = null,

@@ -13,5 +13,5 @@ data class StudioDtoArgValueArgumentData(
     override val arg1: EnumDefnArgBinderArgument,
     override val arg2: EnumDefnArgBinderArgument? = null,
     @Serializable(with = MetaIdFieldSer::class) override val fieldId: Types.MetaIdField,
-    override val valuePathArray: Array<String>? = null
+    override val valuePathArray: List<String>? = null
 ) : StudioDtoArgValueArgument

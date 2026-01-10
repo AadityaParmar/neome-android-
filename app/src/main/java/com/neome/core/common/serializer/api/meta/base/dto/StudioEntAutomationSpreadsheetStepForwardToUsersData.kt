@@ -7,6 +7,7 @@ import com.neome.api.meta.base.Types.EnumDefnKindAutomationStep
 import com.neome.api.meta.base.dto.StudioEntAutomationSpreadsheetStepForwardToUsers
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
+import com.neome.core.common.serializer.api.meta.base.dto.StudioValueVarIdConditionData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdPipelineParamSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer
@@ -20,14 +21,14 @@ import kotlinx.serialization.Serializable
 data class StudioEntAutomationSpreadsheetStepForwardToUsersData(
     override val description: String? = null,
     @Serializable(with = MetaIdPipelineParamSer::class) override val executionConditionInputPipelineVarId: Types.MetaIdPipelineParam? = null,
-    override val executionConditionVarId: StudioValueVarIdCondition? = null,
+    override val executionConditionVarId: StudioValueVarIdConditionData? = null,
     override val kind: EnumDefnKindAutomationStep,
     @Serializable(with = MetaIdStepSer::class) override val metaId: Types.MetaIdStep,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val skipUpdateSpreadsheetTrigger: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val terminateFieldId: Types.MetaIdField? = null,
     override val terminateKind: EnumDefnAutomationTerminateKind? = null,
-    override val dataSourceRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val dataSourceRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     @Serializable(with = MetaIdPipelineParamSer::class) override val formDataSourcePipelineVarId: Types.MetaIdPipelineParam? = null,
     @Serializable(with = MetaIdFieldSer::class) override val senderFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdPipelineParamSer::class) override val senderFormPipelineVarId: Types.MetaIdPipelineParam? = null,

@@ -6,6 +6,7 @@ import com.neome.api.meta.base.Types.EnumDefnKindImport
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntImport
 import com.neome.api.meta.base.dto.StudioModuleSelection
+import com.neome.core.common.serializer.api.meta.base.dto.StudioModuleSelectionData
 import com.neome.core.common.serializer.sysId.MetaIdPluginSer
 import com.neome.core.common.serializer.sysId.SymbolSer
 import kotlinx.serialization.Serializable
@@ -16,6 +17,6 @@ data class StudioEntImportData(
     override val description: String? = null,
     override val kind: EnumDefnKindImport? = null,
     @Serializable(with = MetaIdPluginSer::class) override val metaId: Types.MetaIdPlugin,
-    override val modules: StudioModuleSelection? = null,
+    override val modules: StudioModuleSelectionData? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol? = null
 ) : StudioEntImport

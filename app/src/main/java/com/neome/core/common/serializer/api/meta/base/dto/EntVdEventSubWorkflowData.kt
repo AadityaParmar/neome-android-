@@ -11,6 +11,12 @@ import com.neome.api.meta.base.dto.FormRefKey
 import com.neome.api.meta.base.dto.Point
 import com.neome.api.meta.base.dto.Size
 import com.neome.api.meta.base.dto.StudioValueParagraph
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdPipelineVarMapData
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdWorkflowPointerData
+import com.neome.core.common.serializer.api.meta.base.dto.FormRefKeyData
+import com.neome.core.common.serializer.api.meta.base.dto.PointData
+import com.neome.core.common.serializer.api.meta.base.dto.SizeData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioValueParagraphData
 import com.neome.core.common.serializer.sysId.MetaIdPipelineVarSer
 import com.neome.core.common.serializer.sysId.MetaIdVdAutoNodeSer
 import com.neome.core.common.serializer.sysId.MetaIdVdRegionSer
@@ -22,15 +28,15 @@ import kotlinx.serialization.Serializable
 data class EntVdEventSubWorkflowData(
     override val uiVersion: String? = null,
     override val kind: EnumDefnKindAutoNode,
-    override val logMsg: StudioValueParagraph? = null,
+    override val logMsg: StudioValueParagraphData? = null,
     @Serializable(with = MetaIdVdAutoNodeSer::class) override val metaId: Types.MetaIdVdAutoNode,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     @Serializable(with = MetaIdVdRegionSer::class) override val parentRegionId: Types.MetaIdVdRegion? = null,
-    override val point: Point? = null,
-    override val size: Size? = null,
-    override val pipelineVarMap: EntVdPipelineVarMap? = null,
-    override val inputForm: FormRefKey? = null,
-    override val outputForm: FormRefKey? = null,
-    override val sharedParameterSet: Array<@Serializable(with = MetaIdPipelineVarSer::class) Types.MetaIdPipelineVar>? = null,
-    override val workflowPointer: EntVdWorkflowPointer? = null
+    override val point: PointData? = null,
+    override val size: SizeData? = null,
+    override val pipelineVarMap: EntVdPipelineVarMapData? = null,
+    override val inputForm: FormRefKeyData? = null,
+    override val outputForm: FormRefKeyData? = null,
+    override val sharedParameterSet: List<@Serializable(with = MetaIdPipelineVarSer::class) Types.MetaIdPipelineVar>? = null,
+    override val workflowPointer: EntVdWorkflowPointerData? = null
 ) : EntVdEventSubWorkflow

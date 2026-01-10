@@ -5,6 +5,7 @@ import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.EnumDefnKindDeeplink
 import com.neome.api.meta.base.dto.StudioModuleSelection
+import com.neome.core.common.serializer.api.meta.base.dto.StudioModuleSelectionData
 import com.neome.core.common.serializer.sysId.MetaIdDeeplinkSer
 import com.neome.core.common.serializer.sysId.SymbolSer
 import kotlinx.serialization.Serializable
@@ -15,6 +16,6 @@ data class DtoEntDeeplinkData(
     @Serializable(with = MetaIdDeeplinkSer::class) override val deepLinkId: Types.MetaIdDeeplink,
     override val description: String? = null,
     override val kind: EnumDefnKindDeeplink,
-    override val modules: StudioModuleSelection? = null,
+    override val modules: StudioModuleSelectionData? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol
 ) : DtoEntDeeplink

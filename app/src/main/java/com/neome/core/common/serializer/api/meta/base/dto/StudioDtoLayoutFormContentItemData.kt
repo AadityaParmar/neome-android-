@@ -16,11 +16,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class StudioDtoLayoutFormContentItemData(
     @Serializable(with = MetaIdVarSer::class) override val borderColorVarId: Types.MetaIdVar? = null,
-    override val borderPositionSet: Array<EnumDefnShowBorderKind>? = null,
-    override val fieldIdSet: Array<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
-    override val formLayoutIdSet: Array<@Serializable(with = MetaIdLayoutFormSer::class) Types.MetaIdLayoutForm>? = null,
-    override val gridLayoutIdSet: Array<@Serializable(with = MetaIdLayoutGridSer::class) Types.MetaIdLayoutGrid>? = null,
-    override val gridSwitcherSet: Array<@Serializable(with = MetaIdGridSer::class) Types.MetaIdGrid>? = null,
-    override val paddingPositionSet: Array<EnumDefnShowBorderKind>? = null,
+    override val borderPositionSet: List<EnumDefnShowBorderKind>? = null,
+    override val fieldIdSet: List<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
+    override val formLayoutIdSet: List<@Serializable(with = MetaIdLayoutFormSer::class) Types.MetaIdLayoutForm>? = null,
+    override val gridLayoutIdSet: List<@Serializable(with = MetaIdLayoutGridSer::class) Types.MetaIdLayoutGrid>? = null,
+    override val gridSwitcherSet: List<@Serializable(with = MetaIdGridSer::class) Types.MetaIdGrid>? = null,
+    override val paddingPositionSet: List<EnumDefnShowBorderKind>? = null,
     override val paddingSize: EnumDefnThemeDividerKind? = null
 ) : StudioDtoLayoutFormContentItem

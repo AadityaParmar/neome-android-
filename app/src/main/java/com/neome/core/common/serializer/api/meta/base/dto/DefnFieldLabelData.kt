@@ -11,6 +11,9 @@ import com.neome.api.meta.base.dto.DefnDtoText
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.dto.DefnFieldLabel
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoColorData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoTextData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer
 import com.neome.core.common.serializer.sysId.SymbolSer
@@ -25,7 +28,7 @@ sealed interface DefnFieldLabelSeal : DefnFieldLabel
 data class DefnFieldLabelData(
     override val disabled: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val disabledFieldId: Types.MetaIdField? = null,
-    override val disabledRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val disabledRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val disabledVar: Boolean? = null,
     override val hidden: Boolean? = null,
     override val hideDirtyIndicator: Boolean? = null,
@@ -34,19 +37,19 @@ data class DefnFieldLabelData(
     override val maxWidth: Long? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val pb: Long? = null,
-    override val permissionMatrix: DefnDtoPermissionMatrix? = null,
+    override val permissionMatrix: DefnDtoPermissionMatrixData? = null,
     override val pl: Long? = null,
     override val pr: Long? = null,
     override val pt: Long? = null,
     override val readOnly: Boolean? = null,
     override val type: EnumDefnCompType,
     @Serializable(with = MetaIdFieldSer::class) override val metaId: Types.MetaIdField,
-    override val bgColor: DefnDtoColor? = null,
-    override val bgColorVar: DefnDtoColor? = null,
+    override val bgColor: DefnDtoColorData? = null,
+    override val bgColorVar: DefnDtoColorData? = null,
     override val bold: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val boldFieldId: Types.MetaIdField? = null,
     override val boldVar: Boolean? = null,
-    override val colorVar: DefnDtoColor? = null,
+    override val colorVar: DefnDtoColorData? = null,
     override val italic: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val italicFieldId: Types.MetaIdField? = null,
     override val italicVar: Boolean? = null,
@@ -60,7 +63,7 @@ data class DefnFieldLabelData(
     override val strikeThroughVar: Boolean? = null,
     override val textPattern: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val textPatternFieldId: Types.MetaIdField? = null,
-    override val textPatternVar: DefnDtoText? = null,
+    override val textPatternVar: DefnDtoTextData? = null,
     override val textSize: EnumDefnTextSize? = null,
     @Serializable(with = MetaIdFieldSer::class) override val textSizeFieldId: Types.MetaIdField? = null,
     override val textSizeVar: EnumDefnTextSize? = null,

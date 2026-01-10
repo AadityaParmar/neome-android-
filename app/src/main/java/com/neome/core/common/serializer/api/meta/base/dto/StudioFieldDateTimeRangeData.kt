@@ -8,6 +8,10 @@ import com.neome.api.meta.base.dto.StudioDtoPermissionMatrix
 import com.neome.api.meta.base.dto.StudioFieldDateTime
 import com.neome.api.meta.base.dto.StudioFieldDateTimeRange
 import com.neome.api.meta.base.dto.StudioValueVarIdText
+import com.neome.core.common.serializer.api.meta.base.dto.StudioBuildDateTimeData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDetailsData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioValueVarIdTextData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer
 import com.neome.core.common.serializer.sysId.MetaIdSer
@@ -18,50 +22,50 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class StudioFieldDateTimeRangeData(
     override val aiInstructions: String? = null,
-    override val details: StudioDetails,
+    override val details: StudioDetailsData,
     override val disabled: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val disabledFieldId: Types.MetaIdField? = null,
-    override val disabledRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val disabledRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     @Serializable(with = MetaIdVarSer::class) override val disabledVarId: Types.MetaIdVar? = null,
-    override val permissionMatrix: StudioDtoPermissionMatrix? = null,
+    override val permissionMatrix: StudioDtoPermissionMatrixData? = null,
     override val type: EnumStudioCompType? = null,
     @Serializable(with = MetaIdFieldSer::class) override val metaId: Types.MetaIdField,
     override val autoFill: Boolean? = null,
     override val autoFocus: Boolean? = null,
     override val helperText: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val helperTextFieldId: Types.MetaIdField? = null,
-    override val helperTextVarId: StudioValueVarIdText? = null,
+    override val helperTextVarId: StudioValueVarIdTextData? = null,
     override val hideLabel: Boolean? = null,
     override val icon: String? = null,
     @Serializable(with = MetaIdVarSer::class) override val iconVarId: Types.MetaIdVar? = null,
     @Serializable(with = MetaIdFieldSer::class) override val labelFieldId: Types.MetaIdField? = null,
     override val placeHolder: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val placeHolderFieldId: Types.MetaIdField? = null,
-    override val placeHolderVarId: StudioValueVarIdText? = null,
+    override val placeHolderVarId: StudioValueVarIdTextData? = null,
     override val prefix: String? = null,
-    override val prefixVarId: StudioValueVarIdText? = null,
+    override val prefixVarId: StudioValueVarIdTextData? = null,
     @Serializable(with = MetaIdFieldSer::class) override val refFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdSer::class) override val refTargetId: Types.MetaId? = null,
     override val required: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val requiredFieldId: Types.MetaIdField? = null,
-    override val requiredRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val requiredRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     @Serializable(with = MetaIdVarSer::class) override val requiredVarId: Types.MetaIdVar? = null,
     override val suffix: String? = null,
-    override val suffixVarId: StudioValueVarIdText? = null,
+    override val suffixVarId: StudioValueVarIdTextData? = null,
     @Serializable(with = MetaIdFieldSer::class) override val defaultFieldId: Types.MetaIdField? = null,
-    override val defaultValue: StudioBuildDateTime? = null,
+    override val defaultValue: StudioBuildDateTimeData? = null,
     @Serializable(with = MetaIdVarSer::class) override val defaultVarId: Types.MetaIdVar? = null,
     override val displayDateFormat: String? = null,
-    override val max: StudioBuildDateTime? = null,
+    override val max: StudioBuildDateTimeData? = null,
     @Serializable(with = MetaIdFieldSer::class) override val maxFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdVarSer::class) override val maxVarId: Types.MetaIdVar? = null,
-    override val min: StudioBuildDateTime? = null,
+    override val min: StudioBuildDateTimeData? = null,
     @Serializable(with = MetaIdFieldSer::class) override val minFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdVarSer::class) override val minVarId: Types.MetaIdVar? = null,
-    override val fromDefault: StudioBuildDateTime? = null,
+    override val fromDefault: StudioBuildDateTimeData? = null,
     @Serializable(with = MetaIdFieldSer::class) override val fromDefaultFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdVarSer::class) override val fromDefaultVarId: Types.MetaIdVar? = null,
-    override val toDefault: StudioBuildDateTime? = null,
+    override val toDefault: StudioBuildDateTimeData? = null,
     @Serializable(with = MetaIdFieldSer::class) override val toDefaultFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdVarSer::class) override val toDefaultVarId: Types.MetaIdVar? = null
 ) : StudioFieldDateTimeRange

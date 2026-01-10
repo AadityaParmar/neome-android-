@@ -6,6 +6,7 @@ import com.neome.api.home.base.dto.DtoMessagePayloadSpreadsheetRow
 import com.neome.api.home.main.sig.SigSpreadsheetRow
 import com.neome.api.meta.base.Types
 import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadSeal
+import com.neome.core.common.serializer.api.home.main.sig.SigSpreadsheetRowData
 import com.neome.core.common.serializer.sysId.ContactIdSer
 import com.neome.core.common.serializer.sysId.MetaIdFormSer
 import com.neome.core.common.serializer.sysId.MetaIdSpreadsheetSer
@@ -27,5 +28,5 @@ data class DtoMessagePayloadSpreadsheetRowData(
     @Serializable(with = RowIdSer::class) override val rowId: Types.RowId,
     @Serializable(with = MetaIdSpreadsheetSer::class) override val spreadsheetId: Types.MetaIdSpreadsheet,
     @Serializable(with = SpreadsheetPartitionIdSer::class) override val spreadsheetPartitionId: Types.SpreadsheetPartitionId,
-    override val spreadsheetRow: SigSpreadsheetRow? = null
+    override val spreadsheetRow: SigSpreadsheetRowData? = null
 ) : DtoMessagePayloadSeal, DtoMessagePayloadSpreadsheetRow

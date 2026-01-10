@@ -9,5 +9,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioSetOfMetaIdData(
-    override val valueSet: Array<@Serializable(with = MetaIdSer::class) Types.MetaId>
+    override val valueSet: List<@Serializable(with = MetaIdSer::class) Types.MetaId>
 ) : StudioSetOfMetaId

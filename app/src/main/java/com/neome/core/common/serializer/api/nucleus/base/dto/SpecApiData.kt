@@ -15,19 +15,21 @@ import com.neome.api.nucleus.base.Types.EnumScopeType
 import com.neome.api.nucleus.base.dto.SpecApi
 import com.neome.api.nucleus.base.dto.SpecMsg
 import com.neome.api.nucleus.base.dto.SpecSig
+import com.neome.core.common.serializer.api.nucleus.base.dto.SpecMsgData
+import com.neome.core.common.serializer.api.nucleus.base.dto.SpecSigData
 import kotlinx.serialization.Serializable
 
 
 @Serializable
 data class SpecApiData(
-    override val allowedConnTypes: Array<EnumConnType>,
-    override val allowedDeployKinds: Array<EnumDeployKind>,
-    override val allowedDeviceTypes: Array<EnumDeviceType>,
+    override val allowedConnTypes: List<EnumConnType>,
+    override val allowedDeployKinds: List<EnumDeployKind>,
+    override val allowedDeviceTypes: List<EnumDeviceType>,
     override val apiDesc: String? = null,
     override val apiMethod: EnumApiMethod,
     override val apiName: String,
     override val apiVer: EnumApiVer,
-    override val artifactMembers: Array<EnumArtifactMemberType>,
+    override val artifactMembers: List<EnumArtifactMemberType>,
     override val canBeAccessedViaDeeplink: Boolean,
     override val internal: Boolean,
     override val isDeprecated: Boolean? = null,
@@ -35,18 +37,18 @@ data class SpecApiData(
     override val module: String,
     override val msgClassName: String? = null,
     override val msgSchema: String? = null,
-    override val msgSpec: SpecMsg? = null,
-    override val publishes: Array<String>,
+    override val msgSpec: SpecMsgData? = null,
+    override val publishes: List<String>,
     override val rateLimitPerSec: Long? = null,
-    override val requiredEntAdminScopes: Array<EnumDefnAdminDoNotOptionEnt>,
-    override val requiredPluginAdminScopes: Array<EnumDefnAdminDoNotOptionPlugin>,
-    override val requiredStoreAdminScopes: Array<EnumDefnAdminDoNotOptionStoreItem>,
+    override val requiredEntAdminScopes: List<EnumDefnAdminDoNotOptionEnt>,
+    override val requiredPluginAdminScopes: List<EnumDefnAdminDoNotOptionPlugin>,
+    override val requiredStoreAdminScopes: List<EnumDefnAdminDoNotOptionStoreItem>,
     override val rpcUri: String,
     override val scope: EnumScopeType,
     override val serviceName: ServiceName,
     override val sigClassName: String? = null,
     override val sigSchema: String? = null,
-    override val sigSpec: SpecSig,
+    override val sigSpec: SpecSigData,
     override val skipEntLockCheck: Boolean? = null,
     override val skipEntUserAuthorization: Boolean,
     override val skipInputValidation: Boolean,

@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MsgAutomationStateInfoListData(
-    override val filterAutomationStateSet: Array<EnumAutomationStateFilterKind>? = null,
+    override val filterAutomationStateSet: List<EnumAutomationStateFilterKind>? = null,
     override val from: String? = null,
     override val limit: Long? = null
 ) : MsgAutomationStateInfoList

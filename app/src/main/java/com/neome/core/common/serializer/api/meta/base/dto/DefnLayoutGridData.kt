@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DefnLayoutGridData(
-    override val allowToSwitchLayoutIdSet: Array<@Serializable(with = MetaIdLayoutGridSer::class) Types.MetaIdLayoutGrid>? = null,
+    override val allowToSwitchLayoutIdSet: List<@Serializable(with = MetaIdLayoutGridSer::class) Types.MetaIdLayoutGrid>? = null,
     @Serializable(with = MetaIdFieldSer::class) override val bgColorFieldId: Types.MetaIdField? = null,
     override val description: String? = null,
     override val kind: EnumDefnLayoutGridKind,

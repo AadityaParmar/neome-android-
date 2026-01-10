@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FieldChipSetDayData(
-    override val valueSet: Array<EnumDefnDay>
+    override val valueSet: List<EnumDefnDay>
 ) : FieldChipSetDay

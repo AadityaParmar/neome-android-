@@ -10,6 +10,9 @@ import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.dto.DefnStudioMapOfDtoOption
 import com.neome.api.meta.base.dto.DefnStudioPickPipelineVarId
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoTextData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfDtoOptionData
 import com.neome.core.common.serializer.sysId.MetaIdAutomationSer
 import com.neome.core.common.serializer.sysId.MetaIdEventSer
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
@@ -28,7 +31,7 @@ sealed interface DefnStudioPickPipelineVarIdSeal : DefnStudioPickPipelineVarId
 data class DefnStudioPickPipelineVarIdData(
     override val disabled: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val disabledFieldId: Types.MetaIdField? = null,
-    override val disabledRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val disabledRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val disabledVar: Boolean? = null,
     override val hidden: Boolean? = null,
     override val hideDirtyIndicator: Boolean? = null,
@@ -37,7 +40,7 @@ data class DefnStudioPickPipelineVarIdData(
     override val maxWidth: Long? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val pb: Long? = null,
-    override val permissionMatrix: DefnDtoPermissionMatrix? = null,
+    override val permissionMatrix: DefnDtoPermissionMatrixData? = null,
     override val pl: Long? = null,
     override val pr: Long? = null,
     override val pt: Long? = null,
@@ -48,27 +51,27 @@ data class DefnStudioPickPipelineVarIdData(
     override val autoFocus: Boolean? = null,
     override val helperText: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val helperTextFieldId: Types.MetaIdField? = null,
-    override val helperTextVar: DefnDtoText? = null,
+    override val helperTextVar: DefnDtoTextData? = null,
     override val hideLabel: Boolean? = null,
     override val icon: String? = null,
     override val iconVar: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val labelFieldId: Types.MetaIdField? = null,
     override val placeHolder: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val placeHolderFieldId: Types.MetaIdField? = null,
-    override val placeHolderVar: DefnDtoText? = null,
+    override val placeHolderVar: DefnDtoTextData? = null,
     override val prefix: String? = null,
-    override val prefixVar: DefnDtoText? = null,
+    override val prefixVar: DefnDtoTextData? = null,
     override val required: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val requiredFieldId: Types.MetaIdField? = null,
-    override val requiredRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val requiredRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val requiredVar: Boolean? = null,
     override val suffix: String? = null,
-    override val suffixVar: DefnDtoText? = null,
+    override val suffixVar: DefnDtoTextData? = null,
     @Serializable(with = MetaIdEventSer::class) override val automationEventId: Types.MetaIdEvent? = null,
     @Serializable(with = MetaIdAutomationSer::class) override val automationId: Types.MetaIdAutomation? = null,
     @Serializable(with = MetaIdStepSer::class) override val automationStepId: Types.MetaIdStep? = null,
-    override val excludePipelineVarIdSet: Array<@Serializable(with = MetaIdPipelineVarSer::class) Types.MetaIdPipelineVar>? = null,
-    override val includeOptionMap: DefnStudioMapOfDtoOption? = null,
+    override val excludePipelineVarIdSet: List<@Serializable(with = MetaIdPipelineVarSer::class) Types.MetaIdPipelineVar>? = null,
+    override val includeOptionMap: DefnStudioMapOfDtoOptionData? = null,
     override val multiSelect: Boolean? = null,
     override val pipelineFormKind: EnumDefnPipelineFormKind? = null
 ) : DefnCompSeal, DefnStudioPickPipelineVarId

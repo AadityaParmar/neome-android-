@@ -11,6 +11,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class StudioDtoPermissionMatrixData(
     override val defaultPermission: EnumDefnPermission? = null,
-    override val keys: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>,
+    override val keys: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>,
     override val map: Map<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole, EnumDefnPermission>
 ) : StudioDtoPermissionMatrix

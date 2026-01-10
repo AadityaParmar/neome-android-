@@ -4,6 +4,7 @@ import com.neome.api.ent.entMain.sig.SigFormMappingResultGet
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.dto.FormValue
 import com.neome.api.nucleus.base.sig.Sig
+import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdFormSer
 import kotlinx.serialization.Serializable
@@ -12,6 +13,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SigFormMappingResultGetData(
     @Serializable(with = MetaIdFormSer::class) override val formId: Types.MetaIdForm,
-    override val formValue: FormValue,
-    override val outputFieldIdSet: Array<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null
+    override val formValue: FormValueData,
+    override val outputFieldIdSet: List<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null
 ) : SigFormMappingResultGet

@@ -6,6 +6,7 @@ import com.neome.api.ent.base.dto.DtoEntActionSpreadsheetEditor
 import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.EnumDefnKindAction
+import com.neome.core.common.serializer.api.ent.base.dto.DtoEntActionPermissionData
 import com.neome.core.common.serializer.sysId.MetaIdActionSer
 import com.neome.core.common.serializer.sysId.MetaIdCompSer
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
@@ -29,10 +30,10 @@ data class DtoEntActionSpreadsheetEditorData(
     override val label: String? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val tooltip: String? = null,
-    override val actionPermissionMap: Map<@Serializable(with = MetaIdActionSer::class) Types.MetaIdAction, DtoEntActionPermission>? = null,
-    override val bulkInsertRoleSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
-    override val bulkUpdateFieldIdSet: Array<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
-    override val bulkUpdateRoleSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val actionPermissionMap: Map<@Serializable(with = MetaIdActionSer::class) Types.MetaIdAction, DtoEntActionPermissionData>? = null,
+    override val bulkInsertRoleSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val bulkUpdateFieldIdSet: List<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
+    override val bulkUpdateRoleSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val defaultValueMap: Map<@Serializable(with = MetaIdCompSer::class) Types.MetaIdComp, JsonElement>? = null,
     override val doNotOpenAside: Boolean? = null,
     @Serializable(with = MetaIdFormSer::class) override val inputFormId: Types.MetaIdForm? = null,

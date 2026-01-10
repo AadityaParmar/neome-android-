@@ -8,6 +8,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class NeatPathData(
     override val caption: EnumNeatPathCaption? = null,
-    override val primary: Array<String>? = null,
+    override val primary: List<String>? = null,
     override val secondary: String? = null
 ) : NeatPath

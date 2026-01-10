@@ -10,6 +10,8 @@ import com.neome.api.meta.base.dto.DefnDtoText
 import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.dto.DefnFieldSwitch
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoTextData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer
 import com.neome.core.common.serializer.sysId.SymbolSer
@@ -24,7 +26,7 @@ sealed interface DefnFieldSwitchSeal : DefnFieldSwitch
 data class DefnFieldSwitchData(
     override val disabled: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val disabledFieldId: Types.MetaIdField? = null,
-    override val disabledRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val disabledRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val disabledVar: Boolean? = null,
     override val hidden: Boolean? = null,
     override val hideDirtyIndicator: Boolean? = null,
@@ -33,7 +35,7 @@ data class DefnFieldSwitchData(
     override val maxWidth: Long? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val pb: Long? = null,
-    override val permissionMatrix: DefnDtoPermissionMatrix? = null,
+    override val permissionMatrix: DefnDtoPermissionMatrixData? = null,
     override val pl: Long? = null,
     override val pr: Long? = null,
     override val pt: Long? = null,
@@ -44,26 +46,26 @@ data class DefnFieldSwitchData(
     override val autoFocus: Boolean? = null,
     override val helperText: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val helperTextFieldId: Types.MetaIdField? = null,
-    override val helperTextVar: DefnDtoText? = null,
+    override val helperTextVar: DefnDtoTextData? = null,
     override val hideLabel: Boolean? = null,
     override val icon: String? = null,
     override val iconVar: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val labelFieldId: Types.MetaIdField? = null,
     override val placeHolder: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val placeHolderFieldId: Types.MetaIdField? = null,
-    override val placeHolderVar: DefnDtoText? = null,
+    override val placeHolderVar: DefnDtoTextData? = null,
     override val prefix: String? = null,
-    override val prefixVar: DefnDtoText? = null,
+    override val prefixVar: DefnDtoTextData? = null,
     override val required: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val requiredFieldId: Types.MetaIdField? = null,
-    override val requiredRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val requiredRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val requiredVar: Boolean? = null,
     override val suffix: String? = null,
-    override val suffixVar: DefnDtoText? = null,
+    override val suffixVar: DefnDtoTextData? = null,
     override val captureLocation: Boolean? = null,
     override val captureTime: Boolean? = null,
     override val captureUser: Boolean? = null,
-    override val checkboxLabelVar: DefnDtoText? = null,
+    override val checkboxLabelVar: DefnDtoTextData? = null,
     @Serializable(with = MetaIdFieldSer::class) override val defaultFieldId: Types.MetaIdField? = null,
     override val defaultValue: Boolean? = null,
     override val defaultVar: Boolean? = null,
@@ -74,5 +76,5 @@ data class DefnFieldSwitchData(
     override val showAsCheckbox: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val showAsCheckboxFieldId: Types.MetaIdField? = null,
     override val showAsCheckboxVar: Boolean? = null,
-    override val showCapturedValuesOnAside: Array<EnumDefnCaptureValueKind>? = null
+    override val showCapturedValuesOnAside: List<EnumDefnCaptureValueKind>? = null
 ) : DefnCompSeal, DefnFieldSwitch

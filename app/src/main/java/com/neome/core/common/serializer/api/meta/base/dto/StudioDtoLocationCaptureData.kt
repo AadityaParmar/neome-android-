@@ -11,11 +11,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioDtoLocationCaptureData(
-    override val excludeDaysSet: Array<EnumDefnDay>? = null,
+    override val excludeDaysSet: List<EnumDefnDay>? = null,
     override val frequencyBasedOnDistance: Long? = null,
     override val frequencyBasedOnTime: Long? = null,
     @Serializable(with = AnyTimeSer::class) override val fromTime: Types.AnyTime? = null,
-    override val roleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val roleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     @Serializable(with = AnyTimeSer::class) override val toTime: Types.AnyTime? = null,
     override val type: EnumDefnLocationCapturingMode? = null
 ) : StudioDtoLocationCapture

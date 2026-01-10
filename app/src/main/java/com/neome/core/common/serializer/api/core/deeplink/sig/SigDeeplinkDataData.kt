@@ -6,6 +6,8 @@ import com.neome.api.core.base.dto.DtoDeeplinkWebPreview
 import com.neome.api.core.deeplink.sig.SigDeeplinkData
 import com.neome.api.meta.base.Types
 import com.neome.api.nucleus.base.sig.Sig
+import com.neome.core.common.serializer.api.core.base.dto.DeeplinkDataPayloadData
+import com.neome.core.common.serializer.api.core.base.dto.DtoDeeplinkWebPreviewData
 import com.neome.core.common.serializer.sysId.ArtifactIdSer
 import kotlinx.serialization.Serializable
 
@@ -14,7 +16,7 @@ import kotlinx.serialization.Serializable
 data class SigDeeplinkDataData(
     @Serializable(with = ArtifactIdSer::class) override val artifactId: Types.ArtifactId,
     override val deeplinkActionType: EnumDeeplinkActionType,
-    override val payload: DeeplinkDataPayload? = null,
-    override val preview: DtoDeeplinkWebPreview? = null,
+    override val payload: DeeplinkDataPayloadData? = null,
+    override val preview: DtoDeeplinkWebPreviewData? = null,
     override val requiredSignIn: Boolean
 ) : SigDeeplinkData

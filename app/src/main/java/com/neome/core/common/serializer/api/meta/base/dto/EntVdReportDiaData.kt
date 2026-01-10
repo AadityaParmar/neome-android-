@@ -9,6 +9,11 @@ import com.neome.api.meta.base.dto.EntVdReport
 import com.neome.api.meta.base.dto.EntVdReportDia
 import com.neome.api.meta.base.dto.EntVdReportIOForm
 import com.neome.api.meta.base.dto.EntVdViewport
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdNoteData
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdRegionData
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdReportData
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdReportIOFormData
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdViewportData
 import com.neome.core.common.serializer.sysId.MetaIdFormSer
 import com.neome.core.common.serializer.sysId.MetaIdModuleSer
 import com.neome.core.common.serializer.sysId.MetaIdReportSer
@@ -23,12 +28,12 @@ import kotlinx.serialization.Serializable
 data class EntVdReportDiaData(
     override val isDefault: Boolean? = null,
     @Serializable(with = MetaIdModuleSer::class) override val moduleId: Types.MetaIdModule? = null,
-    override val noteMap: Map<@Serializable(with = MetaIdVdNoteSer::class) Types.MetaIdVdNote, EntVdNote>,
-    override val regionMap: Map<@Serializable(with = MetaIdVdRegionSer::class) Types.MetaIdVdRegion, EntVdRegion>,
-    override val viewport: EntVdViewport? = null,
-    override val ioFormMap: Map<@Serializable(with = MetaIdFormSer::class) Types.MetaIdForm, EntVdReportIOForm>? = null,
+    override val noteMap: Map<@Serializable(with = MetaIdVdNoteSer::class) Types.MetaIdVdNote, EntVdNoteData>,
+    override val regionMap: Map<@Serializable(with = MetaIdVdRegionSer::class) Types.MetaIdVdRegion, EntVdRegionData>,
+    override val viewport: EntVdViewportData? = null,
+    override val ioFormMap: Map<@Serializable(with = MetaIdFormSer::class) Types.MetaIdForm, EntVdReportIOFormData>? = null,
     override val label: String? = null,
     @Serializable(with = MetaIdVdReportDiaSer::class) override val metaId: Types.MetaIdVdReportDia,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
-    override val reportMap: Map<@Serializable(with = MetaIdReportSer::class) Types.MetaIdReport, EntVdReport>? = null
+    override val reportMap: Map<@Serializable(with = MetaIdReportSer::class) Types.MetaIdReport, EntVdReportData>? = null
 ) : EntVdReportDia

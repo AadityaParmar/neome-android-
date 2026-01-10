@@ -9,5 +9,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MsgReverseGeocodeData(
-    override val geoPoints: Array<@Serializable(with = GeoPointSer::class) Types.GeoPoint>
+    override val geoPoints: List<@Serializable(with = GeoPointSer::class) Types.GeoPoint>
 ) : MsgReverseGeocode

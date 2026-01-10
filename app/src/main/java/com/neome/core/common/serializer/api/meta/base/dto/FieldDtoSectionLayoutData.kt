@@ -3,6 +3,7 @@ package com.neome.core.common.serializer.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnPlacement
 import com.neome.api.meta.base.dto.DefnDtoColor
 import com.neome.api.meta.base.dto.FieldDtoSectionLayout
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoColorData
 import kotlinx.serialization.Serializable
 
 
@@ -10,11 +11,11 @@ import kotlinx.serialization.Serializable
 data class FieldDtoSectionLayoutData(
     override val alignItems: EnumDefnPlacement? = null,
     override val autoSize: Boolean? = null,
-    override val backgroundColorVar: DefnDtoColor? = null,
+    override val backgroundColorVar: DefnDtoColorData? = null,
     override val borderBottom: Boolean? = null,
     override val borderBottomLeftRadius: Long? = null,
     override val borderBottomRightRadius: Long? = null,
-    override val borderColor: DefnDtoColor? = null,
+    override val borderColor: DefnDtoColorData? = null,
     override val borderLeft: Boolean? = null,
     override val borderRight: Boolean? = null,
     override val borderTop: Boolean? = null,
@@ -35,6 +36,6 @@ data class FieldDtoSectionLayoutData(
     override val pl: Long? = null,
     override val pr: Long? = null,
     override val pt: Long? = null,
-    override val textColorVar: DefnDtoColor? = null,
+    override val textColorVar: DefnDtoColorData? = null,
     override val width: String? = null
 ) : FieldDtoSectionLayout

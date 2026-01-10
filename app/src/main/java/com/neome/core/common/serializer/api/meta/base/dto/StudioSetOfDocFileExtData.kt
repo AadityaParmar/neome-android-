@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioSetOfDocFileExtData(
-    override val valueSet: Array<EnumDefnDocFileExt>
+    override val valueSet: List<EnumDefnDocFileExt>
 ) : StudioSetOfDocFileExt

@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class DtoEntActionPermissionData(
     @Serializable(with = MetaIdActionSer::class) override val actionId: Types.MetaIdAction,
-    override val deviceSizeSet: Array<EnumDefnDeviceSize>? = null,
+    override val deviceSizeSet: List<EnumDefnDeviceSize>? = null,
     override val hidden: Boolean? = null,
     override val menuGroup: String? = null
 ) : DtoEntActionPermission

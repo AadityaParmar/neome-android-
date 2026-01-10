@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioSetOfPluginSecurityAccessData(
-    override val valueSet: Array<EnumDefnPluginSecurityAccess>
+    override val valueSet: List<EnumDefnPluginSecurityAccess>
 ) : StudioSetOfPluginSecurityAccess

@@ -10,5 +10,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MsgPdfMergeData(
     override val fileName: String? = null,
-    override val pdfMediaIdSet: Array<@Serializable(with = MediaIdSer::class) Types.MediaId>
+    override val pdfMediaIdSet: List<@Serializable(with = MediaIdSer::class) Types.MediaId>
 ) : MsgPdfMerge

@@ -15,6 +15,6 @@ data class DtoAgentEntUserImportData(
     override val handle: String,
     @Serializable(with = EntUserIdSer::class) override val managerId: Types.EntUserId? = null,
     override val nickName: String,
-    override val roleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val roleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val userVariableValueMap: Map<@Serializable(with = MetaIdVarSer::class) Types.MetaIdVar, JsonElement>? = null
 ) : DtoAgentEntUserImport

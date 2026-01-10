@@ -9,6 +9,11 @@ import com.neome.api.meta.base.dto.StudioFieldMap
 import com.neome.api.meta.base.dto.StudioGrid
 import com.neome.api.meta.base.dto.StudioMapOfActionPermission
 import com.neome.api.meta.base.dto.StudioMapOfLayoutGrid
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDetailsData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioFieldMapData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioMapOfActionPermissionData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioMapOfLayoutGridData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdGridSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer
@@ -19,21 +24,21 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class StudioGridData(
     override val aiInstructions: String? = null,
-    override val details: StudioDetails,
+    override val details: StudioDetailsData,
     override val disabled: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val disabledFieldId: Types.MetaIdField? = null,
-    override val disabledRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val disabledRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     @Serializable(with = MetaIdVarSer::class) override val disabledVarId: Types.MetaIdVar? = null,
-    override val permissionMatrix: StudioDtoPermissionMatrix? = null,
+    override val permissionMatrix: StudioDtoPermissionMatrixData? = null,
     override val type: EnumStudioCompType? = null,
-    override val actionPermissionMap: StudioMapOfActionPermission? = null,
-    override val fieldMap: StudioFieldMap,
-    override val layoutGridMap: StudioMapOfLayoutGrid? = null,
+    override val actionPermissionMap: StudioMapOfActionPermissionData? = null,
+    override val fieldMap: StudioFieldMapData,
+    override val layoutGridMap: StudioMapOfLayoutGridData? = null,
     override val maxRows: Long? = null,
     @Serializable(with = MetaIdVarSer::class) override val maxRowsVarId: Types.MetaIdVar? = null,
     @Serializable(with = MetaIdGridSer::class) override val metaId: Types.MetaIdGrid,
     override val minRows: Long? = null,
     @Serializable(with = MetaIdVarSer::class) override val minRowsVarId: Types.MetaIdVar? = null,
-    override val rowActionPermissionMap: StudioMapOfActionPermission? = null,
+    override val rowActionPermissionMap: StudioMapOfActionPermissionData? = null,
     @Serializable(with = MetaIdFieldSer::class) override val showAllRowsFieldId: Types.MetaIdField? = null
 ) : StudioGrid

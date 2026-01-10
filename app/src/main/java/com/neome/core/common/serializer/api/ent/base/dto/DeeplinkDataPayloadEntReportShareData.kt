@@ -8,6 +8,9 @@ import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.EnumDefnRenderingKind
 import com.neome.api.meta.base.dto.DefnForm
 import com.neome.api.meta.base.dto.FormValue
+import com.neome.core.common.serializer.api.ent.base.dto.DeeplinkDataPayloadEntHeaderData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
 import com.neome.core.common.serializer.sysId.MetaIdLayoutFormSer
 import kotlinx.serialization.Serializable
 
@@ -15,9 +18,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class DeeplinkDataPayloadEntReportShareData(
     override val deeplinkActionType: EnumDeeplinkActionType,
-    override val header: DeeplinkDataPayloadEntHeader? = null,
-    override val defnForm: DefnForm,
-    override val formValue: FormValue,
+    override val header: DeeplinkDataPayloadEntHeaderData? = null,
+    override val defnForm: DefnFormData,
+    override val formValue: FormValueData,
     @Serializable(with = MetaIdLayoutFormSer::class) override val outputFormContentLayoutId: Types.MetaIdLayoutForm? = null,
     @Serializable(with = MetaIdLayoutFormSer::class) override val outputFormTemplateLayoutId: Types.MetaIdLayoutForm? = null,
     override val paperHeight: Long? = null,

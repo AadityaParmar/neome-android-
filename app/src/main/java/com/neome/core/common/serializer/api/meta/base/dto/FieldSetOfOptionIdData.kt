@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FieldSetOfOptionIdData(
-    override val displaySet: Array<String>? = null,
-    override val valueSet: Array<String>
+    override val displaySet: List<String>? = null,
+    override val valueSet: List<String>
 ) : FieldSetOfOptionId

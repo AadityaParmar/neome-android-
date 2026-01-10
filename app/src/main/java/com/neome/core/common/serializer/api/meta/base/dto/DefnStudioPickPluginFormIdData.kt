@@ -8,6 +8,8 @@ import com.neome.api.meta.base.dto.DefnStudioMapOfDtoOption
 import com.neome.api.meta.base.dto.DefnStudioPickFormId
 import com.neome.api.meta.base.dto.DefnStudioPickPluginFormId
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfDtoOptionData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdFormSer
 import com.neome.core.common.serializer.sysId.MetaIdPluginSer
@@ -25,7 +27,7 @@ sealed interface DefnStudioPickPluginFormIdSeal : DefnStudioPickPluginFormId
 data class DefnStudioPickPluginFormIdData(
     override val disabled: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val disabledFieldId: Types.MetaIdField? = null,
-    override val disabledRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val disabledRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val disabledVar: Boolean? = null,
     override val hidden: Boolean? = null,
     override val hideDirtyIndicator: Boolean? = null,
@@ -34,7 +36,7 @@ data class DefnStudioPickPluginFormIdData(
     override val maxWidth: Long? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val pb: Long? = null,
-    override val permissionMatrix: DefnDtoPermissionMatrix? = null,
+    override val permissionMatrix: DefnDtoPermissionMatrixData? = null,
     override val pl: Long? = null,
     override val pr: Long? = null,
     override val pt: Long? = null,
@@ -43,8 +45,8 @@ data class DefnStudioPickPluginFormIdData(
     @Serializable(with = MetaIdFieldSer::class) override val metaId: Types.MetaIdField,
     override val alias: String? = null,
     override val allowSystemForms: Boolean? = null,
-    override val excludeFormIdSet: Array<@Serializable(with = MetaIdFormSer::class) Types.MetaIdForm>? = null,
-    override val includeOptionMap: DefnStudioMapOfDtoOption? = null,
+    override val excludeFormIdSet: List<@Serializable(with = MetaIdFormSer::class) Types.MetaIdForm>? = null,
+    override val includeOptionMap: DefnStudioMapOfDtoOptionData? = null,
     @Serializable(with = PluginApiIdSer::class) override val pluginApiId: Types.PluginApiId? = null,
     @Serializable(with = MetaIdPluginSer::class) override val pluginId: Types.MetaIdPlugin? = null
 ) : DefnCompSeal, DefnStudioPickPluginFormId

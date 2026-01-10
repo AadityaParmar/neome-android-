@@ -8,6 +8,7 @@ import com.neome.api.meta.base.Types.EnumDefnWizardNavigationMode
 import com.neome.api.meta.base.dto.StudioDtoLayoutForm
 import com.neome.api.meta.base.dto.StudioDtoLayoutFormEditor
 import com.neome.api.meta.base.dto.StudioMapOfLayoutFormEditorComposite
+import com.neome.core.common.serializer.api.meta.base.dto.StudioMapOfLayoutFormEditorCompositeData
 import com.neome.core.common.serializer.sysId.MetaIdCompositeSer
 import com.neome.core.common.serializer.sysId.MetaIdLayoutFormSer
 import com.neome.core.common.serializer.sysId.SymbolSer
@@ -20,12 +21,12 @@ data class StudioDtoLayoutFormEditorData(
     @Serializable(with = MetaIdLayoutFormSer::class) override val metaId: Types.MetaIdLayoutForm,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val type: EnumDefnFormLayoutType? = null,
-    override val allowToSwitchLayoutIdSet: Array<@Serializable(with = MetaIdLayoutFormSer::class) Types.MetaIdLayoutForm>? = null,
+    override val allowToSwitchLayoutIdSet: List<@Serializable(with = MetaIdLayoutFormSer::class) Types.MetaIdLayoutForm>? = null,
     override val editorLayoutRenderingMode: EnumDefnEditorLayoutRenderingMode? = null,
-    override val formEditorLayoutIdSet: Array<@Serializable(with = MetaIdLayoutFormSer::class) Types.MetaIdLayoutForm>? = null,
-    override val hideLabelCompositeIdSet: Array<@Serializable(with = MetaIdCompositeSer::class) Types.MetaIdComposite>? = null,
+    override val formEditorLayoutIdSet: List<@Serializable(with = MetaIdLayoutFormSer::class) Types.MetaIdLayoutForm>? = null,
+    override val hideLabelCompositeIdSet: List<@Serializable(with = MetaIdCompositeSer::class) Types.MetaIdComposite>? = null,
     override val label: String? = null,
-    override val layoutCompositeMap: StudioMapOfLayoutFormEditorComposite? = null,
+    override val layoutCompositeMap: StudioMapOfLayoutFormEditorCompositeData? = null,
     override val navigationMode: EnumDefnWizardNavigationMode? = null,
     override val nextButtonLabel: String? = null,
     override val prevButtonLabel: String? = null,

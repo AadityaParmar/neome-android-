@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FieldChipSetDeviceTypeData(
-    override val valueSet: Array<EnumDeviceType>
+    override val valueSet: List<EnumDeviceType>
 ) : FieldChipSetDeviceType

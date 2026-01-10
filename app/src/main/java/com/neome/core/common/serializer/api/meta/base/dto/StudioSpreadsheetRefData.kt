@@ -9,6 +9,11 @@ import com.neome.api.meta.base.dto.StudioFieldMap
 import com.neome.api.meta.base.dto.StudioMapOfActionPermission
 import com.neome.api.meta.base.dto.StudioSpreadsheetRef
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDetailsData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioFieldMapData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioMapOfActionPermissionData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioValueVarIdConditionData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdLayoutGridSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer
@@ -21,20 +26,20 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class StudioSpreadsheetRefData(
     override val aiInstructions: String? = null,
-    override val details: StudioDetails,
+    override val details: StudioDetailsData,
     override val disabled: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val disabledFieldId: Types.MetaIdField? = null,
-    override val disabledRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val disabledRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     @Serializable(with = MetaIdVarSer::class) override val disabledVarId: Types.MetaIdVar? = null,
-    override val permissionMatrix: StudioDtoPermissionMatrix? = null,
+    override val permissionMatrix: StudioDtoPermissionMatrixData? = null,
     override val type: EnumStudioCompType? = null,
-    override val actionPermissionMap: StudioMapOfActionPermission? = null,
-    override val fieldMap: StudioFieldMap,
-    override val filterConditionVarId: StudioValueVarIdCondition? = null,
+    override val actionPermissionMap: StudioMapOfActionPermissionData? = null,
+    override val fieldMap: StudioFieldMapData,
+    override val filterConditionVarId: StudioValueVarIdConditionData? = null,
     @Serializable(with = MetaIdLayoutGridSer::class) override val layoutSpreadsheetId: Types.MetaIdLayoutGrid? = null,
     override val maxRecords: Long? = null,
     @Serializable(with = MetaIdSpreadsheetRefSer::class) override val metaId: Types.MetaIdSpreadsheetRef,
     @Serializable(with = MetaIdFieldSer::class) override val refTargetFieldId: Types.MetaIdField? = null,
-    override val rowActionPermissionMap: StudioMapOfActionPermission? = null,
+    override val rowActionPermissionMap: StudioMapOfActionPermissionData? = null,
     @Serializable(with = MetaIdSpreadsheetSer::class) override val spreadsheetId: Types.MetaIdSpreadsheet? = null
 ) : StudioSpreadsheetRef

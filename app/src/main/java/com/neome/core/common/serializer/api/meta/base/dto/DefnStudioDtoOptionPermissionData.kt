@@ -9,5 +9,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class DefnStudioDtoOptionPermissionData(
     @Serializable(with = MetaIdRoleSer::class) override val metaId: Types.MetaIdRole,
-    override val optionIdSet: Array<String>
+    override val optionIdSet: List<String>
 ) : DefnStudioDtoOptionPermission

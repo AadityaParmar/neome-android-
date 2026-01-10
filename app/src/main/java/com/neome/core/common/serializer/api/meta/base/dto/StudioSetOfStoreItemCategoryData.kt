@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioSetOfStoreItemCategoryData(
-    override val valueSet: Array<EnumStoreLabel>
+    override val valueSet: List<EnumStoreLabel>
 ) : StudioSetOfStoreItemCategory

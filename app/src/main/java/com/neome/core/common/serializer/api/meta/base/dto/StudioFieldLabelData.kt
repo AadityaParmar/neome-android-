@@ -10,6 +10,10 @@ import com.neome.api.meta.base.dto.StudioDtoPermissionMatrix
 import com.neome.api.meta.base.dto.StudioField
 import com.neome.api.meta.base.dto.StudioFieldLabel
 import com.neome.api.meta.base.dto.StudioValueVarIdText
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDetailsData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoColorData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioValueVarIdTextData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer
 import com.neome.core.common.serializer.sysId.MetaIdVarSer
@@ -19,15 +23,15 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class StudioFieldLabelData(
     override val aiInstructions: String? = null,
-    override val details: StudioDetails,
+    override val details: StudioDetailsData,
     override val disabled: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val disabledFieldId: Types.MetaIdField? = null,
-    override val disabledRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val disabledRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     @Serializable(with = MetaIdVarSer::class) override val disabledVarId: Types.MetaIdVar? = null,
-    override val permissionMatrix: StudioDtoPermissionMatrix? = null,
+    override val permissionMatrix: StudioDtoPermissionMatrixData? = null,
     override val type: EnumStudioCompType? = null,
     @Serializable(with = MetaIdFieldSer::class) override val metaId: Types.MetaIdField,
-    override val bgColor: StudioDtoColor? = null,
+    override val bgColor: StudioDtoColorData? = null,
     @Serializable(with = MetaIdVarSer::class) override val bgColorVarId: Types.MetaIdVar? = null,
     override val bold: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val boldFieldId: Types.MetaIdField? = null,
@@ -46,7 +50,7 @@ data class StudioFieldLabelData(
     @Serializable(with = MetaIdVarSer::class) override val strikeThroughVarId: Types.MetaIdVar? = null,
     override val textPattern: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val textPatternFieldId: Types.MetaIdField? = null,
-    override val textPatternVarId: StudioValueVarIdText? = null,
+    override val textPatternVarId: StudioValueVarIdTextData? = null,
     override val textSize: EnumDefnTextSize? = null,
     @Serializable(with = MetaIdFieldSer::class) override val textSizeFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdVarSer::class) override val textSizeVarId: Types.MetaIdVar? = null,

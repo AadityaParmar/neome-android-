@@ -10,6 +10,8 @@ import com.neome.api.meta.base.dto.StudioEntDeeplinkSpreadsheetInsert
 import com.neome.api.meta.base.dto.StudioEntDeeplinkWithHeader
 import com.neome.api.meta.base.dto.StudioModuleSelection
 import com.neome.api.meta.base.dto.StudioValueVarIdParagraph
+import com.neome.core.common.serializer.api.meta.base.dto.StudioModuleSelectionData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioValueVarIdParagraphData
 import com.neome.core.common.serializer.sysId.MetaIdDeeplinkSer
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdLayoutFormSer
@@ -22,20 +24,20 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioEntDeeplinkSpreadsheetInsertData(
-    override val creationRoles: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val creationRoles: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val description: String? = null,
     override val expiry: EnumDefnDeeplinkExpiry? = null,
     override val kind: EnumDefnKindDeeplink,
-    override val makeUserDefaultRoles: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val makeUserDefaultRoles: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     @Serializable(with = MetaIdDeeplinkSer::class) override val metaId: Types.MetaIdDeeplink,
-    override val modules: StudioModuleSelection? = null,
+    override val modules: StudioModuleSelectionData? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val showEnterpriseImageInLinkPreview: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val targetUserHandleFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdSpreadsheetSer::class) override val targetUserSpreadsheetId: Types.MetaIdSpreadsheet? = null,
     override val userFieldMap: Map<EnumDefnUserProps, @Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
     override val visibilityConstraint: EnumDefnDeeplinkConstraint? = null,
-    override val hyperlinkVarIdSet: Array<@Serializable(with = MetaIdVarSer::class) Types.MetaIdVar>? = null,
+    override val hyperlinkVarIdSet: List<@Serializable(with = MetaIdVarSer::class) Types.MetaIdVar>? = null,
     override val showEnterprise: Boolean? = null,
     override val showHeader: Boolean? = null,
     override val transparentHeader: Boolean? = null,
@@ -47,5 +49,5 @@ data class StudioEntDeeplinkSpreadsheetInsertData(
     @Serializable(with = MetaIdDeeplinkSer::class) override val successDeeplinkId: Types.MetaIdDeeplink? = null,
     @Serializable(with = MetaIdVarSer::class) override val successMessageBgColorVarId: Types.MetaIdVar? = null,
     @Serializable(with = MetaIdVarSer::class) override val successMessageTextSizeVarId: Types.MetaIdVar? = null,
-    override val successMessageVarId: StudioValueVarIdParagraph? = null
+    override val successMessageVarId: StudioValueVarIdParagraphData? = null
 ) : StudioEntDeeplinkSpreadsheetInsert

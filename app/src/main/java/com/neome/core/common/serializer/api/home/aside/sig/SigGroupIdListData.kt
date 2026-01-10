@@ -9,5 +9,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SigGroupIdListData(
-    override val groupIdList: Array<@Serializable(with = GroupIdSer::class) Types.GroupId>
+    override val groupIdList: List<@Serializable(with = GroupIdSer::class) Types.GroupId>
 ) : SigGroupIdList

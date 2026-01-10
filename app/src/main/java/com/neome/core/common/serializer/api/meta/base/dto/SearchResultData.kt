@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SearchResultData(
-    override val result: Map<@Serializable(with = SearchPathSer::class) Types.SearchPath, Array<String>>? = null
+    override val result: Map<@Serializable(with = SearchPathSer::class) Types.SearchPath, List<String>>? = null
 ) : SearchResult

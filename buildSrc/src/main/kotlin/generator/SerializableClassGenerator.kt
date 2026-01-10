@@ -503,9 +503,15 @@ class SerializableClassGenerator(
             }
         }
 
-        // Import polymorphic root's Seal if this interface has a polymorphic ancestor
+        // Import Seal class if this interface is a polymorphic interface or has a polymorphic ancestor
+        val isPolymorphicInterface = interfaceInfo.name in config.polymorphicInterfaces
         val polymorphicRoot = findPolymorphicRootAncestor(interfaceInfo)
-        if (polymorphicRoot != null) {
+        
+        if (isPolymorphicInterface) {
+            // This IS the polymorphic interface, import its own Seal
+            val outputPackage = config.getOutputPackage(interfaceInfo.packageName)
+            imports.add("import $outputPackage.${interfaceInfo.name}Seal")
+        } else if (polymorphicRoot != null) {
             val rootOutputPackage = config.getOutputPackage(polymorphicRoot.packageName)
             imports.add("import $rootOutputPackage.${polymorphicRoot.name}Seal")
         }
@@ -531,6 +537,17 @@ class SerializableClassGenerator(
                         val polyOutputPackage = config.getOutputPackage(polyInfo.packageName)
                         imports.add("import $polyOutputPackage.${polyInterface}Seal")
                     }
+                }
+            }
+        }
+
+        // Import Data classes for interface types used in properties
+        allProps.forEach { prop ->
+            extractInterfaceTypesFromProperty(prop.type).forEach { interfaceName ->
+                val interfaceInfo = interfaceRegistry.values.find { it.name == interfaceName }
+                if (interfaceInfo != null) {
+                    val dataClassOutputPackage = config.getOutputPackage(interfaceInfo.packageName)
+                    imports.add("import $dataClassOutputPackage.${interfaceName}Data")
                 }
             }
         }
@@ -702,10 +719,17 @@ class SerializableClassGenerator(
         // Inheritance
         val inheritance = mutableListOf<String>()
 
+        // Check if this interface itself is a polymorphic interface
+        val isPolymorphicInterface = interfaceInfo.name in config.polymorphicInterfaces
+        
         // Check if this interface or any ancestor extends a polymorphic interface
         val polymorphicRoot = findPolymorphicRootAncestor(interfaceInfo)
         
-        if (polymorphicRoot != null) {
+        if (isPolymorphicInterface) {
+            // This IS the polymorphic interface, add both Seal and interface
+            inheritance.add("${interfaceInfo.name}Seal")
+            inheritance.add(interfaceInfo.name)
+        } else if (polymorphicRoot != null) {
             // Add the polymorphic root's Seal class first
             inheritance.add("${polymorphicRoot.name}Seal")
             // Then add own interface
@@ -741,10 +765,12 @@ class SerializableClassGenerator(
         if (!isGenericType) {
             // Simple type - check if it's a polymorphic interface first
             val typeWithSeal = replacePolymorphicInterfaceWithSeal(type)
+            // Then replace interface types with Data class types
+            val typeWithData = replaceInterfaceWithDataClass(typeWithSeal)
             // Then qualify SysId types
-            val sysIdTypes = extractSystemIdFromType(typeWithSeal)
+            val sysIdTypes = extractSystemIdFromType(typeWithData)
             hasDirectSysIdType = sysIdTypes.isNotEmpty()
-            return Pair(qualifySystemIdTypes(typeWithSeal), hasDirectSysIdType)
+            return Pair(qualifySystemIdTypes(typeWithData), hasDirectSysIdType)
         }
         
         // For generic types, we need to add inline serializer annotations
@@ -823,18 +849,21 @@ class SerializableClassGenerator(
         // First, replace polymorphic interface with Seal type
         val typeWithSeal = replacePolymorphicInterfaceWithSeal(param)
         
+        // Then replace interface types with Data class types
+        val typeWithData = replaceInterfaceWithDataClass(typeWithSeal)
+        
         // Check if this type needs a serializer
-        val sysIdType = extractSystemIdFromType(typeWithSeal).firstOrNull()
+        val sysIdType = extractSystemIdFromType(typeWithData).firstOrNull()
         
         if (sysIdType != null) {
             // Qualify the type first
-            val qualifiedType = qualifySystemIdTypes(typeWithSeal)
+            val qualifiedType = qualifySystemIdTypes(typeWithData)
             // Add inline serializer annotation
             return "@Serializable(with = ${sysIdType}Ser::class) $qualifiedType"
         }
         
         // No serializer needed, just qualify
-        return qualifySystemIdTypes(typeWithSeal)
+        return qualifySystemIdTypes(typeWithData)
     }
 
     /**
@@ -853,6 +882,71 @@ class SerializableClassGenerator(
         }
         
         return result
+    }
+
+    /**
+     * Replace interface types with their Data class types.
+     * e.g., DefnDtoPermissionMatrix -> DefnDtoPermissionMatrixData
+     * Only replaces types that are in the interface registry.
+     */
+    private fun replaceInterfaceWithDataClass(type: String): String {
+        var result = type
+        
+        // Extract the base type name (without nullable marker)
+        val baseType = type.trimEnd('?')
+        val isNullable = type.endsWith("?")
+        
+        // Skip if it's already a Seal or Data type
+        if (baseType.endsWith("Seal") || baseType.endsWith("Data")) {
+            return type
+        }
+        
+        // Check if this type is a known interface (not a polymorphic one, as those use Seal)
+        val interfaceInfo = interfaceRegistry.values.find { it.name == baseType }
+        
+        if (interfaceInfo != null && baseType !in config.polymorphicInterfaces) {
+            result = "${baseType}Data${if (isNullable) "?" else ""}"
+        }
+        
+        return result
+    }
+
+    /**
+     * Extract all interface types from a property type string.
+     * Handles simple types, generics, and nested generics.
+     * Used for generating Data class imports.
+     */
+    private fun extractInterfaceTypesFromProperty(type: String): List<String> {
+        val interfaceTypes = mutableListOf<String>()
+        
+        // Extract all potential type names using word pattern
+        val typePattern = Regex("""([A-Z][A-Za-z0-9]*)""")
+        typePattern.findAll(type).forEach { match ->
+            val typeName = match.groupValues[1]
+            
+            // Skip common Kotlin/Java types
+            if (typeName in setOf("Map", "List", "Set", "Array", "String", "Long", "Int", "Boolean", "Double", "Float", "Types", "Serializable", "JsonElement")) {
+                return@forEach
+            }
+            
+            // Skip if it ends with Data or Seal or Ser (already processed)
+            if (typeName.endsWith("Data") || typeName.endsWith("Seal") || typeName.endsWith("Ser")) {
+                return@forEach
+            }
+            
+            // Skip polymorphic interfaces (they use Seal)
+            if (typeName in config.polymorphicInterfaces) {
+                return@forEach
+            }
+            
+            // Check if this is a known interface
+            val interfaceInfo = interfaceRegistry.values.find { it.name == typeName }
+            if (interfaceInfo != null) {
+                interfaceTypes.add(typeName)
+            }
+        }
+        
+        return interfaceTypes.distinct()
     }
 
     /**
@@ -989,12 +1083,12 @@ class SerializableClassGenerator(
                 // Has a mapped data class
                 builder.appendLine("            $enumClassName.$enumValue.value -> ${subtypeName}Data.serializer()")
             } else {
-                // No mapping, use Seal serializer
-                builder.appendLine("            $enumClassName.$enumValue.value -> ${interfaceInfo.name}Seal.serializer()")
+                // No mapping, use Data serializer as default
+                builder.appendLine("            $enumClassName.$enumValue.value -> ${interfaceInfo.name}Data.serializer()")
             }
         }
 
-        builder.appendLine("            else -> ${interfaceInfo.name}Seal.serializer()")
+        builder.appendLine("            else -> ${interfaceInfo.name}Data.serializer()")
         builder.appendLine("        }")
         builder.appendLine("    }")
         builder.appendLine("}")

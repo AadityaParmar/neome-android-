@@ -6,6 +6,7 @@ import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.EnumDefnKindAction
 import com.neome.api.meta.base.dto.EntVdWorkflowPointer
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdWorkflowPointerData
 import com.neome.core.common.serializer.sysId.MetaIdActionSer
 import com.neome.core.common.serializer.sysId.MetaIdAutomationSer
 import com.neome.core.common.serializer.sysId.MetaIdFormSer
@@ -25,5 +26,5 @@ data class DtoEntActionExecuteWorkflowData(
     override val tooltip: String? = null,
     @Serializable(with = MetaIdFormSer::class) override val automationFormId: Types.MetaIdForm? = null,
     @Serializable(with = MetaIdAutomationSer::class) override val automationId: Types.MetaIdAutomation? = null,
-    override val workflowPointer: EntVdWorkflowPointer? = null
+    override val workflowPointer: EntVdWorkflowPointerData? = null
 ) : DtoEntActionExecuteWorkflow

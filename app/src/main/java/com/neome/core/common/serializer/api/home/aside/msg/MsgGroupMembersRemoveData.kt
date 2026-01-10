@@ -12,6 +12,6 @@ import kotlinx.serialization.Serializable
 data class MsgGroupMembersRemoveData(
     override val version: String? = null,
     @Serializable(with = GroupIdSer::class) override val groupId: Types.GroupId,
-    override val removeAdminSet: Array<@Serializable(with = EntUserIdSer::class) Types.EntUserId>? = null,
-    override val removeMemberSet: Array<@Serializable(with = EntUserIdSer::class) Types.EntUserId>? = null
+    override val removeAdminSet: List<@Serializable(with = EntUserIdSer::class) Types.EntUserId>? = null,
+    override val removeMemberSet: List<@Serializable(with = EntUserIdSer::class) Types.EntUserId>? = null
 ) : MsgGroupMembersRemove

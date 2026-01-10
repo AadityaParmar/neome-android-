@@ -16,6 +16,6 @@ data class StudioBuildRepeatSettingWeeksData(
     @Serializable(with = MetaIdVarSer::class) override val excludeSetOfDateVarId: Types.MetaIdVar? = null,
     override val frequency: Long? = null,
     override val repeatFrequencyKind: EnumDefnRepeatFrequencyKind,
-    override val setOfRepeatDay: Array<EnumDefnDay>? = null,
-    override val setOfTime: Array<@Serializable(with = AnyTimeSer::class) Types.AnyTime>? = null
+    override val setOfRepeatDay: List<EnumDefnDay>? = null,
+    override val setOfTime: List<@Serializable(with = AnyTimeSer::class) Types.AnyTime>? = null
 ) : StudioBuildRepeatSettingWeeks

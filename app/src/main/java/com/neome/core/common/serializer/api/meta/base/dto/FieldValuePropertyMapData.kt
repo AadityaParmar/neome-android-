@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FieldValuePropertyMapData(
-    override val keys: Array<String>? = null,
-    override val values: Array<String>? = null
+    override val keys: List<String>? = null,
+    override val values: List<String>? = null
 ) : FieldValuePropertyMap

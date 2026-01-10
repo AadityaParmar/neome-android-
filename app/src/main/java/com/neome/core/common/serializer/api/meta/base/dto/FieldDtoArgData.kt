@@ -16,8 +16,8 @@ data class FieldDtoArgData(
     @Serializable(with = MetaIdFieldSer::class) override val valueFieldId: Types.MetaIdField? = null,
     override val valueLong: Long? = null,
     @Serializable(with = SysIdSer::class) override val valueSysId: SysId? = null,
-    override val valueSysIdArray: Array<@Serializable(with = SysIdSer::class) SysId>? = null,
-    override val valueSysIdSet: Array<@Serializable(with = SysIdSer::class) SysId>? = null,
+    override val valueSysIdArray: List<@Serializable(with = SysIdSer::class) SysId>? = null,
+    override val valueSysIdSet: List<@Serializable(with = SysIdSer::class) SysId>? = null,
     override val valueText: String? = null,
-    override val valueTextArray: Array<String>? = null
+    override val valueTextArray: List<String>? = null
 ) : FieldDtoArg

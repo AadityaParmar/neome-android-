@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioSetOfRowAuditTrailData(
-    override val valueSet: Array<EnumDefnRowAuditTrail>
+    override val valueSet: List<EnumDefnRowAuditTrail>
 ) : StudioSetOfRowAuditTrail

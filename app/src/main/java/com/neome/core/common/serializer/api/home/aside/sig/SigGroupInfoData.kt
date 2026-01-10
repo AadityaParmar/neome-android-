@@ -6,6 +6,8 @@ import com.neome.api.home.base.dto.DtoGroupSettings
 import com.neome.api.home.base.dto.DtoUserGroupConfiguration
 import com.neome.api.meta.base.Types
 import com.neome.api.nucleus.base.sig.SigVersion
+import com.neome.core.common.serializer.api.home.base.dto.DtoGroupSettingsData
+import com.neome.core.common.serializer.api.home.base.dto.DtoUserGroupConfigurationData
 import com.neome.core.common.serializer.sysId.EntIdSer
 import com.neome.core.common.serializer.sysId.EntUserIdSer
 import com.neome.core.common.serializer.sysId.GroupIdSer
@@ -21,10 +23,10 @@ data class SigGroupInfoData(
     override val allowPromptAssistant: Boolean? = null,
     @Serializable(with = MediaIdAvatarSer::class) override val avatarId: Types.MediaIdAvatar? = null,
     @Serializable(with = EntIdSer::class) override val entId: Types.EntId,
-    override val groupConfiguration: DtoUserGroupConfiguration,
+    override val groupConfiguration: DtoUserGroupConfigurationData,
     @Serializable(with = GroupIdSer::class) override val groupId: Types.GroupId,
     override val label: String? = null,
     override val memberMap: Map<@Serializable(with = EntUserIdSer::class) Types.EntUserId, DtoGroupMemberMetaData>,
     override val name: String,
-    override val settings: DtoGroupSettings
+    override val settings: DtoGroupSettingsData
 ) : SigGroupInfo

@@ -10,5 +10,5 @@ import kotlinx.serialization.Serializable
 data class DtoCloneConfigData(
     override val cloneAdmin: Boolean? = null,
     override val cloneEntUser: Boolean? = null,
-    override val cloneSpreadsheetIdSet: Array<@Serializable(with = MetaIdSpreadsheetSer::class) Types.MetaIdSpreadsheet>? = null
+    override val cloneSpreadsheetIdSet: List<@Serializable(with = MetaIdSpreadsheetSer::class) Types.MetaIdSpreadsheet>? = null
 ) : DtoCloneConfig

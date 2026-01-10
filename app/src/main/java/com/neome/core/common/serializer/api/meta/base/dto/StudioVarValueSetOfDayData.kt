@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioVarValueSetOfDayData(
-    override val valueSet: Array<EnumDefnDay>
+    override val valueSet: List<EnumDefnDay>
 ) : StudioVarValueSetOfDay

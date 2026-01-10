@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class DescApiTypeSetData(
     override val fileName: String,
-    override val setMap: Map<String, Array<String>>
+    override val setMap: Map<String, List<String>>
 ) : DescApiTypeSet

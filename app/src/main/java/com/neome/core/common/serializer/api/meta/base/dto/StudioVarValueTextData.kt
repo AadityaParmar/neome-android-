@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioVarValueTextData(
-    override val paramSet: Array<String>? = null,
+    override val paramSet: List<String>? = null,
     override val value: String? = null
 ) : StudioVarValueText

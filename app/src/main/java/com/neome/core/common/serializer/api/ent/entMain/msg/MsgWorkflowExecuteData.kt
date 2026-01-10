@@ -5,6 +5,8 @@ import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.dto.EntVdWorkflowPointer
 import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.nucleus.base.msg.Msg
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdWorkflowPointerData
+import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
 import com.neome.core.common.serializer.sysId.MetaIdAutomationSer
 import com.neome.core.common.serializer.sysId.MetaIdVarSer
 import com.neome.core.common.serializer.sysId.RowIdSer
@@ -14,8 +16,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MsgWorkflowExecuteData(
     @Serializable(with = MetaIdAutomationSer::class) override val automationId: Types.MetaIdAutomation? = null,
-    override val formValue: FormValueRaw,
+    override val formValue: FormValueRawData,
     @Serializable(with = RowIdSer::class) override val inputFormGridRowId: Types.RowId? = null,
     @Serializable(with = MetaIdVarSer::class) override val inputMappingVarId: Types.MetaIdVar? = null,
-    override val workflowPointer: EntVdWorkflowPointer? = null
+    override val workflowPointer: EntVdWorkflowPointerData? = null
 ) : MsgWorkflowExecute

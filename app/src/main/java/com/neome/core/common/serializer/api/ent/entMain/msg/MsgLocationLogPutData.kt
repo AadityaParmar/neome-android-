@@ -10,7 +10,7 @@ import kotlinx.serialization.json.JsonElement
 
 @Serializable
 data class MsgLocationLogPutData(
-    override val entIdSet: Array<@Serializable(with = EntIdSer::class) Types.EntId>,
+    override val entIdSet: List<@Serializable(with = EntIdSer::class) Types.EntId>,
     override val name: String,
     override val summary: JsonElement
 ) : MsgLocationLogPut

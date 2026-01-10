@@ -7,6 +7,7 @@ import com.neome.api.meta.base.Types.EnumDefnKindAutomationStep
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 import com.neome.api.meta.base.dto.StudioEntAutomationStepAddSchedule
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
+import com.neome.core.common.serializer.api.meta.base.dto.StudioValueVarIdConditionData
 import com.neome.core.common.serializer.sysId.MetaIdAutomationSer
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdPipelineParamSer
@@ -20,7 +21,7 @@ import kotlinx.serialization.Serializable
 data class StudioEntAutomationStepAddScheduleData(
     override val description: String? = null,
     @Serializable(with = MetaIdPipelineParamSer::class) override val executionConditionInputPipelineVarId: Types.MetaIdPipelineParam? = null,
-    override val executionConditionVarId: StudioValueVarIdCondition? = null,
+    override val executionConditionVarId: StudioValueVarIdConditionData? = null,
     override val kind: EnumDefnKindAutomationStep,
     @Serializable(with = MetaIdStepSer::class) override val metaId: Types.MetaIdStep,
     @Serializable(with = SymbolSer::class) override val name: Symbol,

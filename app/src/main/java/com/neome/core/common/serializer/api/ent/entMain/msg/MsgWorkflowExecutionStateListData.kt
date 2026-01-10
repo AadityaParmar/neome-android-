@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MsgWorkflowExecutionStateListData(
-    override val filterWorkflowStateSet: Array<EnumWorkflowResultKind>? = null,
+    override val filterWorkflowStateSet: List<EnumWorkflowResultKind>? = null,
     override val from: String? = null,
     override val limit: Long? = null
 ) : MsgWorkflowExecutionStateList

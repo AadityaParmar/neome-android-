@@ -7,6 +7,8 @@ import com.neome.api.meta.base.dto.StudioDetails
 import com.neome.api.meta.base.dto.StudioSetOfNumber
 import com.neome.api.meta.base.dto.StudioVar
 import com.neome.api.meta.base.dto.StudioVarSetOfNumber
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDetailsData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioSetOfNumberData
 import com.neome.core.common.serializer.sysId.MetaIdVarSer
 import kotlinx.serialization.Serializable
 
@@ -14,8 +16,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class StudioVarSetOfNumberData(
     override val deploy: EnumDefnDeploy,
-    override val details: StudioDetails,
+    override val details: StudioDetailsData,
     override val kind: EnumStudioVarKind,
     @Serializable(with = MetaIdVarSer::class) override val metaId: Types.MetaIdVar,
-    override val value: StudioSetOfNumber? = null
+    override val value: StudioSetOfNumberData? = null
 ) : StudioVarSetOfNumber

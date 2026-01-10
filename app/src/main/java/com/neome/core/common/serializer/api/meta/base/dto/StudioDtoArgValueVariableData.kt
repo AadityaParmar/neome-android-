@@ -9,6 +9,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioDtoArgValueVariableData(
-    override val valuePathArray: Array<String>? = null,
+    override val valuePathArray: List<String>? = null,
     @Serializable(with = MetaIdVarSer::class) override val varId: Types.MetaIdVar
 ) : StudioDtoArgValueVariable

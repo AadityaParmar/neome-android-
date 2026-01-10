@@ -49,11 +49,7 @@ data class SerializableClassGeneratorConfig(
             "DtoMessagePayloadImage" to "image",
             "DtoMessagePayloadAudio" to "audio"
         ),
-        "DefnComp" to mapOf(
-            "DefnFieldText" to "text",
-            "DefnFieldNumber" to "number",
-            "DefnFieldSwitch" to "bool"
-        )
+        "DefnComp" to defnCompTypeMapping
     ),
 
     // Interfaces to skip during generation

@@ -5,12 +5,14 @@ import com.neome.api.meta.base.dto.AutoXform
 import com.neome.api.meta.base.dto.AutoXformStringIsMobileNumber
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioDtoArgValueParameter
+import com.neome.core.common.serializer.api.meta.base.dto.StudioBuildArgBinderData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoArgValueParameterData
 import kotlinx.serialization.Serializable
 
 
 @Serializable
 data class AutoXformStringIsMobileNumberData(
     override val kind: EnumDefnKindAutoXform? = null,
-    override val outputField: StudioDtoArgValueParameter? = null,
-    override val sourceField: StudioBuildArgBinder? = null
+    override val outputField: StudioDtoArgValueParameterData? = null,
+    override val sourceField: StudioBuildArgBinderData? = null
 ) : AutoXformStringIsMobileNumber

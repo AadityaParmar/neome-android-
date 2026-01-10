@@ -2,10 +2,11 @@ package com.neome.core.common.serializer.api.meta.base.dto
 
 import com.neome.api.meta.base.dto.DtoLogItem
 import com.neome.api.meta.base.dto.DtoLogItemList
+import com.neome.core.common.serializer.api.meta.base.dto.DtoLogItemData
 import kotlinx.serialization.Serializable
 
 
 @Serializable
 data class DtoLogItemListData(
-    override val children: Array<DtoLogItem>? = null
+    override val children: List<DtoLogItemData>? = null
 ) : DtoLogItemList

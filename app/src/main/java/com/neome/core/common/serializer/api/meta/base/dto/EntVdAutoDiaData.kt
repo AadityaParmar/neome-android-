@@ -9,6 +9,11 @@ import com.neome.api.meta.base.dto.EntVdDia
 import com.neome.api.meta.base.dto.EntVdNote
 import com.neome.api.meta.base.dto.EntVdRegion
 import com.neome.api.meta.base.dto.EntVdViewport
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdAutoEdgeData
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdAutoNodeData
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdNoteData
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdRegionData
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdViewportData
 import com.neome.core.common.serializer.sysId.MetaIdModuleSer
 import com.neome.core.common.serializer.sysId.MetaIdVdAutoDiaSer
 import com.neome.core.common.serializer.sysId.MetaIdVdAutoEdgeSer
@@ -23,13 +28,13 @@ import kotlinx.serialization.Serializable
 data class EntVdAutoDiaData(
     override val isDefault: Boolean? = null,
     @Serializable(with = MetaIdModuleSer::class) override val moduleId: Types.MetaIdModule? = null,
-    override val noteMap: Map<@Serializable(with = MetaIdVdNoteSer::class) Types.MetaIdVdNote, EntVdNote>,
-    override val regionMap: Map<@Serializable(with = MetaIdVdRegionSer::class) Types.MetaIdVdRegion, EntVdRegion>,
-    override val viewport: EntVdViewport? = null,
+    override val noteMap: Map<@Serializable(with = MetaIdVdNoteSer::class) Types.MetaIdVdNote, EntVdNoteData>,
+    override val regionMap: Map<@Serializable(with = MetaIdVdRegionSer::class) Types.MetaIdVdRegion, EntVdRegionData>,
+    override val viewport: EntVdViewportData? = null,
     override val description: String? = null,
-    override val edgeMap: Map<@Serializable(with = MetaIdVdAutoEdgeSer::class) Types.MetaIdVdAutoEdge, EntVdAutoEdge>,
+    override val edgeMap: Map<@Serializable(with = MetaIdVdAutoEdgeSer::class) Types.MetaIdVdAutoEdge, EntVdAutoEdgeData>,
     override val label: String? = null,
     @Serializable(with = MetaIdVdAutoDiaSer::class) override val metaId: Types.MetaIdVdAutoDia,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
-    override val nodeMap: Map<@Serializable(with = MetaIdVdAutoNodeSer::class) Types.MetaIdVdAutoNode, EntVdAutoNode>
+    override val nodeMap: Map<@Serializable(with = MetaIdVdAutoNodeSer::class) Types.MetaIdVdAutoNode, EntVdAutoNodeData>
 ) : EntVdAutoDia

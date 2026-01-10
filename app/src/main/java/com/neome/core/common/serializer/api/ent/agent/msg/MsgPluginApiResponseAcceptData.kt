@@ -5,14 +5,16 @@ import com.neome.api.ent.agent.msg.MsgPluginApiResponseAccept
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.nucleus.base.dto.EnvError
+import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
+import com.neome.core.common.serializer.api.nucleus.base.dto.EnvErrorData
 import com.neome.core.common.serializer.sysId.RequestIdSer
 import kotlinx.serialization.Serializable
 
 
 @Serializable
 data class MsgPluginApiResponseAcceptData(
-    override val pluginError: EnvError? = null,
+    override val pluginError: EnvErrorData? = null,
     @Serializable(with = RequestIdSer::class) override val requestId: Types.RequestId,
-    override val responseFormValue: FormValueRaw? = null,
+    override val responseFormValue: FormValueRawData? = null,
     override val responseActorPath: String
 ) : MsgPluginApiResponseAccept

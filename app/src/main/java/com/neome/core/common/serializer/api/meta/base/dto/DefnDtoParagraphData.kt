@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DefnDtoParagraphData(
-    override val value: Array<String>? = null
+    override val value: List<String>? = null
 ) : DefnDtoParagraph

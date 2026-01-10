@@ -8,7 +8,10 @@ import com.neome.api.meta.base.dto.DefnDtoPermissionMatrix
 import com.neome.api.meta.base.dto.DefnDtoText
 import com.neome.api.meta.base.dto.DefnFieldDateTime
 import com.neome.api.meta.base.dto.DefnFieldEditable
+import com.neome.core.common.serializer.api.meta.base.dto.DefnBuildDateTimeData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoTextData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer
 import com.neome.core.common.serializer.sysId.SymbolSer
@@ -24,7 +27,7 @@ sealed interface DefnFieldDateTimeSeal : DefnFieldDateTime
 data class DefnFieldDateTimeData(
     override val disabled: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val disabledFieldId: Types.MetaIdField? = null,
-    override val disabledRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val disabledRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val disabledVar: Boolean? = null,
     override val hidden: Boolean? = null,
     override val hideDirtyIndicator: Boolean? = null,
@@ -33,7 +36,7 @@ data class DefnFieldDateTimeData(
     override val maxWidth: Long? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val pb: Long? = null,
-    override val permissionMatrix: DefnDtoPermissionMatrix? = null,
+    override val permissionMatrix: DefnDtoPermissionMatrixData? = null,
     override val pl: Long? = null,
     override val pr: Long? = null,
     override val pt: Long? = null,
@@ -44,31 +47,31 @@ data class DefnFieldDateTimeData(
     override val autoFocus: Boolean? = null,
     override val helperText: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val helperTextFieldId: Types.MetaIdField? = null,
-    override val helperTextVar: DefnDtoText? = null,
+    override val helperTextVar: DefnDtoTextData? = null,
     override val hideLabel: Boolean? = null,
     override val icon: String? = null,
     override val iconVar: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val labelFieldId: Types.MetaIdField? = null,
     override val placeHolder: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val placeHolderFieldId: Types.MetaIdField? = null,
-    override val placeHolderVar: DefnDtoText? = null,
+    override val placeHolderVar: DefnDtoTextData? = null,
     override val prefix: String? = null,
-    override val prefixVar: DefnDtoText? = null,
+    override val prefixVar: DefnDtoTextData? = null,
     override val required: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val requiredFieldId: Types.MetaIdField? = null,
-    override val requiredRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val requiredRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val requiredVar: Boolean? = null,
     override val suffix: String? = null,
-    override val suffixVar: DefnDtoText? = null,
+    override val suffixVar: DefnDtoTextData? = null,
     @Serializable(with = MetaIdFieldSer::class) override val defaultFieldId: Types.MetaIdField? = null,
-    override val defaultValue: DefnBuildDateTime? = null,
-    override val defaultVar: DefnBuildDateTime? = null,
+    override val defaultValue: DefnBuildDateTimeData? = null,
+    override val defaultVar: DefnBuildDateTimeData? = null,
     override val displayDateFormat: String? = null,
-    override val max: DefnBuildDateTime? = null,
+    override val max: DefnBuildDateTimeData? = null,
     @Serializable(with = MetaIdFieldSer::class) override val maxFieldId: Types.MetaIdField? = null,
-    override val maxVar: DefnBuildDateTime? = null,
-    override val min: DefnBuildDateTime? = null,
+    override val maxVar: DefnBuildDateTimeData? = null,
+    override val min: DefnBuildDateTimeData? = null,
     @Serializable(with = MetaIdFieldSer::class) override val minFieldId: Types.MetaIdField? = null,
-    override val minVar: DefnBuildDateTime? = null,
+    override val minVar: DefnBuildDateTimeData? = null,
     @Serializable(with = TimeZoneKeySer::class) override val timeZone: Types.TimeZoneKey? = null
 ) : DefnCompSeal, DefnFieldDateTime

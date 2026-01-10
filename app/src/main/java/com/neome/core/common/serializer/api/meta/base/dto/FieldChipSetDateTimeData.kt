@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FieldChipSetDateTimeData(
-    override val valueSet: Array<String>
+    override val valueSet: List<String>
 ) : FieldChipSetDateTime

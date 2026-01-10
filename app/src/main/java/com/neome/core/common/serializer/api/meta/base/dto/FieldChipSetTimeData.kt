@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FieldChipSetTimeData(
-    override val valueSet: Array<@Serializable(with = AnyTimeSer::class) Types.AnyTime>
+    override val valueSet: List<@Serializable(with = AnyTimeSer::class) Types.AnyTime>
 ) : FieldChipSetTime

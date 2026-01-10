@@ -5,6 +5,7 @@ import com.neome.api.meta.base.Types.EnumLogItemType
 import com.neome.api.meta.base.Types.EnumLogTextType
 import com.neome.api.meta.base.dto.DtoLogItem
 import com.neome.api.meta.base.dto.DtoLogText
+import com.neome.core.common.serializer.api.meta.base.dto.DtoLogItemData
 import kotlinx.serialization.Serializable
 
 
@@ -15,7 +16,7 @@ data class DtoLogTextData(
     override val bgColor: String,
     override val bold: Boolean? = null,
     override val caption: String? = null,
-    override val child: DtoLogItem? = null,
+    override val child: DtoLogItemData? = null,
     override val contentPosition: EnumFormContentPosition? = null,
     override val executable: Boolean? = null,
     override val iconEnd: String? = null,

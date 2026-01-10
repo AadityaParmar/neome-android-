@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
 data class MsgSpreadsheetRowRemoveData(
     @Serializable(with = MetaIdFormSer::class) override val formId: Types.MetaIdForm,
     @Serializable(with = RowIdSer::class) override val rowId: Types.RowId? = null,
-    override val rowIdSet: Array<@Serializable(with = RowIdSer::class) Types.RowId>? = null,
+    override val rowIdSet: List<@Serializable(with = RowIdSer::class) Types.RowId>? = null,
     @Serializable(with = MetaIdSpreadsheetSer::class) override val spreadsheetId: Types.MetaIdSpreadsheet,
     override val transactionId: String? = null
 ) : MsgSpreadsheetRowRemove

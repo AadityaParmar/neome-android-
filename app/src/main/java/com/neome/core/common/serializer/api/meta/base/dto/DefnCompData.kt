@@ -6,9 +6,177 @@ import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.api.meta.base.Types.EnumStudioCompType
 import com.neome.api.meta.base.dto.DefnComp
 import com.neome.api.meta.base.dto.DefnDtoPermissionMatrix
+import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldAudioData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldAvtarData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldButtonData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldCameraData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldCarouselData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldChipSetData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldChipSetDateData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldChipSetDateTimeData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldChipSetDayData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldChipSetDeviceSizeData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldChipSetDeviceTypeData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldChipSetTimeData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldColorData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldCounterData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldCurrencyData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldDateData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldDateRangeData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldDateTimeData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldDateTimeRangeData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldDecimalData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldDividerData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldDocumentData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldDurationData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldDynamicData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldEditableData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldEmailData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldErrorData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldFormListData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldFormListItemData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldGeoPointData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldHandleData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldHtmlData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldHyperlinkData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldHyperlinkRowData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldIconData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldIdentifierData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldImageData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldInfoData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldLabelData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldLanguageData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldLineStrokeData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldLocationData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldLogCounterData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldLogDecimalData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldLogNumberData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldMessageTypeData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldMobileNumberData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldMonthData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldNumberData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldOtpData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldParagraphData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldPasswordData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldPaymentStatusData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldPickEnumData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldPickGridRowData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldPickOptionData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldPickReportRowData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldPickRoleData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldPickTextData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldPickTreeData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldPickUserData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldPinShapeData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldPropertyMapData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldQuarterData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldRatingData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldRefContactData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldRefData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldRefReportData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldRefSetData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldRefTargetData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldRefUserData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldRowIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldScanCodeData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldSchedulerIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldSetOfDocumentData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldSetOfRoleData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldSetOfTextData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldSetOfUserData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldShowCodeData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldSignatureData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldSliderData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldSwitchData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldSymbolData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldTextData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldTextSizeData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldTimeData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldTimeZoneData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldUserIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldVideoData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldVoiceData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnGridData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnSectionData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnSpreadsheetRefData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioBuildActionPermissionData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioBuildAllModulesData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioBuildArgBinderData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioBuildColorData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioBuildDateData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioBuildDateTimeData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioBuildMappingData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioBuildOptionPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioBuildPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioBuildPropertyMapData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioBuildRefTargetSpreadsheetData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioBuildTreeData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioBuildUserSettingData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioCodeEditorData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioCompArrayData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfArgBinderData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfConditionData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfDynamicConditionData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfDynamicRuleData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfFormulaData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfForwardGroupPermissionData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfForwardRolePermissionData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfFuncArgData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfJarFileData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfLayoutDriveSheetData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfLayoutGridData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfLayoutSpreadsheetData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfMappingData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfPartitionData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfPipelineVariableData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfTextData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfUserConditionData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfVisibilityActionData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfVisibilityConditionData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickActionIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickAutomationIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickCompIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickDeeplinkIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickFieldIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickFormIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickGridIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickGroupIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickImportPluginApiIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickImportPluginIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickLayoutFormContentIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickLayoutGridIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickLayoutSpreadsheetIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickPipelineVarIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickPluginBundleIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickPluginCompIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickPluginFieldIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickPluginFormIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickPluginIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickReportIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickSectionIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickSpreadsheetIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickSpreadsheetRefLayoutIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioPickVarIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioSetOfActionIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioSetOfAdminDoNotOptionData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioSetOfDateData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioSetOfDocFileExtData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioSetOfFieldRefIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioSetOfLayoutFormContentIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioSetOfLayoutGridIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioSetOfModuleData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioSetOfMonthData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioSetOfNumberData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioSetOfPluginSecurityAccessData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioSetOfReportIdData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioSetOfRowAuditTrailData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioSetOfStoreItemCategoryData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioVarIdParagraphEditorData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioVarIdTextEditorData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnTabData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnWizardData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer
 import com.neome.core.common.serializer.sysId.SymbolSer
@@ -28,7 +196,7 @@ sealed interface DefnCompSeal : DefnComp
 data class DefnCompData(
     override val disabled: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val disabledFieldId: Types.MetaIdField? = null,
-    override val disabledRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val disabledRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val disabledVar: Boolean? = null,
     override val hidden: Boolean? = null,
     override val hideDirtyIndicator: Boolean? = null,
@@ -37,13 +205,13 @@ data class DefnCompData(
     override val maxWidth: Long? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val pb: Long? = null,
-    override val permissionMatrix: DefnDtoPermissionMatrix? = null,
+    override val permissionMatrix: DefnDtoPermissionMatrixData? = null,
     override val pl: Long? = null,
     override val pr: Long? = null,
     override val pt: Long? = null,
     override val readOnly: Boolean? = null,
     override val type: EnumDefnCompType
-) : DefnComp
+) : DefnCompSeal, DefnComp
 
 object DefnCompSerializer : JsonContentPolymorphicSerializer<DefnCompSeal>(
     DefnCompSeal::class
@@ -52,92 +220,92 @@ object DefnCompSerializer : JsonContentPolymorphicSerializer<DefnCompSeal>(
         val Type = element.jsonObject["Type"]?.jsonPrimitive?.content
         return when (Type) {
             EnumStudioCompType.bool.value -> DefnFieldSwitchData.serializer()
-            EnumStudioCompType.date.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.decimal.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.logDecimal.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.image.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.label.value -> DefnCompSeal.serializer()
+            EnumStudioCompType.date.value -> DefnFieldDateData.serializer()
+            EnumStudioCompType.decimal.value -> DefnFieldDecimalData.serializer()
+            EnumStudioCompType.logDecimal.value -> DefnFieldLogDecimalData.serializer()
+            EnumStudioCompType.image.value -> DefnFieldImageData.serializer()
+            EnumStudioCompType.label.value -> DefnFieldLabelData.serializer()
             EnumStudioCompType.number.value -> DefnFieldNumberData.serializer()
-            EnumStudioCompType.logNumber.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.paragraph.value -> DefnCompSeal.serializer()
+            EnumStudioCompType.logNumber.value -> DefnFieldLogNumberData.serializer()
+            EnumStudioCompType.paragraph.value -> DefnFieldParagraphData.serializer()
             EnumStudioCompType.text.value -> DefnFieldTextData.serializer()
-            EnumStudioCompType.chipSet.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.chipSetDate.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.chipSetDateTime.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.chipSetDay.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.chipSetDeviceSize.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.chipSetDeviceType.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.chipSetTime.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.currency.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.icon.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.language.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.timeZone.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.pinShape.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.lineStroke.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.paymentStatus.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.month.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.quarter.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.textSize.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.messageKind.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.pickRole.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.pickText.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.pickTree.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.pickUser.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.pickGridRow.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.pickReportRow.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.setOfRole.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.setOfUser.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.setOfText.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.color.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.hyperlink.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.audio.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.camera.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.counter.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.logCounter.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.dateRange.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.dateTime.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.dateTimeRange.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.duration.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.email.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.handle.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.location.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.mobileNumber.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.rating.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.signature.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.slider.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.time.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.video.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.voice.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.geoPoint.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.rowId.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.symbol.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.schedulerId.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.spreadsheetId.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.button.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.divider.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.document.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.error.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.html.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.identifier.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.info.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.propertyMap.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.scanCode.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.setOfDocument.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.showCode.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.userId.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.dynamic.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.hyperlinkRow.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.password.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.ref.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.refSet.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.refUser.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.refReport.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.refTarget.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.refContact.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.grid.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.section.value -> DefnCompSeal.serializer()
-            EnumStudioCompType.spreadsheetRef.value -> DefnCompSeal.serializer()
-            else -> DefnCompSeal.serializer()
+            EnumStudioCompType.chipSet.value -> DefnFieldChipSetData.serializer()
+            EnumStudioCompType.chipSetDate.value -> DefnFieldChipSetDateData.serializer()
+            EnumStudioCompType.chipSetDateTime.value -> DefnFieldChipSetDateTimeData.serializer()
+            EnumStudioCompType.chipSetDay.value -> DefnFieldChipSetDayData.serializer()
+            EnumStudioCompType.chipSetDeviceSize.value -> DefnFieldChipSetDeviceSizeData.serializer()
+            EnumStudioCompType.chipSetDeviceType.value -> DefnFieldChipSetDeviceTypeData.serializer()
+            EnumStudioCompType.chipSetTime.value -> DefnFieldChipSetTimeData.serializer()
+            EnumStudioCompType.currency.value -> DefnFieldCurrencyData.serializer()
+            EnumStudioCompType.icon.value -> DefnFieldIconData.serializer()
+            EnumStudioCompType.language.value -> DefnFieldLanguageData.serializer()
+            EnumStudioCompType.timeZone.value -> DefnFieldTimeZoneData.serializer()
+            EnumStudioCompType.pinShape.value -> DefnFieldPinShapeData.serializer()
+            EnumStudioCompType.lineStroke.value -> DefnFieldLineStrokeData.serializer()
+            EnumStudioCompType.paymentStatus.value -> DefnFieldPaymentStatusData.serializer()
+            EnumStudioCompType.month.value -> DefnFieldMonthData.serializer()
+            EnumStudioCompType.quarter.value -> DefnFieldQuarterData.serializer()
+            EnumStudioCompType.textSize.value -> DefnFieldTextSizeData.serializer()
+            EnumStudioCompType.messageKind.value -> DefnFieldMessageTypeData.serializer()
+            EnumStudioCompType.pickRole.value -> DefnFieldPickRoleData.serializer()
+            EnumStudioCompType.pickText.value -> DefnFieldPickTextData.serializer()
+            EnumStudioCompType.pickTree.value -> DefnFieldPickTreeData.serializer()
+            EnumStudioCompType.pickUser.value -> DefnFieldPickUserData.serializer()
+            EnumStudioCompType.pickGridRow.value -> DefnFieldPickGridRowData.serializer()
+            EnumStudioCompType.pickReportRow.value -> DefnFieldPickReportRowData.serializer()
+            EnumStudioCompType.setOfRole.value -> DefnFieldSetOfRoleData.serializer()
+            EnumStudioCompType.setOfUser.value -> DefnFieldSetOfUserData.serializer()
+            EnumStudioCompType.setOfText.value -> DefnFieldSetOfTextData.serializer()
+            EnumStudioCompType.color.value -> DefnFieldColorData.serializer()
+            EnumStudioCompType.hyperlink.value -> DefnFieldHyperlinkData.serializer()
+            EnumStudioCompType.audio.value -> DefnFieldAudioData.serializer()
+            EnumStudioCompType.camera.value -> DefnFieldCameraData.serializer()
+            EnumStudioCompType.counter.value -> DefnFieldCounterData.serializer()
+            EnumStudioCompType.logCounter.value -> DefnFieldLogCounterData.serializer()
+            EnumStudioCompType.dateRange.value -> DefnFieldDateRangeData.serializer()
+            EnumStudioCompType.dateTime.value -> DefnFieldDateTimeData.serializer()
+            EnumStudioCompType.dateTimeRange.value -> DefnFieldDateTimeRangeData.serializer()
+            EnumStudioCompType.duration.value -> DefnFieldDurationData.serializer()
+            EnumStudioCompType.email.value -> DefnFieldEmailData.serializer()
+            EnumStudioCompType.handle.value -> DefnFieldHandleData.serializer()
+            EnumStudioCompType.location.value -> DefnFieldLocationData.serializer()
+            EnumStudioCompType.mobileNumber.value -> DefnFieldMobileNumberData.serializer()
+            EnumStudioCompType.rating.value -> DefnFieldRatingData.serializer()
+            EnumStudioCompType.signature.value -> DefnFieldSignatureData.serializer()
+            EnumStudioCompType.slider.value -> DefnFieldSliderData.serializer()
+            EnumStudioCompType.time.value -> DefnFieldTimeData.serializer()
+            EnumStudioCompType.video.value -> DefnFieldVideoData.serializer()
+            EnumStudioCompType.voice.value -> DefnFieldVoiceData.serializer()
+            EnumStudioCompType.geoPoint.value -> DefnFieldGeoPointData.serializer()
+            EnumStudioCompType.rowId.value -> DefnFieldRowIdData.serializer()
+            EnumStudioCompType.symbol.value -> DefnFieldSymbolData.serializer()
+            EnumStudioCompType.schedulerId.value -> DefnFieldSchedulerIdData.serializer()
+            EnumStudioCompType.spreadsheetId.value -> DefnCompData.serializer()
+            EnumStudioCompType.button.value -> DefnFieldButtonData.serializer()
+            EnumStudioCompType.divider.value -> DefnFieldDividerData.serializer()
+            EnumStudioCompType.document.value -> DefnFieldDocumentData.serializer()
+            EnumStudioCompType.error.value -> DefnFieldErrorData.serializer()
+            EnumStudioCompType.html.value -> DefnFieldHtmlData.serializer()
+            EnumStudioCompType.identifier.value -> DefnFieldIdentifierData.serializer()
+            EnumStudioCompType.info.value -> DefnFieldInfoData.serializer()
+            EnumStudioCompType.propertyMap.value -> DefnFieldPropertyMapData.serializer()
+            EnumStudioCompType.scanCode.value -> DefnFieldScanCodeData.serializer()
+            EnumStudioCompType.setOfDocument.value -> DefnFieldSetOfDocumentData.serializer()
+            EnumStudioCompType.showCode.value -> DefnFieldShowCodeData.serializer()
+            EnumStudioCompType.userId.value -> DefnFieldUserIdData.serializer()
+            EnumStudioCompType.dynamic.value -> DefnFieldDynamicData.serializer()
+            EnumStudioCompType.hyperlinkRow.value -> DefnFieldHyperlinkRowData.serializer()
+            EnumStudioCompType.password.value -> DefnFieldPasswordData.serializer()
+            EnumStudioCompType.ref.value -> DefnFieldRefData.serializer()
+            EnumStudioCompType.refSet.value -> DefnFieldRefSetData.serializer()
+            EnumStudioCompType.refUser.value -> DefnFieldRefUserData.serializer()
+            EnumStudioCompType.refReport.value -> DefnFieldRefReportData.serializer()
+            EnumStudioCompType.refTarget.value -> DefnFieldRefTargetData.serializer()
+            EnumStudioCompType.refContact.value -> DefnFieldRefContactData.serializer()
+            EnumStudioCompType.grid.value -> DefnGridData.serializer()
+            EnumStudioCompType.section.value -> DefnSectionData.serializer()
+            EnumStudioCompType.spreadsheetRef.value -> DefnSpreadsheetRefData.serializer()
+            else -> DefnCompData.serializer()
         }
     }
 }

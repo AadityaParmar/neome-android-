@@ -12,6 +12,11 @@ import com.neome.api.meta.base.dto.Size
 import com.neome.api.meta.base.dto.StudioDtoMapping
 import com.neome.api.meta.base.dto.StudioDtoRowIdPointer
 import com.neome.api.meta.base.dto.StudioValueParagraph
+import com.neome.core.common.serializer.api.meta.base.dto.PointData
+import com.neome.core.common.serializer.api.meta.base.dto.SizeData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoMappingData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoRowIdPointerData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioValueParagraphData
 import com.neome.core.common.serializer.sysId.MetaIdPipelineParamSer
 import com.neome.core.common.serializer.sysId.MetaIdVarSer
 import com.neome.core.common.serializer.sysId.MetaIdVdAutoNodeSer
@@ -24,19 +29,19 @@ import kotlinx.serialization.Serializable
 data class EntVdRowUpdateData(
     override val uiVersion: String? = null,
     override val kind: EnumDefnKindAutoNode,
-    override val logMsg: StudioValueParagraph? = null,
+    override val logMsg: StudioValueParagraphData? = null,
     @Serializable(with = MetaIdVdAutoNodeSer::class) override val metaId: Types.MetaIdVdAutoNode,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     @Serializable(with = MetaIdVdRegionSer::class) override val parentRegionId: Types.MetaIdVdRegion? = null,
-    override val point: Point? = null,
-    override val size: Size? = null,
+    override val point: PointData? = null,
+    override val size: SizeData? = null,
     @Serializable(with = MetaIdPipelineParamSer::class) override val outputParamId: Types.MetaIdPipelineParam? = null,
     override val outputParamName: String? = null,
     override val terminateKind: EnumDefnNodeTerminateKind? = null,
     override val option: EnumDefnKindPipelineUpdate? = null,
-    override val outputMapping: StudioDtoMapping? = null,
+    override val outputMapping: StudioDtoMappingData? = null,
     @Serializable(with = MetaIdVarSer::class) override val outputMappingVarId: Types.MetaIdVar? = null,
     override val overwriteRow: Boolean? = null,
-    override val rowIdPointer: StudioDtoRowIdPointer? = null,
+    override val rowIdPointer: StudioDtoRowIdPointerData? = null,
     override val skipSpreadsheetUpdateTrigger: Boolean? = null
 ) : EntVdRowUpdate

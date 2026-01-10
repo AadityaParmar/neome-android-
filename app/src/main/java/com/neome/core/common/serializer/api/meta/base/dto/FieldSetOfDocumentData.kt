@@ -9,8 +9,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FieldSetOfDocumentData(
-    override val fileExtSet: Array<EnumDefnDocFileExt>,
-    override val fileNameSet: Array<String>,
-    override val fileSizeSet: Array<Long>,
-    override val mediaIdDocumentSet: Array<@Serializable(with = MediaIdDocumentSer::class) Types.MediaIdDocument>
+    override val fileExtSet: List<EnumDefnDocFileExt>,
+    override val fileNameSet: List<String>,
+    override val fileSizeSet: List<Long>,
+    override val mediaIdDocumentSet: List<@Serializable(with = MediaIdDocumentSer::class) Types.MediaIdDocument>
 ) : FieldSetOfDocument

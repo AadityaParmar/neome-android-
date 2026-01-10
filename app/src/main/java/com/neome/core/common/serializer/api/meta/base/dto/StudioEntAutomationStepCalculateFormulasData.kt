@@ -8,6 +8,8 @@ import com.neome.api.meta.base.dto.StudioEntAutomationStep
 import com.neome.api.meta.base.dto.StudioEntAutomationStepCalculateFormulas
 import com.neome.api.meta.base.dto.StudioMapOfFormula
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
+import com.neome.core.common.serializer.api.meta.base.dto.StudioMapOfFormulaData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioValueVarIdConditionData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdPipelineParamSer
 import com.neome.core.common.serializer.sysId.MetaIdStepSer
@@ -19,7 +21,7 @@ import kotlinx.serialization.Serializable
 data class StudioEntAutomationStepCalculateFormulasData(
     override val description: String? = null,
     @Serializable(with = MetaIdPipelineParamSer::class) override val executionConditionInputPipelineVarId: Types.MetaIdPipelineParam? = null,
-    override val executionConditionVarId: StudioValueVarIdCondition? = null,
+    override val executionConditionVarId: StudioValueVarIdConditionData? = null,
     override val kind: EnumDefnKindAutomationStep,
     @Serializable(with = MetaIdStepSer::class) override val metaId: Types.MetaIdStep,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
@@ -27,6 +29,6 @@ data class StudioEntAutomationStepCalculateFormulasData(
     @Serializable(with = MetaIdFieldSer::class) override val terminateFieldId: Types.MetaIdField? = null,
     override val terminateKind: EnumDefnAutomationTerminateKind? = null,
     @Serializable(with = MetaIdPipelineParamSer::class) override val formulaFormPipelineVarId: Types.MetaIdPipelineParam? = null,
-    override val newFormulaMap: StudioMapOfFormula? = null,
+    override val newFormulaMap: StudioMapOfFormulaData? = null,
     override val recalculateFormFormulas: Boolean? = null
 ) : StudioEntAutomationStepCalculateFormulas

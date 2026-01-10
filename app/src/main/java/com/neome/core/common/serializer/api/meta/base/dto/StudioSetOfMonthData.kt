@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioSetOfMonthData(
-    override val valueSet: Array<EnumDefnMonth>
+    override val valueSet: List<EnumDefnMonth>
 ) : StudioSetOfMonth

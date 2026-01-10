@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FieldSetOfLanguageKeysData(
-    override val valueSet: Array<@Serializable(with = LanguageKeySer::class) Types.LanguageKey>
+    override val valueSet: List<@Serializable(with = LanguageKeySer::class) Types.LanguageKey>
 ) : FieldSetOfLanguageKeys

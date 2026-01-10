@@ -11,6 +11,8 @@ import com.neome.api.meta.base.dto.DefnDtoPermissionMatrix
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.dto.DefnFieldDivider
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoColorData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoPermissionMatrixData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer
 import com.neome.core.common.serializer.sysId.SymbolSer
@@ -25,7 +27,7 @@ sealed interface DefnFieldDividerSeal : DefnFieldDivider
 data class DefnFieldDividerData(
     override val disabled: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val disabledFieldId: Types.MetaIdField? = null,
-    override val disabledRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val disabledRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val disabledVar: Boolean? = null,
     override val hidden: Boolean? = null,
     override val hideDirtyIndicator: Boolean? = null,
@@ -34,14 +36,14 @@ data class DefnFieldDividerData(
     override val maxWidth: Long? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val pb: Long? = null,
-    override val permissionMatrix: DefnDtoPermissionMatrix? = null,
+    override val permissionMatrix: DefnDtoPermissionMatrixData? = null,
     override val pl: Long? = null,
     override val pr: Long? = null,
     override val pt: Long? = null,
     override val readOnly: Boolean? = null,
     override val type: EnumDefnCompType,
     @Serializable(with = MetaIdFieldSer::class) override val metaId: Types.MetaIdField,
-    override val color: DefnDtoColor? = null,
+    override val color: DefnDtoColorData? = null,
     override val colorVar: EnumDefnThemeColor? = null,
     override val dividerKind: EnumDefnThemeDividerKind? = null,
     override val dividerKindVar: EnumDefnThemeDividerKind? = null,

@@ -8,6 +8,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FieldSetOfEntUserIdData(
-    override val displaySet: Array<String>? = null,
-    override val valueSet: Array<@Serializable(with = EntUserIdSer::class) Types.EntUserId>
+    override val displaySet: List<String>? = null,
+    override val valueSet: List<@Serializable(with = EntUserIdSer::class) Types.EntUserId>
 ) : FieldSetOfEntUserId

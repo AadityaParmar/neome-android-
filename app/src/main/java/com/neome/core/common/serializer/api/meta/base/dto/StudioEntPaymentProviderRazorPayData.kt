@@ -17,7 +17,7 @@ data class StudioEntPaymentProviderRazorPayData(
     override val kind: EnumPaymentProviderKind,
     @Serializable(with = MetaIdPaymentProviderSer::class) override val metaId: Types.MetaIdPaymentProvider,
     @Serializable(with = SymbolSer::class) override val name: Symbol? = null,
-    override val allowedPaymentMethodSet: Array<EnumDefnPaymentMethodKind>? = null,
+    override val allowedPaymentMethodSet: List<EnumDefnPaymentMethodKind>? = null,
     override val apiKey: String? = null,
     override val apiSecret: String? = null,
     @Serializable(with = CurrencyKeySer::class) override val defaultCurrency: Types.CurrencyKey? = null,

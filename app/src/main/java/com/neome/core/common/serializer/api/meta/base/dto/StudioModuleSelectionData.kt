@@ -9,5 +9,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioModuleSelectionData(
-    override val moduleIdSet: Array<@Serializable(with = MetaIdModuleSer::class) Types.MetaIdModule>
+    override val moduleIdSet: List<@Serializable(with = MetaIdModuleSer::class) Types.MetaIdModule>
 ) : StudioModuleSelection

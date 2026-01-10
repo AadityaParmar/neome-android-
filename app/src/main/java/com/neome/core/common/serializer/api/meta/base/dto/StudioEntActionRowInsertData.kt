@@ -6,6 +6,8 @@ import com.neome.api.meta.base.dto.StudioDetails
 import com.neome.api.meta.base.dto.StudioDtoChatBubbleHeader
 import com.neome.api.meta.base.dto.StudioEntAction
 import com.neome.api.meta.base.dto.StudioEntActionRowInsert
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDetailsData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoChatBubbleHeaderData
 import com.neome.core.common.serializer.sysId.MetaIdActionSer
 import com.neome.core.common.serializer.sysId.MetaIdCompSer
 import com.neome.core.common.serializer.sysId.MetaIdLayoutFormSer
@@ -18,13 +20,13 @@ import kotlinx.serialization.json.JsonElement
 data class StudioEntActionRowInsertData(
     override val aiInstructions: String? = null,
     override val defaultValueMap: Map<@Serializable(with = MetaIdCompSer::class) Types.MetaIdComp, JsonElement>? = null,
-    override val details: StudioDetails,
+    override val details: StudioDetailsData,
     override val icon: String? = null,
     override val increaseAsideWidth: Boolean? = null,
     override val kind: EnumDefnKindAction,
     @Serializable(with = MetaIdActionSer::class) override val metaId: Types.MetaIdAction,
     override val tooltip: String? = null,
-    override val chatBubbleHeader: StudioDtoChatBubbleHeader? = null,
+    override val chatBubbleHeader: StudioDtoChatBubbleHeaderData? = null,
     @Serializable(with = MetaIdLayoutFormSer::class) override val formEditorLayoutId: Types.MetaIdLayoutForm? = null,
     @Serializable(with = MetaIdLayoutFormSer::class) override val mobileFormEditorLayoutId: Types.MetaIdLayoutForm? = null,
     override val sendMessageToInbox: Boolean? = null,

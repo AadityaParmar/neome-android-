@@ -6,6 +6,7 @@ import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.EnumDefnKindAction
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
+import com.neome.core.common.serializer.api.meta.base.dto.StudioValueVarIdConditionData
 import com.neome.core.common.serializer.sysId.MetaIdActionSer
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdFormSer
@@ -25,7 +26,7 @@ data class DtoEntActionRowUpdateData(
     override val label: String? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val tooltip: String? = null,
-    override val filterConditionVarId: StudioValueVarIdCondition? = null,
+    override val filterConditionVarId: StudioValueVarIdConditionData? = null,
     @Serializable(with = MetaIdLayoutGridSer::class) override val layoutSpreadsheetId: Types.MetaIdLayoutGrid? = null,
     @Serializable(with = MetaIdFieldSer::class) override val lookupFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdFormSer::class) override val spreadsheetFormId: Types.MetaIdForm,

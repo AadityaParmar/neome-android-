@@ -8,6 +8,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FieldSetOfRoleData(
-    override val displaySet: Array<String>? = null,
-    override val valueSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>
+    override val displaySet: List<String>? = null,
+    override val valueSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>
 ) : FieldSetOfRole

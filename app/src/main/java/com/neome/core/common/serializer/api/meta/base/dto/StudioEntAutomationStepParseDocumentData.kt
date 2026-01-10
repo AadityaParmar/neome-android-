@@ -7,6 +7,7 @@ import com.neome.api.meta.base.Types.EnumDefnKindAutomationStep
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 import com.neome.api.meta.base.dto.StudioEntAutomationStepParseDocument
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
+import com.neome.core.common.serializer.api.meta.base.dto.StudioValueVarIdConditionData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdFormSer
 import com.neome.core.common.serializer.sysId.MetaIdGridSer
@@ -21,7 +22,7 @@ import kotlinx.serialization.Serializable
 data class StudioEntAutomationStepParseDocumentData(
     override val description: String? = null,
     @Serializable(with = MetaIdPipelineParamSer::class) override val executionConditionInputPipelineVarId: Types.MetaIdPipelineParam? = null,
-    override val executionConditionVarId: StudioValueVarIdCondition? = null,
+    override val executionConditionVarId: StudioValueVarIdConditionData? = null,
     override val kind: EnumDefnKindAutomationStep,
     @Serializable(with = MetaIdStepSer::class) override val metaId: Types.MetaIdStep,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
@@ -32,7 +33,7 @@ data class StudioEntAutomationStepParseDocumentData(
     @Serializable(with = MetaIdFieldSer::class) override val documentFieldId: Types.MetaIdField? = null,
     override val exposeOutputAsPipelineVariable: Boolean? = null,
     @Serializable(with = MetaIdPipelineParamSer::class) override val inputFormPipelineVarId: Types.MetaIdPipelineParam? = null,
-    override val iterateOnGridFilterVarId: StudioValueVarIdCondition? = null,
+    override val iterateOnGridFilterVarId: StudioValueVarIdConditionData? = null,
     @Serializable(with = MetaIdGridSer::class) override val iterateOnGridId: Types.MetaIdGrid? = null,
     @Serializable(with = MetaIdPipelineParamSer::class) override val outputFormPipelineVarId: Types.MetaIdPipelineParam? = null,
     @Serializable(with = MetaIdVarSer::class) override val outputMappingVarId: Types.MetaIdVar? = null,

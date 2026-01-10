@@ -9,6 +9,11 @@ import com.neome.api.meta.base.dto.EntVdErdRef
 import com.neome.api.meta.base.dto.EntVdNote
 import com.neome.api.meta.base.dto.EntVdRegion
 import com.neome.api.meta.base.dto.EntVdViewport
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdErdEntityData
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdErdRefData
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdNoteData
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdRegionData
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdViewportData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdModuleSer
 import com.neome.core.common.serializer.sysId.MetaIdSpreadsheetSer
@@ -23,12 +28,12 @@ import kotlinx.serialization.Serializable
 data class EntVdErdDiaData(
     override val isDefault: Boolean? = null,
     @Serializable(with = MetaIdModuleSer::class) override val moduleId: Types.MetaIdModule? = null,
-    override val noteMap: Map<@Serializable(with = MetaIdVdNoteSer::class) Types.MetaIdVdNote, EntVdNote>,
-    override val regionMap: Map<@Serializable(with = MetaIdVdRegionSer::class) Types.MetaIdVdRegion, EntVdRegion>,
-    override val viewport: EntVdViewport? = null,
-    override val entityMap: Map<@Serializable(with = MetaIdSpreadsheetSer::class) Types.MetaIdSpreadsheet, EntVdErdEntity>? = null,
+    override val noteMap: Map<@Serializable(with = MetaIdVdNoteSer::class) Types.MetaIdVdNote, EntVdNoteData>,
+    override val regionMap: Map<@Serializable(with = MetaIdVdRegionSer::class) Types.MetaIdVdRegion, EntVdRegionData>,
+    override val viewport: EntVdViewportData? = null,
+    override val entityMap: Map<@Serializable(with = MetaIdSpreadsheetSer::class) Types.MetaIdSpreadsheet, EntVdErdEntityData>? = null,
     override val label: String? = null,
     @Serializable(with = MetaIdVdErdDiaSer::class) override val metaId: Types.MetaIdVdErdDia,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
-    override val refMap: Map<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField, EntVdErdRef>? = null
+    override val refMap: Map<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField, EntVdErdRefData>? = null
 ) : EntVdErdDia

@@ -7,6 +7,7 @@ import com.neome.api.meta.base.Types.EnumLogTreeLineCollapse
 import com.neome.api.meta.base.dto.DtoLogTreeItem
 import com.neome.api.meta.base.dto.DtoLogTreeKeyValue
 import com.neome.api.meta.base.dto.DtoLogTreeLine
+import com.neome.core.common.serializer.api.meta.base.dto.DtoLogTreeKeyValueData
 import kotlinx.serialization.Serializable
 
 
@@ -16,7 +17,7 @@ data class DtoLogTreeLineData(
     override val id: String,
     override val type: EnumLogTreeItemType,
     override val bold: Boolean? = null,
-    override val children: Array<DtoLogTreeKeyValue>? = null,
+    override val children: List<DtoLogTreeKeyValueData>? = null,
     override val collapse: EnumLogTreeLineCollapse? = null,
     override val contentPosition: EnumFormContentPosition? = null,
     override val line: String,

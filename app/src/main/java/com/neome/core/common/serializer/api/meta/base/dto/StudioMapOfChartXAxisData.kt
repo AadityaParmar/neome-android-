@@ -4,12 +4,13 @@ import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioDtoChartXAxis
 import com.neome.api.meta.base.dto.StudioMapOfChartXAxis
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoChartXAxisData
 import com.neome.core.common.serializer.sysId.MetaIdChartXAxisSer
 import kotlinx.serialization.Serializable
 
 
 @Serializable
 data class StudioMapOfChartXAxisData(
-    override val keys: Array<@Serializable(with = MetaIdChartXAxisSer::class) Types.MetaIdChartXAxis>,
-    override val map: Map<@Serializable(with = MetaIdChartXAxisSer::class) Types.MetaIdChartXAxis, StudioDtoChartXAxis>
+    override val keys: List<@Serializable(with = MetaIdChartXAxisSer::class) Types.MetaIdChartXAxis>,
+    override val map: Map<@Serializable(with = MetaIdChartXAxisSer::class) Types.MetaIdChartXAxis, StudioDtoChartXAxisData>
 ) : StudioMapOfChartXAxis

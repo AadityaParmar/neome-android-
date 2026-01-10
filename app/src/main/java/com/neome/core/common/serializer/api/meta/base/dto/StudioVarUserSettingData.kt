@@ -7,6 +7,8 @@ import com.neome.api.meta.base.dto.StudioBuildUserSetting
 import com.neome.api.meta.base.dto.StudioDetails
 import com.neome.api.meta.base.dto.StudioVar
 import com.neome.api.meta.base.dto.StudioVarUserSetting
+import com.neome.core.common.serializer.api.meta.base.dto.StudioBuildUserSettingData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDetailsData
 import com.neome.core.common.serializer.sysId.MetaIdVarSer
 import kotlinx.serialization.Serializable
 
@@ -14,8 +16,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class StudioVarUserSettingData(
     override val deploy: EnumDefnDeploy,
-    override val details: StudioDetails,
+    override val details: StudioDetailsData,
     override val kind: EnumStudioVarKind,
     @Serializable(with = MetaIdVarSer::class) override val metaId: Types.MetaIdVar,
-    override val value: StudioBuildUserSetting? = null
+    override val value: StudioBuildUserSettingData? = null
 ) : StudioVarUserSetting

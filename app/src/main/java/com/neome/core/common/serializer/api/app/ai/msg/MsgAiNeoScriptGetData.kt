@@ -12,5 +12,5 @@ import kotlinx.serialization.Serializable
 data class MsgAiNeoScriptGetData(
     override val kind: EnumKindAiAssist,
     override val neoScriptOrUserMessage: String,
-    override val paramPath: Array<@Serializable(with = MetaIdSer::class) Types.MetaId>? = null
+    override val paramPath: List<@Serializable(with = MetaIdSer::class) Types.MetaId>? = null
 ) : MsgAiNeoScriptGet

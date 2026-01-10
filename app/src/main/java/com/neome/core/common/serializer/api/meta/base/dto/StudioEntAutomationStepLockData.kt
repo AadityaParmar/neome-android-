@@ -9,6 +9,8 @@ import com.neome.api.meta.base.dto.FieldDtoDuration
 import com.neome.api.meta.base.dto.StudioEntAutomationStep
 import com.neome.api.meta.base.dto.StudioEntAutomationStepLock
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
+import com.neome.core.common.serializer.api.meta.base.dto.FieldDtoDurationData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioValueVarIdConditionData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdPipelineParamSer
 import com.neome.core.common.serializer.sysId.MetaIdStepSer
@@ -21,7 +23,7 @@ import kotlinx.serialization.Serializable
 data class StudioEntAutomationStepLockData(
     override val description: String? = null,
     @Serializable(with = MetaIdPipelineParamSer::class) override val executionConditionInputPipelineVarId: Types.MetaIdPipelineParam? = null,
-    override val executionConditionVarId: StudioValueVarIdCondition? = null,
+    override val executionConditionVarId: StudioValueVarIdConditionData? = null,
     override val kind: EnumDefnKindAutomationStep,
     @Serializable(with = MetaIdStepSer::class) override val metaId: Types.MetaIdStep,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
@@ -31,7 +33,7 @@ data class StudioEntAutomationStepLockData(
     @Serializable(with = MetaIdFieldSer::class) override val errorFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdVarSer::class) override val errorRetryCountVarId: Types.MetaIdVar? = null,
     @Serializable(with = MetaIdVarSer::class) override val errorRetryDurationVarId: Types.MetaIdVar? = null,
-    override val lockDuration: FieldDtoDuration? = null,
+    override val lockDuration: FieldDtoDurationData? = null,
     @Serializable(with = MetaIdFieldSer::class) override val lockKeyFieldId: Types.MetaIdField? = null,
     override val operation: EnumDefnLockOperation? = null,
     @Serializable(with = MetaIdPipelineParamSer::class) override val sourcePipelineVarId: Types.MetaIdPipelineParam? = null

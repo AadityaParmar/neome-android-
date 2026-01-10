@@ -10,5 +10,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MsgEntUserIdSetData(
     @Serializable(with = EntUserIdSer::class) override val entUserId: Types.EntUserId? = null,
-    override val entUserIdSet: Array<@Serializable(with = EntUserIdSer::class) Types.EntUserId>? = null
+    override val entUserIdSet: List<@Serializable(with = EntUserIdSer::class) Types.EntUserId>? = null
 ) : MsgEntUserIdSet

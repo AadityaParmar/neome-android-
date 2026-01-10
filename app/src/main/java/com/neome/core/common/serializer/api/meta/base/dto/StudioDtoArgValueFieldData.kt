@@ -12,5 +12,5 @@ import kotlinx.serialization.Serializable
 data class StudioDtoArgValueFieldData(
     @Serializable(with = MetaIdCompositeSer::class) override val compositeId: Types.MetaIdComposite? = null,
     @Serializable(with = MetaIdFieldSer::class) override val fieldId: Types.MetaIdField,
-    override val valuePathArray: Array<String>? = null
+    override val valuePathArray: List<String>? = null
 ) : StudioDtoArgValueField

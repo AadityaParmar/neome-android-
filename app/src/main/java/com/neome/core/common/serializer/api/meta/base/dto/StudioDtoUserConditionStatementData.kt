@@ -12,9 +12,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioDtoUserConditionStatementData(
-    override val derivedRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
-    override val fieldIdSet: Array<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
+    override val derivedRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val fieldIdSet: List<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
     override val kind: EnumDefnKindSetOfUser? = null,
-    override val roleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
-    override val userContextSet: Array<EnumDefnUserContext>? = null
+    override val roleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val userContextSet: List<EnumDefnUserContext>? = null
 ) : StudioDtoUserConditionStatement

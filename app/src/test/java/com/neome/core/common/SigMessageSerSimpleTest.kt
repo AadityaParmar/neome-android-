@@ -3,6 +3,7 @@ package com.neome.core.common
 import com.neome.api.home.base.dto.DtoMessagePayloadText
 import com.neome.api.meta.base.SysId
 import com.neome.api.meta.base.Types
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadMessageDeletedData
 import com.neome.core.common.serializer.api.home.main.sig.SigMessageData
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -71,12 +72,14 @@ class SigMessageSerSimpleTest {
         // Then
         println("\n=== Deserialized Simple Text Message ===")
         println("Message ID: ${message.messageId}")
+        println("Message ID: ${message.messageId}")
 //        println("Message Name: ${message.name}")
 //        println("Message jsonObject: ${message.jsonObject}")
         println("Creation Time: ${message.creationTime}")
         println("messageOffset: ${message.messageOffset}")
         println("Payload messageType: ${message.payload.messageType}")
         println("messageStr: ${messageStr}")
+        println("Payload: ${message.payload}")
         println("Payload text: ${(message.payload as DtoMessagePayloadText).text}")
         println("Payload Type: ${message.payload::class.simpleName}")
         println("=========================================\n")
@@ -103,6 +106,70 @@ class SigMessageSerSimpleTest {
         )
         Assert.assertNull(textPayload.isForwarded)
         Assert.assertNull(textPayload.isUpdated)
+        Assert.assertNull(textPayload.mentionMap)
+    }
+
+    @Test
+    fun `deserialize deleted message`() {
+        // Given - Real text message JSON from production
+        val jsonString = """
+        {
+            "name": "Test",
+            "jsonObject": {
+                "text": "I will join office in second half today",
+                "messageType": "text"
+            },
+            "version": "994ibA2V6DqNrH5iGnxuli0DE",
+            "messageId": "m-Siosyh8WHnxLQfPskp6W9whd0",
+            "messageOffset": 5539,
+            "senderId": "eu-KvvdpvCE1ypF4LXmMOadMkpyh",
+            "payload": {
+                "arr": [{"name": "test1"},{"name": "test2"}],
+                "map":{"key1":{"name": "test1"}},
+                "messageType": "messageDeleted"
+            },
+            "creationTime": "2026-01-07T03:58:16.178Z"
+        }
+        """.trimIndent()
+
+        // When
+        val message =
+            json.decodeFromString<SigMessageData>(jsonString)
+        val messageStr = json.encodeToString(message)
+
+        // Then
+        println("\n=== Deserialized Simple Text Message ===")
+        println("Message ID: ${message.messageId}")
+        println("Message ID: ${message.messageId}")
+//        println("Message Name: ${message.name}")
+//        println("Message jsonObject: ${message.jsonObject}")
+        println("Creation Time: ${message.creationTime}")
+        println("messageOffset: ${message.messageOffset}")
+        println("Payload messageType: ${message.payload.messageType}")
+        println("messageStr: ${messageStr}")
+        println("Payload: ${message.payload}")
+        println("Payload Type: ${message.payload::class.simpleName}")
+        println("=========================================\n")
+
+        Assert.assertNotNull(message)
+        Assert.assertEquals(
+            SysId.create<Types.MessageId>("m-Siosyh8WHnxLQfPskp6W9whd0"),
+            message.messageId
+        )
+        Assert.assertEquals("2026-01-07T03:58:16.178Z", message.creationTime)
+        Assert.assertEquals(5539L, message.messageOffset)
+        Assert.assertEquals(
+            SysId.create<Types.EntUserId>("eu-KvvdpvCE1ypF4LXmMOadMkpyh"),
+            message.senderId
+        )
+        Assert.assertTrue(message.payload is DtoMessagePayloadMessageDeletedData)
+
+        val textPayload = message.payload as DtoMessagePayloadMessageDeletedData
+        Assert.assertEquals(
+            com.neome.api.home.base.Types.EnumMessageType.messageDeleted,
+            textPayload.messageType
+        )
+        Assert.assertNull(textPayload.isForwarded)
         Assert.assertNull(textPayload.mentionMap)
     }
 

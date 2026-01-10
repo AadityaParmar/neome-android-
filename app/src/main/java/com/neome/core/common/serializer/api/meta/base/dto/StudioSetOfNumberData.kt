@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioSetOfNumberData(
-    override val valueSet: Array<Long>
+    override val valueSet: List<Long>
 ) : StudioSetOfNumber

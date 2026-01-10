@@ -10,5 +10,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SigEntSpreadsheetPartitionRowIdListData(
     override val bottomRowOrderVer: String,
-    override val rowIdList: Array<@Serializable(with = RowIdSer::class) Types.RowId>
+    override val rowIdList: List<@Serializable(with = RowIdSer::class) Types.RowId>
 ) : SigEntSpreadsheetPartitionRowIdList

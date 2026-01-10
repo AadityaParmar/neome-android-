@@ -4,6 +4,7 @@ import com.neome.api.core.deeplink.msg.MsgDeeplinkCode
 import com.neome.api.core.deeplink.msg.MsgDeeplinkCodeAction
 import com.neome.api.meta.base.Types.EnumDeviceType
 import com.neome.api.meta.base.dto.FormValueRaw
+import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
 import kotlinx.serialization.Serializable
 
 
@@ -12,5 +13,5 @@ data class MsgDeeplinkCodeActionData(
     override val deeplinkCode: String,
     override val deviceName: String? = null,
     override val deviceType: EnumDeviceType? = null,
-    override val formValueRaw: FormValueRaw? = null
+    override val formValueRaw: FormValueRawData? = null
 ) : MsgDeeplinkCodeAction

@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DefnPaymentConfigData(
-    override val allowedPaymentMethodSet: Array<EnumDefnPaymentMethodKind>? = null,
+    override val allowedPaymentMethodSet: List<EnumDefnPaymentMethodKind>? = null,
     @Serializable(with = MetaIdFieldSer::class) override val amountFieldId: Types.MetaIdField? = null,
     @Serializable(with = CurrencyKeySer::class) override val currency: Types.CurrencyKey? = null,
     @Serializable(with = MetaIdFieldSer::class) override val currencyFieldId: Types.MetaIdField? = null,

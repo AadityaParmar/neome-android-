@@ -8,6 +8,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SigAiNeoScriptGenData(
     override val error: String? = null,
-    override val neoScripts: Array<String>? = null,
+    override val neoScripts: List<String>? = null,
     override val userMessage: String? = null
 ) : SigAiNeoScriptGen

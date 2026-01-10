@@ -9,6 +9,9 @@ import com.neome.api.meta.base.dto.StudioEntAutomation
 import com.neome.api.meta.base.dto.StudioEntAutomationWebhook
 import com.neome.api.meta.base.dto.StudioEntAutomationWebhookEventMap
 import com.neome.api.meta.base.dto.StudioModuleSelection
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoLocationCaptureData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioEntAutomationWebhookEventMapData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioModuleSelectionData
 import com.neome.core.common.serializer.sysId.MetaIdAutomationSer
 import com.neome.core.common.serializer.sysId.MetaIdSpreadsheetSer
 import com.neome.core.common.serializer.sysId.SymbolSer
@@ -21,11 +24,11 @@ data class StudioEntAutomationWebhookData(
     override val description: String? = null,
     override val kind: EnumDefnKindAutomation,
     @Serializable(with = MetaIdAutomationSer::class) override val metaId: Types.MetaIdAutomation,
-    override val modules: StudioModuleSelection? = null,
+    override val modules: StudioModuleSelectionData? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val secondary: String? = null,
     override val callbackKind: EnumDefnAutomationWebhookKind,
-    override val eventMap: StudioEntAutomationWebhookEventMap,
-    override val locationConfig: StudioDtoLocationCapture? = null,
+    override val eventMap: StudioEntAutomationWebhookEventMapData,
+    override val locationConfig: StudioDtoLocationCaptureData? = null,
     @Serializable(with = MetaIdSpreadsheetSer::class) override val spreadsheetId: Types.MetaIdSpreadsheet? = null
 ) : StudioEntAutomationWebhook

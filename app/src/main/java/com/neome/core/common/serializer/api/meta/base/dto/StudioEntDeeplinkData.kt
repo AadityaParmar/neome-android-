@@ -9,6 +9,7 @@ import com.neome.api.meta.base.Types.EnumDefnUserProps
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntDeeplink
 import com.neome.api.meta.base.dto.StudioModuleSelection
+import com.neome.core.common.serializer.api.meta.base.dto.StudioModuleSelectionData
 import com.neome.core.common.serializer.sysId.MetaIdDeeplinkSer
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer
@@ -19,13 +20,13 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioEntDeeplinkData(
-    override val creationRoles: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val creationRoles: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val description: String? = null,
     override val expiry: EnumDefnDeeplinkExpiry? = null,
     override val kind: EnumDefnKindDeeplink,
-    override val makeUserDefaultRoles: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val makeUserDefaultRoles: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     @Serializable(with = MetaIdDeeplinkSer::class) override val metaId: Types.MetaIdDeeplink,
-    override val modules: StudioModuleSelection? = null,
+    override val modules: StudioModuleSelectionData? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val showEnterpriseImageInLinkPreview: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val targetUserHandleFieldId: Types.MetaIdField? = null,

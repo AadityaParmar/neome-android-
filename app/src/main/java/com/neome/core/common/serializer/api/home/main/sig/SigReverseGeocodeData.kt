@@ -4,11 +4,12 @@ import com.neome.api.home.main.sig.SigReverseGeocode
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.dto.FieldDtoLocation
 import com.neome.api.nucleus.base.sig.Sig
+import com.neome.core.common.serializer.api.meta.base.dto.FieldDtoLocationData
 import com.neome.core.common.serializer.sysId.GeoPointSer
 import kotlinx.serialization.Serializable
 
 
 @Serializable
 data class SigReverseGeocodeData(
-    override val map: Map<@Serializable(with = GeoPointSer::class) Types.GeoPoint, FieldDtoLocation>
+    override val map: Map<@Serializable(with = GeoPointSer::class) Types.GeoPoint, FieldDtoLocationData>
 ) : SigReverseGeocode

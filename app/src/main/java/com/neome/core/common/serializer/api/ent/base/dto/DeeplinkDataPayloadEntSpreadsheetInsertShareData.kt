@@ -9,6 +9,10 @@ import com.neome.api.meta.base.Types.EnumDefnTextSize
 import com.neome.api.meta.base.dto.DefnDtoColor
 import com.neome.api.meta.base.dto.DefnDtoParagraph
 import com.neome.api.meta.base.dto.DefnForm
+import com.neome.core.common.serializer.api.ent.base.dto.DeeplinkDataPayloadEntHeaderData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoColorData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoParagraphData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.core.common.serializer.sysId.ChatIdSer
 import com.neome.core.common.serializer.sysId.EntIdSer
 import com.neome.core.common.serializer.sysId.MetaIdActionSer
@@ -22,9 +26,9 @@ import kotlinx.serialization.json.JsonElement
 @Serializable
 data class DeeplinkDataPayloadEntSpreadsheetInsertShareData(
     override val deeplinkActionType: EnumDeeplinkActionType,
-    override val header: DeeplinkDataPayloadEntHeader? = null,
+    override val header: DeeplinkDataPayloadEntHeaderData? = null,
     @Serializable(with = ChatIdSer::class) override val chatId: Types.ChatId? = null,
-    override val defnForm: DefnForm,
+    override val defnForm: DefnFormData,
     @Serializable(with = EntIdSer::class) override val entId: Types.EntId,
     @Serializable(with = MetaIdLayoutFormSer::class) override val formEditorLayoutId: Types.MetaIdLayoutForm? = null,
     @Serializable(with = MetaIdActionSer::class) override val metaIdAction: Types.MetaIdAction? = null,
@@ -33,8 +37,8 @@ data class DeeplinkDataPayloadEntSpreadsheetInsertShareData(
     override val sendMessageToInbox: Boolean? = null,
     override val showRepeatButton: Boolean? = null,
     @Serializable(with = MetaIdSpreadsheetSer::class) override val spreadsheetId: Types.MetaIdSpreadsheet? = null,
-    override val successMessage: DefnDtoParagraph,
-    override val successMessageBgColor: DefnDtoColor? = null,
+    override val successMessage: DefnDtoParagraphData,
+    override val successMessageBgColor: DefnDtoColorData? = null,
     override val successMessageTextSize: EnumDefnTextSize? = null,
     override val valueMap: Map<@Serializable(with = MetaIdCompSer::class) Types.MetaIdComp, JsonElement>? = null
 ) : DeeplinkDataPayloadEntSpreadsheetInsertShare

@@ -8,6 +8,7 @@ import com.neome.api.meta.base.Types.EnumDefnUpdateVariant
 import com.neome.api.meta.base.dto.StudioDtoMappingField
 import com.neome.api.meta.base.dto.StudioDtoMappingFieldMap
 import com.neome.api.meta.base.dto.StudioDtoMappingFieldMapBase
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoMappingFieldData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdMappingSer
 import kotlinx.serialization.Serializable
@@ -15,8 +16,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioDtoMappingFieldMapData(
-    override val keys: Array<@Serializable(with = MetaIdMappingSer::class) Types.MetaIdMapping>,
-    override val map: Map<@Serializable(with = MetaIdMappingSer::class) Types.MetaIdMapping, StudioDtoMappingField>,
+    override val keys: List<@Serializable(with = MetaIdMappingSer::class) Types.MetaIdMapping>,
+    override val map: Map<@Serializable(with = MetaIdMappingSer::class) Types.MetaIdMapping, StudioDtoMappingFieldData>,
     override val emptyFieldVariant: EnumDefnEmptyFieldVariant? = null,
     @Serializable(with = MetaIdFieldSer::class) override val fromKey: Types.MetaIdField? = null,
     override val insertVariant: EnumDefnInsertVariant? = null,

@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioSetOfDateData(
-    override val valueSet: Array<String>
+    override val valueSet: List<String>
 ) : StudioSetOfDate

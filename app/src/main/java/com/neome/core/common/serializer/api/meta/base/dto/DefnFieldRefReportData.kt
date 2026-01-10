@@ -9,6 +9,9 @@ import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.dto.DefnFieldRefReport
 import com.neome.api.meta.base.dto.DefnLayoutGrid
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoLayoutOverlaySpreadsheetData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnLayoutGridData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdGridSer
 import com.neome.core.common.serializer.sysId.MetaIdReportSer
@@ -25,7 +28,7 @@ sealed interface DefnFieldRefReportSeal : DefnFieldRefReport
 data class DefnFieldRefReportData(
     override val disabled: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val disabledFieldId: Types.MetaIdField? = null,
-    override val disabledRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val disabledRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val disabledVar: Boolean? = null,
     override val hidden: Boolean? = null,
     override val hideDirtyIndicator: Boolean? = null,
@@ -34,7 +37,7 @@ data class DefnFieldRefReportData(
     override val maxWidth: Long? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val pb: Long? = null,
-    override val permissionMatrix: DefnDtoPermissionMatrix? = null,
+    override val permissionMatrix: DefnDtoPermissionMatrixData? = null,
     override val pl: Long? = null,
     override val pr: Long? = null,
     override val pt: Long? = null,
@@ -42,14 +45,14 @@ data class DefnFieldRefReportData(
     override val type: EnumDefnCompType,
     @Serializable(with = MetaIdFieldSer::class) override val metaId: Types.MetaIdField,
     override val copyFieldMap: Map<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField, @Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
-    override val editableFieldIdSet: Array<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
+    override val editableFieldIdSet: List<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
     override val forceOpenOnFormCreate: Boolean? = null,
     override val forceOpenOnGridRowCreate: Boolean? = null,
     @Serializable(with = MetaIdGridSer::class) override val gridId: Types.MetaIdGrid? = null,
-    override val keyFieldIdSet: Array<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
-    override val layoutGrid: DefnLayoutGrid? = null,
-    override val mobileLayoutGrid: DefnLayoutGrid? = null,
-    override val mobileOverlayLayoutGrid: DefnDtoLayoutOverlaySpreadsheet? = null,
-    override val overlayLayoutGrid: DefnDtoLayoutOverlaySpreadsheet? = null,
+    override val keyFieldIdSet: List<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
+    override val layoutGrid: DefnLayoutGridData? = null,
+    override val mobileLayoutGrid: DefnLayoutGridData? = null,
+    override val mobileOverlayLayoutGrid: DefnDtoLayoutOverlaySpreadsheetData? = null,
+    override val overlayLayoutGrid: DefnDtoLayoutOverlaySpreadsheetData? = null,
     @Serializable(with = MetaIdReportSer::class) override val reportId: Types.MetaIdReport
 ) : DefnCompSeal, DefnFieldRefReport

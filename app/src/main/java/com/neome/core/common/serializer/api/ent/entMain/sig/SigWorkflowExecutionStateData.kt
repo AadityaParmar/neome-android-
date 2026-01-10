@@ -7,6 +7,9 @@ import com.neome.api.ent.entMain.sig.SigWorkflowExecutionState
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.dto.EntVdWorkflowPointer
 import com.neome.api.nucleus.base.sig.SigVersion
+import com.neome.core.common.serializer.api.ent.base.dto.DtoWorkflowParameterInfoData
+import com.neome.core.common.serializer.api.ent.base.dto.WorkflowStepSummaryData
+import com.neome.core.common.serializer.api.meta.base.dto.EntVdWorkflowPointerData
 import com.neome.core.common.serializer.sysId.MetaIdVdAutoNodeSer
 import com.neome.core.common.serializer.sysId.WorkflowExecutionIdSer
 import kotlinx.serialization.Serializable
@@ -19,9 +22,9 @@ data class SigWorkflowExecutionStateData(
     @Serializable(with = MetaIdVdAutoNodeSer::class) override val currNodeId: Types.MetaIdVdAutoNode? = null,
     override val currStateKind: EnumWorkflowResultKind,
     @Serializable(with = WorkflowExecutionIdSer::class) override val executionId: Types.WorkflowExecutionId,
-    override val executionPathList: Array<@Serializable(with = MetaIdVdAutoNodeSer::class) Types.MetaIdVdAutoNode>? = null,
-    override val parameters: Array<DtoWorkflowParameterInfo>? = null,
-    override val summaryList: Array<WorkflowStepSummary>? = null,
+    override val executionPathList: List<@Serializable(with = MetaIdVdAutoNodeSer::class) Types.MetaIdVdAutoNode>? = null,
+    override val parameters: List<DtoWorkflowParameterInfoData>? = null,
+    override val summaryList: List<WorkflowStepSummaryData>? = null,
     override val updatedOn: String,
-    override val workflowPointer: EntVdWorkflowPointer
+    override val workflowPointer: EntVdWorkflowPointerData
 ) : SigWorkflowExecutionState

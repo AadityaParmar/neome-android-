@@ -13,6 +13,15 @@ import com.neome.api.meta.base.dto.StudioPluginResourceMap
 import com.neome.api.meta.base.dto.StudioPluginTrash
 import com.neome.api.meta.base.dto.StudioStoreItemDetailMap
 import com.neome.api.meta.base.dto.StudioVarMap
+import com.neome.core.common.serializer.api.meta.base.dto.StudioFormMapData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioModuleMapData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioPluginApiMapData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioPluginDeployData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioPluginDetailsData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioPluginResourceMapData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioPluginTrashData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioStoreItemDetailMapData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioVarMapData
 import com.neome.core.common.serializer.sysId.AdminIdSer
 import com.neome.core.common.serializer.sysId.PluginBundleIdSer
 import com.neome.core.common.serializer.sysId.PluginIdSer
@@ -21,22 +30,22 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioCliPluginData(
-    override val apiMap: StudioPluginApiMap,
+    override val apiMap: StudioPluginApiMapData,
     @Serializable(with = AdminIdSer::class) override val createdBy: Types.AdminId? = null,
     override val creationTime: String? = null,
-    override val deploy: StudioPluginDeploy,
+    override val deploy: StudioPluginDeployData,
     override val deprecate: Boolean? = null,
-    override val details: StudioPluginDetails,
-    override val formMap: StudioFormMap,
+    override val details: StudioPluginDetailsData,
+    override val formMap: StudioFormMapData,
     @Serializable(with = AdminIdSer::class) override val lastUpdateBy: Types.AdminId? = null,
     override val lastUpdateTime: String? = null,
     @Serializable(with = PluginIdSer::class) override val metaId: Types.PluginId,
     override val mode: EnumDefnPluginMode,
-    override val moduleMap: StudioModuleMap,
-    override val resourceMap: StudioPluginResourceMap? = null,
-    override val storeItemDetailMap: StudioStoreItemDetailMap? = null,
-    override val trash: StudioPluginTrash? = null,
-    override val varMap: StudioVarMap,
+    override val moduleMap: StudioModuleMapData,
+    override val resourceMap: StudioPluginResourceMapData? = null,
+    override val storeItemDetailMap: StudioStoreItemDetailMapData? = null,
+    override val trash: StudioPluginTrashData? = null,
+    override val varMap: StudioVarMapData,
     override val version: String? = null,
     @Serializable(with = PluginBundleIdSer::class) override val pluginBundleId: Types.PluginBundleId? = null
 ) : StudioCliPlugin

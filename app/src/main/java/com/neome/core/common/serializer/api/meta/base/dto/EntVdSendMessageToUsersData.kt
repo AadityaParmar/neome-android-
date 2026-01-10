@@ -10,6 +10,11 @@ import com.neome.api.meta.base.dto.Size
 import com.neome.api.meta.base.dto.StudioBuildArgBinder
 import com.neome.api.meta.base.dto.StudioDtoUserFilter
 import com.neome.api.meta.base.dto.StudioValueParagraph
+import com.neome.core.common.serializer.api.meta.base.dto.PointData
+import com.neome.core.common.serializer.api.meta.base.dto.SizeData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioBuildArgBinderData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoUserFilterData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioValueParagraphData
 import com.neome.core.common.serializer.sysId.MetaIdVdAutoNodeSer
 import com.neome.core.common.serializer.sysId.MetaIdVdRegionSer
 import com.neome.core.common.serializer.sysId.SymbolSer
@@ -20,13 +25,13 @@ import kotlinx.serialization.Serializable
 data class EntVdSendMessageToUsersData(
     override val uiVersion: String? = null,
     override val kind: EnumDefnKindAutoNode,
-    override val logMsg: StudioValueParagraph? = null,
+    override val logMsg: StudioValueParagraphData? = null,
     @Serializable(with = MetaIdVdAutoNodeSer::class) override val metaId: Types.MetaIdVdAutoNode,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     @Serializable(with = MetaIdVdRegionSer::class) override val parentRegionId: Types.MetaIdVdRegion? = null,
-    override val point: Point? = null,
-    override val size: Size? = null,
-    override val message: StudioValueParagraph? = null,
-    override val sender: StudioBuildArgBinder? = null,
-    override val toUsers: StudioDtoUserFilter? = null
+    override val point: PointData? = null,
+    override val size: SizeData? = null,
+    override val message: StudioValueParagraphData? = null,
+    override val sender: StudioBuildArgBinderData? = null,
+    override val toUsers: StudioDtoUserFilterData? = null
 ) : EntVdSendMessageToUsers

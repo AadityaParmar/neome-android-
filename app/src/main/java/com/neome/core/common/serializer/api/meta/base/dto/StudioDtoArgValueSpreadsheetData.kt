@@ -15,5 +15,5 @@ data class StudioDtoArgValueSpreadsheetData(
     @Serializable(with = MetaIdFieldSer::class) override val fieldId: Types.MetaIdField? = null,
     override val spreadsheetAlias: String? = null,
     @Serializable(with = MetaIdSpreadsheetSer::class) override val spreadsheetId: Types.MetaIdSpreadsheet? = null,
-    override val valuePathArray: Array<String>? = null
+    override val valuePathArray: List<String>? = null
 ) : StudioDtoArgValueSpreadsheet

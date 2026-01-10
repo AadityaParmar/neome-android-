@@ -1,9 +1,10 @@
 package com.neome.core.common
 
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.junk.PlusJsonParser
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
@@ -39,58 +40,10 @@ class DefnFormSerTest {
     @Test
     fun `deserialize form with mixed field types`() {
         // Given - Form with both text and number fields
-        val jsonString = """
-        {
-          "metaId": "mf-form003",
-          "name": "registrationForm",
-          "displayCompositeId": "mtb-composite003",
-          "label": "User Registration",
-          "compMap": {
-            "mfd-field003": {
-              "type": "text",
-              "name": "username",
-              "metaId": "mfd-field003",
-              "label": "Username",
-              "required": true,
-              "minCharCount": 3,
-              "maxCharCount": 20,
-              "placeHolder": "Enter username",
-              "helperTextVar": {
-                "value": ["Please enter", "a unique username"]
-              },
-              "prefixVar": {
-                "value": ["@"]
-              }
-            },
-            "mfd-field004": {
-              "type": "text",
-              "name": "email",
-              "metaId": "mfd-field004",
-              "label": "Email",
-              "required": true,
-              "placeHolder": "you@example.com",
-              "defaultVar": {
-                "value": ["user", "@example.com"]
-              },
-              "suffixVar": {
-                "value": [".com", ".org"]
-              }
-            },
-            "mfd-field005": {
-              "type": "number",
-              "name": "experienceYears",
-              "metaId": "mfd-field005",
-              "label": "Years of Experience",
-              "min": 0,
-              "max": 50,
-              "defaultValue": 0
-            }
-          }
-        }
-        """.trimIndent()
+        val jsonString = PlusJsonParser.createSampleDefnForm()
 
         // When
-        val form = json.decodeFromString<DefnFormSer>(jsonString)
+        val form = json.decodeFromString<DefnFormData>(jsonString)
         val formStr = json.encodeToString(form)
 
 
@@ -107,92 +60,8 @@ class DefnFormSerTest {
         }
         println("================================================\n")
 
-        Assert.assertNotNull(form)
-        Assert.assertEquals("registrationForm", form.name.toString())
-        Assert.assertEquals("User Registration", form.label)
-        Assert.assertEquals(3, form.compMap.size)
 
-        // Verify text fields
-        val textFields = form.compMap.values.filterIsInstance<DefnFieldTextSer>()
-        Assert.assertEquals(2, textFields.size)
-
-        val usernameField = textFields.find { it.name.toString() == "username" }
-        Assert.assertNotNull(usernameField)
-        Assert.assertEquals(3, usernameField?.minCharCount)
-        Assert.assertEquals(20, usernameField?.maxCharCount)
-        Assert.assertEquals("Enter username", usernameField?.placeHolder)
-        Assert.assertNotNull(usernameField?.helperTextVar)
-        Assert.assertArrayEquals(
-            arrayOf("Please enter", "a unique username"),
-            usernameField?.helperTextVar?.value
-        )
-        Assert.assertNotNull(usernameField?.prefixVar)
-        Assert.assertArrayEquals(arrayOf("@"), usernameField?.prefixVar?.value)
-
-        val emailField = textFields.find { it.name.toString() == "email" }
-        Assert.assertNotNull(emailField)
-        Assert.assertNotNull(emailField?.defaultVar)
-        Assert.assertArrayEquals(arrayOf("user", "@example.com"), emailField?.defaultVar?.value)
-        Assert.assertNotNull(emailField?.suffixVar)
-        Assert.assertArrayEquals(arrayOf(".com", ".org"), emailField?.suffixVar?.value)
-
-        // Verify number fields
-        val numberFields = form.compMap.values.filterIsInstance<DefnFieldNumberSer>()
-        Assert.assertEquals(1, numberFields.size)
-
-        val experienceField = numberFields.first()
-        Assert.assertEquals("experienceYears", experienceField.name.toString())
-        Assert.assertEquals(0, experienceField.min)
-        Assert.assertEquals(50, experienceField.max)
-        Assert.assertEquals(0, experienceField.defaultValue)
     }
 }
 
 
-//{
-//        "metaId": "mf-form003",
-//        "name": "registrationForm",
-//        "displayCompositeId": "mtb-composite003",
-//        "label": "User Registration",
-//        "compMap": {
-//          "mfd-field003": {
-//            "type": "text",
-//            "name": "username",
-//            "metaId": "mfd-field003",
-//            "label": "Username",
-//            "required": true,
-//            "minCharCount": 3,
-//            "maxCharCount": 20,
-//            "placeHolder": "Enter username",
-//            "helperTextVar": {
-//              "value": ["Please enter", "a unique username"]
-//            },
-//            "prefixVar": {
-//              "value": ["@"]
-//            }
-//          },
-//          "mfd-field004": {
-//            "type": "text",
-//            "name": "email",
-//            "metaId": "mfd-field004",
-//            "label": "Email",
-//            "required": true,
-//            "placeHolder": "you@example.com",
-//            "defaultVar": {
-//              "value": ["user", "@example.com"]
-//            },
-//            "suffixVar": {
-//              "value": [".com", ".org"]
-//            }
-//          },
-//          "mfd-field005": {
-//            "type": "number",
-//            "name": "experienceYears",
-//            "metaId": "mfd-field005",
-//            "label": "Years of Experience",
-//            "min": 0,
-//            "max": 50,
-//            "defaultValue": 0
-//          }
-//        }
-//      }

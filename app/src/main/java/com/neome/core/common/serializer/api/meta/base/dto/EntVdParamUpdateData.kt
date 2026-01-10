@@ -10,6 +10,10 @@ import com.neome.api.meta.base.dto.Point
 import com.neome.api.meta.base.dto.Size
 import com.neome.api.meta.base.dto.StudioDtoMapping
 import com.neome.api.meta.base.dto.StudioValueParagraph
+import com.neome.core.common.serializer.api.meta.base.dto.PointData
+import com.neome.core.common.serializer.api.meta.base.dto.SizeData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoMappingData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioValueParagraphData
 import com.neome.core.common.serializer.sysId.MetaIdPipelineParamSer
 import com.neome.core.common.serializer.sysId.MetaIdVarSer
 import com.neome.core.common.serializer.sysId.MetaIdVdAutoNodeSer
@@ -22,14 +26,14 @@ import kotlinx.serialization.Serializable
 data class EntVdParamUpdateData(
     override val uiVersion: String? = null,
     override val kind: EnumDefnKindAutoNode,
-    override val logMsg: StudioValueParagraph? = null,
+    override val logMsg: StudioValueParagraphData? = null,
     @Serializable(with = MetaIdVdAutoNodeSer::class) override val metaId: Types.MetaIdVdAutoNode,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     @Serializable(with = MetaIdVdRegionSer::class) override val parentRegionId: Types.MetaIdVdRegion? = null,
-    override val point: Point? = null,
-    override val size: Size? = null,
+    override val point: PointData? = null,
+    override val size: SizeData? = null,
     override val option: EnumDefnKindPipelineUpdate? = null,
-    override val outputMapping: StudioDtoMapping? = null,
+    override val outputMapping: StudioDtoMappingData? = null,
     @Serializable(with = MetaIdVarSer::class) override val outputMappingVarId: Types.MetaIdVar? = null,
     @Serializable(with = MetaIdPipelineParamSer::class) override val pipelineParamId: Types.MetaIdPipelineParam? = null
 ) : EntVdParamUpdate

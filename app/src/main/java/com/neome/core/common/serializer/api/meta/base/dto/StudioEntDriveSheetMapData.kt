@@ -8,6 +8,7 @@ import com.neome.api.meta.base.Types.EnumDefnSyncMode
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntDriveSheet
 import com.neome.api.meta.base.dto.StudioEntDriveSheetMap
+import com.neome.core.common.serializer.api.meta.base.dto.StudioEntDriveSheetData
 import com.neome.core.common.serializer.sysId.MetaIdDriveSheetSer
 import com.neome.core.common.serializer.sysId.SymbolSer
 import kotlinx.serialization.Serializable
@@ -15,12 +16,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioEntDriveSheetMapData(
-    override val addressBookExportKindSet: Array<EnumDefnDataExportKind>? = null,
+    override val addressBookExportKindSet: List<EnumDefnDataExportKind>? = null,
     override val beginningOfTheYear: EnumDefnMonth? = null,
     @Serializable(with = SymbolSer::class) override val driveFolderName: Symbol? = null,
-    override val keys: Array<@Serializable(with = MetaIdDriveSheetSer::class) Types.MetaIdDriveSheet>,
+    override val keys: List<@Serializable(with = MetaIdDriveSheetSer::class) Types.MetaIdDriveSheet>,
     override val manageAdmins: Boolean? = null,
     override val manageUsers: Boolean? = null,
-    override val map: Map<@Serializable(with = MetaIdDriveSheetSer::class) Types.MetaIdDriveSheet, StudioEntDriveSheet>,
+    override val map: Map<@Serializable(with = MetaIdDriveSheetSer::class) Types.MetaIdDriveSheet, StudioEntDriveSheetData>,
     override val syncMode: EnumDefnSyncMode? = null
 ) : StudioEntDriveSheetMap

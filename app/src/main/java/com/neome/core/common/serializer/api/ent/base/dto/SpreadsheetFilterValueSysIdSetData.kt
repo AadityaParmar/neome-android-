@@ -14,5 +14,5 @@ import kotlinx.serialization.Serializable
 data class SpreadsheetFilterValueSysIdSetData(
     @Serializable(with = MetaIdCompSer::class) override val metaIdField: Types.MetaIdComp,
     override val type: EnumFieldFilterValueType,
-    override val valueSet: Array<@Serializable(with = SysIdSer::class) SysId>
+    override val valueSet: List<@Serializable(with = SysIdSer::class) SysId>
 ) : SpreadsheetFilterValueSysIdSet

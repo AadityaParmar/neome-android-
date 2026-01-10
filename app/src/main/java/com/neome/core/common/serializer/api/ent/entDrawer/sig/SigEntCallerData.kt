@@ -17,6 +17,19 @@ import com.neome.api.meta.base.dto.DefnLayoutUserMap
 import com.neome.api.meta.base.dto.DefnStudioDtoActionPermission
 import com.neome.api.meta.base.dto.StudioDtoLocationCapture
 import com.neome.api.nucleus.base.sig.SigVersion
+import com.neome.core.common.serializer.api.ent.base.dto.DtoEntActionData
+import com.neome.core.common.serializer.api.ent.base.dto.DtoEntDeeplinkData
+import com.neome.core.common.serializer.api.ent.base.dto.DtoEntGroupMapData
+import com.neome.core.common.serializer.api.ent.base.dto.DtoEntPromptData
+import com.neome.core.common.serializer.api.ent.base.dto.DtoEntRoleData
+import com.neome.core.common.serializer.api.ent.base.dto.DtoEntSpreadsheetData
+import com.neome.core.common.serializer.api.ent.base.dto.DtoEntWallpaperData
+import com.neome.core.common.serializer.api.ent.base.dto.DtoPaymentProviderData
+import com.neome.core.common.serializer.api.ent.base.dto.DtoVarUserSettingData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnLayoutUserMapData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioDtoActionPermissionData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoLocationCaptureData
 import com.neome.core.common.serializer.sysId.EntIdSer
 import com.neome.core.common.serializer.sysId.EntUserIdSer
 import com.neome.core.common.serializer.sysId.GroupIdSer
@@ -38,34 +51,34 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SigEntCallerData(
     override val version: String,
-    override val actionMap: Map<@Serializable(with = MetaIdActionSer::class) Types.MetaIdAction, DtoEntAction>,
+    override val actionMap: Map<@Serializable(with = MetaIdActionSer::class) Types.MetaIdAction, DtoEntActionData>,
     @Serializable(with = MediaIdSer::class) override val avatarId: Types.MediaId? = null,
     override val color: String,
-    override val deeplinkMap: Map<@Serializable(with = MetaIdDeeplinkSer::class) Types.MetaIdDeeplink, DtoEntDeeplink>? = null,
+    override val deeplinkMap: Map<@Serializable(with = MetaIdDeeplinkSer::class) Types.MetaIdDeeplink, DtoEntDeeplinkData>? = null,
     override val displayDateFormat: String? = null,
     @Serializable(with = EntIdSer::class) override val entId: Types.EntId,
     @Serializable(with = EntUserIdSer::class) override val entUserId: Types.EntUserId,
     override val entUserIdHash: String,
-    override val formMap: Map<@Serializable(with = MetaIdFormSer::class) Types.MetaIdForm, DefnForm>,
+    override val formMap: Map<@Serializable(with = MetaIdFormSer::class) Types.MetaIdForm, DefnFormData>,
     @Serializable(with = EntUserIdSer::class) override val grandManagerId: Types.EntUserId? = null,
     override val groupIdMapping: Map<@Serializable(with = MetaIdGroupSer::class) Types.MetaIdGroup, @Serializable(with = GroupIdSer::class) Types.GroupId>,
-    override val groupMap: DtoEntGroupMap,
+    override val groupMap: DtoEntGroupMapData,
     override val handle: String,
     @Serializable(with = LanguageKeySer::class) override val languageKey: Types.LanguageKey? = null,
-    override val layoutUserMap: DefnLayoutUserMap? = null,
-    override val layoutUserMenuActionMap: Map<@Serializable(with = MetaIdActionSer::class) Types.MetaIdAction, DefnStudioDtoActionPermission>? = null,
+    override val layoutUserMap: DefnLayoutUserMapData? = null,
+    override val layoutUserMenuActionMap: Map<@Serializable(with = MetaIdActionSer::class) Types.MetaIdAction, DefnStudioDtoActionPermissionData>? = null,
     override val locationAccuracy: EnumDefnLocationAccuracy? = null,
-    override val locationConfig: StudioDtoLocationCapture? = null,
+    override val locationConfig: StudioDtoLocationCaptureData? = null,
     @Serializable(with = EntUserIdSer::class) override val managerId: Types.EntUserId? = null,
-    override val managerialRelationshipMap: Map<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole, Array<@Serializable(with = EntUserIdSer::class) Types.EntUserId>>? = null,
+    override val managerialRelationshipMap: Map<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole, List<@Serializable(with = EntUserIdSer::class) Types.EntUserId>>? = null,
     override val nickName: String,
-    override val paymentProvider: DtoPaymentProvider? = null,
-    override val promptMap: Map<@Serializable(with = MetaIdPromptSer::class) Types.MetaIdPrompt, DtoEntPrompt>? = null,
-    override val roleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>,
-    override val roleMap: Map<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole, DtoEntRole>,
-    override val spreadsheetMap: Map<@Serializable(with = MetaIdSpreadsheetSer::class) Types.MetaIdSpreadsheet, DtoEntSpreadsheet>? = null,
+    override val paymentProvider: DtoPaymentProviderData? = null,
+    override val promptMap: Map<@Serializable(with = MetaIdPromptSer::class) Types.MetaIdPrompt, DtoEntPromptData>? = null,
+    override val roleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>,
+    override val roleMap: Map<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole, DtoEntRoleData>,
+    override val spreadsheetMap: Map<@Serializable(with = MetaIdSpreadsheetSer::class) Types.MetaIdSpreadsheet, DtoEntSpreadsheetData>? = null,
     @Serializable(with = TimeZoneKeySer::class) override val timeZone: Types.TimeZoneKey? = null,
     @Serializable(with = UserIdSer::class) override val userId: Types.UserId,
-    override val userSettingVarMap: Map<@Serializable(with = MetaIdVarSer::class) Types.MetaIdVar, DtoVarUserSetting>? = null,
-    override val wallpaper: DtoEntWallpaper? = null
+    override val userSettingVarMap: Map<@Serializable(with = MetaIdVarSer::class) Types.MetaIdVar, DtoVarUserSettingData>? = null,
+    override val wallpaper: DtoEntWallpaperData? = null
 ) : SigEntCaller

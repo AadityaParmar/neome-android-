@@ -12,6 +12,6 @@ import kotlinx.serialization.Serializable
 data class MsgGroupMembersAddData(
     override val version: String? = null,
     @Serializable(with = GroupIdSer::class) override val groupId: Types.GroupId,
-    override val insertAdminSet: Array<@Serializable(with = EntUserIdSer::class) Types.EntUserId>? = null,
-    override val insertMemberSet: Array<@Serializable(with = EntUserIdSer::class) Types.EntUserId>? = null
+    override val insertAdminSet: List<@Serializable(with = EntUserIdSer::class) Types.EntUserId>? = null,
+    override val insertMemberSet: List<@Serializable(with = EntUserIdSer::class) Types.EntUserId>? = null
 ) : MsgGroupMembersAdd

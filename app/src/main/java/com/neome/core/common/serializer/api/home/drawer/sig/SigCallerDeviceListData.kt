@@ -3,10 +3,11 @@ package com.neome.core.common.serializer.api.home.drawer.sig
 import com.neome.api.core.base.dto.DtoDevice
 import com.neome.api.home.drawer.sig.SigCallerDeviceList
 import com.neome.api.nucleus.base.sig.Sig
+import com.neome.core.common.serializer.api.core.base.dto.DtoDeviceData
 import kotlinx.serialization.Serializable
 
 
 @Serializable
 data class SigCallerDeviceListData(
-    override val deviceList: Array<DtoDevice>
+    override val deviceList: List<DtoDeviceData>
 ) : SigCallerDeviceList

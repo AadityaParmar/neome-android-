@@ -12,6 +12,8 @@ import com.neome.api.meta.base.dto.StudioDtoColor
 import com.neome.api.meta.base.dto.StudioDtoLayoutForm
 import com.neome.api.meta.base.dto.StudioDtoLayoutFormContent
 import com.neome.api.meta.base.dto.StudioDtoLayoutFormContentItem
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoColorData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoLayoutFormContentItemData
 import com.neome.core.common.serializer.sysId.MetaIdLayoutFormSer
 import com.neome.core.common.serializer.sysId.MetaIdVarSer
 import com.neome.core.common.serializer.sysId.SymbolSer
@@ -24,21 +26,21 @@ data class StudioDtoLayoutFormContentData(
     @Serializable(with = MetaIdLayoutFormSer::class) override val metaId: Types.MetaIdLayoutForm,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val type: EnumDefnFormLayoutType? = null,
-    override val allowToSwitchLayoutIdSet: Array<@Serializable(with = MetaIdLayoutFormSer::class) Types.MetaIdLayoutForm>? = null,
-    override val backgroundColor: StudioDtoColor? = null,
+    override val allowToSwitchLayoutIdSet: List<@Serializable(with = MetaIdLayoutFormSer::class) Types.MetaIdLayoutForm>? = null,
+    override val backgroundColor: StudioDtoColorData? = null,
     @Serializable(with = MetaIdVarSer::class) override val backgroundColorVarId: Types.MetaIdVar? = null,
-    override val borderColor: StudioDtoColor? = null,
+    override val borderColor: StudioDtoColorData? = null,
     @Serializable(with = MetaIdVarSer::class) override val borderColorVarId: Types.MetaIdVar? = null,
-    override val borderPositionSet: Array<EnumDefnShowBorderKind>? = null,
-    override val borderRadiusSet: Array<EnumDefnShowBorderRadiusKind>? = null,
+    override val borderPositionSet: List<EnumDefnShowBorderKind>? = null,
+    override val borderRadiusSet: List<EnumDefnShowBorderRadiusKind>? = null,
     override val borderRadiusSize: EnumDefnThemeDividerKind? = null,
     override val direction: EnumDefnThemeDirection? = null,
     override val displayLabel: String? = null,
-    override val end: StudioDtoLayoutFormContentItem? = null,
-    override val flexCenter: StudioDtoLayoutFormContentItem? = null,
-    override val paddingPositionSet: Array<EnumDefnShowBorderKind>? = null,
+    override val end: StudioDtoLayoutFormContentItemData? = null,
+    override val flexCenter: StudioDtoLayoutFormContentItemData? = null,
+    override val paddingPositionSet: List<EnumDefnShowBorderKind>? = null,
     override val paddingSize: EnumDefnThemeDividerKind? = null,
     override val renderingMode: EnumDefnRenderingKind? = null,
     override val rootLayout: Boolean? = null,
-    override val start: StudioDtoLayoutFormContentItem? = null
+    override val start: StudioDtoLayoutFormContentItemData? = null
 ) : StudioDtoLayoutFormContent

@@ -12,9 +12,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DefnLayoutUserData(
-    override val allowToSwitchLayoutIdSet: Array<@Serializable(with = MetaIdLayoutUserSer::class) Types.MetaIdLayoutUser>? = null,
-    override val excludeRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
-    override val includeRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val allowToSwitchLayoutIdSet: List<@Serializable(with = MetaIdLayoutUserSer::class) Types.MetaIdLayoutUser>? = null,
+    override val excludeRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val includeRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val kind: EnumDefnLayoutUserKind,
     override val label: String? = null,
     @Serializable(with = MetaIdLayoutUserSer::class) override val metaId: Types.MetaIdLayoutUser,

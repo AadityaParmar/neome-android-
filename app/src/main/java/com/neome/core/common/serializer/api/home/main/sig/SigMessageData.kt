@@ -8,6 +8,8 @@ import com.neome.api.home.main.sig.SigMessage
 import com.neome.api.home.main.sig.SigMessageBase
 import com.neome.api.meta.base.Types
 import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadSeal
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessageReactionData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessageReplyPayloadData
 import com.neome.core.common.serializer.sysId.EntUserIdSer
 import com.neome.core.common.serializer.sysId.MessageIdSer
 import kotlinx.serialization.Serializable
@@ -20,8 +22,8 @@ data class SigMessageData(
     @Serializable(with = MessageIdSer::class) override val messageId: Types.MessageId,
     override val messageOffset: Long? = null,
     override val payload: DtoMessagePayloadSeal,
-    override val reactionMap: Map<@Serializable(with = EntUserIdSer::class) Types.EntUserId, DtoMessageReaction>? = null,
-    override val replyPayload: DtoMessageReplyPayload? = null,
+    override val reactionMap: Map<@Serializable(with = EntUserIdSer::class) Types.EntUserId, DtoMessageReactionData>? = null,
+    override val replyPayload: DtoMessageReplyPayloadData? = null,
     @Serializable(with = EntUserIdSer::class) override val senderId: Types.EntUserId,
     override val receiptStatus: EnumReceiptStatus? = null,
     override val version: String? = null

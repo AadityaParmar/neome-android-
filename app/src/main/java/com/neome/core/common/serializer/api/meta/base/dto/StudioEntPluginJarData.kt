@@ -4,6 +4,7 @@ import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntPluginJar
 import com.neome.api.meta.base.dto.StudioMapOfJarFile
+import com.neome.core.common.serializer.api.meta.base.dto.StudioMapOfJarFileData
 import com.neome.core.common.serializer.sysId.MetaIdFormSer
 import kotlinx.serialization.Serializable
 
@@ -12,5 +13,5 @@ import kotlinx.serialization.Serializable
 data class StudioEntPluginJarData(
     override val packageNameVar: String? = null,
     @Serializable(with = MetaIdFormSer::class) override val pluginConfigFormId: Types.MetaIdForm? = null,
-    override val uploadJarMap: StudioMapOfJarFile? = null
+    override val uploadJarMap: StudioMapOfJarFileData? = null
 ) : StudioEntPluginJar

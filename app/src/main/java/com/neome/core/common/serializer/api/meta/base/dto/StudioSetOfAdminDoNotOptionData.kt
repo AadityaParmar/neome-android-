@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioSetOfAdminDoNotOptionData(
-    override val valueSet: Array<EnumDefnAdminDoNotOptionEnt>
+    override val valueSet: List<EnumDefnAdminDoNotOptionEnt>
 ) : StudioSetOfAdminDoNotOption

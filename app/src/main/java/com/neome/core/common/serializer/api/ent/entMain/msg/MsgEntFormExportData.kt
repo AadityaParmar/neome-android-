@@ -5,6 +5,7 @@ import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.EnumFormExportType
 import com.neome.api.meta.base.dto.FormValueRaw
 import com.neome.api.nucleus.base.msg.Msg
+import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
 import com.neome.core.common.serializer.sysId.EntIdSer
 import com.neome.core.common.serializer.sysId.MetaIdFormSer
 import com.neome.core.common.serializer.sysId.MetaIdLayoutFormSer
@@ -17,7 +18,7 @@ data class MsgEntFormExportData(
     @Serializable(with = EntIdSer::class) override val entId: Types.EntId,
     override val exportType: EnumFormExportType,
     @Serializable(with = MetaIdFormSer::class) override val formId: Types.MetaIdForm,
-    override val formValueRaw: FormValueRaw,
+    override val formValueRaw: FormValueRawData,
     override val height: Long? = null,
     @Serializable(with = MetaIdLayoutFormSer::class) override val templateLayoutId: Types.MetaIdLayoutForm? = null,
     override val width: Long? = null

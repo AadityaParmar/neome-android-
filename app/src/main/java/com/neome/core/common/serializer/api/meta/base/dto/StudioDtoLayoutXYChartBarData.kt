@@ -8,6 +8,8 @@ import com.neome.api.meta.base.dto.StudioDtoLayoutXYChart
 import com.neome.api.meta.base.dto.StudioDtoLayoutXYChartBar
 import com.neome.api.meta.base.dto.StudioMapOfChartXAxis
 import com.neome.api.meta.base.dto.StudioMapOfChartYAxis
+import com.neome.core.common.serializer.api.meta.base.dto.StudioMapOfChartXAxisData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioMapOfChartYAxisData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdLayoutGridSer
 import com.neome.core.common.serializer.sysId.SymbolSer
@@ -16,7 +18,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioDtoLayoutXYChartBarData(
-    override val allowToSwitchLayoutIdSet: Array<@Serializable(with = MetaIdLayoutGridSer::class) Types.MetaIdLayoutGrid>? = null,
+    override val allowToSwitchLayoutIdSet: List<@Serializable(with = MetaIdLayoutGridSer::class) Types.MetaIdLayoutGrid>? = null,
     @Serializable(with = MetaIdFieldSer::class) override val bgColorFieldId: Types.MetaIdField? = null,
     override val description: String? = null,
     override val kind: EnumDefnLayoutGridKind,
@@ -26,8 +28,8 @@ data class StudioDtoLayoutXYChartBarData(
     @Serializable(with = MetaIdFieldSer::class) override val toolTipFieldId: Types.MetaIdField? = null,
     override val hideLegend: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val xAxis: Types.MetaIdField? = null,
-    override val xAxisMap: StudioMapOfChartXAxis? = null,
-    override val yAxisMap: StudioMapOfChartYAxis? = null,
+    override val xAxisMap: StudioMapOfChartXAxisData? = null,
+    override val yAxisMap: StudioMapOfChartYAxisData? = null,
     override val alwaysShowBarValues: Boolean? = null,
     override val renderingMode: EnumDefnChartRenderingMode? = null
 ) : StudioDtoLayoutXYChartBar

@@ -5,6 +5,7 @@ import com.neome.api.meta.base.Types.EnumDefnPromptAttachmentFormat
 import com.neome.api.meta.base.dto.StudioBase
 import com.neome.api.meta.base.dto.StudioEntPrompt
 import com.neome.api.meta.base.dto.StudioEntPromptMap
+import com.neome.core.common.serializer.api.meta.base.dto.StudioEntPromptData
 import com.neome.core.common.serializer.sysId.MetaIdPromptSer
 import com.neome.core.common.serializer.sysId.MetaIdSpreadsheetSer
 import com.neome.core.common.serializer.sysId.MetaIdVarSer
@@ -15,10 +16,10 @@ import kotlinx.serialization.Serializable
 data class StudioEntPromptMapData(
     @Serializable(with = MetaIdVarSer::class) override val adhocPromptMappingVarId: Types.MetaIdVar? = null,
     @Serializable(with = MetaIdSpreadsheetSer::class) override val adhocPromptSpreadsheetId: Types.MetaIdSpreadsheet? = null,
-    override val fieldSeparatorSet: Array<String>? = null,
-    override val keys: Array<@Serializable(with = MetaIdPromptSer::class) Types.MetaIdPrompt>,
+    override val fieldSeparatorSet: List<String>? = null,
+    override val keys: List<@Serializable(with = MetaIdPromptSer::class) Types.MetaIdPrompt>,
     override val lineSeparator: String? = null,
-    override val map: Map<@Serializable(with = MetaIdPromptSer::class) Types.MetaIdPrompt, StudioEntPrompt>,
+    override val map: Map<@Serializable(with = MetaIdPromptSer::class) Types.MetaIdPrompt, StudioEntPromptData>,
     override val promptAttachmentFormat: EnumDefnPromptAttachmentFormat? = null,
     override val reviewBeforeExecuting: Boolean? = null,
     override val sendReviewDeeplinkOnError: Boolean? = null,

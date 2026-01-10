@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
 data class DtoPaymentProviderRazorpayData(
     override val kind: EnumPaymentProviderKind,
     @Serializable(with = MetaIdPaymentProviderSer::class) override val metaId: Types.MetaIdPaymentProvider,
-    override val allowedPaymentMethodSet: Array<EnumDefnPaymentMethodKind>? = null,
+    override val allowedPaymentMethodSet: List<EnumDefnPaymentMethodKind>? = null,
     override val apiKey: String,
     @Serializable(with = CurrencyKeySer::class) override val defaultCurrency: Types.CurrencyKey
 ) : DtoPaymentProviderRazorpay

@@ -6,6 +6,8 @@ import com.neome.api.meta.base.dto.StudioDetails
 import com.neome.api.meta.base.dto.StudioEntAction
 import com.neome.api.meta.base.dto.StudioEntActionRowUpdate
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
+import com.neome.core.common.serializer.api.meta.base.dto.StudioDetailsData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioValueVarIdConditionData
 import com.neome.core.common.serializer.sysId.MetaIdActionSer
 import com.neome.core.common.serializer.sysId.MetaIdCompSer
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
@@ -19,13 +21,13 @@ import kotlinx.serialization.json.JsonElement
 data class StudioEntActionRowUpdateData(
     override val aiInstructions: String? = null,
     override val defaultValueMap: Map<@Serializable(with = MetaIdCompSer::class) Types.MetaIdComp, JsonElement>? = null,
-    override val details: StudioDetails,
+    override val details: StudioDetailsData,
     override val icon: String? = null,
     override val increaseAsideWidth: Boolean? = null,
     override val kind: EnumDefnKindAction,
     @Serializable(with = MetaIdActionSer::class) override val metaId: Types.MetaIdAction,
     override val tooltip: String? = null,
-    override val filterConditionVarId: StudioValueVarIdCondition? = null,
+    override val filterConditionVarId: StudioValueVarIdConditionData? = null,
     @Serializable(with = MetaIdLayoutGridSer::class) override val layoutSpreadsheetId: Types.MetaIdLayoutGrid? = null,
     @Serializable(with = MetaIdFieldSer::class) override val lookupFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdSpreadsheetSer::class) override val spreadsheetId: Types.MetaIdSpreadsheet? = null

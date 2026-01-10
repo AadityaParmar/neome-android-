@@ -8,6 +8,9 @@ import com.neome.api.meta.base.dto.StudioEntAutomationScheduled
 import com.neome.api.meta.base.dto.StudioEntAutomationScheduledEventMap
 import com.neome.api.meta.base.dto.StudioModuleSelection
 import com.neome.api.meta.base.dto.StudioVarValueScheduler
+import com.neome.core.common.serializer.api.meta.base.dto.StudioEntAutomationScheduledEventMapData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioModuleSelectionData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioVarValueSchedulerData
 import com.neome.core.common.serializer.sysId.MetaIdAutomationSer
 import com.neome.core.common.serializer.sysId.SymbolSer
 import kotlinx.serialization.Serializable
@@ -19,9 +22,9 @@ data class StudioEntAutomationScheduledData(
     override val description: String? = null,
     override val kind: EnumDefnKindAutomation,
     @Serializable(with = MetaIdAutomationSer::class) override val metaId: Types.MetaIdAutomation,
-    override val modules: StudioModuleSelection? = null,
+    override val modules: StudioModuleSelectionData? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val secondary: String? = null,
-    override val eventMap: StudioEntAutomationScheduledEventMap,
-    override val scheduler: StudioVarValueScheduler? = null
+    override val eventMap: StudioEntAutomationScheduledEventMapData,
+    override val scheduler: StudioVarValueSchedulerData? = null
 ) : StudioEntAutomationScheduled

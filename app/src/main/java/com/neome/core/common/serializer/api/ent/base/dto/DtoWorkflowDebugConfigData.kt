@@ -10,6 +10,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DtoWorkflowDebugConfigData(
-    override val breakpointMap: Map<@Serializable(with = MetaIdVdAutoDiaSer::class) Types.MetaIdVdAutoDia, Array<@Serializable(with = MetaIdVdAutoNodeSer::class) Types.MetaIdVdAutoNode>>,
+    override val breakpointMap: Map<@Serializable(with = MetaIdVdAutoDiaSer::class) Types.MetaIdVdAutoDia, List<@Serializable(with = MetaIdVdAutoNodeSer::class) Types.MetaIdVdAutoNode>>,
     @Serializable(with = EntUserIdSer::class) override val defaultDebugEntUserId: Types.EntUserId? = null
 ) : DtoWorkflowDebugConfig

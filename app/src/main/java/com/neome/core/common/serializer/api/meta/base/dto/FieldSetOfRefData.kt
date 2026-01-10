@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FieldSetOfRefData(
-    override val displaySet: Array<String>,
-    override val valueSet: Array<@Serializable(with = RowIdSer::class) Types.RowId>,
-    override val versionSet: Array<String>
+    override val displaySet: List<String>,
+    override val valueSet: List<@Serializable(with = RowIdSer::class) Types.RowId>,
+    override val versionSet: List<String>
 ) : FieldSetOfRef

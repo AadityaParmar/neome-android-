@@ -10,6 +10,9 @@ import com.neome.api.meta.base.dto.DefnFieldCamera
 import com.neome.api.meta.base.dto.DefnFieldImage
 import com.neome.api.meta.base.dto.FieldDtoImage
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoTextData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldDtoImageData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer
 import com.neome.core.common.serializer.sysId.SymbolSer
@@ -24,7 +27,7 @@ sealed interface DefnFieldCameraSeal : DefnFieldCamera
 data class DefnFieldCameraData(
     override val disabled: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val disabledFieldId: Types.MetaIdField? = null,
-    override val disabledRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val disabledRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val disabledVar: Boolean? = null,
     override val hidden: Boolean? = null,
     override val hideDirtyIndicator: Boolean? = null,
@@ -33,7 +36,7 @@ data class DefnFieldCameraData(
     override val maxWidth: Long? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val pb: Long? = null,
-    override val permissionMatrix: DefnDtoPermissionMatrix? = null,
+    override val permissionMatrix: DefnDtoPermissionMatrixData? = null,
     override val pl: Long? = null,
     override val pr: Long? = null,
     override val pt: Long? = null,
@@ -44,25 +47,25 @@ data class DefnFieldCameraData(
     override val autoFocus: Boolean? = null,
     override val helperText: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val helperTextFieldId: Types.MetaIdField? = null,
-    override val helperTextVar: DefnDtoText? = null,
+    override val helperTextVar: DefnDtoTextData? = null,
     override val hideLabel: Boolean? = null,
     override val icon: String? = null,
     override val iconVar: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val labelFieldId: Types.MetaIdField? = null,
     override val placeHolder: String? = null,
     @Serializable(with = MetaIdFieldSer::class) override val placeHolderFieldId: Types.MetaIdField? = null,
-    override val placeHolderVar: DefnDtoText? = null,
+    override val placeHolderVar: DefnDtoTextData? = null,
     override val prefix: String? = null,
-    override val prefixVar: DefnDtoText? = null,
+    override val prefixVar: DefnDtoTextData? = null,
     override val required: Boolean? = null,
     @Serializable(with = MetaIdFieldSer::class) override val requiredFieldId: Types.MetaIdField? = null,
-    override val requiredRoleIdSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val requiredRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val requiredVar: Boolean? = null,
     override val suffix: String? = null,
-    override val suffixVar: DefnDtoText? = null,
-    override val defaultImage: FieldDtoImage? = null,
+    override val suffixVar: DefnDtoTextData? = null,
+    override val defaultImage: FieldDtoImageData? = null,
     @Serializable(with = MetaIdFieldSer::class) override val defaultImageFieldId: Types.MetaIdField? = null,
-    override val defaultImageVar: FieldDtoImage? = null,
+    override val defaultImageVar: FieldDtoImageData? = null,
     override val flexWidth: Boolean? = null,
     override val height: Long? = null,
     override val maxSize: Long? = null,
@@ -81,6 +84,6 @@ data class DefnFieldCameraData(
     override val captureLocation: Boolean? = null,
     override val captureTime: Boolean? = null,
     override val captureUser: Boolean? = null,
-    override val pickImageRoleSet: Array<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
-    override val showCapturedValuesOnAside: Array<EnumDefnCaptureValueKind>? = null
+    override val pickImageRoleSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val showCapturedValuesOnAside: List<EnumDefnCaptureValueKind>? = null
 ) : DefnCompSeal, DefnFieldCamera
