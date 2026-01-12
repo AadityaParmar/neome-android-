@@ -217,8 +217,8 @@ object DefnCompSerializer : JsonContentPolymorphicSerializer<DefnCompSeal>(
     DefnCompSeal::class
 ) {
     override fun selectDeserializer(element: JsonElement): DeserializationStrategy<DefnCompSeal> {
-        val Type = element.jsonObject["Type"]?.jsonPrimitive?.content
-        return when (Type) {
+        val type = element.jsonObject["type"]?.jsonPrimitive?.content
+        return when (type) {
             EnumStudioCompType.bool.value -> DefnFieldSwitchData.serializer()
             EnumStudioCompType.date.value -> DefnFieldDateData.serializer()
             EnumStudioCompType.decimal.value -> DefnFieldDecimalData.serializer()

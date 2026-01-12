@@ -1,174 +1,158 @@
 package com.neome.feature.form.presentation.ref
 
-import com.neome.api.meta.base.dto.DefnForm
-import com.neome.api.meta.base.dto.FormValueRaw
+import com.neome.api.meta.base.Types.MetaIdComp
+import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
+import com.neome.feature.form.presentation.state.FieldState
+import com.neome.feature.form.presentation.state.FormEvent
+import com.neome.feature.form.presentation.state.FormState
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.serialization.json.JsonElement
 
 /**
- * Implementation of FormRef interface.
- * Manages all runtime form state internally.
+ * Implementation of FormRef that provides external API for form operations.
  *
- * @param scope CoroutineScope for managing StateFlows (typically viewModelScope)
+ * @param formStateFlow StateFlow of the current FormState
+ * @param dispatchEvent Function to dispatch FormEvent
+ * @param coroutineScope CoroutineScope for managing StateFlows
  */
 class FormRefImpl(
-    private val scope: CoroutineScope
+    private val formStateFlow: StateFlow<FormState>,
+    private val dispatchEvent: (FormEvent) -> Unit,
+    private val coroutineScope: CoroutineScope
 ) : FormRef {
 
-    // Internal state management
-    private var defnForm: DefnForm? = null
-    private var initialFormValue: FormValueRaw? = null
+    private val currentState: FormState
+        get() = formStateFlow.value
 
-    // Field values: fieldId -> StateFlow<Any?>
-    private val fieldValues = mutableMapOf<String, MutableStateFlow<Any?>>()
+    // Cache for field state StateFlows
+    private val fieldStateFlows = mutableMapOf<MetaIdComp, StateFlow<FieldState?>>()
 
-    // Field errors: fieldId -> error message
-    private val fieldErrors = mutableMapOf<String, String>()
+    // ==================== Read Operations ====================
 
-    // Dirty tracking: fieldId -> isDirty
-    private val fieldDirtyState = mutableMapOf<String, Boolean>()
-
-    // Touched tracking: fieldId -> isTouched
-    private val fieldTouchedState = mutableMapOf<String, Boolean>()
-
-    /**
-     * Initialize FormRef with form definition and initial values.
-     * Must be called before using FormRef.
-     */
-    fun initialize(defnForm: DefnForm, formValueRaw: FormValueRaw?) {
-        this.defnForm = defnForm
-        this.initialFormValue = formValueRaw
-
-        // Initialize field values from initialFormValue
-        formValueRaw?.valueMap?.forEach { fieldId, value ->
-            val flow = MutableStateFlow<Any?>(value)
-            fieldValues[fieldId.toString()] = flow
-            fieldDirtyState[fieldId.toString()] = false
-            fieldTouchedState[fieldId.toString()] = false
-        }
+    override fun getValue(fieldId: MetaIdComp): JsonElement? {
+        return currentState.getValue(fieldId)
     }
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <T> getValue(fieldId: String): T? {
-        return fieldValues[fieldId]?.value as? T
+    override fun getValues(): FormValueRawData? {
+        val state = currentState
+        val initialValue = state.initialFormValue ?: return null
+
+        return FormValueRawData(
+            createdBy = initialValue.createdBy,
+            createdOn = initialValue.createdOn,
+            rowId = initialValue.rowId,
+            rowOrder = initialValue.rowOrder,
+            updatedBy = initialValue.updatedBy,
+            updatedOn = initialValue.updatedOn,
+            valueMap = state.getValueMap()
+        )
     }
 
-    override fun getValues(): FormValueRaw? {
-        // TODO: Construct FormValueRaw from current field values
-        // For now, return a basic implementation
-        return null
+    override fun getValueMap(): Map<MetaIdComp, JsonElement> {
+        return currentState.getValueMap()
     }
 
-    override fun <T> setValue(fieldId: String, value: T, shouldValidate: Boolean) {
-        // Get or create StateFlow for this field
-        val flow = fieldValues.getOrPut(fieldId) {
-            MutableStateFlow<Any?>(null)
-        }
-
-        // Update value
-        flow.value = value
-
-        // Mark as dirty and touched
-        fieldDirtyState[fieldId] = true
-        fieldTouchedState[fieldId] = true
-
-        // Validate if requested
-        if (shouldValidate) {
-            trigger(fieldId)
-        }
+    override fun getFieldState(fieldId: MetaIdComp): FieldState? {
+        return currentState.getFieldState(fieldId)
     }
 
-    override fun setValues(formValueRaw: FormValueRaw, shouldValidate: Boolean) {
-        formValueRaw.valueMap?.forEach { fieldId, value ->
-            setValue(fieldId.toString(), value, shouldValidate = false)
-        }
+    // ==================== Write Operations ====================
 
-        if (shouldValidate) {
-            trigger(null)
-        }
+    override fun setValue(fieldId: MetaIdComp, value: JsonElement?, shouldValidate: Boolean) {
+        dispatchEvent(FormEvent.FieldValueChanged(fieldId, value, shouldValidate))
     }
 
-    override fun trigger(fieldId: String?): Boolean {
-        // TODO: Implement validation logic
-        // For now, always return true
-        return if (fieldId != null) {
-            // Validate single field
-            validateField(fieldId)
-        } else {
-            // Validate all fields
-            validateAllFields()
-        }
+    override fun setValues(valueMap: Map<MetaIdComp, JsonElement>, shouldValidate: Boolean) {
+        dispatchEvent(FormEvent.SetValues(valueMap, shouldValidate))
     }
 
-    override fun reset(formValueRaw: FormValueRaw?) {
-        val valueToReset = formValueRaw ?: initialFormValue
+    // ==================== Validation ====================
 
-        // Clear all state
-        fieldValues.clear()
-        fieldErrors.clear()
-        fieldDirtyState.clear()
-        fieldTouchedState.clear()
-
-        // Re-initialize with reset values
-        valueToReset?.valueMap?.forEach { fieldId, value ->
-            val flow = MutableStateFlow<Any?>(value)
-            fieldValues[fieldId.toString()] = flow
-            fieldDirtyState[fieldId.toString()] = false
-            fieldTouchedState[fieldId.toString()] = false
-        }
-    }
-
-    override fun clearErrors(fieldId: String?) {
+    override fun validate(fieldId: MetaIdComp?): Boolean {
         if (fieldId != null) {
-            fieldErrors.remove(fieldId)
+            dispatchEvent(FormEvent.ValidateField(fieldId))
+            // Return validation result from current state
+            return !currentState.hasError(fieldId)
         } else {
-            fieldErrors.clear()
+            dispatchEvent(FormEvent.ValidateAll)
+            // Return validation result from current state
+            return currentState.isValid
         }
     }
 
-    override fun setError(fieldId: String, error: String) {
-        fieldErrors[fieldId] = error
+    override fun setError(fieldId: MetaIdComp, error: String) {
+        dispatchEvent(FormEvent.SetFieldError(fieldId, error))
     }
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <T> watch(fieldId: String): StateFlow<T?> {
-        val flow = fieldValues.getOrPut(fieldId) {
-            MutableStateFlow<Any?>(null)
+    override fun clearErrors(fieldId: MetaIdComp?) {
+        if (fieldId != null) {
+            dispatchEvent(FormEvent.ClearFieldError(fieldId))
+        } else {
+            dispatchEvent(FormEvent.ClearAllErrors)
         }
-        return flow.asStateFlow() as StateFlow<T?>
     }
 
-    override fun isDirty(fieldId: String?): Boolean {
+    // ==================== Form Operations ====================
+
+    override fun submit() {
+        dispatchEvent(FormEvent.Submit)
+    }
+
+    override fun reset(valueMap: Map<MetaIdComp, JsonElement>?) {
+        dispatchEvent(FormEvent.Reset(valueMap))
+    }
+
+    // ==================== State Queries ====================
+
+    override fun isDirty(fieldId: MetaIdComp?): Boolean {
+        val state = currentState
         return if (fieldId != null) {
-            fieldDirtyState[fieldId] ?: false
+            state.getFieldState(fieldId)?.isDirty ?: false
         } else {
-            fieldDirtyState.values.any { it }
+            state.isDirty
         }
     }
 
-    override fun isValid(fieldId: String?): Boolean {
+    override fun isValid(fieldId: MetaIdComp?): Boolean {
+        val state = currentState
         return if (fieldId != null) {
-            !fieldErrors.containsKey(fieldId)
+            !state.hasError(fieldId) && state.getFieldState(fieldId)?.let { fieldState ->
+                !fieldState.fieldProperties.required || fieldState.value != null
+            } ?: true
         } else {
-            fieldErrors.isEmpty()
+            state.isValid
         }
     }
 
-    // Private validation methods
-
-    private fun validateField(fieldId: String): Boolean {
-        // TODO: Implement field-specific validation
-        // For now, always return true
-        clearErrors(fieldId)
-        return true
+    override fun isTouched(fieldId: MetaIdComp?): Boolean {
+        val state = currentState
+        return if (fieldId != null) {
+            state.getFieldState(fieldId)?.isTouched ?: false
+        } else {
+            state.fieldStates.values.any { it.isTouched }
+        }
     }
 
-    private fun validateAllFields(): Boolean {
-        // TODO: Implement full form validation
-        // For now, always return true
-        clearErrors(null)
-        return true
+    // ==================== Reactive Streams ====================
+
+    override fun watchFieldState(fieldId: MetaIdComp): StateFlow<FieldState?> {
+        // Return cached StateFlow or create a new one
+        return fieldStateFlows.getOrPut(fieldId) {
+            formStateFlow.map { formState ->
+                formState.getFieldState(fieldId)
+            }.stateIn(
+                scope = coroutineScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = currentState.getFieldState(fieldId)
+            )
+        }
+    }
+
+    override fun watchFormState(): StateFlow<FormState> {
+        return formStateFlow
     }
 }

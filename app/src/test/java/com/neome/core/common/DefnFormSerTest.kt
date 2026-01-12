@@ -24,16 +24,7 @@ class DefnFormSerTest {
             coerceInputValues = true
 
             // Configure serializers module for contextual types
-            serializersModule = SerializersModule {
-                // Register custom serializers for MetaId types
-
-                // Symbol and DefnDtoText serializers
-//                contextual(Symbol::class, SymbolSer)
-//                contextual(DefnDtoText::class, DefnDtoTextSer)
-
-                // Note: DefnComp polymorphism is handled by DefnCompSerializer
-                // which inspects the type field
-            }
+            serializersModule = SerializersModule {}
         }
     }
 

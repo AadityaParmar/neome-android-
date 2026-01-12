@@ -39,7 +39,7 @@ data class SerializableClassGeneratorConfig(
     // Discriminator field mapping: Interface -> Field name
     val discriminatorFields: Map<String, DiscriminatorFieldDto> = mapOf(
         "DtoMessagePayload" to DiscriminatorFieldDto("messageType", "EnumMessageType"),
-        "DefnComp" to DiscriminatorFieldDto("Type", "EnumStudioCompType")
+        "DefnComp" to DiscriminatorFieldDto("type", "EnumStudioCompType")
     ),
 
     // Type mapping: Interface -> Subtype -> Discriminator value

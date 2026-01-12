@@ -11,7 +11,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Science
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -26,7 +26,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import com.neome.feature.componentshowcase.presentation.showcase.ComponentShowcaseScreen
-import com.neome.feature.componentshowcase.presentation.testing.ComponentTestingScreen
+import com.neome.feature.form.presentation.screen.FormScreen
 import com.neome.feature.componentshowcase.presentation.searchlocation.SearchLocationScreen
 import com.neome.ui.theme.NeomeTheme
 
@@ -81,8 +81,8 @@ fun NeomeApp() {
                         onNavigateToSearchLocation = { showSearchLocation = true }
                     )
 
-                    AppDestinations.TESTING -> {
-                        ComponentTestingScreen()
+                    AppDestinations.FORM -> {
+                        FormScreen()
                     }
 
                     else -> Greeting(
@@ -100,7 +100,7 @@ enum class AppDestinations(
     val icon: ImageVector,
 ) {
     HOME("Home", Icons.Default.Home),
-    TESTING("Testing", Icons.Default.Science),
+    FORM("Form", Icons.Default.Edit),
     FAVORITES("Favorites", Icons.Default.Favorite),
     PROFILE("Profile", Icons.Default.AccountBox),
 }
