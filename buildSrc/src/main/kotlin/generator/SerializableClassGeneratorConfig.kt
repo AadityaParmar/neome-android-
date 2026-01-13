@@ -34,21 +34,19 @@ data class SerializableClassGeneratorConfig(
     ),
 
     // Polymorphic type configuration
-    val polymorphicInterfaces: Set<String> = setOf("DtoMessagePayload", "DefnComp"),
+    val polymorphicInterfaces: Set<String> = setOf("DtoMessagePayload", "DefnComp", "DtoEntAction"),
 
     // Discriminator field mapping: Interface -> Field name
     val discriminatorFields: Map<String, DiscriminatorFieldDto> = mapOf(
         "DtoMessagePayload" to DiscriminatorFieldDto("messageType", "EnumMessageType"),
-        "DefnComp" to DiscriminatorFieldDto("type", "EnumStudioCompType")
+        "DefnComp" to DiscriminatorFieldDto("type", "EnumDefnCompType"),
+        "DtoEntAction" to DiscriminatorFieldDto("kind", "EnumDefnKindAction")
     ),
 
     // Type mapping: Interface -> Subtype -> Discriminator value
     val typeMappings: Map<String, Map<String, String>> = mapOf(
-        "DtoMessagePayload" to mapOf(
-            "DtoMessagePayloadText" to "text",
-            "DtoMessagePayloadImage" to "image",
-            "DtoMessagePayloadAudio" to "audio"
-        ),
+        "DtoMessagePayload" to dtoMessagePayloadMapping,
+        "DtoEntAction" to dtoEntActionMapping,
         "DefnComp" to defnCompTypeMapping
     ),
 
