@@ -45,7 +45,7 @@ data class StudioFieldInfoData(
     @Serializable(with = MetaIdVarSer::class) override val italicVarId: Types.MetaIdVar? = null,
     override val justifyText: EnumDefnPlacement? = null,
     @Serializable(with = MetaIdVarSer::class) override val justifyTextVarId: Types.MetaIdVar? = null,
-    override val opacity: Long? = null,
+    override val opacity: Double? = null,
     @Serializable(with = MetaIdFieldSer::class) override val opacityFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdVarSer::class) override val opacityVarId: Types.MetaIdVar? = null,
     override val strikeThrough: Boolean? = null,
