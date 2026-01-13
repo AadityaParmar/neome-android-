@@ -19,7 +19,7 @@ sealed interface DtoMessagePayloadGroupNameChangeSeal : DtoMessagePayloadGroupNa
 data class DtoMessagePayloadGroupNameChangeData(
     override val isForwarded: Boolean? = null,
     override val mentionMap: Map<String, @Serializable(with = ContactIdSer::class) Types.ContactId>? = null,
-    override val messageType: EnumMessageType,
+    override val messageType: EnumMessageType = EnumMessageType.groupNameChange,
     override val initiatorMember: DtoGroupMemberKeyData,
     override val newSubject: String
 ) : DtoMessagePayloadSeal, DtoMessagePayloadGroupNameChange

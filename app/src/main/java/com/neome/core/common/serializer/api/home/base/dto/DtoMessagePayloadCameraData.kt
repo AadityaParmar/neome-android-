@@ -18,7 +18,7 @@ sealed interface DtoMessagePayloadCameraSeal : DtoMessagePayloadCamera
 data class DtoMessagePayloadCameraData(
     override val isForwarded: Boolean? = null,
     override val mentionMap: Map<String, @Serializable(with = ContactIdSer::class) Types.ContactId>? = null,
-    override val messageType: EnumMessageType,
+    override val messageType: EnumMessageType = EnumMessageType.camera,
     override val isUpdated: Boolean? = null,
     override val text: String,
     override val fileSize: Long? = null,

@@ -6,6 +6,7 @@ import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.EnumDefnKindAction
 import com.neome.api.meta.base.Types.EnumDefnKindReport
+import com.neome.core.common.serializer.api.ent.base.dto.DtoEntActionSeal
 import com.neome.core.common.serializer.sysId.MetaIdActionSer
 import com.neome.core.common.serializer.sysId.MetaIdCompSer
 import com.neome.core.common.serializer.sysId.MetaIdFormSer
@@ -14,6 +15,10 @@ import com.neome.core.common.serializer.sysId.MetaIdReportSer
 import com.neome.core.common.serializer.sysId.SymbolSer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
+
+
+@Serializable
+sealed interface DtoEntActionReportSeal : DtoEntActionReport
 
 
 @Serializable
@@ -34,4 +39,4 @@ data class DtoEntActionReportData(
     @Serializable(with = MetaIdReportSer::class) override val reportId: Types.MetaIdReport,
     override val reportKind: EnumDefnKindReport,
     override val sendMessageToInbox: Boolean? = null
-) : DtoEntActionReport
+) : DtoEntActionSeal, DtoEntActionReport

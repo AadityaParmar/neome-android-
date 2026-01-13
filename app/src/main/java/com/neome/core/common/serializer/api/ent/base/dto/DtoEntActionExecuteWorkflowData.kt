@@ -6,12 +6,17 @@ import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.EnumDefnKindAction
 import com.neome.api.meta.base.dto.EntVdWorkflowPointer
+import com.neome.core.common.serializer.api.ent.base.dto.DtoEntActionSeal
 import com.neome.core.common.serializer.api.meta.base.dto.EntVdWorkflowPointerData
 import com.neome.core.common.serializer.sysId.MetaIdActionSer
 import com.neome.core.common.serializer.sysId.MetaIdAutomationSer
 import com.neome.core.common.serializer.sysId.MetaIdFormSer
 import com.neome.core.common.serializer.sysId.SymbolSer
 import kotlinx.serialization.Serializable
+
+
+@Serializable
+sealed interface DtoEntActionExecuteWorkflowSeal : DtoEntActionExecuteWorkflow
 
 
 @Serializable
@@ -27,4 +32,4 @@ data class DtoEntActionExecuteWorkflowData(
     @Serializable(with = MetaIdFormSer::class) override val automationFormId: Types.MetaIdForm? = null,
     @Serializable(with = MetaIdAutomationSer::class) override val automationId: Types.MetaIdAutomation? = null,
     override val workflowPointer: EntVdWorkflowPointerData? = null
-) : DtoEntActionExecuteWorkflow
+) : DtoEntActionSeal, DtoEntActionExecuteWorkflow

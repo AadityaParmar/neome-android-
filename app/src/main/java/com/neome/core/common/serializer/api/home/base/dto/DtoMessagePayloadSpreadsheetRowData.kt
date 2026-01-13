@@ -23,7 +23,7 @@ sealed interface DtoMessagePayloadSpreadsheetRowSeal : DtoMessagePayloadSpreadsh
 data class DtoMessagePayloadSpreadsheetRowData(
     override val isForwarded: Boolean? = null,
     override val mentionMap: Map<String, @Serializable(with = ContactIdSer::class) Types.ContactId>? = null,
-    override val messageType: EnumMessageType,
+    override val messageType: EnumMessageType = EnumMessageType.spreadsheetRow,
     @Serializable(with = MetaIdFormSer::class) override val formId: Types.MetaIdForm,
     @Serializable(with = RowIdSer::class) override val rowId: Types.RowId,
     @Serializable(with = MetaIdSpreadsheetSer::class) override val spreadsheetId: Types.MetaIdSpreadsheet,

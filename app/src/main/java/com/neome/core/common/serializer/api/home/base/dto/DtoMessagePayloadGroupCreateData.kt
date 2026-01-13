@@ -19,6 +19,6 @@ sealed interface DtoMessagePayloadGroupCreateSeal : DtoMessagePayloadGroupCreate
 data class DtoMessagePayloadGroupCreateData(
     override val isForwarded: Boolean? = null,
     override val mentionMap: Map<String, @Serializable(with = ContactIdSer::class) Types.ContactId>? = null,
-    override val messageType: EnumMessageType,
+    override val messageType: EnumMessageType = EnumMessageType.groupCreate,
     override val initiatorMember: DtoGroupMemberKeyData
 ) : DtoMessagePayloadSeal, DtoMessagePayloadGroupCreate

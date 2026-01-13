@@ -6,6 +6,7 @@ import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.EnumDefnKindAction
 import com.neome.api.meta.base.dto.StudioValueVarIdCondition
+import com.neome.core.common.serializer.api.ent.base.dto.DtoEntActionSeal
 import com.neome.core.common.serializer.api.meta.base.dto.StudioValueVarIdConditionData
 import com.neome.core.common.serializer.sysId.MetaIdActionSer
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
@@ -14,6 +15,10 @@ import com.neome.core.common.serializer.sysId.MetaIdLayoutGridSer
 import com.neome.core.common.serializer.sysId.MetaIdSpreadsheetSer
 import com.neome.core.common.serializer.sysId.SymbolSer
 import kotlinx.serialization.Serializable
+
+
+@Serializable
+sealed interface DtoEntActionRowUpdateSeal : DtoEntActionRowUpdate
 
 
 @Serializable
@@ -31,4 +36,4 @@ data class DtoEntActionRowUpdateData(
     @Serializable(with = MetaIdFieldSer::class) override val lookupFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdFormSer::class) override val spreadsheetFormId: Types.MetaIdForm,
     @Serializable(with = MetaIdSpreadsheetSer::class) override val spreadsheetId: Types.MetaIdSpreadsheet
-) : DtoEntActionRowUpdate
+) : DtoEntActionSeal, DtoEntActionRowUpdate

@@ -20,7 +20,7 @@ sealed interface DtoMessagePayloadUserSeal : DtoMessagePayloadUser
 data class DtoMessagePayloadUserData(
     override val isForwarded: Boolean? = null,
     override val mentionMap: Map<String, @Serializable(with = ContactIdSer::class) Types.ContactId>? = null,
-    override val messageType: EnumMessageType,
+    override val messageType: EnumMessageType = EnumMessageType.user,
     @Serializable(with = EntIdSer::class) override val entId: Types.EntId? = null,
     @Serializable(with = EntUserIdSer::class) override val entUserId: Types.EntUserId? = null,
     override val handle: String,

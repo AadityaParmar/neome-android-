@@ -19,6 +19,6 @@ sealed interface DtoMessagePayloadGroupAvatarChangeSeal : DtoMessagePayloadGroup
 data class DtoMessagePayloadGroupAvatarChangeData(
     override val isForwarded: Boolean? = null,
     override val mentionMap: Map<String, @Serializable(with = ContactIdSer::class) Types.ContactId>? = null,
-    override val messageType: EnumMessageType,
+    override val messageType: EnumMessageType = EnumMessageType.groupAvatarChange,
     override val initiatorMember: DtoGroupMemberKeyData
 ) : DtoMessagePayloadSeal, DtoMessagePayloadGroupAvatarChange

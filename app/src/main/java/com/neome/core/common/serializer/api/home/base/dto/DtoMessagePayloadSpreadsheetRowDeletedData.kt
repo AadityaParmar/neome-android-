@@ -17,5 +17,5 @@ sealed interface DtoMessagePayloadSpreadsheetRowDeletedSeal : DtoMessagePayloadS
 data class DtoMessagePayloadSpreadsheetRowDeletedData(
     override val isForwarded: Boolean? = null,
     override val mentionMap: Map<String, @Serializable(with = ContactIdSer::class) Types.ContactId>? = null,
-    override val messageType: EnumMessageType
+    override val messageType: EnumMessageType = EnumMessageType.spreadsheetRowDeleted
 ) : DtoMessagePayloadSeal, DtoMessagePayloadSpreadsheetRowDeleted

@@ -19,6 +19,6 @@ sealed interface DtoMessagePayloadGroupExitSeal : DtoMessagePayloadGroupExit
 data class DtoMessagePayloadGroupExitData(
     override val isForwarded: Boolean? = null,
     override val mentionMap: Map<String, @Serializable(with = ContactIdSer::class) Types.ContactId>? = null,
-    override val messageType: EnumMessageType,
+    override val messageType: EnumMessageType = EnumMessageType.groupExit,
     override val initiatorMember: DtoGroupMemberKeyData
 ) : DtoMessagePayloadSeal, DtoMessagePayloadGroupExit

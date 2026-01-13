@@ -18,7 +18,7 @@ sealed interface DtoMessagePayloadDocumentSeal : DtoMessagePayloadDocument
 data class DtoMessagePayloadDocumentData(
     override val isForwarded: Boolean? = null,
     override val mentionMap: Map<String, @Serializable(with = ContactIdSer::class) Types.ContactId>? = null,
-    override val messageType: EnumMessageType,
+    override val messageType: EnumMessageType = EnumMessageType.document,
     override val fileExt: String,
     override val fileName: String,
     override val fileSize: Long? = null,

@@ -27,7 +27,7 @@ sealed interface DtoMessagePayloadSpreadsheetPartitionSeal : DtoMessagePayloadSp
 data class DtoMessagePayloadSpreadsheetPartitionData(
     override val isForwarded: Boolean? = null,
     override val mentionMap: Map<String, @Serializable(with = ContactIdSer::class) Types.ContactId>? = null,
-    override val messageType: EnumMessageType,
+    override val messageType: EnumMessageType = EnumMessageType.spreadsheetPartition,
     override val chatBubbleHeader: DtoChatBubbleHeaderData,
     @Serializable(with = MetaIdFormSer::class) override val formId: Types.MetaIdForm,
     override val partitionList: List<DtoPartitionData>? = null,

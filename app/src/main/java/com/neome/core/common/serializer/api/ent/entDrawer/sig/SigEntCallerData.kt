@@ -17,7 +17,7 @@ import com.neome.api.meta.base.dto.DefnLayoutUserMap
 import com.neome.api.meta.base.dto.DefnStudioDtoActionPermission
 import com.neome.api.meta.base.dto.StudioDtoLocationCapture
 import com.neome.api.nucleus.base.sig.SigVersion
-import com.neome.core.common.serializer.api.ent.base.dto.DtoEntActionData
+import com.neome.core.common.serializer.api.ent.base.dto.DtoEntActionSeal
 import com.neome.core.common.serializer.api.ent.base.dto.DtoEntDeeplinkData
 import com.neome.core.common.serializer.api.ent.base.dto.DtoEntGroupMapData
 import com.neome.core.common.serializer.api.ent.base.dto.DtoEntPromptData
@@ -51,7 +51,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SigEntCallerData(
     override val version: String,
-    override val actionMap: Map<@Serializable(with = MetaIdActionSer::class) Types.MetaIdAction, DtoEntActionData>,
+    override val actionMap: Map<@Serializable(with = MetaIdActionSer::class) Types.MetaIdAction, DtoEntActionSeal>,
     @Serializable(with = MediaIdSer::class) override val avatarId: Types.MediaId? = null,
     override val color: String,
     override val deeplinkMap: Map<@Serializable(with = MetaIdDeeplinkSer::class) Types.MetaIdDeeplink, DtoEntDeeplinkData>? = null,

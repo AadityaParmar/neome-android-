@@ -4,9 +4,30 @@ import com.neome.api.home.base.Types.EnumMessageType
 import com.neome.api.home.base.dto.DtoMessagePayload
 import com.neome.api.meta.base.Types
 import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadAudioData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadCameraData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadDocumentData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadGroupAboutChangeData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadGroupAvatarChangeData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadGroupCreateData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadGroupData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadGroupExitData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadGroupJoinWithInviteData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadGroupMemberAddData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadGroupMemberRemoveData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadGroupNameChangeData
 import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadImageData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadLinkTextData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadLocationData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadMessageDeletedData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadReportData
 import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadSeal
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadSpreadsheetPartitionData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadSpreadsheetRowData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadSpreadsheetRowDeletedData
 import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadTextData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadUserData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadVideoData
+import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadVoiceData
 import com.neome.core.common.serializer.sysId.ContactIdSer
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.Serializable
@@ -34,29 +55,29 @@ object DtoMessagePayloadSerializer : JsonContentPolymorphicSerializer<DtoMessage
         val messageType = element.jsonObject["messageType"]?.jsonPrimitive?.content
         return when (messageType) {
             EnumMessageType.audio.value -> DtoMessagePayloadAudioData.serializer()
-            EnumMessageType.camera.value -> DtoMessagePayloadData.serializer()
-            EnumMessageType.document.value -> DtoMessagePayloadData.serializer()
-            EnumMessageType.spreadsheetRow.value -> DtoMessagePayloadData.serializer()
-            EnumMessageType.spreadsheetRowDeleted.value -> DtoMessagePayloadData.serializer()
-            EnumMessageType.group.value -> DtoMessagePayloadData.serializer()
-            EnumMessageType.groupAboutChange.value -> DtoMessagePayloadData.serializer()
-            EnumMessageType.groupAvatarChange.value -> DtoMessagePayloadData.serializer()
-            EnumMessageType.groupCreate.value -> DtoMessagePayloadData.serializer()
-            EnumMessageType.groupExit.value -> DtoMessagePayloadData.serializer()
-            EnumMessageType.groupJoinWithInvite.value -> DtoMessagePayloadData.serializer()
-            EnumMessageType.groupMemberAdd.value -> DtoMessagePayloadData.serializer()
-            EnumMessageType.groupMemberRemove.value -> DtoMessagePayloadData.serializer()
-            EnumMessageType.groupNameChange.value -> DtoMessagePayloadData.serializer()
+            EnumMessageType.camera.value -> DtoMessagePayloadCameraData.serializer()
+            EnumMessageType.document.value -> DtoMessagePayloadDocumentData.serializer()
+            EnumMessageType.spreadsheetRow.value -> DtoMessagePayloadSpreadsheetRowData.serializer()
+            EnumMessageType.spreadsheetRowDeleted.value -> DtoMessagePayloadSpreadsheetRowDeletedData.serializer()
+            EnumMessageType.group.value -> DtoMessagePayloadGroupData.serializer()
+            EnumMessageType.groupAboutChange.value -> DtoMessagePayloadGroupAboutChangeData.serializer()
+            EnumMessageType.groupAvatarChange.value -> DtoMessagePayloadGroupAvatarChangeData.serializer()
+            EnumMessageType.groupCreate.value -> DtoMessagePayloadGroupCreateData.serializer()
+            EnumMessageType.groupExit.value -> DtoMessagePayloadGroupExitData.serializer()
+            EnumMessageType.groupJoinWithInvite.value -> DtoMessagePayloadGroupJoinWithInviteData.serializer()
+            EnumMessageType.groupMemberAdd.value -> DtoMessagePayloadGroupMemberAddData.serializer()
+            EnumMessageType.groupMemberRemove.value -> DtoMessagePayloadGroupMemberRemoveData.serializer()
+            EnumMessageType.groupNameChange.value -> DtoMessagePayloadGroupNameChangeData.serializer()
             EnumMessageType.image.value -> DtoMessagePayloadImageData.serializer()
-            EnumMessageType.linkText.value -> DtoMessagePayloadData.serializer()
-            EnumMessageType.location.value -> DtoMessagePayloadData.serializer()
-            EnumMessageType.messageDeleted.value -> DtoMessagePayloadData.serializer()
-            EnumMessageType.report.value -> DtoMessagePayloadData.serializer()
-            EnumMessageType.spreadsheetPartition.value -> DtoMessagePayloadData.serializer()
+            EnumMessageType.linkText.value -> DtoMessagePayloadLinkTextData.serializer()
+            EnumMessageType.location.value -> DtoMessagePayloadLocationData.serializer()
+            EnumMessageType.messageDeleted.value -> DtoMessagePayloadMessageDeletedData.serializer()
+            EnumMessageType.report.value -> DtoMessagePayloadReportData.serializer()
+            EnumMessageType.spreadsheetPartition.value -> DtoMessagePayloadSpreadsheetPartitionData.serializer()
             EnumMessageType.text.value -> DtoMessagePayloadTextData.serializer()
-            EnumMessageType.user.value -> DtoMessagePayloadData.serializer()
-            EnumMessageType.video.value -> DtoMessagePayloadData.serializer()
-            EnumMessageType.voice.value -> DtoMessagePayloadData.serializer()
+            EnumMessageType.user.value -> DtoMessagePayloadUserData.serializer()
+            EnumMessageType.video.value -> DtoMessagePayloadVideoData.serializer()
+            EnumMessageType.voice.value -> DtoMessagePayloadVoiceData.serializer()
             else -> DtoMessagePayloadData.serializer()
         }
     }

@@ -23,7 +23,7 @@ sealed interface DtoMessagePayloadReportSeal : DtoMessagePayloadReport
 data class DtoMessagePayloadReportData(
     override val isForwarded: Boolean? = null,
     override val mentionMap: Map<String, @Serializable(with = ContactIdSer::class) Types.ContactId>? = null,
-    override val messageType: EnumMessageType,
+    override val messageType: EnumMessageType = EnumMessageType.report,
     @Serializable(with = MetaIdActionSer::class) override val actionId: Types.MetaIdAction,
     override val formValueRaw: FormValueRawData? = null,
     @Serializable(with = MetaIdFormSer::class) override val inputFormId: Types.MetaIdForm? = null,

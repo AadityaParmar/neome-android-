@@ -5,6 +5,7 @@ import com.neome.api.ent.base.dto.DtoEntActionRowInsert
 import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.EnumDefnKindAction
+import com.neome.core.common.serializer.api.ent.base.dto.DtoEntActionSeal
 import com.neome.core.common.serializer.sysId.MetaIdActionSer
 import com.neome.core.common.serializer.sysId.MetaIdCompSer
 import com.neome.core.common.serializer.sysId.MetaIdFormSer
@@ -13,6 +14,10 @@ import com.neome.core.common.serializer.sysId.MetaIdSpreadsheetSer
 import com.neome.core.common.serializer.sysId.SymbolSer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
+
+
+@Serializable
+sealed interface DtoEntActionRowInsertSeal : DtoEntActionRowInsert
 
 
 @Serializable
@@ -32,4 +37,4 @@ data class DtoEntActionRowInsertData(
     override val sendMessageToInbox: Boolean? = null,
     @Serializable(with = MetaIdFormSer::class) override val spreadsheetFormId: Types.MetaIdForm,
     @Serializable(with = MetaIdSpreadsheetSer::class) override val spreadsheetId: Types.MetaIdSpreadsheet
-) : DtoEntActionRowInsert
+) : DtoEntActionSeal, DtoEntActionRowInsert

@@ -5,10 +5,15 @@ import com.neome.api.ent.base.dto.DtoEntActionSpreadsheetHistory
 import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.EnumDefnKindAction
+import com.neome.core.common.serializer.api.ent.base.dto.DtoEntActionSeal
 import com.neome.core.common.serializer.sysId.MetaIdActionSer
 import com.neome.core.common.serializer.sysId.MetaIdSpreadsheetSer
 import com.neome.core.common.serializer.sysId.SymbolSer
 import kotlinx.serialization.Serializable
+
+
+@Serializable
+sealed interface DtoEntActionSpreadsheetHistorySeal : DtoEntActionSpreadsheetHistory
 
 
 @Serializable
@@ -22,4 +27,4 @@ data class DtoEntActionSpreadsheetHistoryData(
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     override val tooltip: String? = null,
     @Serializable(with = MetaIdSpreadsheetSer::class) override val spreadsheetId: Types.MetaIdSpreadsheet
-) : DtoEntActionSpreadsheetHistory
+) : DtoEntActionSeal, DtoEntActionSpreadsheetHistory

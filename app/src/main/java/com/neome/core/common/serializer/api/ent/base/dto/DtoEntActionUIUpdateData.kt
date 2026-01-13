@@ -6,10 +6,15 @@ import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.EnumDefnKindAction
 import com.neome.api.meta.base.Types.EnumDefnKindActionUIUpdate
+import com.neome.core.common.serializer.api.ent.base.dto.DtoEntActionSeal
 import com.neome.core.common.serializer.sysId.MetaIdActionSer
 import com.neome.core.common.serializer.sysId.MetaIdGroupSer
 import com.neome.core.common.serializer.sysId.SymbolSer
 import kotlinx.serialization.Serializable
+
+
+@Serializable
+sealed interface DtoEntActionUIUpdateSeal : DtoEntActionUIUpdate
 
 
 @Serializable
@@ -24,4 +29,4 @@ data class DtoEntActionUIUpdateData(
     override val tooltip: String? = null,
     @Serializable(with = MetaIdGroupSer::class) override val groupId: Types.MetaIdGroup? = null,
     override val updateKind: EnumDefnKindActionUIUpdate
-) : DtoEntActionUIUpdate
+) : DtoEntActionSeal, DtoEntActionUIUpdate

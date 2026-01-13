@@ -19,7 +19,7 @@ sealed interface DtoMessagePayloadGroupMemberAddSeal : DtoMessagePayloadGroupMem
 data class DtoMessagePayloadGroupMemberAddData(
     override val isForwarded: Boolean? = null,
     override val mentionMap: Map<String, @Serializable(with = ContactIdSer::class) Types.ContactId>? = null,
-    override val messageType: EnumMessageType,
+    override val messageType: EnumMessageType = EnumMessageType.groupMemberAdd,
     override val initiatorMember: DtoGroupMemberKeyData,
     override val targetMember: DtoGroupMemberKeyData
 ) : DtoMessagePayloadSeal, DtoMessagePayloadGroupMemberAdd
