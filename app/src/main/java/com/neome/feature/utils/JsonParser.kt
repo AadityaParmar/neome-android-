@@ -18,19 +18,3 @@ object JsonParser {
 
 }
 
-
-//object JsonParser {
-//    val json: Json = Json {
-//        prettyPrint = true
-//        ignoreUnknownKeys = true
-//        coerceInputValues = true
-//
-//        // Configure serializers module for contextual types
-//        serializersModule = SerializersModule {
-//            // this will rarely used
-//        }
-//    }
-//
-//
-//}
-

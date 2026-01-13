@@ -45,6 +45,7 @@ class SigEntCallerSerTest {
         jsonString = loadJsonFromTestDir()
         jsonElement = json.parseToJsonElement(jsonString)
         deserialized = json.decodeFromString<SigEntCallerData>(jsonString)
+        val str = json.encodeToString(deserialized)
     }
 
     private fun loadJsonFromTestDir(): String {

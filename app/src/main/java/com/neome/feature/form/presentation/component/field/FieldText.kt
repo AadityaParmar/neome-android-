@@ -1,6 +1,5 @@
 package com.neome.feature.form.presentation.component.field
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -53,6 +52,6 @@ fun FieldText(
             val jsonValue = if (newValue.isEmpty()) null else JsonPrimitive(newValue)
             onFieldEvent(FieldEvent.ValueChanged(fieldId, jsonValue))
         },
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
     )
 }

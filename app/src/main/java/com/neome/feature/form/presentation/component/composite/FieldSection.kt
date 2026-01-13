@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,7 +13,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.neome.api.meta.base.Types.EnumDefnThemeDirection
-import com.neome.api.meta.base.Types.EnumDefnThemeSectionVariant
 import com.neome.api.meta.base.dto.DefnSection
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.feature.form.presentation.component.FieldFactory
@@ -53,15 +50,11 @@ fun FieldSection(
     val fieldState = formCtx.getFieldState(fieldId)
     val sectionLabel = fieldState?.fieldProperties?.label ?: defnSection.label
     val sectionDirection = defnSection.sectionDirection ?: EnumDefnThemeDirection.vertical
-    val sectionVariant = defnSection.sectionVariant ?: EnumDefnThemeSectionVariant.form
     val fieldIdSet = defnSection.fieldIdSet ?: emptyList()
 
     // Get form state from context
     val formState by formCtx.watchFormState().collectAsState()
     val defnForm = formCtx.getDefnForm() ?: return
-
-    // Determine if section should be rendered as a card
-    val useCard = sectionVariant == EnumDefnThemeSectionVariant.form
 
     val content: @Composable () -> Unit = {
         // Render section label if present
@@ -77,7 +70,6 @@ fun FieldSection(
         when (sectionDirection) {
             EnumDefnThemeDirection.horizontal -> {
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     fieldIdSet.forEach { fieldId ->
@@ -95,7 +87,6 @@ fun FieldSection(
 
             EnumDefnThemeDirection.vertical -> {
                 Column(
-                    modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     fieldIdSet.forEach { fieldId ->
@@ -112,28 +103,10 @@ fun FieldSection(
         }
     }
 
-    if (useCard) {
-        Card(
-            modifier = modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surface
-            ),
-            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-        ) {
-            Column(
-                modifier = Modifier.padding(16.dp)
-            ) {
-                content()
-            }
-        }
-    } else {
-        Column(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp)
-        ) {
-            content()
-        }
+    Column(
+        modifier = modifier
+    ) {
+        content()
     }
 }
 

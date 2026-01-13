@@ -2,7 +2,6 @@ package com.neome.feature.form.presentation.component.composite
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.PrimaryScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
@@ -82,9 +81,7 @@ fun FieldTab(
         val selectedTabId = tabIdSet.getOrNull(selectedTabIndex)
         if (selectedTabId != null) {
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
+                modifier = Modifier.fillMaxWidth()
             ) {
                 RenderTabContent(
                     tabId = selectedTabId,

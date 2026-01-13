@@ -33,9 +33,11 @@ import com.neome.feature.form.presentation.state.FieldEvent
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormIntent
 import com.neome.feature.form.presentation.state.FormState
+import com.neome.feature.utils.JsonParser
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.serialization.encodeToString
 
 /**
  * Pure MVI Form Component.
@@ -61,7 +63,8 @@ fun Form(
     modifier: Modifier = Modifier
 ) {
     val coroutineScope = rememberCoroutineScope()
-    println("===defnForm, ${defnForm.compMap}")
+    val defnFormStr = JsonParser.json.encodeToString(defnForm)
+    println("===defnForm, ${defnFormStr}")
     // Internal state management
     val formStateFlow = remember { MutableStateFlow(FormState()) }
     val formState by formStateFlow.collectAsState()
@@ -159,8 +162,7 @@ private fun FormContent(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(16.dp),
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         if (!state.isInitialized) {

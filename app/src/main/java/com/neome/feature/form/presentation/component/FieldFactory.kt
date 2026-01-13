@@ -1,8 +1,6 @@
 package com.neome.feature.form.presentation.component
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -52,8 +50,6 @@ fun FieldFactory(
         else -> {
             Column(
                 modifier = modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
             ) {
                 Text(
                     text = "Unsupported field type: ${defnComp.type.value}",

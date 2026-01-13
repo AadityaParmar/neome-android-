@@ -1,7 +1,7 @@
 package com.neome.core.common
 
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
-import com.neome.junk.PlusJsonParser
+import com.neome.feature.form.presentation.sample.FormSampleDataFactory
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
@@ -31,7 +31,7 @@ class DefnFormSerTest {
     @Test
     fun `deserialize form with mixed field types`() {
         // Given - Form with both text and number fields
-        val jsonString = PlusJsonParser.createSampleDefnForm()
+        val jsonString = FormSampleDataFactory.createSampleDefnForm()
 
         // When
         val form = json.decodeFromString<DefnFormData>(jsonString)
