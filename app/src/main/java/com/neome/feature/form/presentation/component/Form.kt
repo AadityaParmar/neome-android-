@@ -186,6 +186,7 @@ private fun FormContent(
         if (rootComponent != null) {
             FieldFactory(
                 defnComp = rootComponent,
+                defnForm = defnForm,
                 formCtx = formCtx,
                 onFieldEvent = onFieldEvent,
                 modifier = Modifier.fillMaxWidth()

@@ -1,8 +1,9 @@
 package com.neome.feature.form.presentation.component.composite
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.PrimaryScrollableTabRow
+import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,6 +41,7 @@ import com.neome.feature.form.presentation.state.FormState
 @Composable
 fun FieldTab(
     defnComp: DefnCompSeal,
+    defnForm: DefnFormData,
     onFieldEvent: (FieldEvent) -> Unit,
     formCtx: FormCtx,
     modifier: Modifier = Modifier
@@ -50,7 +52,6 @@ fun FieldTab(
 
     // Get form state from context
     val formState by formCtx.watchFormState().collectAsState()
-    val defnForm = formCtx.getDefnForm() ?: return
 
     // Selected tab index state
     var selectedTabIndex by remember { mutableIntStateOf(0) }
@@ -59,11 +60,12 @@ fun FieldTab(
         return
     }
 
-    Column(modifier = modifier.fillMaxWidth()) {
+    Column(modifier = modifier.fillMaxSize()) {
         // Tab Row
-        PrimaryScrollableTabRow(
+        ScrollableTabRow(
             selectedTabIndex = selectedTabIndex,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            edgePadding = 0.dp
         ) {
             tabIdSet.forEachIndexed { index, tabId ->
                 val tabComponent = defnForm.compMap[tabId]
@@ -114,6 +116,7 @@ private fun RenderTabContent(
     if (tabComponent != null) {
         FieldFactory(
             defnComp = tabComponent,
+            defnForm = defnForm,
             formCtx = formCtx,
             onFieldEvent = onFieldEvent
         )

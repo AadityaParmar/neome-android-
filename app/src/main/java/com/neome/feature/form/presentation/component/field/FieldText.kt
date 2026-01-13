@@ -1,5 +1,7 @@
 package com.neome.feature.form.presentation.component.field
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -7,6 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.feature.form.presentation.ctx.FormCtx
@@ -44,14 +47,20 @@ fun FieldText(
     // Local state for text input
     var textValue by remember(currentValue) { mutableStateOf(currentValue) }
 
-    OutlinedTextField(
-        value = textValue,
-        onValueChange = { newValue ->
-            textValue = newValue
-            // Emit value change event
-            val jsonValue = if (newValue.isEmpty()) null else JsonPrimitive(newValue)
-            onFieldEvent(FieldEvent.ValueChanged(fieldId, jsonValue))
-        },
-        modifier = modifier
-    )
+    // Handle text value changes
+    fun onValueChange(newValue: String) {
+        textValue = newValue
+        // Emit value change event
+        val jsonValue = if (newValue.isEmpty()) null else JsonPrimitive(newValue)
+        onFieldEvent(FieldEvent.ValueChanged(fieldId, jsonValue))
+    }
+
+    FieldBase(modifier = modifier.background(color = Color(76, 175, 80, 255))) {
+        OutlinedTextField(
+            value = textValue,
+            maxLines = 1,
+            modifier = modifier.fillMaxWidth(),
+            onValueChange = ::onValueChange
+        )
+    }
 }

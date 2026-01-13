@@ -5,9 +5,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.feature.form.presentation.component.composite.FieldSection
 import com.neome.feature.form.presentation.component.composite.FieldTab
 import com.neome.feature.form.presentation.component.field.FieldText
@@ -21,6 +21,7 @@ import com.neome.feature.form.presentation.state.FieldEvent
 @Composable
 fun FieldFactory(
     defnComp: DefnCompSeal,
+    defnForm: DefnFormData,
     formCtx: FormCtx,
     onFieldEvent: (FieldEvent) -> Unit,
     modifier: Modifier = Modifier
@@ -35,6 +36,7 @@ fun FieldFactory(
 
         EnumDefnCompType.section -> FieldSection(
             defnComp = defnComp,
+            defnForm = defnForm,
             onFieldEvent = onFieldEvent,
             formCtx = formCtx,
             modifier = modifier
@@ -42,17 +44,30 @@ fun FieldFactory(
 
         EnumDefnCompType.tab -> FieldTab(
             defnComp = defnComp,
+            defnForm = defnForm,
             onFieldEvent = onFieldEvent,
             formCtx = formCtx,
             modifier = modifier
         )
+
+        EnumDefnCompType.grid -> {
+            // TODO: Implement FieldGrid component
+            Column(
+                modifier = modifier
+            ) {
+                Text(
+                    text = "Grid component not implemented yet",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+        }
 
         else -> {
             Column(
                 modifier = modifier
             ) {
                 Text(
-                    text = "Unsupported field type: ${defnComp.type.value}",
+                    text = "Field: ${defnComp.type.value} not implemented yet",
                     style = MaterialTheme.typography.bodyMedium
                 )
             }

@@ -3,18 +3,17 @@ package com.neome.feature.form.presentation.component.composite
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.neome.api.meta.base.Types.EnumDefnThemeDirection
 import com.neome.api.meta.base.dto.DefnSection
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.feature.form.presentation.component.FieldFactory
 import com.neome.feature.form.presentation.ctx.FormCtx
 import com.neome.feature.form.presentation.state.FieldEvent
@@ -39,6 +38,7 @@ import com.neome.feature.form.presentation.state.FieldEvent
 @Composable
 fun FieldSection(
     defnComp: DefnCompSeal,
+    defnForm: DefnFormData,
     onFieldEvent: (FieldEvent) -> Unit,
     formCtx: FormCtx,
     modifier: Modifier = Modifier
@@ -52,9 +52,6 @@ fun FieldSection(
     val sectionDirection = defnSection.sectionDirection ?: EnumDefnThemeDirection.vertical
     val fieldIdSet = defnSection.fieldIdSet ?: emptyList()
 
-    // Get form state from context
-    val formState by formCtx.watchFormState().collectAsState()
-    val defnForm = formCtx.getDefnForm() ?: return
 
     val content: @Composable () -> Unit = {
         // Render section label if present
@@ -73,9 +70,8 @@ fun FieldSection(
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     fieldIdSet.forEach { fieldId ->
-                        renderChildField(
+                        RenderChildField(
                             fieldId = fieldId,
-                            formState = formState,
                             defnForm = defnForm,
                             formCtx = formCtx,
                             onFieldEvent = onFieldEvent,
@@ -90,9 +86,8 @@ fun FieldSection(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     fieldIdSet.forEach { fieldId ->
-                        renderChildField(
+                        RenderChildField(
                             fieldId = fieldId,
-                            formState = formState,
                             defnForm = defnForm,
                             formCtx = formCtx,
                             onFieldEvent = onFieldEvent
@@ -104,7 +99,7 @@ fun FieldSection(
     }
 
     Column(
-        modifier = modifier
+        modifier = modifier.fillMaxSize()
     ) {
         content()
     }
@@ -114,10 +109,9 @@ fun FieldSection(
  * Render a child field within the section.
  */
 @Composable
-private fun renderChildField(
+private fun RenderChildField(
     fieldId: com.neome.api.meta.base.Types.MetaIdField,
-    formState: com.neome.feature.form.presentation.state.FormState,
-    defnForm: com.neome.core.common.serializer.api.meta.base.dto.DefnFormData,
+    defnForm: DefnFormData,
     formCtx: FormCtx,
     onFieldEvent: (FieldEvent) -> Unit,
     modifier: Modifier = Modifier
@@ -126,6 +120,7 @@ private fun renderChildField(
 
     FieldFactory(
         defnComp = childDefnComp,
+        defnForm = defnForm,
         formCtx = formCtx,
         onFieldEvent = onFieldEvent,
         modifier = modifier
