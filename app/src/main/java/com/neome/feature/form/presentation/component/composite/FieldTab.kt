@@ -17,9 +17,11 @@ import androidx.compose.ui.unit.dp
 import com.neome.api.meta.base.Types.MetaIdComposite
 import com.neome.api.meta.base.dto.DefnTab
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.feature.form.presentation.component.FieldFactory
 import com.neome.feature.form.presentation.ctx.FormCtx
 import com.neome.feature.form.presentation.state.FieldEvent
+import com.neome.feature.form.presentation.state.FormState
 
 /**
  * Tab component for form.
@@ -84,7 +86,7 @@ fun FieldTab(
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
-                renderTabContent(
+                RenderTabContent(
                     tabId = selectedTabId,
                     formState = formState,
                     defnForm = defnForm,
@@ -101,20 +103,22 @@ fun FieldTab(
  * Renders the tab component and its children using FieldFactory.
  */
 @Composable
-private fun renderTabContent(
+private fun RenderTabContent(
     tabId: MetaIdComposite,
-    formState: com.neome.feature.form.presentation.state.FormState,
-    defnForm: com.neome.core.common.serializer.api.meta.base.dto.DefnFormData,
+    formState: FormState,
+    defnForm: DefnFormData,
     formCtx: FormCtx,
     onFieldEvent: (FieldEvent) -> Unit
 ) {
-    val tabComponent = defnForm.compMap[tabId] as? DefnCompSeal ?: return
+    val tabComponent = defnForm.compMap[tabId]
 
     // Render the tab component using FieldFactory
     // This will recursively render child components (e.g., sections with their fields)
-    FieldFactory(
-        defnComp = tabComponent,
-        formCtx = formCtx,
-        onFieldEvent = onFieldEvent
-    )
+    if (tabComponent != null) {
+        FieldFactory(
+            defnComp = tabComponent,
+            formCtx = formCtx,
+            onFieldEvent = onFieldEvent
+        )
+    }
 }

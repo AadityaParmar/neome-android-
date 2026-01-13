@@ -266,7 +266,7 @@ object PlusJsonParser {
           }
         }
       },
-      "displayCompositeId": "msc-Details",
+      "displayCompositeId": "mtb-Tab",
       "permissionMatrix": {
         "keys": [],
         "map": {}
