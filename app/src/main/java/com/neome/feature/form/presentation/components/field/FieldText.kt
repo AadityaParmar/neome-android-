@@ -1,4 +1,4 @@
-package com.neome.feature.form.presentation.component.field
+package com.neome.feature.form.presentation.components.field
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
-import com.neome.feature.form.presentation.component.base.FieldBase
-import com.neome.feature.form.presentation.component.base.rememberFieldController
+import com.neome.feature.form.presentation.components.base.FieldBase
+import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.ctx.FormCtx
 import com.neome.feature.form.presentation.state.FieldEvent
 

@@ -1,4 +1,4 @@
-package com.neome.feature.form.presentation.component.base
+package com.neome.feature.form.presentation.components.base
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable

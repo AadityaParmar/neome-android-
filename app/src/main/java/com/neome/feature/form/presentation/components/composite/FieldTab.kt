@@ -1,4 +1,4 @@
-package com.neome.feature.form.presentation.component.composite
+package com.neome.feature.form.presentation.components.composite
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,7 +18,7 @@ import com.neome.api.meta.base.Types.MetaIdComposite
 import com.neome.api.meta.base.dto.DefnTab
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
-import com.neome.feature.form.presentation.component.base.FieldFactory
+import com.neome.feature.form.presentation.components.base.FieldFactory
 import com.neome.feature.form.presentation.ctx.FormCtx
 import com.neome.feature.form.presentation.state.FieldEvent
 import com.neome.feature.form.presentation.state.FormState

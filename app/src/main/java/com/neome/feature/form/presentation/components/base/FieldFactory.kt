@@ -1,4 +1,4 @@
-package com.neome.feature.form.presentation.component.base
+package com.neome.feature.form.presentation.components.base
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
@@ -8,9 +8,9 @@ import androidx.compose.ui.Modifier
 import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
-import com.neome.feature.form.presentation.component.composite.FieldSection
-import com.neome.feature.form.presentation.component.composite.FieldTab
-import com.neome.feature.form.presentation.component.field.FieldText
+import com.neome.feature.form.presentation.components.composite.FieldSection
+import com.neome.feature.form.presentation.components.composite.FieldTab
+import com.neome.feature.form.presentation.components.field.FieldText
 import com.neome.feature.form.presentation.ctx.FormCtx
 import com.neome.feature.form.presentation.state.FieldEvent
 
