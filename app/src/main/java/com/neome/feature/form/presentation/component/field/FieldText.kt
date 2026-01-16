@@ -10,16 +10,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.neome.api.meta.base.dto.DefnField
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
 import com.neome.feature.form.presentation.ctx.FormCtx
 import com.neome.feature.form.presentation.state.FieldEvent
-import kotlinx.serialization.json.JsonPrimitive
 
 /**
  * Simple text field component for form.
  *
- * Basic text box that uses value from fieldState (accessed via formCtx) and updates value on change.
+ * Basic text box that uses standardized field interface with fieldValue, error, fieldProperties, and onChange.
  *
  * @param defnComp Field definition containing field configuration
  * @param onFieldEvent Callback to emit field events to the form
@@ -33,16 +32,18 @@ fun FieldText(
     formCtx: FormCtx,
     modifier: Modifier = Modifier
 ) {
-    val fieldId = (defnComp as? DefnField)?.metaId ?: return
-    val fieldState = formCtx.getFieldState(fieldId) ?: return
+    // Use field controller composable with FieldValueTextData type
+    val fieldController = rememberFieldController<FieldValueTextData>(
+        defnComp = defnComp,
+        onFieldEvent = onFieldEvent,
+        formCtx = formCtx
+    )
 
-    // Get current text value from JsonElement
-    val currentValue = fieldState.value?.let {
-        when (it) {
-            is JsonPrimitive -> it.content
-            else -> it.toString()
-        }
-    } ?: ""
+    // Early return if field setup is invalid
+    if (fieldController.fieldId == null || fieldController.fieldState == null) return
+
+    // Get current text value from FieldValueTextData
+    val currentValue = fieldController.fieldValue?.value ?: ""
 
     // Local state for text input
     var textValue by remember(currentValue) { mutableStateOf(currentValue) }
@@ -50,9 +51,9 @@ fun FieldText(
     // Handle text value changes
     fun onValueChange(newValue: String) {
         textValue = newValue
-        // Emit value change event
-        val jsonValue = if (newValue.isEmpty()) null else JsonPrimitive(newValue)
-        onFieldEvent(FieldEvent.ValueChanged(fieldId, jsonValue))
+        // Use controller's onChange callback with FieldValueTextData
+        val fieldValue = if (newValue.isEmpty()) null else FieldValueTextData(newValue)
+        fieldController.onChange(fieldValue)
     }
 
     FieldBase(modifier = modifier.background(color = Color(76, 175, 80, 255))) {

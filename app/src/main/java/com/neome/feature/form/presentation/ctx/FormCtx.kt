@@ -51,6 +51,14 @@ interface FormCtx {
     fun getValue(fieldId: MetaIdComp): JsonElement?
 
     /**
+     * Get field error (convenience method).
+     *
+     * @param fieldId The field ID to look up
+     * @return FieldError or null if field has no error
+     */
+    fun getError(fieldId: MetaIdComp): com.neome.feature.form.presentation.state.FieldError?
+
+    /**
      * Check if a field exists in the form.
      *
      * @param fieldId The field ID to check

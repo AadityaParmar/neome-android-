@@ -2,6 +2,7 @@ package com.neome.feature.form.presentation.ctx
 
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormState
@@ -42,6 +43,10 @@ class FormCtxImpl(
 
     override fun getValue(fieldId: MetaIdComp): JsonElement? {
         return currentState.getValue(fieldId)
+    }
+
+    override fun getError(fieldId: MetaIdComp): FieldError? {
+        return currentState.getError(fieldId)
     }
 
     override fun hasField(fieldId: MetaIdComp): Boolean {
