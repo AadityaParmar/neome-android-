@@ -8,10 +8,12 @@ import androidx.compose.ui.Modifier
 import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.ctx.FormCtx
 import com.neome.feature.form.presentation.components.composite.FieldSection
 import com.neome.feature.form.presentation.components.composite.FieldTab
+import com.neome.feature.form.presentation.components.field.FieldDecimal
+import com.neome.feature.form.presentation.components.field.FieldNumber
 import com.neome.feature.form.presentation.components.field.FieldText
-import com.neome.feature.form.presentation.ctx.FormCtx
 import com.neome.feature.form.presentation.state.FieldEvent
 
 /**
@@ -28,6 +30,20 @@ fun FieldFactory(
 ) {
     when (defnComp.type) {
         EnumDefnCompType.text -> FieldText(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            formCtx = formCtx,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.number -> FieldNumber(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            formCtx = formCtx,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.decimal -> FieldDecimal(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             formCtx = formCtx,
