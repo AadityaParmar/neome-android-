@@ -84,7 +84,7 @@ object PropertyResolver {
         defnComp.disabledFieldId?.let { references.add(it) }
 
         // For editable fields, check additional field references
-        if (defnComp is com.neome.api.meta.base.dto.DefnFieldEditable) {
+        if (defnComp is DefnFieldEditable) {
             defnComp.helperTextFieldId?.let { references.add(it) }
             defnComp.placeHolderFieldId?.let { references.add(it) }
             defnComp.labelFieldId?.let { references.add(it) }
@@ -140,7 +140,7 @@ object PropertyResolver {
         if (defnComp is DefnFieldEditable) {
             defnComp.helperTextFieldId?.let { fieldId ->
                 val value = getFieldValue(fieldId) ?: return null
-                val compType = defnForm.compMap.get(fieldId)?.type ?: return null
+                val compType = defnForm.compMap[fieldId]?.type ?: return null
 
                 val fieldValue = fieldValueResolver.fnFieldValueToRawValue(compType, value)
                 if (fieldValue != null && fieldValue is String) {
@@ -174,7 +174,7 @@ object PropertyResolver {
         if (defnComp is DefnFieldEditable) {
             defnComp.placeHolderFieldId?.let { fieldId ->
                 val value = getFieldValue(fieldId) ?: return null
-                val compType = defnForm.compMap.get(fieldId)?.type ?: return null
+                val compType = defnForm.compMap[fieldId]?.type ?: return null
 
                 val fieldValue = fieldValueResolver.fnFieldValueToRawValue(compType, value)
                 if (fieldValue != null && fieldValue is String) {

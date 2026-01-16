@@ -4,6 +4,11 @@ import com.neome.api.meta.base.Types
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDecimalData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueNumberData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
+import com.neome.feature.utils.JsonParser
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.decodeFromJsonElement
 
 object fieldValueResolver {
 
@@ -11,7 +16,7 @@ object fieldValueResolver {
      * Converts raw primitive values to appropriate field value types based on component type.
      *
      * @param compType The component type (text, number, decimal)
-     * @param value The raw primitive value (String, Int, Long, Double, Boolean, etc.)
+     * @param value The raw primitive value (String, Int, Long, Double, Boolean, JsonElement, etc.)
      * @return The appropriate FieldValue type or null if conversion fails
      */
     fun fnRawValueToFieldValue(compType: Types.EnumDefnCompType, value: Any?): Any? {
@@ -20,7 +25,10 @@ object fieldValueResolver {
         try {
             return when (compType) {
                 Types.EnumDefnCompType.text -> {
-                    val stringValue = value.toString()
+                    val stringValue = when (value) {
+                        is JsonElement -> value.jsonPrimitive.content
+                        else -> value.toString()
+                    }
                     FieldValueTextData(stringValue)
                 }
 
@@ -31,6 +39,7 @@ object fieldValueResolver {
                         is Double -> value.toLong()
                         is Float -> value.toLong()
                         is String -> value.toLongOrNull()
+                        is JsonElement -> value.jsonPrimitive.content.toLongOrNull()
                         else -> value.toString().toLongOrNull()
                     }
                     numberValue?.let { FieldValueNumberData(it) }
@@ -43,6 +52,7 @@ object fieldValueResolver {
                         is Double -> value.toLong()
                         is Float -> value.toLong()
                         is String -> value.toLongOrNull()
+                        is JsonElement -> value.jsonPrimitive.content.toLongOrNull()
                         else -> value.toString().toLongOrNull()
                     }
                     decimalValue?.let { FieldValueDecimalData(it) }
@@ -59,7 +69,7 @@ object fieldValueResolver {
      * Converts FieldValue data objects back to raw primitive types.
      *
      * @param compType The component type (text, number, decimal)
-     * @param value The FieldValue data object (FieldValueTextData, FieldValueNumberData, FieldValueDecimalData, etc.)
+     * @param value The FieldValue data object (FieldValueTextData, FieldValueNumberData, FieldValueDecimalData, etc.) or JsonElement
      * @return Raw primitive value (String, Long, etc.) or null if conversion fails
      */
     fun fnFieldValueToRawValue(compType: Types.EnumDefnCompType, value: Any?): Any? {
@@ -70,6 +80,11 @@ object fieldValueResolver {
                 Types.EnumDefnCompType.text -> {
                     when (value) {
                         is FieldValueTextData -> value.value
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            FieldValueTextData.serializer(),
+                            value
+                        ).value
+
                         else -> null
                     }
                 }
@@ -77,6 +92,10 @@ object fieldValueResolver {
                 Types.EnumDefnCompType.number -> {
                     when (value) {
                         is FieldValueNumberData -> value.value
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            FieldValueNumberData.serializer(),
+                            value
+                        ).value
                         else -> null
                     }
                 }
@@ -84,6 +103,10 @@ object fieldValueResolver {
                 Types.EnumDefnCompType.decimal -> {
                     when (value) {
                         is FieldValueDecimalData -> value.value
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            FieldValueDecimalData.serializer(),
+                            value
+                        ).value
                         else -> null
                     }
                 }

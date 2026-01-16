@@ -1,6 +1,7 @@
 package com.neome.feature.form.presentation.state
 
 import androidx.compose.runtime.Immutable
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
 
 /**
@@ -10,6 +11,7 @@ import kotlinx.serialization.json.JsonElement
  * Note: Field errors are stored centrally in FormState.errors, not here.
  */
 @Immutable
+@Serializable
 data class FieldState(
     // Values
     val value: JsonElement? = null,
@@ -40,6 +42,7 @@ data class FieldState(
  * 3. Field reference: defnComp.placeHolderFieldId -> get value from another field
  */
 @Immutable
+@Serializable
 data class FieldProperties(
     val required: Boolean = false,
     val disabled: Boolean = false,

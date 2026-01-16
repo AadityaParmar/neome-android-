@@ -132,7 +132,9 @@ object FormSampleDataFactory {
                 "mfd-qDpfN1vSGT",
                 "mfd-1R1vfYHuYg",
                 "mfd-pAGBF98cPc",
-                "mfd-JiBn57WwT1"
+                "mfd-JiBn57WwT1",
+                "mfd-63HKAMm6LQ",
+                "mfd-q96ZG1wLEp"
             ],
             "flexGrow": false,
             "name": "Section1",
@@ -182,9 +184,7 @@ object FormSampleDataFactory {
             "metaId": "msc-iq4fe3O1IV",
             "fieldIdSet": [
                 "mfd-k9fXu7XtBX",
-                "mfd-gdb26wJtRW",
-                "mfd-63HKAMm6LQ",
-                "mfd-q96ZG1wLEp"
+                "mfd-gdb26wJtRW"
             ],
             "flexGrow": false,
             "name": "Section2",

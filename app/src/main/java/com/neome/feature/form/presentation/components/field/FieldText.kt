@@ -9,6 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
 import com.neome.feature.form.domain.ctx.FormCtx
@@ -41,12 +42,14 @@ fun FieldText(
     )
 
     // Early return if field setup is invalid
-    if (fieldController.fieldId == null || fieldController.fieldState == null) return
+    if (fieldController.fieldId == null) return
+
+    // Watch field properties reactively through controller
+    val properties by fieldController.fieldPropertiesFlow.collectAsStateWithLifecycle()
 
     // Early return if field is hidden
-    if (fieldController.fieldProperties.hidden) return
+    if (properties.hidden) return
 
-    val properties = fieldController.fieldProperties
 
     // Get current text value from FieldValueTextData
     val currentValue = fieldController.fieldValue?.value ?: ""
@@ -66,11 +69,11 @@ fun FieldText(
     FieldBase(modifier = modifier) {
         OutlinedTextField(
             value = textValue,
-            label = properties.label?.let { { Text(it) } },
-            placeholder = properties.placeholder?.let { { Text(it) } },
-            supportingText = properties.helperText?.let { { Text(it) } },
-            enabled = !properties.disabled,
-            readOnly = properties.readOnly,
+            label = properties?.label?.let { { Text(it) } },
+            placeholder = properties?.placeholder?.let { { Text(it) } },
+            supportingText = properties?.helperText?.let { { Text(it) } },
+            enabled = properties?.disabled == false,
+            readOnly = properties?.readOnly == true,
             maxLines = 1,
             modifier = modifier.fillMaxWidth(),
             onValueChange = ::onValueChange

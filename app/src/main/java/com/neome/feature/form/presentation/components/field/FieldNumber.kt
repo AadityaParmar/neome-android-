@@ -11,6 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueNumberData
 import com.neome.feature.form.domain.ctx.FormCtx
@@ -43,12 +44,13 @@ fun FieldNumber(
     )
 
     // Early return if field setup is invalid
-    if (fieldController.fieldId == null || fieldController.fieldState == null) return
+    if (fieldController.fieldId == null) return
+
+    // Watch field properties reactively through controller
+    val properties by fieldController.fieldPropertiesFlow.collectAsStateWithLifecycle()
 
     // Early return if field is hidden
-    if (fieldController.fieldProperties.hidden) return
-
-    val properties = fieldController.fieldProperties
+    if (properties.hidden) return
 
 
     // Get current number value from FieldValueNumberData

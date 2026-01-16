@@ -9,7 +9,15 @@ import com.neome.feature.form.domain.ctx.FormCtx
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldEvent
 import com.neome.feature.form.presentation.state.FieldProperties
+import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.utils.JsonParser
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
@@ -50,6 +58,23 @@ data class FieldController<T>(
     /** Computed field properties (required, disabled, etc.) */
     val fieldProperties: FieldProperties
         get() = fieldState?.fieldProperties ?: FieldProperties()
+
+    /** Reactive StateFlow of field properties */
+    val fieldPropertiesFlow: StateFlow<FieldProperties>
+        get() = fieldId?.let {
+            formCtx.watchFieldState(it).map { state ->
+                state?.fieldProperties ?: FieldProperties()
+            }
+        }?.stateIn(
+            scope = CoroutineScope(Dispatchers.Default),
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = fieldProperties
+        ) ?: MutableStateFlow(FieldProperties())
+
+    /** Reactive StateFlow of field state */
+    val fieldStateFlow: StateFlow<FieldState?>
+        get() = fieldId?.let { formCtx.watchFieldState(it) }
+            ?: MutableStateFlow(null)
 
     /** Callback function for value changes */
     val onChange: (T?) -> Unit = { newValue ->
