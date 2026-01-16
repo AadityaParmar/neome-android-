@@ -1,6 +1,7 @@
-package com.neome.feature.form.presentation.ctx
+package com.neome.feature.form.domain.ctx
 
 import com.neome.api.meta.base.Types.MetaIdComp
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormState
@@ -71,7 +72,7 @@ interface FormCtx {
      * Get the DefnForm data.
      * Useful for accessing form-level configuration.
      */
-    fun getDefnForm(): com.neome.core.common.serializer.api.meta.base.dto.DefnFormData?
+    fun getDefnForm(): DefnFormData?
 
     // ==================== Validation ====================
 

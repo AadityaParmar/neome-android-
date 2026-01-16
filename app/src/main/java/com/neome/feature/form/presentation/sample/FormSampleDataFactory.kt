@@ -22,89 +22,191 @@ object FormSampleDataFactory {
     fun createSampleDefnForm(): String {
         return """
 {
-      "metaId": "${'$'}FormSearch",
-      "name": "SysFormSearch",
-      "compMap": {
-        "mtb-Tab": {
-          "metaId": "mtb-Tab",
-          "tabIdSet": [
-            "msc-Details",
-            "mgr-ResultGrid"
-          ],
-          "name": "SysFormSearch",
-          "type": "tab",
-          "disabled": false
+    "metaId": "mf-pdPRpwtlFt",
+    "name": "DefnForm",
+    "compMap": {
+        "mtb-pdPRpwtlFt": {
+            "metaId": "mtb-pdPRpwtlFt",
+            "tabIdSet": [
+                "msc-MgknD5pYZT",
+                "msc-iq4fe3O1IV",
+                "mgr-QtTkTuXYKw"
+            ],
+            "name": "DefnForm",
+            "type": "tab",
+            "disabled": false
         },
-        "mfd-SearchText": {
-          "metaId": "mfd-SearchText",
-          "name": "SearchText",
-          "type": "text",
-          "permissionMatrix": {
-            "keys": [],
-            "map": {}
-          }
+        "mfd-HxbXkSxSQY": {
+            "requiredFieldId": "mfd-qDpfN1vSGT",
+            "metaId": "mfd-HxbXkSxSQY",
+            "name": "FieldText",
+            "type": "text",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
         },
-        "msc-Details": {
-          "metaId": "msc-Details",
-          "fieldIdSet": [
-            "mfd-SearchText"
-          ],
-          "flexGrow": false,
-          "name": "Details",
-          "type": "section",
-          "permissionMatrix": {
-            "keys": [],
-            "map": {}
-          }
+        "mfd-qDpfN1vSGT": {
+            "helperTextFieldId": "mfd-HxbXkSxSQY",
+            "metaId": "mfd-qDpfN1vSGT",
+            "name": "FieldBool",
+            "type": "bool",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
         },
-        "mfd-SpreadsheetId": {
-          "metaId": "mfd-SpreadsheetId",
-          "name": "SpreadsheetId",
-          "type": "spreadsheetId",
-          "permissionMatrix": {
-            "keys": [],
-            "map": {}
-          }
+        "mfd-1R1vfYHuYg": {
+            "defaultValue": 10,
+            "metaId": "mfd-1R1vfYHuYg",
+            "name": "FieldNumber",
+            "type": "number",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
         },
-        "mfd-RowId": {
-          "metaId": "mfd-RowId",
-          "name": "RowId",
-          "type": "rowId",
-          "permissionMatrix": {
-            "keys": [],
-            "map": {}
-          }
+        "mfd-pAGBF98cPc": {
+            "optionMap": {
+                "keys": [
+                    "keyRed",
+                    "keyGreen",
+                    "keyBlue"
+                ],
+                "map": {
+                    "keyRed": {
+                        "metaId": "keyRed",
+                        "value": "Red",
+                        "color": {
+                            "value": "red",
+                            "shade": "s500"
+                        },
+                        "isRemoved": false,
+                        "disabled": false
+                    },
+                    "keyGreen": {
+                        "metaId": "keyGreen",
+                        "value": "Green",
+                        "color": {
+                            "value": "green",
+                            "shade": "s500"
+                        },
+                        "isRemoved": false,
+                        "disabled": false
+                    },
+                    "keyBlue": {
+                        "metaId": "keyBlue",
+                        "value": "Blue",
+                        "color": {
+                            "value": "blue",
+                            "shade": "s500"
+                        },
+                        "isRemoved": false,
+                        "disabled": false
+                    }
+                }
+            },
+            "metaId": "mfd-pAGBF98cPc",
+            "name": "FieldPickText",
+            "type": "pickText",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
         },
-        "mgr-ResultGrid": {
-          "metaId": "mgr-ResultGrid",
-          "fieldIdSet": [
-            "mfd-SpreadsheetId",
-            "mfd-RowId"
-          ],
-          "name": "ResultGrid",
-          "type": "grid",
-          "permissionMatrix": {
-            "keys": [],
-            "map": {}
-          }
+        "mfd-JiBn57WwT1": {
+            "metaId": "mfd-JiBn57WwT1",
+            "name": "FieldDecimal",
+            "type": "decimal",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
+        "msc-MgknD5pYZT": {
+            "metaId": "msc-MgknD5pYZT",
+            "fieldIdSet": [
+                "mfd-HxbXkSxSQY",
+                "mfd-qDpfN1vSGT",
+                "mfd-1R1vfYHuYg",
+                "mfd-pAGBF98cPc",
+                "mfd-JiBn57WwT1"
+            ],
+            "flexGrow": false,
+            "name": "Section1",
+            "type": "section",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
+        "mfd-k9fXu7XtBX": {
+            "metaId": "mfd-k9fXu7XtBX",
+            "name": "FieldDate",
+            "type": "date",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
+        "mfd-gdb26wJtRW": {
+            "metaId": "mfd-gdb26wJtRW",
+            "name": "FieldEmail",
+            "type": "email",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
+        "msc-iq4fe3O1IV": {
+            "metaId": "msc-iq4fe3O1IV",
+            "fieldIdSet": [
+                "mfd-k9fXu7XtBX",
+                "mfd-gdb26wJtRW"
+            ],
+            "flexGrow": false,
+            "name": "Section2",
+            "type": "section",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
+        "mfd-wIACoHHagW": {
+            "metaId": "mfd-wIACoHHagW",
+            "name": "GridFieldText",
+            "type": "text",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
+        "mfd-QtN0Joxw3j": {
+            "metaId": "mfd-QtN0Joxw3j",
+            "name": "GridFieldBool",
+            "type": "bool",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
+        "mgr-QtTkTuXYKw": {
+            "metaId": "mgr-QtTkTuXYKw",
+            "fieldIdSet": [
+                "mfd-wIACoHHagW",
+                "mfd-QtN0Joxw3j"
+            ],
+            "name": "Grid",
+            "type": "grid",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
         }
-      },
-      "displayCompositeId": "mtb-Tab",
-      "permissionMatrix": {
-        "keys": [],
-        "map": {}
-      },
-      "layoutMap": {
-        "keys": [],
-        "map": {}
-      },
-      "visibilityRuleMap": {
-        "keys": [],
-        "map": {}
-      },
-      "formulaFieldIdSet": [],
-      "gridLookupMap": {}
-    }
+    },
+    "displayCompositeId": "mtb-pdPRpwtlFt",
+    "gridLookupMap": {}
+}
         """.trimIndent()
     }
 }

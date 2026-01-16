@@ -1,4 +1,4 @@
-package com.neome.feature.form.presentation.util
+package com.neome.feature.form.domain.util
 
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.dto.DefnComp

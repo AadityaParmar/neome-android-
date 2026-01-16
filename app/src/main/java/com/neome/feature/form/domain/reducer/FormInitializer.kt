@@ -1,11 +1,11 @@
-package com.neome.feature.form.presentation.reducer
+package com.neome.feature.form.domain.reducer
 
 import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
+import com.neome.feature.form.domain.util.PropertyResolver
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormState
-import com.neome.feature.form.presentation.util.PropertyResolver
 
 /**
  * Handles form initialization logic.

@@ -24,8 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.neome.feature.form.domain.ref.FormRef
 import com.neome.feature.form.presentation.components.Form
-import com.neome.feature.form.presentation.ref.FormRef
 
 /**
  * Screen that hosts the Form component inside a minimal scaffold.

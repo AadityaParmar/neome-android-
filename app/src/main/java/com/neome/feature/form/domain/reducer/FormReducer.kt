@@ -1,14 +1,14 @@
-package com.neome.feature.form.presentation.reducer
+package com.neome.feature.form.domain.reducer
 
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.dto.DefnComp
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.util.PropertyResolver
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormIntent
 import com.neome.feature.form.presentation.state.FormState
-import com.neome.feature.form.presentation.util.PropertyResolver
 
 /**
  * Result of processing a FormEvent.

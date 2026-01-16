@@ -1,4 +1,4 @@
-package com.neome.feature.form.presentation.ctx
+package com.neome.feature.form.domain.ctx
 
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
