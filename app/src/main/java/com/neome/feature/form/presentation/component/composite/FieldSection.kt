@@ -14,7 +14,7 @@ import com.neome.api.meta.base.Types.EnumDefnThemeDirection
 import com.neome.api.meta.base.dto.DefnSection
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
-import com.neome.feature.form.presentation.component.FieldFactory
+import com.neome.feature.form.presentation.component.base.FieldFactory
 import com.neome.feature.form.presentation.ctx.FormCtx
 import com.neome.feature.form.presentation.state.FieldEvent
 

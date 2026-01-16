@@ -1,4 +1,4 @@
-package com.neome.feature.form.presentation.component
+package com.neome.feature.form.presentation.component.base
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
