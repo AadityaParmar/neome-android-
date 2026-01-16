@@ -68,6 +68,7 @@ object FormInitializer {
                 val value = initialValueMap[fieldId]
                 val fieldProperties = PropertyResolver.resolveFieldProperties(
                     defnComp = defnComp,
+                    defnForm,
                     getFieldValue = { id -> initialValueMap[id] }
                 )
 

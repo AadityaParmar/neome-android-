@@ -3,6 +3,8 @@ package com.neome.feature.form.domain.util
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.dto.DefnComp
 import com.neome.api.meta.base.dto.DefnDtoText
+import com.neome.api.meta.base.dto.DefnFieldEditable
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.feature.form.presentation.state.FieldDependencyMap
 import com.neome.feature.form.presentation.state.FieldProperties
 import kotlinx.serialization.json.JsonElement
@@ -28,16 +30,20 @@ object PropertyResolver {
      */
     fun resolveFieldProperties(
         defnComp: DefnComp,
+        defnForm: DefnFormData,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): FieldProperties {
+
+        val required = resolveRequired(defnComp)
+
         return FieldProperties(
-            required = resolveRequired(defnComp),
+            required = required,
             disabled = resolveDisabled(defnComp, getFieldValue),
             readOnly = defnComp.readOnly == true,
             hidden = resolveHidden(defnComp),
-            helperText = resolveHelperText(defnComp, getFieldValue),
-            placeholder = resolvePlaceholder(defnComp, getFieldValue),
-            label = resolveLabel(defnComp, getFieldValue)
+            helperText = resolveHelperText(defnComp, defnForm, getFieldValue),
+            placeholder = resolvePlaceholder(defnComp, defnForm, getFieldValue),
+            label = resolveLabel(defnComp, required)
         )
     }
 
@@ -77,9 +83,13 @@ object PropertyResolver {
 
         defnComp.disabledFieldId?.let { references.add(it) }
 
-        // For editable fields, check placeholder and other field references
-        // This would need to be expanded based on specific DefnComp subtypes
-        // that have placeHolderFieldId, labelFieldId, etc.
+        // For editable fields, check additional field references
+        if (defnComp is com.neome.api.meta.base.dto.DefnFieldEditable) {
+            defnComp.helperTextFieldId?.let { references.add(it) }
+            defnComp.placeHolderFieldId?.let { references.add(it) }
+            defnComp.labelFieldId?.let { references.add(it) }
+            defnComp.requiredFieldId?.let { references.add(it) }
+        }
 
         return references
     }
@@ -121,33 +131,81 @@ object PropertyResolver {
 
     private fun resolveHelperText(
         defnComp: DefnComp,
+        defnForm: DefnFormData,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): String? {
-        // Helper text resolution would follow the same pattern:
-        // helperTextFieldId > helperTextVar > helperText
-        // For now, return null - will be enhanced based on specific DefnComp subtypes
+        // Helper text resolution follows: helperTextFieldId > helperTextVar > helperText
+
+        // Check if helperText is based on another field's value (only for DefnFieldEditable)
+        if (defnComp is DefnFieldEditable) {
+            defnComp.helperTextFieldId?.let { fieldId ->
+                val value = getFieldValue(fieldId) ?: return null
+                val compType = defnForm.compMap.get(fieldId)?.type ?: return null
+
+                val fieldValue = fieldValueResolver.fnFieldValueToRawValue(compType, value)
+                if (fieldValue != null && fieldValue is String) {
+                    return fieldValue
+                }
+            }
+
+            // Check helperTextVar (only for DefnFieldEditable)
+            defnComp.helperTextVar?.let { textVar ->
+                val resolvedValue = resolveArgValue(textVar)
+                if (resolvedValue != null) {
+                    return resolvedValue
+                }
+            }
+
+            // Fall back to direct helperText value (only for DefnFieldEditable)
+            return defnComp.helperText
+        }
+
         return null
     }
 
     private fun resolvePlaceholder(
         defnComp: DefnComp,
+        defnForm: DefnFormData,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): String? {
-        // Placeholder resolution would follow:
-        // placeHolderFieldId > placeHolderVar > placeHolder
-        // This requires checking specific DefnComp subtypes (DefnFieldEditable, etc.)
-        // For now, return null - will be enhanced based on specific DefnComp subtypes
+        // Placeholder resolution follows: placeHolderFieldId > placeHolderVar > placeHolder
+
+        // Check if placeholder is based on another field's value (only for DefnFieldEditable)
+        if (defnComp is DefnFieldEditable) {
+            defnComp.placeHolderFieldId?.let { fieldId ->
+                val value = getFieldValue(fieldId) ?: return null
+                val compType = defnForm.compMap.get(fieldId)?.type ?: return null
+
+                val fieldValue = fieldValueResolver.fnFieldValueToRawValue(compType, value)
+                if (fieldValue != null && fieldValue is String) {
+                    return fieldValue
+                }
+            }
+
+            // Check placeHolderVar (only for DefnFieldEditable)
+            defnComp.placeHolderVar?.let { placeHolderVar ->
+                val resolvedValue = resolveArgValue(placeHolderVar)
+                if (resolvedValue != null) {
+                    return resolvedValue
+                }
+            }
+
+            // Fall back to direct placeHolder value (only for DefnFieldEditable)
+            return defnComp.placeHolder
+        }
+
         return null
     }
 
     private fun resolveLabel(
         defnComp: DefnComp,
-        getFieldValue: (MetaIdComp) -> JsonElement?
-    ): String? {
+        required: Boolean?
+    ): String {
         // Label resolution would follow:
         // labelFieldId > labelVar > label
         // For now, return the direct label
-        return defnComp.label
+        val label = defnComp.label ?: defnComp.name.toString()
+        return if (required == true) "$label *" else label
     }
 
     // ==================== Helper Methods ====================

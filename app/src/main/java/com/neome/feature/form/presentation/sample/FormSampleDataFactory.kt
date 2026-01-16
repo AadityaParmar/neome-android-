@@ -38,6 +38,8 @@ object FormSampleDataFactory {
         },
         "mfd-HxbXkSxSQY": {
             "requiredFieldId": "mfd-qDpfN1vSGT",
+            "placeHolderFieldId": "mfd-63HKAMm6LQ",
+            "helperTextFieldId": "mfd-q96ZG1wLEp",
             "metaId": "mfd-HxbXkSxSQY",
             "name": "FieldText",
             "type": "text",
@@ -158,11 +160,31 @@ object FormSampleDataFactory {
                 "map": {}
             }
         },
+        "mfd-63HKAMm6LQ": {
+            "metaId": "mfd-63HKAMm6LQ",
+            "name": "Placeholder",
+            "type": "text",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
+        "mfd-q96ZG1wLEp": {
+            "metaId": "mfd-q96ZG1wLEp",
+            "name": "Helpertext",
+            "type": "text",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
         "msc-iq4fe3O1IV": {
             "metaId": "msc-iq4fe3O1IV",
             "fieldIdSet": [
                 "mfd-k9fXu7XtBX",
-                "mfd-gdb26wJtRW"
+                "mfd-gdb26wJtRW",
+                "mfd-63HKAMm6LQ",
+                "mfd-q96ZG1wLEp"
             ],
             "flexGrow": false,
             "name": "Section2",

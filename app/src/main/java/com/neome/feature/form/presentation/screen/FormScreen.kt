@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -66,6 +65,13 @@ fun FormScreen(
                         .padding(8.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
+                    intentLog.takeLast(3).forEach { message ->
+                        Text(
+                            text = message,
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
+
                     Button(
                         onClick = { formRefState.value?.submit() },
                         enabled = formRefState.value != null,
@@ -79,24 +85,7 @@ fun FormScreen(
                         Text(text = " Submit")
                     }
 
-                    Button(
-                        onClick = { formRefState.value?.reset(null) },
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Refresh,
-                            contentDescription = "Reset",
-                            modifier = Modifier.size(18.dp)
-                        )
-                        Text(text = " Reset")
-                    }
 
-                    intentLog.takeLast(3).forEach { message ->
-                        Text(
-                            text = message,
-                            style = MaterialTheme.typography.bodySmall
-                        )
-                    }
                 }
             }
         }

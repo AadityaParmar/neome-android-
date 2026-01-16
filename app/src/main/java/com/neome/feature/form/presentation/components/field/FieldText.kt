@@ -1,15 +1,14 @@
 package com.neome.feature.form.presentation.components.field
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
 import com.neome.feature.form.domain.ctx.FormCtx
@@ -44,6 +43,11 @@ fun FieldText(
     // Early return if field setup is invalid
     if (fieldController.fieldId == null || fieldController.fieldState == null) return
 
+    // Early return if field is hidden
+    if (fieldController.fieldProperties.hidden) return
+
+    val properties = fieldController.fieldProperties
+
     // Get current text value from FieldValueTextData
     val currentValue = fieldController.fieldValue?.value ?: ""
 
@@ -59,9 +63,14 @@ fun FieldText(
         fieldController.onChange(fieldValue)
     }
 
-    FieldBase(modifier = modifier.background(color = Color(76, 175, 80, 255))) {
+    FieldBase(modifier = modifier) {
         OutlinedTextField(
             value = textValue,
+            label = properties.label?.let { { Text(it) } },
+            placeholder = properties.placeholder?.let { { Text(it) } },
+            supportingText = properties.helperText?.let { { Text(it) } },
+            enabled = !properties.disabled,
+            readOnly = properties.readOnly,
             maxLines = 1,
             modifier = modifier.fillMaxWidth(),
             onValueChange = ::onValueChange

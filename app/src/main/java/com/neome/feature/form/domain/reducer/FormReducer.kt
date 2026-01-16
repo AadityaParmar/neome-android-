@@ -163,6 +163,7 @@ object FormReducer {
 
         val newProperties = PropertyResolver.resolveFieldProperties(
             defnComp = defnComp,
+            defnForm,
             getFieldValue = { id -> state.getValue(id) }
         )
 
@@ -372,6 +373,7 @@ object FormReducer {
 
             val newProperties = PropertyResolver.resolveFieldProperties(
                 defnComp = defnComp,
+                defnForm,
                 getFieldValue = { id -> fieldStates[id]?.value }
             )
 
