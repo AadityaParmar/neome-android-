@@ -1,6 +1,7 @@
 package com.neome.feature.form.presentation.ctx
 
 import com.neome.api.meta.base.Types.MetaIdComp
+import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormState
 import kotlinx.coroutines.flow.StateFlow
@@ -56,7 +57,7 @@ interface FormCtx {
      * @param fieldId The field ID to look up
      * @return FieldError or null if field has no error
      */
-    fun getError(fieldId: MetaIdComp): com.neome.feature.form.presentation.state.FieldError?
+    fun getError(fieldId: MetaIdComp): FieldError?
 
     /**
      * Check if a field exists in the form.
@@ -92,6 +93,16 @@ interface FormCtx {
      * @return StateFlow of FieldState
      */
     fun watchFieldState(fieldId: MetaIdComp): StateFlow<FieldState?>
+
+    /**
+     * Watch field error changes as StateFlow (isolated observation).
+     * Use in Composables with collectAsStateWithLifecycle() when you only need error state.
+     * This prevents unnecessary recomposition when other field properties change.
+     *
+     * @param fieldId Field identifier
+     * @return StateFlow of FieldError (null if no error)
+     */
+    fun watchFieldError(fieldId: MetaIdComp): StateFlow<FieldError?>
 
     /**
      * Watch entire form state.

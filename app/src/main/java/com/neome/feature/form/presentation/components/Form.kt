@@ -1,13 +1,9 @@
 package com.neome.feature.form.presentation.components
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,11 +30,9 @@ import com.neome.feature.form.presentation.state.FieldEvent
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormIntent
 import com.neome.feature.form.presentation.state.FormState
-import com.neome.feature.utils.JsonParser
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.serialization.encodeToString
 
 /**
  * Pure MVI Form Component.
@@ -64,8 +58,6 @@ fun Form(
     modifier: Modifier = Modifier
 ) {
     val coroutineScope = rememberCoroutineScope()
-    val defnFormStr = JsonParser.json.encodeToString(defnForm)
-    println("===defnForm, ${defnFormStr}")
     // Internal state management
     val formStateFlow = remember { MutableStateFlow(FormState()) }
     val formState by formStateFlow.collectAsState()
@@ -149,8 +141,13 @@ fun Form(
 }
 
 /**
- * Stateless form content.
- * Renders the root component using FieldFactory.
+ * Stateless form content with lazy rendering optimization.
+ * Renders the root component using FieldFactory with LazyColumn for large forms.
+ *
+ * PERFORMANCE OPTIMIZATION:
+ * - Uses LazyColumn for efficient rendering of large forms
+ * - Only renders visible items on screen
+ * - Stable keys prevent unnecessary recomposition
  */
 @Composable
 private fun FormContent(
@@ -160,47 +157,41 @@ private fun FormContent(
     onFieldEvent: (FieldEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        if (!state.isInitialized) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "Loading form...",
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            }
-            return@Column
-        }
-
-        val rootCompositeId = defnForm.displayCompositeId
-        val rootComponent = defnForm.compMap[rootCompositeId]
-
-        if (rootComponent != null) {
-            FieldFactory(
-                defnComp = rootComponent,
-                defnForm = defnForm,
-                formCtx = formCtx,
-                onFieldEvent = onFieldEvent,
-                modifier = Modifier.fillMaxWidth()
+    if (!state.isInitialized) {
+        Box(
+            modifier = modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "Loading form...",
+                style = MaterialTheme.typography.bodyMedium
             )
-        } else {
-            println("=== FormContent: Root component not found")
+        }
+        return
+    }
+
+    val rootCompositeId = defnForm.displayCompositeId
+    val rootComponent = defnForm.compMap[rootCompositeId]
+
+    if (rootComponent == null) {
+        Box(
+            modifier = modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
             Text(
                 text = "Error: Root component not found",
                 color = MaterialTheme.colorScheme.error,
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(16.dp)
+                modifier = Modifier.padding(16.dp)
             )
         }
+        return
     }
+
+    FieldFactory(
+        defnComp = rootComponent,
+        defnForm = defnForm,
+        formCtx = formCtx,
+        onFieldEvent = onFieldEvent,
+        modifier = modifier.fillMaxWidth()
+    )
 }

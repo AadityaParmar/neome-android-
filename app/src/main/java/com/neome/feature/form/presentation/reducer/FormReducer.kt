@@ -351,7 +351,12 @@ object FormReducer {
     // ==================== Helper Functions ====================
 
     /**
-     * Trigger dependent fields to recalculate their properties.
+     * Trigger dependent fields to recalculate their properties (optimized batching).
+     *
+     * PERFORMANCE OPTIMIZATION:
+     * - Batches all property recalculations for dependent fields
+     * - Applies all updates in a single map operation (reduces map copies from N to 1)
+     * - Prevents multiple sequential state copies
      */
     private fun triggerDependentFields(
         fieldStates: Map<MetaIdComp, FieldState>,
@@ -360,21 +365,22 @@ object FormReducer {
     ): Map<MetaIdComp, FieldState> {
         if (dependentIds.isEmpty()) return fieldStates
 
-        var updatedStates = fieldStates
-
-        dependentIds.forEach { dependentId ->
-            val defnComp = defnForm.compMap[dependentId] ?: return@forEach
-            val currentState = updatedStates[dependentId] ?: return@forEach
+        // Batch: Calculate new properties for ALL dependents at once
+        val updates = dependentIds.mapNotNull { dependentId ->
+            val defnComp = defnForm.compMap[dependentId] ?: return@mapNotNull null
+            val currentState = fieldStates[dependentId] ?: return@mapNotNull null
 
             val newProperties = PropertyResolver.resolveFieldProperties(
                 defnComp = defnComp,
-                getFieldValue = { id -> updatedStates[id]?.value }
+                getFieldValue = { id -> fieldStates[id]?.value }
             )
 
-            updatedStates = updatedStates + (dependentId to currentState.copy(fieldProperties = newProperties))
-        }
+            // Return update pair
+            dependentId to currentState.copy(fieldProperties = newProperties)
+        }.toMap()
 
-        return updatedStates
+        // Apply all updates in a single operation (1 map copy instead of N)
+        return fieldStates + updates
     }
 
     // ==================== Validation Functions ====================

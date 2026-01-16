@@ -8,6 +8,7 @@ import com.neome.feature.form.presentation.state.FormState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.serialization.json.JsonElement
@@ -142,13 +143,14 @@ class FormRefImpl(
     override fun watchFieldState(fieldId: MetaIdComp): StateFlow<FieldState?> {
         // Return cached StateFlow or create a new one
         return fieldStateFlows.getOrPut(fieldId) {
-            formStateFlow.map { formState ->
-                formState.getFieldState(fieldId)
-            }.stateIn(
-                scope = coroutineScope,
-                started = SharingStarted.WhileSubscribed(5000),
-                initialValue = currentState.getFieldState(fieldId)
-            )
+            formStateFlow
+                .map { formState -> formState.getFieldState(fieldId) }
+                .distinctUntilChanged()
+                .stateIn(
+                    scope = coroutineScope,
+                    started = SharingStarted.WhileSubscribed(5000),
+                    initialValue = currentState.getFieldState(fieldId)
+                )
         }
     }
 
