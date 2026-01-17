@@ -69,11 +69,11 @@ fun FieldText(
     FieldBase(modifier = modifier) {
         OutlinedTextField(
             value = textValue,
-            label = properties?.label?.let { { Text(it) } },
-            placeholder = properties?.placeholder?.let { { Text(it) } },
-            supportingText = properties?.helperText?.let { { Text(it) } },
-            enabled = properties?.disabled == false,
-            readOnly = properties?.readOnly == true,
+            label = properties.label?.let { { Text(it) } },
+            placeholder = properties.placeholder?.let { { Text(it) } },
+            supportingText = properties.helperText?.let { { Text(it) } },
+            enabled = !properties.disabled,
+            readOnly = properties.readOnly,
             maxLines = 1,
             modifier = modifier.fillMaxWidth(),
             onValueChange = ::onValueChange

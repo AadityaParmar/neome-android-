@@ -142,7 +142,7 @@ object PropertyResolver {
                 val value = getFieldValue(fieldId) ?: return null
                 val compType = defnForm.compMap[fieldId]?.type ?: return null
 
-                val fieldValue = fieldValueResolver.fnFieldValueToRawValue(compType, value)
+                val fieldValue = fieldvalueResolver.fnFieldValueToRawValue(compType, value)
                 if (fieldValue != null && fieldValue is String) {
                     return fieldValue
                 }
@@ -176,7 +176,7 @@ object PropertyResolver {
                 val value = getFieldValue(fieldId) ?: return null
                 val compType = defnForm.compMap[fieldId]?.type ?: return null
 
-                val fieldValue = fieldValueResolver.fnFieldValueToRawValue(compType, value)
+                val fieldValue = fieldvalueResolver.fnFieldValueToRawValue(compType, value)
                 if (fieldValue != null && fieldValue is String) {
                     return fieldValue
                 }

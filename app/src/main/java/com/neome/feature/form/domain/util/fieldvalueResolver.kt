@@ -6,11 +6,9 @@ import com.neome.core.common.serializer.api.meta.base.dto.FieldValueNumberData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
 import com.neome.feature.utils.JsonParser
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import kotlinx.serialization.json.decodeFromJsonElement
 
-object fieldValueResolver {
+object fieldvalueResolver {
 
     /**
      * Converts raw primitive values to appropriate field value types based on component type.
@@ -96,6 +94,7 @@ object fieldValueResolver {
                             FieldValueNumberData.serializer(),
                             value
                         ).value
+
                         else -> null
                     }
                 }
@@ -107,6 +106,7 @@ object fieldValueResolver {
                             FieldValueDecimalData.serializer(),
                             value
                         ).value
+
                         else -> null
                     }
                 }
