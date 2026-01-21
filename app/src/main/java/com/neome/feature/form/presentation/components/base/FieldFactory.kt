@@ -12,7 +12,9 @@ import com.neome.feature.form.domain.ctx.FormCtx
 import com.neome.feature.form.presentation.components.composite.FieldSection
 import com.neome.feature.form.presentation.components.composite.FieldTab
 import com.neome.feature.form.presentation.components.field.FieldDecimal
+import com.neome.feature.form.presentation.components.field.FieldEmail
 import com.neome.feature.form.presentation.components.field.FieldNumber
+import com.neome.feature.form.presentation.components.field.FieldParagraph
 import com.neome.feature.form.presentation.components.field.FieldText
 import com.neome.feature.form.presentation.state.FieldEvent
 
@@ -30,6 +32,20 @@ fun FieldFactory(
 ) {
     when (defnComp.type) {
         EnumDefnCompType.text -> FieldText(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            formCtx = formCtx,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.email -> FieldEmail(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            formCtx = formCtx,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.paragraph -> FieldParagraph(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             formCtx = formCtx,

@@ -2,6 +2,7 @@ package com.neome.feature.form.domain.util
 
 import com.neome.api.meta.base.Types
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDecimalData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueEmailData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueNumberData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
 import com.neome.feature.utils.JsonParser
@@ -28,6 +29,14 @@ object fieldvalueResolver {
                         else -> value.toString()
                     }
                     FieldValueTextData(stringValue)
+                }
+
+                Types.EnumDefnCompType.email -> {
+                    val stringValue = when (value) {
+                        is JsonElement -> value.jsonPrimitive.content
+                        else -> value.toString()
+                    }
+                    FieldValueEmailData(stringValue)
                 }
 
                 Types.EnumDefnCompType.number -> {
@@ -80,6 +89,18 @@ object fieldvalueResolver {
                         is FieldValueTextData -> value.value
                         is JsonElement -> JsonParser.json.decodeFromJsonElement(
                             FieldValueTextData.serializer(),
+                            value
+                        ).value
+
+                        else -> null
+                    }
+                }
+
+                Types.EnumDefnCompType.email -> {
+                    when (value) {
+                        is FieldValueEmailData -> value.value
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            FieldValueEmailData.serializer(),
                             value
                         ).value
 
