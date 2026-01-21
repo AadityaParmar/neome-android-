@@ -8,6 +8,8 @@
 
 This document describes the UI structure, state handling, and interaction behavior for **SearchLocationScreen** and its child components.
 
+The screen is displayed as a **Full-screen ModalBottomSheet** (Jetpack Compose Material3).
+
 The screen supports:
 
 * A right-side **Search / Cancel (Close)** icon toggle
@@ -18,54 +20,97 @@ The screen supports:
 
 ---
 
-## 2. Screen State
+## 1.1 Full-Screen Bottom Sheet (90% height)
+
+### Description
+
+* Uses **Material3 ModalBottomSheet** composable
+* Displayed as **90% screen height** bottom sheet
+* No drag handle (dragHandle = null)
+* Can be dismissed by swiping down or tapping outside
+
+### Implementation
 
 ```kotlin
-val showSearchBar: Boolean
+ModalBottomSheet(
+    onDismissRequest = onDismiss,
+    sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+    dragHandle = null
+) {
+    RealSearchLocationComponent(
+        onCancel = onDismiss,
+        onRetryLocation = onRetryLocation,
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(0.90f)
+    )
+}
 ```
-
-### State Behavior
-
-| State   | Right Icon          | Search Bar |
-| ------- | ------------------- | ---------- |
-| `false` | Search Icon         | Hidden     |
-| `true`  | Cancel (Close) Icon | Visible    |
 
 ---
 
-## 3. Top App Bar – Right Icon Logic
+## 2. Top Header Bar
 
-### Icons Used
+### UI Layout
 
-* **Search icon** → `Icons.Default.Search`
-* **Cancel icon** → `Icons.Default.Close`
+```
+[ Cancel ]     Send location     [ ↻ ]
+```
 
-### Interaction
+### Components
 
-* On search icon click → `showSearchBar = true`
-* On cancel icon click → `showSearchBar = false`
+| Position | Element | Type | Action |
+| -------- | ------- | ---- | ------ |
+| Left | "Cancel" | TextButton | Close bottom sheet |
+| Center | "Send location" | Text (titleMedium) | Title only |
+| Right | Refresh icon | IconButton | Fetch current location |
 
-### Alignment
+### Implementation
 
-* Icon is aligned to **right side** of the AppBar
-* Same position for both icons
+```kotlin
+@Composable
+private fun TopHeaderBar(
+    onCancel: () -> Unit,
+    onRetry: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 4.dp, vertical = 8.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        TextButton(onClick = onCancel) {
+            Text(text = "Cancel")
+        }
+        Text(text = "Send location", style = MaterialTheme.typography.titleMedium)
+        IconButton(onClick = onRetry) {
+            Icon(imageVector = Icons.Default.Refresh, contentDescription = "Retry location")
+        }
+    }
+}
+```
+
+### Behavior
+
+* **Cancel button:** Closes the bottom sheet (calls `onDismiss`)
+* **Retry button:** Fetches current location (calls `onRetryLocation`)
 
 ---
 
 ## 4. Component Hierarchy
 
 ```
-SearchLocationScreen
-│
-├── TopAppBar
-│   └── RightActionIcon (Search / Cancel)
+SearchLocationScreen (ModalBottomSheet)
 │
 ├── RealSearchLocationComponent
-│   ├── SearchBarComponent (conditional)
+│   ├── TopHeaderBar (Cancel, Title, Retry)
+│   ├── SearchBarComponent (always visible)
 │   ├── GoogleMapComponent
 │   └── NearByPlacesComponent
-│       ├── SendCurrentLocationComponent (static)
-│       └── NearbyPlacesList
+│       ├── SendCurrentLocationComponent (static - always visible)
+│       └── NearbyPlacesList (search results)
 ```
 
 ---
@@ -74,7 +119,8 @@ SearchLocationScreen
 
 ### Responsibility
 
-* Controls layout of search bar, map, and nearby places
+* Controls layout of header bar, search bar, map, and nearby places
+* Receives `onCancel` and `onRetryLocation` callbacks
 
 ---
 
@@ -82,18 +128,45 @@ SearchLocationScreen
 
 ### Description
 
-* Uses **Jetpack Compose basic SearchBar**
-* Visible only when `showSearchBar == true`
+* Uses **Jetpack Compose TextField** with custom styling
+* Always visible below TopHeaderBar
 
 ### Behavior
 
 * Accepts text input
 * Emits search query events
+* Placeholder: "Search or enter an address"
 
 ### UI
 
 * Full width
-* Placed below TopAppBar
+* Placed below TopHeaderBar
+* **Padding:** 12dp horizontal, 4dp vertical around the TextField
+* **Background color:** Light grey (`Color(0xFFF1F3F4)`)
+* **Border radius:** 8dp
+
+### Styling
+
+```kotlin
+TextField(
+    value = searchQuery,
+    onValueChange = onSearchQueryChanged,
+    modifier = Modifier.fillMaxWidth(),
+    placeholder = {
+        Text(
+            text = "Search or enter an address",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    },
+    colors = TextFieldDefaults.colors(
+        focusedContainerColor = Color(0xFFF1F3F4),
+        unfocusedContainerColor = Color(0xFFF1F3F4),
+        focusedIndicatorColor = Color.Transparent,
+        unfocusedIndicatorColor = Color.Transparent
+    )
+)
+```
 
 
 ## 7. GoogleMapComponent
@@ -122,8 +195,8 @@ SearchLocationScreen
 ### UI Layout
 
 ```
-[ ● ]   Send your current location
-        Accurate to 25 meter
+[ ● ]  Send your current location
+       Accurate to 25 meter
 ```
 
 ### UI Details
@@ -132,10 +205,10 @@ SearchLocationScreen
 
     * Circular container
     * Dot icon inside
-  * icon center align to primary and secondary line
+    * Icon center aligned to primary and secondary line
 * Spacing:
 
-    * **16dp gap** between icon and text
+    * **8dp gap** between icon and text
 
 ### Text
 
@@ -156,8 +229,26 @@ SearchLocationScreen
 
 * Renders list of nearby places
 * Scrollable
+* Reduced vertical spacing between list items
 * Each item contains place name and distance (future scope)
-* right now nearby search places not fetch from google api
+* Right now nearby search places not fetch from Google API
+
+### Item Layout
+
+* **Primary text:** Place name (single line, truncate with ellipsis)
+* **Secondary text:** Address (single line only, truncate from end with ellipsis)
+* **Icon-to-text gap:** 8dp
+
+### Text Styling
+
+```kotlin
+Text(
+    text = place.address,
+    style = MaterialTheme.typography.bodySmall,
+    maxLines = 1,  // Single line only
+    overflow = TextOverflow.Ellipsis  // Truncate from end
+)
+```
 
 ---
 
@@ -177,7 +268,7 @@ When the user types in the **SearchBarComponent**, the app should perform **Plac
 4. Receive places response
 5. Update UI state
 6. Render results inside **Nearby Places List**
-7. 5 search result show from google places api response  
+7. **6 search results** shown from Google Places API response (limit to 6)  
 
 ---
 

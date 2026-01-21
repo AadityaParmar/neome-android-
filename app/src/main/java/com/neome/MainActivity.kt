@@ -70,26 +70,26 @@ fun NeomeApp() {
         }
     ) {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            when (currentDestination) {
+                AppDestinations.HOME -> ComponentShowcaseScreen(
+                    onNavigateBack = {},
+                    onNavigateToSearchLocation = { showSearchLocation = true }
+                )
+
+                AppDestinations.FORM -> {
+                    FormScreen()
+                }
+
+                else -> Greeting(
+                    currentDestination.label,
+                    modifier = Modifier.padding(innerPadding)
+                )
+            }
+
             if (showSearchLocation) {
                 SearchLocationScreen(
-                    onNavigateBack = { showSearchLocation = false }
+                    onDismiss = { showSearchLocation = false }
                 )
-            } else {
-                when (currentDestination) {
-                    AppDestinations.HOME -> ComponentShowcaseScreen(
-                        onNavigateBack = {},
-                        onNavigateToSearchLocation = { showSearchLocation = true }
-                    )
-
-                    AppDestinations.FORM -> {
-                        FormScreen()
-                    }
-
-                    else -> Greeting(
-                        currentDestination.label,
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
             }
         }
     }
