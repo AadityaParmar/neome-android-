@@ -11,6 +11,7 @@ import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.feature.form.domain.ctx.FormCtx
 import com.neome.feature.form.presentation.components.composite.FieldSection
 import com.neome.feature.form.presentation.components.composite.FieldTab
+import com.neome.feature.form.presentation.components.field.FieldDate
 import com.neome.feature.form.presentation.components.field.FieldDecimal
 import com.neome.feature.form.presentation.components.field.FieldEmail
 import com.neome.feature.form.presentation.components.field.FieldNumber
@@ -39,6 +40,13 @@ fun FieldFactory(
         )
 
         EnumDefnCompType.email -> FieldEmail(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            formCtx = formCtx,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.date -> FieldDate(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             formCtx = formCtx,
