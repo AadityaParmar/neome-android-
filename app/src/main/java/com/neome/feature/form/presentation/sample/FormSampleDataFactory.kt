@@ -175,11 +175,31 @@ object FormSampleDataFactory {
                 "map": {}
             }
         },
+        "mfd-pLm9xYz8Qa": {
+            "metaId": "mfd-pLm9xYz8Qa",
+            "name": "FieldParagraph",
+            "type": "paragraph",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
+        "mfd-nRt7uVw2Pq": {
+            "metaId": "mfd-nRt7uVw2Pq",
+            "name": "FieldDate2",
+            "type": "date",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
         "msc-iq4fe3O1IV": {
             "metaId": "msc-iq4fe3O1IV",
             "fieldIdSet": [
                 "mfd-k9fXu7XtBX",
-                "mfd-gdb26wJtRW"
+                "mfd-gdb26wJtRW",
+                "mfd-pLm9xYz8Qa",
+                "mfd-nRt7uVw2Pq"
             ],
             "flexGrow": false,
             "name": "Section2",

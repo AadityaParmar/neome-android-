@@ -1,9 +1,11 @@
 package com.neome.feature.form.domain.util
 
 import com.neome.api.meta.base.Types
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDecimalData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueEmailData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueNumberData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueParagraphData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
 import com.neome.feature.utils.JsonParser
 import kotlinx.serialization.json.JsonElement
@@ -37,6 +39,22 @@ object fieldvalueResolver {
                         else -> value.toString()
                     }
                     FieldValueEmailData(stringValue)
+                }
+
+                Types.EnumDefnCompType.date -> {
+                    val stringValue = when (value) {
+                        is JsonElement -> value.jsonPrimitive.content
+                        else -> value.toString()
+                    }
+                    FieldValueDateData(stringValue)
+                }
+
+                Types.EnumDefnCompType.paragraph -> {
+                    val stringValue = when (value) {
+                        is JsonElement -> value.jsonPrimitive.content
+                        else -> value.toString()
+                    }
+                    FieldValueParagraphData(stringValue)
                 }
 
                 Types.EnumDefnCompType.number -> {
@@ -101,6 +119,30 @@ object fieldvalueResolver {
                         is FieldValueEmailData -> value.value
                         is JsonElement -> JsonParser.json.decodeFromJsonElement(
                             FieldValueEmailData.serializer(),
+                            value
+                        ).value
+
+                        else -> null
+                    }
+                }
+
+                Types.EnumDefnCompType.date -> {
+                    when (value) {
+                        is FieldValueDateData -> value.value
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            FieldValueDateData.serializer(),
+                            value
+                        ).value
+
+                        else -> null
+                    }
+                }
+
+                Types.EnumDefnCompType.paragraph -> {
+                    when (value) {
+                        is FieldValueParagraphData -> value.value
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            FieldValueParagraphData.serializer(),
                             value
                         ).value
 

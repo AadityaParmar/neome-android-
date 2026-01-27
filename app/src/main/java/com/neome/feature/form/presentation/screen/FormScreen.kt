@@ -84,8 +84,6 @@ fun FormScreen(
                         )
                         Text(text = " Submit")
                     }
-
-
                 }
             }
         }
