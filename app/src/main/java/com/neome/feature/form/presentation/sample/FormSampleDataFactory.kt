@@ -148,6 +148,15 @@ object FormSampleDataFactory {
                 "map": {}
             }
         },
+        "mfd-dT1mE2x3Yz": {
+            "metaId": "mfd-dT1mE2x3Yz",
+            "name": "FieldDateTime",
+            "type": "dateTime",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
         "mfd-gdb26wJtRW": {
             "metaId": "mfd-gdb26wJtRW",
             "name": "FieldEmail",
@@ -197,6 +206,7 @@ object FormSampleDataFactory {
             "metaId": "msc-iq4fe3O1IV",
             "fieldIdSet": [
                 "mfd-k9fXu7XtBX",
+                "mfd-dT1mE2x3Yz",
                 "mfd-gdb26wJtRW",
                 "mfd-pLm9xYz8Qa",
                 "mfd-nRt7uVw2Pq"

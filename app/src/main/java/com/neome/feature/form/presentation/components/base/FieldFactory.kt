@@ -12,6 +12,7 @@ import com.neome.feature.form.domain.ctx.FormCtx
 import com.neome.feature.form.presentation.components.composite.FieldSection
 import com.neome.feature.form.presentation.components.composite.FieldTab
 import com.neome.feature.form.presentation.components.field.FieldDate
+import com.neome.feature.form.presentation.components.field.FieldDateTime
 import com.neome.feature.form.presentation.components.field.FieldDecimal
 import com.neome.feature.form.presentation.components.field.FieldEmail
 import com.neome.feature.form.presentation.components.field.FieldNumber
@@ -47,6 +48,13 @@ fun FieldFactory(
         )
 
         EnumDefnCompType.date -> FieldDate(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            formCtx = formCtx,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.dateTime -> FieldDateTime(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             formCtx = formCtx,
