@@ -11,7 +11,7 @@ import com.neome.feature.utils.JsonParser
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonPrimitive
 
-object fieldvalueResolver {
+object FieldValueResolver {
 
     /**
      * Converts raw primitive values to appropriate field value types based on component type.

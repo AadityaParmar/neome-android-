@@ -3,7 +3,7 @@ package com.neome.feature.form.domain.reducer
 import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
-import com.neome.feature.form.domain.util.PropertyResolver
+import com.neome.feature.form.domain.util.FieldPropertyResolver
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormState
 
@@ -56,7 +56,7 @@ object FormInitializer {
         val leafFields = compMap.filter { (_, defnComp) ->
             !isCompositeType(defnComp.type)
         }
-        val dependencyMap = PropertyResolver.buildDependencyMap(leafFields)
+        val dependencyMap = FieldPropertyResolver.buildDependencyMap(leafFields)
 
         // Create initial field states with resolved properties
         // Only create FieldState for leaf field components, not composite containers
@@ -66,7 +66,7 @@ object FormInitializer {
             }
             .mapValues { (fieldId, defnComp) ->
                 val value = initialValueMap[fieldId]
-                val fieldProperties = PropertyResolver.resolveFieldProperties(
+                val fieldProperties = FieldPropertyResolver.resolveFieldProperties(
                     defnComp = defnComp,
                     defnForm,
                     getFieldValue = { id -> initialValueMap[id] }

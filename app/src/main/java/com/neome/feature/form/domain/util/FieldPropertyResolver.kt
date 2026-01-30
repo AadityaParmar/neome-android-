@@ -19,7 +19,7 @@ import kotlinx.serialization.json.contentOrNull
  * 2. Variable: defnComp.propertyVar (e.g., defnComp.placeHolderVar) -> resolveArgValue()
  * 3. Field reference: defnComp.propertyFieldId (e.g., defnComp.placeHolderFieldId) -> get value from another field
  */
-object PropertyResolver {
+object FieldPropertyResolver {
 
     /**
      * Resolve FieldProperties from DefnComp.
@@ -142,7 +142,7 @@ object PropertyResolver {
                 val value = getFieldValue(fieldId) ?: return null
                 val compType = defnForm.compMap[fieldId]?.type ?: return null
 
-                val fieldValue = fieldvalueResolver.fnFieldValueToRawValue(compType, value)
+                val fieldValue = FieldValueResolver.fnFieldValueToRawValue(compType, value)
                 if (fieldValue != null && fieldValue is String) {
                     return fieldValue
                 }
@@ -176,7 +176,7 @@ object PropertyResolver {
                 val value = getFieldValue(fieldId) ?: return null
                 val compType = defnForm.compMap[fieldId]?.type ?: return null
 
-                val fieldValue = fieldvalueResolver.fnFieldValueToRawValue(compType, value)
+                val fieldValue = FieldValueResolver.fnFieldValueToRawValue(compType, value)
                 if (fieldValue != null && fieldValue is String) {
                     return fieldValue
                 }

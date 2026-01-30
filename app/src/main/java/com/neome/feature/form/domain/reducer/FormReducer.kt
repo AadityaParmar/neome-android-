@@ -3,7 +3,7 @@ package com.neome.feature.form.domain.reducer
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.dto.DefnComp
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
-import com.neome.feature.form.domain.util.PropertyResolver
+import com.neome.feature.form.domain.util.FieldPropertyResolver
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormEvent
@@ -161,7 +161,7 @@ object FormReducer {
         val currentFieldState = state.fieldStates[event.fieldId]
             ?: return FormReducerResult(state)
 
-        val newProperties = PropertyResolver.resolveFieldProperties(
+        val newProperties = FieldPropertyResolver.resolveFieldProperties(
             defnComp = defnComp,
             defnForm,
             getFieldValue = { id -> state.getValue(id) }
@@ -371,7 +371,7 @@ object FormReducer {
             val defnComp = defnForm.compMap[dependentId] ?: return@mapNotNull null
             val currentState = fieldStates[dependentId] ?: return@mapNotNull null
 
-            val newProperties = PropertyResolver.resolveFieldProperties(
+            val newProperties = FieldPropertyResolver.resolveFieldProperties(
                 defnComp = defnComp,
                 defnForm,
                 getFieldValue = { id -> fieldStates[id]?.value }
