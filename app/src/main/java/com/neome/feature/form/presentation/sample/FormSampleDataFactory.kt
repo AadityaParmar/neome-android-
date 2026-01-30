@@ -157,10 +157,58 @@ object FormSampleDataFactory {
                 "map": {}
             }
         },
+        "mfd-rG5nD8a4Bc": {
+            "metaId": "mfd-rG5nD8a4Bc",
+            "name": "FieldDateRange",
+            "type": "dateRange",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
+        "mfd-tR9mX7w5Kp": {
+            "metaId": "mfd-tR9mX7w5Kp",
+            "name": "FieldDateTimeRange",
+            "type": "dateTimeRange",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
         "mfd-gdb26wJtRW": {
             "metaId": "mfd-gdb26wJtRW",
             "name": "FieldEmail",
             "type": "email",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
+        "mfd-hN4xYz6Rp": {
+            "metaId": "mfd-hN4xYz6Rp",
+            "name": "FieldHandle",
+            "label": "Email or Mobile",
+            "type": "handle",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
+        "mfd-lK7xYz2Wp": {
+            "metaId": "mfd-lK7xYz2Wp",
+            "name": "FieldHyperlink",
+            "label": "Website URL",
+            "type": "hyperlink",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
+        "mfd-mB8xYz3Np": {
+            "metaId": "mfd-mB8xYz3Np",
+            "name": "FieldMobile",
+            "label": "Mobile Number",
+            "type": "mobileNumber",
             "permissionMatrix": {
                 "keys": [],
                 "map": {}
@@ -202,14 +250,55 @@ object FormSampleDataFactory {
                 "map": {}
             }
         },
+        "mfd-iMg8xYz5Pq": {
+            "metaId": "mfd-iMg8xYz5Pq",
+            "name": "FieldImage",
+            "label": "Profile Picture",
+            "type": "image",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
+        "mfd-dC9xYz4Qp": {
+            "metaId": "mfd-dC9xYz4Qp",
+            "name": "FieldDocument",
+            "label": "Upload Document",
+            "type": "document",
+            "maxSize": 10,
+            "showSize": true,
+            "fileTypeSet": ["any"],
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
+        "mfd-tM3xYz9Wq": {
+            "metaId": "mfd-tM3xYz9Wq",
+            "name": "FieldTime",
+            "label": "Appointment Time",
+            "type": "time",
+            "permissionMatrix": {
+                "keys": [],
+                "map": {}
+            }
+        },
         "msc-iq4fe3O1IV": {
             "metaId": "msc-iq4fe3O1IV",
             "fieldIdSet": [
                 "mfd-k9fXu7XtBX",
                 "mfd-dT1mE2x3Yz",
+                "mfd-tM3xYz9Wq",
+                "mfd-rG5nD8a4Bc",
+                "mfd-tR9mX7w5Kp",
                 "mfd-gdb26wJtRW",
+                "mfd-hN4xYz6Rp",
+                "mfd-lK7xYz2Wp",
+                "mfd-mB8xYz3Np",
                 "mfd-pLm9xYz8Qa",
-                "mfd-nRt7uVw2Pq"
+                "mfd-nRt7uVw2Pq",
+                "mfd-iMg8xYz5Pq",
+                "mfd-dC9xYz4Qp"
             ],
             "flexGrow": false,
             "name": "Section2",

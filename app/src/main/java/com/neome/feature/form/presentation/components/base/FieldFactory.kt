@@ -12,9 +12,17 @@ import com.neome.feature.form.domain.ctx.FormCtx
 import com.neome.feature.form.presentation.components.composite.FieldSection
 import com.neome.feature.form.presentation.components.composite.FieldTab
 import com.neome.feature.form.presentation.components.field.FieldDate
+import com.neome.feature.form.presentation.components.field.FieldDateRange
 import com.neome.feature.form.presentation.components.field.FieldDateTime
+import com.neome.feature.form.presentation.components.field.FieldDateTimeRange
 import com.neome.feature.form.presentation.components.field.FieldDecimal
+import com.neome.feature.form.presentation.components.field.FieldDocument
+import com.neome.feature.form.presentation.components.field.FieldTime
 import com.neome.feature.form.presentation.components.field.FieldEmail
+import com.neome.feature.form.presentation.components.field.FieldHandle
+import com.neome.feature.form.presentation.components.field.FieldHyperlink
+import com.neome.feature.form.presentation.components.field.FieldImage
+import com.neome.feature.form.presentation.components.field.FieldMobile
 import com.neome.feature.form.presentation.components.field.FieldNumber
 import com.neome.feature.form.presentation.components.field.FieldParagraph
 import com.neome.feature.form.presentation.components.field.FieldText
@@ -47,6 +55,27 @@ fun FieldFactory(
             modifier = modifier
         )
 
+        EnumDefnCompType.handle -> FieldHandle(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            formCtx = formCtx,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.hyperlink -> FieldHyperlink(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            formCtx = formCtx,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.mobileNumber -> FieldMobile(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            formCtx = formCtx,
+            modifier = modifier
+        )
+
         EnumDefnCompType.date -> FieldDate(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
@@ -54,7 +83,42 @@ fun FieldFactory(
             modifier = modifier
         )
 
+        EnumDefnCompType.image -> FieldImage(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            formCtx = formCtx,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.document -> FieldDocument(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            formCtx = formCtx,
+            modifier = modifier
+        )
+
         EnumDefnCompType.dateTime -> FieldDateTime(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            formCtx = formCtx,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.dateRange -> FieldDateRange(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            formCtx = formCtx,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.dateTimeRange -> FieldDateTimeRange(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            formCtx = formCtx,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.time -> FieldTime(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             formCtx = formCtx,
