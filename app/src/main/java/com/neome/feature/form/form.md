@@ -2,8 +2,8 @@
 
 ## Metadata
 
-- **Version**: 1.0.0
-- **Last Updated**: 2026-01-30
+- **Version**: 1.1.0
+- **Last Updated**: 2026-02-03
 - **Scope**: Android Form Component Architecture
 - **Path**: `app/src/main/java/com/neome/feature/form/`
 - **Update Trigger**: Any modification to form component files must update this skill
@@ -28,7 +28,7 @@ using skill : defnForm do [instruction]
 
 ## Architecture Overview
 
-### Pattern: MVI + UDF (Unidirectional Data Flow)
+### Pattern: MVI + UDF (Unidirectional Data Flow) + CompositionLocal
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -39,27 +39,27 @@ using skill : defnForm do [instruction]
 │   │   Parent     │◄──────────────────│    Form      │                        │
 │   │  (Screen/VM) │                   │  Component   │                        │
 │   └──────┬───────┘                   └──────┬───────┘                        │
-│          │                                  │                                │
-│          │ FormRef API                      │ FormEvent                      │
-│          │ (imperative)                     │ (reactive)                     │
-│          ▼                                  ▼                                │
+│          │         FormRef (MutableState)     │ LocalFormCtx                   │
+│          │         (imperative API)           │ (stable, via                   │
+│          │                                    │  CompositionLocal)              │
+│          ▼                                    ▼                                │
 │   ┌──────────────┐                   ┌──────────────┐                        │
-│   │   FormRef    │                   │ FormReducer  │                        │
-│   │   (read/write│                   │   (pure fn)  │                        │
-│   │   operations)│                   └──────┬───────┘                        │
-│   └──────────────┘                          │                                │
-│          ▲                                  │                                │
-│          │                                  ▼                                │
+│   │   FormRef    │◄─────────────────│   FormCtx    │                        │
+│   │   (read/write│                   │  (stable     │                        │
+│   │   operations)│                   │   pointer)     │                        │
+│   └──────────────┘                   └──────┬───────┘                        │
+│          ▲                          │                                        │
+│          │                          │ reads from                               │
+│          │                          ▼                                        │
 │   ┌──────┴───────┐                   ┌──────────────┐                        │
-│   │   FormCtx    │◄──────────────────│  FormState   │                        │
-│   │ (field access│                   │ (single src) │                        │
-│   │  & triggering)                   └──────────────┘                        │
-│   └──────────────┘                                                           │
+│   │  FormReducer │                   │  FormState   │                        │
+│   │   (pure fn)  │◄──────────────────│ (single src) │                        │
+│   └──────────────┘                   └──────────────┘                        │
 │          ▲                                                                   │
-│          │ FieldEvent                                                        │
+│          │ FormEvent                                                        │
 │   ┌──────┴───────┐                                                           │
-│   │ Field Comps  │                                                           │
-│   │ (Text/Number/│                                                           │
+│   │ Field Comps  │  - uses LocalFormCtx.current                              │
+│   │ (Text/Number/│  - uses rememberFieldController()                        │
 │   │  Date/etc.)  │                                                           │
 │   └──────────────┘                                                           │
 │                                                                              │
@@ -72,7 +72,8 @@ using skill : defnForm do [instruction]
 2. **Pure Reducer**: `FormReducer.reduce()` is side-effect free
 3. **Reactive Updates**: StateFlow for UI observation
 4. **Imperative API**: `FormRef` for parent control
-5. **Context API**: `FormCtx` for field-to-field communication
+5. **Stable Context**: `FormCtx` is a stable pointer (never recreated after Form init)
+6. **CompositionLocal**: `LocalFormCtx` provides context without prop drilling
 
 ---
 
@@ -262,9 +263,23 @@ data class FieldController<T>(
 @Composable
 inline fun <reified T> rememberFieldController(
     defnComp: DefnCompSeal,
-    onFieldEvent: (FieldEvent) -> Unit,
-    formCtx: FormCtx
+    onFieldEvent: (FieldEvent) -> Unit
 ): FieldController<T>
+```
+
+### LocalFormCtx (CompositionLocal for Form Context)
+
+```kotlin
+val LocalFormCtx = staticCompositionLocalOf<FormCtx> {
+    error("FormCtx not provided. Ensure Form composable is in the composition tree.")
+}
+```
+
+**Usage:**
+```kotlin
+// Inside any composable within Form hierarchy:
+val formCtx = LocalFormCtx.current
+val fieldState = formCtx.getFieldState(fieldId)
 ```
 
 ---
@@ -272,20 +287,20 @@ inline fun <reified T> rememberFieldController(
 ## Component Hierarchy
 
 ```
-Form (root Composable)
+Form (root Composable - provides LocalFormCtx)
 ├── FormContent
 │   └── FieldFactory (root component - typically Tab)
-│       ├── FieldTab (composite)
+│       ├── FieldTab (composite) - uses LocalFormCtx.current
 │       │   └── FieldFactory (per tab)
-│       │       └── FieldSection (composite)
+│       │       └── FieldSection (composite) - uses LocalFormCtx.current
 │       │           └── FieldFactory (per child)
-│       │               ├── FieldText (leaf)
-│       │               ├── FieldNumber (leaf)
-│       │               ├── FieldEmail (leaf)
-│       │               ├── FieldDate (leaf)
-│       │               ├── FieldDateTime (leaf)
-│       │               ├── FieldDecimal (leaf)
-│       │               └── FieldParagraph (leaf)
+│       │               ├── FieldText (leaf) - uses rememberFieldController()
+│       │               ├── FieldNumber (leaf) - uses rememberFieldController()
+│       │               ├── FieldEmail (leaf) - uses rememberFieldController()
+│       │               ├── FieldDate (leaf) - uses rememberFieldController()
+│       │               ├── FieldDateTime (leaf) - uses rememberFieldController()
+│       │               ├── FieldDecimal (leaf) - uses rememberFieldController()
+│       │               └── FieldParagraph (leaf) - uses rememberFieldController()
 │       └── FieldSection (composite - direct child of tab)
 │           └── [same as above]
 ```
@@ -585,6 +600,16 @@ val formulaValue = defnComp.formula?.let { formula ->
 ---
 
 ## Changelog
+
+### v1.1.0 (2026-02-03)
+
+- **BREAKING**: FormCtx now provided via `LocalFormCtx` CompositionLocal instead of parameter passing
+- **BREAKING**: `rememberFieldController()` no longer takes `formCtx` parameter
+- **BREAKING**: All field components no longer take `formCtx` parameter
+- **Feature**: FormCtx is now a stable pointer (never recreated after Form initialization)
+- **Feature**: FormCtx accessible from anywhere via `LocalFormCtx.current`
+- **Internal**: Form.kt uses `rememberUpdatedState` pattern for stable dispatchEvent
+- **Internal**: FieldController now reads formCtx from CompositionLocal internally
 
 ### v1.0.0 (2026-01-30)
 
