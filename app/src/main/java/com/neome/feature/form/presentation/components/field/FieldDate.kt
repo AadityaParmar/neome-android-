@@ -26,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateData
-import com.neome.feature.form.domain.ctx.FormCtx
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldEvent
@@ -39,13 +38,11 @@ import java.util.Locale
 fun FieldDate(
     defnComp: DefnCompSeal,
     onFieldEvent: (FieldEvent) -> Unit,
-    formCtx: FormCtx,
     modifier: Modifier = Modifier
 ) {
     val fieldController = rememberFieldController<FieldValueDateData>(
         defnComp = defnComp,
-        onFieldEvent = onFieldEvent,
-        formCtx = formCtx
+        onFieldEvent = onFieldEvent
     )
 
     if (fieldController.fieldId == null) return

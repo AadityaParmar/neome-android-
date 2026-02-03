@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTimeData
-import com.neome.feature.form.domain.ctx.FormCtx
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldEvent
@@ -42,6 +41,9 @@ import java.util.Locale
 
 /**
  * Time field component for form.
+ *
+ * FormCtx is accessed via LocalFormCtx.current inside rememberFieldController, so this composable
+ * must be called inside a Form composable tree.
  *
  * Behaves exactly like FieldDate but allows time selection only.
  * Opens TimePickerDialog when clicking on the text field or time icon.
@@ -60,7 +62,6 @@ import java.util.Locale
  *
  * @param defnComp Field definition containing field configuration (label, placeholder, helperText, enabled, readOnly)
  * @param onFieldEvent Callback to emit field events to the form
- * @param formCtx Form context for accessing field state and other field values
  * @param modifier Modifier for customization
  */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -68,14 +69,12 @@ import java.util.Locale
 fun FieldTime(
     defnComp: DefnCompSeal,
     onFieldEvent: (FieldEvent) -> Unit,
-    formCtx: FormCtx,
     modifier: Modifier = Modifier
 ) {
     // ========== REUSED FROM FieldDate: Field Controller Setup ==========
     val fieldController = rememberFieldController<FieldValueTimeData>(
         defnComp = defnComp,
-        onFieldEvent = onFieldEvent,
-        formCtx = formCtx
+        onFieldEvent = onFieldEvent
     )
 
     if (fieldController.fieldId == null) return

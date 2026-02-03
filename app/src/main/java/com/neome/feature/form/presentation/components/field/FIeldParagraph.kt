@@ -14,7 +14,6 @@ import com.neome.api.meta.base.dto.FieldValueParagraph
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueParagraphData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
-import com.neome.feature.form.domain.ctx.FormCtx
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldEvent
@@ -22,25 +21,25 @@ import com.neome.feature.form.presentation.state.FieldEvent
 /**
  * Simple text field component for form.
  *
+ * FormCtx is accessed via LocalFormCtx.current inside rememberFieldController, so this composable
+ * must be called inside a Form composable tree.
+ *
  * Basic text box that uses standardized field interface with fieldValue, error, fieldProperties, and onChange.
  *
  * @param defnComp Field definition containing field configuration
  * @param onFieldEvent Callback to emit field events to the form
- * @param formCtx Form context for accessing field state and other field values
  * @param modifier Modifier for customization
  */
 @Composable
 fun FieldParagraph(
     defnComp: DefnCompSeal,
     onFieldEvent: (FieldEvent) -> Unit,
-    formCtx: FormCtx,
     modifier: Modifier = Modifier
 ) {
     // Use field controller composable with FieldValueTextData type
     val fieldController = rememberFieldController<FieldValueParagraphData>(
         defnComp = defnComp,
-        onFieldEvent = onFieldEvent,
-        formCtx = formCtx
+        onFieldEvent = onFieldEvent
     )
 
     // Early return if field setup is invalid

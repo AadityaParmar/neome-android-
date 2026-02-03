@@ -31,7 +31,6 @@ import com.neome.core.common.serializer.api.meta.base.dto.FieldValueImageData
 import com.neome.feature.filepicker.domain.model.FilePickerMode
 import com.neome.feature.filepicker.domain.model.FilePickerResult
 import com.neome.feature.filepicker.presentation.rememberFilePicker
-import com.neome.feature.form.domain.ctx.FormCtx
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldEvent
@@ -49,6 +48,9 @@ private const val BYTES_PER_MEGABYTE = 1024 * 1024L
 /**
  * Image field component for form.
  *
+ * FormCtx is accessed via LocalFormCtx.current inside rememberFieldController, so this composable
+ * must be called inside a Form composable tree.
+ *
  * A specialized field that allows users to select images from their device.
  * Displays the selected image file name and provides preview and clear actions.
  *
@@ -62,21 +64,18 @@ private const val BYTES_PER_MEGABYTE = 1024 * 1024L
  *
  * @param defnComp Field definition containing field configuration
  * @param onFieldEvent Callback to emit field events to the form
- * @param formCtx Form context for accessing field state and other field values
  * @param modifier Modifier for customization
  */
 @Composable
 fun FieldImage(
     defnComp: DefnCompSeal,
     onFieldEvent: (FieldEvent) -> Unit,
-    formCtx: FormCtx,
     modifier: Modifier = Modifier
 ) {
     // Field controller setup
     val fieldController = rememberFieldController<FieldValueImageData>(
         defnComp = defnComp,
-        onFieldEvent = onFieldEvent,
-        formCtx = formCtx
+        onFieldEvent = onFieldEvent
     )
 
     if (fieldController.fieldId == null) return

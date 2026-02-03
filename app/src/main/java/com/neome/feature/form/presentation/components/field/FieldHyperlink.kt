@@ -21,7 +21,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueHyperlinkData
-import com.neome.feature.form.domain.ctx.FormCtx
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldEvent
@@ -76,6 +75,9 @@ private fun normalizeUrl(url: String): String {
 /**
  * Hyperlink field component for form.
  *
+ * FormCtx is accessed via LocalFormCtx.current inside rememberFieldController, so this composable
+ * must be called inside a Form composable tree.
+ *
  * A specialized text field that accepts only valid URLs.
  * Behaves exactly like FieldText but with URL validation and a clickable link icon.
  *
@@ -100,22 +102,19 @@ private fun normalizeUrl(url: String): String {
  *
  * @param defnComp Field definition containing field configuration
  * @param onFieldEvent Callback to emit field events to the form
- * @param formCtx Form context for accessing field state and other field values
  * @param modifier Modifier for customization
  */
 @Composable
 fun FieldHyperlink(
     defnComp: DefnCompSeal,
     onFieldEvent: (FieldEvent) -> Unit,
-    formCtx: FormCtx,
     modifier: Modifier = Modifier
 ) {
     // ========== REUSED FROM FieldText: Field Controller Setup ==========
     // Use field controller composable with FieldValueHyperlinkData type
     val fieldController = rememberFieldController<FieldValueHyperlinkData>(
         defnComp = defnComp,
-        onFieldEvent = onFieldEvent,
-        formCtx = formCtx
+        onFieldEvent = onFieldEvent
     )
 
     // ========== REUSED FROM FieldText: Early Returns ==========

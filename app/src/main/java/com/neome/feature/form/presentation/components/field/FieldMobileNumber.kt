@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueMobileData
-import com.neome.feature.form.domain.ctx.FormCtx
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldEvent
@@ -281,6 +280,9 @@ private fun combineValue(countryCode: String, mobileNumber: String): String {
 /**
  * Mobile field component for form.
  *
+ * FormCtx is accessed via LocalFormCtx.current inside rememberFieldController, so this composable
+ * must be called inside a Form composable tree.
+ *
  * A composite field with a country code dropdown and mobile number input.
  * Looks like a single cohesive field with two coordinated parts.
  *
@@ -304,7 +306,6 @@ private fun combineValue(countryCode: String, mobileNumber: String): String {
  *
  * @param defnComp Field definition containing field configuration
  * @param onFieldEvent Callback to emit field events to the form
- * @param formCtx Form context for accessing field state and other field values
  * @param modifier Modifier for customization
  */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -312,14 +313,12 @@ private fun combineValue(countryCode: String, mobileNumber: String): String {
 fun FieldMobile(
     defnComp: DefnCompSeal,
     onFieldEvent: (FieldEvent) -> Unit,
-    formCtx: FormCtx,
     modifier: Modifier = Modifier
 ) {
     // ========== REUSED FROM FieldText: Field Controller Setup ==========
     val fieldController = rememberFieldController<FieldValueMobileData>(
         defnComp = defnComp,
-        onFieldEvent = onFieldEvent,
-        formCtx = formCtx
+        onFieldEvent = onFieldEvent
     )
 
     // ========== REUSED FROM FieldText: Early Returns ==========

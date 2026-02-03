@@ -43,7 +43,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateTimeRangeData
-import com.neome.feature.form.domain.ctx.FormCtx
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldEvent
@@ -54,6 +53,9 @@ import java.util.Locale
 
 /**
  * DateTime Range field component for form.
+ *
+ * FormCtx is accessed via LocalFormCtx.current inside rememberFieldController, so this composable
+ * must be called inside a Form composable tree.
  *
  * Renders two DateTime inputs (From/To) as a single logical field.
  * The "To" datetime is constrained to be on or after the "From" datetime.
@@ -75,7 +77,6 @@ import java.util.Locale
  *
  * @param defnComp Field definition containing field configuration
  * @param onFieldEvent Callback to emit field events to the form
- * @param formCtx Form context for accessing field state and other field values
  * @param modifier Modifier for customization
  */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -83,14 +84,12 @@ import java.util.Locale
 fun FieldDateTimeRange(
     defnComp: DefnCompSeal,
     onFieldEvent: (FieldEvent) -> Unit,
-    formCtx: FormCtx,
     modifier: Modifier = Modifier
 ) {
     // ========== REUSED FROM FieldDate: Field Controller Setup ==========
     val fieldController = rememberFieldController<FieldValueDateTimeRangeData>(
         defnComp = defnComp,
-        onFieldEvent = onFieldEvent,
-        formCtx = formCtx
+        onFieldEvent = onFieldEvent
     )
 
     if (fieldController.fieldId == null) return

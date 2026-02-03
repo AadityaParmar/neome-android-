@@ -14,7 +14,7 @@ import com.neome.api.meta.base.Types.EnumDefnThemeDirection
 import com.neome.api.meta.base.dto.DefnSection
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
-import com.neome.feature.form.domain.ctx.FormCtx
+import com.neome.feature.form.domain.ctx.LocalFormCtx
 import com.neome.feature.form.presentation.components.base.FieldFactory
 import com.neome.feature.form.presentation.state.FieldEvent
 
@@ -30,9 +30,11 @@ import com.neome.feature.form.presentation.state.FieldEvent
  * - Different visual variants
  * - Child field rendering
  *
+ * FormCtx is accessed via LocalFormCtx.current, so this composable must be called
+ * inside a Form composable tree.
+ *
  * @param defnComp Section definition containing section configuration
  * @param onFieldEvent Callback to emit field events to the form
- * @param formCtx Form context for accessing form state and other fields
  * @param modifier Modifier for customization
  */
 @Composable
@@ -40,10 +42,12 @@ fun FieldSection(
     defnComp: DefnCompSeal,
     defnForm: DefnFormData,
     onFieldEvent: (FieldEvent) -> Unit,
-    formCtx: FormCtx,
     modifier: Modifier = Modifier
 ) {
     val defnSection = defnComp as? DefnSection ?: return
+
+    // Get form context
+    val formCtx = LocalFormCtx.current
 
     // Get field state to access computed properties
     val fieldId = defnSection.metaId
@@ -73,7 +77,6 @@ fun FieldSection(
                         RenderChildField(
                             fieldId = fieldId,
                             defnForm = defnForm,
-                            formCtx = formCtx,
                             onFieldEvent = onFieldEvent,
                             modifier = Modifier.weight(1f)
                         )
@@ -89,7 +92,6 @@ fun FieldSection(
                         RenderChildField(
                             fieldId = fieldId,
                             defnForm = defnForm,
-                            formCtx = formCtx,
                             onFieldEvent = onFieldEvent
                         )
                     }
@@ -112,7 +114,6 @@ fun FieldSection(
 private fun RenderChildField(
     fieldId: com.neome.api.meta.base.Types.MetaIdField,
     defnForm: DefnFormData,
-    formCtx: FormCtx,
     onFieldEvent: (FieldEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -121,7 +122,6 @@ private fun RenderChildField(
     FieldFactory(
         defnComp = childDefnComp,
         defnForm = defnForm,
-        formCtx = formCtx,
         onFieldEvent = onFieldEvent,
         modifier = modifier
     )

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -14,13 +15,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
-import com.neome.feature.form.domain.ctx.FormCtx
 import com.neome.feature.form.domain.ctx.FormCtxImpl
+import com.neome.feature.form.domain.ctx.LocalFormCtx
 import com.neome.feature.form.domain.reducer.FormInitializer
 import com.neome.feature.form.domain.reducer.FormReducer
 import com.neome.feature.form.domain.ref.FormRef
@@ -62,20 +64,24 @@ fun Form(
     val formStateFlow = remember { MutableStateFlow(FormState()) }
     val formState by formStateFlow.collectAsState()
 
-    // Event dispatcher using reducer
-    val dispatchEvent: (FormEvent) -> Unit = remember(defnForm, onIntent) {
+    // Stable references to dependencies that might change
+    val currentOnIntent by rememberUpdatedState(onIntent)
+    val currentDefnForm by rememberUpdatedState(defnForm)
+
+    // Stable event dispatcher - created once but always uses latest dependencies
+    val dispatchEvent: (FormEvent) -> Unit = remember {
         { event ->
             formStateFlow.update { currentState ->
-                val result = FormReducer.reduce(currentState, event, defnForm)
+                val result = FormReducer.reduce(currentState, event, currentDefnForm)
                 // Emit intent if present
-                result.intent?.let { onIntent(it) }
+                result.intent?.let { currentOnIntent(it) }
                 result.state
             }
         }
     }
 
-    // Create FormRef and FormCtx
-    val formRefImpl = remember(formStateFlow, dispatchEvent, coroutineScope) {
+    // Create STABLE FormRef - never recreated, always uses same stateFlow
+    val formRefImpl = remember {
         FormRefImpl(
             formStateFlow = formStateFlow.asStateFlow(),
             dispatchEvent = dispatchEvent,
@@ -83,7 +89,8 @@ fun Form(
         )
     }
 
-    val formCtx = remember(formStateFlow, dispatchEvent, coroutineScope) {
+    // Create STABLE FormCtx - never recreated, always uses same stateFlow
+    val formCtx = remember {
         FormCtxImpl(
             formStateFlow = formStateFlow.asStateFlow(),
             dispatchEvent = dispatchEvent,
@@ -109,35 +116,36 @@ fun Form(
         formStateFlow.value = initialState
     }
 
-    // Render form content
-    FormContent(
-        state = formState,
-        defnForm = defnForm,
-        onFieldEvent = remember(dispatchEvent) {
-            { fieldEvent ->
-                when (fieldEvent) {
-                    is FieldEvent.ValueChanged -> {
-                        dispatchEvent(
-                            FormEvent.FieldValueChanged(
-                                fieldId = fieldEvent.fieldId,
-                                value = fieldEvent.value
+    // Provide FormCtx to nested composables via CompositionLocal
+    CompositionLocalProvider(LocalFormCtx provides formCtx) {
+        FormContent(
+            state = formState,
+            defnForm = defnForm,
+            onFieldEvent = remember {
+                { fieldEvent ->
+                    when (fieldEvent) {
+                        is FieldEvent.ValueChanged -> {
+                            dispatchEvent(
+                                FormEvent.FieldValueChanged(
+                                    fieldId = fieldEvent.fieldId,
+                                    value = fieldEvent.value
+                                )
                             )
-                        )
-                    }
+                        }
 
-                    is FieldEvent.Focused -> {
-                        dispatchEvent(FormEvent.FieldFocused(fieldEvent.fieldId))
-                    }
+                        is FieldEvent.Focused -> {
+                            dispatchEvent(FormEvent.FieldFocused(fieldEvent.fieldId))
+                        }
 
-                    is FieldEvent.Blurred -> {
-                        dispatchEvent(FormEvent.FieldBlurred(fieldEvent.fieldId))
+                        is FieldEvent.Blurred -> {
+                            dispatchEvent(FormEvent.FieldBlurred(fieldEvent.fieldId))
+                        }
                     }
                 }
-            }
-        },
-        formCtx = formCtx,
-        modifier = modifier
-    )
+            },
+            modifier = modifier
+        )
+    }
 }
 
 /**
@@ -153,7 +161,6 @@ fun Form(
 private fun FormContent(
     state: FormState,
     defnForm: DefnFormData,
-    formCtx: FormCtx,
     onFieldEvent: (FieldEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -190,7 +197,6 @@ private fun FormContent(
     FieldFactory(
         defnComp = rootComponent,
         defnForm = defnForm,
-        formCtx = formCtx,
         onFieldEvent = onFieldEvent,
         modifier = modifier.fillMaxWidth()
     )

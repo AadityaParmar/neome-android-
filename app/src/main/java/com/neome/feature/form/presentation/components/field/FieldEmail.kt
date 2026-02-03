@@ -14,7 +14,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueEmailData
-import com.neome.feature.form.domain.ctx.FormCtx
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldEvent
@@ -25,23 +24,23 @@ import com.neome.feature.form.presentation.state.FieldEvent
  * Email input field that uses standardized field interface with fieldValue, error, fieldProperties, and onChange.
  * Configured with email keyboard type and basic email validation.
  *
+ * FormCtx is accessed via LocalFormCtx.current inside rememberFieldController,
+ * so this composable must be called inside a Form composable tree.
+ *
  * @param defnComp Field definition containing field configuration
  * @param onFieldEvent Callback to emit field events to the form
- * @param formCtx Form context for accessing field state and other field values
  * @param modifier Modifier for customization
  */
 @Composable
 fun FieldEmail(
     defnComp: DefnCompSeal,
     onFieldEvent: (FieldEvent) -> Unit,
-    formCtx: FormCtx,
     modifier: Modifier = Modifier
 ) {
     // Use field controller composable with FieldValueEmailData type
     val fieldController = rememberFieldController<FieldValueEmailData>(
         defnComp = defnComp,
-        onFieldEvent = onFieldEvent,
-        formCtx = formCtx
+        onFieldEvent = onFieldEvent
     )
 
     // Early return if field setup is invalid

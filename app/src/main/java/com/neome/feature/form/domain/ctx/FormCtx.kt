@@ -1,5 +1,6 @@
 package com.neome.feature.form.domain.ctx
 
+import androidx.compose.runtime.staticCompositionLocalOf
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.feature.form.presentation.state.FieldError
@@ -111,4 +112,18 @@ interface FormCtx {
      * @return StateFlow of FormState
      */
     fun watchFormState(): StateFlow<FormState>
+}
+
+/**
+ * CompositionLocal to provide FormCtx to nested composables.
+ * FormCtx is a stable pointer that never changes after initialization.
+ *
+ * Usage:
+ * ```kotlin
+ * val formCtx = LocalFormCtx.current
+ * val fieldState = formCtx.getFieldState(fieldId)
+ * ```
+ */
+val LocalFormCtx = staticCompositionLocalOf<FormCtx> {
+    error("FormCtx not provided. Ensure Form composable is in the composition tree.")
 }

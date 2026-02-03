@@ -20,7 +20,7 @@ import com.neome.api.meta.base.Types.MetaIdComposite
 import com.neome.api.meta.base.dto.DefnTab
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
-import com.neome.feature.form.domain.ctx.FormCtx
+import com.neome.feature.form.domain.ctx.LocalFormCtx
 import com.neome.feature.form.presentation.components.base.FieldFactory
 import com.neome.feature.form.presentation.state.FieldEvent
 import com.neome.feature.form.presentation.state.FormState
@@ -35,9 +35,11 @@ import com.neome.feature.form.presentation.state.FormState
  * - Multiple tabs with scrollable tab row
  * - Child component rendering in tab content
  *
+ * FormCtx is accessed via LocalFormCtx.current, so this composable must be called
+ * inside a Form composable tree.
+ *
  * @param defnComp Tab definition containing tab configuration
  * @param onFieldEvent Callback to emit field events to the form
- * @param formCtx Form context for accessing form state and other fields
  * @param modifier Modifier for customization
  */
 @Composable
@@ -45,10 +47,12 @@ fun FieldTab(
     defnComp: DefnCompSeal,
     defnForm: DefnFormData,
     onFieldEvent: (FieldEvent) -> Unit,
-    formCtx: FormCtx,
     modifier: Modifier = Modifier
 ) {
     val defnTab = defnComp as? DefnTab ?: return
+
+    // Get form context
+    val formCtx = LocalFormCtx.current
 
     val tabIdSet = defnTab.tabIdSet ?: emptyList()
 
@@ -93,7 +97,6 @@ fun FieldTab(
                     tabId = selectedTabId,
                     formState = formState,
                     defnForm = defnForm,
-                    formCtx = formCtx,
                     onFieldEvent = onFieldEvent
                 )
             }
@@ -110,7 +113,6 @@ private fun RenderTabContent(
     tabId: MetaIdComposite,
     formState: FormState,
     defnForm: DefnFormData,
-    formCtx: FormCtx,
     onFieldEvent: (FieldEvent) -> Unit
 ) {
     val tabComponent = defnForm.compMap[tabId]
@@ -121,7 +123,6 @@ private fun RenderTabContent(
         FieldFactory(
             defnComp = tabComponent,
             defnForm = defnForm,
-            formCtx = formCtx,
             onFieldEvent = onFieldEvent
         )
     }

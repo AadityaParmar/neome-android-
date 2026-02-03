@@ -6,6 +6,7 @@ import androidx.compose.runtime.remember
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.feature.form.domain.ctx.FormCtx
+import com.neome.feature.form.domain.ctx.LocalFormCtx
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldEvent
 import com.neome.feature.form.presentation.state.FieldProperties
@@ -93,18 +94,17 @@ data class FieldController<T>(
  * @param T The type of field value data (e.g., FieldValueTextData, FieldValueNumberData)
  * @param defnComp Field definition containing field configuration
  * @param onFieldEvent Callback to emit field events to the form
- * @param formCtx Form context for accessing field state and other field values
  * @return FieldController instance with stable reference across recompositions
  */
 @Composable
 inline fun <reified T> rememberFieldController(
     defnComp: DefnCompSeal,
-    noinline onFieldEvent: (FieldEvent) -> Unit,
-    formCtx: FormCtx
+    noinline onFieldEvent: (FieldEvent) -> Unit
 ): FieldController<T> {
+    val formCtx = LocalFormCtx.current
     val serializer = serializer<T>()
 
-    return remember(defnComp, onFieldEvent, formCtx) {
+    return remember(defnComp, onFieldEvent) {
         FieldController(defnComp, onFieldEvent, formCtx, serializer)
     }
 }

@@ -15,7 +15,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueHandleData
-import com.neome.feature.form.domain.ctx.FormCtx
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldEvent
@@ -151,6 +150,9 @@ private fun getValidationErrorMessage(input: String): String? {
 /**
  * Handle field component for form.
  *
+ * FormCtx is accessed via LocalFormCtx.current inside rememberFieldController, so this composable
+ * must be called inside a Form composable tree.
+ *
  * A specialized input field that accepts either an email address OR a mobile number.
  * Behaves exactly like FieldEmail but with extended validation logic.
  *
@@ -171,22 +173,19 @@ private fun getValidationErrorMessage(input: String): String? {
  *
  * @param defnComp Field definition containing field configuration
  * @param onFieldEvent Callback to emit field events to the form
- * @param formCtx Form context for accessing field state and other field values
  * @param modifier Modifier for customization
  */
 @Composable
 fun FieldHandle(
     defnComp: DefnCompSeal,
     onFieldEvent: (FieldEvent) -> Unit,
-    formCtx: FormCtx,
     modifier: Modifier = Modifier
 ) {
     // ========== REUSED FROM FieldEmail: Field Controller Setup ==========
     // Use field controller composable with FieldValueHandleData type
     val fieldController = rememberFieldController<FieldValueHandleData>(
         defnComp = defnComp,
-        onFieldEvent = onFieldEvent,
-        formCtx = formCtx
+        onFieldEvent = onFieldEvent
     )
 
     // ========== REUSED FROM FieldEmail: Early Returns ==========

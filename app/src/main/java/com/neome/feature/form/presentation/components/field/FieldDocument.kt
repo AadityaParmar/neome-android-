@@ -36,7 +36,6 @@ import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDocumentData
 import com.neome.feature.filepicker.domain.model.FilePickerResult
 import com.neome.feature.filepicker.presentation.rememberMultiTypePicker
-import com.neome.feature.form.domain.ctx.FormCtx
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldEvent
@@ -125,6 +124,9 @@ private val PREVIEWABLE_EXTENSIONS: Set<EnumDefnDocFileExt> = setOf(
 /**
  * Document field component for form.
  *
+ * FormCtx is accessed via LocalFormCtx.current inside rememberFieldController, so this composable
+ * must be called inside a Form composable tree.
+ *
  * A specialized field that allows users to select document files from their device.
  * Behaves exactly like the Image Field but with document-specific features.
  *
@@ -153,21 +155,18 @@ private val PREVIEWABLE_EXTENSIONS: Set<EnumDefnDocFileExt> = setOf(
  *
  * @param defnComp Field definition containing field configuration
  * @param onFieldEvent Callback to emit field events to the form
- * @param formCtx Form context for accessing field state and other field values
  * @param modifier Modifier for customization
  */
 @Composable
 fun FieldDocument(
     defnComp: DefnCompSeal,
     onFieldEvent: (FieldEvent) -> Unit,
-    formCtx: FormCtx,
     modifier: Modifier = Modifier
 ) {
     // ========== REUSED FROM ImageField: Field Controller Setup ==========
     val fieldController = rememberFieldController<FieldValueDocumentData>(
         defnComp = defnComp,
-        onFieldEvent = onFieldEvent,
-        formCtx = formCtx
+        onFieldEvent = onFieldEvent
     )
 
     if (fieldController.fieldId == null) return
