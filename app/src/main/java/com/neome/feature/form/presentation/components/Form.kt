@@ -23,18 +23,12 @@ import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
 import com.neome.feature.form.domain.ctx.FormCtxImpl
 import com.neome.feature.form.domain.ctx.LocalFormCtx
-import com.neome.feature.form.domain.reducer.FormInitializer
-import com.neome.feature.form.domain.reducer.FormReducer
 import com.neome.feature.form.domain.ref.FormRef
-import com.neome.feature.form.domain.ref.FormRefImpl
 import com.neome.feature.form.presentation.components.base.FieldFactory
 import com.neome.feature.form.presentation.state.FieldEvent
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormIntent
 import com.neome.feature.form.presentation.state.FormState
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 
 /**
  * Pure MVI Form Component.
@@ -60,72 +54,42 @@ fun Form(
     modifier: Modifier = Modifier
 ) {
     val coroutineScope = rememberCoroutineScope()
-    // Internal state management
-    val formStateFlow = remember { MutableStateFlow(FormState()) }
-    val formState by formStateFlow.collectAsState()
-
-    // Stable references to dependencies that might change
     val currentOnIntent by rememberUpdatedState(onIntent)
-    val currentDefnForm by rememberUpdatedState(defnForm)
 
-    // Stable event dispatcher - created once but always uses latest dependencies
-    val dispatchEvent: (FormEvent) -> Unit = remember {
-        { event ->
-            formStateFlow.update { currentState ->
-                val result = FormReducer.reduce(currentState, event, currentDefnForm)
-                // Emit intent if present
-                result.intent?.let { currentOnIntent(it) }
-                result.state
-            }
-        }
-    }
-
-    // Create STABLE FormRef - never recreated, always uses same stateFlow
-    val formRefImpl = remember {
-        FormRefImpl(
-            formStateFlow = formStateFlow.asStateFlow(),
-            dispatchEvent = dispatchEvent,
-            coroutineScope = coroutineScope
-        )
-    }
-
-    // Create STABLE FormCtx - never recreated, always uses same stateFlow
-    val formCtx = remember {
+    val formCtx = remember(defnForm, initialValue) {
         FormCtxImpl(
-            formStateFlow = formStateFlow.asStateFlow(),
-            dispatchEvent = dispatchEvent,
-            coroutineScope = coroutineScope
+            defnForm = defnForm,
+            initialValue = initialValue,
+            coroutineScope = coroutineScope,
+            onIntent = { currentOnIntent(it) }
         )
     }
 
-    // Expose FormRef to parent
+    val formState by formCtx.stateFlow.collectAsState()
+
+    val formRefImpl = remember(formCtx) {
+        formCtx.createFormRef()
+    }
+
     LaunchedEffect(formRefImpl) {
         formRef.value = formRefImpl
     }
 
-    // Cleanup FormRef on dispose
     DisposableEffect(Unit) {
         onDispose {
             formRef.value = null
         }
     }
 
-    // Initialize form when defnForm or initialValue changes
-    LaunchedEffect(defnForm, initialValue) {
-        val initialState = FormInitializer.initializeFormState(defnForm, initialValue)
-        formStateFlow.value = initialState
-    }
-
-    // Provide FormCtx to nested composables via CompositionLocal
     CompositionLocalProvider(LocalFormCtx provides formCtx) {
         FormContent(
             state = formState,
             defnForm = defnForm,
-            onFieldEvent = remember {
+            onFieldEvent = remember(formCtx) {
                 { fieldEvent ->
                     when (fieldEvent) {
                         is FieldEvent.ValueChanged -> {
-                            dispatchEvent(
+                            formCtx.dispatch(
                                 FormEvent.FieldValueChanged(
                                     fieldId = fieldEvent.fieldId,
                                     value = fieldEvent.value
@@ -134,11 +98,11 @@ fun Form(
                         }
 
                         is FieldEvent.Focused -> {
-                            dispatchEvent(FormEvent.FieldFocused(fieldEvent.fieldId))
+                            formCtx.dispatch(FormEvent.FieldFocused(fieldEvent.fieldId))
                         }
 
                         is FieldEvent.Blurred -> {
-                            dispatchEvent(FormEvent.FieldBlurred(fieldEvent.fieldId))
+                            formCtx.dispatch(FormEvent.FieldBlurred(fieldEvent.fieldId))
                         }
                     }
                 }

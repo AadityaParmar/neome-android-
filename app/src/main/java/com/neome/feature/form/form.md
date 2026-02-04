@@ -4,7 +4,7 @@
 
 | Property           | Value                                       |
 |--------------------|---------------------------------------------|
-| **Version**        | 1.2.0                                       |
+| **Version**        | 1.3.0                                       |
 | **Last Updated**   | 2026-02-03                                  |
 | **Scope**          | Android Form Component Architecture         |
 | **Path**           | `app/src/main/java/com/neome/feature/form/` |
@@ -51,14 +51,17 @@ using skill : defnForm do [instruction]
 
 ### Key Files (Quick Access)
 
-| Purpose          | File                                              |
-|------------------|---------------------------------------------------|
-| Root Composable  | `presentation/components/Form.kt`                 |
-| State Reducer    | `domain/reducer/FormReducer.kt`                   |
-| Field Factory    | `presentation/components/base/FieldFactory.kt`    |
-| External API     | `domain/ref/FormRef.kt`                           |
-| Internal Context | `domain/ctx/FormCtx.kt`                           |
-| Field Controller | `presentation/components/base/FieldController.kt` |
+| Purpose           | File                                              |
+|-------------------|---------------------------------------------------|
+| Root Composable   | `presentation/components/Form.kt`                 |
+| State Owner       | `domain/ctx/FormCtxImpl.kt`                       |
+| Init Helper       | `domain/ctx/helper/FormCtxInitHelper.kt`          |
+| Event Helper      | `domain/ctx/helper/FormCtxEventHelper.kt`         |
+| Validation Helper | `domain/ctx/helper/FormCtxValidationHelper.kt`    |
+| Field Factory     | `presentation/components/base/FieldFactory.kt`    |
+| External API      | `domain/ref/FormRef.kt`                           |
+| Internal Context  | `domain/ctx/FormCtx.kt`                           |
+| Field Controller  | `presentation/components/base/FieldController.kt` |
 
 ---
 
@@ -67,11 +70,54 @@ using skill : defnForm do [instruction]
 ### Pattern: MVI + UDF + CompositionLocal
 
 ```
-                              FORM ARCHITECTURE
-================================================================================
+                              FORM ARCHITECTURE (v1.3.0)
+===============================================================================================
 
   Parent (Screen/ViewModel)
          │
+         │ FormRef (imperative API)
+         ▼
+   ┌──────────────────────────────────────────────────────────────────────────┐
+   │                              Form Component                               │
+   │                                                                          │
+   │   ┌──────────────────────────────────────────────────────────────────┐   │
+   │   │                        FormCtxImpl                                │   │
+   │   │                    (Central State Owner)                          │   │
+   │   │                                                                   │   │
+   │   │   ┌─────────────────┐                                            │   │
+   │   │   │ MutableStateFlow │ ◄─── Owned internally                     │   │
+   │   │   │   <FormState>    │                                           │   │
+   │   │   └────────┬─────────┘                                           │   │
+   │   │            │                                                      │   │
+   │   │   ┌────────▼─────────────────────────────────────────────────┐   │   │
+   │   │   │                     dispatch(event)                       │   │   │
+   │   │   │                                                           │   │   │
+   │   │   │   ┌─────────────────┐  ┌─────────────────────────────┐   │   │   │
+   │   │   │   │ FormCtxInitHelper│  │ FormCtxEventHelper         │   │   │   │
+   │   │   │   │ (initialization) │  │ (value, focus, trigger)    │   │   │   │
+   │   │   │   └─────────────────┘  └─────────────────────────────┘   │   │   │
+   │   │   │                                                           │   │   │
+   │   │   │   ┌───────────────────────┐  ┌─────────────────────────┐ │   │   │
+   │   │   │   │FormCtxValidationHelper│  │ FormCtxStateHelper      │ │   │   │
+   │   │   │   │(validate, errors)     │  │ (flows, queries)        │ │   │   │
+   │   │   │   └───────────────────────┘  └─────────────────────────┘ │   │   │
+   │   │   └───────────────────────────────────────────────────────────┘   │   │
+   │   │                                                                   │   │
+   │   │   ┌──────────────────────┐                                       │   │
+   │   │   │ createFormRef()      │ ──► Returns FormRefImpl               │   │
+   │   │   └──────────────────────┘                                       │   │
+   │   │                                                                   │   │
+   │   └───────────────────────────────────────────────────────────────────┘   │
+   │          │                                                                 │
+   │          │ LocalFormCtx (CompositionLocal)                                │
+   │          ▼                                                                 │
+   │   ┌─────────────────────────────────────────────────────────────────┐    │
+   │   │                      Field Components                            │    │
+   │   │  FieldText │ FieldNumber │ FieldDate │ FieldSection │ ...       │    │
+   │   └─────────────────────────────────────────────────────────────────┘    │
+   │                                                                          │
+   └──────────────────────────────────────────────────────────────────────────┘
+          │
          │ FormRef (imperative API)
          ▼
   ┌──────────────────────────────────────────────────────────────────────────┐
@@ -993,34 +1039,36 @@ app/src/main/java/com/neome/feature/form/
 │
 ├── domain/
 │   ├── ctx/
-│   │   ├── FormCtx.kt                 # Internal API interface
-│   │   └── FormCtxImpl.kt             # Implementation
-│   │
-│   ├── reducer/
-│   │   ├── FormReducer.kt             # Pure state reducer
-│   │   └── FormInitializer.kt         # Initial state builder
+│   │   ├── FormCtx.kt                      # Internal API interface
+│   │   ├── FormCtxImpl.kt                  # Central state owner, dispatches events
+│   │   └── helper/
+│   │       ├── FormReducerResult.kt         # Event processing result
+│   │       ├── FormCtxInitHelper.kt        # Initialization logic
+│   │       ├── FormCtxEventHelper.kt       # Event handlers (value, focus, trigger)
+│   │       ├── FormCtxValidationHelper.kt  # Validation logic
+│   │       └── FormCtxStateHelper.kt       # State flow utilities
 │   │
 │   ├── ref/
-│   │   ├── FormRef.kt                 # External API interface
-│   │   └── FormRefImpl.kt             # Implementation
+│   │   ├── FormRef.kt                      # External API interface
+│   │   └── FormRefImpl.kt                  # Implementation (created by FormCtx)
 │   │
 │   └── util/
-│       ├── FieldPropertyResolver.kt   # Dynamic property resolution
-│       ├── FieldValueResolver.kt      # Type conversion
-│       └── CalcFormula.kt             # Formula calculation
+│       ├── FieldPropertyResolver.kt        # Dynamic property resolution
+│       ├── FieldValueResolver.kt           # Type conversion
+│       └── CalcFormula.kt                  # Formula calculation
 │
 ├── presentation/
 │   ├── components/
-│   │   ├── Form.kt                    # Root composable (provides LocalFormCtx)
+│   │   ├── Form.kt                         # Root composable (provides LocalFormCtx)
 │   │   │
 │   │   ├── base/
-│   │   │   ├── FieldBase.kt           # Common field wrapper
-│   │   │   ├── FieldController.kt     # Field helper + rememberFieldController
-│   │   │   └── FieldFactory.kt        # Type-based routing
+│   │   │   ├── FieldBase.kt                # Common field wrapper
+│   │   │   ├── FieldController.kt          # Field helper + rememberFieldController
+│   │   │   └── FieldFactory.kt           # Type-based routing
 │   │   │
 │   │   ├── composite/
-│   │   │   ├── FieldSection.kt        # Section container
-│   │   │   └── FieldTab.kt            # Tab container
+│   │   │   ├── FieldSection.kt             # Section container
+│   │   │   └── FieldTab.kt                 # Tab container
 │   │   │
 │   │   └── field/
 │   │       ├── FieldText.kt
@@ -1048,7 +1096,7 @@ app/src/main/java/com/neome/feature/form/
 │       ├── FieldEvent.kt
 │       └── FieldError.kt
 │
-└── form.md                            # THIS FILE (skill documentation)
+└── form.md                                 # THIS FILE (skill documentation)
 ```
 
 ---
@@ -1110,6 +1158,16 @@ Update this skill file when:
 ---
 
 ## Changelog
+
+### v1.3.0 (2026-02-03)
+
+- **Refactor**: FormReducer logic merged into FormCtxImpl
+- **Refactor**: FormInitializer moved to FormCtxInitHelper
+- **Added**: Helper objects for code splitting (FormCtxInitHelper, FormCtxEventHelper, FormCtxValidationHelper, FormCtxStateHelper)
+- **Feature**: FormCtxImpl now owns and manages MutableStateFlow internally
+- **Feature**: FormCtxImpl.createFormRef() method creates FormRef instances
+- **Removed**: domain/reducer package (FormReducer.kt, FormInitializer.kt)
+- **Docs**: Updated architecture diagram and file structure
 
 ### v1.2.0 (2026-02-03)
 
