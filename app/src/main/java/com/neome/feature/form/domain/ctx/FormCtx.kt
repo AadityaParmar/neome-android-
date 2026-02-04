@@ -85,6 +85,21 @@ interface FormCtx {
      */
     fun validate(fieldId: MetaIdComp? = null): Boolean
 
+    /**
+     * Set error on a specific field.
+     *
+     * @param fieldId The field to set error on
+     * @param error The error message
+     */
+    fun setError(fieldId: MetaIdComp, error: String)
+
+    /**
+     * Clear error on a specific field.
+     *
+     * @param fieldId The field to clear error from
+     */
+    fun clearError(fieldId: MetaIdComp)
+
     // ==================== Reactive Streams ====================
 
     /**

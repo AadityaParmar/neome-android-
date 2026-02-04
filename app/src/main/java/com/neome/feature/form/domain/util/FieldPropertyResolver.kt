@@ -99,6 +99,10 @@ object FieldPropertyResolver {
     private fun resolveRequired(defnComp: DefnComp): Boolean {
         // Required is typically determined by validation rules
         // For now, return false - will be enhanced when validation is implemented
+        if (defnComp is DefnFieldEditable) {
+
+            return defnComp.required == true
+        }
         return false
     }
 

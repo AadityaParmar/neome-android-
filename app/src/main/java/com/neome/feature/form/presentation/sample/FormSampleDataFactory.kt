@@ -56,6 +56,7 @@ object FormSampleDataFactory {
         "mfd-1R1vfYHuYg": {
             "defaultValue": 10,
             "metaId": "mfd-1R1vfYHuYg",
+            "required": true,
             "name": "FieldNumber",
             "type": "number",
             "permissionMatrix": {

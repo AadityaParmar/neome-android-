@@ -180,4 +180,15 @@ object FieldValueResolver {
             return null // Return null if conversion fails
         }
     }
+
+    fun fnJsonElementFieldValue(compType: Types.EnumDefnCompType, value: JsonElement?): Any? {
+        if (value == null) return null
+
+        return try {
+            fnRawValueToFieldValue(compType, fnFieldValueToRawValue(compType, value))
+        } catch (e: Exception) {
+            null // Return null if conversion fails
+        }
+
+    }
 }

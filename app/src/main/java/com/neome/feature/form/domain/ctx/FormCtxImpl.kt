@@ -63,7 +63,6 @@ class FormCtxImpl(
             is FormEvent.FieldTouched -> FormCtxEventHelper.handleFieldTouched(state, event)
             is FormEvent.TriggerField -> FormCtxEventHelper.handleTriggerField(state, event, defnForm)
             is FormEvent.ValidateField -> FormCtxValidationHelper.handleValidateField(state, event)
-            is FormEvent.ValidationResult -> FormCtxValidationHelper.handleValidationResult(state, event)
             is FormEvent.ValidateAll -> FormCtxValidationHelper.handleValidateAll(state)
             is FormEvent.SetFieldError -> FormCtxValidationHelper.handleSetFieldError(state, event)
             is FormEvent.ClearFieldError -> FormCtxValidationHelper.handleClearFieldError(state, event)
@@ -101,6 +100,14 @@ class FormCtxImpl(
             dispatch(FormEvent.ValidateAll)
             currentState.isValid
         }
+    }
+
+    override fun setError(fieldId: MetaIdComp, error: String) {
+        dispatch(FormEvent.SetFieldError(fieldId, error))
+    }
+
+    override fun clearError(fieldId: MetaIdComp) {
+        dispatch(FormEvent.ClearFieldError(fieldId))
     }
 
     override fun watchFieldState(fieldId: MetaIdComp): StateFlow<FieldState?> {

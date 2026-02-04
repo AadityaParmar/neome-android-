@@ -2,12 +2,13 @@ package com.neome.feature.form.domain.ctx.helper
 
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.ctx.helper.schema.DefnCompSchema
 import com.neome.feature.form.domain.util.FieldPropertyResolver
+import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormIntent
 import com.neome.feature.form.presentation.state.FormState
-import kotlinx.serialization.json.JsonElement
 
 object FormCtxEventHelper {
 
@@ -26,14 +27,29 @@ object FormCtxEventHelper {
 
         val newFieldStates = state.fieldStates + (event.fieldId to newFieldState)
 
-        val dependents = state.fieldDependencies.getDependents(event.fieldId)
-        val updatedFieldStates = triggerDependentFields(
+        // Trigger current field first to recalculate properties and validate
+        val currentFieldTriggerResult = triggerField(
+            fieldId = event.fieldId,
             fieldStates = newFieldStates,
+            errors = state.errors,
+            defnForm = defnForm,
+            compSchemaMap = state.compSchemaMap
+        ) ?: TriggerResult(newFieldStates, state.errors)
+
+        // Then trigger dependent fields
+        val dependents = state.fieldDependencies.getDependents(event.fieldId)
+        val triggerResult = triggerDependentFields(
+            fieldStates = currentFieldTriggerResult.fieldStates,
             dependentIds = dependents,
-            defnForm = defnForm
+            defnForm = defnForm,
+            errors = currentFieldTriggerResult.errors,
+            compSchemaMap = state.compSchemaMap
         )
 
-        val newState = state.copy(fieldStates = updatedFieldStates)
+        val newState = state.copy(
+            fieldStates = triggerResult.fieldStates,
+            errors = triggerResult.errors
+        )
 
         val intent = FormIntent.Watch(
             fieldId = event.fieldId,
@@ -97,20 +113,17 @@ object FormCtxEventHelper {
         event: FormEvent.TriggerField,
         defnForm: DefnFormData
     ): FormReducerResult {
-        val defnComp = defnForm.compMap[event.fieldId]
-            ?: return FormReducerResult(state)
-        val currentFieldState = state.fieldStates[event.fieldId]
-            ?: return FormReducerResult(state)
+        val result = triggerField(
+            fieldId = event.fieldId,
+            fieldStates = state.fieldStates,
+            errors = state.errors,
+            defnForm = defnForm,
+            compSchemaMap = state.compSchemaMap
+        ) ?: return FormReducerResult(state)
 
-        val newProperties = FieldPropertyResolver.resolveFieldProperties(
-            defnComp = defnComp,
-            defnForm,
-            getFieldValue = { id -> state.getValue(id) }
-        )
-
-        val newFieldState = currentFieldState.copy(fieldProperties = newProperties)
         val newState = state.copy(
-            fieldStates = state.fieldStates + (event.fieldId to newFieldState)
+            fieldStates = result.fieldStates,
+            errors = result.errors
         )
 
         return FormReducerResult(newState)
@@ -181,23 +194,131 @@ object FormCtxEventHelper {
     internal fun triggerDependentFields(
         fieldStates: Map<MetaIdComp, FieldState>,
         dependentIds: Set<MetaIdComp>,
-        defnForm: DefnFormData
-    ): Map<MetaIdComp, FieldState> {
-        if (dependentIds.isEmpty()) return fieldStates
+        defnForm: DefnFormData,
+        errors: Map<MetaIdComp, FieldError>,
+        compSchemaMap: Map<MetaIdComp, DefnCompSchema>
+    ): TriggerResult {
+        if (dependentIds.isEmpty()) return TriggerResult(fieldStates, errors)
 
-        val updates = dependentIds.mapNotNull { dependentId ->
-            val defnComp = defnForm.compMap[dependentId] ?: return@mapNotNull null
-            val currentState = fieldStates[dependentId] ?: return@mapNotNull null
+        var updatedFieldStates = fieldStates
+        var updatedErrors = errors
 
-            val newProperties = FieldPropertyResolver.resolveFieldProperties(
-                defnComp = defnComp,
-                defnForm,
-                getFieldValue = { id -> fieldStates[id]?.value }
-            )
+        dependentIds.forEach { dependentId ->
+            val result = triggerField(
+                fieldId = dependentId,
+                fieldStates = updatedFieldStates,
+                errors = updatedErrors,
+                defnForm = defnForm,
+                compSchemaMap = compSchemaMap
+            ) ?: return@forEach
 
-            dependentId to currentState.copy(fieldProperties = newProperties)
-        }.toMap()
+            updatedFieldStates = result.fieldStates
+            updatedErrors = result.errors
+        }
 
-        return fieldStates + updates
+        return TriggerResult(updatedFieldStates, updatedErrors)
     }
+
+    /**
+     * Trigger a single field: recalculate properties and validate.
+     *
+     * @return Updated field states and errors, or null if field/defnComp not found
+     */
+    private fun triggerField(
+        fieldId: MetaIdComp,
+        fieldStates: Map<MetaIdComp, FieldState>,
+        errors: Map<MetaIdComp, FieldError>,
+        defnForm: DefnFormData,
+        compSchemaMap: Map<MetaIdComp, DefnCompSchema>
+    ): TriggerResult? {
+        defnForm.compMap[fieldId] ?: return null
+        val currentFieldState = fieldStates[fieldId] ?: return null
+
+        // 1. Recalculate field properties
+        val newFieldState = calcCompProperties(
+            fieldId = fieldId,
+            currentFieldState = currentFieldState,
+            defnForm = defnForm,
+            fieldStates = fieldStates
+        )
+        val updatedFieldStates = fieldStates + (fieldId to newFieldState)
+
+        // 2. Validate field and update errors
+        val updatedErrors = validateField(
+            fieldId = fieldId,
+            fieldState = newFieldState,
+            errors = errors,
+            compSchemaMap = compSchemaMap
+        )
+
+        return TriggerResult(updatedFieldStates, updatedErrors)
+    }
+
+    /**
+     * Recalculate computed properties for a field based on current form state.
+     *
+     * @return Updated FieldState with new properties
+     */
+    private fun calcCompProperties(
+        fieldId: MetaIdComp,
+        currentFieldState: FieldState,
+        defnForm: DefnFormData,
+        fieldStates: Map<MetaIdComp, FieldState>
+    ): FieldState {
+        val defnComp = defnForm.compMap[fieldId] ?: return currentFieldState
+
+        val newProperties = FieldPropertyResolver.resolveFieldProperties(
+            defnComp = defnComp,
+            defnForm = defnForm,
+            getFieldValue = { id -> fieldStates[id]?.value }
+        )
+
+        return currentFieldState.copy(fieldProperties = newProperties)
+    }
+
+    /**
+     * Validate a single field and update errors map accordingly.
+     * Sets error if validation fails, clears error if validation passes.
+     *
+     * Uses pure validation (no side effects) to avoid dispatching events
+     * during event processing.
+     *
+     * @return Updated errors map with error set or cleared for this field
+     */
+    private fun validateField(
+        fieldId: MetaIdComp,
+        fieldState: FieldState,
+        errors: Map<MetaIdComp, FieldError>,
+        compSchemaMap: Map<MetaIdComp, DefnCompSchema>
+    ): Map<MetaIdComp, FieldError> {
+        val schema = compSchemaMap[fieldId]
+            ?: return errors // No schema = no validation needed
+
+        // Use pure validation to get error without side effects
+        val error = schema.validatePure(fieldState.value, fieldState)
+
+        return if (error != null) {
+            // Set error
+            errors + (fieldId to FieldError(
+                message = error,
+                type = FieldError.ErrorType.Validation
+            ))
+        } else {
+            // Clear error (only validation errors, keep custom/server errors)
+            val existingError = errors[fieldId]
+            if (existingError?.type == FieldError.ErrorType.Validation) {
+                errors - fieldId
+            } else {
+                errors
+            }
+        }
+    }
+
+    /**
+     * Result of triggering field(s) containing updated field states and errors.
+     */
+    data class TriggerResult(
+        val fieldStates: Map<MetaIdComp, FieldState>,
+        val errors: Map<MetaIdComp, FieldError>
+    )
 }

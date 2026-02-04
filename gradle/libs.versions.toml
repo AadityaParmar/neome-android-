@@ -17,6 +17,7 @@ hilt = "2.57"
 hiltNavigationCompose = "1.2.0"
 kotlinxSerialization = "1.8.0"
 zodkmp = "1.2.0"
+konform = "0.11.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,6 +46,7 @@ hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-comp
 hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 zodkmp = { module = "io.github.piashcse:zodkmp", version.ref = "zodkmp" }
+konform-jvm = { group = "io.konform", name = "konform-jvm", version.ref = "konform" }
 
 # CameraX
 androidx-camera-core = { group = "androidx.camera", name = "camera-core", version.ref = "cameraX" }

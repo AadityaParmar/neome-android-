@@ -77,6 +77,11 @@ data class FieldController<T>(
         get() = fieldId?.let { formCtx.watchFieldState(it) }
             ?: MutableStateFlow(null)
 
+    /** Reactive StateFlow of field error */
+    val errorFlow: StateFlow<FieldError?>
+        get() = fieldId?.let { formCtx.watchFieldError(it) }
+            ?: MutableStateFlow(null)
+
     /** Callback function for value changes */
     val onChange: (T?) -> Unit = { newValue ->
         val jsonValue = newValue?.let { Json.encodeToJsonElement(serializer, it) }

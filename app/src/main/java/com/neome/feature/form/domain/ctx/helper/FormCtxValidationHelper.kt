@@ -1,7 +1,7 @@
 package com.neome.feature.form.domain.ctx.helper
 
 import com.neome.api.meta.base.Types.MetaIdComp
-import com.neome.api.meta.base.dto.DefnComp
+import com.neome.feature.form.domain.ctx.helper.schema.DefnCompSchema
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormEvent
@@ -16,70 +16,94 @@ object FormCtxValidationHelper {
         val currentFieldState = state.fieldStates[event.fieldId]
             ?: return FormReducerResult(state)
 
-        val defnComp = state.defnForm?.compMap?.get(event.fieldId)
-            ?: return FormReducerResult(state)
+        val schema = state.compSchemaMap[event.fieldId]
+            ?: return FormReducerResult(state) // No schema = no validation needed
 
+        // 1. Mark as validating
         val validatingFieldState = currentFieldState.copy(isValidating = true)
-        val validatingState = state.copy(
-            fieldStates = state.fieldStates + (event.fieldId to validatingFieldState)
+
+        // 2. Use pure validation to get error without side effects
+        val error = schema.validatePure(currentFieldState.value, currentFieldState)
+
+        // 3. Update errors map
+        val updatedErrors = updateFieldError(
+            fieldId = event.fieldId,
+            error = error,
+            errors = state.errors
         )
 
-        val validationError = validateField(event.fieldId, currentFieldState, defnComp)
-
-        val validationResultEvent = FormEvent.ValidationResult(event.fieldId, validationError)
-
-        return handleValidationResult(validatingState, validationResultEvent)
-    }
-
-    fun handleValidationResult(
-        state: FormState,
-        event: FormEvent.ValidationResult
-    ): FormReducerResult {
-        val currentFieldState = state.fieldStates[event.fieldId]
-
-        val newFieldStates = if (currentFieldState != null) {
-            state.fieldStates + (event.fieldId to currentFieldState.copy(isValidating = false))
-        } else {
-            state.fieldStates
-        }
-
-        val newErrors = if (event.error != null) {
-            state.errors + (event.fieldId to FieldError(message = event.error))
-        } else {
-            state.errors - event.fieldId
-        }
+        // 4. Mark as not validating
+        val finalFieldState = validatingFieldState.copy(isValidating = false)
 
         val newState = state.copy(
-            fieldStates = newFieldStates,
-            errors = newErrors
+            fieldStates = state.fieldStates + (event.fieldId to finalFieldState),
+            errors = updatedErrors
         )
 
         return FormReducerResult(newState)
     }
 
     fun handleValidateAll(state: FormState): FormReducerResult {
-        val defnForm = state.defnForm ?: return FormReducerResult(state)
-
+        // 1. Mark all as validating
         val validatingFieldStates = state.fieldStates.mapValues { (_, fieldState) ->
             fieldState.copy(isValidating = true)
         }
 
-        var validatingState = state.copy(fieldStates = validatingFieldStates)
-
-        val validationResults = mutableListOf<FormEvent.ValidationResult>()
-
-        state.fieldStates.forEach { (fieldId, fieldState) ->
-            val defnComp = defnForm.compMap[fieldId] ?: return@forEach
-            val error = validateField(fieldId, fieldState, defnComp)
-            validationResults.add(FormEvent.ValidationResult(fieldId, error))
+        // 2. Validate all fields with schemas using pure validation
+        var updatedErrors = state.errors
+        state.compSchemaMap.forEach { (fieldId, schema) ->
+            val fieldState = state.fieldStates[fieldId]
+            val error = schema.validatePure(fieldState?.value, fieldState)
+            updatedErrors = updateFieldError(
+                fieldId = fieldId,
+                error = error,
+                errors = updatedErrors
+            )
         }
 
-        validationResults.forEach { result ->
-            val resultState = handleValidationResult(validatingState, result)
-            validatingState = resultState.state
+        // 3. Mark all as not validating
+        val finalFieldStates = validatingFieldStates.mapValues { (_, fieldState) ->
+            fieldState.copy(isValidating = false)
         }
 
-        return FormReducerResult(validatingState)
+        val newState = state.copy(
+            fieldStates = finalFieldStates,
+            errors = updatedErrors
+        )
+
+        return FormReducerResult(newState)
+    }
+
+    /**
+     * Update errors map for a single field based on validation result.
+     * Sets error if validation fails, clears validation error if passes.
+     * Preserves custom/server errors when clearing.
+     *
+     * @param fieldId The field to update
+     * @param error The validation error message, or null if validation passed
+     * @param errors The current errors map
+     * @return Updated errors map
+     */
+    private fun updateFieldError(
+        fieldId: MetaIdComp,
+        error: String?,
+        errors: Map<MetaIdComp, FieldError>
+    ): Map<MetaIdComp, FieldError> {
+        return if (error != null) {
+            // Set validation error
+            errors + (fieldId to FieldError(
+                message = error,
+                type = FieldError.ErrorType.Validation
+            ))
+        } else {
+            // Clear error only if it's a validation error (preserve custom/server errors)
+            val existingError = errors[fieldId]
+            if (existingError?.type == FieldError.ErrorType.Validation) {
+                errors - fieldId
+            } else {
+                errors
+            }
+        }
     }
 
     fun handleSetFieldError(
@@ -106,17 +130,5 @@ object FormCtxValidationHelper {
     fun handleClearAllErrors(state: FormState): FormReducerResult {
         val newState = state.copy(errors = emptyMap())
         return FormReducerResult(newState)
-    }
-
-    internal fun validateField(
-        fieldId: MetaIdComp,
-        fieldState: FieldState,
-        defnComp: DefnComp
-    ): String? {
-        if (fieldState.fieldProperties.required && fieldState.value == null) {
-            return "This field is required"
-        }
-
-        return null
     }
 }

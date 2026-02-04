@@ -67,14 +67,6 @@ sealed interface FormEvent : UiEvent {
     ) : FormEvent
 
     /**
-     * Set validation result for a field.
-     */
-    data class ValidationResult(
-        val fieldId: MetaIdComp,
-        val error: String?
-    ) : FormEvent
-
-    /**
      * Validate all fields in the form.
      */
     data object ValidateAll : FormEvent

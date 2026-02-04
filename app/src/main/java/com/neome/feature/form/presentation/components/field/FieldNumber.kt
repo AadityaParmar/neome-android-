@@ -51,12 +51,15 @@ fun FieldNumber(
     // Early return if field is hidden
     if (properties.hidden) return
 
+    // Watch error reactively through controller
+    val error by fieldController.errorFlow.collectAsStateWithLifecycle()
 
     // Get current number value from FieldValueNumberData
     val currentValue = fieldController.fieldValue?.value?.toString() ?: ""
 
     // Local state for number input
     var textValue by remember(currentValue) { mutableStateOf(currentValue) }
+
 
     // Handle number value changes
     fun onValueChange(newValue: String) {
@@ -82,7 +85,8 @@ fun FieldNumber(
             value = textValue,
             label = properties.label?.let { { Text(it) } },
             placeholder = properties.placeholder?.let { { Text(it) } },
-            supportingText = properties.helperText?.let { { Text(it) } },
+            isError = error != null,
+            supportingText = error?.let { { Text(it.message) } } ?: properties.helperText?.let { { Text(it) } },
             enabled = !properties.disabled,
             readOnly = properties.readOnly,
             maxLines = 1,
