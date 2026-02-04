@@ -4,7 +4,7 @@
 
 | Property           | Value                                       |
 |--------------------|---------------------------------------------|
-| **Version**        | 1.4.1                                       |
+| **Version**        | 1.4.2                                       |
 | **Last Updated**   | 2026-02-04                                  |
 | **Scope**          | Android Form Component Architecture         |
 | **Path**           | `app/src/main/java/com/neome/feature/form/` |
@@ -400,6 +400,14 @@ app/src/main/java/com/neome/feature/form/
 ---
 
 ## Changelog
+
+### v1.4.2 (2026-02-04)
+
+- **Refactor**: FieldText.kt - Extract stateless FieldTextContent for optimal recomposition control
+- **Fix**: FieldText.kt - Add missing error flow observation
+- **Fix**: FieldText.kt - Fixed supporting text area with placeholder space to prevent layout jumps
+- **Refactor**: FieldNumber.kt - Extract stateless FieldNumberContent for optimal recomposition control
+- **Fix**: FieldNumber.kt - Fixed supporting text area with placeholder space to prevent layout jumps
 
 ### v1.4.1 (2026-02-04)
 

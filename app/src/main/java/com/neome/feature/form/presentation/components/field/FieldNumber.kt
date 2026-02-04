@@ -16,12 +16,14 @@ import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueNumberData
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
+import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldEvent
 
 /**
- * Simple number field component for form.
+ * Number field component for form.
  *
- * Basic number input that uses standardized field interface with fieldValue, error, fieldProperties, and onChange.
+ * Stateful wrapper that uses rememberFieldController for state management.
+ * Delegates rendering to stateless FieldNumberContent for optimal recomposition.
  *
  * FormCtx is accessed via LocalFormCtx.current inside rememberFieldController,
  * so this composable must be called inside a Form composable tree.
@@ -57,42 +59,83 @@ fun FieldNumber(
     // Get current number value from FieldValueNumberData
     val currentValue = fieldController.fieldValue?.value?.toString() ?: ""
 
-    // Local state for number input
+    // Local state for number input - keyed to currentValue for external updates
     var textValue by remember(currentValue) { mutableStateOf(currentValue) }
 
-
-    // Handle number value changes
-    fun onValueChange(newValue: String) {
-        // Allow empty string or valid number input
-        if (newValue.isEmpty() || newValue == "-") {
-            textValue = newValue
-            fieldController.onChange(null)
-            return
-        }
-
-        // Try to parse as Long
-        val longValue = newValue.toLongOrNull()
-        if (longValue != null) {
-            textValue = newValue
-            // Use controller's onChange callback with FieldValueNumberData
-            fieldController.onChange(FieldValueNumberData(longValue))
-        }
-        // If parsing fails, don't update state (keep previous valid value)
-    }
-
+    // Delegate to stateless content for optimal recomposition
     FieldBase(modifier = modifier) {
-        OutlinedTextField(
+        FieldNumberContent(
             value = textValue,
-            label = properties.label?.let { { Text(it) } },
-            placeholder = properties.placeholder?.let { { Text(it) } },
-            isError = error != null,
-            supportingText = error?.let { { Text(it.message) } } ?: properties.helperText?.let { { Text(it) } },
+            label = properties.label,
+            placeholder = properties.placeholder,
+            helperText = properties.helperText,
+            error = error,
             enabled = !properties.disabled,
             readOnly = properties.readOnly,
-            maxLines = 1,
-            modifier = modifier.fillMaxWidth(),
-            onValueChange = ::onValueChange,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+            onValueChange = { newValue ->
+                // Allow empty string or valid number input
+                if (newValue.isEmpty() || newValue == "-") {
+                    textValue = newValue
+                    fieldController.onChange(null)
+                    return@FieldNumberContent
+                }
+
+                // Try to parse as Long
+                val longValue = newValue.toLongOrNull()
+                if (longValue != null) {
+                    textValue = newValue
+                    // Use controller's onChange callback with FieldValueNumberData
+                    fieldController.onChange(FieldValueNumberData(longValue))
+                }
+                // If parsing fails, don't update state (keep previous valid value)
+            }
         )
     }
+}
+
+/**
+ * Stateless number field content for optimal recomposition control.
+ *
+ * Only recomposes when its parameters change. Uses fixed placeholder space
+ * for supporting text to prevent layout jumps when error/helper text changes.
+ *
+ * @param value Current text value (string representation of number)
+ * @param label Field label
+ * @param placeholder Field placeholder
+ * @param helperText Helper text to display below field
+ * @param error Field error, if any
+ * @param enabled Whether field is enabled
+ * @param readOnly Whether field is read-only
+ * @param onValueChange Callback when value changes
+ * @param modifier Modifier for customization
+ */
+@Composable
+private fun FieldNumberContent(
+    value: String,
+    label: String?,
+    placeholder: String?,
+    helperText: String?,
+    error: FieldError?,
+    enabled: Boolean,
+    readOnly: Boolean,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    OutlinedTextField(
+        value = value,
+        label = label?.let { { Text(it) } },
+        placeholder = placeholder?.let { { Text(it) } },
+        isError = error != null,
+        supportingText = {
+            // Always render with placeholder space to prevent layout jumps
+            // Space character reserves height when no error or helper text
+            Text(text = error?.message ?: helperText ?: " ")
+        },
+        enabled = enabled,
+        readOnly = readOnly,
+        maxLines = 1,
+        modifier = modifier.fillMaxWidth(),
+        onValueChange = onValueChange,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+    )
 }

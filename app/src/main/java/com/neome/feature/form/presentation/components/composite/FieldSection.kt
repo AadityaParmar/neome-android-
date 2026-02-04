@@ -71,7 +71,7 @@ fun FieldSection(
         when (sectionDirection) {
             EnumDefnThemeDirection.horizontal -> {
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     fieldIdSet.forEach { fieldId ->
                         RenderChildField(
@@ -86,7 +86,7 @@ fun FieldSection(
 
             EnumDefnThemeDirection.vertical -> {
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    verticalArrangement = Arrangement.spacedBy(2.dp)
                 ) {
                     fieldIdSet.forEach { fieldId ->
                         RenderChildField(
