@@ -15,6 +15,7 @@ import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormIntent
 import com.neome.feature.form.presentation.state.FormState
+import com.neome.feature.form.presentation.state.SendBtnDisableFlag
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -42,6 +43,9 @@ class FormCtxImpl(
         _stateFlow = MutableStateFlow(
             FormCtxInitHelper.initializeFormState(defnForm, initialValue)
         )
+
+        // Emit initial send button state
+        onIntent(FormIntent.SendBtnStateChanged(enabled = _stateFlow.value.isSendBtnEnabled))
     }
 
     internal fun dispatch(event: FormEvent) {
@@ -70,7 +74,50 @@ class FormCtxImpl(
             is FormEvent.Submit -> FormCtxEventHelper.handleSubmit(state)
             is FormEvent.Reset -> FormCtxEventHelper.handleReset(state, event)
             is FormEvent.SetValues -> FormCtxEventHelper.handleSetValues(state, event)
+            is FormEvent.AddSendBtnDisableFlag -> handleAddSendBtnDisableFlag(state, event)
+            is FormEvent.RemoveSendBtnDisableFlag -> handleRemoveSendBtnDisableFlag(state, event)
         }
+    }
+
+    private fun handleAddSendBtnDisableFlag(
+        state: FormState,
+        event: FormEvent.AddSendBtnDisableFlag
+    ): FormReducerResult {
+        if (event.flag in state.disableSendBtnSet) {
+            return FormReducerResult(state) // No change
+        }
+
+        val wasEnabled = state.isSendBtnEnabled
+        val newSet = state.disableSendBtnSet + event.flag
+        val newState = state.copy(disableSendBtnSet = newSet)
+
+        // Emit intent only on transition: enabled -> disabled
+        val intent = if (wasEnabled) {
+            FormIntent.SendBtnStateChanged(enabled = false)
+        } else null
+
+        return FormReducerResult(newState, intent)
+    }
+
+    private fun handleRemoveSendBtnDisableFlag(
+        state: FormState,
+        event: FormEvent.RemoveSendBtnDisableFlag
+    ): FormReducerResult {
+        if (event.flag !in state.disableSendBtnSet) {
+            return FormReducerResult(state) // No change
+        }
+
+        val wasEnabled = state.isSendBtnEnabled
+        val newSet = state.disableSendBtnSet - event.flag
+        val newState = state.copy(disableSendBtnSet = newSet)
+        val isNowEnabled = newState.isSendBtnEnabled
+
+        // Emit intent only on transition: disabled -> enabled
+        val intent = if (!wasEnabled && isNowEnabled) {
+            FormIntent.SendBtnStateChanged(enabled = true)
+        } else null
+
+        return FormReducerResult(newState, intent)
     }
 
     fun createFormRef(): FormRef {
@@ -123,4 +170,12 @@ class FormCtxImpl(
     }
 
     override fun watchFormState(): StateFlow<FormState> = stateFlow
+
+    override fun addSendBtnDisableFlag(flag: SendBtnDisableFlag) {
+        dispatch(FormEvent.AddSendBtnDisableFlag(flag))
+    }
+
+    override fun removeSendBtnDisableFlag(flag: SendBtnDisableFlag) {
+        dispatch(FormEvent.RemoveSendBtnDisableFlag(flag))
+    }
 }

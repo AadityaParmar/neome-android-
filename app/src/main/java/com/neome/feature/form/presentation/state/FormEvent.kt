@@ -125,4 +125,18 @@ sealed interface FormEvent : UiEvent {
      * Builds dependency map, sets initial values, and calculates initial fieldProperties.
      */
     data object Initialize : FormEvent
+
+    // ==================== Send Button Flag Events ====================
+
+    /**
+     * Add a flag that disables the send button.
+     * When any flag is present, the send button is disabled.
+     */
+    data class AddSendBtnDisableFlag(val flag: SendBtnDisableFlag) : FormEvent
+
+    /**
+     * Remove a flag that disables the send button.
+     * When all flags are removed, the send button is enabled.
+     */
+    data class RemoveSendBtnDisableFlag(val flag: SendBtnDisableFlag) : FormEvent
 }

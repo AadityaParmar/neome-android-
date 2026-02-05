@@ -33,9 +33,9 @@ abstract class CompSchema(open val defnForm: DefnFormData, open val defnComp: De
      * @param fieldState The current field state (includes properties like required)
      * @return Error message if validation fails, null if validation passes
      */
-    abstract fun validatePure(fieldValue: JsonElement?, fieldState: FieldState?): String?
+    abstract fun validate(fieldValue: JsonElement?, fieldState: FieldState?): String?
 
-    fun calcIsRequired(formCtx: FormCtx) {
+    protected fun calcIsRequired(formCtx: FormCtx) {
 
     }
 }

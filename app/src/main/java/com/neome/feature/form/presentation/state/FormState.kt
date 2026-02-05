@@ -8,6 +8,28 @@ import com.neome.feature.form.domain.ctx.helper.schema.CompSchema
 import kotlinx.serialization.json.JsonElement
 
 /**
+ * Flags that disable the send button.
+ * When any flag is present in [FormState.disableSendBtnSet], the send button is disabled.
+ * When the set is empty, the send button is enabled.
+ */
+sealed interface SendBtnDisableFlag {
+    /** Form has validation errors - managed automatically by FormCtxValidationHelper */
+    data object Invalid : SendBtnDisableFlag
+
+    /** File upload in progress */
+    data object Uploading : SendBtnDisableFlag
+
+    /** Background processing in progress */
+    data object Processing : SendBtnDisableFlag
+
+    /** Validation in progress */
+    data object Validating : SendBtnDisableFlag
+
+    /** Custom flag with a unique key for extensibility */
+    data class Custom(val key: String) : SendBtnDisableFlag
+}
+
+/**
  * Centralized state for the Form component.
  * Holds all configuration and runtime data.
  */
@@ -40,7 +62,14 @@ data class FormState(
     // Form-level state
     val isSubmitting: Boolean = false,
     val formError: String? = null,
-    val isInitialized: Boolean = false
+    val isInitialized: Boolean = false,
+
+    /**
+     * Set of flags that disable the send button.
+     * Send button is enabled only when this set is empty.
+     * @see SendBtnDisableFlag
+     */
+    val disableSendBtnSet: Set<SendBtnDisableFlag> = emptySet()
 ) {
     /**
      * Get current form values as a map.
@@ -90,6 +119,13 @@ data class FormState(
      * Check if field has error.
      */
     fun hasError(fieldId: MetaIdComp): Boolean = errors.containsKey(fieldId)
+
+    /**
+     * Check if send button is enabled.
+     * Returns true only when no disable flags are present.
+     */
+    val isSendBtnEnabled: Boolean
+        get() = disableSendBtnSet.isEmpty()
 }
 
 /**

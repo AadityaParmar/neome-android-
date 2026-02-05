@@ -20,7 +20,7 @@ class FieldNumberSchema(override val defnForm: DefnFormData, override val defnCo
     /**
      * Pure validation that returns an error message without side effects.
      */
-    override fun validatePure(fieldValue: JsonElement?, fieldState: FieldState?): String? {
+    override fun validate(fieldValue: JsonElement?, fieldState: FieldState?): String? {
         val defnField = defnComp as DefnFieldNumber
         val typedValue =
             FieldValueResolver.fnJsonElementFieldValue(defnField.type, fieldValue) as FieldValueNumberData?

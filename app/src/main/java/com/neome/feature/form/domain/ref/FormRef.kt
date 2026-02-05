@@ -4,6 +4,7 @@ import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormState
+import com.neome.feature.form.presentation.state.SendBtnDisableFlag
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.serialization.json.JsonElement
 
@@ -161,4 +162,30 @@ interface FormRef {
      * @return StateFlow of FormState
      */
     fun watchFormState(): StateFlow<FormState>
+
+    // ==================== Send Button Control ====================
+
+    /**
+     * Add a flag that disables the send button.
+     * When any flag is present, the send button is disabled.
+     *
+     * @param flag The flag to add
+     */
+    fun addSendBtnDisableFlag(flag: SendBtnDisableFlag)
+
+    /**
+     * Remove a flag that disables the send button.
+     * When all flags are removed, the send button is enabled.
+     *
+     * @param flag The flag to remove
+     */
+    fun removeSendBtnDisableFlag(flag: SendBtnDisableFlag)
+
+    /**
+     * Check if send button is enabled.
+     * Returns true when no disable flags are present.
+     *
+     * @return true if send button is enabled
+     */
+    fun isSendBtnEnabled(): Boolean
 }

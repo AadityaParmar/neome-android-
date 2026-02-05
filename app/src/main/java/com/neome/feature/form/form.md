@@ -4,8 +4,8 @@
 
 | Property           | Value                                       |
 |--------------------|---------------------------------------------|
-| **Version**        | 1.4.2                                       |
-| **Last Updated**   | 2026-02-04                                  |
+| **Version**        | 1.5.0                                       |
+| **Last Updated**   | 2026-02-05                                  |
 | **Scope**          | Android Form Component Architecture         |
 | **Path**           | `app/src/main/java/com/neome/feature/form/` |
 | **Update Trigger** | Any modification to form component files    |
@@ -148,8 +148,8 @@ using skill : defnForm do [instruction]
    │                                                                          │
    └──────────────────────────────────────────────────────────────────────────┘
          │
-         │ FormIntent (Submit, Watch, ValidationStateChanged)
-         ▼
+          │ FormIntent (Submit, Watch, ValidationStateChanged, SendBtnStateChanged)
+          ▼
   Parent (Screen/ViewModel)
 ```
 
@@ -183,40 +183,52 @@ using skill : defnForm do [instruction]
 - `errors` - Map of field ID to FieldError
 - `fieldDependencies` - Dependency tracking for property recalculation
 - `compSchemaMap` - Validation schemas built during initialization
+- `disableSendBtnSet` - Set of flags disabling send button (empty = enabled)
 - `isInitialized`, `disabled`, `readOnly`, `isSubmitting`
 
-**Computed Properties:** `hasErrors`, `isDirty`, `isValid`
+**Computed Properties:** `hasErrors`, `isDirty`, `isValid`, `isSendBtnEnabled`
+
+**SendBtnDisableFlag Types:**
+
+- `Invalid` - Form has validation errors (auto-managed by FormCtxValidationHelper)
+- `Uploading` - File upload in progress
+- `Processing` - Background processing in progress
+- `Validating` - Validation in progress
+- `Custom(key)` - Custom flag with unique key
 
 ### Event System
 
 > **Reference File:** `presentation/state/FormEvent.kt`
 
-| Event               | Purpose                          | Triggers                     |
-|---------------------|----------------------------------|------------------------------|
-| `Initialize`        | Build deps, set initial values   | Form mount                   |
-| `FieldValueChanged` | Update value, trigger dependents | User input                   |
-| `FieldFocused`      | Mark field focused               | Field gains focus            |
-| `FieldBlurred`      | Mark touched + unfocused         | Field loses focus            |
-| `FieldTouched`      | Mark field touched               | Any interaction              |
-| `TriggerField`      | Recalculate field properties     | Dependency change            |
-| `ValidateField`     | Validate single field            | Blur, submit, manual         |
-| `ValidateAll`       | Validate all fields              | Submit                       |
-| `SetFieldError`     | Set custom error                 | API error, custom validation |
-| `ClearFieldError`   | Clear field error                | Manual clear                 |
-| `ClearAllErrors`    | Clear all errors                 | Form reset                   |
-| `Submit`            | Validate + submit if valid       | Submit button                |
-| `Reset`             | Reset to initial values          | Reset button                 |
-| `SetValues`         | Bulk value update                | External data load           |
+| Event                      | Purpose                          | Triggers                     |
+|----------------------------|----------------------------------|------------------------------|
+| `Initialize`               | Build deps, set initial values   | Form mount                   |
+| `FieldValueChanged`        | Update value, trigger dependents | User input                   |
+| `FieldFocused`             | Mark field focused               | Field gains focus            |
+| `FieldBlurred`             | Mark touched + unfocused         | Field loses focus            |
+| `FieldTouched`             | Mark field touched               | Any interaction              |
+| `TriggerField`             | Recalculate field properties     | Dependency change            |
+| `ValidateField`            | Validate single field            | Blur, submit, manual         |
+| `ValidateAll`              | Validate all fields              | Submit                       |
+| `SetFieldError`            | Set custom error                 | API error, custom validation |
+| `ClearFieldError`          | Clear field error                | Manual clear                 |
+| `ClearAllErrors`           | Clear all errors                 | Form reset                   |
+| `Submit`                   | Validate + submit if valid       | Submit button                |
+| `Reset`                    | Reset to initial values          | Reset button                 |
+| `SetValues`                | Bulk value update                | External data load           |
+| `AddSendBtnDisableFlag`    | Add flag to disable send btn     | Upload start, validation     |
+| `RemoveSendBtnDisableFlag` | Remove flag from set             | Upload complete              |
 
 ### Intent System
 
 > **Reference File:** `presentation/state/FormIntent.kt`
 
-| Intent                   | Direction     | Purpose                         |
-|--------------------------|---------------|---------------------------------|
-| `Submit`                 | Form → Parent | Deliver validated form data     |
-| `Watch`                  | Form → Parent | Notify field value changes      |
-| `ValidationStateChanged` | Form → Parent | Notify validation state changes |
+| Intent                   | Direction     | Purpose                          |
+|--------------------------|---------------|----------------------------------|
+| `Submit`                 | Form → Parent | Deliver validated form data      |
+| `Watch`                  | Form → Parent | Notify field value changes       |
+| `ValidationStateChanged` | Form → Parent | Notify validation state changes  |
+| `SendBtnStateChanged`    | Form → Parent | Notify send button state changes |
 
 ### Error Handling
 
@@ -231,9 +243,9 @@ using skill : defnForm do [instruction]
 > - `domain/ref/FormRef.kt` - External API for parent components
 > - `domain/ctx/FormCtx.kt` - Internal API for field components
 
-**FormRef** (for parents): `getValue`, `getValues`, `setValue`, `setValues`, `validate`, `setError`, `clearErrors`, `submit`, `reset`, `isDirty`, `isValid`, `isTouched`, `watchFieldState`, `watchFormState`
+**FormRef** (for parents): `getValue`, `getValues`, `setValue`, `setValues`, `validate`, `setError`, `clearErrors`, `submit`, `reset`, `isDirty`, `isValid`, `isTouched`, `watchFieldState`, `watchFormState`, `addSendBtnDisableFlag`, `removeSendBtnDisableFlag`, `isSendBtnEnabled`
 
-**FormCtx** (for fields): `trigger`, `getValues`, `getValue`, `getFieldState`, `getError`, `hasField`, `getDefnForm`, `validate`, `setError`, `clearError`, `watchFieldState`, `watchFieldError`, `watchFormState`
+**FormCtx** (for fields): `trigger`, `getValues`, `getValue`, `getFieldState`, `getError`, `hasField`, `getDefnForm`, `validate`, `setError`, `clearError`, `watchFieldState`, `watchFieldError`, `watchFormState`, `addSendBtnDisableFlag`, `removeSendBtnDisableFlag`
 
 ### Validation Schema System
 
@@ -400,6 +412,18 @@ app/src/main/java/com/neome/feature/form/
 ---
 
 ## Changelog
+
+### v1.5.0 (2026-02-05)
+
+- **Feature**: Added send button disable flag system
+- **Added**: `SendBtnDisableFlag` sealed interface with predefined flags (`Invalid`, `Uploading`, `Processing`, `Validating`, `Custom`)
+- **Added**: `FormState.disableSendBtnSet` property and `FormState.isSendBtnEnabled` computed property
+- **Added**: `FormEvent.AddSendBtnDisableFlag` and `FormEvent.RemoveSendBtnDisableFlag` events
+- **Added**: `FormIntent.SendBtnStateChanged(enabled: Boolean)` for parent notification on state transitions
+- **Added**: `FormCtx.addSendBtnDisableFlag()` and `FormCtx.removeSendBtnDisableFlag()` methods
+- **Added**: `FormRef.addSendBtnDisableFlag()`, `FormRef.removeSendBtnDisableFlag()`, `FormRef.isSendBtnEnabled()` methods
+- **Changed**: `FormCtxValidationHelper` auto-manages `SendBtnDisableFlag.Invalid` based on error state
+- **Changed**: Initial `SendBtnStateChanged` intent emitted on form initialization
 
 ### v1.4.2 (2026-02-04)
 

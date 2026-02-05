@@ -6,6 +6,7 @@ import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormState
+import com.neome.feature.form.presentation.state.SendBtnDisableFlag
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.serialization.json.JsonElement
 
@@ -127,6 +128,24 @@ interface FormCtx {
      * @return StateFlow of FormState
      */
     fun watchFormState(): StateFlow<FormState>
+
+    // ==================== Send Button Control ====================
+
+    /**
+     * Add a flag that disables the send button.
+     * When any flag is present, the send button is disabled.
+     *
+     * @param flag The flag to add
+     */
+    fun addSendBtnDisableFlag(flag: SendBtnDisableFlag)
+
+    /**
+     * Remove a flag that disables the send button.
+     * When all flags are removed, the send button is enabled.
+     *
+     * @param flag The flag to remove
+     */
+    fun removeSendBtnDisableFlag(flag: SendBtnDisableFlag)
 }
 
 /**

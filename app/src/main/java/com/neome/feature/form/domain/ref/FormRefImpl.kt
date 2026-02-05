@@ -5,6 +5,7 @@ import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormState
+import com.neome.feature.form.presentation.state.SendBtnDisableFlag
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -156,5 +157,19 @@ class FormRefImpl(
 
     override fun watchFormState(): StateFlow<FormState> {
         return formStateFlow
+    }
+
+    // ==================== Send Button Control ====================
+
+    override fun addSendBtnDisableFlag(flag: SendBtnDisableFlag) {
+        dispatchEvent(FormEvent.AddSendBtnDisableFlag(flag))
+    }
+
+    override fun removeSendBtnDisableFlag(flag: SendBtnDisableFlag) {
+        dispatchEvent(FormEvent.RemoveSendBtnDisableFlag(flag))
+    }
+
+    override fun isSendBtnEnabled(): Boolean {
+        return currentState.isSendBtnEnabled
     }
 }

@@ -32,6 +32,10 @@ class FormScreenViewModel @Inject constructor() : ViewModel() {
             is FormIntent.ValidationStateChanged -> {
                 "Validation → valid=${intent.isValid} errors=${intent.hasErrors}"
             }
+
+            is FormIntent.SendBtnStateChanged -> {
+                "SendBtn → enabled=${intent.enabled}"
+            }
         }
 
         Log.d("FormScreen", message)

@@ -44,4 +44,14 @@ sealed interface FormIntent : UiEvent {
         val isValid: Boolean,
         val hasErrors: Boolean
     ) : FormIntent
+
+    /**
+     * Send button enabled state changed.
+     * Emitted when the send button transitions between enabled and disabled states.
+     * Also emitted on form initialization with the initial state.
+     *
+     * @param enabled true if send button is now enabled, false if disabled
+     */
+    @Immutable
+    data class SendBtnStateChanged(val enabled: Boolean) : FormIntent
 }

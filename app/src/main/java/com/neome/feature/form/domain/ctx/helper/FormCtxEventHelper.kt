@@ -295,7 +295,7 @@ object FormCtxEventHelper {
             ?: return errors // No schema = no validation needed
 
         // Use pure validation to get error without side effects
-        val error = schema.validatePure(fieldState.value, fieldState)
+        val error = schema.validate(fieldState.value, fieldState)
 
         return if (error != null) {
             // Set error

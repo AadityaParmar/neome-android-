@@ -3,7 +3,9 @@ package com.neome.feature.form.domain.ctx.helper
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FormEvent
+import com.neome.feature.form.presentation.state.FormIntent
 import com.neome.feature.form.presentation.state.FormState
+import com.neome.feature.form.presentation.state.SendBtnDisableFlag
 
 object FormCtxValidationHelper {
 
@@ -21,7 +23,7 @@ object FormCtxValidationHelper {
         val validatingFieldState = currentFieldState.copy(isValidating = true)
 
         // 2. Use pure validation to get error without side effects
-        val error = schema.validatePure(currentFieldState.value, currentFieldState)
+        val error = schema.validate(currentFieldState.value, currentFieldState)
 
         // 3. Update errors map
         val updatedErrors = updateFieldError(
@@ -38,7 +40,8 @@ object FormCtxValidationHelper {
             errors = updatedErrors
         )
 
-        return FormReducerResult(newState)
+        // Update Invalid flag based on new error state
+        return updateInvalidFlag(newState)
     }
 
     fun handleValidateAll(state: FormState): FormReducerResult {
@@ -51,7 +54,7 @@ object FormCtxValidationHelper {
         var updatedErrors = state.errors
         state.compSchemaMap.forEach { (fieldId, schema) ->
             val fieldState = state.fieldStates[fieldId]
-            val error = schema.validatePure(fieldState?.value, fieldState)
+            val error = schema.validate(fieldState?.value, fieldState)
             updatedErrors = updateFieldError(
                 fieldId = fieldId,
                 error = error,
@@ -69,7 +72,8 @@ object FormCtxValidationHelper {
             errors = updatedErrors
         )
 
-        return FormReducerResult(newState)
+        // Update Invalid flag based on new error state
+        return updateInvalidFlag(newState)
     }
 
     /**
@@ -114,7 +118,9 @@ object FormCtxValidationHelper {
         ))
 
         val newState = state.copy(errors = newErrors)
-        return FormReducerResult(newState)
+
+        // Update Invalid flag based on new error state
+        return updateInvalidFlag(newState)
     }
 
     fun handleClearFieldError(
@@ -122,11 +128,49 @@ object FormCtxValidationHelper {
         event: FormEvent.ClearFieldError
     ): FormReducerResult {
         val newState = state.copy(errors = state.errors - event.fieldId)
-        return FormReducerResult(newState)
+
+        // Update Invalid flag based on new error state
+        return updateInvalidFlag(newState)
     }
 
     fun handleClearAllErrors(state: FormState): FormReducerResult {
         val newState = state.copy(errors = emptyMap())
-        return FormReducerResult(newState)
+
+        // Update Invalid flag based on new error state
+        return updateInvalidFlag(newState)
+    }
+
+    /**
+     * Updates the SendBtnDisableFlag.Invalid flag based on error state.
+     * Returns updated state with correct flag and optional intent on transition.
+     *
+     * @param state The state after error changes
+     * @return FormReducerResult with updated disableSendBtnSet and optional SendBtnStateChanged intent
+     */
+    private fun updateInvalidFlag(state: FormState): FormReducerResult {
+        val hasErrors = state.errors.isNotEmpty()
+        val hasInvalidFlag = SendBtnDisableFlag.Invalid in state.disableSendBtnSet
+
+        return when {
+            hasErrors && !hasInvalidFlag -> {
+                // Add Invalid flag
+                val wasEnabled = state.isSendBtnEnabled
+                val newSet = state.disableSendBtnSet + SendBtnDisableFlag.Invalid
+                val newState = state.copy(disableSendBtnSet = newSet)
+                val intent = if (wasEnabled) FormIntent.SendBtnStateChanged(enabled = false) else null
+                FormReducerResult(newState, intent)
+            }
+
+            !hasErrors && hasInvalidFlag -> {
+                // Remove Invalid flag
+                val newSet = state.disableSendBtnSet - SendBtnDisableFlag.Invalid
+                val newState = state.copy(disableSendBtnSet = newSet)
+                val isNowEnabled = newState.isSendBtnEnabled
+                val intent = if (isNowEnabled) FormIntent.SendBtnStateChanged(enabled = true) else null
+                FormReducerResult(newState, intent)
+            }
+
+            else -> FormReducerResult(state) // No change needed
+        }
     }
 }
