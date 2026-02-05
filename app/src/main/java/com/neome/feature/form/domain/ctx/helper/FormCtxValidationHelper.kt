@@ -1,9 +1,7 @@
 package com.neome.feature.form.domain.ctx.helper
 
 import com.neome.api.meta.base.Types.MetaIdComp
-import com.neome.feature.form.domain.ctx.helper.schema.DefnCompSchema
 import com.neome.feature.form.presentation.state.FieldError
-import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormState
 

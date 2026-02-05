@@ -1,6 +1,7 @@
 package com.neome.feature.form.domain.ctx.helper.schema
 
 import com.neome.api.meta.base.Types.EnumDefnCompType
+import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 
@@ -13,18 +14,27 @@ import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
  */
 object CompSchemaFactory {
 
+    fun buildFormSchemas(defnForm: DefnFormData): Map<MetaIdComp, CompSchema> {
+        return defnForm.compMap
+            .mapNotNull { (fieldId, defnComp) ->
+                val schema = this.create(defnForm, defnComp)
+                schema?.let { fieldId to it }
+            }
+            .toMap()
+    }
+
     /**
      * Creates a CompSchema for the given component definition.
      *
      * @param defnComp The component definition to create schema for
      * @return CompSchema for validation, or null for composite/display-only types
      */
-    fun create(defnForm: DefnFormData, defnComp: DefnCompSeal): DefnCompSchema? {
+    private fun create(defnForm: DefnFormData, defnComp: DefnCompSeal): CompSchema? {
         return when (defnComp.type) {
             // ═══════════════════════════════════════════════════════════════
             // TEXT-BASED FIELDS
             // ═══════════════════════════════════════════════════════════════
-            EnumDefnCompType.text -> DefnFieldTextSchema(defnForm, defnComp)
+            EnumDefnCompType.text -> FieldTextSchema(defnForm, defnComp)
             EnumDefnCompType.paragraph,
             EnumDefnCompType.handle,
             EnumDefnCompType.hyperlink -> null
@@ -38,7 +48,7 @@ object CompSchemaFactory {
             // NUMBER FIELDS
             // ═══════════════════════════════════════════════════════════════
             EnumDefnCompType.number,
-            EnumDefnCompType.logNumber -> DefnFieldNumberSchema(defnForm, defnComp) // TODO: NumberCompSchema
+            EnumDefnCompType.logNumber -> FieldNumberSchema(defnForm, defnComp) // TODO: NumberCompSchema
 
             // ═══════════════════════════════════════════════════════════════
             // DECIMAL FIELDS

@@ -3,7 +3,7 @@ package com.neome.feature.form.domain.ctx.helper
 import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
-import com.neome.feature.form.domain.ctx.helper.schema.CalcSchema
+import com.neome.feature.form.domain.ctx.helper.schema.CompSchemaFactory
 import com.neome.feature.form.domain.util.FieldPropertyResolver
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormState
@@ -54,7 +54,7 @@ object FormCtxInitHelper {
             }
 
         // Build validation schemas for all fields
-        val compSchemaMap = CalcSchema.buildFormSchemas(defnForm)
+        val compSchemaMap = CompSchemaFactory.buildFormSchemas(defnForm)
 
         return FormState(
             defnForm = defnForm,

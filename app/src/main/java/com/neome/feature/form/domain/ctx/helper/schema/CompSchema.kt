@@ -16,7 +16,7 @@ import kotlinx.serialization.json.JsonElement
  *
  * The validate() method internally sets/clears errors using FormCtx.
  */
-abstract class DefnCompSchema(open val defnForm: DefnFormData, open val defnComp: DefnCompSeal) {
+abstract class CompSchema(open val defnForm: DefnFormData, open val defnComp: DefnCompSeal) {
 
     /**
      * Pure validation that returns an error message without side effects.

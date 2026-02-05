@@ -4,7 +4,7 @@ import androidx.compose.runtime.Immutable
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
-import com.neome.feature.form.domain.ctx.helper.schema.DefnCompSchema
+import com.neome.feature.form.domain.ctx.helper.schema.CompSchema
 import kotlinx.serialization.json.JsonElement
 
 /**
@@ -31,7 +31,7 @@ data class FormState(
      * Built once during form initialization by [CalcSchema.buildFormSchemas].
      * Only contains schemas for leaf field types with validation rules.
      */
-    val compSchemaMap: Map<MetaIdComp, DefnCompSchema> = emptyMap(),
+    val compSchemaMap: Map<MetaIdComp, CompSchema> = emptyMap(),
 
     // Form-wide configuration
     val disabled: Boolean = false,

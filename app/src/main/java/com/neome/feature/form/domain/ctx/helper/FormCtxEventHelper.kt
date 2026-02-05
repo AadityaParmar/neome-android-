@@ -2,7 +2,7 @@ package com.neome.feature.form.domain.ctx.helper
 
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
-import com.neome.feature.form.domain.ctx.helper.schema.DefnCompSchema
+import com.neome.feature.form.domain.ctx.helper.schema.CompSchema
 import com.neome.feature.form.domain.util.FieldPropertyResolver
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldState
@@ -196,7 +196,7 @@ object FormCtxEventHelper {
         dependentIds: Set<MetaIdComp>,
         defnForm: DefnFormData,
         errors: Map<MetaIdComp, FieldError>,
-        compSchemaMap: Map<MetaIdComp, DefnCompSchema>
+        compSchemaMap: Map<MetaIdComp, CompSchema>
     ): TriggerResult {
         if (dependentIds.isEmpty()) return TriggerResult(fieldStates, errors)
 
@@ -229,7 +229,7 @@ object FormCtxEventHelper {
         fieldStates: Map<MetaIdComp, FieldState>,
         errors: Map<MetaIdComp, FieldError>,
         defnForm: DefnFormData,
-        compSchemaMap: Map<MetaIdComp, DefnCompSchema>
+        compSchemaMap: Map<MetaIdComp, CompSchema>
     ): TriggerResult? {
         defnForm.compMap[fieldId] ?: return null
         val currentFieldState = fieldStates[fieldId] ?: return null
@@ -289,7 +289,7 @@ object FormCtxEventHelper {
         fieldId: MetaIdComp,
         fieldState: FieldState,
         errors: Map<MetaIdComp, FieldError>,
-        compSchemaMap: Map<MetaIdComp, DefnCompSchema>
+        compSchemaMap: Map<MetaIdComp, CompSchema>
     ): Map<MetaIdComp, FieldError> {
         val schema = compSchemaMap[fieldId]
             ?: return errors // No schema = no validation needed
