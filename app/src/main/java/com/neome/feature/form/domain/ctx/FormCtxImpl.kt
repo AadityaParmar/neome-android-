@@ -12,16 +12,24 @@ import com.neome.feature.form.domain.ref.FormRef
 import com.neome.feature.form.domain.ref.FormRefImpl
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldState
+import com.neome.feature.form.presentation.state.FormAction
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormIntent
 import com.neome.feature.form.presentation.state.FormState
 import com.neome.feature.form.presentation.state.SendBtnDisableFlag
+import com.neome.feature.form.presentation.state.toFormEvent
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.json.JsonElement
+import java.util.concurrent.atomic.AtomicInteger
 
 class FormCtxImpl(
     private val defnForm: DefnFormData,
@@ -39,6 +47,11 @@ class FormCtxImpl(
     private val fieldStateFlows = mutableMapOf<MetaIdComp, StateFlow<FieldState?>>()
     private val fieldErrorFlows = mutableMapOf<MetaIdComp, StateFlow<FieldError?>>()
 
+    private val processingDispatcher = Dispatchers.Default
+    private val activeJobCount = AtomicInteger(0)
+    private val idleMutex = Mutex()
+    private val activeJobs = mutableSetOf<Job>()
+
     init {
         _stateFlow = MutableStateFlow(
             FormCtxInitHelper.initializeFormState(defnForm, initialValue)
@@ -53,6 +66,40 @@ class FormCtxImpl(
             val result = processEvent(currentState, event)
             result.intent?.let { onIntent(it) }
             result.state
+        }
+    }
+
+    internal fun enqueue(action: FormAction) {
+        activeJobCount.incrementAndGet()
+        val job = coroutineScope.launch(processingDispatcher) {
+            try {
+                val event = action.toFormEvent()
+                dispatch(event)
+            } finally {
+                activeJobCount.decrementAndGet()
+                idleMutex.withLock {
+                    activeJobs.remove(coroutineContext[Job])
+                }
+            }
+        }
+        coroutineScope.launch {
+            idleMutex.withLock {
+                activeJobs.add(job)
+            }
+        }
+    }
+
+    override suspend fun awaitIdle() {
+        // Fast path: no active jobs
+        if (activeJobCount.get() == 0) return
+
+        // Wait for all active jobs to complete
+        val jobsToAwait = idleMutex.withLock { activeJobs.toList() }
+        jobsToAwait.forEach { it.join() }
+
+        // Recursive check in case new jobs were added during wait
+        if (activeJobCount.get() > 0) {
+            awaitIdle()
         }
     }
 
@@ -123,13 +170,14 @@ class FormCtxImpl(
     fun createFormRef(): FormRef {
         return FormRefImpl(
             formStateFlow = stateFlow,
-            dispatchEvent = ::dispatch,
-            coroutineScope = coroutineScope
+            enqueueAction = ::enqueue,
+            coroutineScope = coroutineScope,
+            awaitIdleFn = ::awaitIdle
         )
     }
 
     override fun trigger(fieldId: MetaIdComp) {
-        dispatch(FormEvent.TriggerField(fieldId))
+        enqueue(FormAction.Trigger(fieldId))
     }
 
     override fun getValues(): Map<MetaIdComp, JsonElement> = currentState.getValueMap()
@@ -140,21 +188,20 @@ class FormCtxImpl(
     override fun getDefnForm(): DefnFormData? = currentState.defnForm
 
     override fun validate(fieldId: MetaIdComp?): Boolean {
+        enqueue(FormAction.Validate(fieldId))
         return if (fieldId != null) {
-            dispatch(FormEvent.ValidateField(fieldId))
             !currentState.hasError(fieldId)
         } else {
-            dispatch(FormEvent.ValidateAll)
             currentState.isValid
         }
     }
 
     override fun setError(fieldId: MetaIdComp, error: String) {
-        dispatch(FormEvent.SetFieldError(fieldId, error))
+        enqueue(FormAction.SetError(fieldId, error))
     }
 
     override fun clearError(fieldId: MetaIdComp) {
-        dispatch(FormEvent.ClearFieldError(fieldId))
+        enqueue(FormAction.ClearError(fieldId))
     }
 
     override fun watchFieldState(fieldId: MetaIdComp): StateFlow<FieldState?> {
@@ -172,10 +219,10 @@ class FormCtxImpl(
     override fun watchFormState(): StateFlow<FormState> = stateFlow
 
     override fun addSendBtnDisableFlag(flag: SendBtnDisableFlag) {
-        dispatch(FormEvent.AddSendBtnDisableFlag(flag))
+        enqueue(FormAction.AddSendBtnFlag(flag))
     }
 
     override fun removeSendBtnDisableFlag(flag: SendBtnDisableFlag) {
-        dispatch(FormEvent.RemoveSendBtnDisableFlag(flag))
+        enqueue(FormAction.RemoveSendBtnFlag(flag))
     }
 }

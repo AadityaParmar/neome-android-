@@ -146,6 +146,27 @@ interface FormCtx {
      * @param flag The flag to remove
      */
     fun removeSendBtnDisableFlag(flag: SendBtnDisableFlag)
+
+    // ==================== Async Operations ====================
+
+    /**
+     * Suspends until all queued actions are processed.
+     * Use after batching multiple setValue calls to ensure state is consistent
+     * before reading values.
+     *
+     * Example:
+     * ```kotlin
+     * // Batch updates
+     * items.forEach { formCtx.setValue(it.fieldId, it.value) }
+     *
+     * // Wait for all to complete
+     * formCtx.awaitIdle()
+     *
+     * // Now safe to read latest state
+     * val values = formCtx.getValues()
+     * ```
+     */
+    suspend fun awaitIdle()
 }
 
 /**

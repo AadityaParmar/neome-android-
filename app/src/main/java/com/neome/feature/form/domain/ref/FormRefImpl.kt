@@ -3,7 +3,7 @@ package com.neome.feature.form.domain.ref
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
 import com.neome.feature.form.presentation.state.FieldState
-import com.neome.feature.form.presentation.state.FormEvent
+import com.neome.feature.form.presentation.state.FormAction
 import com.neome.feature.form.presentation.state.FormState
 import com.neome.feature.form.presentation.state.SendBtnDisableFlag
 import kotlinx.coroutines.CoroutineScope
@@ -23,8 +23,9 @@ import kotlinx.serialization.json.JsonElement
  */
 class FormRefImpl(
     private val formStateFlow: StateFlow<FormState>,
-    private val dispatchEvent: (FormEvent) -> Unit,
-    private val coroutineScope: CoroutineScope
+    private val enqueueAction: (FormAction) -> Unit,
+    private val coroutineScope: CoroutineScope,
+    private val awaitIdleFn: suspend () -> Unit
 ) : FormRef {
 
     private val currentState: FormState
@@ -65,47 +66,41 @@ class FormRefImpl(
     // ==================== Write Operations ====================
 
     override fun setValue(fieldId: MetaIdComp, value: JsonElement?, shouldValidate: Boolean) {
-        dispatchEvent(FormEvent.FieldValueChanged(fieldId, value, shouldValidate))
+        enqueueAction(FormAction.SetValue(fieldId, value, shouldValidate))
     }
 
     override fun setValues(valueMap: Map<MetaIdComp, JsonElement>, shouldValidate: Boolean) {
-        dispatchEvent(FormEvent.SetValues(valueMap, shouldValidate))
+        enqueueAction(FormAction.SetValues(valueMap, shouldValidate))
     }
 
     // ==================== Validation ====================
 
     override fun validate(fieldId: MetaIdComp?): Boolean {
-        if (fieldId != null) {
-            dispatchEvent(FormEvent.ValidateField(fieldId))
-            // Return validation result from current state
-            return !currentState.hasError(fieldId)
+        enqueueAction(FormAction.Validate(fieldId))
+        // Note: Returns current state - use awaitIdle() if you need result after processing
+        return if (fieldId != null) {
+            !currentState.hasError(fieldId)
         } else {
-            dispatchEvent(FormEvent.ValidateAll)
-            // Return validation result from current state
-            return currentState.isValid
+            currentState.isValid
         }
     }
 
     override fun setError(fieldId: MetaIdComp, error: String) {
-        dispatchEvent(FormEvent.SetFieldError(fieldId, error))
+        enqueueAction(FormAction.SetError(fieldId, error))
     }
 
     override fun clearErrors(fieldId: MetaIdComp?) {
-        if (fieldId != null) {
-            dispatchEvent(FormEvent.ClearFieldError(fieldId))
-        } else {
-            dispatchEvent(FormEvent.ClearAllErrors)
-        }
+        enqueueAction(FormAction.ClearError(fieldId))
     }
 
     // ==================== Form Operations ====================
 
     override fun submit() {
-        dispatchEvent(FormEvent.Submit)
+        enqueueAction(FormAction.Submit)
     }
 
     override fun reset(valueMap: Map<MetaIdComp, JsonElement>?) {
-        dispatchEvent(FormEvent.Reset(valueMap))
+        enqueueAction(FormAction.Reset(valueMap))
     }
 
     // ==================== State Queries ====================
@@ -162,14 +157,20 @@ class FormRefImpl(
     // ==================== Send Button Control ====================
 
     override fun addSendBtnDisableFlag(flag: SendBtnDisableFlag) {
-        dispatchEvent(FormEvent.AddSendBtnDisableFlag(flag))
+        enqueueAction(FormAction.AddSendBtnFlag(flag))
     }
 
     override fun removeSendBtnDisableFlag(flag: SendBtnDisableFlag) {
-        dispatchEvent(FormEvent.RemoveSendBtnDisableFlag(flag))
+        enqueueAction(FormAction.RemoveSendBtnFlag(flag))
     }
 
     override fun isSendBtnEnabled(): Boolean {
         return currentState.isSendBtnEnabled
+    }
+
+    // ==================== Async Operations ====================
+
+    override suspend fun awaitIdle() {
+        awaitIdleFn()
     }
 }

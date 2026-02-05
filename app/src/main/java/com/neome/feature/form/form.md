@@ -4,7 +4,7 @@
 
 | Property           | Value                                       |
 |--------------------|---------------------------------------------|
-| **Version**        | 1.5.0                                       |
+| **Version**        | 1.6.0                                       |
 | **Last Updated**   | 2026-02-05                                  |
 | **Scope**          | Android Form Component Architecture         |
 | **Path**           | `app/src/main/java/com/neome/feature/form/` |
@@ -88,6 +88,7 @@ using skill : defnForm do [instruction]
 | Field Controller  | `presentation/components/base/FieldController.kt` |
 | State Classes     | `presentation/state/FormState.kt`                 |
 | Events            | `presentation/state/FormEvent.kt`                 |
+| Actions           | `presentation/state/FormAction.kt`                |
 | Field State       | `presentation/state/FieldState.kt`                |
 | Property Resolver | `domain/util/FieldPropertyResolver.kt`            |
 | Value Resolver    | `domain/util/FieldValueResolver.kt`               |
@@ -164,6 +165,7 @@ using skill : defnForm do [instruction]
 | Stable Context         | `FormCtx` never recreated after Form init          |
 | No Prop Drilling       | `LocalFormCtx` provides context to all descendants |
 | Schema Validation      | `DefnCompSchema` for type-specific validation      |
+| Background Processing  | All mutations via `enqueue()` on `Dispatchers.Default` |
 
 ---
 
@@ -243,9 +245,9 @@ using skill : defnForm do [instruction]
 > - `domain/ref/FormRef.kt` - External API for parent components
 > - `domain/ctx/FormCtx.kt` - Internal API for field components
 
-**FormRef** (for parents): `getValue`, `getValues`, `setValue`, `setValues`, `validate`, `setError`, `clearErrors`, `submit`, `reset`, `isDirty`, `isValid`, `isTouched`, `watchFieldState`, `watchFormState`, `addSendBtnDisableFlag`, `removeSendBtnDisableFlag`, `isSendBtnEnabled`
+**FormRef** (for parents): `getValue`, `getValues`, `setValue`, `setValues`, `validate`, `setError`, `clearErrors`, `submit`, `reset`, `isDirty`, `isValid`, `isTouched`, `watchFieldState`, `watchFormState`, `addSendBtnDisableFlag`, `removeSendBtnDisableFlag`, `isSendBtnEnabled`, `awaitIdle`
 
-**FormCtx** (for fields): `trigger`, `getValues`, `getValue`, `getFieldState`, `getError`, `hasField`, `getDefnForm`, `validate`, `setError`, `clearError`, `watchFieldState`, `watchFieldError`, `watchFormState`, `addSendBtnDisableFlag`, `removeSendBtnDisableFlag`
+**FormCtx** (for fields): `trigger`, `getValues`, `getValue`, `getFieldState`, `getError`, `hasField`, `getDefnForm`, `validate`, `setError`, `clearError`, `watchFieldState`, `watchFieldError`, `watchFormState`, `addSendBtnDisableFlag`, `removeSendBtnDisableFlag`, `awaitIdle`
 
 ### Validation Schema System
 
@@ -402,6 +404,7 @@ app/src/main/java/com/neome/feature/form/
 │       ├── FormState.kt
 │       ├── FieldState.kt
 │       ├── FormEvent.kt
+│       ├── FormAction.kt                    # Action types for background processing
 │       ├── FormIntent.kt
 │       ├── FieldEvent.kt
 │       └── FieldError.kt
@@ -412,6 +415,17 @@ app/src/main/java/com/neome/feature/form/
 ---
 
 ## Changelog
+
+### v1.6.0 (2026-02-05)
+
+- **Feature**: Added background action processing for UI responsiveness
+- **Added**: `FormAction` sealed interface for all form actions (`presentation/state/FormAction.kt`)
+- **Added**: `FormCtx.awaitIdle()` and `FormRef.awaitIdle()` suspend functions
+- **Added**: `toFormEvent()` extension function to convert `FormAction` to `FormEvent`
+- **Changed**: All state-modifying operations now processed on `Dispatchers.Default` via `enqueue()`
+- **Changed**: `FormCtxImpl` tracks active jobs with `AtomicInteger` and `Mutex` for `awaitIdle()` support
+- **Changed**: `FormRefImpl` constructor now takes `enqueueAction` instead of `dispatchEvent`
+- **Benefit**: UI thread stays responsive during complex form operations (validations, calculations)
 
 ### v1.5.0 (2026-02-05)
 

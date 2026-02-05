@@ -188,4 +188,25 @@ interface FormRef {
      * @return true if send button is enabled
      */
     fun isSendBtnEnabled(): Boolean
+
+    // ==================== Async Operations ====================
+
+    /**
+     * Suspends until all queued actions are processed.
+     * Use after batching multiple setValue calls to ensure state is consistent
+     * before reading values.
+     *
+     * Example:
+     * ```kotlin
+     * // Batch updates from external module
+     * rules.forEach { formRef.setValue(it.fieldId, it.value) }
+     *
+     * // Wait for all to complete
+     * formRef.awaitIdle()
+     *
+     * // Now safe to read latest state
+     * val values = formRef.getValues()
+     * ```
+     */
+    suspend fun awaitIdle()
 }
