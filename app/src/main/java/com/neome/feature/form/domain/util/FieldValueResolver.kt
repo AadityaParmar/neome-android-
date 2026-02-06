@@ -1,12 +1,18 @@
 package com.neome.feature.form.domain.util
 
 import com.neome.api.meta.base.Types
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueColorData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateTimeData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDecimalData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueEmailData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueHandleData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueHyperlinkData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueMobileData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueNumberData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueParagraphData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTimeData
 import com.neome.feature.utils.JsonParser
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonPrimitive
@@ -25,7 +31,13 @@ object FieldValueResolver {
 
         try {
             return when (compType) {
-                Types.EnumDefnCompType.text -> {
+                Types.EnumDefnCompType.text,
+                Types.EnumDefnCompType.password,
+                Types.EnumDefnCompType.icon,
+                Types.EnumDefnCompType.info,
+                Types.EnumDefnCompType.identifier,
+                Types.EnumDefnCompType.symbol,
+                Types.EnumDefnCompType.otp -> {
                     val stringValue = when (value) {
                         is JsonElement -> value.jsonPrimitive.content
                         else -> value.toString()
@@ -41,12 +53,60 @@ object FieldValueResolver {
                     FieldValueEmailData(stringValue)
                 }
 
+                Types.EnumDefnCompType.mobileNumber -> {
+                    val stringValue = when (value) {
+                        is JsonElement -> value.jsonPrimitive.content
+                        else -> value.toString()
+                    }
+                    FieldValueMobileData(stringValue)
+                }
+
+                Types.EnumDefnCompType.handle -> {
+                    val stringValue = when (value) {
+                        is JsonElement -> value.jsonPrimitive.content
+                        else -> value.toString()
+                    }
+                    FieldValueHandleData(stringValue)
+                }
+
+                Types.EnumDefnCompType.hyperlink -> {
+                    val stringValue = when (value) {
+                        is JsonElement -> value.jsonPrimitive.content
+                        else -> value.toString()
+                    }
+                    FieldValueHyperlinkData(stringValue)
+                }
+
+                Types.EnumDefnCompType.color -> {
+                    val stringValue = when (value) {
+                        is JsonElement -> value.jsonPrimitive.content
+                        else -> value.toString()
+                    }
+                    FieldValueColorData(stringValue)
+                }
+
                 Types.EnumDefnCompType.date -> {
                     val stringValue = when (value) {
                         is JsonElement -> value.jsonPrimitive.content
                         else -> value.toString()
                     }
                     FieldValueDateData(stringValue)
+                }
+
+                Types.EnumDefnCompType.time -> {
+                    val stringValue = when (value) {
+                        is JsonElement -> value.jsonPrimitive.content
+                        else -> value.toString()
+                    }
+                    FieldValueTimeData(stringValue)
+                }
+
+                Types.EnumDefnCompType.dateTime -> {
+                    val stringValue = when (value) {
+                        is JsonElement -> value.jsonPrimitive.content
+                        else -> value.toString()
+                    }
+                    FieldValueDateTimeData(stringValue)
                 }
 
                 Types.EnumDefnCompType.paragraph -> {
@@ -57,7 +117,11 @@ object FieldValueResolver {
                     FieldValueParagraphData(stringValue)
                 }
 
-                Types.EnumDefnCompType.number -> {
+                Types.EnumDefnCompType.number,
+                Types.EnumDefnCompType.logNumber,
+                Types.EnumDefnCompType.counter,
+                Types.EnumDefnCompType.logCounter,
+                Types.EnumDefnCompType.rating -> {
                     val numberValue = when (value) {
                         is Long -> value
                         is Int -> value.toLong()
@@ -70,7 +134,8 @@ object FieldValueResolver {
                     numberValue?.let { FieldValueNumberData(it) }
                 }
 
-                Types.EnumDefnCompType.decimal -> {
+                Types.EnumDefnCompType.decimal,
+                Types.EnumDefnCompType.logDecimal -> {
                     val decimalValue = when (value) {
                         is Long -> value.toDouble()
                         is Int -> value.toDouble()

@@ -4,7 +4,7 @@
 
 | Property           | Value                                       |
 |--------------------|---------------------------------------------|
-| **Version**        | 1.8.0                                       |
+| **Version**        | 1.9.0                                       |
 | **Last Updated**   | 2026-02-06                                  |
 | **Scope**          | Android Form Component Architecture         |
 | **Path**           | `app/src/main/java/com/neome/feature/form/` |
@@ -84,6 +84,7 @@ using skill : defnForm do [instruction]
 | Schema Base       | `domain/ctx/helper/schema/CompSchema.kt`          |
 | Text Schema       | `domain/ctx/helper/schema/FieldTextSchema.kt`     |
 | Number Schema     | `domain/ctx/helper/schema/FieldNumberSchema.kt`   |
+| All Schemas       | `domain/ctx/helper/schema/Field*Schema.kt` (35+)  |
 | Field Factory     | `presentation/components/base/FieldFactory.kt`    |
 | External API      | `domain/ref/FormRef.kt`                           |
 | Internal Context  | `domain/ctx/FormCtx.kt`                           |
@@ -267,11 +268,10 @@ using skill : defnForm do [instruction]
 ### Validation Schema System
 
 > **Reference Files:**
-> - `domain/ctx/helper/schema/DefnCompSchema.kt` - Abstract base class
+> - `domain/ctx/helper/schema/CompSchema.kt` - Abstract base class
 > - `domain/ctx/helper/schema/CalcSchema.kt` - Builds schemas during init
 > - `domain/ctx/helper/schema/CompSchemaFactory.kt` - Factory by field type
-> - `domain/ctx/helper/schema/DefnFieldTextSchema.kt` - Text validation
-> - `domain/ctx/helper/schema/DefnFieldNumberSchema.kt` - Number validation
+> - `domain/ctx/helper/schema/Field*Schema.kt` - Type-specific validation (35+ schemas)
 
 **Schema Lifecycle:**
 
@@ -385,9 +385,10 @@ app/src/main/java/com/neome/feature/form/
 │   │       └── schema/                     # Validation schema system
 │   │           ├── CalcSchema.kt           # Builds schemas for all fields
 │   │           ├── CompSchemaFactory.kt    # Factory by field type
-│   │           ├── DefnCompSchema.kt       # Abstract base class
-│   │           ├── DefnFieldTextSchema.kt  # Text validation
-│   │           └── DefnFieldNumberSchema.kt # Number validation
+│   │           ├── CompSchema.kt           # Abstract base class
+│   │           ├── FieldTextSchema.kt      # Text validation
+│   │           ├── FieldNumberSchema.kt    # Number validation
+│   │           └── Field*Schema.kt         # 35+ type-specific schemas
 │   │
 │   ├── ref/
 │   │   ├── FormRef.kt                      # External API interface
@@ -433,6 +434,26 @@ app/src/main/java/com/neome/feature/form/
 ---
 
 ## Changelog
+
+### v1.9.0 (2026-02-06)
+
+- **Feature**: Comprehensive validation schema implementation for all field types (35 new schemas)
+- **Added**: Text-based schemas: `FieldEmailSchema`, `FieldParagraphSchema`, `FieldHyperlinkSchema`, `FieldSymbolSchema`, `FieldHandleSchema`, `FieldMobileNumberSchema`, `FieldOtpSchema`
+- **Added**: Numeric schemas: `FieldDecimalSchema` (FieldNumberSchema already existed)
+- **Added**: Date/Time schemas: `FieldDateSchema`, `FieldTimeSchema`, `FieldDateTimeSchema`, `FieldDateRangeSchema`
+- **Added**: Pick/Select schemas: `FieldPickTextSchema`, `FieldPickTreeSchema`, `FieldPickUserSchema`, `FieldPickRoleSchema`, `FieldPickGridRowSchema`
+- **Added**: SetOf/ChipSet schemas: `FieldChipSetSchema`, `FieldSetOfTextSchema`, `FieldSetOfUserSchema`, `FieldSetOfRoleSchema`, `FieldSetOfDocumentSchema`
+- **Added**: Media schemas: `FieldImageSchema`, `FieldCameraSchema`, `FieldVideoSchema`, `FieldAudioSchema`, `FieldVoiceSchema`, `FieldDocumentSchema`
+- **Added**: Special field schemas: `FieldBoolSchema`, `FieldSignatureSchema`, `FieldScanCodeSchema`, `FieldLocationSchema`, `FieldDurationSchema`, `FieldSliderSchema`, `FieldColorSchema`, `FieldGridSchema`
+- **Added**: `FieldValueResolver` support for: mobileNumber, handle, hyperlink, color, time, dateTime, symbol, otp, slider, duration, location, signature, scanCode, audio, voice, video, camera, document, image, chipSet, setOfText, setOfUser, setOfRole, setOfDocument, pickText, pickTree, pickUser, pickRole, pickGridRow, grid, dateRange, dateTimeRange
+- **Changed**: `CompSchemaFactory` now routes all field types to their respective schema implementations
+- **Validation**: Media fields validate `required`, `maxSize` (MB to bytes conversion), and capture values (captureTime, captureLocation, captureUser)
+- **Validation**: Pick fields validate `required` with proper value extraction from FieldValue*Data types
+- **Validation**: SetOf fields validate `required` checking non-empty sets
+- **Validation**: Duration fields validate `required`, `minDuration`, `maxDuration` with unit conversion (seconds, minutes, hours, days, weeks, months, quarters, years)
+- **Validation**: Mobile number validates format with regex pattern `^\+[0-9]+$` and length 7-15 digits
+- **Validation**: Email uses standard email regex pattern validation
+- **Validation**: Decimal fields validate `required`, `minDecimal`, `maxDecimal` from FieldProperties
 
 ### v1.8.0 (2026-02-06)
 

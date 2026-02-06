@@ -34,101 +34,83 @@ object CompSchemaFactory {
             // ═══════════════════════════════════════════════════════════════
             // TEXT-BASED FIELDS
             // ═══════════════════════════════════════════════════════════════
-            EnumDefnCompType.text -> FieldTextSchema(defnForm, defnComp)
-            EnumDefnCompType.paragraph,
-            EnumDefnCompType.handle,
-            EnumDefnCompType.hyperlink -> null
+            EnumDefnCompType.text,
+            EnumDefnCompType.password,
+            EnumDefnCompType.icon,
+            EnumDefnCompType.info,
+            EnumDefnCompType.identifier -> FieldTextSchema(defnForm, defnComp)
+
+            EnumDefnCompType.paragraph -> FieldParagraphSchema(defnForm, defnComp)
+            EnumDefnCompType.hyperlink -> FieldHyperlinkSchema(defnForm, defnComp)
+            EnumDefnCompType.symbol -> FieldSymbolSchema(defnForm, defnComp)
+            EnumDefnCompType.handle -> FieldHandleSchema(defnForm, defnComp)
 
             // ═══════════════════════════════════════════════════════════════
             // EMAIL FIELD
             // ═══════════════════════════════════════════════════════════════
-            EnumDefnCompType.email -> null // TODO: EmailCompSchema
+            EnumDefnCompType.email -> FieldEmailSchema(defnForm, defnComp)
+
+            // ═══════════════════════════════════════════════════════════════
+            // MOBILE NUMBER FIELD
+            // ═══════════════════════════════════════════════════════════════
+            EnumDefnCompType.mobileNumber -> FieldMobileNumberSchema(defnForm, defnComp)
+
+            // ═══════════════════════════════════════════════════════════════
+            // OTP FIELD
+            // ═══════════════════════════════════════════════════════════════
+            EnumDefnCompType.otp -> FieldOtpSchema(defnForm, defnComp)
 
             // ═══════════════════════════════════════════════════════════════
             // NUMBER FIELDS
             // ═══════════════════════════════════════════════════════════════
             EnumDefnCompType.number,
-            EnumDefnCompType.logNumber -> FieldNumberSchema(defnForm, defnComp) // TODO: NumberCompSchema
+            EnumDefnCompType.logNumber,
+            EnumDefnCompType.counter,
+            EnumDefnCompType.logCounter,
+            EnumDefnCompType.rating -> FieldNumberSchema(defnForm, defnComp)
 
             // ═══════════════════════════════════════════════════════════════
             // DECIMAL FIELDS
             // ═══════════════════════════════════════════════════════════════
             EnumDefnCompType.decimal,
-            EnumDefnCompType.logDecimal -> null // TODO: DecimalCompSchema
+            EnumDefnCompType.logDecimal -> FieldDecimalSchema(defnForm, defnComp)
 
             // ═══════════════════════════════════════════════════════════════
             // DATE/TIME FIELDS
             // ═══════════════════════════════════════════════════════════════
-            EnumDefnCompType.date -> null // TODO: DateCompSchema
-            EnumDefnCompType.dateTime -> null // TODO: DateTimeCompSchema
-            EnumDefnCompType.time -> null // TODO: TimeCompSchema
-            EnumDefnCompType.dateRange -> null // TODO: DateRangeCompSchema
-            EnumDefnCompType.dateTimeRange -> null // TODO: DateTimeRangeCompSchema
+            EnumDefnCompType.date -> FieldDateSchema(defnForm, defnComp)
+            EnumDefnCompType.time -> FieldTimeSchema(defnForm, defnComp)
+            EnumDefnCompType.dateTime -> FieldDateTimeSchema(defnForm, defnComp)
+            EnumDefnCompType.dateRange,
+            EnumDefnCompType.dateTimeRange -> FieldDateRangeSchema(defnForm, defnComp)
+
+            // ═══════════════════════════════════════════════════════════════
+            // DURATION FIELD
+            // ═══════════════════════════════════════════════════════════════
+            EnumDefnCompType.duration -> FieldDurationSchema(defnForm, defnComp)
 
             // ═══════════════════════════════════════════════════════════════
             // BOOLEAN FIELD
             // ═══════════════════════════════════════════════════════════════
-            EnumDefnCompType.bool -> null // TODO: BoolCompSchema
+            EnumDefnCompType.bool -> FieldBoolSchema(defnForm, defnComp)
 
             // ═══════════════════════════════════════════════════════════════
             // PICK/SELECTION FIELDS
             // ═══════════════════════════════════════════════════════════════
-            EnumDefnCompType.pickText -> null // TODO: PickTextCompSchema
-            EnumDefnCompType.pickUser -> null // TODO: PickUserCompSchema
-            EnumDefnCompType.pickRole -> null // TODO: PickRoleCompSchema
-            EnumDefnCompType.pickTree -> null // TODO: PickTreeCompSchema
-            EnumDefnCompType.pickGridRow -> null // TODO: PickGridRowCompSchema
-            EnumDefnCompType.pickReportRow -> null // TODO: PickReportRowCompSchema
+            EnumDefnCompType.pickText -> FieldPickTextSchema(defnForm, defnComp)
+            EnumDefnCompType.pickTree -> FieldPickTreeSchema(defnForm, defnComp)
+            EnumDefnCompType.pickUser -> FieldPickUserSchema(defnForm, defnComp)
+            EnumDefnCompType.pickRole -> FieldPickRoleSchema(defnForm, defnComp)
+            EnumDefnCompType.pickGridRow,
+            EnumDefnCompType.pickReportRow -> FieldPickGridRowSchema(defnForm, defnComp)
 
             // ═══════════════════════════════════════════════════════════════
             // SET FIELDS
             // ═══════════════════════════════════════════════════════════════
-            EnumDefnCompType.setOfText -> null // TODO: SetOfTextCompSchema
-            EnumDefnCompType.setOfUser -> null // TODO: SetOfUserCompSchema
-            EnumDefnCompType.setOfRole -> null // TODO: SetOfRoleCompSchema
-            EnumDefnCompType.setOfDocument -> null // TODO: SetOfDocumentCompSchema
-
-            // ═══════════════════════════════════════════════════════════════
-            // MEDIA FIELDS
-            // ═══════════════════════════════════════════════════════════════
-            EnumDefnCompType.image -> null // TODO: ImageCompSchema
-            EnumDefnCompType.document -> null // TODO: DocumentCompSchema
-            EnumDefnCompType.camera -> null // TODO: CameraCompSchema
-            EnumDefnCompType.video -> null // TODO: VideoCompSchema
-            EnumDefnCompType.audio -> null // TODO: AudioCompSchema
-            EnumDefnCompType.voice -> null // TODO: VoiceCompSchema
-            EnumDefnCompType.signature -> null // TODO: SignatureCompSchema
-
-            // ═══════════════════════════════════════════════════════════════
-            // SPECIAL TEXT FIELDS
-            // ═══════════════════════════════════════════════════════════════
-            EnumDefnCompType.mobileNumber -> null // TODO: MobileNumberCompSchema
-            EnumDefnCompType.password -> null // TODO: PasswordCompSchema
-
-            // ═══════════════════════════════════════════════════════════════
-            // NUMERIC DISPLAY FIELDS
-            // ═══════════════════════════════════════════════════════════════
-            EnumDefnCompType.counter,
-            EnumDefnCompType.logCounter -> null // TODO: CounterCompSchema
-            EnumDefnCompType.rating -> null // TODO: RatingCompSchema
-            EnumDefnCompType.slider -> null // TODO: SliderCompSchema
-            EnumDefnCompType.duration -> null // TODO: DurationCompSchema
-
-            // ═══════════════════════════════════════════════════════════════
-            // LOCATION FIELDS
-            // ═══════════════════════════════════════════════════════════════
-            EnumDefnCompType.location -> null // TODO: LocationCompSchema
-            EnumDefnCompType.geoPoint -> null // TODO: GeoPointCompSchema
-
-            // ═══════════════════════════════════════════════════════════════
-            // REFERENCE FIELDS
-            // ═══════════════════════════════════════════════════════════════
-            EnumDefnCompType.ref -> null // TODO: RefCompSchema
-            EnumDefnCompType.refSet -> null // TODO: RefSetCompSchema
-            EnumDefnCompType.refUser -> null // TODO: RefUserCompSchema
-            EnumDefnCompType.refReport -> null // TODO: RefReportCompSchema
-            EnumDefnCompType.refTarget -> null // TODO: RefTargetCompSchema
-            EnumDefnCompType.refContact -> null // TODO: RefContactCompSchema
+            EnumDefnCompType.setOfText -> FieldSetOfTextSchema(defnForm, defnComp)
+            EnumDefnCompType.setOfUser -> FieldSetOfUserSchema(defnForm, defnComp)
+            EnumDefnCompType.setOfRole -> FieldSetOfRoleSchema(defnForm, defnComp)
+            EnumDefnCompType.setOfDocument -> FieldSetOfDocumentSchema(defnForm, defnComp)
 
             // ═══════════════════════════════════════════════════════════════
             // CHIPSET FIELDS
@@ -139,23 +121,54 @@ object CompSchemaFactory {
             EnumDefnCompType.chipSetDay,
             EnumDefnCompType.chipSetTime,
             EnumDefnCompType.chipSetDeviceSize,
-            EnumDefnCompType.chipSetDeviceType -> null // TODO: ChipSetCompSchema
+            EnumDefnCompType.chipSetDeviceType -> FieldChipSetSchema(defnForm, defnComp)
 
             // ═══════════════════════════════════════════════════════════════
-            // OTHER SPECIALIZED FIELDS
+            // MEDIA FIELDS
             // ═══════════════════════════════════════════════════════════════
-            EnumDefnCompType.currency -> null // TODO: CurrencyCompSchema
-            EnumDefnCompType.color -> null // TODO: ColorCompSchema
-            EnumDefnCompType.icon -> null // TODO: IconCompSchema
-            EnumDefnCompType.language -> null // TODO: LanguageCompSchema
-            EnumDefnCompType.timeZone -> null // TODO: TimeZoneCompSchema
-            EnumDefnCompType.month -> null // TODO: MonthCompSchema
-            EnumDefnCompType.quarter -> null // TODO: QuarterCompSchema
-            EnumDefnCompType.pinShape -> null // TODO: PinShapeCompSchema
-            EnumDefnCompType.lineStroke -> null // TODO: LineStrokeCompSchema
-            EnumDefnCompType.textSize -> null // TODO: TextSizeCompSchema
-            EnumDefnCompType.paymentStatus -> null // TODO: PaymentStatusCompSchema
-            EnumDefnCompType.messageKind -> null // TODO: MessageKindCompSchema
+            EnumDefnCompType.image -> FieldImageSchema(defnForm, defnComp)
+            EnumDefnCompType.camera -> FieldCameraSchema(defnForm, defnComp)
+            EnumDefnCompType.video -> FieldVideoSchema(defnForm, defnComp)
+            EnumDefnCompType.audio -> FieldAudioSchema(defnForm, defnComp)
+            EnumDefnCompType.voice -> FieldVoiceSchema(defnForm, defnComp)
+            EnumDefnCompType.document -> FieldDocumentSchema(defnForm, defnComp)
+            EnumDefnCompType.signature -> FieldSignatureSchema(defnForm, defnComp)
+
+            // ═══════════════════════════════════════════════════════════════
+            // LOCATION FIELDS
+            // ═══════════════════════════════════════════════════════════════
+            EnumDefnCompType.location -> FieldLocationSchema(defnForm, defnComp)
+            EnumDefnCompType.geoPoint -> null // GeoPoint is typically display-only
+
+            // ═══════════════════════════════════════════════════════════════
+            // COLOR FIELD
+            // ═══════════════════════════════════════════════════════════════
+            EnumDefnCompType.color -> FieldColorSchema(defnForm, defnComp)
+
+            // ═══════════════════════════════════════════════════════════════
+            // SLIDER FIELD
+            // ═══════════════════════════════════════════════════════════════
+            EnumDefnCompType.slider -> FieldSliderSchema(defnForm, defnComp)
+
+            // ═══════════════════════════════════════════════════════════════
+            // SCANCODE FIELD
+            // ═══════════════════════════════════════════════════════════════
+            EnumDefnCompType.scanCode -> FieldScanCodeSchema(defnForm, defnComp)
+
+            // ═══════════════════════════════════════════════════════════════
+            // GRID FIELD
+            // ═══════════════════════════════════════════════════════════════
+            EnumDefnCompType.grid -> FieldGridSchema(defnForm, defnComp)
+
+            // ═══════════════════════════════════════════════════════════════
+            // REFERENCE FIELDS (no validation, read-only displays)
+            // ═══════════════════════════════════════════════════════════════
+            EnumDefnCompType.ref,
+            EnumDefnCompType.refSet,
+            EnumDefnCompType.refUser,
+            EnumDefnCompType.refReport,
+            EnumDefnCompType.refTarget,
+            EnumDefnCompType.refContact -> null
 
             // ═══════════════════════════════════════════════════════════════
             // DISPLAY-ONLY FIELDS (no validation needed)
@@ -163,12 +176,9 @@ object CompSchemaFactory {
             EnumDefnCompType.label,
             EnumDefnCompType.divider,
             EnumDefnCompType.html,
-            EnumDefnCompType.info,
             EnumDefnCompType.error,
             EnumDefnCompType.button,
             EnumDefnCompType.showCode,
-            EnumDefnCompType.scanCode,
-            EnumDefnCompType.identifier,
             EnumDefnCompType.dynamic,
             EnumDefnCompType.hyperlinkRow,
             EnumDefnCompType.propertyMap -> null
@@ -178,21 +188,113 @@ object CompSchemaFactory {
             // ═══════════════════════════════════════════════════════════════
             EnumDefnCompType.section,
             EnumDefnCompType.tab,
-            EnumDefnCompType.grid,
             EnumDefnCompType.wizard,
             EnumDefnCompType.spreadsheetRef -> null
 
             // ═══════════════════════════════════════════════════════════════
-            // ID FIELDS
+            // ID FIELDS (typically read-only)
             // ═══════════════════════════════════════════════════════════════
             EnumDefnCompType.rowId,
-            EnumDefnCompType.symbol,
             EnumDefnCompType.schedulerId,
             EnumDefnCompType.spreadsheetId,
-            EnumDefnCompType.userId -> null // TODO: IdCompSchema if needed
+            EnumDefnCompType.userId -> null
 
             // ═══════════════════════════════════════════════════════════════
-            // ALL OTHER TYPES (enum*, studio*, pick*, etc.)
+            // PICKER FIELDS (enum pickers, typically studio fields)
+            // These use simple string validation - required check only
+            // ═══════════════════════════════════════════════════════════════
+            EnumDefnCompType.currency,
+            EnumDefnCompType.language,
+            EnumDefnCompType.timeZone,
+            EnumDefnCompType.month,
+            EnumDefnCompType.quarter,
+            EnumDefnCompType.pinShape,
+            EnumDefnCompType.lineStroke,
+            EnumDefnCompType.textSize,
+            EnumDefnCompType.paymentStatus,
+            EnumDefnCompType.messageKind,
+            EnumDefnCompType.dateFormat,
+            EnumDefnCompType.pickVarId,
+            EnumDefnCompType.pickActionId,
+            EnumDefnCompType.pickCompId,
+            EnumDefnCompType.pickPluginCompId,
+            EnumDefnCompType.pickFieldId,
+            EnumDefnCompType.pickPluginFieldId,
+            EnumDefnCompType.pickFormId,
+            EnumDefnCompType.pickPluginFormId,
+            EnumDefnCompType.pickGridId,
+            EnumDefnCompType.pickImportPluginId,
+            EnumDefnCompType.pickImportPluginApiId,
+            EnumDefnCompType.pickLayoutFormContentId,
+            EnumDefnCompType.pickLayoutGridId,
+            EnumDefnCompType.pickSpreadsheetRefLayoutId,
+            EnumDefnCompType.pickLayoutSpreadsheetId,
+            EnumDefnCompType.pickPluginBundleId,
+            EnumDefnCompType.pickPluginId,
+            EnumDefnCompType.pickReportId,
+            EnumDefnCompType.pickSectionId,
+            EnumDefnCompType.pickSpreadsheetId,
+            EnumDefnCompType.pickGroupId,
+            EnumDefnCompType.pickDeeplinkId,
+            EnumDefnCompType.pickPipelineVarId,
+            EnumDefnCompType.pickDeployPaymentProviderId,
+            EnumDefnCompType.pickAutomationId -> null // Simple required validation if needed
+
+            // ═══════════════════════════════════════════════════════════════
+            // STUDIO FIELDS (no validation in form context)
+            // ═══════════════════════════════════════════════════════════════
+            EnumDefnCompType.studioVarIdTextEditor,
+            EnumDefnCompType.studioVarIdParagraphEditor,
+            EnumDefnCompType.studioCodeEditor,
+            EnumDefnCompType.studioBuildAllModules,
+            EnumDefnCompType.studioBuildArgBinder,
+            EnumDefnCompType.studioSetOfDate,
+            EnumDefnCompType.studioBuildColor,
+            EnumDefnCompType.studioBuildDate,
+            EnumDefnCompType.studioBuildDateTime,
+            EnumDefnCompType.studioBuildPermissionMatrix,
+            EnumDefnCompType.studioBuildTree,
+            EnumDefnCompType.studioBuildUserSetting,
+            EnumDefnCompType.studioBuildActionPermission,
+            EnumDefnCompType.studioBuildPropertyMap,
+            EnumDefnCompType.studioBuildMapping,
+            EnumDefnCompType.studioBuildVideoTimestampMap,
+            EnumDefnCompType.studioBuildOptionPermissionMatrix,
+            EnumDefnCompType.studioMapOfForwardRolePermission,
+            EnumDefnCompType.studioMapOfCondition,
+            EnumDefnCompType.studioMapOfFormula,
+            EnumDefnCompType.studioMapOfFuncArg,
+            EnumDefnCompType.studioMapOfJarFile,
+            EnumDefnCompType.studioMapOfLayoutSpreadsheet,
+            EnumDefnCompType.studioMapOfLayoutGrid,
+            EnumDefnCompType.studioMapOfText,
+            EnumDefnCompType.studioMapOfVisibilityCondition,
+            EnumDefnCompType.studioMapOfVisibilityAction,
+            EnumDefnCompType.studioMapOfPartition,
+            EnumDefnCompType.studioMapOfForwardGroupPermission,
+            EnumDefnCompType.studioMapOfDynamicRule,
+            EnumDefnCompType.studioMapOfPipelineVariable,
+            EnumDefnCompType.studioMapOfDynamicCondition,
+            EnumDefnCompType.studioMapOfUserCondition,
+            EnumDefnCompType.studioMapOfLayoutDriveSpreadsheet,
+            EnumDefnCompType.studioFieldMappingTree,
+            EnumDefnCompType.studioGridMappingTree,
+            EnumDefnCompType.studioMapOfArgBinder,
+            EnumDefnCompType.studioMapOfRefTargetSpreadsheet,
+            EnumDefnCompType.studioSetOfDocFileExt,
+            EnumDefnCompType.studioSetOfStoreItemCategory,
+            EnumDefnCompType.studioSetOfModule,
+            EnumDefnCompType.studioSetOfNumber,
+            EnumDefnCompType.studioSetOfAdminDoNotOption,
+            EnumDefnCompType.studioSetOfPluginSecurityAccess,
+            EnumDefnCompType.studioSetOfRowAuditTrail,
+            EnumDefnCompType.studioSetOfMonth,
+            EnumDefnCompType.studioSetOfBorder,
+            EnumDefnCompType.studioSetOfBorderRadius,
+            EnumDefnCompType.studioSetOfCompId -> null
+
+            // ═══════════════════════════════════════════════════════════════
+            // ENUM FIELDS (typically studio/admin fields)
             // ═══════════════════════════════════════════════════════════════
             else -> null
         }
