@@ -72,13 +72,13 @@ object FieldValueResolver {
 
                 Types.EnumDefnCompType.decimal -> {
                     val decimalValue = when (value) {
-                        is Long -> value
-                        is Int -> value.toLong()
-                        is Double -> value.toLong()
-                        is Float -> value.toLong()
-                        is String -> value.toLongOrNull()
-                        is JsonElement -> value.jsonPrimitive.content.toLongOrNull()
-                        else -> value.toString().toLongOrNull()
+                        is Long -> value.toDouble()
+                        is Int -> value.toDouble()
+                        is Double -> value
+                        is Float -> value.toDouble()
+                        is String -> value.toDoubleOrNull()
+                        is JsonElement -> value.jsonPrimitive.content.toDoubleOrNull()
+                        else -> value.toString().toDoubleOrNull()
                     }
                     decimalValue?.let { FieldValueDecimalData(it) }
                 }
@@ -190,5 +190,38 @@ object FieldValueResolver {
             null // Return null if conversion fails
         }
 
+    }
+
+    fun fnResolveNumericValue(compType: Types.EnumDefnCompType, value: Any?): Long? {
+
+        val fieldValueForAnyValue = if (value is JsonElement) fnJsonElementFieldValue(compType, value) else value
+
+        return when (fieldValueForAnyValue) {
+            is Long -> fieldValueForAnyValue
+            is Int -> fieldValueForAnyValue.toLong()
+            is Double -> fieldValueForAnyValue.toLong()
+            is Float -> fieldValueForAnyValue.toLong()
+            is String -> fieldValueForAnyValue.toLongOrNull()
+            is FieldValueDecimalData -> fieldValueForAnyValue.value?.toLong()
+            is FieldValueNumberData -> fieldValueForAnyValue.value
+            else -> fieldValueForAnyValue.toString().toLongOrNull()
+        }
+    }
+
+    fun fnResolveNumericDecimalValue(compType: Types.EnumDefnCompType, value: Any?): Double? {
+
+        val fieldValueForAnyValue = if (value is JsonElement) fnJsonElementFieldValue(compType, value) else value
+
+        return when (fieldValueForAnyValue) {
+            is Long -> fieldValueForAnyValue.toDouble()
+            is Int -> fieldValueForAnyValue.toDouble()
+            is Double -> fieldValueForAnyValue
+            is Float -> fieldValueForAnyValue.toDouble()
+            is String -> fieldValueForAnyValue.toDoubleOrNull()
+            is FieldValueDecimalData -> fieldValueForAnyValue.value
+            is FieldValueNumberData -> fieldValueForAnyValue.value?.toDouble()
+
+            else -> value.toString().toDoubleOrNull()
+        }
     }
 }

@@ -34,6 +34,8 @@ object FormCtxInitHelper {
         }
         val dependencyMap = FieldPropertyResolver.buildDependencyMap(leafFields)
 
+        //TODO execute DefnFormEvent
+
         val fieldStates = compMap
             .filter { (_, defnComp) ->
                 !isCompositeType(defnComp.type)

@@ -50,6 +50,39 @@ data class FieldProperties(
     val hidden: Boolean = false,
     val helperText: String? = null,
     val placeholder: String? = null,
-    val label: String? = null
-    // More properties to be added as needed
+    val label: String? = null,
+
+    // Text/Paragraph/Password validation constraints
+    val minCharCount: Long? = null,
+    val maxCharCount: Long? = null,
+    val lineCount: Long? = null,         // Paragraph
+
+    // Number/Counter validation constraints
+    val minNumber: Long? = null,
+    val maxNumber: Long? = null,
+    val step: Long? = null,              // Counter
+    val minDisplayValue: Long? = null,   // Counter
+
+    // Decimal validation constraints
+    val minDecimal: Double? = null,
+    val maxDecimal: Double? = null,
+
+    // Display/UI properties
+    val showAsCheckbox: Boolean? = null,   // Switch
+    val showLabel: Boolean? = null,        // Image, Camera, ShowCode
+    val showPreview: Boolean? = null,      // Image, Camera, Video
+    val showSize: Boolean? = null,         // Document, Image, Camera, Video
+    val showSecond: Boolean? = null,       // Time
+    val showAsDropdown: Boolean? = null,   // PickUser, SetOfUser
+
+    // Media properties
+    val maxSize: Long? = null,             // Audio, Document, Image, Camera, Video, Voice
+
+    // Button properties
+    val textSize: String? = null,          // Button (EnumDefnTextSize.value)
+    val disableElevation: Boolean? = null, // Button
+
+    // Layout properties
+    val justifyContent: String? = null,    // Counter (EnumDefnPlacement.value)
+    val flexHeight: Boolean? = null        // Paragraph
 )

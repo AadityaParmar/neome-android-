@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FieldValueDecimalData(
-    override val value: Long? = null
+    override val value: Double? = null
 ) : FieldValueDecimal

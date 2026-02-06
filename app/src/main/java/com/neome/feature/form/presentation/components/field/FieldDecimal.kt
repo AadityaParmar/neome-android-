@@ -68,7 +68,7 @@ fun FieldDecimal(
         }
 
         // Try to parse as Long (for decimal values stored as Long)
-        val longValue = newValue.toLongOrNull()
+        val longValue = newValue.toDoubleOrNull()
         if (longValue != null) {
             textValue = newValue
             // Use controller's onChange callback with FieldValueDecimalData

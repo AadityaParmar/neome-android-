@@ -99,10 +99,11 @@ dependencies {
 
     // Permissions (Accompanist)
     implementation("com.google.accompanist:accompanist-permissions:0.36.0")
-    implementation(libs.zodkmp)
     implementation(libs.konform.jvm)
 
     testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
