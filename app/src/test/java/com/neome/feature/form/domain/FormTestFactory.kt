@@ -31,6 +31,9 @@ object FormTestFactory {
     fun numberValue(num: Long): JsonElement =
         JsonParser.json.encodeToJsonElement(FieldValueNumberData.serializer(), FieldValueNumberData(num))
 
+    fun decimalValue(num: Double): JsonElement =
+        JsonParser.json.encodeToJsonElement(FieldValueDecimalData.serializer(), FieldValueDecimalData(num))
+
     // ===================== Field Definitions =====================
     fun defnText(
         id: String,
@@ -41,6 +44,7 @@ object FormTestFactory {
         invisible: Boolean? = null,
         readOnly: Boolean? = null,
         label: String? = null,
+        labelFieldId: String? = null,
         helperText: String? = null,
         helperTextFieldId: String? = null,
         placeHolder: String? = null,
@@ -57,6 +61,7 @@ object FormTestFactory {
         invisible = invisible,
         readOnly = readOnly,
         label = label,
+        labelFieldId = labelFieldId?.let { fieldId(it) },
         helperText = helperText,
         helperTextFieldId = helperTextFieldId?.let { fieldId(it) },
         placeHolder = placeHolder,
@@ -72,6 +77,7 @@ object FormTestFactory {
         disabled: Boolean? = null,
         hidden: Boolean? = null,
         label: String? = null,
+        labelFieldId: String? = null,
         min: Long? = null,
         max: Long? = null,
         defaultValue: Long? = null,
@@ -84,9 +90,41 @@ object FormTestFactory {
         disabled = disabled,
         hidden = hidden,
         label = label,
+        labelFieldId = labelFieldId?.let { fieldId(it) },
         min = min,
         max = max,
         defaultValue = defaultValue,
+        disabledFieldId = disabledFieldId?.let { fieldId(it) }
+    )
+
+    fun defnDecimal(
+        id: String,
+        name: String = "Decimal_$id",
+        required: Boolean? = null,
+        disabled: Boolean? = null,
+        hidden: Boolean? = null,
+        label: String? = null,
+        labelFieldId: String? = null,
+        min: Double? = null,
+        max: Double? = null,
+        defaultValue: Double? = null,
+        minFieldId: String? = null,
+        maxFieldId: String? = null,
+        disabledFieldId: String? = null
+    ): DefnFieldDecimalData = DefnFieldDecimalData(
+        metaId = fieldId(id),
+        name = symbol(name),
+        type = Types.EnumDefnCompType.decimal,
+        required = required,
+        disabled = disabled,
+        hidden = hidden,
+        label = label,
+        labelFieldId = labelFieldId?.let { fieldId(it) },
+        min = min,
+        max = max,
+        defaultValue = defaultValue,
+        minFieldId = minFieldId?.let { fieldId(it) },
+        maxFieldId = maxFieldId?.let { fieldId(it) },
         disabledFieldId = disabledFieldId?.let { fieldId(it) }
     )
 

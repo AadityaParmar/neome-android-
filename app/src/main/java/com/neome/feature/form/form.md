@@ -4,8 +4,8 @@
 
 | Property           | Value                                       |
 |--------------------|---------------------------------------------|
-| **Version**        | 1.6.0                                       |
-| **Last Updated**   | 2026-02-05                                  |
+| **Version**        | 1.8.0                                       |
+| **Last Updated**   | 2026-02-06                                  |
 | **Scope**          | Android Form Component Architecture         |
 | **Path**           | `app/src/main/java/com/neome/feature/form/` |
 | **Update Trigger** | Any modification to form component files    |
@@ -81,7 +81,9 @@ using skill : defnForm do [instruction]
 | Validation Helper | `domain/ctx/helper/FormCtxValidationHelper.kt`    |
 | Schema Builder    | `domain/ctx/helper/schema/CalcSchema.kt`          |
 | Schema Factory    | `domain/ctx/helper/schema/CompSchemaFactory.kt`   |
-| Schema Base       | `domain/ctx/helper/schema/DefnCompSchema.kt`      |
+| Schema Base       | `domain/ctx/helper/schema/CompSchema.kt`          |
+| Text Schema       | `domain/ctx/helper/schema/FieldTextSchema.kt`     |
+| Number Schema     | `domain/ctx/helper/schema/FieldNumberSchema.kt`   |
 | Field Factory     | `presentation/components/base/FieldFactory.kt`    |
 | External API      | `domain/ref/FormRef.kt`                           |
 | Internal Context  | `domain/ctx/FormCtx.kt`                           |
@@ -189,6 +191,19 @@ using skill : defnForm do [instruction]
 - `isInitialized`, `disabled`, `readOnly`, `isSubmitting`
 
 **Computed Properties:** `hasErrors`, `isDirty`, `isValid`, `isSendBtnEnabled`
+
+**FieldProperties (v1.8.0):**
+
+| Category           | Properties                                              |
+|--------------------|---------------------------------------------------------|
+| Base               | `required`, `disabled`, `readOnly`, `hidden`            |
+| Display            | `label`, `helperText`, `placeholder`                    |
+| Text/Paragraph     | `minCharCount`, `maxCharCount`, `lineCount`, `flexHeight` |
+| Number/Counter     | `minNumber`, `maxNumber`, `step`, `minDisplayValue`, `justifyContent` |
+| Decimal            | `minDecimal`, `maxDecimal`                              |
+| Media              | `maxSize`, `showLabel`, `showPreview`, `showSize`       |
+| UI Toggles         | `showAsCheckbox`, `showSecond`, `showAsDropdown`        |
+| Button             | `textSize`, `disableElevation`                          |
 
 **SendBtnDisableFlag Types:**
 
@@ -330,6 +345,9 @@ Form (provides LocalFormCtx)
 2. **Add resolver** in `domain/util/FieldPropertyResolver.kt`
 3. **Add to dependency extraction** in `extractFieldIdReferences()`
 
+**Supported Field Types for Dependency Extraction (v1.8.0):**
+Text, Number, Decimal, Counter, Date, DateTime, Duration, Time, Paragraph, Password, Button, Audio, Document, Image, Video, Voice, PickUser, SetOfUser, ShowCode, Switch
+
 ### Adding Cross-Field Validation
 
 Cross-field schemas may need `FormCtx` access. Modify `CompSchemaFactory` to pass context if needed.
@@ -415,6 +433,39 @@ app/src/main/java/com/neome/feature/form/
 ---
 
 ## Changelog
+
+### v1.8.0 (2026-02-06)
+
+- **Feature**: Comprehensive `FieldProperties` expansion with 20+ new properties
+- **Added**: Text/Paragraph constraints: `minCharCount`, `maxCharCount`, `lineCount`
+- **Added**: Number/Counter constraints: `minNumber`, `maxNumber`, `step`, `minDisplayValue`
+- **Added**: Decimal constraints: `minDecimal`, `maxDecimal`
+- **Added**: Display/UI properties: `showAsCheckbox`, `showLabel`, `showPreview`, `showSize`, `showSecond`, `showAsDropdown`
+- **Added**: Media properties: `maxSize`
+- **Added**: Button properties: `textSize`, `disableElevation`
+- **Added**: Layout properties: `justifyContent`, `flexHeight`
+- **Added**: `FieldValueResolver.fnResolveNumericValue()` for Long field value resolution
+- **Added**: `FieldValueResolver.fnResolveNumericDecimalValue()` for Double field value resolution
+- **Added**: `CompSchema.isRequired()` helper method for required field validation
+- **Changed**: `FieldPropertyResolver` now resolves all new properties with full field/var/value cascade support
+- **Changed**: `extractFieldIdReferences()` expanded to support 15+ field types (Text, Number, Decimal, Counter, Date, DateTime, Duration, Time, Paragraph, Password, Button, Audio, Document, Image, Video, Voice, PickUser, SetOfUser, ShowCode, Switch)
+- **Changed**: `FieldTextSchema` validates with regex patterns: aadhaar, gstin, pan, custom
+- **Changed**: `FieldNumberSchema` validates with dynamic min/max from FieldProperties
+- **Fixed**: `FieldDecimal` parsing now uses `toDoubleOrNull()` instead of `toLongOrNull()`
+- **Fixed**: `FieldValueResolver` decimal conversion now returns `Double` instead of `Long`
+
+### v1.7.0 (2026-02-05)
+
+- **Feature**: Integrated Konform validation library for type-safe, declarative validation
+- **Added**: `FieldProperties.minCharCount`, `FieldProperties.maxCharCount` for text validation constraints
+- **Added**: `FieldProperties.minNumber`, `FieldProperties.maxNumber` for number validation constraints
+- **Changed**: `FieldTextSchema` now uses Konform DSL with dynamic constraint building
+- **Changed**: `FieldNumberSchema` now uses Konform DSL with dynamic constraint building
+- **Changed**: `FieldPropertyResolver` now resolves validation constraints with field reference support
+- **Changed**: `extractFieldIdReferences()` now includes `minCharCountFieldId`, `maxCharCountFieldId`, `minFieldId`, `maxFieldId`
+- **Validation**: Text fields support `required`, `minCharCount`, `maxCharCount`, `validationPattern` (aadhaar/gstin/pan/custom)
+- **Validation**: Number fields support `required`, `minNumber`, `maxNumber`
+- **Benefit**: Validation rules only applied when constraint values are not null (dynamic/conditional validation)
 
 ### v1.6.0 (2026-02-05)
 

@@ -6,6 +6,7 @@ import com.neome.feature.form.domain.FormTestFactory
 import kotlinx.serialization.json.JsonPrimitive
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -27,6 +28,34 @@ class FieldPropertyResolverTest {
         val form = FormTestFactory.defnForm(compMap = mapOf(FormTestFactory.fieldId("f1") to field))
         val props = FieldPropertyResolver.resolveFieldProperties(field, form) { null }
         assertTrue(props.required)
+    }
+
+    @Test
+    fun `required - resolves from requiredFieldId when truthy`() {
+        val toggle = FormTestFactory.defnSwitch(id = "toggle")
+        val field = FormTestFactory.defnText(id = "f1", requiredFieldId = "toggle")
+        val toggleId = FormTestFactory.fieldId("toggle")
+        val form = FormTestFactory.defnForm(
+            compMap = mapOf(toggleId to toggle, FormTestFactory.fieldId("f1") to field)
+        )
+        val props = FieldPropertyResolver.resolveFieldProperties(field, form) { id ->
+            if (id == toggleId) JsonPrimitive(true) else null
+        }
+        assertTrue(props.required)
+    }
+
+    @Test
+    fun `required - resolves from requiredFieldId when falsy`() {
+        val toggle = FormTestFactory.defnSwitch(id = "toggle")
+        val field = FormTestFactory.defnText(id = "f1", requiredFieldId = "toggle")
+        val toggleId = FormTestFactory.fieldId("toggle")
+        val form = FormTestFactory.defnForm(
+            compMap = mapOf(toggleId to toggle, FormTestFactory.fieldId("f1") to field)
+        )
+        val props = FieldPropertyResolver.resolveFieldProperties(field, form) { id ->
+            if (id == toggleId) JsonPrimitive(false) else null
+        }
+        assertFalse(props.required)
     }
 
     // ==================== Disabled ====================
@@ -161,6 +190,34 @@ class FieldPropertyResolverTest {
         assertEquals("Email *", props.label)
     }
 
+    @Test
+    fun `label - resolves from labelFieldId`() {
+        val source = FormTestFactory.defnText(id = "labelSource")
+        val field = FormTestFactory.defnText(id = "f1", labelFieldId = "labelSource")
+        val sourceId = FormTestFactory.fieldId("labelSource")
+        val form = FormTestFactory.defnForm(
+            compMap = mapOf(sourceId to source, FormTestFactory.fieldId("f1") to field)
+        )
+        val props = FieldPropertyResolver.resolveFieldProperties(field, form) { id ->
+            if (id == sourceId) FormTestFactory.textValue("Dynamic Label") else null
+        }
+        assertEquals("Dynamic Label", props.label)
+    }
+
+    @Test
+    fun `label - direct label takes priority over labelFieldId`() {
+        val source = FormTestFactory.defnText(id = "labelSource")
+        val field = FormTestFactory.defnText(id = "f1", label = "Direct Label", labelFieldId = "labelSource")
+        val sourceId = FormTestFactory.fieldId("labelSource")
+        val form = FormTestFactory.defnForm(
+            compMap = mapOf(sourceId to source, FormTestFactory.fieldId("f1") to field)
+        )
+        val props = FieldPropertyResolver.resolveFieldProperties(field, form) { id ->
+            if (id == sourceId) FormTestFactory.textValue("Dynamic Label") else null
+        }
+        assertEquals("Direct Label", props.label)
+    }
+
     // ==================== HelperText ====================
 
     @Test
@@ -257,5 +314,98 @@ class FieldPropertyResolverTest {
         val depMap = FieldPropertyResolver.buildDependencyMap(compMap)
         val dependents = depMap.getDependents(sourceId)
         assertEquals(2, dependents.size)
+    }
+
+    @Test
+    fun `buildDependencyMap - tracks decimal minFieldId dependencies`() {
+        val source = FormTestFactory.defnNumber(id = "source")
+        val dep = FormTestFactory.defnDecimal(id = "dep", minFieldId = "source")
+        val sourceId = FormTestFactory.fieldId("source")
+        val depId = FormTestFactory.fieldId("dep")
+        val compMap = mapOf<Types.MetaIdComp, DefnCompSeal>(
+            sourceId to source, depId to dep
+        )
+        val depMap = FieldPropertyResolver.buildDependencyMap(compMap)
+        assertTrue(depMap.getDependents(sourceId).contains(depId))
+    }
+
+    @Test
+    fun `buildDependencyMap - tracks requiredFieldId dependencies`() {
+        val toggle = FormTestFactory.defnSwitch(id = "toggle")
+        val dep = FormTestFactory.defnText(id = "dep", requiredFieldId = "toggle")
+        val toggleId = FormTestFactory.fieldId("toggle")
+        val depId = FormTestFactory.fieldId("dep")
+        val compMap = mapOf<Types.MetaIdComp, DefnCompSeal>(
+            toggleId to toggle, depId to dep
+        )
+        val depMap = FieldPropertyResolver.buildDependencyMap(compMap)
+        assertTrue(depMap.getDependents(toggleId).contains(depId))
+    }
+
+    @Test
+    fun `buildDependencyMap - tracks labelFieldId dependencies`() {
+        val source = FormTestFactory.defnText(id = "source")
+        val dep = FormTestFactory.defnText(id = "dep", labelFieldId = "source")
+        val sourceId = FormTestFactory.fieldId("source")
+        val depId = FormTestFactory.fieldId("dep")
+        val compMap = mapOf<Types.MetaIdComp, DefnCompSeal>(
+            sourceId to source, depId to dep
+        )
+        val depMap = FieldPropertyResolver.buildDependencyMap(compMap)
+        assertTrue(depMap.getDependents(sourceId).contains(depId))
+    }
+
+    // ==================== MinDecimal / MaxDecimal ====================
+
+    @Test
+    fun `minDecimal - returns null for non-decimal field`() {
+        val field = FormTestFactory.defnText(id = "f1")
+        val form = FormTestFactory.defnForm(compMap = mapOf(FormTestFactory.fieldId("f1") to field))
+        val props = FieldPropertyResolver.resolveFieldProperties(field, form) { null }
+        assertNull(props.minDecimal)
+    }
+
+    @Test
+    fun `minDecimal - returns direct value`() {
+        val field = FormTestFactory.defnDecimal(id = "f1", min = 1.5)
+        val form = FormTestFactory.defnForm(compMap = mapOf(FormTestFactory.fieldId("f1") to field))
+        val props = FieldPropertyResolver.resolveFieldProperties(field, form) { null }
+        assertEquals(1.5, props.minDecimal)
+    }
+
+    @Test
+    fun `maxDecimal - returns direct value`() {
+        val field = FormTestFactory.defnDecimal(id = "f1", max = 99.9)
+        val form = FormTestFactory.defnForm(compMap = mapOf(FormTestFactory.fieldId("f1") to field))
+        val props = FieldPropertyResolver.resolveFieldProperties(field, form) { null }
+        assertEquals(99.9, props.maxDecimal)
+    }
+
+    @Test
+    fun `minDecimal - resolves from minFieldId`() {
+        val source = FormTestFactory.defnDecimal(id = "source")
+        val field = FormTestFactory.defnDecimal(id = "f1", minFieldId = "source")
+        val sourceId = FormTestFactory.fieldId("source")
+        val form = FormTestFactory.defnForm(
+            compMap = mapOf(sourceId to source, FormTestFactory.fieldId("f1") to field)
+        )
+        val props = FieldPropertyResolver.resolveFieldProperties(field, form) { id ->
+            if (id == sourceId) FormTestFactory.decimalValue(5.5) else null
+        }
+        assertEquals(5.5, props.minDecimal)
+    }
+
+    @Test
+    fun `maxDecimal - resolves from maxFieldId`() {
+        val source = FormTestFactory.defnDecimal(id = "source")
+        val field = FormTestFactory.defnDecimal(id = "f1", maxFieldId = "source")
+        val sourceId = FormTestFactory.fieldId("source")
+        val form = FormTestFactory.defnForm(
+            compMap = mapOf(sourceId to source, FormTestFactory.fieldId("f1") to field)
+        )
+        val props = FieldPropertyResolver.resolveFieldProperties(field, form) { id ->
+            if (id == sourceId) FormTestFactory.decimalValue(100.0) else null
+        }
+        assertEquals(100.0, props.maxDecimal)
     }
 }

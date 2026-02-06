@@ -2,7 +2,7 @@ package com.neome.feature.form.domain.ctx.helper.schema
 
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
-import com.neome.feature.form.domain.ctx.FormCtx
+import com.neome.feature.form.domain.util.FieldValueResolver
 import com.neome.feature.form.presentation.state.FieldState
 import kotlinx.serialization.json.JsonElement
 
@@ -35,7 +35,16 @@ abstract class CompSchema(open val defnForm: DefnFormData, open val defnComp: De
      */
     abstract fun validate(fieldValue: JsonElement?, fieldState: FieldState?): String?
 
-    protected fun calcIsRequired(formCtx: FormCtx) {
+    protected fun isRequired(fieldValue: JsonElement?, fieldState: FieldState?): String? {
+        val typedValue =
+            FieldValueResolver.fnJsonElementFieldValue(defnComp.type, fieldValue)
+        val fieldProperties = fieldState?.fieldProperties
 
+        if (fieldProperties?.required == true) {
+            if (typedValue == null) {
+                return "Required"
+            }
+        }
+        return null
     }
 }
