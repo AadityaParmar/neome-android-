@@ -34,6 +34,10 @@ import com.neome.feature.form.domain.TypeUiFormPermissionMap
 import com.neome.feature.form.domain.TypeUiManagerialRelationship
 import com.neome.feature.form.domain.TypeUiPermissionRole
 import com.neome.feature.form.domain.util.FilterForm.matchAllRoles
+import com.neome.feature.utils.JsonParser
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.jsonObject
 
 /**
  * Utility for preparing a DefnForm for UI consumption.
@@ -500,6 +504,7 @@ object FilterForm {
     fun prepare(form: DefnFormData, callerEnt: SigEntCaller): DefnFormUi {
         val roleIdSet = callerEnt.roleIdSet
         val mutableCompMap = form.compMap.toMutableMap()
+        val formJson = JsonParser.json.encodeToJsonElement(DefnFormData.serializer(), form)
         val parentMap = mutableMapOf<MetaIdComp, MutableList<MetaIdComp>>()
         val managerialRelationship = MutableManagerialRelationship()
         val permissionResolveMap = mutableMapOf<MetaIdComp, TypeUiFormPermission>()
@@ -578,34 +583,45 @@ object FilterForm {
         ensureParentVisibility(permissionResolveMap, parentMap)
         trimPermissionMap(permissionResolveMap)
 
+
         // 5. Construct DefnFormUi with all original form fields + computed maps
-        return DefnFormUi(
-            actionPermissionMap = form.actionPermissionMap,
-            allowToPrintForm = form.allowToPrintForm,
-            calculateFormulaMode = form.calculateFormulaMode,
-            chatBubbleFieldIdSet = form.chatBubbleFieldIdSet,
-            chatLabelFieldId = form.chatLabelFieldId,
-            chatLabelPatternVar = form.chatLabelPatternVar,
-            chatPatternVar = form.chatPatternVar,
-            commentReadOnlyRoleSet = form.commentReadOnlyRoleSet,
-            commentRoleSet = form.commentRoleSet,
-            compMap = mutableCompMap,
-            configForm = form.configForm,
-            displayCompositeId = form.displayCompositeId,
-            formulaFieldIdSet = form.formulaFieldIdSet,
-            gridLookupMap = form.gridLookupMap,
-            label = form.label,
-            layoutMap = form.layoutMap,
-            metaId = form.metaId,
-            name = form.name,
-            paymentConfig = form.paymentConfig,
-            permissionMatrix = form.permissionMatrix,
-            theme = form.theme,
-            visibilityRuleMap = form.visibilityRuleMap,
-            _permissionMap = TypeUiFormPermissionMap(permissionResolveMap),
-            _parentMap = TypeUiFormParentMap(parentMap),
-            _managerialRelationship = managerialRelationship.toImmutable()
-        )
+
+        val permissionResolveMapJsonObj = JsonParser.json.encodeToJsonElement(
+            TypeUiFormPermissionMap.serializer(),
+            TypeUiFormPermissionMap(permissionResolveMap)
+        ).jsonObject
+
+        val parentMapJsonObj = JsonParser.json.encodeToJsonElement(
+            TypeUiFormParentMap.serializer(),
+            TypeUiFormParentMap(parentMap)
+        ).jsonObject
+        val managerialRelationshipJsonObject = JsonParser.json.encodeToJsonElement(
+            TypeUiManagerialRelationship.serializer(),
+            managerialRelationship.toImmutable()
+        ).jsonObject
+
+        val mutableCompMapJsonObj = buildJsonObject {
+            mutableCompMap.forEach { (key, value) ->
+                put(
+                    key.toString(),
+                    JsonParser.json.encodeToJsonElement(DefnCompSeal.serializer(), value)
+                )
+            }
+        }
+
+
+        val defnFormUiJson: JsonElement = buildJsonObject {
+            formJson.jsonObject.forEach { (key, value) -> put(key, value) }
+            put("compMap", mutableCompMapJsonObj)
+            put("_permissionMap", permissionResolveMapJsonObj)
+            put("_parentMap", parentMapJsonObj)
+            put("_managerialRelationship", managerialRelationshipJsonObject)
+        }
+
+
+        val defnFormUi = JsonParser.json.decodeFromJsonElement(DefnFormUi.serializer(), defnFormUiJson)
+        println("===defnFormUiJson $defnFormUi ")
+        return defnFormUi
     }
 
     // endregion
