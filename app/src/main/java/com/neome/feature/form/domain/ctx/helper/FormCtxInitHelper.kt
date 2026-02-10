@@ -3,10 +3,14 @@ package com.neome.feature.form.domain.ctx.helper
 import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
+import com.neome.feature.form.domain.TypeUiFormParentMap
 import com.neome.feature.form.domain.ctx.helper.schema.CompSchemaFactory
 import com.neome.feature.form.domain.util.FieldPropertyResolver
+import com.neome.feature.form.domain.util.FilterForm
+import com.neome.feature.form.presentation.sample.FormSampleDataFactory
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormState
+import com.neome.feature.utils.JsonParser
 
 object FormCtxInitHelper {
 
@@ -33,8 +37,18 @@ object FormCtxInitHelper {
             !isCompositeType(defnComp.type)
         }
         val dependencyMap = FieldPropertyResolver.buildDependencyMap(leafFields)
+        val callerEnt = FormSampleDataFactory.getSampleCallerEnt()
+        val filteredForm = FilterForm.prepare(defnForm, callerEnt)
+        val _permissionMap = filteredForm._parentMap ?: TypeUiFormParentMap(map = null)
+        val _filteredFormStr = JsonParser.json.encodeToString(TypeUiFormParentMap.serializer(), _permissionMap)
+        println(
+            "===filteredForm ${
+                _filteredFormStr.replace(" ", "").replace("\n", "")
+            }"
+        )
 
         //TODO execute DefnFormEvent
+
 
         val fieldStates = compMap
             .filter { (_, defnComp) ->
