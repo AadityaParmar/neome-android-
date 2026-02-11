@@ -14,6 +14,8 @@ import com.neome.feature.form.presentation.components.field.FieldDate
 import com.neome.feature.form.presentation.components.field.FieldDateRange
 import com.neome.feature.form.presentation.components.field.FieldDateTime
 import com.neome.feature.form.presentation.components.field.FieldDateTimeRange
+import com.neome.feature.form.presentation.components.field.FieldCounter
+import com.neome.feature.form.presentation.components.field.FieldLogCounter
 import com.neome.feature.form.presentation.components.field.FieldDecimal
 import com.neome.feature.form.presentation.components.field.FieldDocument
 import com.neome.feature.form.presentation.components.field.FieldEmail
@@ -124,6 +126,18 @@ fun FieldFactory(
         )
 
         EnumDefnCompType.decimal -> FieldDecimal(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.counter -> FieldCounter(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.logCounter -> FieldLogCounter(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             modifier = modifier
