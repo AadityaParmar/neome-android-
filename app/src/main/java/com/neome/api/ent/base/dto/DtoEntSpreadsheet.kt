@@ -14,16 +14,16 @@ import com.neome.api.meta.base.dto.DefnLayoutGridMap
 interface DtoEntSpreadsheet {
     val canClear: Boolean
     val canExpire: Boolean
-    val forwardRoleIdSet: List<MetaIdRole>
+    val forwardRoleIdSet: List<MetaIdRole>?
     val hasPartition: Boolean
-    val insertRoleIdSet: List<MetaIdRole>
+    val insertRoleIdSet: List<MetaIdRole>?
     val label: String?
     val layoutMap: DefnLayoutGridMap?
     val name: Symbol
-    val removeRoleIdSet: List<MetaIdRole>
+    val removeRoleIdSet: List<MetaIdRole>?
     val sheetIdHash: String
     val spreadsheetFormId: MetaIdForm
     val spreadsheetRefTokenMap: Map<MetaIdSpreadsheetRef, String>?
     val supportOffline: Boolean
-    val updateRoleIdSet: List<MetaIdRole>
+    val updateRoleIdSet: List<MetaIdRole>?
 }

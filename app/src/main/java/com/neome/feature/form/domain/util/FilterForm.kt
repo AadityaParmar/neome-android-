@@ -506,6 +506,7 @@ object FilterForm {
         val mutableCompMap = form.compMap.toMutableMap()
         val formJson = JsonParser.json.encodeToJsonElement(DefnFormData.serializer(), form)
         val parentMap = mutableMapOf<MetaIdComp, MutableList<MetaIdComp>>()
+
         val managerialRelationship = MutableManagerialRelationship()
         val permissionResolveMap = mutableMapOf<MetaIdComp, TypeUiFormPermission>()
 
@@ -544,13 +545,15 @@ object FilterForm {
 
             // 3c. Resolve parent permission if not yet done
             if (parentCompId != null && !permissionResolveMap.containsKey(parentCompId)) {
-                permissionResolveMap[parentCompId] = TypeUiFormPermission(
-                    permission = getPermission(
-                        roleIdSet,
-                        parent.permissionMatrix,
-                        formPermission
+
+                permissionResolveMap[parentCompId] =
+                    TypeUiFormPermission(
+                        permission = getPermission(
+                            roleIdSet,
+                            parent.permissionMatrix,
+                            formPermission
+                        )
                     )
-                )
             }
 
             // 3d. Compute disabled/required state
@@ -580,8 +583,8 @@ object FilterForm {
         }
 
         // 4. Post-processing
-        ensureParentVisibility(permissionResolveMap, parentMap)
-        trimPermissionMap(permissionResolveMap)
+//        ensureParentVisibility(permissionResolveMap, parentMap)
+//        trimPermissionMap(permissionResolveMap)
 
 
         // 5. Construct DefnFormUi with all original form fields + computed maps
@@ -619,9 +622,8 @@ object FilterForm {
         }
 
 
-        val defnFormUi = JsonParser.json.decodeFromJsonElement(DefnFormUi.serializer(), defnFormUiJson)
-        println("===defnFormUiJson $defnFormUi ")
-        return defnFormUi
+        return JsonParser.json.decodeFromJsonElement(DefnFormUi.serializer(), defnFormUiJson)
+
     }
 
     // endregion

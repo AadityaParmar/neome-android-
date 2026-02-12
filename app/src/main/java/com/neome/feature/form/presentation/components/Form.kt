@@ -24,7 +24,9 @@ import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
 import com.neome.feature.form.domain.ctx.FormCtxImpl
 import com.neome.feature.form.domain.ctx.LocalFormCtx
 import com.neome.feature.form.domain.ref.FormRef
+import com.neome.feature.form.domain.util.FilterForm
 import com.neome.feature.form.presentation.components.base.FieldFactory
+import com.neome.feature.form.presentation.sample.FormSampleDataFactory
 import com.neome.feature.form.presentation.state.FieldEvent
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormIntent
@@ -74,6 +76,14 @@ fun Form(
     LaunchedEffect(formRefImpl) {
         formRef.value = formRefImpl
     }
+
+    LaunchedEffect(Unit) {
+        val callerEnt = FormSampleDataFactory.getSampleCallerEnt()
+
+        val filteredForm = FilterForm.prepare(defnForm, callerEnt)
+
+    }
+
 
     DisposableEffect(Unit) {
         onDispose {
