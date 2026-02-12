@@ -6,9 +6,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -38,7 +35,7 @@ fun FieldNumber(
     onFieldEvent: (FieldEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    // Use field controller composable with FieldValueNumberData type
+    // Stable field controller remembered across recompositions
     val fieldController = rememberFieldController<FieldValueNumberData>(
         defnComp = defnComp,
         onFieldEvent = onFieldEvent
@@ -47,25 +44,22 @@ fun FieldNumber(
     // Early return if field setup is invalid
     if (fieldController.fieldId == null) return
 
-    // Watch field properties reactively through controller
-    val properties by fieldController.fieldPropertiesFlow.collectAsStateWithLifecycle()
+    // Collect reactive field value separately for finer-grained recomposition
+    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+
+    // Collect reactive field properties and error
+    val (properties, error) = fieldController.field.collectAsStateWithLifecycle().value
 
     // Early return if field is hidden
     if (properties.hidden) return
 
-    // Watch error reactively through controller
-    val error by fieldController.errorFlow.collectAsStateWithLifecycle()
-
     // Get current number value from FieldValueNumberData
-    val currentValue = fieldController.fieldValue?.value?.toString() ?: ""
-
-    // Local state for number input - keyed to currentValue for external updates
-    var textValue by remember(currentValue) { mutableStateOf(currentValue) }
+    val currentValue = fieldValue?.value?.toString() ?: ""
 
     // Delegate to stateless content for optimal recomposition
     FieldBase(modifier = modifier) {
         FieldNumberContent(
-            value = textValue,
+            value = currentValue,
             label = properties.label,
             placeholder = properties.placeholder,
             helperText = properties.helperText,
@@ -75,7 +69,6 @@ fun FieldNumber(
             onValueChange = { newValue ->
                 // Allow empty string or valid number input
                 if (newValue.isEmpty() || newValue == "-") {
-                    textValue = newValue
                     fieldController.onChange(null)
                     return@FieldNumberContent
                 }
@@ -83,8 +76,6 @@ fun FieldNumber(
                 // Try to parse as Long
                 val longValue = newValue.toLongOrNull()
                 if (longValue != null) {
-                    textValue = newValue
-                    // Use controller's onChange callback with FieldValueNumberData
                     fieldController.onChange(FieldValueNumberData(longValue))
                 }
                 // If parsing fails, don't update state (keep previous valid value)

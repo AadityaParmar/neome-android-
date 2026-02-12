@@ -9,6 +9,7 @@ import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormIntent
 import com.neome.feature.form.presentation.state.FormState
+import kotlinx.serialization.json.JsonElement
 
 object FormCtxEventHelper {
 
@@ -20,8 +21,14 @@ object FormCtxEventHelper {
         val currentFieldState = state.fieldStates[event.fieldId]
             ?: return FormReducerResult(state)
 
+        // Update valueMap
+        val newValueMap = if (event.value != null) {
+            state.valueMap + (event.fieldId to event.value)
+        } else {
+            state.valueMap - event.fieldId
+        }
+
         val newFieldState = currentFieldState.copy(
-            value = event.value,
             isDirty = event.value != currentFieldState.defaultValue
         )
 
@@ -31,6 +38,7 @@ object FormCtxEventHelper {
         val currentFieldTriggerResult = triggerField(
             fieldId = event.fieldId,
             fieldStates = newFieldStates,
+            valueMap = newValueMap,
             errors = state.errors,
             defnForm = defnForm,
             compSchemaMap = state.compSchemaMap
@@ -40,6 +48,7 @@ object FormCtxEventHelper {
         val dependents = state.fieldDependencies.getDependents(event.fieldId)
         val triggerResult = triggerDependentFields(
             fieldStates = currentFieldTriggerResult.fieldStates,
+            valueMap = newValueMap,
             dependentIds = dependents,
             defnForm = defnForm,
             errors = currentFieldTriggerResult.errors,
@@ -48,13 +57,14 @@ object FormCtxEventHelper {
 
         val newState = state.copy(
             fieldStates = triggerResult.fieldStates,
+            valueMap = newValueMap,
             errors = triggerResult.errors
         )
 
         val intent = FormIntent.Watch(
             fieldId = event.fieldId,
             fieldValue = event.value,
-            valueMap = newState.getValueMap()
+            valueMap = newState.valueMap
         )
 
         return FormReducerResult(newState, intent)
@@ -116,6 +126,7 @@ object FormCtxEventHelper {
         val result = triggerField(
             fieldId = event.fieldId,
             fieldStates = state.fieldStates,
+            valueMap = state.valueMap,
             errors = state.errors,
             defnForm = defnForm,
             compSchemaMap = state.compSchemaMap
@@ -138,7 +149,7 @@ object FormCtxEventHelper {
         }
 
         val newState = validatedState.copy(isSubmitting = true)
-        val intent = FormIntent.Submit(valueMap = validatedState.getValueMap())
+        val intent = FormIntent.Submit(valueMap = validatedState.valueMap)
 
         return FormReducerResult(newState, intent)
     }
@@ -154,7 +165,6 @@ object FormCtxEventHelper {
         val resetFieldStates = state.fieldStates.mapValues { (fieldId, fieldState) ->
             val value = initialValueMap[fieldId]
             fieldState.copy(
-                value = value,
                 defaultValue = value,
                 isTouched = false,
                 isDirty = false,
@@ -162,8 +172,12 @@ object FormCtxEventHelper {
             )
         }
 
+        // Build reset valueMap (only non-null entries from initialValueMap for leaf fields)
+        val resetValueMap = initialValueMap.filterKeys { state.fieldStates.containsKey(it) }
+
         val newState = state.copy(
             fieldStates = resetFieldStates,
+            valueMap = resetValueMap,
             errors = emptyMap(),
             isSubmitting = false
         )
@@ -179,7 +193,6 @@ object FormCtxEventHelper {
             val newValue = event.valueMap[fieldId]
             if (newValue != null) {
                 fieldState.copy(
-                    value = newValue,
                     isDirty = newValue != fieldState.defaultValue
                 )
             } else {
@@ -187,12 +200,19 @@ object FormCtxEventHelper {
             }
         }
 
-        val newState = state.copy(fieldStates = updatedFieldStates)
+        // Merge event values into existing valueMap
+        val updatedValueMap = state.valueMap + event.valueMap.filterKeys { state.fieldStates.containsKey(it) }
+
+        val newState = state.copy(
+            fieldStates = updatedFieldStates,
+            valueMap = updatedValueMap
+        )
         return FormReducerResult(newState)
     }
 
     internal fun triggerDependentFields(
         fieldStates: Map<MetaIdComp, FieldState>,
+        valueMap: Map<MetaIdComp, JsonElement>,
         dependentIds: Set<MetaIdComp>,
         defnForm: DefnFormData,
         errors: Map<MetaIdComp, FieldError>,
@@ -207,6 +227,7 @@ object FormCtxEventHelper {
             val result = triggerField(
                 fieldId = dependentId,
                 fieldStates = updatedFieldStates,
+                valueMap = valueMap,
                 errors = updatedErrors,
                 defnForm = defnForm,
                 compSchemaMap = compSchemaMap
@@ -227,6 +248,7 @@ object FormCtxEventHelper {
     private fun triggerField(
         fieldId: MetaIdComp,
         fieldStates: Map<MetaIdComp, FieldState>,
+        valueMap: Map<MetaIdComp, JsonElement>,
         errors: Map<MetaIdComp, FieldError>,
         defnForm: DefnFormData,
         compSchemaMap: Map<MetaIdComp, CompSchema>
@@ -239,13 +261,14 @@ object FormCtxEventHelper {
             fieldId = fieldId,
             currentFieldState = currentFieldState,
             defnForm = defnForm,
-            fieldStates = fieldStates
+            valueMap = valueMap
         )
         val updatedFieldStates = fieldStates + (fieldId to newFieldState)
 
         // 2. Validate field and update errors
         val updatedErrors = validateField(
             fieldId = fieldId,
+            fieldValue = valueMap[fieldId],
             fieldState = newFieldState,
             errors = errors,
             compSchemaMap = compSchemaMap
@@ -263,14 +286,14 @@ object FormCtxEventHelper {
         fieldId: MetaIdComp,
         currentFieldState: FieldState,
         defnForm: DefnFormData,
-        fieldStates: Map<MetaIdComp, FieldState>
+        valueMap: Map<MetaIdComp, JsonElement>
     ): FieldState {
         val defnComp = defnForm.compMap[fieldId] ?: return currentFieldState
 
         val newProperties = FieldPropertyResolver.resolveFieldProperties(
             defnComp = defnComp,
             defnForm = defnForm,
-            getFieldValue = { id -> fieldStates[id]?.value }
+            getFieldValue = { id -> valueMap[id] }
         )
 
         return currentFieldState.copy(fieldProperties = newProperties)
@@ -283,10 +306,12 @@ object FormCtxEventHelper {
      * Uses pure validation (no side effects) to avoid dispatching events
      * during event processing.
      *
+     * @param fieldValue The current field value from valueMap
      * @return Updated errors map with error set or cleared for this field
      */
     private fun validateField(
         fieldId: MetaIdComp,
+        fieldValue: JsonElement?,
         fieldState: FieldState,
         errors: Map<MetaIdComp, FieldError>,
         compSchemaMap: Map<MetaIdComp, CompSchema>
@@ -295,7 +320,7 @@ object FormCtxEventHelper {
             ?: return errors // No schema = no validation needed
 
         // Use pure validation to get error without side effects
-        val error = schema.validate(fieldState.value, fieldState)
+        val error = schema.validate(fieldValue, fieldState)
 
         return if (error != null) {
             // Set error

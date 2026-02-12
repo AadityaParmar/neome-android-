@@ -6,9 +6,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -37,7 +34,7 @@ fun FieldEmail(
     onFieldEvent: (FieldEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    // Use field controller composable with FieldValueEmailData type
+    // Stable field controller remembered across recompositions
     val fieldController = rememberFieldController<FieldValueEmailData>(
         defnComp = defnComp,
         onFieldEvent = onFieldEvent
@@ -46,37 +43,29 @@ fun FieldEmail(
     // Early return if field setup is invalid
     if (fieldController.fieldId == null) return
 
-    // Watch field properties reactively through controller
-    val properties by fieldController.fieldPropertiesFlow.collectAsStateWithLifecycle()
+    // Collect reactive field value separately for finer-grained recomposition
+    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+
+    // Collect reactive field properties and error
+    val (properties, _) = fieldController.field.collectAsStateWithLifecycle().value
 
     // Early return if field is hidden
     if (properties.hidden) return
 
     // Get current email value from FieldValueEmailData
-    val currentValue = fieldController.fieldValue?.value ?: ""
-
-    // Local state for email input
-    var emailValue by remember(currentValue) { mutableStateOf(currentValue) }
-
-    // Basic email validation regex
-    val emailRegex = remember {
-        Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")
-    }
+    val currentValue = fieldValue?.value ?: ""
 
     // Handle email value changes
     fun onValueChange(newValue: String) {
-        emailValue = newValue
-        // Use controller's onChange callback with FieldValueEmailData
-        val fieldValue = if (newValue.isEmpty()) null else FieldValueEmailData(newValue)
-
-        fieldController.onChange(fieldValue)
+        val fv = if (newValue.isEmpty()) null else FieldValueEmailData(newValue)
+        fieldController.onChange(fv)
     }
 
     FieldBase(modifier = modifier) {
         OutlinedTextField(
-            value = emailValue,
+            value = currentValue,
             label = properties.label?.let { { Text(it) } },
-            isError = emailValue.isNotEmpty() && !emailValue.contains("@"),
+            isError = currentValue.isNotEmpty() && !currentValue.contains("@"),
             placeholder = properties.placeholder?.let { { Text(it) } },
             supportingText = properties.helperText?.let { { Text(it) } },
             enabled = !properties.disabled,

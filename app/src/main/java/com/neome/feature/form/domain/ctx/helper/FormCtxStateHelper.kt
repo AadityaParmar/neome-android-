@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.serialization.json.JsonElement
 
 object FormCtxStateHelper {
 
@@ -26,6 +27,22 @@ object FormCtxStateHelper {
                 scope = coroutineScope,
                 started = SharingStarted.WhileSubscribed(5000),
                 initialValue = currentState.getFieldState(fieldId)
+            )
+    }
+
+    fun createFieldValueFlow(
+        formStateFlow: StateFlow<FormState>,
+        fieldId: MetaIdComp,
+        coroutineScope: CoroutineScope
+    ): StateFlow<JsonElement?> {
+        val currentState = formStateFlow.value
+        return formStateFlow
+            .map { it.getValue(fieldId) }
+            .distinctUntilChanged()
+            .stateIn(
+                scope = coroutineScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = currentState.getValue(fieldId)
             )
     }
 

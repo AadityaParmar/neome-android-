@@ -5,9 +5,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
@@ -36,7 +33,7 @@ fun FieldText(
     onFieldEvent: (FieldEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    // Use field controller composable with FieldValueTextData type
+    // Stable field controller remembered across recompositions
     val fieldController = rememberFieldController<FieldValueTextData>(
         defnComp = defnComp,
         onFieldEvent = onFieldEvent
@@ -45,25 +42,22 @@ fun FieldText(
     // Early return if field setup is invalid
     if (fieldController.fieldId == null) return
 
-    // Watch field properties reactively through controller
-    val properties by fieldController.fieldPropertiesFlow.collectAsStateWithLifecycle()
+    // Collect reactive field value separately for finer-grained recomposition
+    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+
+    // Collect reactive field properties and error
+    val (properties, error) = fieldController.field.collectAsStateWithLifecycle().value
 
     // Early return if field is hidden
     if (properties.hidden) return
 
-    // Watch error reactively through controller
-    val error by fieldController.errorFlow.collectAsStateWithLifecycle()
-
     // Get current text value from FieldValueTextData
-    val currentValue = fieldController.fieldValue?.value ?: ""
-
-    // Local state for text input - keyed to currentValue for external updates
-    var textValue by remember(currentValue) { mutableStateOf(currentValue) }
+    val currentValue = fieldValue?.value ?: ""
 
     // Delegate to stateless content for optimal recomposition
     FieldBase(modifier = modifier) {
         FieldTextContent(
-            value = textValue,
+            value = currentValue,
             label = properties.label,
             placeholder = properties.placeholder,
             helperText = properties.helperText,
@@ -71,7 +65,6 @@ fun FieldText(
             enabled = !properties.disabled,
             readOnly = properties.readOnly,
             onValueChange = { newValue ->
-                textValue = newValue
                 // Use controller's onChange callback with FieldValueTextData
                 val fieldValue = if (newValue.isEmpty()) null else FieldValueTextData(newValue)
                 fieldController.onChange(fieldValue)

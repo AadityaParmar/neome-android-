@@ -45,6 +45,7 @@ class FormCtxImpl(
     private val currentState: FormState get() = _stateFlow.value
 
     private val fieldStateFlows = mutableMapOf<MetaIdComp, StateFlow<FieldState?>>()
+    private val fieldValueFlows = mutableMapOf<MetaIdComp, StateFlow<JsonElement?>>()
     private val fieldErrorFlows = mutableMapOf<MetaIdComp, StateFlow<FieldError?>>()
 
     private val processingDispatcher = Dispatchers.Default
@@ -180,7 +181,7 @@ class FormCtxImpl(
         enqueue(FormAction.Trigger(fieldId))
     }
 
-    override fun getValues(): Map<MetaIdComp, JsonElement> = currentState.getValueMap()
+    override fun getValues(): Map<MetaIdComp, JsonElement> = currentState.valueMap
     override fun getFieldState(fieldId: MetaIdComp): FieldState? = currentState.getFieldState(fieldId)
     override fun getValue(fieldId: MetaIdComp): JsonElement? = currentState.getValue(fieldId)
     override fun getError(fieldId: MetaIdComp): FieldError? = currentState.getError(fieldId)
@@ -207,6 +208,12 @@ class FormCtxImpl(
     override fun watchFieldState(fieldId: MetaIdComp): StateFlow<FieldState?> {
         return fieldStateFlows.getOrPut(fieldId) {
             FormCtxStateHelper.createFieldStateFlow(stateFlow, fieldId, coroutineScope)
+        }
+    }
+
+    override fun watchFieldValue(fieldId: MetaIdComp): StateFlow<JsonElement?> {
+        return fieldValueFlows.getOrPut(fieldId) {
+            FormCtxStateHelper.createFieldValueFlow(stateFlow, fieldId, coroutineScope)
         }
     }
 

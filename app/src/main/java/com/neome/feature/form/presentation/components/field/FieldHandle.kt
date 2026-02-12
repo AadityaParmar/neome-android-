@@ -7,9 +7,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -182,46 +179,40 @@ fun FieldHandle(
     modifier: Modifier = Modifier
 ) {
     // ========== REUSED FROM FieldEmail: Field Controller Setup ==========
-    // Use field controller composable with FieldValueHandleData type
     val fieldController = rememberFieldController<FieldValueHandleData>(
         defnComp = defnComp,
         onFieldEvent = onFieldEvent
     )
 
     // ========== REUSED FROM FieldEmail: Early Returns ==========
-    // Early return if field setup is invalid
     if (fieldController.fieldId == null) return
 
-    // ========== REUSED FROM FieldEmail: Reactive Properties ==========
-    // Watch field properties reactively through controller
-    val properties by fieldController.fieldPropertiesFlow.collectAsStateWithLifecycle()
+    // ========== Collect reactive field value separately for finer-grained recomposition ==========
+    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+
+    // ========== Collect reactive field properties and error ==========
+    val (properties, _) = fieldController.field.collectAsStateWithLifecycle().value
 
     // Early return if field is hidden
     if (properties.hidden) return
 
     // ========== REUSED FROM FieldEmail: Current Value & Local State ==========
     // Get current handle value from FieldValueHandleData
-    val currentValue = fieldController.fieldValue?.value ?: ""
-
-    // Local state for handle input
-    var handleValue by remember(currentValue) { mutableStateOf(currentValue) }
+    val currentValue = fieldValue?.value ?: ""
 
     // ========== REUSED FROM FieldEmail: Value Change Handler ==========
-    // Handle value changes
     fun onValueChange(newValue: String) {
-        handleValue = newValue
-        // Use controller's onChange callback with FieldValueHandleData
-        val fieldValue = if (newValue.isEmpty()) null else FieldValueHandleData(newValue)
-        fieldController.onChange(fieldValue)
+        val fv = if (newValue.isEmpty()) null else FieldValueHandleData(newValue)
+        fieldController.onChange(fv)
     }
 
     // ========== Handle-specific: Validation State ==========
-    val isError = hasValidationError(handleValue)
-    val errorMessage = getValidationErrorMessage(handleValue)
+    val isError = hasValidationError(currentValue)
+    val errorMessage = getValidationErrorMessage(currentValue)
 
     // ========== Handle-specific: Determine Keyboard Type ==========
     // Use phone keyboard if input starts with '+', otherwise email keyboard
-    val keyboardType = if (handleValue.startsWith("+")) {
+    val keyboardType = if (currentValue.startsWith("+")) {
         KeyboardType.Phone
     } else {
         KeyboardType.Email
@@ -230,7 +221,7 @@ fun FieldHandle(
     // ========== REUSED FROM FieldEmail: FieldBase + OutlinedTextField UI ==========
     FieldBase(modifier = modifier) {
         OutlinedTextField(
-            value = handleValue,
+            value = currentValue,
             onValueChange = ::onValueChange,
             label = properties.label?.let { { Text(it) } },
             placeholder = properties.placeholder?.let { { Text(it) } },

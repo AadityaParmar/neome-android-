@@ -171,8 +171,11 @@ fun FieldDocument(
 
     if (fieldController.fieldId == null) return
 
-    // ========== REUSED FROM ImageField: Reactive Properties ==========
-    val properties by fieldController.fieldPropertiesFlow.collectAsStateWithLifecycle()
+    // ========== Collect reactive field value separately for finer-grained recomposition ==========
+    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+
+    // ========== Collect reactive field properties and error ==========
+    val (properties, _) = fieldController.field.collectAsStateWithLifecycle().value
 
     if (properties.hidden) return
 
@@ -190,8 +193,8 @@ fun FieldDocument(
 
     // ========== REUSED FROM ImageField: State Holder ==========
     val documentState = rememberFieldDocumentState(
-        initialFileName = fieldController.fieldValue?.value?.fileName,
-        initialFileSize = fieldController.fieldValue?.value?.fileSize,
+        initialFileName = fieldValue?.value?.fileName,
+        initialFileSize = fieldValue?.value?.fileSize,
         maxSizeBytes = maxSizeBytes,
         allowedFileTypes = allowedFileTypes,
         onValueChange = { fieldController.onChange(null) },

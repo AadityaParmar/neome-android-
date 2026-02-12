@@ -80,18 +80,17 @@ fun FieldDateRange(
 
     if (fieldController.fieldId == null) return
 
-    // ========== REUSED FROM FieldDate: Reactive Properties ==========
-    val properties by fieldController.fieldPropertiesFlow.collectAsStateWithLifecycle()
+    // ========== Collect reactive field value separately for finer-grained recomposition ==========
+    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+
+    // ========== Collect reactive field properties and error ==========
+    val (properties, _) = fieldController.field.collectAsStateWithLifecycle().value
 
     if (properties.hidden) return
 
     // ========== DateRange-specific: Get Current Values ==========
-    val currentFromValue = fieldController.fieldValue?.from
-    val currentToValue = fieldController.fieldValue?.to
-
-    // ========== REUSED FROM FieldDate: Local State for Immediate UI Updates ==========
-    var displayFromValue by remember(currentFromValue) { mutableStateOf(currentFromValue) }
-    var displayToValue by remember(currentToValue) { mutableStateOf(currentToValue) }
+    val currentFromValue = fieldValue?.from
+    val currentToValue = fieldValue?.to
 
     // ========== DateRange-specific: Picker State Management ==========
     var showFromDatePicker by remember { mutableStateOf(false) }
@@ -136,19 +135,14 @@ fun FieldDateRange(
     // ========== DateRange-specific: From Date Selection Handler ==========
     fun onFromDateSelected(timestamp: Long?) {
         val dateString = timestamp?.let { dateToIsoString(Date(it)) }
-        displayFromValue = dateString
 
         // If the new "From" date is after the current "To" date, clear the "To" date
         val fromDate = stringToDate(dateString)
-        val toDate = stringToDate(displayToValue)
+        val toDate = stringToDate(currentToValue)
         val newToValue = if (fromDate != null && toDate != null && toDate.before(fromDate)) {
             null // Clear "To" date since it's now invalid
         } else {
-            displayToValue
-        }
-
-        if (newToValue != displayToValue) {
-            displayToValue = newToValue
+            currentToValue
         }
 
         updateFieldValue(dateString, newToValue)
@@ -158,22 +152,18 @@ fun FieldDateRange(
     // ========== DateRange-specific: To Date Selection Handler ==========
     fun onToDateSelected(timestamp: Long?) {
         val dateString = timestamp?.let { dateToIsoString(Date(it)) }
-        displayToValue = dateString
-        updateFieldValue(displayFromValue, dateString)
+        updateFieldValue(currentFromValue, dateString)
         showToDatePicker = false
     }
 
     // ========== DateRange-specific: Clear Handlers ==========
     fun onClearFromDate() {
-        displayFromValue = null
         // When clearing "From", also clear "To" to maintain consistency
-        displayToValue = null
         updateFieldValue(null, null)
     }
 
     fun onClearToDate() {
-        displayToValue = null
-        updateFieldValue(displayFromValue, null)
+        updateFieldValue(currentFromValue, null)
     }
 
     // ========== REUSED FROM FieldDate: Interactive State ==========
@@ -210,7 +200,7 @@ fun FieldDateRange(
         Column(modifier = Modifier.fillMaxWidth()) {
             // ===== FROM DATE FIELD (reuses FieldDate OutlinedTextField pattern) =====
             OutlinedTextField(
-                value = formatDateForDisplay(displayFromValue),
+                value = formatDateForDisplay(currentFromValue),
                 onValueChange = { /* Read-only, no manual text input */ },
                 label = { Text(properties.label?.let { "$it (From)" } ?: "From") },
                 placeholder = properties.placeholder?.let { { Text(it) } },
@@ -228,7 +218,7 @@ fun FieldDateRange(
                                 )
                             }
                         }
-                        if (isInteractive && !displayFromValue.isNullOrBlank()) {
+                        if (isInteractive && !currentFromValue.isNullOrBlank()) {
                             IconButton(onClick = { onClearFromDate() }) {
                                 Icon(
                                     imageVector = Icons.Default.Clear,
@@ -244,7 +234,7 @@ fun FieldDateRange(
 
             // ===== TO DATE FIELD (reuses FieldDate OutlinedTextField pattern) =====
             OutlinedTextField(
-                value = formatDateForDisplay(displayToValue),
+                value = formatDateForDisplay(currentToValue),
                 onValueChange = { /* Read-only, no manual text input */ },
                 label = { Text(properties.label?.let { "$it (To)" } ?: "To") },
                 placeholder = properties.placeholder?.let { { Text(it) } },
@@ -263,7 +253,7 @@ fun FieldDateRange(
                                 )
                             }
                         }
-                        if (isInteractive && !displayToValue.isNullOrBlank()) {
+                        if (isInteractive && !currentToValue.isNullOrBlank()) {
                             IconButton(onClick = { onClearToDate() }) {
                                 Icon(
                                     imageVector = Icons.Default.Clear,
@@ -279,7 +269,7 @@ fun FieldDateRange(
 
     // ========== REUSED FROM FieldDate: DatePickerDialog for "From" Date ==========
     if (showFromDatePicker) {
-        val initialDate = stringToDate(displayFromValue)
+        val initialDate = stringToDate(currentFromValue)
         val datePickerState = rememberDatePickerState(
             initialSelectedDateMillis = initialDate?.time ?: System.currentTimeMillis()
         )
@@ -307,8 +297,8 @@ fun FieldDateRange(
 
     // ========== DateRange-specific: DatePickerDialog for "To" Date with Min Date Constraint ==========
     if (showToDatePicker) {
-        val initialToDate = stringToDate(displayToValue)
-        val minDate = stringToDate(displayFromValue)
+        val initialToDate = stringToDate(currentToValue)
+        val minDate = stringToDate(currentFromValue)
 
         // Create SelectableDates that enforces minimum date constraint
         val selectableDates = remember(minDate) {

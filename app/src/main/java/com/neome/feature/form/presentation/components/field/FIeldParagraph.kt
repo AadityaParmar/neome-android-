@@ -5,15 +5,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.neome.api.meta.base.dto.FieldValueParagraph
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueParagraphData
-import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldEvent
@@ -45,22 +40,19 @@ fun FieldParagraph(
     // Early return if field setup is invalid
     if (fieldController.fieldId == null) return
 
-    // Watch field properties reactively through controller
-    val properties by fieldController.fieldPropertiesFlow.collectAsStateWithLifecycle()
+    // Collect reactive field value separately for finer-grained recomposition
+    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+
+    // Collect reactive field properties and error
+    val (properties, error) = fieldController.field.collectAsStateWithLifecycle().value
 
     // Early return if field is hidden
     if (properties.hidden) return
 
 
-    // Get current text value from FieldValueParagraphData
-    val currentValue = fieldController.fieldValue?.value ?: ""
-
-    // Local state for text input
-    var textValue by remember(currentValue) { mutableStateOf(currentValue) }
 
     // Handle text value changes
     fun onValueChange(newValue: String) {
-        textValue = newValue
         // Use controller's onChange callback with FieldValueParagraphData
         val fieldValue = if (newValue.isEmpty()) null else FieldValueParagraphData(newValue)
 
@@ -69,7 +61,7 @@ fun FieldParagraph(
 
     FieldBase(modifier = modifier) {
         OutlinedTextField(
-            value = textValue,
+            value = fieldValue?.value.let { it ?: "" },
             label = properties.label?.let { { Text(it) } },
             placeholder = properties.placeholder?.let { { Text(it) } },
             supportingText = properties.helperText?.let { { Text(it) } },

@@ -23,7 +23,7 @@ object FormCtxValidationHelper {
         val validatingFieldState = currentFieldState.copy(isValidating = true)
 
         // 2. Use pure validation to get error without side effects
-        val error = schema.validate(currentFieldState.value, currentFieldState)
+        val error = schema.validate(state.valueMap[event.fieldId], currentFieldState)
 
         // 3. Update errors map
         val updatedErrors = updateFieldError(
@@ -54,7 +54,7 @@ object FormCtxValidationHelper {
         var updatedErrors = state.errors
         state.compSchemaMap.forEach { (fieldId, schema) ->
             val fieldState = state.fieldStates[fieldId]
-            val error = schema.validate(fieldState?.value, fieldState)
+            val error = schema.validate(state.valueMap[fieldId], fieldState)
             updatedErrors = updateFieldError(
                 fieldId = fieldId,
                 error = error,

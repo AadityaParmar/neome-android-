@@ -79,18 +79,17 @@ fun FieldTime(
 
     if (fieldController.fieldId == null) return
 
-    // ========== REUSED FROM FieldDate: Reactive Properties ==========
-    val properties by fieldController.fieldPropertiesFlow.collectAsStateWithLifecycle()
+    // ========== Collect reactive field value separately for finer-grained recomposition ==========
+    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+
+    // ========== Collect reactive field properties and error ==========
+    val (properties, _) = fieldController.field.collectAsStateWithLifecycle().value
 
     if (properties.hidden) return
 
     // ========== REUSED FROM FieldDate: Current Value & Local State ==========
     // Get current time value from FieldValueTimeData
-    val currentValue = fieldController.fieldValue?.value
-
-    // Local state for the displayed time - ensures immediate UI update when time is selected
-    // The remember(currentValue) key ensures this syncs if the value changes externally
-    var displayValue by remember(currentValue) { mutableStateOf(currentValue) }
+    val currentValue = fieldValue?.value
 
     // ========== Time-specific: Picker State ==========
     var showTimePicker by remember { mutableStateOf(false) }
@@ -125,13 +124,13 @@ fun FieldTime(
 
     // ========== Time-specific: Extract Hour/Minute from Existing Value ==========
     fun getExistingHour(): Int {
-        val date = stringToDate(displayValue) ?: return Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        val date = stringToDate(currentValue) ?: return Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         val calendar = Calendar.getInstance().apply { time = date }
         return calendar.get(Calendar.HOUR_OF_DAY)
     }
 
     fun getExistingMinute(): Int {
-        val date = stringToDate(displayValue) ?: return Calendar.getInstance().get(Calendar.MINUTE)
+        val date = stringToDate(currentValue) ?: return Calendar.getInstance().get(Calendar.MINUTE)
         val calendar = Calendar.getInstance().apply { time = date }
         return calendar.get(Calendar.MINUTE)
     }
@@ -145,7 +144,6 @@ fun FieldTime(
             set(Calendar.MILLISECOND, 0)
         }
         val timeString = dateToIsoString(calendar.time)
-        displayValue = timeString // Update local state immediately for instant UI feedback
         val newValue = FieldValueTimeData(timeString)
         fieldController.onChange(newValue)
         showTimePicker = false
@@ -153,7 +151,6 @@ fun FieldTime(
 
     // ========== REUSED FROM FieldDate: Clear Handler ==========
     fun onClearTime() {
-        displayValue = null // Update local state immediately
         fieldController.onChange(null)
     }
 
@@ -178,7 +175,7 @@ fun FieldTime(
     // ========== REUSED FROM FieldDate: FieldBase + OutlinedTextField UI ==========
     FieldBase(modifier = modifier) {
         OutlinedTextField(
-            value = formatTimeForDisplay(displayValue),
+            value = formatTimeForDisplay(currentValue),
             onValueChange = { /* Read-only, no manual text input */ },
             label = properties.label?.let { { Text(it) } },
             placeholder = properties.placeholder?.let { { Text(it) } },
@@ -197,7 +194,7 @@ fun FieldTime(
                             )
                         }
                     }
-                    if (isInteractive && !displayValue.isNullOrBlank()) {
+                    if (isInteractive && !currentValue.isNullOrBlank()) {
                         IconButton(onClick = { onClearTime() }) {
                             Icon(
                                 imageVector = Icons.Default.Clear,

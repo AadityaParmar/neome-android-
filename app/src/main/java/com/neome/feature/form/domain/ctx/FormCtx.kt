@@ -113,6 +113,16 @@ interface FormCtx {
     fun watchFieldState(fieldId: MetaIdComp): StateFlow<FieldState?>
 
     /**
+     * Watch field value changes as StateFlow (isolated observation).
+     * Use in Composables with collectAsStateWithLifecycle() when you only need the value.
+     * This prevents unnecessary recomposition when other field properties change.
+     *
+     * @param fieldId Field identifier
+     * @return StateFlow of JsonElement value (null if no value)
+     */
+    fun watchFieldValue(fieldId: MetaIdComp): StateFlow<JsonElement?>
+
+    /**
      * Watch field error changes as StateFlow (isolated observation).
      * Use in Composables with collectAsStateWithLifecycle() when you only need error state.
      * This prevents unnecessary recomposition when other field properties change.

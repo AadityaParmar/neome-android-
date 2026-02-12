@@ -51,12 +51,12 @@ class FormRefImpl(
             rowOrder = initialValue.rowOrder,
             updatedBy = initialValue.updatedBy,
             updatedOn = initialValue.updatedOn,
-            valueMap = state.getValueMap()
+            valueMap = state.valueMap
         )
     }
 
     override fun getValueMap(): Map<MetaIdComp, JsonElement> {
-        return currentState.getValueMap()
+        return currentState.valueMap
     }
 
     override fun getFieldState(fieldId: MetaIdComp): FieldState? {
@@ -118,7 +118,7 @@ class FormRefImpl(
         val state = currentState
         return if (fieldId != null) {
             !state.hasError(fieldId) && state.getFieldState(fieldId)?.let { fieldState ->
-                !fieldState.fieldProperties.required || fieldState.value != null
+                !fieldState.fieldProperties.required || state.valueMap[fieldId] != null
             } ?: true
         } else {
             state.isValid

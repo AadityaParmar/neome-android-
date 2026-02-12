@@ -51,11 +51,15 @@ object FormCtxInitHelper {
                 )
 
                 FieldState(
-                    value = value,
                     defaultValue = value,
                     fieldProperties = fieldProperties
                 )
             }
+
+        // Build valueMap from initial values (only non-null entries)
+        val valueMap = initialValueMap.filterKeys { fieldId ->
+            compMap[fieldId]?.let { !isCompositeType(it.type) } ?: false
+        }
 
         // Build validation schemas for all fields
         val compSchemaMap = CompSchemaFactory.buildFormSchemas(defnForm)
@@ -64,6 +68,7 @@ object FormCtxInitHelper {
             defnForm = defnForm,
             initialFormValue = initialValue,
             fieldStates = fieldStates,
+            valueMap = valueMap,
             fieldDependencies = dependencyMap,
             errors = emptyMap(),
             compSchemaMap = compSchemaMap,

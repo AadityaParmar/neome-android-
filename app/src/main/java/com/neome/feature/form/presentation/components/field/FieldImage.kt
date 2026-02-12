@@ -80,8 +80,11 @@ fun FieldImage(
 
     if (fieldController.fieldId == null) return
 
-    // Reactive properties from form context
-    val properties by fieldController.fieldPropertiesFlow.collectAsStateWithLifecycle()
+    // Collect reactive field value separately for finer-grained recomposition
+    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+
+    // Collect reactive field properties and error
+    val (properties, _) = fieldController.field.collectAsStateWithLifecycle().value
 
     if (properties.hidden) return
 
@@ -90,7 +93,7 @@ fun FieldImage(
 
     // State holder for image field logic
     val imageState = rememberFieldImageState(
-        initialFileName = fieldController.fieldValue?.value?.fileName,
+        initialFileName = fieldValue?.value?.fileName,
         maxSizeBytes = maxSizeBytes,
         onValueChange = { fieldController.onChange(null) },
         onClear = { fieldController.onChange(null) }

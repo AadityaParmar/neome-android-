@@ -324,46 +324,43 @@ fun FieldMobile(
     // ========== REUSED FROM FieldText: Early Returns ==========
     if (fieldController.fieldId == null) return
 
-    // ========== REUSED FROM FieldText: Reactive Properties ==========
-    val properties by fieldController.fieldPropertiesFlow.collectAsStateWithLifecycle()
+    // ========== Collect reactive field value separately for finer-grained recomposition ==========
+    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+
+    // ========== Collect reactive field properties and error ==========
+    val (properties, _) = fieldController.field.collectAsStateWithLifecycle().value
 
     if (properties.hidden) return
 
     // ========== Mobile-specific: Parse Current Value ==========
-    val currentValue = fieldController.fieldValue?.value ?: ""
-    val (initialCountryCode, initialMobileNumber) = remember(currentValue) {
+    val currentValue = fieldValue?.value ?: ""
+    val (parsedCountryCode, parsedMobileNumber) = remember(currentValue) {
         parseStoredValue(currentValue)
     }
-
-    // ========== Mobile-specific: Local State ==========
-    var selectedCountryCode by remember(initialCountryCode) {
-        mutableStateOf(COUNTRY_CODES.find { it.code == initialCountryCode } ?: DEFAULT_COUNTRY_CODE)
+    val selectedCountryCode = remember(parsedCountryCode) {
+        COUNTRY_CODES.find { it.code == parsedCountryCode } ?: DEFAULT_COUNTRY_CODE
     }
-    var mobileNumber by remember(initialMobileNumber) { mutableStateOf(initialMobileNumber) }
+
     var isDropdownExpanded by remember { mutableStateOf(false) }
 
     // ========== Mobile-specific: Validation ==========
-    val validationError = validateMobileNumber(mobileNumber)
+    val validationError = validateMobileNumber(parsedMobileNumber)
     val isError = validationError != null
 
     // ========== Mobile-specific: Value Change Handlers ==========
-    fun emitCombinedValue() {
-        val combined = combineValue(selectedCountryCode.code, mobileNumber)
-        val fieldValue = if (combined.isEmpty()) null else FieldValueMobileData(combined)
-        fieldController.onChange(fieldValue)
-    }
-
     fun onCountryCodeSelected(country: CountryCode) {
-        selectedCountryCode = country
         isDropdownExpanded = false
-        emitCombinedValue()
+        val combined = combineValue(country.code, parsedMobileNumber)
+        val fv = if (combined.isEmpty()) null else FieldValueMobileData(combined)
+        fieldController.onChange(fv)
     }
 
     fun onMobileNumberChange(newValue: String) {
         // Filter to digits only and limit length
         val filtered = filterDigitsOnly(newValue).take(DEFAULT_MOBILE_LENGTH)
-        mobileNumber = filtered
-        emitCombinedValue()
+        val combined = combineValue(selectedCountryCode.code, filtered)
+        val fv = if (combined.isEmpty()) null else FieldValueMobileData(combined)
+        fieldController.onChange(fv)
     }
 
     // ========== REUSED FROM FieldText: FieldBase Wrapper ==========
@@ -413,7 +410,7 @@ fun FieldMobile(
 
             // ========== Right Section: Mobile Number Input ==========
             OutlinedTextField(
-                value = mobileNumber,
+                value = parsedMobileNumber,
                 onValueChange = ::onMobileNumberChange,
                 label = properties.label?.let { { Text(it) } },
                 placeholder = properties.placeholder?.let { { Text(it) } },

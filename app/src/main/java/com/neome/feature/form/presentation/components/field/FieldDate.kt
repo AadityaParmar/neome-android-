@@ -47,17 +47,16 @@ fun FieldDate(
 
     if (fieldController.fieldId == null) return
 
-    // ✅ reactive properties
-    val properties by fieldController.fieldPropertiesFlow.collectAsStateWithLifecycle()
+    // Collect reactive field value separately for finer-grained recomposition
+    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+
+    // Collect reactive field properties and error
+    val (properties, _) = fieldController.field.collectAsStateWithLifecycle().value
 
     if (properties.hidden) return
 
     // Get current date value from FieldValueDateData
-    val currentValue = fieldController.fieldValue?.value
-
-    // Local state for the displayed date - ensures immediate UI update when date is selected
-    // The remember(currentValue) key ensures this syncs if the value changes externally
-    var displayValue by remember(currentValue) { mutableStateOf(currentValue) }
+    val currentValue = fieldValue?.value
 
     var showDatePicker by remember { mutableStateOf(false) }
 
@@ -86,23 +85,19 @@ fun FieldDate(
 
     fun onDateSelected(timestamp: Long?) {
         val dateString = timestamp?.let { dateToIsoString(Date(it)) }
-        displayValue = dateString // Update local state immediately for instant UI feedback
         val newValue = dateString?.let { FieldValueDateData(it) }
         fieldController.onChange(newValue)
         showDatePicker = false
     }
 
     fun onClearDate() {
-        displayValue = null // Update local state immediately
         fieldController.onChange(null)
     }
 
     val isInteractive = !properties.disabled && !properties.readOnly
 
-    // InteractionSource to detect clicks on the text field
     val interactionSource = remember { MutableInteractionSource() }
 
-    // Listen for press interactions to open date picker when text field is clicked
     LaunchedEffect(interactionSource, isInteractive) {
         if (isInteractive) {
             interactionSource.interactions.collect { interaction ->
@@ -115,7 +110,7 @@ fun FieldDate(
 
     FieldBase(modifier = modifier) {
         OutlinedTextField(
-            value = formatDateForDisplay(displayValue),
+            value = formatDateForDisplay(currentValue),
             onValueChange = { /* Read-only, no manual text input */ },
             label = properties.label?.let { { Text(it) } },
             placeholder = properties.placeholder?.let { { Text(it) } },
@@ -134,7 +129,7 @@ fun FieldDate(
                             )
                         }
                     }
-                    if (isInteractive && !displayValue.isNullOrBlank()) {
+                    if (isInteractive && !currentValue.isNullOrBlank()) {
                         IconButton(onClick = { onClearDate() }) {
                             Icon(
                                 imageVector = Icons.Default.Clear,
@@ -148,7 +143,7 @@ fun FieldDate(
     }
 
     if (showDatePicker) {
-        val initialDate = stringToDate(displayValue)
+        val initialDate = stringToDate(currentValue)
         val datePickerState = rememberDatePickerState(
             initialSelectedDateMillis = initialDate?.time ?: System.currentTimeMillis()
         )

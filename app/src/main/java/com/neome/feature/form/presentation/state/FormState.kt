@@ -42,6 +42,9 @@ data class FormState(
     // Runtime state (centralized)
     val fieldStates: Map<MetaIdComp, FieldState> = emptyMap(),
 
+    // Field values (separate from fieldStates for isolated observation)
+    val valueMap: Map<MetaIdComp, JsonElement> = emptyMap(),
+
     // Field errors (separate from fieldStates for easy access)
     val errors: Map<MetaIdComp, FieldError> = emptyMap(),
 
@@ -72,15 +75,6 @@ data class FormState(
     val disableSendBtnSet: Set<SendBtnDisableFlag> = emptySet()
 ) {
     /**
-     * Get current form values as a map.
-     */
-    fun getValueMap(): Map<MetaIdComp, JsonElement> {
-        return fieldStates.mapNotNull { (fieldId, state) ->
-            state.value?.let { fieldId to it }
-        }.toMap()
-    }
-
-    /**
      * Check if any field has validation errors.
      */
     val hasErrors: Boolean
@@ -96,8 +90,8 @@ data class FormState(
      * Check if all required fields are filled and no errors.
      */
     val isValid: Boolean
-        get() = !hasErrors && fieldStates.values.none { state ->
-            state.fieldProperties.required && state.value == null
+        get() = !hasErrors && fieldStates.none { (fieldId, state) ->
+            state.fieldProperties.required && valueMap[fieldId] == null
         }
 
     /**
@@ -108,7 +102,7 @@ data class FormState(
     /**
      * Get field value by ID.
      */
-    fun getValue(fieldId: MetaIdComp): JsonElement? = fieldStates[fieldId]?.value
+    fun getValue(fieldId: MetaIdComp): JsonElement? = valueMap[fieldId]
 
     /**
      * Get field error by ID.

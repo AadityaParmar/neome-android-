@@ -82,17 +82,16 @@ fun FieldDateTime(
 
     if (fieldController.fieldId == null) return
 
-    // ========== REUSED FROM FieldDate: Reactive Properties ==========
-    val properties by fieldController.fieldPropertiesFlow.collectAsStateWithLifecycle()
+    // ========== Collect reactive field value separately for finer-grained recomposition ==========
+    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+
+    // ========== Collect reactive field properties and error ==========
+    val (properties, _) = fieldController.field.collectAsStateWithLifecycle().value
 
     if (properties.hidden) return
 
-    // ========== REUSED FROM FieldDate: Current Value & Local State ==========
-    val currentValue = fieldController.fieldValue?.value
-
-    // Local state for the displayed datetime - ensures immediate UI update
-    // The remember(currentValue) key ensures this syncs if the value changes externally
-    var displayValue by remember(currentValue) { mutableStateOf(currentValue) }
+    // ========== Current Value ==========
+    val currentValue = fieldValue?.value
 
     // ========== DateTime-specific: Picker State Management ==========
     // Picker flow states
@@ -144,13 +143,13 @@ fun FieldDateTime(
 
     // ========== DateTime-specific: Extract Time from Existing Value ==========
     fun getExistingHour(): Int {
-        val date = stringToDate(displayValue) ?: return Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        val date = stringToDate(currentValue) ?: return Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         val calendar = Calendar.getInstance().apply { time = date }
         return calendar.get(Calendar.HOUR_OF_DAY)
     }
 
     fun getExistingMinute(): Int {
-        val date = stringToDate(displayValue) ?: return Calendar.getInstance().get(Calendar.MINUTE)
+        val date = stringToDate(currentValue) ?: return Calendar.getInstance().get(Calendar.MINUTE)
         val calendar = Calendar.getInstance().apply { time = date }
         return calendar.get(Calendar.MINUTE)
     }
@@ -167,7 +166,6 @@ fun FieldDateTime(
     fun onTimeConfirmed(hour: Int, minute: Int) {
         val combinedDateTime = combineDateAndTime(selectedDateMillis, hour, minute)
         val dateTimeString = dateToIsoString(combinedDateTime)
-        displayValue = dateTimeString // Update local state immediately for instant UI feedback
         val newValue = FieldValueDateTimeData(dateTimeString)
         fieldController.onChange(newValue)
         showTimePicker = false
@@ -175,7 +173,6 @@ fun FieldDateTime(
 
     // ========== REUSED FROM FieldDate: Clear Handler ==========
     fun onClearDateTime() {
-        displayValue = null // Update local state immediately
         fieldController.onChange(null)
     }
 
@@ -199,7 +196,7 @@ fun FieldDateTime(
     // ========== REUSED FROM FieldDate: FieldBase + OutlinedTextField UI ==========
     FieldBase(modifier = modifier) {
         OutlinedTextField(
-            value = formatDateTimeForDisplay(displayValue),
+            value = formatDateTimeForDisplay(currentValue),
             onValueChange = { /* Read-only, no manual text input */ },
             label = properties.label?.let { { Text(it) } },
             placeholder = properties.placeholder?.let { { Text(it) } },
@@ -218,7 +215,7 @@ fun FieldDateTime(
                             )
                         }
                     }
-                    if (isInteractive && !displayValue.isNullOrBlank()) {
+                    if (isInteractive && !currentValue.isNullOrBlank()) {
                         IconButton(onClick = { onClearDateTime() }) {
                             Icon(
                                 imageVector = Icons.Default.Clear,
@@ -233,7 +230,7 @@ fun FieldDateTime(
 
     // ========== REUSED FROM FieldDate: DatePickerDialog (Step 1) ======
     if (showDatePicker) {
-        val initialDate = stringToDate(displayValue)
+        val initialDate = stringToDate(currentValue)
         val datePickerState = rememberDatePickerState(
             initialSelectedDateMillis = initialDate?.time ?: System.currentTimeMillis()
         )

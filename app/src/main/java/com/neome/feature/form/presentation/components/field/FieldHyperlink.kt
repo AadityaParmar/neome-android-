@@ -13,9 +13,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -111,42 +108,36 @@ fun FieldHyperlink(
     modifier: Modifier = Modifier
 ) {
     // ========== REUSED FROM FieldText: Field Controller Setup ==========
-    // Use field controller composable with FieldValueHyperlinkData type
     val fieldController = rememberFieldController<FieldValueHyperlinkData>(
         defnComp = defnComp,
         onFieldEvent = onFieldEvent
     )
 
     // ========== REUSED FROM FieldText: Early Returns ==========
-    // Early return if field setup is invalid
     if (fieldController.fieldId == null) return
 
-    // ========== REUSED FROM FieldText: Reactive Properties ==========
-    // Watch field properties reactively through controller
-    val properties by fieldController.fieldPropertiesFlow.collectAsStateWithLifecycle()
+    // ========== Collect reactive field value separately for finer-grained recomposition ==========
+    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+
+    // ========== Collect reactive field properties and error ==========
+    val (properties, _) = fieldController.field.collectAsStateWithLifecycle().value
 
     // Early return if field is hidden
     if (properties.hidden) return
 
     // ========== REUSED FROM FieldText: Current Value & Local State ==========
     // Get current hyperlink value from FieldValueHyperlinkData
-    val currentValue = fieldController.fieldValue?.value ?: ""
-
-    // Local state for text input
-    var hyperlinkValue by remember(currentValue) { mutableStateOf(currentValue) }
+    val currentValue = fieldValue?.value ?: ""
 
     // ========== REUSED FROM FieldText: Value Change Handler ==========
-    // Handle text value changes
     fun onValueChange(newValue: String) {
-        hyperlinkValue = newValue
-        // Use controller's onChange callback with FieldValueHyperlinkData
-        val fieldValue = if (newValue.isEmpty()) null else FieldValueHyperlinkData(newValue)
-        fieldController.onChange(fieldValue)
+        val fv = if (newValue.isEmpty()) null else FieldValueHyperlinkData(newValue)
+        fieldController.onChange(fv)
     }
 
     // ========== Hyperlink-specific: Validation State ==========
-    val isError = hasUrlValidationError(hyperlinkValue)
-    val isValidLink = hyperlinkValue.isNotEmpty() && isValidUrl(hyperlinkValue)
+    val isError = hasUrlValidationError(currentValue)
+    val isValidLink = currentValue.isNotEmpty() && isValidUrl(currentValue)
 
     // ========== Hyperlink-specific: Icon Click State ==========
     // Icon is clickable only when:
@@ -162,7 +153,7 @@ fun FieldHyperlink(
         if (!isIconEnabled) return
 
         try {
-            val normalizedUrl = normalizeUrl(hyperlinkValue)
+            val normalizedUrl = normalizeUrl(currentValue)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(normalizedUrl))
             context.startActivity(intent)
         } catch (e: Exception) {
@@ -173,7 +164,7 @@ fun FieldHyperlink(
     // ========== REUSED FROM FieldText: FieldBase + OutlinedTextField UI ==========
     FieldBase(modifier = modifier) {
         OutlinedTextField(
-            value = hyperlinkValue,
+            value = currentValue,
             onValueChange = ::onValueChange,
             label = properties.label?.let { { Text(it) } },
             placeholder = properties.placeholder?.let { { Text(it) } },

@@ -94,18 +94,17 @@ fun FieldDateTimeRange(
 
     if (fieldController.fieldId == null) return
 
-    // ========== REUSED FROM FieldDate: Reactive Properties ==========
-    val properties by fieldController.fieldPropertiesFlow.collectAsStateWithLifecycle()
+    // ========== Collect reactive field value separately for finer-grained recomposition ==========
+    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+
+    // ========== Collect reactive field properties and error ==========
+    val (properties, _) = fieldController.field.collectAsStateWithLifecycle().value
 
     if (properties.hidden) return
 
     // ========== DateTimeRange-specific: Get Current Values ==========
-    val currentFromValue = fieldController.fieldValue?.from
-    val currentToValue = fieldController.fieldValue?.to
-
-    // ========== REUSED FROM FieldDate: Local State for Immediate UI Updates ==========
-    var displayFromValue by remember(currentFromValue) { mutableStateOf(currentFromValue) }
-    var displayToValue by remember(currentToValue) { mutableStateOf(currentToValue) }
+    val currentFromValue = fieldValue?.from
+    val currentToValue = fieldValue?.to
 
     // ========== DateTimeRange-specific: Picker State Management ==========
     // Which field is being edited: "from" or "to"
@@ -221,13 +220,9 @@ fun FieldDateTimeRange(
     fun onFromTimeConfirmed(hour: Int, minute: Int) {
         val combinedDateTime = combineDateAndTime(selectedDateMillis, hour, minute)
         val dateTimeString = dateToIsoString(combinedDateTime)
-        displayFromValue = dateTimeString
 
         // Validate and potentially clear "To" value
-        val validatedToValue = validateToValueAgainstFrom(dateTimeString, displayToValue)
-        if (validatedToValue != displayToValue) {
-            displayToValue = validatedToValue
-        }
+        val validatedToValue = validateToValueAgainstFrom(dateTimeString, currentToValue)
 
         updateFieldValue(dateTimeString, validatedToValue)
         showTimePicker = false
@@ -245,32 +240,27 @@ fun FieldDateTimeRange(
     fun onToTimeConfirmed(hour: Int, minute: Int) {
         val combinedDateTime = combineDateAndTime(selectedDateMillis, hour, minute)
         val toDate = combinedDateTime
-        val fromDate = stringToDate(displayFromValue)
+        val fromDate = stringToDate(currentFromValue)
 
         // Validate: "To" must be >= "From"
         val dateTimeString = if (fromDate != null && toDate.before(fromDate)) {
-            // If user selected time that makes "To" before "From", adjust to match "From"
             dateToIsoString(fromDate)
         } else {
             dateToIsoString(toDate)
         }
 
-        displayToValue = dateTimeString
-        updateFieldValue(displayFromValue, dateTimeString)
+        updateFieldValue(currentFromValue, dateTimeString)
         showTimePicker = false
         activeField = null
     }
 
     // ========== DateTimeRange-specific: Clear Handlers ==========
     fun onClearFromDateTime() {
-        displayFromValue = null
-        displayToValue = null // Clear "To" as well for consistency
         updateFieldValue(null, null)
     }
 
     fun onClearToDateTime() {
-        displayToValue = null
-        updateFieldValue(displayFromValue, null)
+        updateFieldValue(currentFromValue, null)
     }
 
     // ========== REUSED FROM FieldDate: Interactive State ==========
@@ -309,7 +299,7 @@ fun FieldDateTimeRange(
         Column(modifier = Modifier.fillMaxWidth()) {
             // ===== FROM DATETIME FIELD =====
             OutlinedTextField(
-                value = formatDateTimeForDisplay(displayFromValue),
+                value = formatDateTimeForDisplay(currentFromValue),
                 onValueChange = { /* Read-only */ },
                 label = { Text(properties.label?.let { "$it (From)" } ?: "From") },
                 placeholder = properties.placeholder?.let { { Text(it) } },
@@ -330,7 +320,7 @@ fun FieldDateTimeRange(
                                 )
                             }
                         }
-                        if (isInteractive && !displayFromValue.isNullOrBlank()) {
+                        if (isInteractive && !currentFromValue.isNullOrBlank()) {
                             IconButton(onClick = { onClearFromDateTime() }) {
                                 Icon(
                                     imageVector = Icons.Default.Clear,
@@ -346,7 +336,7 @@ fun FieldDateTimeRange(
 
             // ===== TO DATETIME FIELD =====
             OutlinedTextField(
-                value = formatDateTimeForDisplay(displayToValue),
+                value = formatDateTimeForDisplay(currentToValue),
                 onValueChange = { /* Read-only */ },
                 label = { Text(properties.label?.let { "$it (To)" } ?: "To") },
                 placeholder = properties.placeholder?.let { { Text(it) } },
@@ -368,7 +358,7 @@ fun FieldDateTimeRange(
                                 )
                             }
                         }
-                        if (isInteractive && !displayToValue.isNullOrBlank()) {
+                        if (isInteractive && !currentToValue.isNullOrBlank()) {
                             IconButton(onClick = { onClearToDateTime() }) {
                                 Icon(
                                     imageVector = Icons.Default.Clear,
@@ -385,9 +375,9 @@ fun FieldDateTimeRange(
     // ========== DatePickerDialog (Step 1) ==========
     if (showDatePicker) {
         val isFromField = activeField == "from"
-        val currentDisplayValue = if (isFromField) displayFromValue else displayToValue
+        val currentDisplayValue = if (isFromField) currentFromValue else currentToValue
         val initialDate = stringToDate(currentDisplayValue)
-        val fromDate = stringToDate(displayFromValue)
+        val fromDate = stringToDate(currentFromValue)
 
         // For "To" field: create SelectableDates that enforces minimum date
         val selectableDates = remember(fromDate, isFromField) {
@@ -447,8 +437,8 @@ fun FieldDateTimeRange(
     // ========== TimePickerDialog (Step 2) ==========
     if (showTimePicker) {
         val isFromField = activeField == "from"
-        val currentDisplayValue = if (isFromField) displayFromValue else displayToValue
-        val fromDate = stringToDate(displayFromValue)
+        val currentDisplayValue = if (isFromField) currentFromValue else currentToValue
+        val fromDate = stringToDate(currentFromValue)
 
         // Convert selectedDateMillis to local calendar for proper day comparison
         val selectedCalendar = remember(selectedDateMillis) {

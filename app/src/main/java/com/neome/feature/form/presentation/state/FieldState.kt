@@ -6,16 +6,16 @@ import kotlinx.serialization.json.JsonElement
 
 /**
  * Runtime state for a single form field.
- * Contains current value, interaction state, and computed properties.
+ * Contains interaction state and computed properties.
  *
+ * Note: Field values are stored centrally in FormState.valueMap, not here.
  * Note: Field errors are stored centrally in FormState.errors, not here.
  */
 @Immutable
 @Serializable
 data class FieldState(
-    // Values
-    val value: JsonElement? = null,
-    val defaultValue: JsonElement? = null,  // Set on init from initialValue
+    // Default value (set once on init from initialValue, does not change)
+    val defaultValue: JsonElement? = null,
 
     // Interaction state
     val isTouched: Boolean = false,
@@ -28,8 +28,9 @@ data class FieldState(
 ) {
     /**
      * Check if field value differs from default.
+     * @param value The current field value from FormState.valueMap
      */
-    fun computeIsDirty(): Boolean = value != defaultValue
+    fun computeIsDirty(value: JsonElement?): Boolean = value != defaultValue
 }
 
 /**
