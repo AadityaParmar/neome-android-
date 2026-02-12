@@ -51,13 +51,17 @@ fun FieldCounter(
 
     if (fieldController.fieldId == null) return
 
-    val properties by fieldController.fieldPropertiesFlow.collectAsStateWithLifecycle()
+    // Collect reactive field value separately for finer-grained recomposition
+    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+
+    // Collect reactive field properties and error
+    val (properties, error) = fieldController.field.collectAsStateWithLifecycle().value
 
     if (properties.hidden) return
 
-    val error by fieldController.errorFlow.collectAsStateWithLifecycle()
+    // Get current text value from FieldValueTextData
+    val currentValue = fieldValue?.value
 
-    val currentValue = fieldController.fieldValue?.value
     val minValue = counterDefn.min ?: Long.MIN_VALUE
     val maxValue = counterDefn.max ?: Long.MAX_VALUE
     val stepValue = counterDefn.step ?: 1L

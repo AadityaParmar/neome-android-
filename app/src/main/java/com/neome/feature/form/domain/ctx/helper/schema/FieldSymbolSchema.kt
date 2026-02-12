@@ -1,6 +1,6 @@
 package com.neome.feature.form.domain.ctx.helper.schema
 
-import com.neome.api.meta.base.dto.DefnFieldText
+import com.neome.api.meta.base.dto.DefnFieldSymbol
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
@@ -29,7 +29,7 @@ class FieldSymbolSchema(
     override val defnComp: DefnCompSeal
 ) : CompSchema(defnForm, defnComp) {
 
-    private val defnField = defnComp as DefnFieldText
+    private val defnField = defnComp as DefnFieldSymbol
 
     override fun validate(fieldValue: JsonElement?, fieldState: FieldState?): String? {
         // For symbol, we work with the raw string value
@@ -62,19 +62,6 @@ class FieldSymbolSchema(
             if (isEmpty && !properties.required) {
                 return@Validation
             }
-
-            // Min char count
-            defnField.minCharCountVar?.let { min ->
-                constrain("Must be at least $min characters") { it.length >= min }
-            }
-
-            // Max char count (capped at MAX_CHARACTER_COUNT_SYMBOL)
-            val maxFromDefn = defnField.maxCharCountVar
-            val effectiveMax = when {
-                maxFromDefn != null && maxFromDefn < MAX_CHARACTER_COUNT_SYMBOL -> maxFromDefn
-                else -> MAX_CHARACTER_COUNT_SYMBOL
-            }
-            constrain("Must be at most $effectiveMax characters") { it.length <= effectiveMax }
 
             // First character cannot be a digit
             constrain("First character cannot be a digit") { symbol ->

@@ -34,11 +34,11 @@ object CompSchemaFactory {
             // ═══════════════════════════════════════════════════════════════
             // TEXT-BASED FIELDS
             // ═══════════════════════════════════════════════════════════════
-            EnumDefnCompType.text,
+            EnumDefnCompType.text -> FieldTextSchema(defnForm, defnComp)
             EnumDefnCompType.password,
             EnumDefnCompType.icon,
             EnumDefnCompType.info,
-            EnumDefnCompType.identifier -> FieldTextSchema(defnForm, defnComp)
+            EnumDefnCompType.identifier -> null
 
             EnumDefnCompType.paragraph -> FieldParagraphSchema(defnForm, defnComp)
             EnumDefnCompType.hyperlink -> FieldHyperlinkSchema(defnForm, defnComp)
@@ -64,10 +64,12 @@ object CompSchemaFactory {
             // NUMBER FIELDS
             // ═══════════════════════════════════════════════════════════════
             EnumDefnCompType.number,
-            EnumDefnCompType.logNumber,
+            EnumDefnCompType.logNumber -> FieldNumberSchema(defnForm, defnComp)
+
             EnumDefnCompType.counter,
-            EnumDefnCompType.logCounter,
-            EnumDefnCompType.rating -> FieldNumberSchema(defnForm, defnComp)
+            EnumDefnCompType.logCounter -> null
+
+            EnumDefnCompType.rating -> null
 
             // ═══════════════════════════════════════════════════════════════
             // DECIMAL FIELDS
