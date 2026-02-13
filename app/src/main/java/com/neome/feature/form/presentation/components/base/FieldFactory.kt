@@ -26,6 +26,7 @@ import com.neome.feature.form.presentation.components.field.FieldMobile
 import com.neome.feature.form.presentation.components.field.FieldNumber
 import com.neome.feature.form.presentation.components.field.FieldParagraph
 import com.neome.feature.form.presentation.components.field.FieldText
+import com.neome.feature.form.presentation.components.field.FieldSwitch
 import com.neome.feature.form.presentation.components.field.FieldTime
 import com.neome.feature.form.presentation.state.FieldEvent
 
@@ -138,6 +139,12 @@ fun FieldFactory(
         )
 
         EnumDefnCompType.logCounter -> FieldLogCounter(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.bool -> FieldSwitch(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             modifier = modifier
