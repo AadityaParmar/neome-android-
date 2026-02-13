@@ -16,8 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-
-import com.neome.api.meta.base.Types.EnumDefnCaptureValueKind
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.neome.api.meta.base.Types.EnumDefnPlacement
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldSwitchData
@@ -33,9 +32,9 @@ import com.neome.feature.form.presentation.state.FieldEvent
  * Stateful wrapper that uses rememberFieldController for state management.
  * Renders as a Switch (default) or Checkbox depending on resolved properties.
  *
- * Capture flags (captureLocation, captureTime, captureUser) are read from the
- * definition and preserved in the value model structure. Actual capture logic
- * is deferred to a future shared capture handler.
+ * Capture metadata is displayed via [RawCaptureExtraProperties] between the
+ * toggle row and helper text. Actual capture logic is deferred to a future
+ * shared capture handler.
  *
  * @param defnComp Field definition containing field configuration (must be DefnFieldSwitchData)
  * @param onFieldEvent Callback to emit field events to the form
@@ -56,8 +55,8 @@ fun FieldSwitch(
 
     if (fieldController.fieldId == null) return
 
-    val fieldValue = fieldController.value.value
-    val (properties, error) = fieldController.field.value
+    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+    val (properties, error) = fieldController.field.collectAsStateWithLifecycle().value
 
     if (properties.hidden) return
 
@@ -75,16 +74,20 @@ fun FieldSwitch(
     // Position: direct > var, fallback to null
     val position = switchDefn.position ?: switchDefn.positionVar
 
-    // Capture flags available on switchDefn: captureLocation, captureTime, captureUser
-    // Reserved for future shared capture handler — no logic implemented yet.
+    // Capture enable flags from field definition
+    val captureTimeEnabled = switchDefn.captureTime == true
+    val captureUserEnabled = switchDefn.captureUser == true
+    val captureLocationEnabled = switchDefn.captureLocation == true
 
-    val showCapturedValuesOnAside = switchDefn.showCapturedValuesOnAside
-
-    // Build aside text from captured values if configured
-    val capturedValuesAside = buildCapturedValuesAside(
-        fieldValue = fieldValue,
-        showKinds = showCapturedValuesOnAside
-    )
+    // Extract captured value strings from field value
+    val captureTime = fieldValue?.captureTime
+    val captureUser = fieldValue?.captureUser?.let { user ->
+        user.displayField ?: user.value.toString()
+    }
+    val captureLocation = fieldValue?.captureLocation?.let { location ->
+        location.value.address ?: location.value.geoPoint.toString()
+    }
+    val captureLocationLatLng = fieldValue?.captureLocation?.value?.geoPoint?.toString()
 
     FieldBase(modifier = modifier) {
         FieldSwitchContent(
@@ -99,7 +102,14 @@ fun FieldSwitch(
             checkboxLabel = checkboxLabel,
             labelPlacement = labelPlacement,
             position = position,
-            capturedValuesAside = capturedValuesAside,
+            captureTimeEnabled = captureTimeEnabled,
+            captureUserEnabled = captureUserEnabled,
+            captureLocationEnabled = captureLocationEnabled,
+            captureTime = captureTime,
+            captureUser = captureUser,
+            captureLocation = captureLocation,
+            captureLocationLatLng = captureLocationLatLng,
+            showCapturedValues = switchDefn.showCapturedValuesOnAside,
             onValueChange = { newChecked ->
                 // Preserve existing capture metadata when toggling value
                 val updatedValue = fieldValue?.copy(value = newChecked)
@@ -113,10 +123,12 @@ fun FieldSwitch(
 /**
  * Stateless switch field content for optimal recomposition control.
  *
- * Renders a Switch or Checkbox toggle with label, supporting text,
- * and optional captured values aside.
+ * Layout:
+ * [[Switch][Label]]
+ * [RawCaptureExtraProperties]
+ * [helperText]
  *
- * Default layout: [Toggle START] [Label END]
+ * Default toggle layout: [Toggle START] [Label END]
  * Label placement can override via [labelPlacement].
  */
 @Composable
@@ -132,7 +144,14 @@ internal fun FieldSwitchContent(
     checkboxLabel: String?,
     labelPlacement: EnumDefnPlacement?,
     position: EnumDefnPlacement?,
-    capturedValuesAside: String?,
+    captureTimeEnabled: Boolean,
+    captureUserEnabled: Boolean,
+    captureLocationEnabled: Boolean,
+    captureTime: String?,
+    captureUser: String?,
+    captureLocation: String?,
+    captureLocationLatLng: String?,
+    showCapturedValues: List<com.neome.api.meta.base.Types.EnumDefnCaptureValueKind>?,
     onValueChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -157,6 +176,7 @@ internal fun FieldSwitchContent(
     val labelBeforeToggle = labelPlacement == EnumDefnPlacement.start
 
     Column(modifier = modifier.fillMaxWidth()) {
+        // Toggle row
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = horizontalArrangement,
@@ -193,13 +213,27 @@ internal fun FieldSwitchContent(
             }
         }
 
-        // Captured values aside
-        if (!capturedValuesAside.isNullOrBlank()) {
+        // Capture metadata rows
+        val hasCaptureEnabled = captureTimeEnabled || captureUserEnabled || captureLocationEnabled
+        if (hasCaptureEnabled) {
             Spacer(modifier = Modifier.height(2.dp))
-            Text(
-                text = capturedValuesAside,
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+            RawCaptureExtraProperties(
+                captureTimeEnabled = captureTimeEnabled,
+                captureUserEnabled = captureUserEnabled,
+                captureLocationEnabled = captureLocationEnabled,
+                captureTime = captureTime,
+                captureUser = captureUser,
+                captureLocation = captureLocation,
+                captureTimeError = null,       // Future: from capture handler
+                captureUserError = null,       // Future: from capture handler
+                captureLocationError = null,   // Future: from capture handler
+                captureLocationStatus = null,  // Future: from capture handler
+                showCapturedValues = showCapturedValues,
+                captureLocationLatLng = captureLocationLatLng,
+                onRetryTime = { },             // Future: capture handler callback
+                onRetryUser = { },             // Future: capture handler callback
+                onRetryLocation = { },         // Future: capture handler callback
+                onOpenLocationInMap = { }      // Future: maps intent callback
             )
         }
 
@@ -239,39 +273,4 @@ private fun FieldSwitchLabel(
         },
         modifier = modifier
     )
-}
-
-/**
- * Builds a display string from captured values present in the field value,
- * filtered by the configured [showKinds].
- *
- * Returns null if no captured values are configured or present.
- */
-private fun buildCapturedValuesAside(
-    fieldValue: FieldValueSwitchData?,
-    showKinds: List<EnumDefnCaptureValueKind>?
-): String? {
-    if (fieldValue == null || showKinds.isNullOrEmpty()) return null
-
-    val parts = mutableListOf<String>()
-
-    for (kind in showKinds) {
-        val text: String? = when (kind) {
-            EnumDefnCaptureValueKind.captureTime -> fieldValue.captureTime
-
-            EnumDefnCaptureValueKind.captureLocation -> {
-                fieldValue.captureLocation?.value?.geoPoint?.toString()
-            }
-
-            EnumDefnCaptureValueKind.captureUser -> {
-                val user = fieldValue.captureUser
-                user?.displayField ?: user?.value?.toString()
-            }
-        }
-        if (!text.isNullOrBlank()) {
-            parts.add(text)
-        }
-    }
-
-    return parts.takeIf { it.isNotEmpty() }?.joinToString(" · ")
 }
