@@ -29,6 +29,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.json.JsonElement
+import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicInteger
 
 class FormCtxImpl(
@@ -44,9 +45,9 @@ class FormCtxImpl(
 
     private val currentState: FormState get() = _stateFlow.value
 
-    private val fieldStateFlows = mutableMapOf<MetaIdComp, StateFlow<FieldState?>>()
-    private val fieldValueFlows = mutableMapOf<MetaIdComp, StateFlow<JsonElement?>>()
-    private val fieldErrorFlows = mutableMapOf<MetaIdComp, StateFlow<FieldError?>>()
+    private val fieldStateFlows = ConcurrentHashMap<MetaIdComp, StateFlow<FieldState?>>()
+    private val fieldValueFlows = ConcurrentHashMap<MetaIdComp, StateFlow<JsonElement?>>()
+    private val fieldErrorFlows = ConcurrentHashMap<MetaIdComp, StateFlow<FieldError?>>()
 
     private val processingDispatcher = Dispatchers.Default
     private val activeJobCount = AtomicInteger(0)

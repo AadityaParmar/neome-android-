@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.serialization.json.JsonElement
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * Implementation of FormRef that provides external API for form operations.
@@ -32,7 +33,7 @@ class FormRefImpl(
         get() = formStateFlow.value
 
     // Cache for field state StateFlows
-    private val fieldStateFlows = mutableMapOf<MetaIdComp, StateFlow<FieldState?>>()
+    private val fieldStateFlows = ConcurrentHashMap<MetaIdComp, StateFlow<FieldState?>>()
 
     // ==================== Read Operations ====================
 
