@@ -14,13 +14,11 @@ sealed interface FormEvent : UiEvent {
 
     /**
      * Field value has changed.
-     * Triggers validation if shouldValidate is true.
-     * Also triggers dependent fields to recalculate their properties.
+     * Always triggers validation and dependent fields to recalculate their properties.
      */
     data class FieldValueChanged(
         val fieldId: MetaIdComp,
-        val value: JsonElement?,
-        val shouldValidate: Boolean = true
+        val value: JsonElement?
     ) : FormEvent
 
     // ==================== Field Interaction Events ====================
@@ -112,10 +110,10 @@ sealed interface FormEvent : UiEvent {
 
     /**
      * Set multiple field values at once.
+     * Always triggers validation and dependent fields to recalculate their properties.
      */
     data class SetValues(
-        val valueMap: Map<MetaIdComp, JsonElement>,
-        val shouldValidate: Boolean = true
+        val valueMap: Map<MetaIdComp, JsonElement>
     ) : FormEvent
 
     // ==================== Initialization ====================
