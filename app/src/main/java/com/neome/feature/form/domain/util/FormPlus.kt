@@ -1,6 +1,7 @@
 package com.neome.feature.form.domain.util
 
 import com.neome.api.meta.base.Types.MetaIdComp
+import com.neome.api.meta.base.dto.DefnForm
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldFormListData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
@@ -13,13 +14,17 @@ import com.neome.core.common.serializer.api.meta.base.dto.DefnWizardData
 object FormPlus {
 
     /**
-     * Recursively traverses the form definition tree starting from [DefnFormData.displayCompositeId].
+     * Recursively traverses the form definition tree starting from [DefnForm.displayCompositeId].
+     *
+     * Accepts any [DefnForm] implementation (e.g., [DefnFormData], DefnFormUi).
+     * Both concrete types store [DefnCompSeal] in their compMap, so the cast is safe.
      *
      * @param defnForm The form definition containing the component map and root composite ID.
      * @param cb Callback invoked for each component with (comp, parent). Return `true` to break the loop early.
      */
-    fun loopDefnForm(defnForm: DefnFormData, cb: (comp: DefnCompSeal, parent: DefnCompSeal) -> Boolean?) {
-        val compMap = defnForm.compMap
+    @Suppress("UNCHECKED_CAST")
+    fun loopDefnForm(defnForm: DefnForm, cb: (comp: DefnCompSeal, parent: DefnCompSeal) -> Boolean?) {
+        val compMap = defnForm.compMap as Map<MetaIdComp, DefnCompSeal>
         val displayCompositeId = defnForm.displayCompositeId
 
         val rootComp = compMap[displayCompositeId] ?: return
