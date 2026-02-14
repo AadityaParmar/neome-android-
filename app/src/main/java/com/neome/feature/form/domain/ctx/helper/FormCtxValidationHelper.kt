@@ -81,12 +81,15 @@ object FormCtxValidationHelper {
      * Sets error if validation fails, clears validation error if passes.
      * Preserves custom/server errors when clearing.
      *
+     * Shared by both [FormCtxValidationHelper] and [FormCtxEventHelper]
+     * to avoid duplicating error update logic.
+     *
      * @param fieldId The field to update
      * @param error The validation error message, or null if validation passed
      * @param errors The current errors map
      * @return Updated errors map
      */
-    private fun updateFieldError(
+    internal fun updateFieldError(
         fieldId: MetaIdComp,
         error: String?,
         errors: Map<MetaIdComp, FieldError>

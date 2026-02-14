@@ -392,20 +392,15 @@ object FieldPropertyResolver {
     ): Long? {
         if (defnComp !is DefnFieldText) return null
 
-        return if (defnComp.minCharCount != null) defnComp.minCharCount?.let { return it }
-        else if (defnComp.minCharCountVar != null) defnComp.minCharCountVar?.let { return it }
-        else if (defnComp.minCharCountFieldId != null) {
-            val fieldId = defnComp.minCharCountFieldId as MetaIdComp
-            val fieldValue = getFieldValue(fieldId)
-            val minField = defnForm.compMap[fieldId]
-
-            fieldValue.let {
-                return if (minField != null)
-                    FieldValueResolver.fnResolveNumericValue(minField.type, it)
-                else null
+        return when {
+            defnComp.minCharCount != null -> defnComp.minCharCount
+            defnComp.minCharCountVar != null -> defnComp.minCharCountVar
+            defnComp.minCharCountFieldId != null -> {
+                val fieldId = defnComp.minCharCountFieldId as MetaIdComp
+                val field = defnForm.compMap[fieldId]
+                field?.let { FieldValueResolver.fnResolveNumericValue(it.type, getFieldValue(fieldId)) }
             }
-        } else {
-            null
+            else -> null
         }
     }
 
@@ -416,20 +411,15 @@ object FieldPropertyResolver {
     ): Long? {
         if (defnComp !is DefnFieldText) return null
 
-        return if (defnComp.maxCharCount != null) defnComp.maxCharCount?.let { return it }
-        else if (defnComp.maxCharCountVar != null) defnComp.maxCharCountVar?.let { return it }
-        else if (defnComp.maxCharCountFieldId != null) {
-            val fieldId = defnComp.maxCharCountFieldId as MetaIdComp
-            val fieldValue = getFieldValue(fieldId)
-            val minField = defnForm.compMap[fieldId]
-
-            fieldValue.let {
-                return if (minField != null)
-                    FieldValueResolver.fnResolveNumericValue(minField.type, it)
-                else null
+        return when {
+            defnComp.maxCharCount != null -> defnComp.maxCharCount
+            defnComp.maxCharCountVar != null -> defnComp.maxCharCountVar
+            defnComp.maxCharCountFieldId != null -> {
+                val fieldId = defnComp.maxCharCountFieldId as MetaIdComp
+                val field = defnForm.compMap[fieldId]
+                field?.let { FieldValueResolver.fnResolveNumericValue(it.type, getFieldValue(fieldId)) }
             }
-        } else {
-            null
+            else -> null
         }
     }
 
@@ -442,20 +432,15 @@ object FieldPropertyResolver {
     ): Long? {
         if (defnComp !is DefnFieldNumber) return null
 
-        return if (defnComp.min != null) defnComp.min?.let { return it }
-        else if (defnComp.minVar != null) defnComp.minVar?.let { return it }
-        else if (defnComp.minFieldId != null) {
-            val fieldId = defnComp.minFieldId as MetaIdComp
-            val fieldValue = getFieldValue(fieldId)
-            val minField = defnForm.compMap[fieldId]
-
-            fieldValue.let {
-                return if (minField != null)
-                    FieldValueResolver.fnResolveNumericValue(minField.type, it)
-                else null
+        return when {
+            defnComp.min != null -> defnComp.min
+            defnComp.minVar != null -> defnComp.minVar
+            defnComp.minFieldId != null -> {
+                val fieldId = defnComp.minFieldId as MetaIdComp
+                val field = defnForm.compMap[fieldId]
+                field?.let { FieldValueResolver.fnResolveNumericValue(it.type, getFieldValue(fieldId)) }
             }
-        } else {
-            null
+            else -> null
         }
     }
 
@@ -466,20 +451,15 @@ object FieldPropertyResolver {
     ): Long? {
         if (defnComp !is DefnFieldNumber) return null
 
-        return if (defnComp.max != null) defnComp.max?.let { return it }
-        else if (defnComp.maxVar != null) defnComp.maxVar?.let { return it }
-        else if (defnComp.maxFieldId != null) {
-            val fieldId = defnComp.maxFieldId as MetaIdComp
-            val fieldValue = getFieldValue(fieldId)
-            val maxField = defnForm.compMap[fieldId]
-
-            fieldValue.let {
-                return if (maxField != null)
-                    FieldValueResolver.fnResolveNumericValue(maxField.type, it)
-                else null
+        return when {
+            defnComp.max != null -> defnComp.max
+            defnComp.maxVar != null -> defnComp.maxVar
+            defnComp.maxFieldId != null -> {
+                val fieldId = defnComp.maxFieldId as MetaIdComp
+                val field = defnForm.compMap[fieldId]
+                field?.let { FieldValueResolver.fnResolveNumericValue(it.type, getFieldValue(fieldId)) }
             }
-        } else {
-            null
+            else -> null
         }
     }
 
@@ -492,20 +472,15 @@ object FieldPropertyResolver {
     ): Double? {
         if (defnComp !is DefnFieldDecimal) return null
 
-        return if (defnComp.min != null) defnComp.min?.let { return it }
-        else if (defnComp.minVar != null) defnComp.minVar?.let { return it }
-        else if (defnComp.minFieldId != null) {
-            val fieldId = defnComp.minFieldId as MetaIdComp
-            val fieldValue = getFieldValue(fieldId)
-            val minField = defnForm.compMap[fieldId]
-
-            fieldValue.let {
-                return if (minField != null)
-                    FieldValueResolver.fnResolveNumericDecimalValue(minField.type, it)
-                else null
+        return when {
+            defnComp.min != null -> defnComp.min
+            defnComp.minVar != null -> defnComp.minVar
+            defnComp.minFieldId != null -> {
+                val fieldId = defnComp.minFieldId as MetaIdComp
+                val field = defnForm.compMap[fieldId]
+                field?.let { FieldValueResolver.fnResolveNumericDecimalValue(it.type, getFieldValue(fieldId)) }
             }
-        } else {
-            null
+            else -> null
         }
     }
 
@@ -516,20 +491,15 @@ object FieldPropertyResolver {
     ): Double? {
         if (defnComp !is DefnFieldDecimal) return null
 
-        return if (defnComp.max != null) defnComp.max?.let { return it }
-        else if (defnComp.maxVar != null) defnComp.maxVar?.let { return it }
-        else if (defnComp.maxFieldId != null) {
-            val fieldId = defnComp.maxFieldId as MetaIdComp
-            val fieldValue = getFieldValue(fieldId)
-            val maxField = defnForm.compMap[fieldId]
-
-            fieldValue.let {
-                return if (maxField != null)
-                    FieldValueResolver.fnResolveNumericDecimalValue(maxField.type, it)
-                else null
+        return when {
+            defnComp.max != null -> defnComp.max
+            defnComp.maxVar != null -> defnComp.maxVar
+            defnComp.maxFieldId != null -> {
+                val fieldId = defnComp.maxFieldId as MetaIdComp
+                val field = defnForm.compMap[fieldId]
+                field?.let { FieldValueResolver.fnResolveNumericDecimalValue(it.type, getFieldValue(fieldId)) }
             }
-        } else {
-            null
+            else -> null
         }
     }
 
@@ -542,20 +512,15 @@ object FieldPropertyResolver {
     ): Long? {
         if (defnComp !is DefnFieldCounter) return null
 
-        return if (defnComp.step != null) defnComp.step?.let { return it }
-        else if (defnComp.stepVar != null) defnComp.stepVar?.let { return it }
-        else if (defnComp.stepFieldId != null) {
-            val fieldId = defnComp.stepFieldId as MetaIdComp
-            val fieldValue = getFieldValue(fieldId)
-            val field = defnForm.compMap[fieldId]
-
-            fieldValue.let {
-                return if (field != null)
-                    FieldValueResolver.fnResolveNumericValue(field.type, it)
-                else null
+        return when {
+            defnComp.step != null -> defnComp.step
+            defnComp.stepVar != null -> defnComp.stepVar
+            defnComp.stepFieldId != null -> {
+                val fieldId = defnComp.stepFieldId as MetaIdComp
+                val field = defnForm.compMap[fieldId]
+                field?.let { FieldValueResolver.fnResolveNumericValue(it.type, getFieldValue(fieldId)) }
             }
-        } else {
-            null
+            else -> null
         }
     }
 
@@ -578,20 +543,15 @@ object FieldPropertyResolver {
     ): Long? {
         if (defnComp !is DefnFieldParagraph) return null
 
-        return if (defnComp.lineCount != null) defnComp.lineCount?.let { return it }
-        else if (defnComp.lineCountVar != null) defnComp.lineCountVar?.let { return it }
-        else if (defnComp.lineCountFieldId != null) {
-            val fieldId = defnComp.lineCountFieldId as MetaIdComp
-            val fieldValue = getFieldValue(fieldId)
-            val field = defnForm.compMap[fieldId]
-
-            fieldValue.let {
-                return if (field != null)
-                    FieldValueResolver.fnResolveNumericValue(field.type, it)
-                else null
+        return when {
+            defnComp.lineCount != null -> defnComp.lineCount
+            defnComp.lineCountVar != null -> defnComp.lineCountVar
+            defnComp.lineCountFieldId != null -> {
+                val fieldId = defnComp.lineCountFieldId as MetaIdComp
+                val field = defnForm.compMap[fieldId]
+                field?.let { FieldValueResolver.fnResolveNumericValue(it.type, getFieldValue(fieldId)) }
             }
-        } else {
-            null
+            else -> null
         }
     }
 
@@ -835,21 +795,21 @@ object FieldPropertyResolver {
 
 
     /**
-     * Resolve DefnDtoText variable.
-     * This is a placeholder - actual implementation would depend on the variable resolution system.
+     * Resolve DefnDtoText variable to a string value.
+     *
+     * DefnDtoText.value is a list of string segments that are concatenated.
+     * Returns null if the value list is null or empty.
+     *
+     * TODO: Implement full variable resolution (e.g., context variables, calculations)
+     *  when the variable resolution system is available.
      *
      * @param dtoText The DefnDtoText to resolve
      * @return Resolved string value or null
      */
     fun resolveArgValue(dtoText: DefnDtoText?): String? {
         if (dtoText == null) return null
-
-        // Basic placeholder implementation
-        // In a real implementation, this would resolve variables from context,
-        // perform calculations, etc. based on the DefnDtoText structure
-
-        // For now, return a simple representation
-        // This prevents the function from always returning null
-        return dtoText.toString()
+        val segments = dtoText.value
+        if (segments.isNullOrEmpty()) return null
+        return segments.joinToString("")
     }
 }

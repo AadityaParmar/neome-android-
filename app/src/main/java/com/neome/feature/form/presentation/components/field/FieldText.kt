@@ -4,9 +4,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
 import com.neome.feature.form.presentation.components.base.FieldBase
@@ -42,11 +40,11 @@ fun FieldText(
     // Early return if field setup is invalid
     if (fieldController.fieldId == null) return
 
-    // Collect reactive field value separately for finer-grained recomposition
-    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+    // Read reactive field value (derivedStateOf provides fine-grained recomposition)
+    val fieldValue = fieldController.value.value
 
-    // Collect reactive field properties and error
-    val (properties, error) = fieldController.field.collectAsStateWithLifecycle().value
+    // Read reactive field properties and error
+    val (properties, error) = fieldController.field.value
 
     // Early return if field is hidden
     if (properties.hidden) return

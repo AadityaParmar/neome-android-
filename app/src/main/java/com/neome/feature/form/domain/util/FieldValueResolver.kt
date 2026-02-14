@@ -1,6 +1,7 @@
 package com.neome.feature.form.domain.util
 
 import com.neome.api.meta.base.Types
+import com.neome.core.logging.AppLogger
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueColorData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateTimeData
@@ -18,6 +19,8 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonPrimitive
 
 object FieldValueResolver {
+
+    private const val TAG = "FieldValueResolver"
 
     /**
      * Converts raw primitive values to appropriate field value types based on component type.
@@ -151,7 +154,8 @@ object FieldValueResolver {
                 else -> null
             }
         } catch (e: Exception) {
-            return null // Return null if conversion fails
+            AppLogger.w(TAG, "fnRawValueToFieldValue failed for compType=$compType", e)
+            return null
         }
     }
 
@@ -242,7 +246,8 @@ object FieldValueResolver {
                 else -> null
             }
         } catch (e: Exception) {
-            return null // Return null if conversion fails
+            AppLogger.w(TAG, "fnFieldValueToRawValue failed for compType=$compType", e)
+            return null
         }
     }
 
@@ -252,7 +257,8 @@ object FieldValueResolver {
         return try {
             fnRawValueToFieldValue(compType, fnFieldValueToRawValue(compType, value))
         } catch (e: Exception) {
-            null // Return null if conversion fails
+            AppLogger.w(TAG, "fnJsonElementFieldValue failed for compType=$compType", e)
+            null
         }
 
     }

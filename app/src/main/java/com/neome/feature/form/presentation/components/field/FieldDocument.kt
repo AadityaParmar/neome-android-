@@ -29,7 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+
 import com.neome.api.meta.base.Types.EnumDefnDocFileExt
 import com.neome.api.meta.base.dto.DefnFieldDocument
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
@@ -172,10 +172,10 @@ fun FieldDocument(
     if (fieldController.fieldId == null) return
 
     // ========== Collect reactive field value separately for finer-grained recomposition ==========
-    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+    val fieldValue = fieldController.value.value
 
     // ========== Collect reactive field properties and error ==========
-    val (properties, _) = fieldController.field.collectAsStateWithLifecycle().value
+    val (properties, _) = fieldController.field.value
 
     if (properties.hidden) return
 

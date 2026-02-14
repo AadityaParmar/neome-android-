@@ -9,7 +9,6 @@ import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -57,7 +56,7 @@ fun FieldTab(
     val tabIdSet = defnTab.tabIdSet ?: emptyList()
 
     // Get form state from context
-    val formState by formCtx.watchFormState().collectAsState()
+    val formState = formCtx.formState.value
 
     // Selected tab index state
     var selectedTabIndex by remember { mutableIntStateOf(0) }

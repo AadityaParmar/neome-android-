@@ -3,25 +3,21 @@ package com.neome.feature.form.domain.ref
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
 import com.neome.feature.form.presentation.state.FieldState
-import com.neome.feature.form.presentation.state.FormState
 import com.neome.feature.form.presentation.state.SendBtnDisableFlag
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.serialization.json.JsonElement
 
 /**
  * External API for parent screens to interact with the Form component.
  *
  * Inspired by React Hook Form's ref pattern.
+ * All operations are synchronous. State is updated immediately after each call.
+ *
  * This provides an imperative API for:
  * - Reading form/field values
  * - Setting form/field values
  * - Error management
  * - Form operations (submit, reset)
  * - State queries (dirty, valid, touched)
- * - Reactive state watching
- *
- * Note: For validation and watching state, use FormCtx which is available
- * internally to field components.
  */
 interface FormRef {
 
@@ -62,21 +58,20 @@ interface FormRef {
     /**
      * Set single field value.
      * Dispatches FieldValueChanged event internally.
+     * Always triggers validation.
      *
      * @param fieldId Field identifier
      * @param value New value
-     * @param shouldValidate Whether to validate after setting (default: true)
      */
-    fun setValue(fieldId: MetaIdComp, value: JsonElement?, shouldValidate: Boolean = true)
+    fun setValue(fieldId: MetaIdComp, value: JsonElement?)
 
     /**
      * Set multiple field values at once.
-     * Sets FormValueRawData.valueMap.
+     * Always triggers validation.
      *
      * @param valueMap Map of field IDs to values
-     * @param shouldValidate Whether to validate after setting (default: true)
      */
-    fun setValues(valueMap: Map<MetaIdComp, JsonElement>, shouldValidate: Boolean = true)
+    fun setValues(valueMap: Map<MetaIdComp, JsonElement>)
 
     // ==================== Validation ====================
 
@@ -84,9 +79,8 @@ interface FormRef {
      * Validate a specific field or all fields.
      *
      * @param fieldId Field to validate, or null for entire form
-     * @return true if validation passed
      */
-    fun validate(fieldId: MetaIdComp? = null): Boolean
+    fun validate(fieldId: MetaIdComp? = null)
 
     /**
      * Set custom validation error for a field.
@@ -144,25 +138,6 @@ interface FormRef {
      */
     fun isTouched(fieldId: MetaIdComp? = null): Boolean
 
-    // ==================== Reactive Streams ====================
-
-    /**
-     * Watch field state changes as StateFlow.
-     * Use in Composables with collectAsStateWithLifecycle().
-     *
-     * @param fieldId Field identifier
-     * @return StateFlow of FieldState, or null if field doesn't exist
-     */
-    fun watchFieldState(fieldId: MetaIdComp): StateFlow<FieldState?>
-
-    /**
-     * Watch entire form state changes as StateFlow.
-     * Use in Composables with collectAsStateWithLifecycle().
-     *
-     * @return StateFlow of FormState
-     */
-    fun watchFormState(): StateFlow<FormState>
-
     // ==================== Send Button Control ====================
 
     /**
@@ -188,25 +163,4 @@ interface FormRef {
      * @return true if send button is enabled
      */
     fun isSendBtnEnabled(): Boolean
-
-    // ==================== Async Operations ====================
-
-    /**
-     * Suspends until all queued actions are processed.
-     * Use after batching multiple setValue calls to ensure state is consistent
-     * before reading values.
-     *
-     * Example:
-     * ```kotlin
-     * // Batch updates from external module
-     * rules.forEach { formRef.setValue(it.fieldId, it.value) }
-     *
-     * // Wait for all to complete
-     * formRef.awaitIdle()
-     *
-     * // Now safe to read latest state
-     * val values = formRef.getValues()
-     * ```
-     */
-    suspend fun awaitIdle()
 }

@@ -32,7 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateTimeData
 import com.neome.feature.form.presentation.components.base.FieldBase
@@ -83,10 +83,10 @@ fun FieldDateTime(
     if (fieldController.fieldId == null) return
 
     // ========== Collect reactive field value separately for finer-grained recomposition ==========
-    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+    val fieldValue = fieldController.value.value
 
     // ========== Collect reactive field properties and error ==========
-    val (properties, _) = fieldController.field.collectAsStateWithLifecycle().value
+    val (properties, _) = fieldController.field.value
 
     if (properties.hidden) return
 

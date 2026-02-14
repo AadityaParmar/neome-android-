@@ -11,10 +11,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,9 +21,7 @@ import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
 import com.neome.feature.form.domain.ctx.FormCtxImpl
 import com.neome.feature.form.domain.ctx.LocalFormCtx
 import com.neome.feature.form.domain.ref.FormRef
-import com.neome.feature.form.domain.util.FilterForm
 import com.neome.feature.form.presentation.components.base.FieldFactory
-import com.neome.feature.form.presentation.sample.FormSampleDataFactory
 import com.neome.feature.form.presentation.state.FieldEvent
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormIntent
@@ -37,7 +32,7 @@ import com.neome.feature.form.presentation.state.FormState
  *
  * An embedded form component that:
  * - Receives configuration from parent (defnForm, initialValue)
- * - Manages centralized state internally using FormReducer
+ * - Manages centralized state internally via synchronous dispatch
  * - Emits intents to parent (Submit, Watch)
  * - Exposes FormRef for external access
  *
@@ -55,19 +50,17 @@ fun Form(
     onIntent: (FormIntent) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val coroutineScope = rememberCoroutineScope()
-    val currentOnIntent by rememberUpdatedState(onIntent)
+    val currentOnIntent = rememberUpdatedState(onIntent)
 
     val formCtx = remember(defnForm, initialValue) {
         FormCtxImpl(
             defnForm = defnForm,
             initialValue = initialValue,
-            coroutineScope = coroutineScope,
-            onIntent = { currentOnIntent(it) }
+            onIntent = { currentOnIntent.value(it) }
         )
     }
 
-    val formState by formCtx.stateFlow.collectAsState()
+    val formState = formCtx.formState.value
 
     val formRefImpl = remember(formCtx) {
         formCtx.createFormRef()
@@ -76,14 +69,6 @@ fun Form(
     LaunchedEffect(formRefImpl) {
         formRef.value = formRefImpl
     }
-
-    LaunchedEffect(Unit) {
-        val callerEnt = FormSampleDataFactory.getSampleCallerEnt()
-
-        val filteredForm = FilterForm.prepare(defnForm, callerEnt)
-
-    }
-
 
     DisposableEffect(Unit) {
         onDispose {

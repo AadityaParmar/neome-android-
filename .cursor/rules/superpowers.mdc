@@ -1,0 +1,67 @@
+---
+description: Superpowers skills for systematic development workflows - debugging, TDD, planning, code review, and more
+globs: []
+alwaysApply: true
+---
+
+# Superpowers Skills
+
+A collection of development workflow skills adapted from [obra/superpowers](https://github.com/obra/superpowers) for Cursor. These skills provide systematic approaches to common development tasks.
+
+## Available Skills
+
+All skills are installed at `~/.cursor/skills/` and can be read when needed.
+
+### Process Skills (use first -- they determine HOW to approach tasks)
+
+| Skill | Path | When to Use |
+|-------|------|-------------|
+| **brainstorming** | `~/.cursor/skills/brainstorming/SKILL.md` | Before any creative work: features, components, modifications |
+| **systematic-debugging** | `~/.cursor/skills/systematic-debugging/SKILL.md` | Any bug, test failure, or unexpected behavior |
+| **test-driven-development** | `~/.cursor/skills/test-driven-development/SKILL.md` | Before writing any implementation code |
+| **verification-before-completion** | `~/.cursor/skills/verification-before-completion/SKILL.md` | Before claiming work is complete or passing |
+
+### Workflow Skills (manage multi-step work)
+
+| Skill | Path | When to Use |
+|-------|------|-------------|
+| **writing-plans** | `~/.cursor/skills/writing-plans/SKILL.md` | Have a spec/requirements, need implementation plan |
+| **executing-plans** | `~/.cursor/skills/executing-plans/SKILL.md` | Have a plan, need to execute in batches |
+| **subagent-driven-development** | `~/.cursor/skills/subagent-driven-development/SKILL.md` | Executing plans with subagents in current session |
+| **finishing-a-development-branch** | `~/.cursor/skills/finishing-a-development-branch/SKILL.md` | Implementation complete, need to integrate |
+
+### Collaboration Skills (teamwork and quality)
+
+| Skill | Path | When to Use |
+|-------|------|-------------|
+| **requesting-code-review** | `~/.cursor/skills/requesting-code-review/SKILL.md` | Completing tasks, before merging |
+| **receiving-code-review** | `~/.cursor/skills/receiving-code-review/SKILL.md` | Got review feedback, before implementing |
+| **dispatching-parallel-agents** | `~/.cursor/skills/dispatching-parallel-agents/SKILL.md` | Multiple independent problems to solve |
+
+### Efficiency Skills
+
+| Skill | Path | When to Use |
+|-------|------|-------------|
+| **cost-efficient-subtasks** | `~/.cursor/skills/cost-efficient-subtasks/SKILL.md` | Delegate micro-tasks to free models via OpenCode CLI |
+
+### Infrastructure Skills
+
+| Skill | Path | When to Use |
+|-------|------|-------------|
+| **using-git-worktrees** | `~/.cursor/skills/using-git-worktrees/SKILL.md` | Need isolated workspace for feature work |
+| **using-superpowers** | `~/.cursor/skills/using-superpowers/SKILL.md` | Reference for all available skills |
+| **writing-skills** | `~/.cursor/skills/writing-skills/SKILL.md` | Creating or editing skills |
+
+## Usage
+
+To use a skill, read its SKILL.md file and follow the instructions within. Skills are designed to be read on-demand when the relevant situation arises.
+
+## Skill Priority
+
+1. **Process skills first** (brainstorming, debugging) -- these determine approach
+2. **Implementation skills second** -- these guide execution
+
+Examples:
+- "Build feature X" -> brainstorming first, then writing-plans
+- "Fix this bug" -> systematic-debugging first, then TDD for the fix
+- "Complete this work" -> verification-before-completion before claiming done

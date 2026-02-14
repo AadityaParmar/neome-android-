@@ -338,22 +338,22 @@ class SigEntCallerSerTest {
             verifyJsonArray(
                 "spreadsheetMap[$key].insertRoleIdSet",
                 spreadsheetObj["insertRoleIdSet"],
-                spreadsheet.insertRoleIdSet.map { it.toString() }
+                spreadsheet.insertRoleIdSet?.map { it.toString() } ?: emptyList()
             )
             verifyJsonArray(
                 "spreadsheetMap[$key].updateRoleIdSet",
                 spreadsheetObj["updateRoleIdSet"],
-                spreadsheet.updateRoleIdSet.map { it.toString() }
+                spreadsheet.updateRoleIdSet?.map { it.toString() } ?: emptyList()
             )
             verifyJsonArray(
                 "spreadsheetMap[$key].removeRoleIdSet",
                 spreadsheetObj["removeRoleIdSet"],
-                spreadsheet.removeRoleIdSet.map { it.toString() }
+                spreadsheet.removeRoleIdSet?.map { it.toString() } ?: emptyList()
             )
             verifyJsonArray(
                 "spreadsheetMap[$key].forwardRoleIdSet",
                 spreadsheetObj["forwardRoleIdSet"],
-                spreadsheet.forwardRoleIdSet.map { it.toString() }
+                spreadsheet.forwardRoleIdSet?.map { it.toString() } ?: emptyList()
             )
         }
         println("spreadsheetMap verified: ${jsonMap.size} spreadsheets with all nested properties")

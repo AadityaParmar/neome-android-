@@ -91,7 +91,6 @@ using skill : defnForm do [instruction]
 | Field Controller  | `presentation/components/base/FieldController.kt` |
 | State Classes     | `presentation/state/FormState.kt`                 |
 | Events            | `presentation/state/FormEvent.kt`                 |
-| Actions           | `presentation/state/FormAction.kt`                |
 | Field State       | `presentation/state/FieldState.kt`                |
 | Property Resolver | `domain/util/FieldPropertyResolver.kt`            |
 | Value Resolver    | `domain/util/FieldValueResolver.kt`               |
@@ -117,10 +116,10 @@ using skill : defnForm do [instruction]
    │   │                        FormCtxImpl                                │   │
    │   │                    (Central State Owner)                          │   │
    │   │                                                                   │   │
-   │   │   ┌─────────────────┐                                            │   │
-   │   │   │ MutableStateFlow │ ◄─── Owned internally                     │   │
-   │   │   │   <FormState>    │                                           │   │
-   │   │   └────────┬─────────┘                                           │   │
+    │   │   ┌─────────────────┐                                            │   │
+    │   │   │ mutableStateOf  │ ◄─── Owned internally                       │   │
+    │   │   │   <FormState>   │                                            │   │
+    │   │   └────────┬────────┘                                            │   │
    │   │            │                                                      │   │
    │   │   ┌────────▼─────────────────────────────────────────────────┐   │   │
    │   │   │                     dispatch(event)                       │   │   │
@@ -130,10 +129,10 @@ using skill : defnForm do [instruction]
    │   │   │   │ (initialization) │  │ (value, focus, trigger)    │   │   │   │
    │   │   │   └─────────────────┘  └─────────────────────────────┘   │   │   │
    │   │   │                                                           │   │   │
-   │   │   │   ┌───────────────────────┐  ┌─────────────────────────┐ │   │   │
-   │   │   │   │FormCtxValidationHelper│  │ FormCtxStateHelper      │ │   │   │
-   │   │   │   │ + CompSchema system   │  │ (flows, queries)        │ │   │   │
-   │   │   │   └───────────────────────┘  └─────────────────────────┘ │   │   │
+    │   │   │   ┌───────────────────────┐                              │   │   │
+    │   │   │   │FormCtxValidationHelper│                              │   │   │
+    │   │   │   │ + CompSchema system   │                              │   │   │
+    │   │   │   └───────────────────────┘                              │   │   │
    │   │   └───────────────────────────────────────────────────────────┘   │   │
    │   │                                                                   │   │
    │   │   ┌──────────────────────┐                                       │   │
@@ -163,12 +162,12 @@ using skill : defnForm do [instruction]
 |------------------------|----------------------------------------------------|
 | Single Source of Truth | All state in immutable `FormState`                 |
 | Pure Handlers          | Helper functions have no side effects              |
-| Reactive Updates       | StateFlow for UI observation                       |
+| Reactive Updates       | Compose `State<T>` for UI observation              |
 | Imperative API         | `FormRef` for parent control                       |
 | Stable Context         | `FormCtx` never recreated after Form init          |
 | No Prop Drilling       | `LocalFormCtx` provides context to all descendants |
 | Schema Validation      | `DefnCompSchema` for type-specific validation      |
-| Background Processing  | All mutations via `enqueue()` on `Dispatchers.Default` |
+| Background Processing  | All mutations synchronous via `dispatch(FormEvent)`. Future threading via caller-chosen dispatchers. |
 
 ---
 
@@ -261,9 +260,9 @@ using skill : defnForm do [instruction]
 > - `domain/ref/FormRef.kt` - External API for parent components
 > - `domain/ctx/FormCtx.kt` - Internal API for field components
 
-**FormRef** (for parents): `getValue`, `getValues`, `setValue`, `setValues`, `validate`, `setError`, `clearErrors`, `submit`, `reset`, `isDirty`, `isValid`, `isTouched`, `watchFieldState`, `watchFormState`, `addSendBtnDisableFlag`, `removeSendBtnDisableFlag`, `isSendBtnEnabled`, `awaitIdle`
+**FormRef** (for parents): `getValue`, `getValues`, `setValue`, `setValues`, `validate`, `setError`, `clearErrors`, `submit`, `reset`, `isDirty`, `isValid`, `isTouched`, `addSendBtnDisableFlag`, `removeSendBtnDisableFlag`, `isSendBtnEnabled`, `formState`
 
-**FormCtx** (for fields): `trigger`, `getValues`, `getValue`, `getFieldState`, `getError`, `hasField`, `getDefnForm`, `validate`, `setError`, `clearError`, `watchFieldState`, `watchFieldError`, `watchFormState`, `addSendBtnDisableFlag`, `removeSendBtnDisableFlag`, `awaitIdle`
+**FormCtx** (for fields): `trigger`, `getValues`, `getValue`, `getFieldState`, `getError`, `hasField`, `getDefnForm`, `validate`, `setError`, `clearError`, `addSendBtnDisableFlag`, `removeSendBtnDisableFlag`, `formState`
 
 ### Validation Schema System
 
@@ -381,7 +380,6 @@ app/src/main/java/com/neome/feature/form/
 │   │       ├── FormCtxInitHelper.kt        # Initialization logic
 │   │       ├── FormCtxEventHelper.kt       # Event handlers
 │   │       ├── FormCtxValidationHelper.kt  # Validation logic
-│   │       ├── FormCtxStateHelper.kt       # State flow utilities
 │   │       └── schema/                     # Validation schema system
 │   │           ├── CalcSchema.kt           # Builds schemas for all fields
 │   │           ├── CompSchemaFactory.kt    # Factory by field type
@@ -423,7 +421,6 @@ app/src/main/java/com/neome/feature/form/
 │       ├── FormState.kt
 │       ├── FieldState.kt
 │       ├── FormEvent.kt
-│       ├── FormAction.kt                    # Action types for background processing
 │       ├── FormIntent.kt
 │       ├── FieldEvent.kt
 │       └── FieldError.kt
@@ -434,6 +431,23 @@ app/src/main/java/com/neome/feature/form/
 ---
 
 ## Changelog
+
+### v1.10.0 (2026-02-15)
+
+- **Refactor**: Removed coroutines, queues, and async machinery from form architecture
+- **Removed**: `FormAction.kt` - FormEvent is now the unified API for all operations
+- **Removed**: `FormCtxStateHelper.kt` - Replaced with Compose `derivedStateOf` for computed states
+- **Changed**: All mutations are now synchronous via `dispatch(FormEvent)` - no more coroutines, queues, or Dispatchers.Default
+- **Changed**: `FormCtxImpl` no longer takes a `CoroutineScope` parameter
+- **Removed**: `enqueue()` method - replaced by direct synchronous `dispatch()`
+- **Removed**: `awaitIdle()` - operations are synchronous, state is always consistent after each call
+- **Changed**: `MutableStateFlow<FormState>` replaced with `mutableStateOf<FormState>` (Compose runtime)
+- **Changed**: `FormCtx` interface - removed `watchFieldState()`, `watchFieldValue()`, `watchFieldError()`, `watchFormState()`, `awaitIdle()`. Added `val formState: State<FormState>`
+- **Changed**: `FormRef` interface - removed `watchFieldState()`, `watchFormState()`, `awaitIdle()`. Added `val formState: State<FormState>`
+- **Changed**: `FormRefImpl` constructor simplified from `(formStateFlow, enqueueAction, coroutineScope, awaitIdleFn)` to `(getFormState, dispatchEvent)`
+- **Changed**: `FieldController` now uses `State<T?>` and `State<FieldUiState>` with `derivedStateOf` instead of `StateFlow` + `CoroutineScope(Dispatchers.Default)` + `stateIn`
+- **Changed**: Field component pattern - before: `val fieldValue by fieldController.value.collectAsStateWithLifecycle()`, after: `val fieldValue = fieldController.value.value`
+- **Changed**: Field component pattern - before: `val (properties, error) = fieldController.field.collectAsStateWithLifecycle().value`, after: `val (properties, error) = fieldController.field.value`
 
 ### v1.9.0 (2026-02-06)
 

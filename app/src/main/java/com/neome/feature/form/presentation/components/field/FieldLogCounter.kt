@@ -1,9 +1,8 @@
 package com.neome.feature.form.presentation.components.field
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldLogCounterData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueNumberData
@@ -41,10 +40,10 @@ fun FieldLogCounter(
     if (fieldController.fieldId == null) return
 
     // Collect reactive field value separately for finer-grained recomposition
-    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+    val fieldValue = fieldController.value.value
 
     // Collect reactive field properties and error
-    val (properties, error) = fieldController.field.collectAsStateWithLifecycle().value
+    val (properties, error) = fieldController.field.value
 
     if (properties.hidden) return
 

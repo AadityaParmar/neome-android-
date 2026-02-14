@@ -2,24 +2,18 @@ package com.neome.feature.form.presentation.components.base
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.feature.form.domain.ctx.FormCtx
 import com.neome.feature.form.domain.ctx.LocalFormCtx
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldEvent
 import com.neome.feature.form.presentation.state.FieldProperties
+import com.neome.feature.form.presentation.state.FormState
 import com.neome.feature.utils.JsonParser
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
@@ -28,10 +22,10 @@ import kotlinx.serialization.serializer
  * Reactive UI state for a form field's properties and error.
  *
  * Holds computed properties and validation error for a field.
- * Emitted via [FieldController.field] StateFlow so composables
- * can destructure properties and error from a single collect.
+ * Emitted via [FieldController.field] State so composables
+ * can destructure properties and error from a single read.
  *
- * Field value is exposed separately via [FieldController.value] StateFlow
+ * Field value is exposed separately via [FieldController.value] State
  * for finer-grained recomposition control.
  */
 @Immutable
@@ -43,11 +37,12 @@ data class FieldUiState(
 /**
  * Controller for form fields that provides standardized access to field state and operations.
  *
- * This is a stable remembered object. Reactive state is exposed through two StateFlows:
- * - [value]: The deserialized field value, updated independently.
- * - [field]: Combined properties and error as [FieldUiState].
+ * This is a stable remembered object. Reactive state is exposed through two Compose States:
+ * - [value]: The deserialized field value, derived from FormState via derivedStateOf.
+ * - [field]: Combined properties and error as [FieldUiState], derived from FormState.
  *
- * Composables collect both with `collectAsStateWithLifecycle()`.
+ * Both use derivedStateOf for fine-grained recomposition — only recomposes
+ * when the specific field's data changes, not on every FormState change.
  *
  * All field components should use this controller to ensure consistent
  * state management and property access across different field types.
@@ -57,11 +52,11 @@ data class FieldController<T>(
     /** Field ID extracted from defnComp */
     val fieldId: Types.MetaIdComp?,
 
-    /** Reactive StateFlow of the deserialized field value */
-    val value: StateFlow<T?>,
+    /** Compose State of the deserialized field value */
+    val value: State<T?>,
 
-    /** Reactive StateFlow combining field properties and error */
-    val field: StateFlow<FieldUiState>,
+    /** Compose State combining field properties and error */
+    val field: State<FieldUiState>,
 
     /** Callback function for value changes */
     val onChange: (T?) -> Unit
@@ -71,9 +66,8 @@ data class FieldController<T>(
  * Composable for creating and managing a field controller with stable reference.
  *
  * Returns a stable [FieldController] instance that is remembered across recompositions.
- * The controller exposes two reactive StateFlows:
- * - [FieldController.value] for the deserialized field value.
- * - [FieldController.field] for properties and error.
+ * Uses derivedStateOf to derive per-field state from the centralized FormState,
+ * ensuring fine-grained recomposition.
  *
  * Usage:
  * ```kotlin
@@ -84,8 +78,8 @@ data class FieldController<T>(
  *
  * if (fieldController.fieldId == null) return
  *
- * val fieldValue by fieldController.value.collectAsStateWithLifecycle()
- * val (properties, error) = fieldController.field.collectAsStateWithLifecycle().value
+ * val fieldValue = fieldController.value.value
+ * val (properties, error) = fieldController.field.value
  *
  * if (properties.hidden) return
  * val currentValue = fieldValue?.value ?: ""
@@ -106,8 +100,13 @@ inline fun <reified T> rememberFieldController(
     val fieldId = (defnComp as? DefnField)?.metaId
 
     return remember(defnComp, onFieldEvent) {
-        val valueFlow = createFieldValueFlow(fieldId, formCtx, serializer)
-        val fieldFlow = createFieldUiStateFlow(fieldId, formCtx)
+        val valueState = derivedStateOf {
+            deriveFieldValue(fieldId, formCtx.formState.value, serializer)
+        }
+
+        val fieldState = derivedStateOf {
+            deriveFieldUiState(fieldId, formCtx.formState.value)
+        }
 
         val onChange: (T?) -> Unit = { newValue ->
             val jsonValue = newValue?.let { Json.encodeToJsonElement(serializer, it) }
@@ -116,80 +115,40 @@ inline fun <reified T> rememberFieldController(
 
         FieldController(
             fieldId = fieldId,
-            value = valueFlow,
-            field = fieldFlow,
+            value = valueState,
+            field = fieldState,
             onChange = onChange
         )
     }
 }
 
 /**
- * Creates a StateFlow of the deserialized field value from the raw JSON value flow.
- *
- * @param fieldId Field identifier, or null if defnComp is not a DefnField
- * @param formCtx Form context providing reactive watch methods
- * @param serializer KSerializer for deserializing the field value from JsonElement
- * @return StateFlow that emits a new deserialized value on any value change
+ * Derive deserialized field value from FormState.
  */
-fun <T> createFieldValueFlow(
+fun <T> deriveFieldValue(
     fieldId: Types.MetaIdComp?,
-    formCtx: FormCtx,
+    formState: FormState,
     serializer: KSerializer<T>
-): StateFlow<T?> {
-    if (fieldId == null) {
-        return MutableStateFlow(null)
+): T? {
+    if (fieldId == null) return null
+    val jsonValue = formState.getValue(fieldId) ?: return null
+    return try {
+        JsonParser.json.decodeFromJsonElement(serializer, jsonValue)
+    } catch (e: Exception) {
+        null
     }
-
-    return formCtx.watchFieldValue(fieldId).map { jsonValue ->
-        jsonValue?.let { jsonElement ->
-            try {
-                JsonParser.json.decodeFromJsonElement(serializer, jsonElement)
-            } catch (e: Exception) {
-                null
-            }
-        }
-    }.stateIn(
-        scope = CoroutineScope(Dispatchers.Default),
-        started = SharingStarted.WhileSubscribed(5000),
-        initialValue = formCtx.getValue(fieldId)?.let { jsonElement ->
-            try {
-                JsonParser.json.decodeFromJsonElement(serializer, jsonElement)
-            } catch (e: Exception) {
-                null
-            }
-        }
-    )
 }
 
 /**
- * Creates a combined StateFlow of [FieldUiState] from field state and error flows.
- *
- * @param fieldId Field identifier, or null if defnComp is not a DefnField
- * @param formCtx Form context providing reactive watch methods
- * @return StateFlow that emits a new FieldUiState on any state or error change
+ * Derive FieldUiState from FormState for a specific field.
  */
-fun createFieldUiStateFlow(
+fun deriveFieldUiState(
     fieldId: Types.MetaIdComp?,
-    formCtx: FormCtx
-): StateFlow<FieldUiState> {
-    if (fieldId == null) {
-        return MutableStateFlow(FieldUiState())
-    }
-
-    return combine(
-        formCtx.watchFieldState(fieldId),
-        formCtx.watchFieldError(fieldId)
-    ) { state, error ->
-        FieldUiState(
-            properties = state?.fieldProperties ?: FieldProperties(),
-            error = error
-        )
-    }.stateIn(
-        scope = CoroutineScope(Dispatchers.Default),
-        started = SharingStarted.WhileSubscribed(5000),
-        initialValue = FieldUiState(
-            properties = formCtx.getFieldState(fieldId)?.fieldProperties ?: FieldProperties(),
-            error = formCtx.getError(fieldId)
-        )
+    formState: FormState
+): FieldUiState {
+    if (fieldId == null) return FieldUiState()
+    return FieldUiState(
+        properties = formState.getFieldState(fieldId)?.fieldProperties ?: FieldProperties(),
+        error = formState.getError(fieldId)
     )
 }

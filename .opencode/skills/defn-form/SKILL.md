@@ -18,8 +18,8 @@ metadata:
 
 | Property         | Value                                       |
 |------------------|---------------------------------------------|
-| **Version**      | 1.8.0                                       |
-| **Last Updated** | 2026-02-06                                  |
+| **Version**      | 1.9.0                                       |
+| **Last Updated** | 2026-02-15                                  |
 | **Scope**        | Android Form Component Architecture         |
 | **Path**         | `app/src/main/java/com/neome/feature/form/` |
 
@@ -61,7 +61,6 @@ using skill : defnForm do [instruction]
 | Field Controller  | `presentation/components/base/FieldController.kt` |
 | State Classes     | `presentation/state/FormState.kt`                 |
 | Events            | `presentation/state/FormEvent.kt`                 |
-| Actions           | `presentation/state/FormAction.kt`                |
 | Field State       | `presentation/state/FieldState.kt`                |
 | Property Resolver | `domain/util/FieldPropertyResolver.kt`            |
 | Value Resolver    | `domain/util/FieldValueResolver.kt`               |
@@ -69,11 +68,11 @@ using skill : defnForm do [instruction]
 ## Architecture
 
 - **Pattern**: MVI + UDF (Unidirectional Data Flow) + CompositionLocal
-- **State**: Immutable `FormState` with `FieldState` per field
-- **Events**: `FormEvent` (internal), `FormIntent` (external), `FieldEvent` (field→form)
+- **State**: Immutable `FormState` with `FieldState` per field, held in Compose `mutableStateOf`
+- **Events**: `FormEvent` (unified API), `FormIntent` (external), `FieldEvent` (field->form)
 - **Context**: `LocalFormCtx` provides stable context without prop drilling
 - **Validation**: Schema-based with Konform library (`DefnCompSchema` system)
-- **Background**: All mutations via `enqueue()` on `Dispatchers.Default`
+- **Dispatch**: All mutations synchronous via `dispatch(FormEvent)`. Future threading via caller-chosen dispatchers.
 
 ## Field Types
 
@@ -81,14 +80,18 @@ using skill : defnForm do [instruction]
 
 **Composite Types** (no FieldState): `section`, `tab`, `grid`, `wizard`, `spreadsheetRef`
 
-## Recent Changes (v1.8.0)
+## Recent Changes (v1.9.0)
 
-- Comprehensive `FieldProperties` expansion with 20+ new properties
-- Enhanced `FieldPropertyResolver` with full field/var/value cascade support
-- `extractFieldIdReferences()` supports 20+ field types
-- `FieldValueResolver` fixes for decimal type conversion
-- `CompSchema.isRequired()` helper method
-- Text/Number schema validation with Konform library
+- Removed coroutines, queues, Mutex from FormCtxImpl — all mutations are now synchronous
+- Deleted `FormAction.kt` — `FormEvent` is now the unified API for all mutations
+- Deleted `FormCtxStateHelper.kt` — replaced with Compose `derivedStateOf`
+- Replaced `MutableStateFlow<FormState>` with `mutableStateOf<FormState>` (Compose runtime)
+- `FormCtx` exposes `val formState: State<FormState>` instead of watch methods
+- Removed `awaitIdle()` — operations are synchronous, state always consistent after each call
+- `FieldController` uses `State<T?>` + `derivedStateOf` instead of `StateFlow` + `stateIn`
+- Field components use `fieldController.value.value` instead of `collectAsStateWithLifecycle()`
+- `FormCtxImpl` no longer requires `CoroutineScope` parameter
+- `FormRefImpl` simplified to `(getFormState, dispatchEvent)` constructor
 
 ---
 

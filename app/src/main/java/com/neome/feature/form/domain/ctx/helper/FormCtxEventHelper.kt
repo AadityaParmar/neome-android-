@@ -187,7 +187,8 @@ object FormCtxEventHelper {
 
     fun handleSetValues(
         state: FormState,
-        event: FormEvent.SetValues
+        event: FormEvent.SetValues,
+        defnForm: DefnFormData
     ): FormReducerResult {
         val updatedFieldStates = state.fieldStates.mapValues { (fieldId, fieldState) ->
             val newValue = event.valueMap[fieldId]
@@ -200,12 +201,48 @@ object FormCtxEventHelper {
             }
         }
 
-        // Merge event values into existing valueMap
-        val updatedValueMap = state.valueMap + event.valueMap.filterKeys { state.fieldStates.containsKey(it) }
+        // Merge event values into existing valueMap (only for known leaf fields)
+        val validKeys = event.valueMap.filterKeys { state.fieldStates.containsKey(it) }
+        val updatedValueMap = state.valueMap + validKeys
+
+        // Trigger each changed field and its dependents to recalculate properties and validate
+        var currentFieldStates = updatedFieldStates
+        var currentErrors = state.errors
+        val changedFieldIds = validKeys.keys
+
+        changedFieldIds.forEach { fieldId ->
+            // Trigger the changed field itself
+            val fieldTriggerResult = triggerField(
+                fieldId = fieldId,
+                fieldStates = currentFieldStates,
+                valueMap = updatedValueMap,
+                errors = currentErrors,
+                defnForm = defnForm,
+                compSchemaMap = state.compSchemaMap
+            )
+            if (fieldTriggerResult != null) {
+                currentFieldStates = fieldTriggerResult.fieldStates
+                currentErrors = fieldTriggerResult.errors
+            }
+
+            // Trigger dependent fields
+            val dependents = state.fieldDependencies.getDependents(fieldId)
+            val dependentResult = triggerDependentFields(
+                fieldStates = currentFieldStates,
+                valueMap = updatedValueMap,
+                dependentIds = dependents,
+                defnForm = defnForm,
+                errors = currentErrors,
+                compSchemaMap = state.compSchemaMap
+            )
+            currentFieldStates = dependentResult.fieldStates
+            currentErrors = dependentResult.errors
+        }
 
         val newState = state.copy(
-            fieldStates = updatedFieldStates,
-            valueMap = updatedValueMap
+            fieldStates = currentFieldStates,
+            valueMap = updatedValueMap,
+            errors = currentErrors
         )
         return FormReducerResult(newState)
     }
@@ -301,10 +338,7 @@ object FormCtxEventHelper {
 
     /**
      * Validate a single field and update errors map accordingly.
-     * Sets error if validation fails, clears error if validation passes.
-     *
-     * Uses pure validation (no side effects) to avoid dispatching events
-     * during event processing.
+     * Delegates to [FormCtxValidationHelper.updateFieldError] for error map updates.
      *
      * @param fieldValue The current field value from valueMap
      * @return Updated errors map with error set or cleared for this field
@@ -319,24 +353,8 @@ object FormCtxEventHelper {
         val schema = compSchemaMap[fieldId]
             ?: return errors // No schema = no validation needed
 
-        // Use pure validation to get error without side effects
         val error = schema.validate(fieldValue, fieldState)
-
-        return if (error != null) {
-            // Set error
-            errors + (fieldId to FieldError(
-                message = error,
-                type = FieldError.ErrorType.Validation
-            ))
-        } else {
-            // Clear error (only validation errors, keep custom/server errors)
-            val existingError = errors[fieldId]
-            if (existingError?.type == FieldError.ErrorType.Validation) {
-                errors - fieldId
-            } else {
-                errors
-            }
-        }
+        return FormCtxValidationHelper.updateFieldError(fieldId, error, errors)
     }
 
     /**

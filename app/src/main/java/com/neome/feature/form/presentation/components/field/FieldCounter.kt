@@ -12,13 +12,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldCounterData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueNumberData
@@ -52,10 +51,10 @@ fun FieldCounter(
     if (fieldController.fieldId == null) return
 
     // Collect reactive field value separately for finer-grained recomposition
-    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
+    val fieldValue = fieldController.value.value
 
     // Collect reactive field properties and error
-    val (properties, error) = fieldController.field.collectAsStateWithLifecycle().value
+    val (properties, error) = fieldController.field.value
 
     if (properties.hidden) return
 

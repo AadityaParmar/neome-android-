@@ -16,7 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+
 import com.neome.api.meta.base.Types.EnumDefnCaptureValueKind
 import com.neome.api.meta.base.Types.EnumDefnPlacement
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
@@ -56,8 +56,8 @@ fun FieldSwitch(
 
     if (fieldController.fieldId == null) return
 
-    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
-    val (properties, error) = fieldController.field.collectAsStateWithLifecycle().value
+    val fieldValue = fieldController.value.value
+    val (properties, error) = fieldController.field.value
 
     if (properties.hidden) return
 
