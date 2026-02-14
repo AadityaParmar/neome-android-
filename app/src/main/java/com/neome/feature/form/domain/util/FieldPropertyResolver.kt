@@ -795,21 +795,29 @@ object FieldPropertyResolver {
 
 
     /**
-     * Resolve DefnDtoText variable to a string value.
+     * Resolves a [DefnDtoText] variable to a plain string.
      *
-     * DefnDtoText.value is a list of string segments that are concatenated.
-     * Returns null if the value list is null or empty.
-     *
-     * TODO: Implement full variable resolution (e.g., context variables, calculations)
-     *  when the variable resolution system is available.
+     * When [defnForm] and [callerEnt] are available, delegates to [ArgValueResolver]
+     * for full arg-value resolution. Otherwise, falls back to joining the raw value list.
      *
      * @param dtoText The DefnDtoText to resolve
+     * @param defnForm The form definition (optional, needed for field lookups)
+     * @param callerEnt The caller entity (optional, needed for context resolution)
      * @return Resolved string value or null
      */
-    fun resolveArgValue(dtoText: DefnDtoText?): String? {
+    fun resolveArgValue(
+        dtoText: DefnDtoText?,
+        defnForm: com.neome.api.meta.base.dto.DefnForm? = null,
+        callerEnt: com.neome.api.ent.entDrawer.sig.SigEntCaller? = null
+    ): String? {
         if (dtoText == null) return null
-        val segments = dtoText.value
-        if (segments.isNullOrEmpty()) return null
-        return segments.joinToString("")
+
+        if (defnForm != null && callerEnt != null) {
+            val resolved = ArgValueResolver.resolve(dtoText, defnForm, callerEnt)
+            return resolved?.value?.joinToString("")
+        }
+
+        // Fallback: join raw values without resolution
+        return dtoText.value?.joinToString("")
     }
 }
