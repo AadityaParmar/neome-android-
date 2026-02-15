@@ -4,7 +4,7 @@ import com.neome.api.meta.base.dto.DefnFieldEmail
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueEmailData
-import com.neome.feature.form.domain.util.FieldValueResolver
+import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
 import com.neome.feature.form.presentation.state.FieldProperties
 import com.neome.feature.form.presentation.state.FieldState
 import io.konform.validation.Invalid

@@ -1,7 +1,6 @@
-package com.neome.feature.form.domain.util
+package com.neome.feature.form.domain.util.FieldVal
 
 import com.neome.api.meta.base.Types
-import com.neome.core.logging.AppLogger
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueColorData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateTimeData
@@ -14,6 +13,7 @@ import com.neome.core.common.serializer.api.meta.base.dto.FieldValueNumberData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueParagraphData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTimeData
+import com.neome.core.logging.AppLogger
 import com.neome.feature.utils.JsonParser
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonPrimitive

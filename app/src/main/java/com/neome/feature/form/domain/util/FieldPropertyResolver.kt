@@ -27,6 +27,7 @@ import com.neome.api.meta.base.dto.DefnFieldVoice
 import com.neome.api.meta.base.dto.FieldValueSwitch
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldSwitchData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
 import com.neome.feature.form.presentation.state.FieldDependencyMap
 import com.neome.feature.form.presentation.state.FieldProperties
 import kotlinx.serialization.json.JsonElement
@@ -400,6 +401,7 @@ object FieldPropertyResolver {
                 val field = defnForm.compMap[fieldId]
                 field?.let { FieldValueResolver.fnResolveNumericValue(it.type, getFieldValue(fieldId)) }
             }
+
             else -> null
         }
     }
@@ -419,6 +421,7 @@ object FieldPropertyResolver {
                 val field = defnForm.compMap[fieldId]
                 field?.let { FieldValueResolver.fnResolveNumericValue(it.type, getFieldValue(fieldId)) }
             }
+
             else -> null
         }
     }
@@ -440,6 +443,7 @@ object FieldPropertyResolver {
                 val field = defnForm.compMap[fieldId]
                 field?.let { FieldValueResolver.fnResolveNumericValue(it.type, getFieldValue(fieldId)) }
             }
+
             else -> null
         }
     }
@@ -459,6 +463,7 @@ object FieldPropertyResolver {
                 val field = defnForm.compMap[fieldId]
                 field?.let { FieldValueResolver.fnResolveNumericValue(it.type, getFieldValue(fieldId)) }
             }
+
             else -> null
         }
     }
@@ -480,6 +485,7 @@ object FieldPropertyResolver {
                 val field = defnForm.compMap[fieldId]
                 field?.let { FieldValueResolver.fnResolveNumericDecimalValue(it.type, getFieldValue(fieldId)) }
             }
+
             else -> null
         }
     }
@@ -499,6 +505,7 @@ object FieldPropertyResolver {
                 val field = defnForm.compMap[fieldId]
                 field?.let { FieldValueResolver.fnResolveNumericDecimalValue(it.type, getFieldValue(fieldId)) }
             }
+
             else -> null
         }
     }
@@ -520,6 +527,7 @@ object FieldPropertyResolver {
                 val field = defnForm.compMap[fieldId]
                 field?.let { FieldValueResolver.fnResolveNumericValue(it.type, getFieldValue(fieldId)) }
             }
+
             else -> null
         }
     }
@@ -551,6 +559,7 @@ object FieldPropertyResolver {
                 val field = defnForm.compMap[fieldId]
                 field?.let { FieldValueResolver.fnResolveNumericValue(it.type, getFieldValue(fieldId)) }
             }
+
             else -> null
         }
     }
