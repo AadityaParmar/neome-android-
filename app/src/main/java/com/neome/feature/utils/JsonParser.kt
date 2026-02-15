@@ -15,6 +15,14 @@ object JsonParser {
         }
     }
 
+    fun isJsonString(str: String): Boolean {
+        return try {
+            Json.parseToJsonElement(str)
+            true
+        } catch (_: Exception) {
+            false
+        }
+    }
 
 }
 

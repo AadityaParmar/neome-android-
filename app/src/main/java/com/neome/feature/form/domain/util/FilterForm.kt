@@ -33,7 +33,6 @@ import com.neome.feature.form.domain.TypeUiFormPermission
 import com.neome.feature.form.domain.TypeUiFormPermissionMap
 import com.neome.feature.form.domain.TypeUiManagerialRelationship
 import com.neome.feature.form.domain.TypeUiPermissionRole
-import com.neome.feature.form.domain.util.FilterForm.matchAllRoles
 import com.neome.feature.utils.JsonParser
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.buildJsonObject
@@ -50,6 +49,8 @@ import kotlinx.serialization.json.jsonObject
  *
  * Equivalent to TypeScript's FilterFormPlus.ts PrepareUiForm class.
  */
+
+
 object FilterForm {
 
     private val defaultPermission: EnumDefnPermission = EnumDefnPermission.write
@@ -62,6 +63,12 @@ object FilterForm {
         EnumDefnPermission.invisible to 2,
         EnumDefnPermission.hide to 1
     )
+
+    fun prepareUiForm(form: DefnFormData, callerEnt: SigEntCaller): DefnFormUi {
+
+        val permissionResolvedForm = this.prepare(form, callerEnt)
+        return ArgValueResolver.resolveDefnForm(permissionResolvedForm, callerEnt)
+    }
 
     // region --- Foundation Helpers ---
 
@@ -81,15 +88,6 @@ object FilterForm {
         return if (existingPriority > newPriority) existingPermission else newPermission
     }
 
-    /**
-     * Returns true if every role in [callerRoles] is present in [targetRoles].
-     */
-    private fun matchAllRoles(
-        callerRoles: List<MetaIdRole>,
-        targetRoles: List<MetaIdRole>
-    ): Boolean {
-        return callerRoles.all { it in targetRoles }
-    }
 
     /**
      * Finds the [EnumDefnRoles] value whose string ID matches the given [MetaIdRole].
@@ -212,7 +210,7 @@ object FilterForm {
                 }
             }
             if (filteredDisabledRoleIdSet.isNotEmpty()
-                && matchAllRoles(roleIdSet, filteredDisabledRoleIdSet)
+                && FormPlus.matchAllRoles(roleIdSet, filteredDisabledRoleIdSet)
             ) {
                 if (disabled == null) disabled = mutableMapOf()
                 disabled[TypeUiPermissionRole.Caller] = true
@@ -233,7 +231,7 @@ object FilterForm {
                 }
             }
             if (filteredRequiredRoleIdSet.isNotEmpty()
-                && matchAllRoles(roleIdSet, filteredRequiredRoleIdSet)
+                && FormPlus.matchAllRoles(roleIdSet, filteredRequiredRoleIdSet)
             ) {
                 if (required == null) required = mutableMapOf()
                 required[TypeUiPermissionRole.Caller] = true
@@ -501,7 +499,7 @@ object FilterForm {
      *
      * TS Reference: FilterFormPlus.ts lines 393-457
      */
-    fun prepare(form: DefnFormData, callerEnt: SigEntCaller): DefnFormUi {
+    private fun prepare(form: DefnFormData, callerEnt: SigEntCaller): DefnFormUi {
         val roleIdSet = callerEnt.roleIdSet
         val mutableCompMap = form.compMap.toMutableMap()
         val formJson = JsonParser.json.encodeToJsonElement(DefnFormData.serializer(), form)

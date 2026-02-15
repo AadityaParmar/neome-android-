@@ -33,6 +33,7 @@ import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldShowCodeData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldSwitchData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnGridData
 import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.utils.JsonParser
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
@@ -241,7 +242,8 @@ object ArgValueResolver {
         callerEnt: SigEntCaller,
         skipResolveSeqVar: Boolean
     ): String? {
-        if (argStr.isBlank() || !StringPlus.isJsonString(argStr)) {
+
+        if (argStr.isBlank() || !JsonParser.isJsonString(argStr)) {
             return argStr
         }
 
@@ -424,6 +426,7 @@ object ArgValueResolver {
             "sequence" -> {
                 if (skipResolveSeqVar) argStr else baseMap.name
             }
+
             "setOfDate" -> baseMap.name // TODO: proper resolution
             else -> baseMap.name
         }

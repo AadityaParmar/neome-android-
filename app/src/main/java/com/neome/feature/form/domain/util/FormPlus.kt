@@ -1,5 +1,6 @@
 package com.neome.feature.form.domain.util
 
+import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.dto.DefnForm
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
@@ -12,6 +13,15 @@ import com.neome.core.common.serializer.api.meta.base.dto.DefnWizardData
 
 
 object FormPlus {
+    /**
+     * Returns true if every role in [callerRoles] is present in [targetRoles].
+     */
+    fun matchAllRoles(
+        callerRoles: List<Types.MetaIdRole>,
+        targetRoles: List<Types.MetaIdRole>
+    ): Boolean {
+        return callerRoles.all { it in targetRoles }
+    }
 
     /**
      * Recursively traverses the form definition tree starting from [DefnForm.displayCompositeId].
@@ -28,6 +38,7 @@ object FormPlus {
         val displayCompositeId = defnForm.displayCompositeId
 
         val rootComp = compMap[displayCompositeId] ?: return
+
         getComp(displayCompositeId, rootComp, compMap, cb)
     }
 
