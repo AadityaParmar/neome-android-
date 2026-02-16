@@ -29,11 +29,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoOptionData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfDtoOptionData
 import com.neome.feature.form.presentation.components.resolveThemeColor
@@ -73,6 +76,8 @@ fun RawPickerSingleSelect(
     modifier: Modifier = Modifier
 ) {
     val isInteractive = enabled && !readOnly
+    val focusManager = LocalFocusManager.current
+    val scope = rememberCoroutineScope()
     var showSheet by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
@@ -111,7 +116,10 @@ fun RawPickerSingleSelect(
         trailingIcon = {
             Row {
                 if (isInteractive && hasSelection) {
-                    IconButton(onClick = { onChange(null) }) {
+                    IconButton(onClick = {
+                        onChange(null)
+                        focusManager.clearFocus()
+                    }) {
                         Icon(
                             imageVector = Icons.Default.Clear,
                             contentDescription = "Clear selection"
@@ -158,7 +166,11 @@ fun RawPickerSingleSelect(
                             isSelected = isSelected,
                             onClick = {
                                 onChange(option)
-                                showSheet = false
+                                scope.launch {
+                                    sheetState.hide()
+                                }.invokeOnCompletion {
+                                    showSheet = false
+                                }
                             }
                         )
                     }
