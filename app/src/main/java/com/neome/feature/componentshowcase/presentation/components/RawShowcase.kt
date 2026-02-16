@@ -28,7 +28,7 @@ fun RawShowcase(
     ) {
         Text("Raw components", style = MaterialTheme.typography.headlineSmall)
 
-        var singleSelect by remember { mutableStateOf<String?>(null) }
+        var singleSelect by remember { mutableStateOf<String?>("c") }
 
         RawPickerSingleSelect(
             modifier = modifier,

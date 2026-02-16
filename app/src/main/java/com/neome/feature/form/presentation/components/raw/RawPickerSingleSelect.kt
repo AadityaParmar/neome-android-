@@ -22,6 +22,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -83,9 +84,15 @@ fun RawPickerSingleSelect(
 
     val hasSelection = !selectedOption.isNullOrEmpty()
 
-    // Display text: the display value of the selected option
+    // Detect if selectedOption references an option that no longer exists in the map
+    val isOptionNotFound = remember(selectedOption, optionMap) {
+        hasSelection && optionMap?.map?.containsKey(selectedOption) != true
+    }
+
+    // Display text: the display value of the selected option, or "Not Found" if missing
     val displayText = remember(selectedOption, optionMap) {
-        selectedOption?.let { optionMap?.map?.get(it)?.value } ?: ""
+        if (selectedOption.isNullOrEmpty()) return@remember ""
+        optionMap?.map?.get(selectedOption)?.value ?: "Not Found"
     }
 
     // Click detection on the text field (same pattern as FieldDate)
@@ -107,10 +114,18 @@ fun RawPickerSingleSelect(
         label = label?.let { { Text(it) } },
         placeholder = placeholder?.let { { Text(it) } },
         supportingText = { Text(text = helperText ?: " ") },
-        isError = isError,
+        isError = isError || isOptionNotFound,
         enabled = enabled,
         readOnly = true,
         singleLine = true,
+        colors = if (isOptionNotFound) {
+            OutlinedTextFieldDefaults.colors(
+                unfocusedTextColor = MaterialTheme.colorScheme.error,
+                focusedTextColor = MaterialTheme.colorScheme.error
+            )
+        } else {
+            OutlinedTextFieldDefaults.colors()
+        },
         modifier = modifier.fillMaxWidth(),
         interactionSource = interactionSource,
         trailingIcon = {
