@@ -31,21 +31,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.neome.feature.componentshowcase.domain.model.ComponentCategory
 import com.neome.feature.componentshowcase.presentation.components.ButtonShowcase
 import com.neome.feature.componentshowcase.presentation.components.CardShowcase
 import com.neome.feature.componentshowcase.presentation.components.DialogShowcase
 import com.neome.feature.componentshowcase.presentation.components.FilePickerShowcase
 import com.neome.feature.componentshowcase.presentation.components.ImageCompressionShowcase
+import com.neome.feature.componentshowcase.presentation.components.ImagePrimaryColorShowcase
+import com.neome.feature.componentshowcase.presentation.components.LocationShowcase
+import com.neome.feature.componentshowcase.presentation.components.MediaCarouselShowcase
 import com.neome.feature.componentshowcase.presentation.components.MediaShowcase
 import com.neome.feature.componentshowcase.presentation.components.OtherComponentsShowcase
 import com.neome.feature.componentshowcase.presentation.components.ProgressShowcase
+import com.neome.feature.componentshowcase.presentation.components.RawShowcase
 import com.neome.feature.componentshowcase.presentation.components.SelectionShowcase
 import com.neome.feature.componentshowcase.presentation.components.TextFieldShowcase
 import com.neome.feature.componentshowcase.presentation.components.ThumbnailPickerShowcase
-import com.neome.feature.componentshowcase.presentation.components.ImagePrimaryColorShowcase
-import com.neome.feature.componentshowcase.presentation.components.MediaCarouselShowcase
-import com.neome.feature.componentshowcase.presentation.components.LocationShowcase
-import com.neome.feature.componentshowcase.domain.model.ComponentCategory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -153,9 +154,8 @@ private fun ComponentShowcaseContent(
                         10 -> ThumbnailPickerShowcase()
                         11 -> ImagePrimaryColorShowcase()
                         12 -> MediaCarouselShowcase()
-                        13 -> LocationShowcase(
-                            onNavigateToSearch = onNavigateToSearchLocation
-                        )
+                        13 -> LocationShowcase(onNavigateToSearch = onNavigateToSearchLocation)
+                        14 -> RawShowcase()
                     }
                 }
 

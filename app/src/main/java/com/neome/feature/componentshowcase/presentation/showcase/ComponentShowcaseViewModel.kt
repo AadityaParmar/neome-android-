@@ -20,9 +20,11 @@ class ComponentShowcaseViewModel : ViewModel() {
             is ComponentShowcaseEvent.SelectCategory -> {
                 _state.update { it.copy(selectedCategoryIndex = event.index) }
             }
+
             is ComponentShowcaseEvent.Search -> {
                 _state.update { it.copy(searchQuery = event.query) }
             }
+
             ComponentShowcaseEvent.ClearSearch -> {
                 _state.update { it.copy(searchQuery = "") }
             }
@@ -103,6 +105,11 @@ class ComponentShowcaseViewModel : ViewModel() {
                 name = "Location",
                 description = "Location services",
                 components = listOf("Get Current Location with address")
+            ),
+            ComponentCategory(
+                name = "Raw",
+                description = "Raw components",
+                components = listOf("Raw picker")
             )
         )
         _state.update { it.copy(categories = categories) }
