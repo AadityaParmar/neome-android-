@@ -19,6 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.neome.api.meta.base.Types.EnumDefnCaptureValueKind
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueEntUserIdData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueLocationData
 
 /**
  * UI-specific status for location capture progress.
@@ -41,40 +43,26 @@ enum class CaptureLocationStatus {
  * - If not in [showCapturedValues]: shown only while capturing (status-only), hidden once value arrives.
  * - Error rows always shown with a retry button.
  *
- * @param captureTimeEnabled Whether time capture is enabled on the field definition
- * @param captureUserEnabled Whether user capture is enabled on the field definition
- * @param captureLocationEnabled Whether location capture is enabled on the field definition
  * @param captureTime Current captured time value (null = not yet captured)
  * @param captureUser Current captured user display string (null = not yet captured)
  * @param captureLocation Current captured location display string (null = not yet captured)
- * @param captureTimeError Error string for time capture (null = no error)
- * @param captureUserError Error string for user capture (null = no error)
  * @param captureLocationError Error string for location capture (null = no error)
  * @param captureLocationStatus Current location fetching phase (null = idle/done)
  * @param showCapturedValues Which capture kinds to show persistently with key: value format
  * @param captureLocationLatLng Lat,lng string for "open in maps" button (null = not available)
- * @param onRetryTime Callback when retry is tapped on time error row
- * @param onRetryUser Callback when retry is tapped on user error row
  * @param onRetryLocation Callback when retry is tapped on location error row
  * @param onOpenLocationInMap Callback when "open in maps" is tapped on location row
  * @param modifier Modifier for customization
  */
 @Composable
 fun RawCaptureExtraProperties(
-    captureTimeEnabled: Boolean,
-    captureUserEnabled: Boolean,
-    captureLocationEnabled: Boolean,
     captureTime: String?,
-    captureUser: String?,
-    captureLocation: String?,
-    captureTimeError: String?,
-    captureUserError: String?,
+    captureUser: FieldValueEntUserIdData?,
+    captureLocation: FieldValueLocationData?,
     captureLocationError: String?,
     captureLocationStatus: CaptureLocationStatus?,
     showCapturedValues: List<EnumDefnCaptureValueKind>?,
     captureLocationLatLng: String?,
-    onRetryTime: () -> Unit,
-    onRetryUser: () -> Unit,
     onRetryLocation: () -> Unit,
     onOpenLocationInMap: () -> Unit,
     modifier: Modifier = Modifier
@@ -82,29 +70,29 @@ fun RawCaptureExtraProperties(
     val showSet = showCapturedValues?.toSet() ?: emptySet()
 
     // Determine which rows to render
-    val timeRow = if (captureTimeEnabled) {
+    val timeRow = if (captureTime != null) {
         buildRowState(
             kind = EnumDefnCaptureValueKind.captureTime,
             value = captureTime,
-            error = captureTimeError,
             isInShowList = EnumDefnCaptureValueKind.captureTime in showSet,
-            statusText = "Capturing time...",
+            error = null,
+            statusText = null,
             keyLabel = "Captured time"
         )
     } else null
 
-    val userRow = if (captureUserEnabled) {
+    val userRow = if (captureUser != null) {
         buildRowState(
             kind = EnumDefnCaptureValueKind.captureUser,
-            value = captureUser,
-            error = captureUserError,
+            value = captureUser.displayField ?: captureUser.value.toString(),
             isInShowList = EnumDefnCaptureValueKind.captureUser in showSet,
-            statusText = "Capturing user...",
+            error = null,
+            statusText = null,
             keyLabel = "Captured user"
         )
     } else null
 
-    val locationRow = if (captureLocationEnabled) {
+    val locationRow = if (captureLocation != null) {
         // Location has specific status phases
         val locationStatusText = when (captureLocationStatus) {
             CaptureLocationStatus.GettingLatLng -> "Getting coordinates..."
@@ -113,7 +101,7 @@ fun RawCaptureExtraProperties(
         }
         buildRowState(
             kind = EnumDefnCaptureValueKind.captureLocation,
-            value = captureLocation,
+            value = captureLocation.value.address ?: captureLocation.value.geoPoint.toString(),
             error = captureLocationError,
             isInShowList = EnumDefnCaptureValueKind.captureLocation in showSet,
             statusText = locationStatusText,
@@ -121,7 +109,13 @@ fun RawCaptureExtraProperties(
         )
     } else null
 
-    val rows = listOfNotNull(timeRow, userRow, locationRow)
+    val rows = showSet.mapNotNull { item ->
+        when (item) {
+            EnumDefnCaptureValueKind.captureTime -> timeRow
+            EnumDefnCaptureValueKind.captureUser -> userRow
+            EnumDefnCaptureValueKind.captureLocation -> locationRow
+        }
+    }
 
     if (rows.isEmpty()) return
 
@@ -136,10 +130,10 @@ fun RawCaptureExtraProperties(
                     isError = state.hasError,
                     showRetryButton = state.hasError,
                     showOpenMapButton = state.kind == EnumDefnCaptureValueKind.captureLocation
-                            && captureLocationLatLng != null,
+                        && captureLocationLatLng != null,
                     onRetry = when (state.kind) {
-                        EnumDefnCaptureValueKind.captureTime -> onRetryTime
-                        EnumDefnCaptureValueKind.captureUser -> onRetryUser
+                        EnumDefnCaptureValueKind.captureTime -> null
+                        EnumDefnCaptureValueKind.captureUser -> null
                         EnumDefnCaptureValueKind.captureLocation -> onRetryLocation
                     },
                     onOpenMap = onOpenLocationInMap
@@ -175,8 +169,8 @@ private fun buildRowState(
     value: String?,
     error: String?,
     isInShowList: Boolean,
-    statusText: String,
-    keyLabel: String
+    statusText: String?,
+    keyLabel: String?
 ): CaptureRowState {
     val hasValue = !value.isNullOrBlank()
     val hasError = !error.isNullOrBlank()
@@ -189,6 +183,7 @@ private fun buildRowState(
             hasValue -> "$keyLabel: $value"
             else -> "$keyLabel: $statusText"
         }
+
         CaptureRowState(
             kind = kind,
             shouldRender = true,
@@ -201,14 +196,14 @@ private fun buildRowState(
             isCapturing -> CaptureRowState(
                 kind = kind,
                 shouldRender = true,
-                displayText = statusText,
+                displayText = statusText ?: "",
                 hasError = false
             )
 
             hasError -> CaptureRowState(
                 kind = kind,
                 shouldRender = true,
-                displayText = error!!,
+                displayText = error,
                 hasError = true
             )
 
@@ -233,7 +228,7 @@ private fun CaptureRow(
     isError: Boolean,
     showRetryButton: Boolean,
     showOpenMapButton: Boolean,
-    onRetry: () -> Unit,
+    onRetry: (() -> Unit)?,
     onOpenMap: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -256,7 +251,7 @@ private fun CaptureRow(
         if (showRetryButton) {
             Spacer(modifier = Modifier.width(4.dp))
             IconButton(
-                onClick = onRetry,
+                onClick = onRetry ?: {},
                 modifier = Modifier.size(20.dp)
             ) {
                 Icon(

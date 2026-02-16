@@ -12,14 +12,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.neome.api.meta.base.Types.EnumDefnPlacement
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldSwitchData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueEntUserIdData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueLocationData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueSwitchData
 import com.neome.feature.form.domain.util.FieldPropertyResolver
 import com.neome.feature.form.presentation.components.base.FieldBase
@@ -55,8 +55,11 @@ fun FieldSwitch(
 
     if (fieldController.fieldId == null) return
 
-    val fieldValue by fieldController.value.collectAsStateWithLifecycle()
-    val (properties, error) = fieldController.field.collectAsStateWithLifecycle().value
+    // Read reactive field value (derivedStateOf provides fine-grained recomposition)
+    val fieldValue = fieldController.value.value
+
+    // Read reactive field properties and error
+    val (properties, error) = fieldController.field.value
 
     if (properties.hidden) return
 
@@ -81,12 +84,8 @@ fun FieldSwitch(
 
     // Extract captured value strings from field value
     val captureTime = fieldValue?.captureTime
-    val captureUser = fieldValue?.captureUser?.let { user ->
-        user.displayField ?: user.value.toString()
-    }
-    val captureLocation = fieldValue?.captureLocation?.let { location ->
-        location.value.address ?: location.value.geoPoint.toString()
-    }
+    val captureUser = fieldValue?.captureUser
+    val captureLocation = fieldValue?.captureLocation
     val captureLocationLatLng = fieldValue?.captureLocation?.value?.geoPoint?.toString()
 
     FieldBase(modifier = modifier) {
@@ -148,8 +147,8 @@ internal fun FieldSwitchContent(
     captureUserEnabled: Boolean,
     captureLocationEnabled: Boolean,
     captureTime: String?,
-    captureUser: String?,
-    captureLocation: String?,
+    captureUser: FieldValueEntUserIdData?,
+    captureLocation: FieldValueLocationData?,
     captureLocationLatLng: String?,
     showCapturedValues: List<com.neome.api.meta.base.Types.EnumDefnCaptureValueKind>?,
     onValueChange: (Boolean) -> Unit,
@@ -218,20 +217,13 @@ internal fun FieldSwitchContent(
         if (hasCaptureEnabled) {
             Spacer(modifier = Modifier.height(2.dp))
             RawCaptureExtraProperties(
-                captureTimeEnabled = captureTimeEnabled,
-                captureUserEnabled = captureUserEnabled,
-                captureLocationEnabled = captureLocationEnabled,
                 captureTime = captureTime,
                 captureUser = captureUser,
                 captureLocation = captureLocation,
-                captureTimeError = null,       // Future: from capture handler
-                captureUserError = null,       // Future: from capture handler
                 captureLocationError = null,   // Future: from capture handler
                 captureLocationStatus = null,  // Future: from capture handler
                 showCapturedValues = showCapturedValues,
                 captureLocationLatLng = captureLocationLatLng,
-                onRetryTime = { },             // Future: capture handler callback
-                onRetryUser = { },             // Future: capture handler callback
                 onRetryLocation = { },         // Future: capture handler callback
                 onOpenLocationInMap = { }      // Future: maps intent callback
             )
