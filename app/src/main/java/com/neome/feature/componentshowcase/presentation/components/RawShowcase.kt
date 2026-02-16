@@ -35,8 +35,7 @@ fun RawShowcase(
             label = "Single Select Picker",
             readOnly = false,
             enabled = true,
-            onChange = { option -> singleSelect = option.metaId },
-            onClear = {},
+            onChange = { option -> singleSelect = option?.metaId },
             isError = false,
             optionMap = DefnStudioMapOfDtoOptionData(
                 keys = listOf("a", "b"),

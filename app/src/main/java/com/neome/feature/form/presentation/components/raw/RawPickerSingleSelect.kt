@@ -49,8 +49,7 @@ import com.neome.feature.form.presentation.components.resolveThemeColor
  *
  * @param optionMap Map of option metaIds to option data providing the list of choices
  * @param selectedOption Currently selected option metaId (null means no selection)
- * @param onChange Callback when user selects an option from the bottom sheet list
- * @param onClear Callback to clear the current selection
+ * @param onChange Callback when user selects an option (receives null when selection is cleared)
  * @param label Optional label for the text field
  * @param placeholder Optional placeholder shown when nothing is selected
  * @param helperText Optional supporting text displayed below the field
@@ -64,8 +63,7 @@ import com.neome.feature.form.presentation.components.resolveThemeColor
 fun RawPickerSingleSelect(
     optionMap: DefnStudioMapOfDtoOptionData?,
     selectedOption: String?,
-    onChange: (option: DefnDtoOptionData) -> Unit,
-    onClear: () -> Unit,
+    onChange: (option: DefnDtoOptionData?) -> Unit,
     label: String? = null,
     placeholder: String? = null,
     helperText: String? = null,
@@ -113,7 +111,7 @@ fun RawPickerSingleSelect(
         trailingIcon = {
             Row {
                 if (isInteractive && hasSelection) {
-                    IconButton(onClick = onClear) {
+                    IconButton(onClick = { onChange(null) }) {
                         Icon(
                             imageVector = Icons.Default.Clear,
                             contentDescription = "Clear selection"
@@ -158,7 +156,10 @@ fun RawPickerSingleSelect(
                         SingleSelectOptionItem(
                             option = option,
                             isSelected = isSelected,
-                            onClick = { onChange(option) }
+                            onClick = {
+                                onChange(option)
+                                showSheet = false
+                            }
                         )
                     }
                 }
