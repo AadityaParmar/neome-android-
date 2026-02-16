@@ -9,7 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.neome.feature.form.presentation.components.raw.RawPicker
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoOptionData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfDtoOptionData
+import com.neome.feature.form.presentation.components.raw.RawPickerMultiSelect
+import com.neome.feature.form.presentation.components.raw.RawPickerSingleSelect
 
 @Composable
 fun RawShowcase(
@@ -21,15 +24,50 @@ fun RawShowcase(
     ) {
         Text("Raw components", style = MaterialTheme.typography.headlineSmall)
 
-        RawPicker(
+        RawPickerSingleSelect(
             modifier = modifier,
-            label = "Raw Picker",
+            label = "Single Select Picker",
             readOnly = false,
             enabled = true,
             onClear = {},
             isError = false,
-            sheetContent = {},
-            selectedItems = emptyList()
+            optionMap = DefnStudioMapOfDtoOptionData(
+                keys = listOf("a", "b"),
+                map = mapOf(
+                    "a" to DefnDtoOptionData(
+                        metaId = "a",
+                        value = "A"
+                    ),
+                    "b" to DefnDtoOptionData(
+                        metaId = "b",
+                        value = "B"
+                    )
+                )
+            ),
+            selectedOption = "a"
+        )
+
+        RawPickerMultiSelect(
+            modifier = modifier,
+            label = "Multi Select Picker",
+            readOnly = false,
+            enabled = true,
+            onClear = {},
+            isError = false,
+            optionMap = DefnStudioMapOfDtoOptionData(
+                keys = listOf("a", "b"),
+                map = mapOf(
+                    "a" to DefnDtoOptionData(
+                        metaId = "a",
+                        value = "A"
+                    ),
+                    "b" to DefnDtoOptionData(
+                        metaId = "b",
+                        value = "B"
+                    )
+                )
+            ),
+            selectedOptions = listOf("a", "b")
         )
     }
 }

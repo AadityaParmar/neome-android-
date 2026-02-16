@@ -1,18 +1,24 @@
 package com.neome.feature.form.presentation.components.raw
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
-import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -23,19 +29,25 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoOptionData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfDtoOptionData
+import com.neome.feature.form.presentation.components.resolveThemeColor
 
 /**
- * Raw picker component — stateless, reusable picker UI.
+ * Raw single-select picker component — stateless, reusable picker UI for choosing one option.
  *
- * Displays an [OutlinedTextField] (read-only) showing the current selection.
- * Tapping the field opens a [ModalBottomSheet] whose content is provided via [sheetContent].
- * Supports both single-select and multi-select display through the [selectedItems] list.
+ * Displays an [OutlinedTextField] (read-only) showing the currently selected option.
+ * Tapping the field opens a [ModalBottomSheet] with a virtualized list of options.
+ * Each option is a plain text row (no checkbox).
  *
- * State is fully controlled by the caller via [selectedItems], [onClear], and [sheetContent].
+ * State is fully controlled by the caller via [selectedOption], [onClear], and [optionMap].
  *
- * @param selectedItems Display texts of currently selected items (empty list means no selection)
+ * @param optionMap Map of option metaIds to option data providing the list of choices
+ * @param selectedOption Currently selected option metaId (null means no selection)
  * @param onClear Callback to clear the current selection
  * @param label Optional label for the text field
  * @param placeholder Optional placeholder shown when nothing is selected
@@ -44,12 +56,12 @@ import androidx.compose.ui.unit.dp
  * @param enabled Whether the picker is interactive
  * @param readOnly Whether the picker is read-only (shows value but not interactive)
  * @param modifier Modifier for customization
- * @param sheetContent Content to display inside the bottom sheet
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RawPicker(
-    selectedItems: List<String>,
+fun RawPickerSingleSelect(
+    optionMap: DefnStudioMapOfDtoOptionData?,
+    selectedOption: String?,
     onClear: () -> Unit,
     label: String? = null,
     placeholder: String? = null,
@@ -57,15 +69,18 @@ fun RawPicker(
     isError: Boolean = false,
     enabled: Boolean = true,
     readOnly: Boolean = false,
-    modifier: Modifier = Modifier,
-    sheetContent: @Composable ColumnScope.() -> Unit = {}
+    modifier: Modifier = Modifier
 ) {
     val isInteractive = enabled && !readOnly
     var showSheet by remember { mutableStateOf(false) }
-    val sheetState = rememberModalBottomSheetState()
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
-    // Display text: comma-separated selected items or empty
-    val displayText = selectedItems.joinToString(", ")
+    val hasSelection = !selectedOption.isNullOrEmpty()
+
+    // Display text: the display value of the selected option
+    val displayText = remember(selectedOption, optionMap) {
+        selectedOption?.let { optionMap?.map?.get(it)?.value } ?: ""
+    }
 
     // Click detection on the text field (same pattern as FieldDate)
     val interactionSource = remember { MutableInteractionSource() }
@@ -94,7 +109,7 @@ fun RawPicker(
         interactionSource = interactionSource,
         trailingIcon = {
             Row {
-                if (isInteractive && selectedItems.isNotEmpty()) {
+                if (isInteractive && hasSelection) {
                     IconButton(onClick = onClear) {
                         Icon(
                             imageVector = Icons.Default.Clear,
@@ -116,14 +131,71 @@ fun RawPicker(
     )
 
     if (showSheet) {
+        val optionKeys = optionMap?.keys ?: emptyList()
+
         ModalBottomSheet(
             onDismissRequest = { showSheet = false },
             sheetState = sheetState
         ) {
-            sheetContent()
+            Column(
+                modifier = Modifier.fillMaxHeight(0.75f)
+            ) {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                ) {
+                    items(
+                        items = optionKeys,
+                        key = { it }
+                    ) { metaId ->
+                        val option = optionMap?.map?.get(metaId) ?: return@items
 
-            // Bottom spacing for navigation bar insets
-            Spacer(modifier = Modifier.height(32.dp))
+                        SingleSelectOptionItem(option = option)
+                    }
+                }
+
+                // Bottom spacing for navigation bar insets
+                Spacer(modifier = Modifier.height(32.dp))
+            }
         }
+    }
+}
+
+/**
+ * A single option item for the single-select picker list.
+ *
+ * Plain text row without checkbox.
+ * Text color is determined by [DefnDtoOptionData.color] if present.
+ * Background becomes error container color if [DefnDtoOptionData.isRemoved] is true.
+ *
+ * @param option The option data to render
+ */
+@Composable
+private fun SingleSelectOptionItem(
+    option: DefnDtoOptionData
+) {
+    val isRemoved = option.isRemoved == true
+
+    val backgroundColor = if (isRemoved) {
+        MaterialTheme.colorScheme.errorContainer
+    } else {
+        Color.Transparent
+    }
+
+    val textColor = resolveThemeColor(option.color)
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(backgroundColor)
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = option.value,
+            style = MaterialTheme.typography.bodyLarge,
+            color = textColor
+        )
     }
 }
