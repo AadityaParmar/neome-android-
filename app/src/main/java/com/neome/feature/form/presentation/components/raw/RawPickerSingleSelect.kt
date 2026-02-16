@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,6 +17,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -49,11 +51,17 @@ import com.neome.feature.form.presentation.components.resolveThemeColor
  * Tapping the field opens a [ModalBottomSheet] with a virtualized list of options.
  * Each option is a plain text row (no checkbox).
  *
- * State is fully controlled by the caller via [selectedOption], [onClear], and [optionMap].
+ * Options can be provided directly via [optionMap], or fetched asynchronously via [cbGetOptionMap].
+ * If [optionMap] is null and [cbGetOptionMap] is provided, options are fetched eagerly on composition.
+ * The text field shows "Loading..." until the callback delivers the options.
+ *
+ * State is fully controlled by the caller via [selectedOption], [onChange], and [optionMap].
  *
  * @param optionMap Map of option metaIds to option data providing the list of choices
  * @param selectedOption Currently selected option metaId (null means no selection)
  * @param onChange Callback when user selects an option (receives null when selection is cleared)
+ * @param cbGetOptionMap Optional async callback to fetch options when [optionMap] is null.
+ *   The caller invokes the provided `cb` with the fetched options when ready.
  * @param label Optional label for the text field
  * @param placeholder Optional placeholder shown when nothing is selected
  * @param helperText Optional supporting text displayed below the field
@@ -68,6 +76,7 @@ fun RawPickerSingleSelect(
     optionMap: DefnStudioMapOfDtoOptionData?,
     selectedOption: String?,
     onChange: (option: DefnDtoOptionData?) -> Unit,
+    cbGetOptionMap: ((cb: (DefnStudioMapOfDtoOptionData?) -> Unit) -> Unit)? = null,
     label: String? = null,
     placeholder: String? = null,
     helperText: String? = null,
@@ -82,17 +91,38 @@ fun RawPickerSingleSelect(
     var showSheet by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
+    // Async option fetching: used when optionMap is null and cbGetOptionMap is provided
+    var fetchedOptionMap by remember { mutableStateOf<DefnStudioMapOfDtoOptionData?>(null) }
+    var isFetchingOptions by remember { mutableStateOf(false) }
+
+    // Eagerly fetch options on composition when optionMap is not provided
+    LaunchedEffect(optionMap, cbGetOptionMap) {
+        if (optionMap == null && cbGetOptionMap != null) {
+            isFetchingOptions = true
+            fetchedOptionMap = null
+            cbGetOptionMap { options ->
+                fetchedOptionMap = options
+                isFetchingOptions = false
+            }
+        }
+    }
+
+    // Resolved option map: prefer direct optionMap, fall back to fetched
+    val resolvedOptionMap = optionMap ?: fetchedOptionMap
+
     val hasSelection = !selectedOption.isNullOrEmpty()
 
     // Detect if selectedOption references an option that no longer exists in the map
-    val isOptionNotFound = remember(selectedOption, optionMap) {
-        hasSelection && optionMap?.map?.containsKey(selectedOption) != true
+    // Suppressed during loading so we don't flash error styling before fetch completes
+    val isOptionNotFound = remember(selectedOption, resolvedOptionMap, isFetchingOptions) {
+        hasSelection && !isFetchingOptions && resolvedOptionMap?.map?.containsKey(selectedOption) != true
     }
 
-    // Display text: the display value of the selected option, or "Not Found" if missing
-    val displayText = remember(selectedOption, optionMap) {
+    // Display text: "Loading…" during fetch, resolved value, or "Not Found" if missing
+    val displayText = remember(selectedOption, resolvedOptionMap, isFetchingOptions) {
         if (selectedOption.isNullOrEmpty()) return@remember ""
-        optionMap?.map?.get(selectedOption)?.value ?: "Not Found"
+        if (optionMap == null && isFetchingOptions) return@remember "Loading\u2026"
+        resolvedOptionMap?.map?.get(selectedOption)?.value ?: "Not Found"
     }
 
     // Click detection on the text field (same pattern as FieldDate)
@@ -155,8 +185,6 @@ fun RawPickerSingleSelect(
     )
 
     if (showSheet) {
-        val optionKeys = optionMap?.keys ?: emptyList()
-
         ModalBottomSheet(
             onDismissRequest = { showSheet = false },
             sheetState = sheetState
@@ -164,30 +192,43 @@ fun RawPickerSingleSelect(
             Column(
                 modifier = Modifier.fillMaxHeight(0.75f)
             ) {
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f)
-                ) {
-                    items(
-                        items = optionKeys,
-                        key = { it }
-                    ) { metaId ->
-                        val option = optionMap?.map?.get(metaId) ?: return@items
-                        val isSelected = metaId == selectedOption
+                if (optionMap == null && isFetchingOptions) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                } else {
+                    val optionKeys = resolvedOptionMap?.keys ?: emptyList()
 
-                        SingleSelectOptionItem(
-                            option = option,
-                            isSelected = isSelected,
-                            onClick = {
-                                onChange(option)
-                                scope.launch {
-                                    sheetState.hide()
-                                }.invokeOnCompletion {
-                                    showSheet = false
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f)
+                    ) {
+                        items(
+                            items = optionKeys,
+                            key = { it }
+                        ) { metaId ->
+                            val option = resolvedOptionMap?.map?.get(metaId) ?: return@items
+                            val isSelected = metaId == selectedOption
+
+                            SingleSelectOptionItem(
+                                option = option,
+                                isSelected = isSelected,
+                                onClick = {
+                                    onChange(option)
+                                    scope.launch {
+                                        sheetState.hide()
+                                    }.invokeOnCompletion {
+                                        showSheet = false
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
                 }
 
