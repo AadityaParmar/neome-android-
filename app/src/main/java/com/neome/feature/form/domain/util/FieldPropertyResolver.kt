@@ -797,7 +797,7 @@ object FieldPropertyResolver {
         val field = defnForm.compMap[fieldId]
         return if (field != null && field is DefnFieldSwitchData) {
             val value = FieldValueResolver.fnJsonElementFieldValue(field.type, fieldValue)
-            return if (value != null && value is FieldValueSwitch) value.value
+            if (value != null && value is FieldValueSwitch) value.value
             else false
         } else false
     }
