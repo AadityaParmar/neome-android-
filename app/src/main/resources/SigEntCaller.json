@@ -10746,6 +10746,20 @@
           "disabled": false
         },
         "mfd-HxbXkSxSQY": {
+          "defaultVar": {
+            "value": [
+              "static ",
+              "{\"kind\":\"context\",\"argValue\":{\"attribute\":\"nickName\",\"kind\":\"caller\"}}",
+              "  ",
+              "{\"kind\":\"variable\",\"argValue\":{\"varId\":\"mw-VJorq1gJUW\"},\"customValueMap\":{\"id\":\"mw-VJorq1gJUW\",\"name\":\"VarDate\",\"kind\":\"date\",\"customDate\":\"2026-02-12T18:30:00.000Z\"}}",
+              " ",
+              "{\"kind\":\"field\",\"argValue\":{\"compositeId\":\"msc-MgknD5pYZT\",\"fieldId\":\"mfd-qDpfN1vSGT\"}}",
+              " ",
+              "{\"kind\":\"variable\",\"argValue\":{\"varId\":\"mw-iUn8KLLpV5\"},\"customValueMap\":{\"id\":\"mw-iUn8KLLpV5\",\"name\":\"VarDateTime\",\"kind\":\"dateTime\",\"customDate\":\"2026-02-12T22:30:00.000Z\"}}",
+              " ",
+              "{\"kind\":\"variable\",\"argValue\":{\"varId\":\"mw-sGnqJaflD1\"},\"customValueMap\":{\"id\":\"mw-sGnqJaflD1\",\"name\":\"VarTime\",\"kind\":\"time\",\"customValue\":\"00:00:00\"}}"
+            ]
+          },
           "requiredFieldId": "mfd-qDpfN1vSGT",
           "placeHolderFieldId": "mfd-63HKAMm6LQ",
           "helperTextFieldId": "mfd-q96ZG1wLEp",
@@ -10782,6 +10796,7 @@
           }
         },
         "mfd-63HKAMm6LQ": {
+          "defaultValue": "place holder",
           "metaId": "mfd-63HKAMm6LQ",
           "name": "Placeholder",
           "type": "text",
@@ -10796,6 +10811,12 @@
           }
         },
         "mfd-q96ZG1wLEp": {
+          "defaultVar": {
+            "value": [
+              "",
+              "ent101"
+            ]
+          },
           "metaId": "mfd-q96ZG1wLEp",
           "name": "Helpertext",
           "type": "text",
@@ -10847,6 +10868,7 @@
           }
         },
         "mfd-wIACoHHagW": {
+          "defaultValue": "row default",
           "metaId": "mfd-wIACoHHagW",
           "name": "GridFieldText",
           "type": "text",
@@ -15347,5 +15369,5 @@
       ]
     }
   },
-  "version": "ybdTn1feLdLrwuo55BYzd0j2n|gh-q3QtIvpx7feH1HBVV8ErkHUIV|en|RaxYwBMRq43uBwELyk24rjkeC"
+  "version": "zLNcNEJV1nHVq8GYB4HKYOjhg|gh-q3QtIvpx7feH1HBVV8ErkHUIV|en|RaxYwBMRq43uBwELyk24rjkeC"
 }

@@ -14,7 +14,6 @@ import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnGridData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldDtoGridRowData
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
-import com.neome.core.logging.AppLogger
 import com.neome.feature.form.domain.util.ArgValueResolver
 import com.neome.feature.form.domain.util.FormPlus
 import kotlinx.serialization.json.JsonElement
@@ -46,19 +45,20 @@ internal interface DefaultValue : Converter {
             defaultValue = defaultValue
         )
 
-        FormPlus.loopDefnForm(defnForm) { comp, _ ->
+        FormPlus.loopDefnForm(defnForm) { comp, parent ->
 
-            val resolvedSet = mutableSetOf<MetaIdComp>()
+            if (parent.type == EnumDefnCompType.section) {
 
-            val compId = FormPlus.getCompMetaId(comp)
-            if (compId != null) {
-                val fieldValue = resolveCompDefaultValue(defnForm, comp, mutableFormValue, formValue, resolvedSet)
-                if (fieldValue != null) {
-                    val jsonElement = fnFieldValueToJsonElement(comp.type, fieldValue)
-                    if (jsonElement != null) {
-                        mutableFormValue.putValue(compId, jsonElement)
-                    } else {
-                        AppLogger.w(TAG, "fnFieldValueToJsonElement returned null for type=${comp.type}")
+                val resolvedSet = mutableSetOf<MetaIdComp>()
+
+                val compId = FormPlus.getCompMetaId(comp)
+                if (compId != null) {
+                    val fieldValue = resolveCompDefaultValue(defnForm, comp, mutableFormValue, formValue, resolvedSet)
+                    if (fieldValue != null) {
+                        val jsonElement = fnFieldValueToJsonElement(comp.type, fieldValue)
+                        if (jsonElement != null) {
+                            mutableFormValue.putValue(compId, jsonElement)
+                        }
                     }
                 }
             }

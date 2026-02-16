@@ -28,8 +28,9 @@ object FormCtxInitHelper {
         initialValue: FormValueData?
     ): FormState {
         val compMap = defnForm.compMap
-        val initialValueMap = initialValue?.valueMap ?: emptyMap()
         val realInitialValue = FieldValueResolver.fnEnsureInit(defnForm, initialValue)
+        println("realInitialValue $realInitialValue")
+        val initialValueMap = realInitialValue.valueMap
 
         val leafFields = compMap.filter { (_, defnComp) ->
             !isCompositeType(defnComp.type)
@@ -68,7 +69,7 @@ object FormCtxInitHelper {
 
         return FormState(
             defnForm = defnForm,
-            initialFormValue = initialValue,
+            initialFormValue = realInitialValue,
             fieldStates = fieldStates,
             valueMap = valueMap,
             fieldDependencies = dependencyMap,
