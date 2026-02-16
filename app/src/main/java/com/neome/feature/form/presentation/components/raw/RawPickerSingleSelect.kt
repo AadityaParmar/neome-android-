@@ -1,6 +1,7 @@
 package com.neome.feature.form.presentation.components.raw
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Column
@@ -48,6 +49,7 @@ import com.neome.feature.form.presentation.components.resolveThemeColor
  *
  * @param optionMap Map of option metaIds to option data providing the list of choices
  * @param selectedOption Currently selected option metaId (null means no selection)
+ * @param onChange Callback when user selects an option from the bottom sheet list
  * @param onClear Callback to clear the current selection
  * @param label Optional label for the text field
  * @param placeholder Optional placeholder shown when nothing is selected
@@ -62,6 +64,7 @@ import com.neome.feature.form.presentation.components.resolveThemeColor
 fun RawPickerSingleSelect(
     optionMap: DefnStudioMapOfDtoOptionData?,
     selectedOption: String?,
+    onChange: (option: DefnDtoOptionData) -> Unit,
     onClear: () -> Unit,
     label: String? = null,
     placeholder: String? = null,
@@ -150,8 +153,13 @@ fun RawPickerSingleSelect(
                         key = { it }
                     ) { metaId ->
                         val option = optionMap?.map?.get(metaId) ?: return@items
+                        val isSelected = metaId == selectedOption
 
-                        SingleSelectOptionItem(option = option)
+                        SingleSelectOptionItem(
+                            option = option,
+                            isSelected = isSelected,
+                            onClick = { onChange(option) }
+                        )
                     }
                 }
 
@@ -165,22 +173,27 @@ fun RawPickerSingleSelect(
 /**
  * A single option item for the single-select picker list.
  *
- * Plain text row without checkbox.
+ * Plain text row without checkbox. Clickable to trigger selection.
  * Text color is determined by [DefnDtoOptionData.color] if present.
- * Background becomes error container color if [DefnDtoOptionData.isRemoved] is true.
+ * Background becomes error container color if [DefnDtoOptionData.isRemoved] is true,
+ * or primary container color if [isSelected] is true.
  *
  * @param option The option data to render
+ * @param isSelected Whether this option is currently selected
+ * @param onClick Callback when the option is tapped
  */
 @Composable
 private fun SingleSelectOptionItem(
-    option: DefnDtoOptionData
+    option: DefnDtoOptionData,
+    isSelected: Boolean,
+    onClick: () -> Unit
 ) {
     val isRemoved = option.isRemoved == true
 
-    val backgroundColor = if (isRemoved) {
-        MaterialTheme.colorScheme.errorContainer
-    } else {
-        Color.Transparent
+    val backgroundColor = when {
+        isRemoved -> MaterialTheme.colorScheme.errorContainer
+        isSelected -> MaterialTheme.colorScheme.primaryContainer
+        else -> Color.Transparent
     }
 
     val textColor = resolveThemeColor(option.color)
@@ -189,6 +202,7 @@ private fun SingleSelectOptionItem(
         modifier = Modifier
             .fillMaxWidth()
             .background(backgroundColor)
+            .clickable(onClick = onClick)
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
