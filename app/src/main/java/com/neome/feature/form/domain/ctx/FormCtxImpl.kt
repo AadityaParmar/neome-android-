@@ -3,8 +3,8 @@ package com.neome.feature.form.domain.ctx
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import com.neome.api.meta.base.Types.MetaIdComp
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
-import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
+import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.domain.ctx.helper.FormCtxEventHelper
 import com.neome.feature.form.domain.ctx.helper.FormCtxInitHelper
 import com.neome.feature.form.domain.ctx.helper.FormCtxValidationHelper
@@ -20,8 +20,8 @@ import com.neome.feature.form.presentation.state.SendBtnDisableFlag
 import kotlinx.serialization.json.JsonElement
 
 class FormCtxImpl(
-    private val defnForm: DefnFormData,
-    initialValue: FormValueRawData?,
+    private val defnForm: DefnFormUi,
+    initialValue: FormValueData?,
     private val onIntent: (FormIntent) -> Unit
 ) : FormCtx {
 
@@ -109,7 +109,7 @@ class FormCtxImpl(
     override fun getValue(fieldId: MetaIdComp): JsonElement? = currentState.getValue(fieldId)
     override fun getError(fieldId: MetaIdComp): FieldError? = currentState.getError(fieldId)
     override fun hasField(fieldId: MetaIdComp): Boolean = currentState.fieldStates.containsKey(fieldId)
-    override fun getDefnForm(): DefnFormData? = currentState.defnForm
+    override fun getDefnForm(): DefnFormUi? = currentState.defnForm
 
     override fun validate(fieldId: MetaIdComp?) {
         if (fieldId != null) {

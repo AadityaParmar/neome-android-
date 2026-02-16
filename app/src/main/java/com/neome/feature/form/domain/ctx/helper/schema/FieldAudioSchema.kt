@@ -2,7 +2,7 @@ package com.neome.feature.form.domain.ctx.helper.schema
 
 import com.neome.api.meta.base.dto.DefnFieldAudio
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueAudioData
 import com.neome.feature.form.presentation.state.FieldProperties
 import com.neome.feature.form.presentation.state.FieldState
@@ -20,7 +20,7 @@ import kotlinx.serialization.json.JsonElement
  * - maxSize: file size must be less than max (from FieldProperties, in MB)
  */
 class FieldAudioSchema(
-    override val defnForm: DefnFormData,
+    override val defnForm: DefnFormUi,
     override val defnComp: DefnCompSeal
 ) : CompSchema(defnForm, defnComp) {
 

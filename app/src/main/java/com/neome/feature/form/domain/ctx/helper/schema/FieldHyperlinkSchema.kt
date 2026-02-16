@@ -2,7 +2,7 @@ package com.neome.feature.form.domain.ctx.helper.schema
 
 import com.neome.api.meta.base.dto.DefnFieldHyperlink
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueHyperlinkData
 import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
 import com.neome.feature.form.presentation.state.FieldProperties
@@ -20,7 +20,7 @@ import kotlinx.serialization.json.JsonElement
  * - URL format: must match URL regex pattern
  */
 class FieldHyperlinkSchema(
-    override val defnForm: DefnFormData,
+    override val defnForm: DefnFormUi,
     override val defnComp: DefnCompSeal
 ) : CompSchema(defnForm, defnComp) {
 

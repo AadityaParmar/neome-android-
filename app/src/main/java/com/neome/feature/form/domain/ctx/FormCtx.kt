@@ -3,7 +3,7 @@ package com.neome.feature.form.domain.ctx
 import androidx.compose.runtime.State
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.neome.api.meta.base.Types.MetaIdComp
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormState
@@ -90,7 +90,7 @@ interface FormCtx {
      * Get the DefnForm data.
      * Useful for accessing form-level configuration.
      */
-    fun getDefnForm(): DefnFormData?
+    fun getDefnForm(): DefnFormUi?
 
     // ==================== Validation ====================
 

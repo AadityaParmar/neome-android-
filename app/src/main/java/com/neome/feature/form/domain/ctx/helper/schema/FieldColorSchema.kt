@@ -1,7 +1,7 @@
 package com.neome.feature.form.domain.ctx.helper.schema
 
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueColorData
 import com.neome.feature.form.presentation.state.FieldProperties
 import com.neome.feature.form.presentation.state.FieldState
@@ -18,7 +18,7 @@ import kotlinx.serialization.json.JsonElement
  * - required: value must be present
  */
 class FieldColorSchema(
-    override val defnForm: DefnFormData,
+    override val defnForm: DefnFormUi,
     override val defnComp: DefnCompSeal
 ) : CompSchema(defnForm, defnComp) {
 

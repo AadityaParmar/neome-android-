@@ -17,6 +17,7 @@ import com.neome.core.logging.AppLogger
 import com.neome.feature.utils.JsonParser
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.serializerOrNull
 
 internal interface Converter {
 
@@ -250,6 +251,22 @@ internal interface Converter {
         }
     }
 
+    fun fnFieldValueToJsonElement(compType: Types.EnumDefnCompType, value: Any?): JsonElement? {
+        if (value == null) return null
+
+        return try {
+            val kSerializer = serializerOrNull(value::class.java)
+                ?: return null
+            JsonParser.json.encodeToJsonElement(
+                kSerializer,
+                value
+            )
+        } catch (e: Exception) {
+            AppLogger.w(TAG, "fnFieldValueToJsonElement failed for ${value::class.simpleName}", e)
+            null
+        }
+    }
+
     fun fnResolveNumericValue(compType: Types.EnumDefnCompType, value: Any?): Long? {
 
         val fieldValueForAnyValue = if (value is JsonElement) fnJsonElementFieldValue(compType, value) else value
@@ -281,5 +298,6 @@ internal interface Converter {
             else -> value.toString().toDoubleOrNull()
         }
     }
+
 
 }

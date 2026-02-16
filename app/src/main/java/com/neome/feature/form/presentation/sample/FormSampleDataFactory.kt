@@ -4,6 +4,8 @@ import com.neome.api.meta.base.SysId
 import com.neome.api.meta.base.Types
 import com.neome.core.common.serializer.api.ent.entDrawer.sig.SigEntCallerData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.util.FilterForm
 import com.neome.feature.utils.JsonParser
 
 /**
@@ -12,9 +14,12 @@ import com.neome.feature.utils.JsonParser
 object FormSampleDataFactory {
     private var callerEntStr: String? = null
 
-    fun createTextForm(): DefnFormData {
+    fun createTextForm(): DefnFormUi {
         val jsonString = this.createSampleDefnForm()
-        return JsonParser.json.decodeFromString<DefnFormData>(jsonString)
+
+        val defnForm = JsonParser.json.decodeFromString<DefnFormData>(jsonString)
+        val callerEnt = getSampleCallerEnt()
+        return FilterForm.prepareUiForm(defnForm, callerEnt)
     }
 
     fun getSampleCallerEnt(): SigEntCallerData {

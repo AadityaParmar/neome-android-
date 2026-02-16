@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.presentation.components.composite.FieldSection
 import com.neome.feature.form.presentation.components.composite.FieldTab
 import com.neome.feature.form.presentation.components.field.FieldDate
@@ -37,7 +37,7 @@ import com.neome.feature.form.presentation.state.FieldEvent
 @Composable
 fun FieldFactory(
     defnComp: DefnCompSeal,
-    defnForm: DefnFormData,
+    defnForm: DefnFormUi,
     onFieldEvent: (FieldEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {

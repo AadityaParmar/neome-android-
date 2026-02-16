@@ -2,7 +2,7 @@ package com.neome.feature.form.domain.ctx.helper.schema
 
 import com.neome.api.meta.base.dto.DefnFieldMobileNumber
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueMobileData
 import com.neome.feature.form.presentation.state.FieldProperties
 import com.neome.feature.form.presentation.state.FieldState
@@ -24,7 +24,7 @@ import kotlinx.serialization.json.JsonElement
  * - validCountryCodeSetVar: country code must be in valid set
  */
 class FieldMobileNumberSchema(
-    override val defnForm: DefnFormData,
+    override val defnForm: DefnFormUi,
     override val defnComp: DefnCompSeal
 ) : CompSchema(defnForm, defnComp) {
 

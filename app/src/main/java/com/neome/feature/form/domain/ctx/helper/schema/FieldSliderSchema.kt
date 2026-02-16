@@ -2,7 +2,7 @@ package com.neome.feature.form.domain.ctx.helper.schema
 
 import com.neome.api.meta.base.dto.DefnFieldSlider
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.presentation.state.FieldProperties
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.utils.JsonParser
@@ -21,7 +21,7 @@ import kotlinx.serialization.json.JsonElement
  * - maxValue: slider max value must be <= field max and >= field min
  */
 class FieldSliderSchema(
-    override val defnForm: DefnFormData,
+    override val defnForm: DefnFormUi,
     override val defnComp: DefnCompSeal
 ) : CompSchema(defnForm, defnComp) {
 

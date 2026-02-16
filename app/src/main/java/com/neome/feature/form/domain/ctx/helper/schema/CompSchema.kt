@@ -1,7 +1,7 @@
 package com.neome.feature.form.domain.ctx.helper.schema
 
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
 import com.neome.feature.form.presentation.state.FieldState
 import kotlinx.serialization.json.JsonElement
@@ -17,7 +17,7 @@ import kotlinx.serialization.json.JsonElement
  * without modifying form state. Error map updates are handled by the caller
  * (e.g., [FormCtxValidationHelper] or [FormCtxEventHelper]).
  */
-abstract class CompSchema(open val defnForm: DefnFormData, open val defnComp: DefnCompSeal) {
+abstract class CompSchema(open val defnForm: DefnFormUi, open val defnComp: DefnCompSeal) {
 
     /**
      * Pure validation that returns an error message without side effects.

@@ -1,10 +1,11 @@
 package com.neome.feature.form.domain.ctx.helper
 
 import com.neome.api.meta.base.Types.EnumDefnCompType
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
-import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
+import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.domain.ctx.helper.schema.CompSchemaFactory
 import com.neome.feature.form.domain.util.FieldPropertyResolver
+import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormState
 
@@ -23,11 +24,12 @@ object FormCtxInitHelper {
     }
 
     fun initializeFormState(
-        defnForm: DefnFormData,
-        initialValue: FormValueRawData?
+        defnForm: DefnFormUi,
+        initialValue: FormValueData?
     ): FormState {
         val compMap = defnForm.compMap
         val initialValueMap = initialValue?.valueMap ?: emptyMap()
+        val realInitialValue = FieldValueResolver.fnEnsureInit(defnForm, initialValue)
 
         val leafFields = compMap.filter { (_, defnComp) ->
             !isCompositeType(defnComp.type)

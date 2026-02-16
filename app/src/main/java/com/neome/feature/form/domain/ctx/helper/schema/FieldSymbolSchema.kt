@@ -2,7 +2,7 @@ package com.neome.feature.form.domain.ctx.helper.schema
 
 import com.neome.api.meta.base.dto.DefnFieldSymbol
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
 import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
 import com.neome.feature.form.presentation.state.FieldProperties
@@ -25,7 +25,7 @@ import kotlinx.serialization.json.JsonElement
  * - No special characters allowed
  */
 class FieldSymbolSchema(
-    override val defnForm: DefnFormData,
+    override val defnForm: DefnFormUi,
     override val defnComp: DefnCompSeal
 ) : CompSchema(defnForm, defnComp) {
 

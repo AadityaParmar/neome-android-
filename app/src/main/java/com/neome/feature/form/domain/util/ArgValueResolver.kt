@@ -32,6 +32,7 @@ import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldParagraphData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldShowCodeData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldSwitchData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnGridData
+import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
 import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.utils.JsonParser
 import kotlinx.serialization.Serializable
@@ -643,7 +644,7 @@ object ArgValueResolver {
         FormPlus.loopDefnForm(defnForm) { comp, _ ->
             val resolvedComp = resolveDefnComp(comp, defnForm, callerEnt)
             if (resolvedComp !== comp) {
-                val compId = getCompMetaId(comp)
+                val compId = FormPlus.getCompMetaId(comp)
                 if (compId != null) {
                     mutableCompMap[compId] = resolvedComp
                 }
@@ -706,6 +707,52 @@ object ArgValueResolver {
         // 2. For "card"/"list" kinds: resolve card item line segments' lineVar
         // 3. For "map" kind: resolve locmap pin labelVar and toolTipVar
         // 4. Resolve media html for card items
+    }
+
+    // endregion
+
+    // region --- Field Value Default Resolution ---
+
+    /**
+     * Resolves arg-value variables embedded in a [DefnDtoText] for field-value
+     * default resolution.
+     *
+     * TODO: Implement full arg-value resolution with form value context.
+     * For now, returns a simple joinToString of the text value list.
+     *
+     * @param defnForm the form definition for field lookups
+     * @param formValue the current form value (for future context-aware resolution)
+     * @param defnDtoText the text definition containing potential arg-value strings
+     * @return resolved plain-text string, or null if input is null/empty
+     */
+    fun resolveArgForFieldVal(
+        defnForm: DefnForm,
+        formValue: FormValueData?,
+        defnDtoText: DefnDtoText?
+    ): String? {
+        if (defnDtoText == null) return null
+        return defnDtoText.value?.joinToString("")
+    }
+
+    /**
+     * Resolves arg-value variables embedded in a [DefnDtoParagraph] for field-value
+     * default resolution.
+     *
+     * TODO: Implement full arg-value resolution with form value context.
+     * For now, returns a simple joinToString of the paragraph value list.
+     *
+     * @param defnForm the form definition for field lookups
+     * @param formValue the current form value (for future context-aware resolution)
+     * @param defnDtoParagraph the paragraph definition containing potential arg-value strings
+     * @return resolved plain-text string, or null if input is null/empty
+     */
+    fun resolveArgForFieldVal(
+        defnForm: DefnForm,
+        formValue: FormValueData?,
+        defnDtoParagraph: DefnDtoParagraph?
+    ): String? {
+        if (defnDtoParagraph == null) return null
+        return defnDtoParagraph.value?.joinToString("")
     }
 
     // endregion

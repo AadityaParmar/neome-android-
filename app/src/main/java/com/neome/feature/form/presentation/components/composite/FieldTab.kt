@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.neome.api.meta.base.Types.MetaIdComposite
 import com.neome.api.meta.base.dto.DefnTab
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.domain.ctx.LocalFormCtx
 import com.neome.feature.form.presentation.components.base.FieldFactory
 import com.neome.feature.form.presentation.state.FieldEvent
@@ -44,7 +44,7 @@ import com.neome.feature.form.presentation.state.FormState
 @Composable
 fun FieldTab(
     defnComp: DefnCompSeal,
-    defnForm: DefnFormData,
+    defnForm: DefnFormUi,
     onFieldEvent: (FieldEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -111,7 +111,7 @@ fun FieldTab(
 private fun RenderTabContent(
     tabId: MetaIdComposite,
     formState: FormState,
-    defnForm: DefnFormData,
+    defnForm: DefnFormUi,
     onFieldEvent: (FieldEvent) -> Unit
 ) {
     val tabComponent = defnForm.compMap[tabId]

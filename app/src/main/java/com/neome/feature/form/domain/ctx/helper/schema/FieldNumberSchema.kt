@@ -2,7 +2,7 @@ package com.neome.feature.form.domain.ctx.helper.schema
 
 import com.neome.api.meta.base.dto.DefnFieldNumber
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueNumberData
 import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
 import com.neome.feature.form.presentation.state.FieldProperties
@@ -21,7 +21,7 @@ import kotlinx.serialization.json.JsonElement
  * - minNumber: minimum value (if not null)
  * - maxNumber: maximum value (if not null)
  */
-class FieldNumberSchema(override val defnForm: DefnFormData, override val defnComp: DefnCompSeal) :
+class FieldNumberSchema(override val defnForm: DefnFormUi, override val defnComp: DefnCompSeal) :
     CompSchema(defnForm, defnComp) {
 
     private val defnField = defnComp as DefnFieldNumber

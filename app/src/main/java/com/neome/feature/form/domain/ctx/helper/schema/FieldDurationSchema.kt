@@ -3,7 +3,7 @@ package com.neome.feature.form.domain.ctx.helper.schema
 import com.neome.api.meta.base.Types.EnumDefnDurationUnit
 import com.neome.api.meta.base.dto.DefnFieldDuration
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.core.common.serializer.api.meta.base.dto.FieldDtoDurationData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDurationData
 import com.neome.feature.form.presentation.state.FieldProperties
@@ -25,7 +25,7 @@ import kotlinx.serialization.json.JsonElement
  * - maxDuration: duration must be <= max (from DefnFieldDuration)
  */
 class FieldDurationSchema(
-    override val defnForm: DefnFormData,
+    override val defnForm: DefnFormUi,
     override val defnComp: DefnCompSeal
 ) : CompSchema(defnForm, defnComp) {
 

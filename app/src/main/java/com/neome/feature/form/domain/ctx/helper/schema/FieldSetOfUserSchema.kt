@@ -2,7 +2,7 @@ package com.neome.feature.form.domain.ctx.helper.schema
 
 import com.neome.api.meta.base.dto.DefnFieldSetOfUser
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.core.common.serializer.api.meta.base.dto.FieldSetOfEntUserIdData
 import com.neome.feature.form.presentation.state.FieldProperties
 import com.neome.feature.form.presentation.state.FieldState
@@ -19,7 +19,7 @@ import kotlinx.serialization.json.JsonElement
  * - required: valueSet must not be empty
  */
 class FieldSetOfUserSchema(
-    override val defnForm: DefnFormData,
+    override val defnForm: DefnFormUi,
     override val defnComp: DefnCompSeal
 ) : CompSchema(defnForm, defnComp) {
 

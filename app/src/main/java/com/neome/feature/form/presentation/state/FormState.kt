@@ -2,8 +2,8 @@ package com.neome.feature.form.presentation.state
 
 import androidx.compose.runtime.Immutable
 import com.neome.api.meta.base.Types.MetaIdComp
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
-import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
+import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.domain.ctx.helper.schema.CompSchema
 import kotlinx.serialization.json.JsonElement
 
@@ -36,8 +36,8 @@ sealed interface SendBtnDisableFlag {
 @Immutable
 data class FormState(
     // Configuration (from parent)
-    val defnForm: DefnFormData? = null,
-    val initialFormValue: FormValueRawData? = null,
+    val defnForm: DefnFormUi? = null,
+    val initialFormValue: FormValueData? = null,
 
     // Runtime state (centralized)
     val fieldStates: Map<MetaIdComp, FieldState> = emptyMap(),

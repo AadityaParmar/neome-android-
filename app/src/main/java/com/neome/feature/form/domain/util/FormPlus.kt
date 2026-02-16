@@ -2,10 +2,14 @@ package com.neome.feature.form.domain.util
 
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.MetaIdComp
+import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.dto.DefnForm
+import com.neome.api.meta.base.dto.DefnGrid
+import com.neome.api.meta.base.dto.DefnSection
+import com.neome.api.meta.base.dto.DefnTab
+import com.neome.api.meta.base.dto.DefnWizard
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldFormListData
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnGridData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnSectionData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnTabData
@@ -21,6 +25,14 @@ object FormPlus {
         targetRoles: List<Types.MetaIdRole>
     ): Boolean {
         return callerRoles.all { it in targetRoles }
+    }
+
+    fun getCompMetaId(comp: DefnCompSeal): MetaIdComp? {
+        return (comp as? DefnField)?.metaId
+            ?: (comp as? DefnSection)?.metaId
+            ?: (comp as? DefnGrid)?.metaId
+            ?: (comp as? DefnTab)?.metaId
+            ?: (comp as? DefnWizard)?.metaId
     }
 
     /**
@@ -96,3 +108,5 @@ object FormPlus {
         return true
     }
 }
+
+

@@ -3,7 +3,7 @@ package com.neome.feature.form.domain.ctx.helper.schema
 import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
 
 /**
  * Factory that creates appropriate CompSchema based on component type.
@@ -14,7 +14,7 @@ import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
  */
 object CompSchemaFactory {
 
-    fun buildFormSchemas(defnForm: DefnFormData): Map<MetaIdComp, CompSchema> {
+    fun buildFormSchemas(defnForm: DefnFormUi): Map<MetaIdComp, CompSchema> {
         return defnForm.compMap
             .mapNotNull { (fieldId, defnComp) ->
                 val schema = this.create(defnForm, defnComp)
@@ -29,7 +29,7 @@ object CompSchemaFactory {
      * @param defnComp The component definition to create schema for
      * @return CompSchema for validation, or null for composite/display-only types
      */
-    private fun create(defnForm: DefnFormData, defnComp: DefnCompSeal): CompSchema? {
+    private fun create(defnForm: DefnFormUi, defnComp: DefnCompSeal): CompSchema? {
         return when (defnComp.type) {
             // ═══════════════════════════════════════════════════════════════
             // TEXT-BASED FIELDS

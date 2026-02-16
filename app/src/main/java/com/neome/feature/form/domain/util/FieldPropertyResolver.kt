@@ -26,7 +26,7 @@ import com.neome.api.meta.base.dto.DefnFieldVideo
 import com.neome.api.meta.base.dto.DefnFieldVoice
 import com.neome.api.meta.base.dto.FieldValueSwitch
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldSwitchData
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
 import com.neome.feature.form.presentation.state.FieldDependencyMap
 import com.neome.feature.form.presentation.state.FieldProperties
@@ -51,7 +51,7 @@ object FieldPropertyResolver {
      */
     fun resolveFieldProperties(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): FieldProperties {
 
@@ -273,7 +273,7 @@ object FieldPropertyResolver {
 
     private fun resolveRequired(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): Boolean {
         if (defnComp !is DefnFieldEditable) return false
@@ -293,7 +293,7 @@ object FieldPropertyResolver {
 
     private fun resolveDisabled(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): Boolean {
         return if (defnComp.disabled != null) defnComp.disabled == true
@@ -313,7 +313,7 @@ object FieldPropertyResolver {
 
     private fun resolveHelperText(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): String? {
         if (defnComp !is DefnFieldEditable) return null
@@ -337,7 +337,7 @@ object FieldPropertyResolver {
 
     private fun resolvePlaceholder(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): String? {
         if (defnComp !is DefnFieldEditable) return null
@@ -361,7 +361,7 @@ object FieldPropertyResolver {
 
     private fun resolveLabel(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?,
         required: Boolean?
     ): String {
@@ -388,7 +388,7 @@ object FieldPropertyResolver {
 
     private fun resolveMinCharCount(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): Long? {
         if (defnComp !is DefnFieldText) return null
@@ -408,7 +408,7 @@ object FieldPropertyResolver {
 
     private fun resolveMaxCharCount(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): Long? {
         if (defnComp !is DefnFieldText) return null
@@ -430,7 +430,7 @@ object FieldPropertyResolver {
 
     private fun resolveMinNumber(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): Long? {
         if (defnComp !is DefnFieldNumber) return null
@@ -450,7 +450,7 @@ object FieldPropertyResolver {
 
     private fun resolveMaxNumber(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): Long? {
         if (defnComp !is DefnFieldNumber) return null
@@ -472,7 +472,7 @@ object FieldPropertyResolver {
 
     private fun resolveMinDecimal(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): Double? {
         if (defnComp !is DefnFieldDecimal) return null
@@ -492,7 +492,7 @@ object FieldPropertyResolver {
 
     private fun resolveMaxDecimal(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): Double? {
         if (defnComp !is DefnFieldDecimal) return null
@@ -514,7 +514,7 @@ object FieldPropertyResolver {
 
     private fun resolveStep(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): Long? {
         if (defnComp !is DefnFieldCounter) return null
@@ -546,7 +546,7 @@ object FieldPropertyResolver {
 
     private fun resolveLineCount(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): Long? {
         if (defnComp !is DefnFieldParagraph) return null
@@ -573,7 +573,7 @@ object FieldPropertyResolver {
 
     private fun resolveShowSecond(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): Boolean? {
         if (defnComp !is DefnFieldTime) return null
@@ -593,7 +593,7 @@ object FieldPropertyResolver {
 
     private fun resolveMaxSize(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): Long? {
         val (maxSize, maxSizeVar, maxSizeFieldId) = when (defnComp) {
@@ -624,7 +624,7 @@ object FieldPropertyResolver {
 
     private fun resolveShowLabel(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): Boolean? {
         val (showLabel, showLabelVar, showLabelFieldId) = when (defnComp) {
@@ -646,7 +646,7 @@ object FieldPropertyResolver {
 
     private fun resolveShowPreview(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): Boolean? {
         val (showPreview, showPreviewVar, showPreviewFieldId) = when (defnComp) {
@@ -668,7 +668,7 @@ object FieldPropertyResolver {
 
     private fun resolveShowSize(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): Boolean? {
         val (showSize, showSizeVar, showSizeFieldId) = when (defnComp) {
@@ -693,7 +693,7 @@ object FieldPropertyResolver {
 
     private fun resolveTextSize(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): String? {
         if (defnComp !is DefnFieldButton) return null
@@ -717,7 +717,7 @@ object FieldPropertyResolver {
 
     private fun resolveDisableElevation(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): Boolean? {
         if (defnComp !is DefnFieldButton) return null
@@ -737,7 +737,7 @@ object FieldPropertyResolver {
 
     private fun resolveShowAsCheckbox(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): Boolean? {
         if (defnComp !is DefnFieldSwitch) return null
@@ -757,7 +757,7 @@ object FieldPropertyResolver {
 
     private fun resolveShowAsDropdown(
         defnComp: DefnComp,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         getFieldValue: (MetaIdComp) -> JsonElement?
     ): Boolean? {
         val (showAsDropdown, showAsDropdownVar, showAsDropdownFieldId) = when (defnComp) {
@@ -790,7 +790,7 @@ object FieldPropertyResolver {
     // ==================== Helper Methods ====================
 
     private fun getBoolFieldValue(
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         fieldId: MetaIdComp,
         fieldValue: JsonElement?
     ): Boolean {

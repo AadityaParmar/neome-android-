@@ -16,8 +16,8 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
-import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
+import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.domain.ctx.FormCtxImpl
 import com.neome.feature.form.domain.ctx.LocalFormCtx
 import com.neome.feature.form.domain.ref.FormRef
@@ -44,8 +44,8 @@ import com.neome.feature.form.presentation.state.FormState
  */
 @Composable
 fun Form(
-    defnForm: DefnFormData,
-    initialValue: FormValueRawData? = null,
+    defnForm: DefnFormUi,
+    initialValue: FormValueData? = null,
     formRef: MutableState<FormRef?>,
     onIntent: (FormIntent) -> Unit,
     modifier: Modifier = Modifier
@@ -119,7 +119,7 @@ fun Form(
 @Composable
 private fun FormContent(
     state: FormState,
-    defnForm: DefnFormData,
+    defnForm: DefnFormUi,
     onFieldEvent: (FieldEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {

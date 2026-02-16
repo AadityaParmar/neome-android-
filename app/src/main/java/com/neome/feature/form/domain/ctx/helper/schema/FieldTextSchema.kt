@@ -3,7 +3,7 @@ package com.neome.feature.form.domain.ctx.helper.schema
 import com.neome.api.meta.base.Types.EnumDefnTextValidationPattern
 import com.neome.api.meta.base.dto.DefnFieldText
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
 import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
 import com.neome.feature.form.presentation.state.FieldProperties
@@ -23,7 +23,7 @@ import kotlinx.serialization.json.JsonElement
  * - maxCharCount: maximum character count (if not null)
  * - validationPattern: regex pattern from DefnFieldText (aadhaar, gstin, pan, or custom)
  */
-class FieldTextSchema(override val defnForm: DefnFormData, override val defnComp: DefnCompSeal) :
+class FieldTextSchema(override val defnForm: DefnFormUi, override val defnComp: DefnCompSeal) :
     CompSchema(defnForm, defnComp) {
 
     private val defnField = defnComp as DefnFieldText

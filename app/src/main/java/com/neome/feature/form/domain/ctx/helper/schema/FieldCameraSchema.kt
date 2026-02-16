@@ -2,7 +2,7 @@ package com.neome.feature.form.domain.ctx.helper.schema
 
 import com.neome.api.meta.base.dto.DefnFieldCamera
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueCameraData
 import com.neome.feature.form.presentation.state.FieldProperties
 import com.neome.feature.form.presentation.state.FieldState
@@ -23,7 +23,7 @@ import kotlinx.serialization.json.JsonElement
  * - captureUser: user must be captured if required
  */
 class FieldCameraSchema(
-    override val defnForm: DefnFormData,
+    override val defnForm: DefnFormUi,
     override val defnComp: DefnCompSeal
 ) : CompSchema(defnForm, defnComp) {
 
@@ -79,12 +79,12 @@ class FieldCameraSchema(
             if (properties.required) {
                 // Build capture validation error message
                 val captureErrors = mutableListOf<String>()
-                
+
                 constrain("capture validation") { value ->
                     if (value == null) return@constrain true
-                    
+
                     captureErrors.clear()
-                    
+
                     if (defnField.captureTime == true && value.captureTime.isNullOrBlank()) {
                         captureErrors.add("Time")
                     }
@@ -94,7 +94,7 @@ class FieldCameraSchema(
                     if (defnField.captureUser == true && value.captureUser?.value == null) {
                         captureErrors.add("User value")
                     }
-                    
+
                     captureErrors.isEmpty()
                 }
             }

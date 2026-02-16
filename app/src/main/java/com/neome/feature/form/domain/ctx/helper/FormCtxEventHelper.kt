@@ -1,7 +1,7 @@
 package com.neome.feature.form.domain.ctx.helper
 
 import com.neome.api.meta.base.Types.MetaIdComp
-import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
+import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.domain.ctx.helper.schema.CompSchema
 import com.neome.feature.form.domain.util.FieldPropertyResolver
 import com.neome.feature.form.presentation.state.FieldError
@@ -16,7 +16,7 @@ object FormCtxEventHelper {
     fun handleFieldValueChanged(
         state: FormState,
         event: FormEvent.FieldValueChanged,
-        defnForm: DefnFormData
+        defnForm: DefnFormUi
     ): FormReducerResult {
         val currentFieldState = state.fieldStates[event.fieldId]
             ?: return FormReducerResult(state)
@@ -121,7 +121,7 @@ object FormCtxEventHelper {
     fun handleTriggerField(
         state: FormState,
         event: FormEvent.TriggerField,
-        defnForm: DefnFormData
+        defnForm: DefnFormUi
     ): FormReducerResult {
         val result = triggerField(
             fieldId = event.fieldId,
@@ -188,7 +188,7 @@ object FormCtxEventHelper {
     fun handleSetValues(
         state: FormState,
         event: FormEvent.SetValues,
-        defnForm: DefnFormData
+        defnForm: DefnFormUi
     ): FormReducerResult {
         val updatedFieldStates = state.fieldStates.mapValues { (fieldId, fieldState) ->
             val newValue = event.valueMap[fieldId]
@@ -251,7 +251,7 @@ object FormCtxEventHelper {
         fieldStates: Map<MetaIdComp, FieldState>,
         valueMap: Map<MetaIdComp, JsonElement>,
         dependentIds: Set<MetaIdComp>,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         errors: Map<MetaIdComp, FieldError>,
         compSchemaMap: Map<MetaIdComp, CompSchema>
     ): TriggerResult {
@@ -287,7 +287,7 @@ object FormCtxEventHelper {
         fieldStates: Map<MetaIdComp, FieldState>,
         valueMap: Map<MetaIdComp, JsonElement>,
         errors: Map<MetaIdComp, FieldError>,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         compSchemaMap: Map<MetaIdComp, CompSchema>
     ): TriggerResult? {
         defnForm.compMap[fieldId] ?: return null
@@ -322,7 +322,7 @@ object FormCtxEventHelper {
     private fun calcCompProperties(
         fieldId: MetaIdComp,
         currentFieldState: FieldState,
-        defnForm: DefnFormData,
+        defnForm: DefnFormUi,
         valueMap: Map<MetaIdComp, JsonElement>
     ): FieldState {
         val defnComp = defnForm.compMap[fieldId] ?: return currentFieldState
