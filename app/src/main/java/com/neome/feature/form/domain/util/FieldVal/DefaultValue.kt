@@ -13,6 +13,7 @@ import com.neome.api.meta.base.dto.DefnForm
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnGridData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldDtoGridRowData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueGridData
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
 import com.neome.feature.form.domain.util.ArgValueResolver
 import com.neome.feature.form.domain.util.FormPlus
@@ -44,6 +45,8 @@ internal interface DefaultValue : Converter {
             existingValueMap = formValue?.valueMap,
             defaultValue = defaultValue
         )
+        val gridSet = mutableSetOf<MetaIdComp>()
+
 
         FormPlus.loopDefnForm(defnForm) { comp, parent ->
 
@@ -53,7 +56,13 @@ internal interface DefaultValue : Converter {
 
                 val compId = FormPlus.getCompMetaId(comp)
                 if (compId != null) {
-                    val fieldValue = resolveCompDefaultValue(defnForm, comp, mutableFormValue, formValue, resolvedSet)
+                    val fieldValue = resolveCompDefaultValue(
+                        defnForm,
+                        comp,
+                        mutableFormValue, // for grid this will be FieldDtoGridRow
+                        mutableFormValue.toFormValueData(), // for grid rows to access parent
+                        resolvedSet
+                    )
                     if (fieldValue != null) {
                         val jsonElement = fnFieldValueToJsonElement(comp.type, fieldValue)
                         if (jsonElement != null) {
@@ -61,9 +70,21 @@ internal interface DefaultValue : Converter {
                         }
                     }
                 }
+            } else if (parent.type == EnumDefnCompType.grid) {
+                val compId = FormPlus.getCompMetaId(comp)
+                if (compId != null)
+                    gridSet.add(compId)
             }
 
             null // continue iteration — never break early
+        }
+        if (gridSet.isNotEmpty()) {
+            gridSet.forEach { gridId ->
+                val grid = defnForm.compMap[gridId] as? DefnGridData ?: return@forEach
+
+                fnEnsureInitGrid(defnForm, grid, mutableFormValue.toFormValueData())
+
+            }
         }
 
         return mutableFormValue.toFormValueData()
@@ -73,15 +94,69 @@ internal interface DefaultValue : Converter {
      * Ensures every leaf field inside [fieldGrid] has an initial value for a
      * single grid row.
      *
-     * TODO: Implement grid-row default resolution.
      */
+    private fun fnEnsureInitGrid(
+        defnForm: DefnForm,
+        fieldGrid: DefnGridData,
+        formValue: FormValueData?,
+    ) {
+        val gridId = FormPlus.getCompMetaId(fieldGrid) ?: return
+        val fieldValueGrid = FieldValueResolver.fnJsonElementFieldValue(
+            fieldGrid.type,
+            formValue?.valueMap[gridId]
+        ) as FieldValueGridData?
+        val newGridRowMap = mutableMapOf<Types.RowId, FieldDtoGridRowData>().apply {
+            val map = fieldValueGrid?.map
+            if (map != null)
+                putAll(map)
+        }
+
+
+        fieldValueGrid?.keys?.forEach { rowId ->
+            val gridRow = fieldValueGrid.map[rowId]
+            val newGridRow = fnEnsureInitGridRow(defnForm, fieldGrid, formValue, gridRow)
+            newGridRowMap.set(rowId, newGridRow)
+        }
+    }
+
     fun fnEnsureInitGridRow(
         defnForm: DefnForm,
         fieldGrid: DefnGridData,
         formValue: FormValueData?,
         gridRow: FieldDtoGridRowData?,
-    ) {
-        // TODO: grid-row default value resolution
+    ): FieldDtoGridRowData {
+
+        val mutableGridValue = MutableFormValue(
+            rowId = gridRow?.rowId,
+            createdBy = gridRow?.createdBy,
+            updatedBy = gridRow?.updatedBy,
+            createdOn = gridRow?.createdOn,
+            updatedOn = gridRow?.updatedOn,
+            rowOrder = gridRow?.rowOrder,
+            existingValueMap = gridRow?.valueMap as Map<MetaIdComp, JsonElement>?,
+        )
+        fieldGrid.fieldIdSet?.forEach { fieldId ->
+            val resolvedSet = mutableSetOf<MetaIdComp>()
+            val comp = defnForm.compMap[fieldId] as? DefnCompSeal ?: return@forEach
+            val compId = FormPlus.getCompMetaId(comp) ?: return@forEach
+
+            val fieldValue = resolveCompDefaultValue(
+                defnForm,
+                comp,
+                mutableGridValue, // for grid this will be FieldDtoGridRow
+                formValue, // for grid rows to access parent
+                resolvedSet
+            )
+            if (fieldValue != null) {
+                val jsonElement = fnFieldValueToJsonElement(comp.type, fieldValue)
+                if (jsonElement != null) {
+                    mutableGridValue.putValue(compId, jsonElement)
+                }
+            }
+        }
+
+        return mutableGridValue.toFieldDtoGridRowData()
+
     }
 
     // ── Dispatch ───────────────────────────────────────────────────────
@@ -105,8 +180,14 @@ internal interface DefaultValue : Converter {
             return fnJsonElementFieldValue(defnComp.type, existingJson)
         }
 
+        // this method will be reUse for grid row
+        val existingJsonInFormValue = formValue?.valueMap[compId]
+        if (existingJsonInFormValue != null) {
+            return fnJsonElementFieldValue(defnComp.type, existingJsonInFormValue)
+        }
+
         val fieldValue: Any? = when (defnComp.type) {
-            // ── Text-like group ────────────────────────────────────────
+            // ── Text ────────────────────────────────────────
             EnumDefnCompType.text,
             EnumDefnCompType.password ->
                 resolverEditableText(defnForm, defnComp, mutableFormValue, formValue, resolvedSet)
@@ -321,6 +402,18 @@ internal class MutableFormValue(
             updatedOn = updatedOn,
             rowOrder = rowOrder,
             valueMap = valueMap.toMap()
+        )
+    }
+
+    fun toFieldDtoGridRowData(): FieldDtoGridRowData {
+        return FieldDtoGridRowData(
+            rowId = rowId,
+            createdBy = createdBy,
+            updatedBy = updatedBy,
+            createdOn = createdOn,
+            updatedOn = updatedOn,
+            rowOrder = rowOrder,
+            valueMap = valueMap.toMap() as MutableMap<Types.MetaIdField, JsonElement>
         )
     }
 }
