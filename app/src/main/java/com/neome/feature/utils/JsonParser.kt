@@ -1,6 +1,8 @@
 package com.neome.feature.utils
 
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.modules.SerializersModule
 
 object JsonParser {
@@ -17,8 +19,8 @@ object JsonParser {
 
     fun isJsonString(str: String): Boolean {
         return try {
-            Json.parseToJsonElement(str)
-            true
+            val element = Json.parseToJsonElement(str)
+            element is JsonObject || element is JsonArray
         } catch (_: Exception) {
             false
         }

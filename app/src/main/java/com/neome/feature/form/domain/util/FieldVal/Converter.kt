@@ -3,6 +3,7 @@ package com.neome.feature.form.domain.util.FieldVal
 import com.neome.api.meta.base.AnyValue
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.AnyTime
+import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueColorData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDecimalData
@@ -326,6 +327,11 @@ internal interface Converter {
             is FieldValueNumberData -> fieldValueForAnyValue.value?.toDouble()
             else -> value.toString().toDoubleOrNull()
         }
+    }
+
+    fun fnResolveFieldValueToSting(defnComp: DefnCompSeal, value: JsonElement?): String? {
+        val compType = defnComp.type
+        return fnFieldValueToRawValue(compType, value)?.toString()
     }
 
 

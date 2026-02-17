@@ -1,13 +1,32 @@
 package com.neome.feature.form.domain.util
 
+import android.util.Log
+import com.neome.api.ent.entDrawer.sig.SigEntCaller
+import com.neome.api.meta.base.SysId
+import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.EnumDefnArgBinder
 import com.neome.api.meta.base.Types.EnumDefnArgBinderContext
-import com.neome.api.meta.base.Types.EnumDefnDate
-import com.neome.api.meta.base.Types.EnumDefnTime
+import com.neome.api.meta.base.Types.EnumDefnCompType
+import com.neome.api.meta.base.dto.DefnDtoParagraph
 import com.neome.api.meta.base.dto.DefnDtoText
+import com.neome.api.meta.base.dto.DefnFieldDate
+import com.neome.api.meta.base.dto.DefnFieldDateTime
+import com.neome.api.meta.base.dto.DefnFieldPickText
 import com.neome.api.meta.base.dto.DefnForm
-import com.neome.api.meta.base.dto.StudioDtoArgValue
-import com.neome.api.meta.base.dto.StudioDtoArgValueContext
+import com.neome.core.common.serializer.api.meta.base.dto.DefnBuildDateData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoParagraphData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoTextData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldButtonData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldHtmlData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldHyperlinkRowData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldIdentifierData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldInfoData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldLabelData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldParagraphData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldShowCodeData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldSwitchData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnGridData
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoArgValueContextCallerData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoArgValueContextCallerSettingData
@@ -15,212 +34,492 @@ import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoArgValueConte
 import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoArgValueContextEntData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoArgValueDerivedData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoArgValueFieldData
-import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoArgValueVariableData
-import kotlinx.serialization.DeserializationStrategy
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerializationException
-import kotlinx.serialization.descriptors.PrimitiveKind
-import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.descriptors.buildClassSerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
-import kotlinx.serialization.json.JsonContentPolymorphicSerializer
-import kotlinx.serialization.json.JsonDecoder
+import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
+import com.neome.feature.utils.JsonParser
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.decodeFromJsonElement
 
 object ArgValueResolver {
 
-    // region --- TypeCustomValueMap hierarchy ---
+    private const val TAG = "ArgValueResolver"
 
-    @Serializable(with = TypeCustomValueMapSerializer::class)
-    sealed interface TypeCustomValueMap {
-        val id: String
-        val kind: String
-        val name: String
-    }
+    /**
+     * Resolves all arg value references in a DefnDtoText.
+     * Iterates the value list, resolves each JSON-encoded arg string, returns new DefnDtoTextData.
+     */
+    fun resolve(
+        defnDtoText: DefnDtoText?,
+        defnForm: DefnForm,
+        callerEnt: SigEntCaller,
+        skipResolveSeqVar: Boolean = false
+    ): DefnDtoTextData? {
+        if (defnDtoText?.value.isNullOrEmpty()) return null
 
-    @Serializable
-    data class TypeCustomValueDate(
-        override val id: String,
-        override val kind: String,
-        override val name: String,
-        val value: EnumDefnDate? = null,
-        val customDate: String? = null
-    ) : TypeCustomValueMap
-
-    @Serializable
-    data class TypeCustomValueTime(
-        override val id: String,
-        override val kind: String,
-        override val name: String,
-        val customValue: String? = null,
-        val value: EnumDefnTime? = null
-    ) : TypeCustomValueMap
-
-    @Serializable
-    data class TypeCustomValueDateTime(
-        override val id: String,
-        override val kind: String,
-        override val name: String,
-        val value: EnumDefnDate? = null,
-        val customDate: String? = null,
-        val customTime: String? = null
-    ) : TypeCustomValueMap
-
-    @Serializable
-    data class TypeCustomValueSeq(
-        override val id: String,
-        override val kind: String,
-        override val name: String
-    ) : TypeCustomValueMap
-
-    // endregion
-
-    // region --- TypeCustomValueMapSerializer ---
-
-    object TypeCustomValueMapSerializer :
-        JsonContentPolymorphicSerializer<TypeCustomValueMap>(TypeCustomValueMap::class) {
-
-        override fun selectDeserializer(
-            element: JsonElement
-        ): DeserializationStrategy<TypeCustomValueMap> {
-            val kind = element.jsonObject["kind"]?.jsonPrimitive?.content
-            return when (kind) {
-                "date" -> TypeCustomValueDate.serializer()
-                "time" -> TypeCustomValueTime.serializer()
-                "dateTime" -> TypeCustomValueDateTime.serializer()
-                "sequence" -> TypeCustomValueSeq.serializer()
-                else -> TypeCustomValueSeq.serializer()
+        val newValue = mutableListOf<String>()
+        defnDtoText.value?.forEach { argStr ->
+            val resolvedVal = resolveArgVal(argStr, defnForm, callerEnt, skipResolveSeqVar)
+            if (resolvedVal != null) {
+                newValue.add(resolvedVal)
             }
         }
+
+        return if (newValue.isEmpty()) null else DefnDtoTextData(value = newValue)
     }
 
-    // endregion
+    /**
+     * Resolves all arg value references in a DefnDtoParagraph.
+     * Same as resolve() but returns DefnDtoParagraphData.
+     */
+    fun resolveParagraph(
+        paragraph: DefnDtoParagraph?,
+        defnForm: DefnForm,
+        callerEnt: SigEntCaller
+    ): DefnDtoParagraphData? {
+        if (paragraph?.value.isNullOrEmpty()) return null
 
-    // region --- StudioDtoArgValueContextSerializer ---
-
-    object StudioDtoArgValueContextSerializer :
-        JsonContentPolymorphicSerializer<StudioDtoArgValueContext>(
-            StudioDtoArgValueContext::class
-        ) {
-
-        override fun selectDeserializer(
-            element: JsonElement
-        ): DeserializationStrategy<StudioDtoArgValueContext> {
-            val kind = element.jsonObject["kind"]?.jsonPrimitive?.content
-            return when (kind) {
-                EnumDefnArgBinderContext.caller.value ->
-                    StudioDtoArgValueContextCallerData.serializer()
-
-                EnumDefnArgBinderContext.callerSetting.value ->
-                    StudioDtoArgValueContextCallerSettingData.serializer()
-
-                EnumDefnArgBinderContext.ent.value ->
-                    StudioDtoArgValueContextEntData.serializer()
-
-                else -> StudioDtoArgValueContextData.serializer()
+        val newValue = mutableListOf<String>()
+        paragraph.value?.forEach { argStr ->
+            val resolvedVal = resolveArgVal(argStr, defnForm, callerEnt, false)
+            if (resolvedVal != null) {
+                newValue.add(resolvedVal)
             }
         }
+
+        return if (newValue.isEmpty()) null else DefnDtoParagraphData(value = newValue)
     }
-
-    // endregion
-
-    // region --- StudioDtoArgValueForClient ---
-
-    @Serializable(with = StudioDtoArgValueForClientSerializer::class)
-    data class StudioDtoArgValueForClient(
-        val kind: EnumDefnArgBinder,
-        val argValue: StudioDtoArgValue,
-        val customValueMap: TypeCustomValueMap? = null
-    )
-
-    // endregion
-
-    // region --- StudioDtoArgValueForClientSerializer ---
-
-    object StudioDtoArgValueForClientSerializer : KSerializer<StudioDtoArgValueForClient> {
-
-        override val descriptor: SerialDescriptor =
-            buildClassSerialDescriptor("StudioDtoArgValueForClient") {
-                element("kind", PrimitiveSerialDescriptor("EnumDefnArgBinder", PrimitiveKind.STRING))
-                element("argValue", buildClassSerialDescriptor("StudioDtoArgValue"))
-                element(
-                    "customValueMap",
-                    TypeCustomValueMapSerializer.descriptor,
-                    isOptional = true
-                )
-            }
-
-        override fun deserialize(decoder: Decoder): StudioDtoArgValueForClient {
-            val jsonDecoder = decoder as? JsonDecoder
-                ?: throw SerializationException(
-                    "StudioDtoArgValueForClientSerializer requires JsonDecoder"
-                )
-            val json = jsonDecoder.json
-            val element = jsonDecoder.decodeJsonElement().jsonObject
-
-            val kindStr = element["kind"]?.jsonPrimitive?.content
-                ?: throw SerializationException(
-                    "Missing 'kind' field in StudioDtoArgValueForClient"
-                )
-
-            val kind = EnumDefnArgBinder.entries.firstOrNull { it.value == kindStr }
-                ?: throw SerializationException(
-                    "Unknown EnumDefnArgBinder: $kindStr"
-                )
-
-            val argValueElement = element["argValue"]
-                ?: throw SerializationException(
-                    "Missing 'argValue' field in StudioDtoArgValueForClient"
-                )
-
-            val argValue: StudioDtoArgValue = when (kind) {
-                EnumDefnArgBinder.Context -> json.decodeFromJsonElement(
-                    StudioDtoArgValueContextSerializer, argValueElement
-                )
-
-                EnumDefnArgBinder.derived -> json.decodeFromJsonElement(
-                    StudioDtoArgValueDerivedData.serializer(), argValueElement
-                )
-
-                EnumDefnArgBinder.variable -> json.decodeFromJsonElement(
-                    StudioDtoArgValueVariableData.serializer(), argValueElement
-                )
-
-                EnumDefnArgBinder.field -> json.decodeFromJsonElement(
-                    StudioDtoArgValueFieldData.serializer(), argValueElement
-                )
-
-                else -> json.decodeFromJsonElement(
-                    StudioDtoArgValueContextData.serializer(), argValueElement
-                )
-            }
-
-            val customValueMap = element["customValueMap"]?.let {
-                json.decodeFromJsonElement(TypeCustomValueMapSerializer, it)
-            }
-
-            return StudioDtoArgValueForClient(kind, argValue, customValueMap)
-        }
-
-        override fun serialize(encoder: Encoder, value: StudioDtoArgValueForClient) {
-            throw SerializationException(
-                "Serialization not supported for StudioDtoArgValueForClient"
-            )
-        }
-    }
-
-    // endregion
 
     fun resolveArgForFieldVal(
         defnForm: DefnForm,
-        formValue: FormValueData?,
-        argValue: DefnDtoText,
-    ): DefnDtoText {
-        return argValue
+        formValue: FormValueData,
+        defnDtoText: DefnDtoText,
+    ): String {
+
+        val newValue = mutableListOf<String>()
+        defnDtoText.value?.forEach { argStr ->
+            newValue.add(resolveArgValField(argStr, defnForm, formValue))
+        }
+        return newValue.joinToString(", ")
     }
+
+    fun resolveArgForFieldVal(
+        defnForm: DefnForm,
+        formValue: FormValueData,
+        defnDtoText: DefnDtoParagraph,
+    ): String {
+
+        val newValue = mutableListOf<String>()
+        defnDtoText.value?.forEach { argStr ->
+            newValue.add(resolveArgValField(argStr, defnForm, formValue))
+        }
+        return newValue.filter { it.isNotBlank() || !it.isEmpty() || it != " " }.joinToString(", ")
+    }
+
+    private fun resolveArgValField(
+        argStr: String,
+        defnForm: DefnForm,
+        formValue: FormValueData,
+    ): String {
+        if (argStr.isBlank() || !JsonParser.isJsonString(argStr)) {
+            return argStr
+        }
+
+        return try {
+            val parsed = JsonParser.json.decodeFromString<StudioDtoArgValueForClient>(argStr)
+            when (parsed.kind) {
+
+                EnumDefnArgBinder.field -> {
+                    val parsedField = JsonParser.json.decodeFromJsonElement<StudioDtoArgValueFieldData>(parsed.argValue)
+                    val comp = defnForm.compMap[parsedField.fieldId] as? DefnCompSeal ?: return ""
+                    val fieldValue = formValue.valueMap[parsedField.fieldId] ?: return ""
+                    return FieldValueResolver.fnResolveFieldValueToSting(comp, fieldValue) ?: ""
+                }
+
+                else -> return argStr
+            }
+
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to parse arg value: $argStr", e)
+            ""
+        }
+    }
+
+    /**
+     * Parses and resolves a single arg value string.
+     * If it's JSON, parse as StudioDtoArgValueForClient and dispatch by kind.
+     * Otherwise return as-is.
+     */
+    private fun resolveArgVal(
+        argStr: String,
+        defnForm: DefnForm,
+        callerEnt: SigEntCaller,
+        skipResolveSeqVar: Boolean
+    ): String? {
+        if (argStr.isBlank() || !JsonParser.isJsonString(argStr)) {
+            return argStr
+        }
+
+        return try {
+
+            val parsed = JsonParser.json.decodeFromString<StudioDtoArgValueForClient>(argStr)
+            when (parsed.kind) {
+                EnumDefnArgBinder.Context -> {
+                    resolveArgValCtx(parsed.argValue, argStr, callerEnt)
+                }
+
+                EnumDefnArgBinder.derived -> {
+                    resolveArgValDerived(parsed.argValue, argStr, defnForm, callerEnt)
+                }
+
+                EnumDefnArgBinder.variable -> {
+                    resolveArgValVariable(parsed.argValue, argStr, callerEnt, parsed.customValueMap, skipResolveSeqVar)
+                }
+
+                EnumDefnArgBinder.field -> {
+                    argStr  // Passthrough - resolved later
+                }
+
+                else -> argStr
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to parse arg value: $argStr", e)
+            argStr
+        }
+    }
+
+    /**
+     * Resolves context-based arg values (caller, callerSetting, ent, row).
+     */
+    private fun resolveArgValCtx(
+        argValJson: JsonElement,
+        argStr: String,
+        callerEnt: SigEntCaller
+    ): String? {
+        val contextData = JsonParser.json.decodeFromJsonElement<StudioDtoArgValueContextData>(argValJson)
+
+        return when (contextData.kind) {
+            EnumDefnArgBinderContext.caller -> {
+                val caller = JsonParser.json.decodeFromJsonElement<StudioDtoArgValueContextCallerData>(argValJson)
+                when (caller.attribute) {
+                    Types.EnumDefnArgBinderContextCaller.userId -> callerEnt.userId.toString()
+                    Types.EnumDefnArgBinderContextCaller.entUserId -> callerEnt.entUserId.toString()
+                    Types.EnumDefnArgBinderContextCaller.nickName -> callerEnt.nickName
+                    Types.EnumDefnArgBinderContextCaller.handle -> callerEnt.handle
+                    Types.EnumDefnArgBinderContextCaller.color -> callerEnt.color
+                    Types.EnumDefnArgBinderContextCaller.email,
+                    Types.EnumDefnArgBinderContextCaller.mobileNumber -> callerEnt.handle
+
+                    Types.EnumDefnArgBinderContextCaller.managerId -> callerEnt.managerId?.toString()
+                    Types.EnumDefnArgBinderContextCaller.roles -> {
+                        callerEnt.roleMap.values.joinToString(", ") { role ->
+                            role.label ?: role.name.toString()
+                        }
+                    }
+
+                    else -> argStr
+                }
+            }
+
+            EnumDefnArgBinderContext.callerSetting -> {
+                val setting =
+                    JsonParser.json.decodeFromJsonElement<StudioDtoArgValueContextCallerSettingData>(argValJson)
+                val variable = callerEnt.userSettingVarMap?.get(setting.userSettingVarId)
+                variable?.value?.toString() ?: argStr
+            }
+
+            EnumDefnArgBinderContext.ent -> {
+                val ent = JsonParser.json.decodeFromJsonElement<StudioDtoArgValueContextEntData>(argValJson)
+                when (ent.attribute) {
+                    Types.EnumDefnArgBinderContextEnt.id -> callerEnt.entId.toString()
+                    Types.EnumDefnArgBinderContextEnt.timeZone -> callerEnt.timeZone?.toString()
+                    Types.EnumDefnArgBinderContextEnt.displayDateFormat -> callerEnt.displayDateFormat
+                    else -> argStr
+                }
+            }
+
+            EnumDefnArgBinderContext.row -> argStr  // Resolve after value
+            else -> argStr
+        }
+    }
+
+    /**
+     * Resolves derived field values (values from other fields in the form).
+     */
+    private fun resolveArgValDerived(
+        argValueJson: JsonElement,
+        argStr: String,
+        defnForm: DefnForm,
+        callerEnt: SigEntCaller
+    ): String? {
+        val argValue = JsonParser.json.decodeFromJsonElement<StudioDtoArgValueDerivedData>(argValueJson)
+        val field = defnForm.compMap[argValue.derivedFieldId] ?: return argStr
+
+        return when (argValue.derivedFieldType) {
+            EnumDefnCompType.bool -> {
+                when (argValue.valueBoolean) {
+                    true -> "Yes"
+                    false -> "No"
+                    null -> null
+                }
+            }
+
+            EnumDefnCompType.date, EnumDefnCompType.dateTime -> {
+                val valueDate = argValue.valueDate
+                if (valueDate is String) {
+                    val comp = field as? DefnFieldDate ?: field as? DefnFieldDateTime
+                    val isDateTime = comp is DefnFieldDateTime
+                    val displayDateFormat = when (comp) {
+                        is DefnFieldDate -> comp.displayDateFormat
+                        is DefnFieldDateTime -> comp.displayDateFormat
+                        else -> null
+                    } ?: callerEnt.displayDateFormat
+
+                    if (displayDateFormat != null) {
+                        DatePlus.formatDate(valueDate, displayDateFormat, isDateTime)
+                    } else {
+                        DatePlus.dateToLocalString(valueDate)
+                    }
+                } else {
+                    valueDate
+                }
+            }
+
+            EnumDefnCompType.rating, EnumDefnCompType.decimal -> {
+                argValue.valueDouble?.toString()
+            }
+
+            EnumDefnCompType.number, EnumDefnCompType.counter -> {
+                argValue.valueLong?.toString()
+            }
+
+            EnumDefnCompType.symbol, EnumDefnCompType.text, EnumDefnCompType.paragraph,
+            EnumDefnCompType.hyperlink, EnumDefnCompType.mobileNumber, EnumDefnCompType.email,
+            EnumDefnCompType.handle, EnumDefnCompType.spreadsheetId -> {
+                argValue.valueText
+            }
+
+            EnumDefnCompType.pickText -> {
+                val optionId = argValue.valueOptionId
+                val pickText = field as? DefnFieldPickText
+                val optionMap = pickText?.optionMap
+                if (optionId != null && optionMap?.map != null) {
+                    optionMap.map[optionId]?.value ?: optionId
+                } else {
+                    optionId
+                }
+            }
+
+            EnumDefnCompType.language, EnumDefnCompType.timeZone, EnumDefnCompType.currency -> {
+                argValue.valueOptionId
+            }
+
+            EnumDefnCompType.pickTree, EnumDefnCompType.paymentStatus -> {
+                ""  // TODO
+            }
+
+            EnumDefnCompType.pickRole -> {
+                val optionId = argValue.valueOptionId
+                if (optionId != null) {
+                    val roleId = SysId.create<Types.MetaIdRole>(optionId)
+                    callerEnt.roleMap[roleId]?.name?.toString() ?: optionId
+                } else {
+                    null
+                }
+            }
+
+            else -> null
+        }
+    }
+
+    /**
+     * Resolves variable arg values using customValueMap.
+     */
+    private fun resolveArgValVariable(
+        argValueJson: JsonElement,
+        argStr: String,
+        callerEnt: SigEntCaller,
+        customValueMapJson: JsonElement?,
+        skipResolveSeqVar: Boolean
+    ): String? {
+        if (customValueMapJson == null) return null
+
+        // Decode as base to get kind
+        val baseMap = JsonParser.json.decodeFromJsonElement<TypeCustomValueDate>(customValueMapJson)
+
+        return when (baseMap.kind) {
+            "date" -> {
+                val variable = JsonParser.json.decodeFromJsonElement<TypeCustomValueDate>(customValueMapJson)
+                val defnBuildDate = DefnBuildDateData(
+                    customValue = variable.customDate,
+                    value = variable.value
+                )
+                val timeZone = callerEnt.timeZone?.toString()
+                if (timeZone != null) {
+                    val dateIsoStr = DatePlus.calcDefnBuildDate(defnBuildDate, timeZone)
+                    if (dateIsoStr != null) {
+                        DatePlus.formatDate(dateIsoStr, callerEnt.displayDateFormat, false)
+                    } else {
+                        defnBuildDate.customValue
+                    }
+                } else {
+                    defnBuildDate.customValue
+                }
+            }
+
+            "dateTime" -> {
+                val variable = JsonParser.json.decodeFromJsonElement<TypeCustomValueDateTime>(customValueMapJson)
+                val defnBuildDate = DefnBuildDateData(
+                    customValue = variable.customDate,
+                    value = variable.value
+                )
+                val timeZone = callerEnt.timeZone?.toString()
+                if (timeZone != null) {
+                    val dateIsoStr = DatePlus.calcDefnBuildDateTime(defnBuildDate, timeZone)
+                    if (dateIsoStr != null) {
+                        DatePlus.formatDate(dateIsoStr, callerEnt.displayDateFormat, true)
+                    } else {
+                        defnBuildDate.customValue
+                    }
+                } else {
+                    defnBuildDate.customValue
+                }
+            }
+
+            "time" -> {
+                val variable = JsonParser.json.decodeFromJsonElement<TypeCustomValueTime>(customValueMapJson)
+                variable.customValue ?: DatePlus.resolveTimeValue(variable.value?.value)
+            }
+
+            "sequence" -> {
+                val variable = JsonParser.json.decodeFromJsonElement<TypeCustomValueSeq>(customValueMapJson)
+                if (skipResolveSeqVar) argStr else variable.name
+            }
+
+            "setOfDate" -> baseMap.name  // TODO
+            else -> baseMap.name
+        }
+    }
+
+    /**
+     * Resolves all DefnDtoText/DefnDtoParagraph properties on a component.
+     * Pattern matches on concrete Data types and uses copy() to create new resolved instances.
+     */
+    private fun resolveDefnComp(
+        comp: DefnCompSeal,
+        defnForm: DefnForm,
+        callerEnt: SigEntCaller
+    ): DefnCompSeal {
+        return when (comp) {
+            is DefnFieldButtonData -> comp.copy(
+                // Editable base props
+                helperTextVar = resolve(comp.helperTextVar, defnForm, callerEnt),
+                placeHolderVar = resolve(comp.placeHolderVar, defnForm, callerEnt),
+                prefixVar = resolve(comp.prefixVar, defnForm, callerEnt),
+                suffixVar = resolve(comp.suffixVar, defnForm, callerEnt),
+                // Type-specific
+                toastMessageOnClickVar = resolve(comp.toastMessageOnClickVar, defnForm, callerEnt),
+                whatsAppMessage = resolveParagraph(comp.whatsAppMessage, defnForm, callerEnt)
+            )
+
+            is DefnFieldSwitchData -> comp.copy(
+                // Editable base props
+                helperTextVar = resolve(comp.helperTextVar, defnForm, callerEnt),
+                placeHolderVar = resolve(comp.placeHolderVar, defnForm, callerEnt),
+                prefixVar = resolve(comp.prefixVar, defnForm, callerEnt),
+                suffixVar = resolve(comp.suffixVar, defnForm, callerEnt),
+                // Type-specific
+                checkboxLabelVar = resolve(comp.checkboxLabelVar, defnForm, callerEnt)
+            )
+
+            is DefnFieldIdentifierData -> comp.copy(
+                // Editable base props
+                helperTextVar = resolve(comp.helperTextVar, defnForm, callerEnt),
+                placeHolderVar = resolve(comp.placeHolderVar, defnForm, callerEnt),
+                prefixVar = resolve(comp.prefixVar, defnForm, callerEnt),
+                suffixVar = resolve(comp.suffixVar, defnForm, callerEnt),
+                // Type-specific
+                textPatternVar = resolve(comp.textPatternVar, defnForm, callerEnt)
+            )
+
+            is DefnFieldHyperlinkRowData -> comp.copy(
+                // Editable base props
+                helperTextVar = resolve(comp.helperTextVar, defnForm, callerEnt),
+                placeHolderVar = resolve(comp.placeHolderVar, defnForm, callerEnt),
+                prefixVar = resolve(comp.prefixVar, defnForm, callerEnt),
+                suffixVar = resolve(comp.suffixVar, defnForm, callerEnt),
+                // Type-specific
+                displayTextVar = resolve(comp.displayTextVar, defnForm, callerEnt)
+            )
+
+            is DefnFieldLabelData -> comp.copy(
+                // Type-specific (NO editable base - extends DefnField not DefnFieldEditable)
+                textPatternVar = resolve(comp.textPatternVar, defnForm, callerEnt)
+            )
+
+            is DefnFieldInfoData -> comp.copy(
+                // Type-specific (NO editable base - extends DefnFieldLabel which extends DefnField)
+                labelPatternVar = resolve(comp.labelPatternVar, defnForm, callerEnt),
+                defaultVar = resolveParagraph(comp.defaultVar, defnForm, callerEnt),
+                textPatternVar = resolve(comp.textPatternVar, defnForm, callerEnt)
+            )
+
+            is DefnFieldParagraphData -> comp.copy(
+                // Editable base props
+                helperTextVar = resolve(comp.helperTextVar, defnForm, callerEnt),
+                placeHolderVar = resolve(comp.placeHolderVar, defnForm, callerEnt),
+                prefixVar = resolve(comp.prefixVar, defnForm, callerEnt),
+                suffixVar = resolve(comp.suffixVar, defnForm, callerEnt),
+                // Type-specific (defaultVar is DefnDtoParagraph, not DefnDtoText)
+                defaultVar = resolveParagraph(comp.defaultVar, defnForm, callerEnt)
+            )
+
+            is DefnFieldShowCodeData -> comp.copy(
+                // Editable base props
+                helperTextVar = resolve(comp.helperTextVar, defnForm, callerEnt),
+                placeHolderVar = resolve(comp.placeHolderVar, defnForm, callerEnt),
+                prefixVar = resolve(comp.prefixVar, defnForm, callerEnt),
+                suffixVar = resolve(comp.suffixVar, defnForm, callerEnt),
+                // Type-specific
+                defaultVar = resolveParagraph(comp.defaultVar, defnForm, callerEnt)
+            )
+
+            is DefnFieldHtmlData -> comp.copy(
+                // Type-specific (NO editable base - extends DefnField not DefnFieldEditable)
+                defaultVar = resolveParagraph(comp.defaultVar, defnForm, callerEnt),
+                placeHolderVar = resolveParagraph(comp.placeHolderVar, defnForm, callerEnt)
+            )
+
+            is DefnGridData -> {
+                // Skip - resolveGridLayoutMap excluded per instructions
+                comp
+            }
+
+            else -> comp  // All other types - no var properties to resolve
+        }
+    }
+
+    /**
+     * Resolves all arg values in a DefnFormUi.
+     * Returns a new DefnFormUi with resolved form properties and component map.
+     */
+    fun resolveDefnForm(defnForm: DefnFormUi, callerEnt: SigEntCaller): DefnFormUi {
+        // Resolve form-level properties
+        val resolvedChatLabelPatternVar = resolve(defnForm.chatLabelPatternVar, defnForm, callerEnt)
+        val resolvedChatPatternVar = resolveParagraph(defnForm.chatPatternVar, defnForm, callerEnt)
+
+        // Skip resolveFormLayoutMap - excluded per instructions
+
+        // Build new compMap with all components resolved
+        val newCompMap = defnForm.compMap.mapValues { (_, comp) ->
+            resolveDefnComp(comp as DefnCompSeal, defnForm, callerEnt)
+        }
+
+        // Return new DefnFormUi with resolved properties
+        return defnForm.copy(
+            chatLabelPatternVar = resolvedChatLabelPatternVar,
+            chatPatternVar = resolvedChatPatternVar,
+            compMap = newCompMap
+        )
+    }
+
 }

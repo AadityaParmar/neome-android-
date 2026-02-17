@@ -69,7 +69,6 @@ abstract class SysId : Comparable<SysId> {
             }
 
             val systemSysId = systemIdMap[id]
-            println("systemSysId= $systemSysId, id = $id $systemIdMap")
             if (systemSysId != null) {
                 return systemSysId as T
             }

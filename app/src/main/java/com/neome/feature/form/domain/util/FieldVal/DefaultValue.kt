@@ -20,6 +20,7 @@ import com.neome.core.common.serializer.api.meta.base.dto.FieldSetOfOptionIdData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueGridData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueOptionIdData
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
+import com.neome.feature.form.domain.util.ArgValueResolver
 import com.neome.feature.form.domain.util.FormPlus
 import kotlinx.serialization.json.JsonElement
 
@@ -232,14 +233,16 @@ internal interface DefaultValue : Converter {
     ): Any? {
         val field = defnComp as? DefnFieldEditableText ?: return null
 
+        val defnDtoText = field.defaultVar
+
         val rawValue: String? = when {
             field.defaultValue != null -> {
                 field.defaultValue
             }
 
-//            field.defaultVar != null -> {
-//                ArgValueResolver.resolveArgForFieldVal(defnForm, formValue, field.defaultVar)
-//            }
+            defnDtoText != null -> {
+                ArgValueResolver.resolveArgForFieldVal(defnForm, mutableFormValue.toFormValueData(), defnDtoText)
+            }
 
             field.defaultFieldId != null -> {
                 resolveDefaultFieldIdVal(
@@ -268,14 +271,15 @@ internal interface DefaultValue : Converter {
     ): Any? {
         val field = defnComp as? DefnFieldParagraph ?: return null
 
+        val defnDtoText = field.defaultVar
         val rawValue: String? = when {
             field.defaultValue != null -> {
                 field.defaultValue
             }
 
-//            field.defaultVar != null -> {
-//                ArgValueResolver.resolveArgForFieldVal(defnForm, formValue, field.defaultVar)
-//            }
+            defnDtoText != null -> {
+                ArgValueResolver.resolveArgForFieldVal(defnForm, mutableFormValue.toFormValueData(), defnDtoText)
+            }
 
             field.defaultFieldId != null -> {
                 resolveDefaultFieldIdVal(
@@ -304,14 +308,15 @@ internal interface DefaultValue : Converter {
     ): Any? {
         val field = defnComp as? DefnFieldInfo ?: return null
 
+        val defnDtoText = field.defaultVar
         val rawValue: String? = when {
             field.defaultValue != null -> {
                 field.defaultValue
             }
 
-//            field.defaultVar != null -> {
-//                ArgValueResolver.resolveArgForFieldVal(defnForm, formValue, field.defaultVar)
-//            }
+            defnDtoText != null -> {
+                ArgValueResolver.resolveArgForFieldVal(defnForm, mutableFormValue.toFormValueData(), defnDtoText)
+            }
 
             field.defaultFieldId != null -> {
                 resolveDefaultFieldIdVal(
