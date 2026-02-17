@@ -1,8 +1,11 @@
 package com.neome.feature.form.presentation.components.raw
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,24 +20,32 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoOptionData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfDtoOptionData
 import com.neome.feature.form.presentation.components.resolveThemeColor
@@ -43,14 +54,23 @@ import com.neome.feature.form.presentation.components.resolveThemeColor
  * Raw multi-select picker component — stateless, reusable picker UI for choosing multiple options.
  *
  * Displays an [OutlinedTextField] (read-only) showing comma-separated selected options.
- * Tapping the field opens a [ModalBottomSheet] with a virtualized list of options.
- * Each option has a checkbox on the left reflecting the current selection state.
+ * Tapping the field opens a [ModalBottomSheet] with a virtualized list of options,
+ * each with a checkbox on the left. A footer provides "Select All" / "Deselect All" and "Done" buttons.
  *
- * State is fully controlled by the caller via [selectedOptions], [onClear], and [optionMap].
+ * Options can be provided directly via [optionMap], or fetched asynchronously via [cbGetOptionMap].
+ * If [optionMap] is null and [cbGetOptionMap] is provided, options are fetched eagerly on composition.
+ * The text field shows "Loading…" until the callback delivers the options.
+ *
+ * Selection changes are committed only when the user presses "Done".
+ * If no options are selected when "Done" is pressed, [onChange] receives null (same as clearing).
+ *
+ * State is fully controlled by the caller via [selectedOptions], [onChange], and [optionMap].
  *
  * @param optionMap Map of option metaIds to option data providing the list of choices
  * @param selectedOptions List of currently selected option metaIds (null or empty means no selection)
- * @param onClear Callback to clear the current selection
+ * @param onChange Callback when selection is committed (receives null when selection is cleared)
+ * @param cbGetOptionMap Optional async callback to fetch options when [optionMap] is null.
+ *   The caller invokes the provided `cb` with the fetched options when ready.
  * @param label Optional label for the text field
  * @param placeholder Optional placeholder shown when nothing is selected
  * @param helperText Optional supporting text displayed below the field
@@ -64,7 +84,8 @@ import com.neome.feature.form.presentation.components.resolveThemeColor
 fun RawPickerMultiSelect(
     optionMap: DefnStudioMapOfDtoOptionData?,
     selectedOptions: List<String>?,
-    onClear: () -> Unit,
+    onChange: (options: List<DefnDtoOptionData>?) -> Unit,
+    cbGetOptionMap: ((cb: (DefnStudioMapOfDtoOptionData?) -> Unit) -> Unit)? = null,
     label: String? = null,
     placeholder: String? = null,
     helperText: String? = null,
@@ -74,19 +95,47 @@ fun RawPickerMultiSelect(
     modifier: Modifier = Modifier
 ) {
     val isInteractive = enabled && !readOnly
+    val focusManager = LocalFocusManager.current
+    val scope = rememberCoroutineScope()
     var showSheet by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
-    val selectedSet = remember(selectedOptions) {
-        selectedOptions?.toSet() ?: emptySet()
+    // Async option fetching: used when optionMap is null and cbGetOptionMap is provided
+    var fetchedOptionMap by remember { mutableStateOf<DefnStudioMapOfDtoOptionData?>(null) }
+    var isFetchingOptions by remember { mutableStateOf(false) }
+
+    // Eagerly fetch options on composition when optionMap is not provided
+    LaunchedEffect(optionMap, cbGetOptionMap) {
+        if (optionMap == null && cbGetOptionMap != null) {
+            isFetchingOptions = true
+            fetchedOptionMap = null
+            cbGetOptionMap { options ->
+                fetchedOptionMap = options
+                isFetchingOptions = false
+            }
+        }
     }
 
-    // Display text: comma-separated display values of selected options
-    val displayText = remember(selectedOptions, optionMap) {
+    // Resolved option map: prefer direct optionMap, fall back to fetched
+    val resolvedOptionMap = optionMap ?: fetchedOptionMap
+
+    val hasSelection = !selectedOptions.isNullOrEmpty()
+
+    // Detect if any selectedOption references an option that no longer exists in the map
+    // Suppressed during loading so we don't flash error styling before fetch completes
+    val isOptionNotFound = remember(selectedOptions, resolvedOptionMap, isFetchingOptions) {
+        hasSelection && !isFetchingOptions && selectedOptions?.any { metaId ->
+            resolvedOptionMap?.map?.containsKey(metaId) != true
+        } == true
+    }
+
+    // Display text: "Loading…" during fetch, comma-separated values, with "Not Found" for missing entries
+    val displayText = remember(selectedOptions, resolvedOptionMap, isFetchingOptions) {
+        if (selectedOptions.isNullOrEmpty()) return@remember ""
+        if (optionMap == null && isFetchingOptions) return@remember "Loading\u2026"
         selectedOptions
-            ?.mapNotNull { metaId -> optionMap?.map?.get(metaId)?.value }
-            ?.joinToString(", ")
-            ?: ""
+            .map { metaId -> resolvedOptionMap?.map?.get(metaId)?.value ?: "Not Found" }
+            .joinToString(", ")
     }
 
     // Click detection on the text field (same pattern as FieldDate)
@@ -108,16 +157,27 @@ fun RawPickerMultiSelect(
         label = label?.let { { Text(it) } },
         placeholder = placeholder?.let { { Text(it) } },
         supportingText = { Text(text = helperText ?: " ") },
-        isError = isError,
+        isError = isError || isOptionNotFound,
         enabled = enabled,
         readOnly = true,
         singleLine = true,
+        colors = if (isOptionNotFound) {
+            OutlinedTextFieldDefaults.colors(
+                unfocusedTextColor = MaterialTheme.colorScheme.error,
+                focusedTextColor = MaterialTheme.colorScheme.error
+            )
+        } else {
+            OutlinedTextFieldDefaults.colors()
+        },
         modifier = modifier.fillMaxWidth(),
         interactionSource = interactionSource,
         trailingIcon = {
             Row {
-                if (isInteractive && selectedSet.isNotEmpty()) {
-                    IconButton(onClick = onClear) {
+                if (isInteractive && hasSelection) {
+                    IconButton(onClick = {
+                        onChange(null)
+                        focusManager.clearFocus()
+                    }) {
                         Icon(
                             imageVector = Icons.Default.Clear,
                             contentDescription = "Clear selection"
@@ -138,7 +198,10 @@ fun RawPickerMultiSelect(
     )
 
     if (showSheet) {
-        val optionKeys = optionMap?.keys ?: emptyList()
+        // Local selection state: initialized from selectedOptions when sheet opens
+        val localSelectedSet = remember(showSheet) {
+            mutableStateListOf(*(selectedOptions?.toTypedArray() ?: emptyArray()))
+        }
 
         ModalBottomSheet(
             onDismissRequest = { showSheet = false },
@@ -147,22 +210,88 @@ fun RawPickerMultiSelect(
             Column(
                 modifier = Modifier.fillMaxHeight(0.75f)
             ) {
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f)
-                ) {
-                    items(
-                        items = optionKeys,
-                        key = { it }
-                    ) { metaId ->
-                        val option = optionMap?.map?.get(metaId) ?: return@items
-                        val isSelected = metaId in selectedSet
+                if (optionMap == null && isFetchingOptions) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                } else {
+                    val optionKeys = resolvedOptionMap?.keys ?: emptyList()
+                    val allSelected = optionKeys.isNotEmpty() &&
+                        optionKeys.all { it in localSelectedSet }
 
-                        MultiSelectOptionItem(
-                            option = option,
-                            isSelected = isSelected
-                        )
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f)
+                    ) {
+                        items(
+                            items = optionKeys,
+                            key = { it }
+                        ) { metaId ->
+                            val option = resolvedOptionMap?.map?.get(metaId) ?: return@items
+                            val isSelected = metaId in localSelectedSet
+
+                            MultiSelectOptionItem(
+                                option = option,
+                                isSelected = isSelected,
+                                onToggle = {
+                                    if (isSelected) {
+                                        localSelectedSet.remove(metaId)
+                                    } else {
+                                        localSelectedSet.add(metaId)
+                                    }
+                                }
+                            )
+                        }
+                    }
+
+                    // Footer: Select All / Deselect All + Done
+                    HorizontalDivider()
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        TextButton(
+                            onClick = {
+                                if (allSelected) {
+                                    localSelectedSet.clear()
+                                } else {
+                                    localSelectedSet.clear()
+                                    localSelectedSet.addAll(optionKeys)
+                                }
+                            }
+                        ) {
+                            Text(if (allSelected) "Deselect All" else "Select All")
+                        }
+
+                        TextButton(
+                            onClick = {
+                                val result = if (localSelectedSet.isEmpty()) {
+                                    null
+                                } else {
+                                    localSelectedSet.mapNotNull { metaId ->
+                                        resolvedOptionMap?.map?.get(metaId)
+                                    }
+                                }
+                                onChange(result)
+                                scope.launch {
+                                    sheetState.hide()
+                                }.invokeOnCompletion {
+                                    showSheet = false
+                                }
+                            }
+                        ) {
+                            Text("Done")
+                        }
                     }
                 }
 
@@ -176,17 +305,19 @@ fun RawPickerMultiSelect(
 /**
  * A single option item for the multi-select picker list.
  *
- * Shows a checkbox on the left reflecting [isSelected] state.
+ * Shows a checkbox on the left reflecting [isSelected] state. Clickable to toggle selection.
  * Text color is determined by [DefnDtoOptionData.color] if present.
  * Background becomes error container color if [DefnDtoOptionData.isRemoved] is true.
  *
  * @param option The option data to render
  * @param isSelected Whether this option is currently selected
+ * @param onToggle Callback to toggle this option's selection state
  */
 @Composable
 private fun MultiSelectOptionItem(
     option: DefnDtoOptionData,
-    isSelected: Boolean
+    isSelected: Boolean,
+    onToggle: () -> Unit
 ) {
     val isRemoved = option.isRemoved == true
 
@@ -202,12 +333,13 @@ private fun MultiSelectOptionItem(
         modifier = Modifier
             .fillMaxWidth()
             .background(backgroundColor)
+            .clickable(onClick = onToggle)
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Checkbox(
             checked = isSelected,
-            onCheckedChange = null // onClick handled later
+            onCheckedChange = { onToggle() }
         )
         Spacer(modifier = Modifier.width(8.dp))
         Text(

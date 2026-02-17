@@ -53,12 +53,14 @@ fun RawShowcase(
             selectedOption = singleSelect
         )
 
+        var multiSelect by remember { mutableStateOf<List<String>?>(listOf("a", "b")) }
+
         RawPickerMultiSelect(
             modifier = modifier,
             label = "Multi Select Picker",
             readOnly = false,
             enabled = true,
-            onClear = {},
+            onChange = { options -> multiSelect = options?.map { it.metaId } },
             isError = false,
             optionMap = DefnStudioMapOfDtoOptionData(
                 keys = listOf("a", "b"),
@@ -73,7 +75,7 @@ fun RawShowcase(
                     )
                 )
             ),
-            selectedOptions = listOf("a", "b")
+            selectedOptions = multiSelect
         )
     }
 }
