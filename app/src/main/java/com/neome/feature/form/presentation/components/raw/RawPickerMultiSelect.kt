@@ -7,6 +7,7 @@ import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
@@ -24,6 +25,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -37,6 +39,8 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -315,8 +319,52 @@ fun RawPickerMultiSelect(
                     }
                 } else {
                     val optionKeys = resolvedOptionMap?.keys ?: emptyList()
-                    val allSelected = optionKeys.isNotEmpty() &&
-                        optionKeys.all { it in localSelectedSet }
+
+                    // Search
+                    var searchQuery by remember { mutableStateOf("") }
+                    val filteredKeys = remember(optionKeys, searchQuery) {
+                        if (searchQuery.isBlank()) optionKeys
+                        else optionKeys.filter { metaId ->
+                            resolvedOptionMap?.map?.get(metaId)?.value
+                                ?.contains(searchQuery, ignoreCase = true) == true
+                        }
+                    }
+
+                    val allFilteredSelected = filteredKeys.isNotEmpty() &&
+                        filteredKeys.all { it in localSelectedSet }
+
+                    TextField(
+                        value = searchQuery,
+                        onValueChange = { searchQuery = it },
+                        placeholder = { Text("Search options") },
+                        singleLine = true,
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Default.Search,
+                                contentDescription = "Search"
+                            )
+                        },
+                        trailingIcon = {
+                            if (searchQuery.isNotEmpty()) {
+                                IconButton(onClick = { searchQuery = "" }) {
+                                    Icon(
+                                        imageVector = Icons.Default.Clear,
+                                        contentDescription = "Clear search"
+                                    )
+                                }
+                            }
+                        },
+                        colors = TextFieldDefaults.colors(
+                            focusedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                            unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent
+                        ),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
+                    )
 
                     LazyColumn(
                         modifier = Modifier
@@ -324,7 +372,7 @@ fun RawPickerMultiSelect(
                             .weight(1f)
                     ) {
                         items(
-                            items = optionKeys,
+                            items = filteredKeys,
                             key = { it }
                         ) { metaId ->
                             val option = resolvedOptionMap?.map?.get(metaId) ?: return@items
@@ -356,15 +404,16 @@ fun RawPickerMultiSelect(
                     ) {
                         TextButton(
                             onClick = {
-                                if (allSelected) {
-                                    localSelectedSet.clear()
+                                if (allFilteredSelected) {
+                                    filteredKeys.forEach { localSelectedSet.remove(it) }
                                 } else {
-                                    localSelectedSet.clear()
-                                    localSelectedSet.addAll(optionKeys)
+                                    filteredKeys.forEach {
+                                        if (it !in localSelectedSet) localSelectedSet.add(it)
+                                    }
                                 }
                             }
                         ) {
-                            Text(if (allSelected) "Deselect All" else "Select All")
+                            Text(if (allFilteredSelected) "Deselect All" else "Select All")
                         }
 
                         TextButton(
