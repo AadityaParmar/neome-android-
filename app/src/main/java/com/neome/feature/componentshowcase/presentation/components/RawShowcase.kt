@@ -15,8 +15,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoOptionData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfDtoOptionData
-import com.neome.feature.form.presentation.components.raw.RawPickerMultiSelect
-import com.neome.feature.form.presentation.components.raw.RawPickerSingleSelect
+import com.neome.feature.form.presentation.components.raw.picker.RawPickerMultiSelect
+import com.neome.feature.form.presentation.components.raw.picker.RawPickerSingleSelect
 
 @Composable
 fun RawShowcase(
