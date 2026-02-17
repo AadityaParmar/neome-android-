@@ -79,6 +79,13 @@ interface FormCtx {
     fun getError(fieldId: MetaIdComp): FieldError?
 
     /**
+     * Optional API context provider.
+     * Implementations may override to expose additional APIs specific to this form.
+     * This is intentionally nullable to keep backward compatibility prior to API wiring.
+     */
+    fun getApiCtx(): FormApiContext? = null
+
+    /**
      * Check if a field exists in the form.
      *
      * @param fieldId The field ID to check
