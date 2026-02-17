@@ -9,11 +9,16 @@ import com.neome.api.meta.base.Types.RowId
 import com.neome.api.meta.base.dto.DefnFieldEditableText
 import com.neome.api.meta.base.dto.DefnFieldInfo
 import com.neome.api.meta.base.dto.DefnFieldParagraph
+import com.neome.api.meta.base.dto.DefnFieldPickText
+import com.neome.api.meta.base.dto.DefnFieldSetOfText
 import com.neome.api.meta.base.dto.DefnForm
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnGridData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfDtoOptionData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldDtoGridRowData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldSetOfOptionIdData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueGridData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueOptionIdData
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
 import com.neome.feature.form.domain.util.FormPlus
 import kotlinx.serialization.json.JsonElement
@@ -199,6 +204,14 @@ internal interface DefaultValue : Converter {
             EnumDefnCompType.info ->
                 resolveInfo(defnForm, defnComp, mutableFormValue, formValue, resolvedSet)
 
+            // ── PickText (single-select) ──────────────────────────────
+            EnumDefnCompType.pickText ->
+                resolverPickText(defnForm, defnComp, mutableFormValue, formValue, resolvedSet)
+
+            // ── SetOfText (multi-select) ──────────────────────────────
+            EnumDefnCompType.setOfText ->
+                resolverSetOfText(defnForm, defnComp, mutableFormValue, formValue, resolvedSet)
+
             // ── Other types — no-op for now ────────────────────────────
             else -> null
         }
@@ -315,6 +328,89 @@ internal interface DefaultValue : Converter {
         }
 
         return rawValue?.let { fnRawValueToFieldValue(defnComp.type, it) }
+    }
+
+
+    /**
+     * Resolves default value for a pickText (single-select) field.
+     *
+     * Priority:
+     * 1. [DefnFieldPickText.defaultOptionId] — direct option ID, looked up in optionMap
+     *    for display value
+     * 2. [DefnFieldPickText.defaultOptionFieldId] — recursive resolution from another field
+     *
+     * Returns [FieldValueOptionIdData] or null.
+     */
+    private fun resolverPickText(
+        defnForm: DefnForm,
+        defnComp: DefnCompSeal,
+        mutableFormValue: MutableFormValue,
+        formValue: FormValueData?,
+        resolvedSet: MutableSet<MetaIdComp>
+    ): Any? {
+        val field = defnComp as? DefnFieldPickText ?: return null
+
+        // Priority 1: Direct default option ID
+        field.defaultOptionId?.let { optionId ->
+            val displayValue = (field.optionMap as? DefnStudioMapOfDtoOptionData)
+                ?.map?.get(optionId)?.value
+            return FieldValueOptionIdData(optionId = optionId, value = displayValue)
+        }
+
+        // Priority 2: Default from another field (recursive)
+        field.defaultOptionFieldId?.let { defaultFieldId ->
+            val defaultFieldComp =
+                defnForm.compMap[defaultFieldId] as? DefnCompSeal ?: return null
+            return resolveCompDefaultValue(
+                defnForm, defaultFieldComp, mutableFormValue, formValue, resolvedSet
+            )
+        }
+
+        return null
+    }
+
+
+    /**
+     * Resolves default value for a setOfText (multi-select) field.
+     *
+     * Priority:
+     * 1. [DefnFieldSetOfText.defaultValue] — direct list of option IDs, each looked up
+     *    in optionMap for display values
+     * 2. [DefnFieldSetOfText.defaultValueFieldId] — recursive resolution from another field
+     *
+     * Returns [FieldSetOfOptionIdData] or null.
+     */
+    private fun resolverSetOfText(
+        defnForm: DefnForm,
+        defnComp: DefnCompSeal,
+        mutableFormValue: MutableFormValue,
+        formValue: FormValueData?,
+        resolvedSet: MutableSet<MetaIdComp>
+    ): Any? {
+        val field = defnComp as? DefnFieldSetOfText ?: return null
+
+        // Priority 1: Direct default value (list of option IDs)
+        field.defaultValue?.takeIf { it.isNotEmpty() }?.let { optionIds ->
+            val optionMapData = field.optionMap as? DefnStudioMapOfDtoOptionData
+            val displaySet = optionIds.map { optionId ->
+                optionMapData?.map?.get(optionId)?.value ?: optionId
+            }
+            return FieldSetOfOptionIdData(
+                valueSet = optionIds,
+                displaySet = displaySet
+            )
+        }
+
+        // Priority 2: Default from another field (recursive)
+        field.defaultValueFieldId?.let { defaultFieldId ->
+            val defaultFieldComp =
+                defnForm.compMap[defaultFieldId] as? DefnCompSeal ?: return null
+            return resolveCompDefaultValue(
+                defnForm, defaultFieldComp, mutableFormValue, formValue, resolvedSet
+            )
+        }
+
+        return null
     }
 
     //endregion

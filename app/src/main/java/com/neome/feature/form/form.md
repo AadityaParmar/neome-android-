@@ -4,7 +4,7 @@
 
 | Property           | Value                                       |
 |--------------------|---------------------------------------------|
-| **Version**        | 1.13.0                                      |
+| **Version**        | 1.14.0                                      |
 | **Last Updated**   | 2026-02-17                                  |
 | **Scope**          | Android Form Component Architecture         |
 | **Path**           | `app/src/main/java/com/neome/feature/form/` |
@@ -1038,6 +1038,14 @@ app/src/main/java/com/neome/feature/form/
 ---
 
 ## Changelog
+
+### v1.14.0 (2026-02-17)
+
+- **Feature**: Added default value support for `pickText` and `setOfText` fields in `DefaultValue.kt`
+- **Added**: `resolverPickText` — resolves `defaultOptionId` (direct option ID lookup in optionMap) and `defaultOptionFieldId` (recursive field reference)
+- **Added**: `resolverSetOfText` — resolves `defaultValue` (list of option IDs with display text lookup) and `defaultValueFieldId` (recursive field reference)
+- **Added**: `pickText` and `setOfText` dispatch branches in `resolveCompDefaultValue`
+- **Note**: Both resolvers return typed field values (`FieldValueOptionIdData`/`FieldSetOfOptionIdData`) directly, bypassing `resolveDefaultFieldIdVal` which only handles `String?` raw values
 
 ### v1.13.0 (2026-02-17)
 
