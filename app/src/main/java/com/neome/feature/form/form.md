@@ -65,7 +65,7 @@ using skill : defnForm do [instruction]
 
 | Task                       | Example Instruction                      |
 |----------------------------|------------------------------------------|
-| Add new field type         | `Add new field type FieldPhone`          |
+| Add new field type         | `using skill : defnFieldMaker do Add new field type FieldPhone` |
 | Add validation rule        | `Add email format validation`            |
 | Add cross-field validation | `Validate password confirmation matches` |
 | Add formula support        | `Implement formula calculation for X`    |
@@ -108,6 +108,13 @@ using skill : defnForm do [instruction]
 | Formula Calc (TODO)  | `domain/util/CalcFormula.kt`                      |
 | Arg Resolver (TODO)  | `domain/util/ArgValueResolver.kt`                 |
 | Date Utilities (TODO)| `domain/util/DatePlus.kt`                         |
+| Field Maker Skill    | `field-maker.md` (step-by-step guide for new fields) |
+
+### Related Skills
+
+| Skill              | Purpose                                                |
+|--------------------|--------------------------------------------------------|
+| `defnFieldMaker`   | Step-by-step guide for adding new field types to FieldFactory. Use: `using skill : defnFieldMaker do [instruction]` |
 
 ---
 
