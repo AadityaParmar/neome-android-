@@ -4,8 +4,11 @@ import com.neome.api.meta.base.Types.EnumDefnArgBinder
 import com.neome.api.meta.base.Types.EnumDefnArgBinderContext
 import com.neome.api.meta.base.Types.EnumDefnDate
 import com.neome.api.meta.base.Types.EnumDefnTime
+import com.neome.api.meta.base.dto.DefnDtoText
+import com.neome.api.meta.base.dto.DefnForm
 import com.neome.api.meta.base.dto.StudioDtoArgValue
 import com.neome.api.meta.base.dto.StudioDtoArgValueContext
+import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoArgValueContextCallerData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoArgValueContextCallerSettingData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoArgValueContextData
@@ -212,4 +215,12 @@ object ArgValueResolver {
     }
 
     // endregion
+
+    fun resolveArgForFieldVal(
+        defnForm: DefnForm,
+        formValue: FormValueData?,
+        argValue: DefnDtoText,
+    ): DefnDtoText {
+        return argValue
+    }
 }

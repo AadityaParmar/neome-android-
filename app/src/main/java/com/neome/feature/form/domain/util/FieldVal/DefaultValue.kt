@@ -15,7 +15,6 @@ import com.neome.core.common.serializer.api.meta.base.dto.DefnGridData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldDtoGridRowData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueGridData
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
-import com.neome.feature.form.domain.util.ArgValueResolver
 import com.neome.feature.form.domain.util.FormPlus
 import kotlinx.serialization.json.JsonElement
 
@@ -225,9 +224,9 @@ internal interface DefaultValue : Converter {
                 field.defaultValue
             }
 
-            field.defaultVar != null -> {
-                ArgValueResolver.resolveArgForFieldVal(defnForm, formValue, field.defaultVar)
-            }
+//            field.defaultVar != null -> {
+//                ArgValueResolver.resolveArgForFieldVal(defnForm, formValue, field.defaultVar)
+//            }
 
             field.defaultFieldId != null -> {
                 resolveDefaultFieldIdVal(
@@ -261,9 +260,9 @@ internal interface DefaultValue : Converter {
                 field.defaultValue
             }
 
-            field.defaultVar != null -> {
-                ArgValueResolver.resolveArgForFieldVal(defnForm, formValue, field.defaultVar)
-            }
+//            field.defaultVar != null -> {
+//                ArgValueResolver.resolveArgForFieldVal(defnForm, formValue, field.defaultVar)
+//            }
 
             field.defaultFieldId != null -> {
                 resolveDefaultFieldIdVal(
@@ -297,9 +296,9 @@ internal interface DefaultValue : Converter {
                 field.defaultValue
             }
 
-            field.defaultVar != null -> {
-                ArgValueResolver.resolveArgForFieldVal(defnForm, formValue, field.defaultVar)
-            }
+//            field.defaultVar != null -> {
+//                ArgValueResolver.resolveArgForFieldVal(defnForm, formValue, field.defaultVar)
+//            }
 
             field.defaultFieldId != null -> {
                 resolveDefaultFieldIdVal(

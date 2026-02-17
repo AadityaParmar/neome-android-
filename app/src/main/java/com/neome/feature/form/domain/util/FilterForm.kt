@@ -67,7 +67,8 @@ object FilterForm {
     fun prepareUiForm(form: DefnFormData, callerEnt: SigEntCaller): DefnFormUi {
 
         val permissionResolvedForm = this.prepare(form, callerEnt)
-        return ArgValueResolver.resolveDefnForm(permissionResolvedForm, callerEnt)
+//        return ArgValueResolver.resolveDefnForm(permissionResolvedForm, callerEnt)
+        return permissionResolvedForm
     }
 
     // region --- Foundation Helpers ---

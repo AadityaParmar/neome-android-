@@ -822,8 +822,8 @@ object FieldPropertyResolver {
         if (dtoText == null) return null
 
         if (defnForm != null && callerEnt != null) {
-            val resolved = ArgValueResolver.resolve(dtoText, defnForm, callerEnt)
-            return resolved?.value?.joinToString("")
+//            val resolved = ArgValueResolver.resolve(dtoText, defnForm, callerEnt)
+            return dtoText.value?.joinToString("")
         }
 
         // Fallback: join raw values without resolution
