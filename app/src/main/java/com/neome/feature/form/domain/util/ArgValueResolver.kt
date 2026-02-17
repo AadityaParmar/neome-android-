@@ -103,7 +103,7 @@ object ArgValueResolver {
         defnDtoText.value?.forEach { argStr ->
             newValue.add(resolveArgValField(argStr, defnForm, formValue))
         }
-        return newValue.joinToString(", ")
+        return newValue.filter { it.isNotBlank() || !it.isEmpty() || it != " " }.joinToString(", ")
     }
 
     fun resolveArgForFieldVal(
