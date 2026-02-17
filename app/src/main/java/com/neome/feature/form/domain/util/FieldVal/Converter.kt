@@ -10,6 +10,7 @@ import com.neome.core.common.serializer.api.meta.base.dto.FieldValueEmailData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueHandleData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueMobileData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueNumberData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueOptionIdData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueParagraphData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
 import com.neome.core.logging.AppLogger
@@ -146,6 +147,9 @@ internal interface Converter {
                     decimalValue?.let { FieldValueDecimalData(it) }
                 }
 
+                // Complex types — serialized/deserialized via KSerializer in FieldController
+                Types.EnumDefnCompType.pickText -> null
+
                 else -> null
             }
         } catch (e: Exception) {
@@ -226,6 +230,18 @@ internal interface Converter {
                             FieldValueDecimalData.serializer(),
                             value
                         ).value
+
+                        else -> null
+                    }
+                }
+
+                Types.EnumDefnCompType.pickText -> {
+                    when (value) {
+                        is FieldValueOptionIdData -> value.optionId
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            FieldValueOptionIdData.serializer(),
+                            value
+                        ).optionId
 
                         else -> null
                     }

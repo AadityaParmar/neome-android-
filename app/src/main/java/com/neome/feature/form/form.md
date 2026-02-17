@@ -4,7 +4,7 @@
 
 | Property           | Value                                       |
 |--------------------|---------------------------------------------|
-| **Version**        | 1.11.0                                      |
+| **Version**        | 1.12.0                                      |
 | **Last Updated**   | 2026-02-17                                  |
 | **Scope**          | Android Form Component Architecture         |
 | **Path**           | `app/src/main/java/com/neome/feature/form/` |
@@ -63,58 +63,58 @@ using skill : defnForm do [instruction]
 
 ### Common Instructions
 
-| Task                       | Example Instruction                      |
-|----------------------------|------------------------------------------|
+| Task                       | Example Instruction                                             |
+|----------------------------|-----------------------------------------------------------------|
 | Add new field type         | `using skill : defnFieldMaker do Add new field type FieldPhone` |
-| Add validation rule        | `Add email format validation`            |
-| Add cross-field validation | `Validate password confirmation matches` |
-| Add formula support        | `Implement formula calculation for X`    |
-| Fix field bug              | `Fix validation bug in FieldNumber`      |
-| Add property resolution    | `Add maxItems property to FieldPickText` |
-| Add conditional visibility | `Hide field Y when X is empty`           |
+| Add validation rule        | `Add email format validation`                                   |
+| Add cross-field validation | `Validate password confirmation matches`                        |
+| Add formula support        | `Implement formula calculation for X`                           |
+| Fix field bug              | `Fix validation bug in FieldNumber`                             |
+| Add property resolution    | `Add maxItems property to FieldPickText`                        |
+| Add conditional visibility | `Hide field Y when X is empty`                                  |
 
 ### Key Files
 
-| Purpose              | File                                              |
-|----------------------|---------------------------------------------------|
-| Root Composable      | `presentation/components/Form.kt`                 |
-| State Owner          | `domain/ctx/FormCtxImpl.kt`                       |
-| Init Helper          | `domain/ctx/helper/FormCtxInitHelper.kt`          |
-| Event Helper         | `domain/ctx/helper/FormCtxEventHelper.kt`         |
-| Validation Helper    | `domain/ctx/helper/FormCtxValidationHelper.kt`    |
-| Reducer Result       | `domain/ctx/helper/FormReducerResult.kt`          |
-| Schema Factory       | `domain/ctx/helper/schema/CompSchemaFactory.kt`   |
-| Schema Base          | `domain/ctx/helper/schema/CompSchema.kt`          |
-| All Schemas          | `domain/ctx/helper/schema/Field*Schema.kt` (40+)  |
-| Field Factory        | `presentation/components/base/FieldFactory.kt`    |
-| External API         | `domain/ref/FormRef.kt`                           |
-| External API Impl    | `domain/ref/FormRefImpl.kt`                       |
-| Internal Context     | `domain/ctx/FormCtx.kt`                           |
-| Field Controller     | `presentation/components/base/FieldController.kt` |
-| Field Base Layout    | `presentation/components/base/FieldBase.kt`       |
-| State Classes        | `presentation/state/FormState.kt`                 |
-| Events               | `presentation/state/FormEvent.kt`                 |
-| Field State          | `presentation/state/FieldState.kt`                |
-| Field Events         | `presentation/state/FieldEvent.kt`                |
-| Field Errors         | `presentation/state/FieldError.kt`                |
-| Intents              | `presentation/state/FormIntent.kt`                |
-| Property Resolver    | `domain/util/FieldPropertyResolver.kt`            |
-| Value Resolver       | `domain/util/FieldVal/FieldValueResolver.kt`      |
-| Value Converter      | `domain/util/FieldVal/Converter.kt`               |
-| Default Values       | `domain/util/FieldVal/DefaultValue.kt`            |
-| Form Types           | `domain/TypesForm.kt`                             |
-| Permission Filter    | `domain/util/FilterForm.kt`                       |
-| Form Tree Traversal  | `domain/util/FormPlus.kt`                         |
-| Formula Calc (TODO)  | `domain/util/CalcFormula.kt`                      |
-| Arg Resolver (TODO)  | `domain/util/ArgValueResolver.kt`                 |
-| Date Utilities (TODO)| `domain/util/DatePlus.kt`                         |
-| Field Maker Skill    | `field-maker.md` (step-by-step guide for new fields) |
+| Purpose               | File                                                 |
+|-----------------------|------------------------------------------------------|
+| Root Composable       | `presentation/components/Form.kt`                    |
+| State Owner           | `domain/ctx/FormCtxImpl.kt`                          |
+| Init Helper           | `domain/ctx/helper/FormCtxInitHelper.kt`             |
+| Event Helper          | `domain/ctx/helper/FormCtxEventHelper.kt`            |
+| Validation Helper     | `domain/ctx/helper/FormCtxValidationHelper.kt`       |
+| Reducer Result        | `domain/ctx/helper/FormReducerResult.kt`             |
+| Schema Factory        | `domain/ctx/helper/schema/CompSchemaFactory.kt`      |
+| Schema Base           | `domain/ctx/helper/schema/CompSchema.kt`             |
+| All Schemas           | `domain/ctx/helper/schema/Field*Schema.kt` (40+)     |
+| Field Factory         | `presentation/components/base/FieldFactory.kt`       |
+| External API          | `domain/ref/FormRef.kt`                              |
+| External API Impl     | `domain/ref/FormRefImpl.kt`                          |
+| Internal Context      | `domain/ctx/FormCtx.kt`                              |
+| Field Controller      | `presentation/components/base/FieldController.kt`    |
+| Field Base Layout     | `presentation/components/base/FieldBase.kt`          |
+| State Classes         | `presentation/state/FormState.kt`                    |
+| Events                | `presentation/state/FormEvent.kt`                    |
+| Field State           | `presentation/state/FieldState.kt`                   |
+| Field Events          | `presentation/state/FieldEvent.kt`                   |
+| Field Errors          | `presentation/state/FieldError.kt`                   |
+| Intents               | `presentation/state/FormIntent.kt`                   |
+| Property Resolver     | `domain/util/FieldPropertyResolver.kt`               |
+| Value Resolver        | `domain/util/FieldVal/FieldValueResolver.kt`         |
+| Value Converter       | `domain/util/FieldVal/Converter.kt`                  |
+| Default Values        | `domain/util/FieldVal/DefaultValue.kt`               |
+| Form Types            | `domain/TypesForm.kt`                                |
+| Permission Filter     | `domain/util/FilterForm.kt`                          |
+| Form Tree Traversal   | `domain/util/FormPlus.kt`                            |
+| Formula Calc (TODO)   | `domain/util/CalcFormula.kt`                         |
+| Arg Resolver (TODO)   | `domain/util/ArgValueResolver.kt`                    |
+| Date Utilities (TODO) | `domain/util/DatePlus.kt`                            |
+| Field Maker Skill     | `field-maker.md` (step-by-step guide for new fields) |
 
 ### Related Skills
 
-| Skill              | Purpose                                                |
-|--------------------|--------------------------------------------------------|
-| `defnFieldMaker`   | Step-by-step guide for adding new field types to FieldFactory. Use: `using skill : defnFieldMaker do [instruction]` |
+| Skill            | Purpose                                                                                                             |
+|------------------|---------------------------------------------------------------------------------------------------------------------|
+| `defnFieldMaker` | Step-by-step guide for adding new field types to FieldFactory. Use: `using skill : defnFieldMaker do [instruction]` |
 
 ---
 
@@ -180,7 +180,7 @@ using skill : defnForm do [instruction]
 ### Core Principles
 
 | Principle              | Implementation                                                                     |
-|------------------------|-------------------------------------------------------------------------------------|
+|------------------------|------------------------------------------------------------------------------------|
 | Single Source of Truth | All state in immutable `FormState`                                                 |
 | Pure Handlers          | Helper functions have no side effects                                              |
 | Reactive Updates       | Compose `State<T>` for UI observation                                              |
@@ -203,37 +203,38 @@ using skill : defnForm do [instruction]
 
 **FormState Properties:**
 
-| Property            | Type                              | Purpose                                    |
-|---------------------|-----------------------------------|--------------------------------------------|
-| `defnForm`          | `DefnFormUi`                      | Form schema definition (with permissions)  |
-| `initialFormValue`  | `FormValueData`                   | Initial values at form creation            |
-| `fieldStates`       | `Map<MetaIdComp, FieldState>`     | Per-field UI state (interaction + props)   |
-| `valueMap`          | `Map<MetaIdComp, JsonElement>`    | Field values (isolated for performance)    |
-| `errors`            | `Map<MetaIdComp, FieldError>`     | Validation errors per field                |
-| `fieldDependencies` | `FieldDependencyMap`              | Dependency graph for recalculation         |
-| `compSchemaMap`     | `Map<MetaIdComp, CompSchema>`     | Validation schemas built during init       |
-| `disableSendBtnSet` | `Set<SendBtnDisableFlag>`         | Flags disabling send button                |
-| `isInitialized`     | `Boolean`                         | Form init complete                         |
-| `disabled`          | `Boolean`                         | Entire form disabled                       |
-| `readOnly`          | `Boolean`                         | Entire form read-only                      |
-| `isSubmitting`      | `Boolean`                         | Submit in progress                         |
+| Property            | Type                           | Purpose                                   |
+|---------------------|--------------------------------|-------------------------------------------|
+| `defnForm`          | `DefnFormUi`                   | Form schema definition (with permissions) |
+| `initialFormValue`  | `FormValueData`                | Initial values at form creation           |
+| `fieldStates`       | `Map<MetaIdComp, FieldState>`  | Per-field UI state (interaction + props)  |
+| `valueMap`          | `Map<MetaIdComp, JsonElement>` | Field values (isolated for performance)   |
+| `errors`            | `Map<MetaIdComp, FieldError>`  | Validation errors per field               |
+| `fieldDependencies` | `FieldDependencyMap`           | Dependency graph for recalculation        |
+| `compSchemaMap`     | `Map<MetaIdComp, CompSchema>`  | Validation schemas built during init      |
+| `disableSendBtnSet` | `Set<SendBtnDisableFlag>`      | Flags disabling send button               |
+| `isInitialized`     | `Boolean`                      | Form init complete                        |
+| `disabled`          | `Boolean`                      | Entire form disabled                      |
+| `readOnly`          | `Boolean`                      | Entire form read-only                     |
+| `isSubmitting`      | `Boolean`                      | Submit in progress                        |
 
 **Computed Properties:** `hasErrors`, `isDirty`, `isValid`, `isSendBtnEnabled`
 
 **FieldProperties (25+ properties):**
 
-| Category       | Properties                                                              |
-|----------------|-------------------------------------------------------------------------|
-| Base           | `required`, `disabled`, `readOnly`, `hidden`                            |
-| Display        | `label`, `helperText`, `placeholder`                                    |
-| Text/Paragraph | `minCharCount`, `maxCharCount`, `lineCount`, `flexHeight`              |
-| Number/Counter | `minNumber`, `maxNumber`, `step`, `minDisplayValue`, `justifyContent`  |
-| Decimal        | `minDecimal`, `maxDecimal`                                              |
-| Media          | `maxSize`, `showLabel`, `showPreview`, `showSize`                       |
-| UI Toggles     | `showAsCheckbox`, `showSecond`, `showAsDropdown`                        |
-| Button         | `textSize`, `disableElevation`                                          |
+| Category       | Properties                                                            |
+|----------------|-----------------------------------------------------------------------|
+| Base           | `required`, `disabled`, `readOnly`, `hidden`                          |
+| Display        | `label`, `helperText`, `placeholder`                                  |
+| Text/Paragraph | `minCharCount`, `maxCharCount`, `lineCount`, `flexHeight`             |
+| Number/Counter | `minNumber`, `maxNumber`, `step`, `minDisplayValue`, `justifyContent` |
+| Decimal        | `minDecimal`, `maxDecimal`                                            |
+| Media          | `maxSize`, `showLabel`, `showPreview`, `showSize`                     |
+| UI Toggles     | `showAsCheckbox`, `showSecond`, `showAsDropdown`                      |
+| Button         | `textSize`, `disableElevation`                                        |
 
 **Property Resolution Priority (3 levels):**
+
 1. **Direct value**: `defnComp.property` (e.g., `placeHolder`)
 2. **Variable**: `defnComp.propertyVar` (e.g., `placeHolderVar`) → `ArgValueResolver`
 3. **Field reference**: `defnComp.propertyFieldId` (e.g., `placeHolderFieldId`) → value from another field
@@ -284,8 +285,8 @@ using skill : defnForm do [instruction]
 
 > **Reference File:** `presentation/state/FormIntent.kt`
 
-| Intent                   | Direction     | Payload                                 | Purpose                          |
-|--------------------------|---------------|-----------------------------------------|----------------------------------|
+| Intent                   | Direction     | Payload                                  | Purpose                          |
+|--------------------------|---------------|------------------------------------------|----------------------------------|
 | `Submit`                 | Form → Parent | `valueMap: Map<MetaIdComp, JsonElement>` | Deliver validated form data      |
 | `Watch`                  | Form → Parent | `fieldId`, `fieldValue`, `valueMap`      | Notify field value changes       |
 | `ValidationStateChanged` | Form → Parent | `isValid`, `hasErrors`                   | Notify validation state changes  |
@@ -295,11 +296,11 @@ using skill : defnForm do [instruction]
 
 > **Reference File:** `presentation/state/FieldEvent.kt`
 
-| Event          | Purpose                   | Converted To              |
-|----------------|---------------------------|---------------------------|
-| `ValueChanged` | Field value changed       | `FormEvent.FieldValueChanged` |
-| `Focused`      | Field gained focus        | `FormEvent.FieldFocused`  |
-| `Blurred`      | Field lost focus          | `FormEvent.FieldBlurred`  |
+| Event          | Purpose             | Converted To                  |
+|----------------|---------------------|-------------------------------|
+| `ValueChanged` | Field value changed | `FormEvent.FieldValueChanged` |
+| `Focused`      | Field gained focus  | `FormEvent.FieldFocused`      |
+| `Blurred`      | Field lost focus    | `FormEvent.FieldBlurred`      |
 
 **Conversion**: FieldEvents are automatically converted to FormEvents by the Form component.
 
@@ -307,11 +308,11 @@ using skill : defnForm do [instruction]
 
 > **Reference File:** `presentation/state/FieldError.kt`
 
-| Error Type   | Auto-Cleared | Cleared By              |
-|-------------|--------------|--------------------------|
-| `Validation` | Yes (on value change) | Schema validation  |
-| `Custom`     | No           | `clearErrors()` only    |
-| `Server`     | No           | `clearErrors()` only    |
+| Error Type   | Auto-Cleared          | Cleared By           |
+|--------------|-----------------------|----------------------|
+| `Validation` | Yes (on value change) | Schema validation    |
+| `Custom`     | No                    | `clearErrors()` only |
+| `Server`     | No                    | `clearErrors()` only |
 
 ### API Interfaces
 
@@ -322,25 +323,25 @@ using skill : defnForm do [instruction]
 
 **FormRef** (for parents - imperative API, inspired by React Hook Form):
 
-| Category       | Methods                                                                  |
-|----------------|--------------------------------------------------------------------------|
-| Read Values    | `getValue(fieldId)`, `getValues()`, `getValueMap()`                     |
-| Write Values   | `setValue(fieldId, value)`, `setValues(valueMap)`                        |
-| Validation     | `validate(fieldId)`, `setError(fieldId, error)`, `clearErrors(fieldId)` |
-| Form Ops       | `submit()`, `reset(valueMap)`                                            |
-| State Queries  | `isDirty(fieldId)`, `isValid(fieldId)`, `isTouched(fieldId)`            |
-| Send Button    | `addSendBtnDisableFlag`, `removeSendBtnDisableFlag`, `isSendBtnEnabled` |
-| Observe        | `formState: State<FormState>`                                            |
+| Category      | Methods                                                                 |
+|---------------|-------------------------------------------------------------------------|
+| Read Values   | `getValue(fieldId)`, `getValues()`, `getValueMap()`                     |
+| Write Values  | `setValue(fieldId, value)`, `setValues(valueMap)`                       |
+| Validation    | `validate(fieldId)`, `setError(fieldId, error)`, `clearErrors(fieldId)` |
+| Form Ops      | `submit()`, `reset(valueMap)`                                           |
+| State Queries | `isDirty(fieldId)`, `isValid(fieldId)`, `isTouched(fieldId)`            |
+| Send Button   | `addSendBtnDisableFlag`, `removeSendBtnDisableFlag`, `isSendBtnEnabled` |
+| Observe       | `formState: State<FormState>`                                           |
 
 **FormCtx** (for fields - reactive API via CompositionLocal):
 
-| Category       | Methods                                                                  |
-|----------------|--------------------------------------------------------------------------|
-| State          | `formState: State<FormState>`                                            |
-| Trigger        | `trigger(fieldId)` - Recalculate field properties                        |
-| Read           | `getValues()`, `getValue(fieldId)`, `getFieldState(fieldId)`, `getError(fieldId)`, `hasField(fieldId)`, `getDefnForm()` |
-| Validation     | `validate(fieldId)`, `setError(fieldId, error)`, `clearError(fieldId)`   |
-| Send Button    | `addSendBtnDisableFlag`, `removeSendBtnDisableFlag`                      |
+| Category    | Methods                                                                                                                 |
+|-------------|-------------------------------------------------------------------------------------------------------------------------|
+| State       | `formState: State<FormState>`                                                                                           |
+| Trigger     | `trigger(fieldId)` - Recalculate field properties                                                                       |
+| Read        | `getValues()`, `getValue(fieldId)`, `getFieldState(fieldId)`, `getError(fieldId)`, `hasField(fieldId)`, `getDefnForm()` |
+| Validation  | `validate(fieldId)`, `setError(fieldId, error)`, `clearError(fieldId)`                                                  |
+| Send Button | `addSendBtnDisableFlag`, `removeSendBtnDisableFlag`                                                                     |
 
 ### Validation Schema System
 
@@ -357,6 +358,7 @@ using skill : defnForm do [instruction]
 4. Returns `String?` - error message or null (pure function, no side effects)
 
 **CompSchema base class:**
+
 ```kotlin
 abstract fun validate(fieldValue: JsonElement?, fieldState: FieldState?): String?
 // Helper: isRequired() - common required validation logic
@@ -364,17 +366,17 @@ abstract fun validate(fieldValue: JsonElement?, fieldState: FieldState?): String
 
 **Schema Categories (40+ schemas):**
 
-| Category     | Schemas                                                                                          |
-|-------------|---------------------------------------------------------------------------------------------------|
-| Text        | `FieldTextSchema` (required, min/max char, regex: aadhaar/gstin/pan/custom)                      |
-| Email       | `FieldEmailSchema` (required, format regex, domain whitelist/blacklist)                           |
-| Number      | `FieldNumberSchema` (required, min/max), `FieldDecimalSchema` (required, min/max)                |
-| Date/Time   | `FieldDateSchema`, `FieldTimeSchema`, `FieldDateTimeSchema`, `FieldDateRangeSchema`              |
-| Boolean     | `FieldBoolSchema` (required + capture validations: time, location, user)                         |
-| Pick/Select | `FieldPickTextSchema`, `FieldPickTreeSchema`, `FieldPickUserSchema`, `FieldPickRoleSchema`, `FieldPickGridRowSchema` |
-| Set/ChipSet | `FieldSetOfTextSchema`, `FieldSetOfUserSchema`, `FieldSetOfRoleSchema`, `FieldSetOfDocumentSchema`, `FieldChipSetSchema` |
-| Media       | `FieldImageSchema`, `FieldVideoSchema`, `FieldAudioSchema`, `FieldDocumentSchema`, `FieldCameraSchema`, `FieldVoiceSchema`, `FieldSignatureSchema` |
-| Special     | `FieldParagraphSchema`, `FieldHandleSchema`, `FieldHyperlinkSchema`, `FieldMobileNumberSchema`, `FieldOtpSchema` |
+| Category    | Schemas                                                                                                                                              |
+|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Text        | `FieldTextSchema` (required, min/max char, regex: aadhaar/gstin/pan/custom)                                                                          |
+| Email       | `FieldEmailSchema` (required, format regex, domain whitelist/blacklist)                                                                              |
+| Number      | `FieldNumberSchema` (required, min/max), `FieldDecimalSchema` (required, min/max)                                                                    |
+| Date/Time   | `FieldDateSchema`, `FieldTimeSchema`, `FieldDateTimeSchema`, `FieldDateRangeSchema`                                                                  |
+| Boolean     | `FieldBoolSchema` (required + capture validations: time, location, user)                                                                             |
+| Pick/Select | `FieldPickTextSchema`, `FieldPickTreeSchema`, `FieldPickUserSchema`, `FieldPickRoleSchema`, `FieldPickGridRowSchema`                                 |
+| Set/ChipSet | `FieldSetOfTextSchema`, `FieldSetOfUserSchema`, `FieldSetOfRoleSchema`, `FieldSetOfDocumentSchema`, `FieldChipSetSchema`                             |
+| Media       | `FieldImageSchema`, `FieldVideoSchema`, `FieldAudioSchema`, `FieldDocumentSchema`, `FieldCameraSchema`, `FieldVoiceSchema`, `FieldSignatureSchema`   |
+| Special     | `FieldParagraphSchema`, `FieldHandleSchema`, `FieldHyperlinkSchema`, `FieldMobileNumberSchema`, `FieldOtpSchema`                                     |
 | Layout      | `FieldDurationSchema`, `FieldLocationSchema`, `FieldColorSchema`, `FieldSliderSchema`, `FieldScanCodeSchema`, `FieldGridSchema`, `FieldSymbolSchema` |
 
 **Factory returns null for** (no validation): composite types (section, tab, grid, wizard), display-only (label, divider, html, button), reference fields (ref, refSet, refUser), studio fields.
@@ -390,6 +392,7 @@ abstract fun validate(fieldValue: JsonElement?, fieldState: FieldState?): String
 Implements `FormCtx`. Single dispatch entry point for all state mutations.
 
 **Architecture:**
+
 ```
 FormEvent → dispatch() → processEvent() → Helpers → FormReducerResult(state, intent?)
 ```
@@ -418,6 +421,7 @@ data class FormReducerResult(
 Called once on form mount. Produces initial `FormState`.
 
 **Process:**
+
 1. `FieldValueResolver.fnEnsureInit()` - Ensure initial values with defaults
 2. Build dependency map from field references
 3. Create `FieldState` for each non-composite field (resolve initial properties)
@@ -431,6 +435,7 @@ Called once on form mount. Produces initial `FormState`.
 Handles all field-level events and cascading dependency updates.
 
 **Key Methods:**
+
 - `handleFieldValueChanged()` - Update value → trigger field + dependents → emit Watch intent
 - `handleFieldFocused/Blurred/Touched()` - Update interaction state
 - `handleTriggerField()` - Recalculate properties for single field
@@ -440,6 +445,7 @@ Handles all field-level events and cascading dependency updates.
 - `triggerDependentFields()` - Walk dependency graph, recalculate dependents
 
 **Dependency Trigger Flow:**
+
 ```
 Field Value Changed → Update valueMap → Trigger current field
   → Get dependents from FieldDependencyMap → Trigger each dependent
@@ -451,6 +457,7 @@ Field Value Changed → Update valueMap → Trigger current field
 > **File:** `domain/ctx/helper/FormCtxValidationHelper.kt`
 
 **Key Methods:**
+
 - `handleValidateField()` - Validate single field via schema
 - `handleValidateAll()` - Validate all fields with schemas
 - `updateFieldError()` - Update error map (preserves custom/server errors)
@@ -463,14 +470,14 @@ Field Value Changed → Update valueMap → Trigger current field
 
 UI-specific type definitions for the permission system:
 
-| Type                         | Purpose                                      |
-|------------------------------|----------------------------------------------|
-| `TypeUiPermissionRole`       | Sealed: `Role(EnumDefnRoles)` or `Caller`   |
-| `TypeUiFormPermission`       | Permission config per component              |
-| `TypeUiFormPermissionMap`    | Wraps permission map                         |
-| `TypeUiFormParentMap`        | Parent-child relationships                   |
-| `TypeUiManagerialRelationship` | User sets for managerial roles             |
-| `DefnFormUi`                 | Extends `DefnForm` with UI-specific maps     |
+| Type                           | Purpose                                   |
+|--------------------------------|-------------------------------------------|
+| `TypeUiPermissionRole`         | Sealed: `Role(EnumDefnRoles)` or `Caller` |
+| `TypeUiFormPermission`         | Permission config per component           |
+| `TypeUiFormPermissionMap`      | Wraps permission map                      |
+| `TypeUiFormParentMap`          | Parent-child relationships                |
+| `TypeUiManagerialRelationship` | User sets for managerial roles            |
+| `DefnFormUi`                   | Extends `DefnForm` with UI-specific maps  |
 
 **Permission Priority:** `write (6) > writeOnce (5) > writeOnInsert (4) > read (3) > invisible (2) > hide (1)`
 
@@ -485,6 +492,7 @@ fun prepareUiForm(form: DefnFormData, callerEnt: SigEntCaller): DefnFormUi
 ```
 
 **Preparation Steps:**
+
 1. Resolve form-level + component-level permissions from `permissionMatrix`
 2. Walk component tree, inherit permissions from parent
 3. Map caller roles → permissions (highest priority wins)
@@ -501,6 +509,7 @@ fun prepareUiForm(form: DefnFormData, callerEnt: SigEntCaller): DefnFormUi
 Resolves 25+ field properties with 3-level priority (direct → var → fieldId reference).
 
 **Dependency Tracking:**
+
 - `buildDependencyMap(defnForm)` → `FieldDependencyMap` - Scans all `*FieldId` properties
 - `extractFieldIdReferences(defnComp)` → field references from `DefnComp`
 
@@ -515,16 +524,17 @@ Resolves 25+ field properties with 3-level priority (direct → var → fieldId 
 
 **Converter** (`domain/util/FieldVal/Converter.kt`):
 
-| Method                      | Purpose                              |
-|-----------------------------|--------------------------------------|
-| `fnRawValueToFieldValue`    | Raw primitive → Typed value          |
-| `fnFieldValueToRawValue`    | Typed value → Raw primitive          |
-| `fnJsonElementFieldValue`   | JsonElement → Typed value            |
-| `fnFieldValueToJsonElement` | Typed value → JsonElement            |
-| `fnResolveNumericValue`     | Any value → Long?                    |
-| `fnResolveNumericDecimalValue` | Any value → Double?               |
+| Method                         | Purpose                     |
+|--------------------------------|-----------------------------|
+| `fnRawValueToFieldValue`       | Raw primitive → Typed value |
+| `fnFieldValueToRawValue`       | Typed value → Raw primitive |
+| `fnJsonElementFieldValue`      | JsonElement → Typed value   |
+| `fnFieldValueToJsonElement`    | Typed value → JsonElement   |
+| `fnResolveNumericValue`        | Any value → Long?           |
+| `fnResolveNumericDecimalValue` | Any value → Double?         |
 
 **Supported Value Types:**
+
 - Text → `FieldValueTextData(String)`, Email → `FieldValueEmailData(String)`
 - Number → `FieldValueNumberData(Long)`, Decimal → `FieldValueDecimalData(Double)`
 - Date → `FieldValueDateData(String)`, Time → `FieldValueTimeData`, DateTime → `FieldValueDateTimeData`
@@ -532,11 +542,11 @@ Resolves 25+ field properties with 3-level priority (direct → var → fieldId 
 
 **DefaultValue** (`domain/util/FieldVal/DefaultValue.kt`):
 
-| Method                    | Purpose                                          |
-|---------------------------|--------------------------------------------------|
-| `fnEnsureInit`            | Initialize form values with defaults             |
-| `fnEnsureInitGrid`        | Initialize grid field values                     |
-| `resolveCompDefaultValue` | Recursive default with cycle detection           |
+| Method                    | Purpose                                |
+|---------------------------|----------------------------------------|
+| `fnEnsureInit`            | Initialize form values with defaults   |
+| `fnEnsureInitGrid`        | Initialize grid field values           |
+| `resolveCompDefaultValue` | Recursive default with cycle detection |
 
 **Default Value Priority:** Existing value > `defaultValue` param > `defnField.defaultValue` > `defnField.defaultVar` (TODO) > `defnField.defaultFieldId` (recursive)
 
@@ -546,19 +556,19 @@ Resolves 25+ field properties with 3-level priority (direct → var → fieldId 
 
 > **File:** `domain/util/FormPlus.kt`
 
-| Method            | Purpose                                        |
-|-------------------|------------------------------------------------|
-| `loopDefnForm`    | Recursive tree traversal (Tab, Section, Wizard, Grid, FormList) |
-| `getCompMetaId`   | Extract MetaIdComp from any component type     |
-| `matchAllRoles`   | Check if all caller roles match target roles   |
+| Method          | Purpose                                                         |
+|-----------------|-----------------------------------------------------------------|
+| `loopDefnForm`  | Recursive tree traversal (Tab, Section, Wizard, Grid, FormList) |
+| `getCompMetaId` | Extract MetaIdComp from any component type                      |
+| `matchAllRoles` | Check if all caller roles match target roles                    |
 
 ### Stub Utilities (TODO)
 
-| File                      | Purpose                        | Status |
-|---------------------------|--------------------------------|--------|
-| `domain/util/CalcFormula.kt` | Formula calculation         | TODO   |
-| `domain/util/ArgValueResolver.kt` | DefnDtoText variable resolution | TODO |
-| `domain/util/DatePlus.kt` | Date formatting/calculation    | TODO   |
+| File                              | Purpose                         | Status |
+|-----------------------------------|---------------------------------|--------|
+| `domain/util/CalcFormula.kt`      | Formula calculation             | TODO   |
+| `domain/util/ArgValueResolver.kt` | DefnDtoText variable resolution | TODO   |
+| `domain/util/DatePlus.kt`         | Date formatting/calculation     | TODO   |
 
 ---
 
@@ -580,6 +590,7 @@ fun Form(
 ```
 
 **Responsibilities:**
+
 1. Creates `FormCtxImpl` (domain layer) for state + business logic
 2. Provides `LocalFormCtx` via `CompositionLocalProvider`
 3. Converts `FieldEvent` → `FormEvent` and dispatches to FormCtx
@@ -589,17 +600,18 @@ fun Form(
 
 > **File:** `presentation/components/base/FieldFactory.kt`
 
-Routes `defnComp.type` to correct field renderer. Supported types (23):
+Routes `defnComp.type` to correct field renderer. Supported types (24):
 
-| Category   | Types                                                        |
-|------------|--------------------------------------------------------------|
-| Text       | `text`, `email`, `handle`, `hyperlink`, `mobileNumber`, `paragraph` |
-| Date/Time  | `date`, `dateTime`, `dateRange`, `dateTimeRange`, `time`     |
-| Number     | `number`, `decimal`, `counter`, `logCounter`                 |
-| Boolean    | `bool` (renders as Switch)                                   |
-| Media      | `image`, `document`                                          |
-| Composite  | `section`, `tab`                                             |
-| TODO       | `grid`                                                       |
+| Category  | Types                                                               |
+|-----------|---------------------------------------------------------------------|
+| Text      | `text`, `email`, `handle`, `hyperlink`, `mobileNumber`, `paragraph` |
+| Date/Time | `date`, `dateTime`, `dateRange`, `dateTimeRange`, `time`            |
+| Number    | `number`, `decimal`, `counter`, `logCounter`                        |
+| Boolean   | `bool` (renders as Switch)                                          |
+| Pick      | `pickText` (dropdown via RawPickerSingleSelect)                     |
+| Media     | `image`, `document`                                                 |
+| Composite | `section`, `tab`                                                    |
+| TODO      | `grid`                                                              |
 
 ### FieldController.kt - Field State Access
 
@@ -613,6 +625,7 @@ fun <T> rememberFieldController(serializer: KSerializer<T>): FieldController<T>
 ```
 
 **Properties:**
+
 - `fieldId: MetaIdComp?` - Field identifier
 - `value: State<T?>` - Deserialized value via `derivedStateOf` (fine-grained recomposition)
 - `field: State<FieldUiState>` - Properties + error via `derivedStateOf`
@@ -629,18 +642,21 @@ Wraps all fields with consistent `Column(fillMaxWidth)` + padding (16dp horizont
 ### Composite Components
 
 **FieldSection** (`presentation/components/composite/FieldSection.kt`):
+
 - Groups fields with optional label (`titleMedium`)
 - Direction: Horizontal (`Row` with `weight(1f)`) or Vertical (`Column`)
 - Recursive rendering via `FieldFactory`
 
 **FieldTab** (`presentation/components/composite/FieldTab.kt`):
+
 - Material3 `ScrollableTabRow` with local tab selection state
 - Content area with `verticalScroll`
 - Renders selected tab content via `FieldFactory`
 
-### Field Implementations (21 files)
+### Field Implementations (22 files)
 
 **Field Component Pattern:**
+
 ```kotlin
 @Composable
 fun FieldX(defnComp: DefnCompSeal, onFieldEvent: (FieldEvent) -> Unit) {
@@ -648,7 +664,7 @@ fun FieldX(defnComp: DefnCompSeal, onFieldEvent: (FieldEvent) -> Unit) {
     val value = controller.value.value
     val (properties, error) = controller.field.value
     if (controller.fieldId == null || properties.hidden) return
-    
+
     FieldBase {
         FieldXContent(value, properties, error, controller.onChange)
     }
@@ -657,59 +673,65 @@ fun FieldX(defnComp: DefnCompSeal, onFieldEvent: (FieldEvent) -> Unit) {
 
 **Text-Based Fields:**
 
-| Component          | Value Type              | Special Features                                           |
-|--------------------|-------------------------|------------------------------------------------------------|
-| `FieldText`        | `FieldValueTextData`    | Placeholder space for supporting text, stateless content   |
-| `FieldParagraph`   | `FieldValueParagraphData` | minLines=3, maxLines=5                                  |
-| `FieldEmail`       | `FieldValueEmailData`   | KeyboardType.Email, basic @ validation                     |
-| `FieldHandle`      | `FieldValueEmailData`   | Dynamic keyboard (Phone if starts with +, else Email), dual regex validation |
-| `FieldHyperlink`   | `FieldValueHyperlinkData` | URL validation, trailing link icon, auto-prefix https:// |
+| Component           | Value Type                   | Special Features                                                                       |
+|---------------------|------------------------------|----------------------------------------------------------------------------------------|
+| `FieldText`         | `FieldValueTextData`         | Placeholder space for supporting text, stateless content                               |
+| `FieldParagraph`    | `FieldValueParagraphData`    | minLines=3, maxLines=5                                                                 |
+| `FieldEmail`        | `FieldValueEmailData`        | KeyboardType.Email, basic @ validation                                                 |
+| `FieldHandle`       | `FieldValueEmailData`        | Dynamic keyboard (Phone if starts with +, else Email), dual regex validation           |
+| `FieldHyperlink`    | `FieldValueHyperlinkData`    | URL validation, trailing link icon, auto-prefix https://                               |
 | `FieldMobileNumber` | `FieldValueMobileNumberData` | Country code dropdown (140+ codes) + 10-digit input, combined format `+<code><number>` |
 
 **Number Fields:**
 
-| Component        | Value Type                | Special Features                                    |
-|------------------|---------------------------|-----------------------------------------------------|
-| `FieldNumber`    | `FieldValueNumberData`    | KeyboardType.Number, Long, allows `-`               |
-| `FieldDecimal`   | `FieldValueDecimalData`   | KeyboardType.Decimal, Double, allows `.` and `-.`   |
-| `FieldCounter`   | (Long)                    | Stepper: `[- ] [INPUT] [+ ]`, uses `RawCounter`    |
-| `FieldLogCounter` | (Long)                   | Counter with hideInfo + logReadRoleSet              |
+| Component         | Value Type              | Special Features                                  |
+|-------------------|-------------------------|---------------------------------------------------|
+| `FieldNumber`     | `FieldValueNumberData`  | KeyboardType.Number, Long, allows `-`             |
+| `FieldDecimal`    | `FieldValueDecimalData` | KeyboardType.Decimal, Double, allows `.` and `-.` |
+| `FieldCounter`    | (Long)                  | Stepper: `[- ] [INPUT] [+ ]`, uses `RawCounter`   |
+| `FieldLogCounter` | (Long)                  | Counter with hideInfo + logReadRoleSet            |
 
 **Date/Time Fields:**
 
-| Component            | Special Features                                        |
-|----------------------|---------------------------------------------------------|
-| `FieldDate`          | Read-only + DatePickerDialog, ISO storage `yyyy-MM-dd`  |
-| `FieldDateTime`      | Two-step: Date → Time picker, preserves existing time   |
-| `FieldTime`          | AlertDialog + TimePicker, format `HH:mm`                |
-| `FieldDateRange`     | Two stacked date fields, "To" min >= "From"             |
-| `FieldDateTimeRange` | Most complex: constraints, snapshotFlow for validation  |
+| Component            | Special Features                                       |
+|----------------------|--------------------------------------------------------|
+| `FieldDate`          | Read-only + DatePickerDialog, ISO storage `yyyy-MM-dd` |
+| `FieldDateTime`      | Two-step: Date → Time picker, preserves existing time  |
+| `FieldTime`          | AlertDialog + TimePicker, format `HH:mm`               |
+| `FieldDateRange`     | Two stacked date fields, "To" min >= "From"            |
+| `FieldDateTimeRange` | Most complex: constraints, snapshotFlow for validation |
 
 **Boolean/Media Fields:**
 
-| Component       | Special Features                                              |
-|-----------------|---------------------------------------------------------------|
+| Component       | Special Features                                                |
+|-----------------|-----------------------------------------------------------------|
 | `FieldSwitch`   | Render modes: Switch/Checkbox, labelPlacement, capture metadata |
-| `FieldImage`    | File picker, size validation, zoomable preview dialog         |
-| `FieldDocument` | 40+ MIME types, size display, system preview via Intent       |
+| `FieldImage`    | File picker, size validation, zoomable preview dialog           |
+| `FieldDocument` | 40+ MIME types, size display, system preview via Intent         |
+
+**Pick/Selection Fields:**
+
+| Component       | Value Type               | Special Features                                                            |
+|-----------------|--------------------------|-----------------------------------------------------------------------------|
+| `FieldPickText` | `FieldValueOptionIdData` | Dropdown via `RawPickerSingleSelect`, option map from DefnFieldPickTextData |
 
 ### Raw Reusable Components
 
-| Component                    | File                                       | Purpose                                |
-|------------------------------|--------------------------------------------|----------------------------------------|
-| `RawCounter`                 | `field/RawCounter.kt`                      | Stepper UI: BasicTextField + ±buttons  |
-| `RawCaptureExtraProperties`  | `field/RawCaptureExtraProperties.kt`       | Capture metadata display (time/user/location) |
-| `RawPickerSingleSelect`      | `raw/RawPickerSingleSelect.kt`             | ModalBottomSheet single-select dropdown |
-| `RawPickerMultiSelect`       | `raw/RawPickerMultiSelect.kt`              | ModalBottomSheet multi-select with checkboxes |
-| `ImagePreviewDialog`         | `field/ImagePreviewDialog.kt`              | Pinch-to-zoom (1x-4x) + pan image preview |
+| Component                   | File                                 | Purpose                                       |
+|-----------------------------|--------------------------------------|-----------------------------------------------|
+| `RawCounter`                | `field/RawCounter.kt`                | Stepper UI: BasicTextField + ±buttons         |
+| `RawCaptureExtraProperties` | `field/RawCaptureExtraProperties.kt` | Capture metadata display (time/user/location) |
+| `RawPickerSingleSelect`     | `raw/RawPickerSingleSelect.kt`       | ModalBottomSheet single-select dropdown       |
+| `RawPickerMultiSelect`      | `raw/RawPickerMultiSelect.kt`        | ModalBottomSheet multi-select with checkboxes |
+| `ImagePreviewDialog`        | `field/ImagePreviewDialog.kt`        | Pinch-to-zoom (1x-4x) + pan image preview     |
 
 ### Screen Components
 
-| File                      | Purpose                                |
-|---------------------------|----------------------------------------|
-| `screen/FormScreen.kt`    | Demo scaffold hosting Form + intent log |
-| `screen/FormScreenViewModel.kt` | Sample data + intent logging     |
-| `sample/FormSampleDataFactory.kt` | Sample DefnFormUi for dev/test |
+| File                              | Purpose                                 |
+|-----------------------------------|-----------------------------------------|
+| `screen/FormScreen.kt`            | Demo scaffold hosting Form + intent log |
+| `screen/FormScreenViewModel.kt`   | Sample data + intent logging            |
+| `sample/FormSampleDataFactory.kt` | Sample DefnFormUi for dev/test          |
 
 ---
 
@@ -730,6 +752,7 @@ Form (provides LocalFormCtx)
             ├── Number: FieldNumber, FieldDecimal, FieldCounter, FieldLogCounter
             ├── Date/Time: FieldDate, FieldDateTime, FieldTime, FieldDateRange, FieldDateTimeRange
             ├── Boolean: FieldSwitch
+            ├── Pick: FieldPickText
             └── Media: FieldImage, FieldDocument
 ```
 
@@ -738,6 +761,7 @@ Form (provides LocalFormCtx)
 ## Data Flow
 
 ### Initialization Flow
+
 ```
 DefnFormData + SigEntCaller
   ↓ FilterForm.prepareUiForm()
@@ -753,6 +777,7 @@ FormCtx (CompositionLocal) + FormRef (imperative API for parent)
 ```
 
 ### Value Change Flow
+
 ```
 User Input
   ↓ controller.onChange(value) → FieldEvent.ValueChanged
@@ -769,6 +794,7 @@ User Input
 ```
 
 ### Validation Flow
+
 ```
 formRef.validate(fieldId)
   ↓ FormEvent.ValidateField
@@ -782,6 +808,7 @@ formRef.validate(fieldId)
 ```
 
 ### Submit Flow
+
 ```
 formRef.submit() → FormEvent.Submit
   ↓ handleSubmit()
@@ -852,18 +879,18 @@ Cross-field schemas may need `FormCtx` access. Modify `CompSchemaFactory` to pas
 
 ## Troubleshooting
 
-| Issue                          | Cause                                   | Solution                                                     |
-|--------------------------------|-----------------------------------------|--------------------------------------------------------------|
-| Field not updating             | Missing dependency registration         | Check `extractFieldIdReferences()` includes the source field |
-| Validation not running         | Schema not registered                   | Check `CompSchemaFactory` returns schema for field type      |
-| FormCtx not found              | Field outside Form tree                 | Wrap component in Form or check hierarchy                    |
-| Stale field state              | Not using derivedStateOf properly       | Ensure FieldController pattern with derivedStateOf           |
-| Infinite recomposition         | Unstable lambda/object in composable    | Use `remember` or move to ViewModel                          |
-| Field not rendering            | `hidden = true` in properties           | Check property resolution logic in FieldPropertyResolver     |
-| Send button always disabled    | DisableFlag not removed                 | Check `removeSendBtnDisableFlag` called after operation      |
-| Permission not applied         | FilterForm not called                   | Ensure `prepareUiForm()` called before passing to Form       |
-| Default value not set          | Missing in DefaultValue.kt             | Add case in `resolveCompDefaultValue()` for field type       |
-| Value type mismatch            | Missing Converter case                  | Add case in `Converter.kt` for field type                    |
+| Issue                       | Cause                                | Solution                                                     |
+|-----------------------------|--------------------------------------|--------------------------------------------------------------|
+| Field not updating          | Missing dependency registration      | Check `extractFieldIdReferences()` includes the source field |
+| Validation not running      | Schema not registered                | Check `CompSchemaFactory` returns schema for field type      |
+| FormCtx not found           | Field outside Form tree              | Wrap component in Form or check hierarchy                    |
+| Stale field state           | Not using derivedStateOf properly    | Ensure FieldController pattern with derivedStateOf           |
+| Infinite recomposition      | Unstable lambda/object in composable | Use `remember` or move to ViewModel                          |
+| Field not rendering         | `hidden = true` in properties        | Check property resolution logic in FieldPropertyResolver     |
+| Send button always disabled | DisableFlag not removed              | Check `removeSendBtnDisableFlag` called after operation      |
+| Permission not applied      | FilterForm not called                | Ensure `prepareUiForm()` called before passing to Form       |
+| Default value not set       | Missing in DefaultValue.kt           | Add case in `resolveCompDefaultValue()` for field type       |
+| Value type mismatch         | Missing Converter case               | Add case in `Converter.kt` for field type                    |
 
 ---
 
@@ -952,13 +979,13 @@ app/src/main/java/com/neome/feature/form/
 │   │   ├── base/
 │   │   │   ├── FieldBase.kt                 # Common field wrapper (padding/layout)
 │   │   │   ├── FieldController.kt           # Generic state controller (derivedStateOf)
-│   │   │   └── FieldFactory.kt              # Type-based routing (23 types)
+│   │   │   └── FieldFactory.kt              # Type-based routing (24 types)
 │   │   │
 │   │   ├── composite/
 │   │   │   ├── FieldSection.kt              # Section: label + horizontal/vertical children
 │   │   │   └── FieldTab.kt                  # Tab: ScrollableTabRow + content
 │   │   │
-│   │   ├── field/                           # Leaf field implementations (21 files)
+│   │   ├── field/                           # Leaf field implementations (22 files)
 │   │   │   ├── FieldText.kt                 # Single-line text input
 │   │   │   ├── FIeldParagraph.kt            # Multi-line text (minLines=3)
 │   │   │   ├── FieldEmail.kt                # Email with KeyboardType.Email
@@ -975,6 +1002,7 @@ app/src/main/java/com/neome/feature/form/
 │   │   │   ├── FieldDateRange.kt            # From/To date with constraints
 │   │   │   ├── FieldDateTimeRange.kt        # Complex from/to datetime
 │   │   │   ├── FieldSwitch.kt               # Switch/Checkbox + capture metadata
+│   │   │   ├── FieldPickText.kt             # Single-select dropdown (RawPickerSingleSelect)
 │   │   │   ├── FieldImage.kt                # Image picker + preview dialog
 │   │   │   ├── FieldDocument.kt             # Document picker (40+ MIME types)
 │   │   │   ├── ImagePreviewDialog.kt        # Pinch-to-zoom image preview
@@ -1006,6 +1034,15 @@ app/src/main/java/com/neome/feature/form/
 ---
 
 ## Changelog
+
+### v1.12.0 (2026-02-17)
+
+- **Feature**: Added `FieldPickText` component — single-select dropdown picker field
+- **Added**: `presentation/components/field/FieldPickText.kt` — uses `RawPickerSingleSelect` for dropdown UI
+- **Added**: `pickText` branch in `Converter.kt` — `fnRawValueToFieldValue` (complex type, returns null) and `fnFieldValueToRawValue` (extracts `optionId` from `FieldValueOptionIdData`)
+- **Added**: `EnumDefnCompType.pickText` routing in `FieldFactory.kt`
+- **Note**: Schema (`FieldPickTextSchema`) and factory registration (`CompSchemaFactory`) already existed from v1.9.0
+- **Value type**: `FieldValueOptionIdData(optionId: String, value: String?)` — stores selected option metaId and display text
 
 ### v1.11.0 (2026-02-17)
 

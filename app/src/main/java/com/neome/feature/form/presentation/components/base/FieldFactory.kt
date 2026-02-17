@@ -25,6 +25,7 @@ import com.neome.feature.form.presentation.components.field.FieldImage
 import com.neome.feature.form.presentation.components.field.FieldMobile
 import com.neome.feature.form.presentation.components.field.FieldNumber
 import com.neome.feature.form.presentation.components.field.FieldParagraph
+import com.neome.feature.form.presentation.components.field.FieldPickText
 import com.neome.feature.form.presentation.components.field.FieldText
 import com.neome.feature.form.presentation.components.field.FieldSwitch
 import com.neome.feature.form.presentation.components.field.FieldTime
@@ -145,6 +146,12 @@ fun FieldFactory(
         )
 
         EnumDefnCompType.bool -> FieldSwitch(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.pickText -> FieldPickText(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             modifier = modifier
