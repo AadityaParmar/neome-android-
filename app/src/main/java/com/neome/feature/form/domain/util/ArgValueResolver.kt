@@ -11,6 +11,8 @@ import com.neome.api.meta.base.dto.DefnDtoParagraph
 import com.neome.api.meta.base.dto.DefnDtoText
 import com.neome.api.meta.base.dto.DefnFieldDate
 import com.neome.api.meta.base.dto.DefnFieldDateTime
+import com.neome.api.meta.base.dto.DefnFieldEditable
+import com.neome.api.meta.base.dto.DefnFieldEditableText
 import com.neome.api.meta.base.dto.DefnFieldPickText
 import com.neome.api.meta.base.dto.DefnForm
 import com.neome.core.common.serializer.api.meta.base.dto.DefnBuildDateData
@@ -38,7 +40,9 @@ import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
 import com.neome.feature.utils.JsonParser
 import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.decodeFromJsonElement
+import kotlinx.serialization.json.jsonObject
 
 object ArgValueResolver {
 
@@ -401,100 +405,140 @@ object ArgValueResolver {
     }
 
     /**
+     * Resolves DefnFieldEditable base properties (helperTextVar, placeHolderVar, prefixVar, suffixVar)
+     * for any DefnCompSeal that implements DefnFieldEditable.
+     * Uses JSON round-trip to generically update properties without type-casting to each concrete class.
+     */
+    private fun resolveEditableProps(
+        comp: DefnCompSeal,
+        defnForm: DefnForm,
+        callerEnt: SigEntCaller
+    ): DefnCompSeal {
+        if (comp !is DefnFieldEditable) return comp
+
+        val editable = comp as DefnFieldEditable
+        val resolvedHelperTextVar = resolve(editable.helperTextVar, defnForm, callerEnt)
+        val resolvedPlaceHolderVar = resolve(editable.placeHolderVar, defnForm, callerEnt)
+        val resolvedPrefixVar = resolve(editable.prefixVar, defnForm, callerEnt)
+        val resolvedSuffixVar = resolve(editable.suffixVar, defnForm, callerEnt)
+
+        val jsonMap = JsonParser.json.encodeToJsonElement(
+            DefnCompSeal.serializer(), comp
+        ).jsonObject.toMutableMap()
+
+        jsonMap.putResolved("helperTextVar", resolvedHelperTextVar)
+        jsonMap.putResolved("placeHolderVar", resolvedPlaceHolderVar)
+        jsonMap.putResolved("prefixVar", resolvedPrefixVar)
+        jsonMap.putResolved("suffixVar", resolvedSuffixVar)
+
+        return JsonParser.json.decodeFromJsonElement(
+            DefnCompSeal.serializer(), JsonObject(jsonMap)
+        )
+    }
+
+    /**
+     * Resolves DefnFieldEditableText.defaultVar (DefnDtoText type)
+     * for any DefnCompSeal that implements DefnFieldEditableText.
+     * Uses JSON round-trip to generically update the property without type-casting to each concrete class.
+     */
+    private fun resolveEditableTextProps(
+        comp: DefnCompSeal,
+        defnForm: DefnForm,
+        callerEnt: SigEntCaller
+    ): DefnCompSeal {
+        if (comp !is DefnFieldEditableText) return comp
+
+        val editableText = comp as DefnFieldEditableText
+        val resolvedDefaultVar = resolve(editableText.defaultVar, defnForm, callerEnt)
+
+        val jsonMap = JsonParser.json.encodeToJsonElement(
+            DefnCompSeal.serializer(), comp
+        ).jsonObject.toMutableMap()
+
+        jsonMap.putResolved("defaultVar", resolvedDefaultVar)
+
+        return JsonParser.json.decodeFromJsonElement(
+            DefnCompSeal.serializer(), JsonObject(jsonMap)
+        )
+    }
+
+    /**
+     * Helper to put a resolved DefnDtoTextData into a mutable JSON map.
+     * If the resolved value is null, removes the key; otherwise encodes and puts it.
+     */
+    private fun MutableMap<String, JsonElement>.putResolved(
+        key: String,
+        value: DefnDtoTextData?
+    ) {
+        if (value != null) {
+            this[key] = JsonParser.json.encodeToJsonElement(DefnDtoTextData.serializer(), value)
+        } else {
+            this.remove(key)
+        }
+    }
+
+    /**
      * Resolves all DefnDtoText/DefnDtoParagraph properties on a component.
-     * Pattern matches on concrete Data types and uses copy() to create new resolved instances.
+     * First resolves DefnFieldEditable and DefnFieldEditableText base properties generically,
+     * then pattern matches on concrete Data types for type-specific properties.
      */
     private fun resolveDefnComp(
         comp: DefnCompSeal,
         defnForm: DefnForm,
         callerEnt: SigEntCaller
     ): DefnCompSeal {
-        return when (comp) {
-            is DefnFieldButtonData -> comp.copy(
-                // Editable base props
-                helperTextVar = resolve(comp.helperTextVar, defnForm, callerEnt),
-                placeHolderVar = resolve(comp.placeHolderVar, defnForm, callerEnt),
-                prefixVar = resolve(comp.prefixVar, defnForm, callerEnt),
-                suffixVar = resolve(comp.suffixVar, defnForm, callerEnt),
-                // Type-specific
-                toastMessageOnClickVar = resolve(comp.toastMessageOnClickVar, defnForm, callerEnt),
-                whatsAppMessage = resolveParagraph(comp.whatsAppMessage, defnForm, callerEnt)
+
+        // Step 1: Generically resolve DefnFieldEditable base props
+        val editableResolved = resolveEditableProps(comp, defnForm, callerEnt)
+
+        // Step 2: Generically resolve DefnFieldEditableText.defaultVar
+        val resolved = resolveEditableTextProps(editableResolved, defnForm, callerEnt)
+
+        // Step 3: Handle type-specific properties beyond editable base
+        return when (resolved) {
+            is DefnFieldButtonData -> resolved.copy(
+                toastMessageOnClickVar = resolve(resolved.toastMessageOnClickVar, defnForm, callerEnt),
+                whatsAppMessage = resolveParagraph(resolved.whatsAppMessage, defnForm, callerEnt)
             )
 
-            is DefnFieldSwitchData -> comp.copy(
-                // Editable base props
-                helperTextVar = resolve(comp.helperTextVar, defnForm, callerEnt),
-                placeHolderVar = resolve(comp.placeHolderVar, defnForm, callerEnt),
-                prefixVar = resolve(comp.prefixVar, defnForm, callerEnt),
-                suffixVar = resolve(comp.suffixVar, defnForm, callerEnt),
-                // Type-specific
-                checkboxLabelVar = resolve(comp.checkboxLabelVar, defnForm, callerEnt)
+            is DefnFieldSwitchData -> resolved.copy(
+                checkboxLabelVar = resolve(resolved.checkboxLabelVar, defnForm, callerEnt)
             )
 
-            is DefnFieldIdentifierData -> comp.copy(
-                // Editable base props
-                helperTextVar = resolve(comp.helperTextVar, defnForm, callerEnt),
-                placeHolderVar = resolve(comp.placeHolderVar, defnForm, callerEnt),
-                prefixVar = resolve(comp.prefixVar, defnForm, callerEnt),
-                suffixVar = resolve(comp.suffixVar, defnForm, callerEnt),
-                // Type-specific
-                textPatternVar = resolve(comp.textPatternVar, defnForm, callerEnt)
+            is DefnFieldIdentifierData -> resolved.copy(
+                textPatternVar = resolve(resolved.textPatternVar, defnForm, callerEnt)
             )
 
-            is DefnFieldHyperlinkRowData -> comp.copy(
-                // Editable base props
-                helperTextVar = resolve(comp.helperTextVar, defnForm, callerEnt),
-                placeHolderVar = resolve(comp.placeHolderVar, defnForm, callerEnt),
-                prefixVar = resolve(comp.prefixVar, defnForm, callerEnt),
-                suffixVar = resolve(comp.suffixVar, defnForm, callerEnt),
-                // Type-specific
-                displayTextVar = resolve(comp.displayTextVar, defnForm, callerEnt)
+            is DefnFieldHyperlinkRowData -> resolved.copy(
+                displayTextVar = resolve(resolved.displayTextVar, defnForm, callerEnt)
             )
 
-            is DefnFieldLabelData -> comp.copy(
-                // Type-specific (NO editable base - extends DefnField not DefnFieldEditable)
-                textPatternVar = resolve(comp.textPatternVar, defnForm, callerEnt)
+            is DefnFieldLabelData -> resolved.copy(
+                textPatternVar = resolve(resolved.textPatternVar, defnForm, callerEnt)
             )
 
-            is DefnFieldInfoData -> comp.copy(
-                // Type-specific (NO editable base - extends DefnFieldLabel which extends DefnField)
-                labelPatternVar = resolve(comp.labelPatternVar, defnForm, callerEnt),
-                defaultVar = resolveParagraph(comp.defaultVar, defnForm, callerEnt),
-                textPatternVar = resolve(comp.textPatternVar, defnForm, callerEnt)
+            is DefnFieldInfoData -> resolved.copy(
+                labelPatternVar = resolve(resolved.labelPatternVar, defnForm, callerEnt),
+                defaultVar = resolveParagraph(resolved.defaultVar, defnForm, callerEnt),
+                textPatternVar = resolve(resolved.textPatternVar, defnForm, callerEnt)
             )
 
-            is DefnFieldParagraphData -> comp.copy(
-                // Editable base props
-                helperTextVar = resolve(comp.helperTextVar, defnForm, callerEnt),
-                placeHolderVar = resolve(comp.placeHolderVar, defnForm, callerEnt),
-                prefixVar = resolve(comp.prefixVar, defnForm, callerEnt),
-                suffixVar = resolve(comp.suffixVar, defnForm, callerEnt),
-                // Type-specific (defaultVar is DefnDtoParagraph, not DefnDtoText)
-                defaultVar = resolveParagraph(comp.defaultVar, defnForm, callerEnt)
+            is DefnFieldParagraphData -> resolved.copy(
+                defaultVar = resolveParagraph(resolved.defaultVar, defnForm, callerEnt)
             )
 
-            is DefnFieldShowCodeData -> comp.copy(
-                // Editable base props
-                helperTextVar = resolve(comp.helperTextVar, defnForm, callerEnt),
-                placeHolderVar = resolve(comp.placeHolderVar, defnForm, callerEnt),
-                prefixVar = resolve(comp.prefixVar, defnForm, callerEnt),
-                suffixVar = resolve(comp.suffixVar, defnForm, callerEnt),
-                // Type-specific
-                defaultVar = resolveParagraph(comp.defaultVar, defnForm, callerEnt)
+            is DefnFieldShowCodeData -> resolved.copy(
+                defaultVar = resolveParagraph(resolved.defaultVar, defnForm, callerEnt)
             )
 
-            is DefnFieldHtmlData -> comp.copy(
-                // Type-specific (NO editable base - extends DefnField not DefnFieldEditable)
-                defaultVar = resolveParagraph(comp.defaultVar, defnForm, callerEnt),
-                placeHolderVar = resolveParagraph(comp.placeHolderVar, defnForm, callerEnt)
+            is DefnFieldHtmlData -> resolved.copy(
+                defaultVar = resolveParagraph(resolved.defaultVar, defnForm, callerEnt),
+                placeHolderVar = resolveParagraph(resolved.placeHolderVar, defnForm, callerEnt)
             )
 
-            is DefnGridData -> {
-                // Skip - resolveGridLayoutMap excluded per instructions
-                comp
-            }
+            is DefnGridData -> resolved  // Skip grid resolution
 
-            else -> comp  // All other types - no var properties to resolve
+            else -> resolved
         }
     }
 
