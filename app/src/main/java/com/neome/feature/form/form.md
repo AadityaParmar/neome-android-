@@ -4,7 +4,7 @@
 
 | Property           | Value                                       |
 |--------------------|---------------------------------------------|
-| **Version**        | 1.12.0                                      |
+| **Version**        | 1.13.0                                      |
 | **Last Updated**   | 2026-02-17                                  |
 | **Scope**          | Android Form Component Architecture         |
 | **Path**           | `app/src/main/java/com/neome/feature/form/` |
@@ -600,7 +600,7 @@ fun Form(
 
 > **File:** `presentation/components/base/FieldFactory.kt`
 
-Routes `defnComp.type` to correct field renderer. Supported types (24):
+Routes `defnComp.type` to correct field renderer. Supported types (25):
 
 | Category  | Types                                                               |
 |-----------|---------------------------------------------------------------------|
@@ -608,7 +608,8 @@ Routes `defnComp.type` to correct field renderer. Supported types (24):
 | Date/Time | `date`, `dateTime`, `dateRange`, `dateTimeRange`, `time`            |
 | Number    | `number`, `decimal`, `counter`, `logCounter`                        |
 | Boolean   | `bool` (renders as Switch)                                          |
-| Pick      | `pickText` (dropdown via RawPickerSingleSelect)                     |
+| Pick       | `pickText` (dropdown via RawPickerSingleSelect)              |
+| Set        | `setOfText` (multi-select via RawPickerMultiSelect)          |
 | Media     | `image`, `document`                                                 |
 | Composite | `section`, `tab`                                                    |
 | TODO      | `grid`                                                              |
@@ -653,7 +654,7 @@ Wraps all fields with consistent `Column(fillMaxWidth)` + padding (16dp horizont
 - Content area with `verticalScroll`
 - Renders selected tab content via `FieldFactory`
 
-### Field Implementations (22 files)
+### Field Implementations (23 files)
 
 **Field Component Pattern:**
 
@@ -713,7 +714,8 @@ fun FieldX(defnComp: DefnCompSeal, onFieldEvent: (FieldEvent) -> Unit) {
 
 | Component       | Value Type               | Special Features                                                            |
 |-----------------|--------------------------|-----------------------------------------------------------------------------|
-| `FieldPickText` | `FieldValueOptionIdData` | Dropdown via `RawPickerSingleSelect`, option map from DefnFieldPickTextData |
+| `FieldPickText`  | `FieldValueOptionIdData` | Dropdown via `RawPickerSingleSelect`, option map from DefnFieldPickTextData   |
+| `FieldSetOfText` | `FieldSetOfOptionIdData` | Multi-select via `RawPickerMultiSelect`, chips + checkboxes, from DefnFieldSetOfTextData |
 
 ### Raw Reusable Components
 
@@ -753,6 +755,7 @@ Form (provides LocalFormCtx)
             ├── Date/Time: FieldDate, FieldDateTime, FieldTime, FieldDateRange, FieldDateTimeRange
             ├── Boolean: FieldSwitch
             ├── Pick: FieldPickText
+            ├── Set: FieldSetOfText
             └── Media: FieldImage, FieldDocument
 ```
 
@@ -979,13 +982,13 @@ app/src/main/java/com/neome/feature/form/
 │   │   ├── base/
 │   │   │   ├── FieldBase.kt                 # Common field wrapper (padding/layout)
 │   │   │   ├── FieldController.kt           # Generic state controller (derivedStateOf)
-│   │   │   └── FieldFactory.kt              # Type-based routing (24 types)
+│   │   │   └── FieldFactory.kt              # Type-based routing (25 types)
 │   │   │
 │   │   ├── composite/
 │   │   │   ├── FieldSection.kt              # Section: label + horizontal/vertical children
 │   │   │   └── FieldTab.kt                  # Tab: ScrollableTabRow + content
 │   │   │
-│   │   ├── field/                           # Leaf field implementations (22 files)
+│   │   ├── field/                           # Leaf field implementations (23 files)
 │   │   │   ├── FieldText.kt                 # Single-line text input
 │   │   │   ├── FIeldParagraph.kt            # Multi-line text (minLines=3)
 │   │   │   ├── FieldEmail.kt                # Email with KeyboardType.Email
@@ -1003,6 +1006,7 @@ app/src/main/java/com/neome/feature/form/
 │   │   │   ├── FieldDateTimeRange.kt        # Complex from/to datetime
 │   │   │   ├── FieldSwitch.kt               # Switch/Checkbox + capture metadata
 │   │   │   ├── FieldPickText.kt             # Single-select dropdown (RawPickerSingleSelect)
+│   │   │   ├── FieldSetOfText.kt            # Multi-select dropdown (RawPickerMultiSelect)
 │   │   │   ├── FieldImage.kt                # Image picker + preview dialog
 │   │   │   ├── FieldDocument.kt             # Document picker (40+ MIME types)
 │   │   │   ├── ImagePreviewDialog.kt        # Pinch-to-zoom image preview
@@ -1034,6 +1038,15 @@ app/src/main/java/com/neome/feature/form/
 ---
 
 ## Changelog
+
+### v1.13.0 (2026-02-17)
+
+- **Feature**: Added `FieldSetOfText` component — multi-select dropdown picker field
+- **Added**: `presentation/components/field/FieldSetOfText.kt` — uses `RawPickerMultiSelect` for multi-select UI with chips and checkboxes
+- **Added**: `setOfText` branch in `Converter.kt` — `fnRawValueToFieldValue` (complex type, returns null) and `fnFieldValueToRawValue` (extracts `valueSet` from `FieldSetOfOptionIdData`)
+- **Added**: `EnumDefnCompType.setOfText` routing in `FieldFactory.kt`
+- **Note**: Schema (`FieldSetOfTextSchema`) and factory registration (`CompSchemaFactory`) already existed from v1.9.0
+- **Value type**: `FieldSetOfOptionIdData(valueSet: List<String>, displaySet: List<String>?)` — stores selected option metaIds and display texts
 
 ### v1.12.0 (2026-02-17)
 

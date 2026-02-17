@@ -10,6 +10,7 @@ import com.neome.core.common.serializer.api.meta.base.dto.FieldValueEmailData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueHandleData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueMobileData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueNumberData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldSetOfOptionIdData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueOptionIdData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueParagraphData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
@@ -148,7 +149,8 @@ internal interface Converter {
                 }
 
                 // Complex types — serialized/deserialized via KSerializer in FieldController
-                Types.EnumDefnCompType.pickText -> null
+                Types.EnumDefnCompType.pickText,
+                Types.EnumDefnCompType.setOfText -> null
 
                 else -> null
             }
@@ -242,6 +244,18 @@ internal interface Converter {
                             FieldValueOptionIdData.serializer(),
                             value
                         ).optionId
+
+                        else -> null
+                    }
+                }
+
+                Types.EnumDefnCompType.setOfText -> {
+                    when (value) {
+                        is FieldSetOfOptionIdData -> value.valueSet
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            FieldSetOfOptionIdData.serializer(),
+                            value
+                        ).valueSet
 
                         else -> null
                     }
