@@ -36,16 +36,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
-import kotlinx.coroutines.flow.collectLatest
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateTimeRangeData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateRangeData
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldEvent
+import kotlinx.coroutines.flow.collectLatest
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -87,7 +86,7 @@ fun FieldDateTimeRange(
     modifier: Modifier = Modifier
 ) {
     // ========== REUSED FROM FieldDate: Field Controller Setup ==========
-    val fieldController = rememberFieldController<FieldValueDateTimeRangeData>(
+    val fieldController = rememberFieldController<FieldValueDateRangeData>(
         defnComp = defnComp,
         onFieldEvent = onFieldEvent
     )
@@ -159,7 +158,7 @@ fun FieldDateTimeRange(
         val cal1 = Calendar.getInstance().apply { time = date1 }
         val cal2 = Calendar.getInstance().apply { time = date2 }
         return cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
-                cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR)
+            cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR)
     }
 
     // ========== DateTimeRange-specific: Get date-only millis (midnight) ==========
@@ -191,7 +190,7 @@ fun FieldDateTimeRange(
         val newValue = if (from == null && to == null) {
             null
         } else {
-            FieldValueDateTimeRangeData(from = from, to = to)
+            FieldValueDateRangeData(from = from, to = to)
         }
         fieldController.onChange(newValue)
     }
@@ -387,6 +386,7 @@ fun FieldDateTimeRange(
                     override fun isSelectableDate(utcTimeMillis: Long): Boolean {
                         return utcTimeMillis >= minDateMillis
                     }
+
                     override fun isSelectableYear(year: Int): Boolean = true
                 }
             } else {
@@ -455,8 +455,8 @@ fun FieldDateTimeRange(
         // Check if "To" date picker selected the same day as "From"
         val isToFieldSameDayAsFrom = remember(isFromField, selectedCalendar, fromCalendar) {
             !isFromField && fromCalendar != null &&
-                    selectedCalendar.get(Calendar.YEAR) == fromCalendar.get(Calendar.YEAR) &&
-                    selectedCalendar.get(Calendar.DAY_OF_YEAR) == fromCalendar.get(Calendar.DAY_OF_YEAR)
+                selectedCalendar.get(Calendar.YEAR) == fromCalendar.get(Calendar.YEAR) &&
+                selectedCalendar.get(Calendar.DAY_OF_YEAR) == fromCalendar.get(Calendar.DAY_OF_YEAR)
         }
 
         // Compute minimum time from "From" value (only applies when same day)

@@ -12,12 +12,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.core.common.serializer.api.meta.base.dto.FieldValueHyperlinkData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldEvent
@@ -108,7 +106,7 @@ fun FieldHyperlink(
     modifier: Modifier = Modifier
 ) {
     // ========== REUSED FROM FieldText: Field Controller Setup ==========
-    val fieldController = rememberFieldController<FieldValueHyperlinkData>(
+    val fieldController = rememberFieldController<FieldValueTextData>(
         defnComp = defnComp,
         onFieldEvent = onFieldEvent
     )
@@ -131,7 +129,7 @@ fun FieldHyperlink(
 
     // ========== REUSED FROM FieldText: Value Change Handler ==========
     fun onValueChange(newValue: String) {
-        val fv = if (newValue.isEmpty()) null else FieldValueHyperlinkData(newValue)
+        val fv = if (newValue.isEmpty()) null else FieldValueTextData(newValue)
         fieldController.onChange(fv)
     }
 

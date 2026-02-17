@@ -1,9 +1,9 @@
 package com.neome.feature.form.domain.ctx.helper.schema
 
+import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.dto.DefnFieldTime
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.feature.form.domain.DefnFormUi
-import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTimeData
 import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
 import com.neome.feature.form.presentation.state.FieldProperties
 import com.neome.feature.form.presentation.state.FieldState
@@ -33,7 +33,7 @@ class FieldTimeSchema(
         val typedValue = FieldValueResolver.fnJsonElementFieldValue(
             defnField.type,
             fieldValue
-        ) as FieldValueTimeData?
+        ) as Types.AnyTime?
         val properties = fieldState?.fieldProperties ?: FieldProperties()
 
         val timeValue = typedValue?.value

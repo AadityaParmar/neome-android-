@@ -74,7 +74,7 @@ fun FieldLogCounter(
             isError = error != null,
             errorMessage = error?.message,
             onValueChange = { newValue ->
-                fieldController.onChange(FieldValueNumberData(newValue))
+                fieldController.onChange(if (newValue == null) null else FieldValueNumberData(newValue))
             }
         )
     }

@@ -11,6 +11,7 @@ import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoFormThemeData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoParagraphData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoPermissionMatrixData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoTextData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFormEventMapData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnLayoutFormMapData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnPaymentConfigData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfActionPermissionData
@@ -125,9 +126,10 @@ data class DefnFormUi(
     override val permissionMatrix: DefnDtoPermissionMatrixData? = null,
     override val theme: DefnDtoFormThemeData? = null,
     override val visibilityRuleMap: DefnVisibilityRuleMapData? = null,
+    override val eventMap: DefnFormEventMapData? = null,
 
     // UI-specific permission and relationship maps
     val _permissionMap: TypeUiFormPermissionMap? = null,
     val _parentMap: TypeUiFormParentMap? = null,
-    val _managerialRelationship: TypeUiManagerialRelationship? = null
+    val _managerialRelationship: TypeUiManagerialRelationship? = null,
 ) : DefnForm

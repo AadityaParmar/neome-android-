@@ -126,7 +126,7 @@ object FilterForm {
      * TS Reference: FilterFormPlus.ts lines 182-227
      */
     private fun getPermission(
-        roleIdSet: List<MetaIdRole>,
+        roleIdSet: Set<MetaIdRole>,
         permissionMatrix: DefnDtoPermissionMatrix?,
         parentPermission: MutableMap<TypeUiPermissionRole, EnumDefnPermission>? = null
     ): MutableMap<TypeUiPermissionRole, EnumDefnPermission> {
@@ -188,7 +188,7 @@ object FilterForm {
      * TS Reference: FilterFormPlus.ts lines 76-138
      */
     private fun getRequiredAndDisabledPermission(
-        roleIdSet: List<MetaIdRole>,
+        roleIdSet: Set<MetaIdRole>,
         comp: DefnCompSeal
     ): Pair<Map<TypeUiPermissionRole, Boolean>?, Map<TypeUiPermissionRole, Boolean>?> {
         val disabledRoleIdSet = comp.disabledRoleIdSet
@@ -198,7 +198,7 @@ object FilterForm {
         var required: MutableMap<TypeUiPermissionRole, Boolean>? = null
 
         if (disabledRoleIdSet != null) {
-            val filteredDisabledRoleIdSet = mutableListOf<MetaIdRole>()
+            val filteredDisabledRoleIdSet = mutableSetOf<MetaIdRole>()
             for (roleId in disabledRoleIdSet) {
                 if (SysId.isSystemId(roleId)) {
                     val sysRole = enumDefnRolesFromId(roleId)
@@ -219,7 +219,7 @@ object FilterForm {
         }
 
         if (requiredRoleIdSet != null) {
-            val filteredRequiredRoleIdSet = mutableListOf<MetaIdRole>()
+            val filteredRequiredRoleIdSet = mutableSetOf<MetaIdRole>()
             for (roleId in requiredRoleIdSet) {
                 if (SysId.isSystemId(roleId)) {
                     val sysRole = enumDefnRolesFromId(roleId)

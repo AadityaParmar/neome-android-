@@ -10862,7 +10862,6 @@
           "name": "Section1",
           "type": "section",
           "permissionMatrix": {
-            "defaultPermission": "hide",
             "keys": [],
             "map": {}
           }
@@ -15369,5 +15368,5 @@
       ]
     }
   },
-  "version": "zLNcNEJV1nHVq8GYB4HKYOjhg|gh-q3QtIvpx7feH1HBVV8ErkHUIV|en|RaxYwBMRq43uBwELyk24rjkeC"
+  "version": "MHN0r8OKZYi9YR20fOncsXkOI|gh-q3QtIvpx7feH1HBVV8ErkHUIV|en|RaxYwBMRq43uBwELyk24rjkeC"
 }

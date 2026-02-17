@@ -2,8 +2,8 @@ package com.neome.feature.form.domain.ctx.helper.schema
 
 import com.neome.api.meta.base.dto.DefnFieldDateTime
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateData
 import com.neome.feature.form.domain.DefnFormUi
-import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateTimeData
 import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
 import com.neome.feature.form.presentation.state.FieldProperties
 import com.neome.feature.form.presentation.state.FieldState
@@ -31,7 +31,7 @@ class FieldDateTimeSchema(
         val typedValue = FieldValueResolver.fnJsonElementFieldValue(
             defnField.type,
             fieldValue
-        ) as FieldValueDateTimeData?
+        ) as FieldValueDateData?
         val properties = fieldState?.fieldProperties ?: FieldProperties()
 
         val dateTimeValue = typedValue?.value

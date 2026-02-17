@@ -1,18 +1,17 @@
 package com.neome.feature.form.domain.util.FieldVal
 
+import com.neome.api.meta.base.AnyValue
 import com.neome.api.meta.base.Types
+import com.neome.api.meta.base.Types.AnyTime
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueColorData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateData
-import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateTimeData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDecimalData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueEmailData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueHandleData
-import com.neome.core.common.serializer.api.meta.base.dto.FieldValueHyperlinkData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueMobileData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueNumberData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueParagraphData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
-import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTimeData
 import com.neome.core.logging.AppLogger
 import com.neome.feature.utils.JsonParser
 import kotlinx.serialization.json.JsonElement
@@ -73,7 +72,7 @@ internal interface Converter {
                         is JsonElement -> value.jsonPrimitive.content
                         else -> value.toString()
                     }
-                    FieldValueHyperlinkData(stringValue)
+                    FieldValueTextData(stringValue)
                 }
 
                 Types.EnumDefnCompType.color -> {
@@ -97,7 +96,7 @@ internal interface Converter {
                         is JsonElement -> value.jsonPrimitive.content
                         else -> value.toString()
                     }
-                    FieldValueTimeData(stringValue)
+                    AnyValue.create(stringValue, AnyTime::class.java)
                 }
 
                 Types.EnumDefnCompType.dateTime -> {
@@ -105,7 +104,7 @@ internal interface Converter {
                         is JsonElement -> value.jsonPrimitive.content
                         else -> value.toString()
                     }
-                    FieldValueDateTimeData(stringValue)
+                    FieldValueDateData(stringValue)
                 }
 
                 Types.EnumDefnCompType.paragraph -> {

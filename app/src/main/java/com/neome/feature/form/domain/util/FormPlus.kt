@@ -1,7 +1,7 @@
 package com.neome.feature.form.domain.util
 
-import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.MetaIdComp
+import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.dto.DefnForm
 import com.neome.api.meta.base.dto.DefnGrid
@@ -21,8 +21,8 @@ object FormPlus {
      * Returns true if every role in [callerRoles] is present in [targetRoles].
      */
     fun matchAllRoles(
-        callerRoles: List<Types.MetaIdRole>,
-        targetRoles: List<Types.MetaIdRole>
+        callerRoles: Set<MetaIdRole>,
+        targetRoles: Set<MetaIdRole>
     ): Boolean {
         return callerRoles.all { it in targetRoles }
     }

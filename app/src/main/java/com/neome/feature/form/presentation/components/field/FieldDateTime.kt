@@ -34,7 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateTimeData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateData
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldEvent
@@ -75,7 +75,7 @@ fun FieldDateTime(
     modifier: Modifier = Modifier
 ) {
     // ========== REUSED FROM FieldDate: Field Controller Setup ==========
-    val fieldController = rememberFieldController<FieldValueDateTimeData>(
+    val fieldController = rememberFieldController<FieldValueDateData>(
         defnComp = defnComp,
         onFieldEvent = onFieldEvent
     )
@@ -166,7 +166,7 @@ fun FieldDateTime(
     fun onTimeConfirmed(hour: Int, minute: Int) {
         val combinedDateTime = combineDateAndTime(selectedDateMillis, hour, minute)
         val dateTimeString = dateToIsoString(combinedDateTime)
-        val newValue = FieldValueDateTimeData(dateTimeString)
+        val newValue = FieldValueDateData(dateTimeString)
         fieldController.onChange(newValue)
         showTimePicker = false
     }
