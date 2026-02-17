@@ -35,9 +35,11 @@ data class StudioGridData(
     override val fieldMap: StudioFieldMapData,
     override val layoutGridMap: StudioMapOfLayoutGridData? = null,
     override val maxRows: Long? = null,
+    @Serializable(with = MetaIdFieldSer::class) override val maxRowsFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdVarSer::class) override val maxRowsVarId: Types.MetaIdVar? = null,
     @Serializable(with = MetaIdGridSer::class) override val metaId: Types.MetaIdGrid,
     override val minRows: Long? = null,
+    @Serializable(with = MetaIdFieldSer::class) override val minRowsFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdVarSer::class) override val minRowsVarId: Types.MetaIdVar? = null,
     override val rowActionPermissionMap: StudioMapOfActionPermissionData? = null,
     @Serializable(with = MetaIdFieldSer::class) override val showAllRowsFieldId: Types.MetaIdField? = null

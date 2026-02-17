@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SigPdfMergeData(
     override val fileExt: EnumDefnDocFileExt,
-    override val fileLength: Long? = null,
+    override val fileLength: Long,
     override val fileName: String,
     @Serializable(with = MediaIdSer::class) override val mediaId: Types.MediaId
 ) : SigPdfMerge

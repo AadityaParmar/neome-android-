@@ -11,6 +11,6 @@ import kotlinx.serialization.Serializable
 data class SigMediaListData(
     override val documentList: List<SigMessageBaseData>,
     override val linkList: List<SigMessageBaseData>,
-    override val mediaCount: Long? = null,
+    override val mediaCount: Long,
     override val mediaList: List<SigMessageBaseData>
 ) : SigMediaList

@@ -5,15 +5,17 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdField
 
-interface DefnFieldHandle : DefnFieldEditable {
-    val autoPickSelf: Boolean?
-    val defaultFieldId: MetaIdField?
-    val defaultValue: String?
-    val defaultVar: String?
-    val invalidDomainSetVar: List<String>?
-    val invalidMobileCountryCodeSetVar: List<String>?
-    val validDomainSetVar: List<String>?
-    val validMobileCountryCodeSetVar: List<String>?
+interface DefnFieldHandle : DefnFieldEditable
+{
+  val autoPickSelf: Boolean?
+  val defaultFieldId: MetaIdField?
+  val defaultValue: String?
+  val defaultVar: String?
+  val invalidDomainSetVar: List<String>?
+  val invalidMobileCountryCodeSetVar: List<String>?
+  val validDomainSetVar: List<String>?
+  val validMobileCountryCodeSetVar: List<String>?
 }

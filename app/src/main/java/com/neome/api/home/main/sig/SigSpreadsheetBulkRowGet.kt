@@ -7,9 +7,11 @@ package com.neome.api.home.main.sig
 
 import com.neome.api.meta.base.Types.RowId
 import com.neome.api.nucleus.base.sig.Sig
+import com.neome.api.home.main.sig.SigSpreadsheetRow
 
-interface SigSpreadsheetBulkRowGet : Sig {
-    val expiredRowIdSet: List<RowId>?
-    val inProgressRowIdSet: List<RowId>?
-    val rowMap: Map<RowId, SigSpreadsheetRow>?
+interface SigSpreadsheetBulkRowGet : Sig
+{
+  val expiredRowIdSet: Set<RowId>?
+  val inProgressRowIdSet: Set<RowId>?
+  val rowMap: Map<RowId, SigSpreadsheetRow>?
 }

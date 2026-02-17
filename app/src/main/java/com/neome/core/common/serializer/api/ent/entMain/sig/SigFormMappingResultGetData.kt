@@ -14,5 +14,5 @@ import kotlinx.serialization.Serializable
 data class SigFormMappingResultGetData(
     @Serializable(with = MetaIdFormSer::class) override val formId: Types.MetaIdForm,
     override val formValue: FormValueData,
-    override val outputFieldIdSet: List<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null
+    override val outputFieldIdSet: Set<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null
 ) : SigFormMappingResultGet

@@ -15,6 +15,6 @@ data class DtoStarMessageData(
     override val creationDate: String,
     @Serializable(with = EntIdSer::class) override val entId: Types.EntId,
     @Serializable(with = MessageIdSer::class) override val messageId: Types.MessageId,
-    override val messageOffset: Long? = null,
+    override val messageOffset: Long,
     @Serializable(with = EntUserIdSer::class) override val senderId: Types.EntUserId
 ) : DtoStarMessage

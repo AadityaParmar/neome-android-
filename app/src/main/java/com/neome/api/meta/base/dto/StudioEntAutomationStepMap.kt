@@ -6,8 +6,11 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdStep
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioEntAutomationStep
 
-interface StudioEntAutomationStepMap : StudioBase {
-    val keys: List<MetaIdStep>
-    val map: Map<MetaIdStep, StudioEntAutomationStep>
+interface StudioEntAutomationStepMap : StudioBase
+{
+  val keys: List<MetaIdStep>
+  val map: Map<MetaIdStep, StudioEntAutomationStep>
 }

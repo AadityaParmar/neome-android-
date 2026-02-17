@@ -17,7 +17,7 @@ data class DefnLayoutFormWatermarkData(
     override val bgImageHorizontalPosition: EnumDefnContentAlignment? = null,
     override val bgImageVar: FieldDtoImageData? = null,
     override val bgImageVerticalPosition: EnumDefnContentAlignment? = null,
-    override val textOpacityVar: Long? = null,
+    override val textOpacityVar: Double? = null,
     override val textPatternVar: DefnDtoTextData? = null,
     override val textPositionVar: EnumDefnPlacement? = null,
     override val textSizeVar: EnumDefnTextSize? = null

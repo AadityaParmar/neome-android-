@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SigGuaranteedRequestListGetData(
-    override val bottomOffset: Long? = null,
+    override val bottomOffset: Long,
     override val list: List<GuaranteedRequestData>,
-    override val pageBottomOffset: Long? = null
+    override val pageBottomOffset: Long
 ) : SigGuaranteedRequestListGet

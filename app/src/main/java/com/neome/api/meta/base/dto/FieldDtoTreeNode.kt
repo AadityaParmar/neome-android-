@@ -5,9 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
-interface FieldDtoTreeNode : StudioBase {
-    val keys: List<String>
-    val map: Map<String, FieldDtoTreeNode>
-    val metaId: String
-    val value: String?
+import com.neome.api.meta.base.dto.StudioBase
+
+interface FieldDtoTreeNode : StudioBase
+{
+  val keys: List<String>
+  val map: Map<String, FieldDtoTreeNode>
+  val metaId: String
+  val value: String?
 }

@@ -9,7 +9,7 @@ import com.neome.api.nucleus.base.msg.Msg
 
 interface MsgGuaranteedRequestQueueId : Msg
 {
-  val pageSize: Long?
+  val pageSize: Long
   val queueId: String
   val startOffset: Long?
 }

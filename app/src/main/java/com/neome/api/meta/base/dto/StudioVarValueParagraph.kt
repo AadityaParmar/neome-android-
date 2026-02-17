@@ -5,7 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-interface StudioVarValueParagraph {
-    val paramSet: List<String>?
-    val value: String?
+interface StudioVarValueParagraph
+{
+  val paramSet: List<String>?
+  val value: String?
 }

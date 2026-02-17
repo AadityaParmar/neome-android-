@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DtoCarouselTemplateGroupData(
-    override val numberOfCardParams: Long? = null,
-    override val numberOfCards: Long? = null,
-    override val numberOfHeaderMessageParams: Long? = null
+    override val numberOfCardParams: Long,
+    override val numberOfCards: Long,
+    override val numberOfHeaderMessageParams: Long
 ) : DtoCarouselTemplateGroup

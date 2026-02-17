@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MsgEntSpreadsheetDataData(
     override val fromGridVer: String? = null,
-    override val pageSize: Long? = null,
+    override val pageSize: Long,
     @Serializable(with = MetaIdSpreadsheetSer::class) override val spreadsheetId: Types.MetaIdSpreadsheet,
     override val toGridVer: String
 ) : MsgEntSpreadsheetData

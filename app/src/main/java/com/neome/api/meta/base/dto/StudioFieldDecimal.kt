@@ -12,13 +12,13 @@ import com.neome.api.meta.base.dto.StudioFieldEditable
 interface StudioFieldDecimal : StudioFieldEditable
 {
   val defaultFieldId: MetaIdField?
-  val defaultValue: Long?
+  val defaultValue: Double?
   val defaultVarId: MetaIdVar?
-  val max: Long?
+  val max: Double?
   val maxFieldId: MetaIdField?
   val maxVarId: MetaIdVar?
-  val min: Long?
-  val minDisplayValue: Long?
+  val min: Double?
+  val minDisplayValue: Double?
   val minFieldId: MetaIdField?
   val minVarId: MetaIdVar?
   val numberFormat: String?

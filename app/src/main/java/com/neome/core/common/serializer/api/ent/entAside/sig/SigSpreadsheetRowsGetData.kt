@@ -10,8 +10,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SigSpreadsheetRowsGetData(
-    override val dateRowIdSetMap: Map<String, List<@Serializable(with = RowIdSer::class) Types.RowId>>? = null,
-    override val groupByRowIdSetMap: Map<String, List<@Serializable(with = RowIdSer::class) Types.RowId>>? = null,
+    override val dateRowIdSetMap: Map<String, Set<@Serializable(with = RowIdSer::class) Types.RowId>>? = null,
+    override val groupByRowIdSetMap: Map<String, Set<@Serializable(with = RowIdSer::class) Types.RowId>>? = null,
     @Serializable(with = MetaIdFormSer::class) override val outputFormId: Types.MetaIdForm,
     override val rowIdSet: List<@Serializable(with = RowIdSer::class) Types.RowId>? = null
 ) : SigSpreadsheetRowsGet

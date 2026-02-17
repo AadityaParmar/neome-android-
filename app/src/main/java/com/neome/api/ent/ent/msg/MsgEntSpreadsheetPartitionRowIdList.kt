@@ -10,7 +10,7 @@ import com.neome.api.nucleus.base.msg.Msg
 
 interface MsgEntSpreadsheetPartitionRowIdList : Msg
 {
-  val pageSize: Long?
+  val pageSize: Long
   val spreadsheetId: MetaIdSpreadsheet
   val toRowOrderVer: String
 }

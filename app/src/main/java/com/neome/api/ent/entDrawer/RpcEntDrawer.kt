@@ -11,6 +11,7 @@ import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.ISigAcceptor
 import com.neome.api.home.drawer.msg.MsgEntFilter
 import com.neome.api.ent.entDrawer.msg.MsgEntVariableUpdate
+import com.neome.api.ent.entDrawer.msg.MsgPluginAuthBasicPut
 import com.neome.api.core.base.msg.MsgVersion
 import com.neome.api.meta.base.Types.ServiceName
 import com.neome.api.nucleus.base.sig.SigDone
@@ -18,6 +19,7 @@ import com.neome.api.ent.entDrawer.sig.SigEntAvatarUser
 import com.neome.api.ent.entDrawer.sig.SigEntCaller
 import com.neome.api.ent.entDrawer.sig.SigEntDeployListGet
 import com.neome.api.ent.entDrawer.sig.SigEntFreezeGroupListGet
+import com.neome.api.ent.entDrawer.sig.SigPluginAuthMapGet
 
 class RpcEntDrawer
 {
@@ -58,6 +60,20 @@ class RpcEntDrawer
             CallFactory.rpc.create(SigEntFreezeGroupListGet::class.java, ApiPlus.ENT_ID_GLOBAL, SN, "entFreezeGroupListGet")
               .sendBearerToken()
               .get(msg, sigAcceptor)
+          }
+
+      fun pluginAuthBasicPut(entId: EntId, msg: MsgPluginAuthBasicPut, sigAcceptor: ISigAcceptor<SigDone>)
+          {
+            CallFactory.rpc.create(SigDone::class.java, entId, SN, "pluginAuthBasicPut")
+              .sendBearerToken()
+              .put(msg, sigAcceptor)
+          }
+
+      fun pluginAuthMapGet(sigAcceptor: ISigAcceptor<SigPluginAuthMapGet>)
+          {
+            CallFactory.rpc.create(SigPluginAuthMapGet::class.java, ApiPlus.ENT_ID_GLOBAL, SN, "pluginAuthMapGet")
+              .sendBearerToken()
+              .get(null, sigAcceptor)
           }
   }
 }

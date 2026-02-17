@@ -5,9 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnDtoChartXAxis
 import com.neome.api.meta.base.Types.MetaIdChartXAxis
 
-interface DefnStudioMapOfChartXAxis {
-    val keys: List<MetaIdChartXAxis>
-    val map: Map<MetaIdChartXAxis, DefnDtoChartXAxis>
+interface DefnStudioMapOfChartXAxis
+{
+  val keys: List<MetaIdChartXAxis>
+  val map: Map<MetaIdChartXAxis, DefnDtoChartXAxis>
 }

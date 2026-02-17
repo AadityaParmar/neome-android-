@@ -3,6 +3,7 @@ package com.neome.core.common.serializer.api.ent.base.dto
 import com.neome.api.ent.base.dto.DtoEntSpreadsheet
 import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types
+import com.neome.api.meta.base.dto.DefnLayoutGridMap
 import com.neome.core.common.serializer.api.meta.base.dto.DefnLayoutGridMapData
 import com.neome.core.common.serializer.sysId.MetaIdFormSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer

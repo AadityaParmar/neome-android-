@@ -5,7 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
-interface StudioMapOfValueText : StudioBase {
-    val keys: List<String>
-    val map: Map<String, StudioValueText>
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioValueText
+
+interface StudioMapOfValueText : StudioBase
+{
+  val keys: List<String>
+  val map: Map<String, StudioValueText>
 }

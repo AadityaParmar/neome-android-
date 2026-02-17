@@ -8,9 +8,11 @@ package com.neome.api.meta.base.dto
 import com.neome.api.meta.base.Types.EnumDefnDay
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdVar
+import com.neome.api.meta.base.dto.StudioFieldEditable
 
-interface StudioFieldChipSetDay : StudioFieldEditable {
-    val defaultFieldId: MetaIdField?
-    val defaultValue: List<EnumDefnDay>?
-    val defaultVarId: MetaIdVar?
+interface StudioFieldChipSetDay : StudioFieldEditable
+{
+  val defaultFieldId: MetaIdField?
+  val defaultValue: List<EnumDefnDay>?
+  val defaultVarId: MetaIdVar?
 }

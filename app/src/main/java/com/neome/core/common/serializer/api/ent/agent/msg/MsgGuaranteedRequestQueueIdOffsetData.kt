@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MsgGuaranteedRequestQueueIdOffsetData(
-    override val offset: Long? = null,
+    override val offset: Long,
     override val queueId: String
 ) : MsgGuaranteedRequestQueueIdOffset

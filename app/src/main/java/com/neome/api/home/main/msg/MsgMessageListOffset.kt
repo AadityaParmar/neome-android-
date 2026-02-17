@@ -9,5 +9,5 @@ import com.neome.api.home.main.msg.MsgMessageList
 
 interface MsgMessageListOffset : MsgMessageList
 {
-  val offset: Long?
+  val offset: Long
 }

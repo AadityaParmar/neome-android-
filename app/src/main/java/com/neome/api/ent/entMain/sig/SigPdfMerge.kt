@@ -12,7 +12,7 @@ import com.neome.api.nucleus.base.sig.Sig
 interface SigPdfMerge : Sig
 {
   val fileExt: EnumDefnDocFileExt
-  val fileLength: Long?
+  val fileLength: Long
   val fileName: String
   val mediaId: MediaId
 }

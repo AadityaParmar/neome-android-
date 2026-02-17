@@ -10,6 +10,6 @@ import com.neome.api.nucleus.base.sig.Sig
 
 interface SigVerifyKey : Sig
 {
-  val expiryMins: Long?
+  val expiryMins: Long
   val verifyKey: AnyKey
 }

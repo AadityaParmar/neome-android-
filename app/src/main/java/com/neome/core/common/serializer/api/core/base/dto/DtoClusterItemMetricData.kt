@@ -6,19 +6,19 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DtoClusterItemMetricData(
-    override val avgTime: Long? = null,
-    override val emptyCount: Long? = null,
-    override val failureCount: Long? = null,
-    override val maxTime: Long? = null,
-    override val medianTime: Long? = null,
-    override val minTime: Long? = null,
+    override val avgTime: Double,
+    override val emptyCount: Long,
+    override val failureCount: Long,
+    override val maxTime: Long,
+    override val medianTime: Double,
+    override val minTime: Long,
     override val name: List<String>,
-    override val p80Time: Long? = null,
-    override val p90Time: Long? = null,
-    override val p95Time: Long? = null,
-    override val p999Time: Long? = null,
-    override val p99Time: Long? = null,
+    override val p80Time: Double,
+    override val p90Time: Double,
+    override val p95Time: Double,
+    override val p999Time: Double,
+    override val p99Time: Double,
     override val sla: Long? = null,
-    override val successCount: Long? = null,
-    override val totalCount: Long? = null
+    override val successCount: Long,
+    override val totalCount: Long
 ) : DtoClusterItemMetric

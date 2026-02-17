@@ -12,5 +12,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SigPluginApiOutputData(
     override val formValueRaw: FormValueRawData,
-    override val outputFieldIdSet: List<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null
+    override val outputFieldIdSet: Set<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null
 ) : SigPluginApiOutput

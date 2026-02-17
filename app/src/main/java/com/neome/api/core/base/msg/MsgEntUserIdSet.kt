@@ -8,7 +8,8 @@ package com.neome.api.core.base.msg
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.nucleus.base.msg.Msg
 
-interface MsgEntUserIdSet : Msg {
-    val entUserId: EntUserId?
-    val entUserIdSet: List<EntUserId>?
+interface MsgEntUserIdSet : Msg
+{
+  val entUserId: EntUserId?
+  val entUserIdSet: List<EntUserId>?
 }

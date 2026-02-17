@@ -8,6 +8,7 @@ package com.neome.api.core.cluster.sig
 import com.neome.api.core.base.dto.DtoClusterItem
 import com.neome.api.nucleus.base.sig.Sig
 
-interface SigClusterItemList : Sig {
-    val clusterItemList: List<DtoClusterItem>?
+interface SigClusterItemList : Sig
+{
+  val clusterItemList: List<DtoClusterItem>?
 }

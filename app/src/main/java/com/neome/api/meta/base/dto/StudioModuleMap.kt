@@ -6,8 +6,11 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdModule
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioModule
 
-interface StudioModuleMap : StudioBase {
-    val keys: List<MetaIdModule>
-    val map: Map<MetaIdModule, StudioModule>
+interface StudioModuleMap : StudioBase
+{
+  val keys: List<MetaIdModule>
+  val map: Map<MetaIdModule, StudioModule>
 }

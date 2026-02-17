@@ -5,9 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.EntVdForm
 import com.neome.api.meta.base.Types.GhostId
+import com.neome.api.meta.base.dto.StudioBase
 
-interface EntVdFormMap : StudioBase {
-    val keys: List<GhostId>
-    val map: Map<GhostId, EntVdForm>
+interface EntVdFormMap : StudioBase
+{
+  val keys: List<GhostId>
+  val map: Map<GhostId, EntVdForm>
 }

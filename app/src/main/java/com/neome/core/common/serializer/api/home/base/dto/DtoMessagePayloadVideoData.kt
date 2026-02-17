@@ -1,7 +1,7 @@
 package com.neome.core.common.serializer.api.home.base.dto
 
 import com.neome.api.home.base.Types.EnumMessageType
-import com.neome.api.home.base.dto.DtoMessagePayloadText
+import com.neome.api.home.base.dto.DtoMessagePayloadOptionalText
 import com.neome.api.home.base.dto.DtoMessagePayloadVideo
 import com.neome.api.meta.base.Types
 import com.neome.core.common.serializer.api.home.base.dto.DtoMessagePayloadSeal
@@ -20,15 +20,14 @@ data class DtoMessagePayloadVideoData(
     override val isForwarded: Boolean? = null,
     override val mentionMap: Map<String, @Serializable(with = ContactIdSer::class) Types.ContactId>? = null,
     override val messageType: EnumMessageType = EnumMessageType.video,
-    override val isUpdated: Boolean? = null,
-    override val text: String,
-    override val durationMs: Long? = null,
+    override val text: String? = null,
+    override val durationMs: Long,
     override val fileName: String,
-    override val fileSize: Long? = null,
-    override val height: Long? = null,
+    override val fileSize: Long,
+    override val height: Long,
     @Serializable(with = MediaIdImageSer::class) override val mediaId: Types.MediaIdImage,
     @Serializable(with = MediaIdImageSer::class) override val mediaIdBlurImage: Types.MediaIdImage,
     @Serializable(with = MediaIdVideoSer::class) override val mediaIdVideo: Types.MediaIdVideo,
     override val primaryColor: String,
-    override val width: Long? = null
+    override val width: Long
 ) : DtoMessagePayloadSeal, DtoMessagePayloadVideo

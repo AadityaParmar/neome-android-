@@ -5,6 +5,8 @@
 
 package com.neome.api.home.base.dto
 
-interface DtoMessagePayloadMessageDeleted : DtoMessagePayload {
+import com.neome.api.home.base.dto.DtoMessagePayload
 
+interface DtoMessagePayloadMessageDeleted : DtoMessagePayload
+{
 }

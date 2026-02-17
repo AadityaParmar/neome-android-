@@ -8,11 +8,13 @@ import com.neome.api.meta.base.dto.DefnForm
 import com.neome.api.meta.base.dto.StudioEntImport
 import com.neome.api.meta.base.dto.StudioEntPlugin
 import com.neome.api.meta.base.dto.StudioEntPluginApi
+import com.neome.api.meta.base.dto.StudioEntPluginAuthMap
 import com.neome.api.meta.base.dto.StudioEntPluginResourceMap
 import com.neome.api.meta.base.dto.StudioModuleSelection
 import com.neome.api.meta.base.dto.StudioVar
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioEntPluginApiData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioEntPluginAuthMapData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioEntPluginResourceMapData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioModuleSelectionData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioVarData
@@ -34,6 +36,7 @@ data class StudioEntPluginData(
     @Serializable(with = MetaIdPluginSer::class) override val metaId: Types.MetaIdPlugin,
     override val modules: StudioModuleSelectionData? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol? = null,
+    override val authMap: StudioEntPluginAuthMapData? = null,
     override val mode: EnumDefnPluginMode,
     override val pluginAbout: String? = null,
     override val pluginApiIdKeys: List<@Serializable(with = PluginApiIdSer::class) Types.PluginApiId>,

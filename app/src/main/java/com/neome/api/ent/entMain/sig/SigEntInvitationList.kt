@@ -5,9 +5,10 @@
 
 package com.neome.api.ent.entMain.sig
 
-import com.neome.api.ent.entDrawer.sig.SigEntAvatarUser
 import com.neome.api.nucleus.base.sig.Sig
+import com.neome.api.ent.entDrawer.sig.SigEntAvatarUser
 
-interface SigEntInvitationList : Sig {
-    val entList: List<SigEntAvatarUser>?
+interface SigEntInvitationList : Sig
+{
+  val entList: List<SigEntAvatarUser>?
 }

@@ -7,6 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.LanguageKey
 
-interface FieldSetOfLanguageKeys {
-    val valueSet: List<LanguageKey>
+interface FieldSetOfLanguageKeys
+{
+  val valueSet: List<LanguageKey>
 }

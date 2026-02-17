@@ -13,6 +13,7 @@ import com.neome.core.common.serializer.api.meta.base.dto.StudioMapOfArgBinderDa
 import com.neome.core.common.serializer.api.meta.base.dto.StudioModuleSelectionData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioPluginApiBodyData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioValueVarIdTextData
+import com.neome.core.common.serializer.sysId.MetaIdAuthMethodSer
 import com.neome.core.common.serializer.sysId.MetaIdFormSer
 import com.neome.core.common.serializer.sysId.PluginApiIdSer
 import com.neome.core.common.serializer.sysId.SymbolSer
@@ -22,12 +23,14 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class StudioPluginApiData(
     override val apiType: EnumDefnPluginApiMethod,
+    @Serializable(with = MetaIdAuthMethodSer::class) override val authMethodId: Types.MetaIdAuthMethod? = null,
     override val baseURLVarId: StudioValueVarIdTextData? = null,
     override val creationDate: String,
     override val description: String? = null,
     override val guaranteedInvocation: Boolean? = null,
     override val headerParamMap: StudioMapOfArgBinderData? = null,
     @Serializable(with = MetaIdFormSer::class) override val inputFormId: Types.MetaIdForm? = null,
+    override val isAuthSupported: Boolean? = null,
     @Serializable(with = PluginApiIdSer::class) override val metaId: Types.PluginApiId,
     override val modules: StudioModuleSelectionData? = null,
     @Serializable(with = SymbolSer::class) override val name: Symbol,

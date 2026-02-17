@@ -5,8 +5,9 @@
 
 package com.neome.api.ent.base.dto
 
-interface DtoFieldFilterOption {
-    val childFilters: List<DtoFieldFilterOption>?
-    val label: String
-    val value: String
+interface DtoFieldFilterOption
+{
+  val childFilters: List<DtoFieldFilterOption>?
+  val label: String
+  val value: String
 }

@@ -19,6 +19,6 @@ interface StudioEntDeployPayment : StudioBase
   val messagesPerSecond: Long?
   val paymentGatewayToken: String?
   val paymentMethod: EnumDefnPaymentMethod?
-  val totalPricePerMonth: Long?
+  val totalPricePerMonth: Double?
   val totalStorageGB: Long?
 }

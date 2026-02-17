@@ -12,6 +12,7 @@ import com.neome.api.meta.base.dto.StudioDeployUnit
 import com.neome.api.meta.base.dto.StudioFormMap
 import com.neome.api.meta.base.dto.StudioModuleMap
 import com.neome.api.meta.base.dto.StudioPluginApiMap
+import com.neome.api.meta.base.dto.StudioPluginAuthMap
 import com.neome.api.meta.base.dto.StudioPluginDeploy
 import com.neome.api.meta.base.dto.StudioPluginDetails
 import com.neome.api.meta.base.dto.StudioPluginResourceMap
@@ -22,6 +23,7 @@ import com.neome.api.meta.base.dto.StudioVarMap
 interface StudioPlugin : StudioDeployUnit
 {
   val apiMap: StudioPluginApiMap
+  val authMap: StudioPluginAuthMap?
   val createdBy: AdminId?
   val creationTime: String?
   val deploy: StudioPluginDeploy

@@ -10,6 +10,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SigVerifyKeyData(
-    override val expiryMins: Long? = null,
+    override val expiryMins: Long,
     @Serializable(with = AnyKeySer::class) override val verifyKey: AnyKey
 ) : SigVerifyKey

@@ -5,7 +5,8 @@
 
 package com.neome.api.nucleus.base.dto
 
-interface DescApiTypeSet {
-    val fileName: String
-    val setMap: Map<String, List<String>>
+interface DescApiTypeSet
+{
+  val fileName: String
+  val setMap: Map<String, Set<String>>
 }

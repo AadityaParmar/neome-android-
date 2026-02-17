@@ -9,6 +9,6 @@ import com.neome.api.ent.base.dto.SpreadsheetFilterValue
 
 interface SpreadsheetFilterValueDoubleRange : SpreadsheetFilterValue
 {
-  val max: Long?
-  val min: Long?
+  val max: Double?
+  val min: Double?
 }

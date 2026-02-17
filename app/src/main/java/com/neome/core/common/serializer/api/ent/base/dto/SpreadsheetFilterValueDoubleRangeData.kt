@@ -12,6 +12,6 @@ import kotlinx.serialization.Serializable
 data class SpreadsheetFilterValueDoubleRangeData(
     @Serializable(with = MetaIdCompSer::class) override val metaIdField: Types.MetaIdComp,
     override val type: EnumFieldFilterValueType,
-    override val max: Long? = null,
-    override val min: Long? = null
+    override val max: Double? = null,
+    override val min: Double? = null
 ) : SpreadsheetFilterValueDoubleRange

@@ -11,5 +11,5 @@ import com.neome.api.core.base.msg.MsgVersion
 interface MsgOffsetWithVersion : MsgVersion
 {
   val chatId: ChatId
-  val offset: Long?
+  val offset: Long
 }

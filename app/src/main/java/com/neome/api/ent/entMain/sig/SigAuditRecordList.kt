@@ -8,6 +8,7 @@ package com.neome.api.ent.entMain.sig
 import com.neome.api.ent.base.dto.DtoAuditRecord
 import com.neome.api.nucleus.base.sig.Sig
 
-interface SigAuditRecordList : Sig {
-    val auditRecordList: List<DtoAuditRecord>?
+interface SigAuditRecordList : Sig
+{
+  val auditRecordList: List<DtoAuditRecord>?
 }

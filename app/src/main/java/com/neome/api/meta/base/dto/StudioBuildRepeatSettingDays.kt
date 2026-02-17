@@ -6,7 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.AnyTime
+import com.neome.api.meta.base.dto.StudioBuildRepeatSetting
 
-interface StudioBuildRepeatSettingDays : StudioBuildRepeatSetting {
-    val setOfTime: List<AnyTime>?
+interface StudioBuildRepeatSettingDays : StudioBuildRepeatSetting
+{
+  val setOfTime: List<AnyTime>?
 }

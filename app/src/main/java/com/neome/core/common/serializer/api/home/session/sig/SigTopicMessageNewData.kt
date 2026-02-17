@@ -15,5 +15,5 @@ data class SigTopicMessageNewData(
     @Serializable(with = SysIdSer::class) override val aboutId: SysId,
     @Serializable(with = ArtifactIdSer::class) override val artifactId: Types.ArtifactId,
     override val type: EnumTopicType,
-    override val messageOffset: Long? = null
+    override val messageOffset: Long
 ) : SigTopicMessageNew

@@ -5,7 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-interface FieldValueDateTime
+import com.neome.api.meta.base.dto.StudioPluginAuthBase
+
+interface StudioPluginAuthBasic : StudioPluginAuthBase
 {
-  val value: String
 }

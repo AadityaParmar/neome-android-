@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DescApiTypeEnumData(
-    override val valueSet: List<String>
+    override val valueSet: Set<String>
 ) : DescApiTypeEnum

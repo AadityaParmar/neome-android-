@@ -9,7 +9,7 @@ import com.neome.api.meta.base.Types.GeoPoint
 
 interface DtoGeoPoint
 {
-  val accuracy: Long?
+  val accuracy: Double?
   val dateTime: String
   val geoPoint: GeoPoint
 }

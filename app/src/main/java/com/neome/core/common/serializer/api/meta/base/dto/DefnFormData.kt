@@ -9,6 +9,7 @@ import com.neome.api.meta.base.dto.DefnDtoParagraph
 import com.neome.api.meta.base.dto.DefnDtoPermissionMatrix
 import com.neome.api.meta.base.dto.DefnDtoText
 import com.neome.api.meta.base.dto.DefnForm
+import com.neome.api.meta.base.dto.DefnFormEventMap
 import com.neome.api.meta.base.dto.DefnLayoutFormMap
 import com.neome.api.meta.base.dto.DefnPaymentConfig
 import com.neome.api.meta.base.dto.DefnStudioMapOfActionPermission
@@ -18,6 +19,7 @@ import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoFormThemeData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoParagraphData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoPermissionMatrixData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoTextData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnFormEventMapData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnLayoutFormMapData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnPaymentConfigData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfActionPermissionData
@@ -47,6 +49,7 @@ data class DefnFormData(
     override val compMap: Map<@Serializable(with = MetaIdCompSer::class) Types.MetaIdComp, DefnCompSeal>,
     override val configForm: Boolean? = null,
     @Serializable(with = MetaIdCompositeSer::class) override val displayCompositeId: Types.MetaIdComposite,
+    override val eventMap: DefnFormEventMapData? = null,
     override val formulaFieldIdSet: List<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
     override val gridLookupMap: Map<@Serializable(with = MetaIdLayoutGridSer::class) Types.MetaIdLayoutGrid, @Serializable(with = MetaIdGridSer::class) Types.MetaIdGrid>? = null,
     override val label: String? = null,

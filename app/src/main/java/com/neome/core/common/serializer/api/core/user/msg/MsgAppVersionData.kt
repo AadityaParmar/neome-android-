@@ -9,5 +9,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MsgAppVersionData(
     override val deviceType: EnumDeviceType,
-    override val versionCode: Long? = null
+    override val versionCode: Long
 ) : MsgAppVersion

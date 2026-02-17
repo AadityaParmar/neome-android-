@@ -6,7 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnAdminDoNotOptionEnt
+import com.neome.api.meta.base.dto.StudioBase
 
-interface StudioSetOfAdminDoNotOption : StudioBase {
-    val valueSet: List<EnumDefnAdminDoNotOptionEnt>
+interface StudioSetOfAdminDoNotOption : StudioBase
+{
+  val valueSet: List<EnumDefnAdminDoNotOptionEnt>
 }

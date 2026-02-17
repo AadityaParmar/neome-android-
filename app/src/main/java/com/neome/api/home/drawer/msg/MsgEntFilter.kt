@@ -5,9 +5,10 @@
 
 package com.neome.api.home.drawer.msg
 
-import com.neome.api.core.base.msg.MsgVersion
 import com.neome.api.meta.base.Types.EntId
+import com.neome.api.core.base.msg.MsgVersion
 
-interface MsgEntFilter : MsgVersion {
-    val filterEntIdSet: List<EntId>?
+interface MsgEntFilter : MsgVersion
+{
+  val filterEntIdSet: Set<EntId>?
 }

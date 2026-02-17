@@ -5,6 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-interface DefnDtoText {
-    val value: List<String>?
+interface DefnDtoText
+{
+  val value: List<String>?
 }

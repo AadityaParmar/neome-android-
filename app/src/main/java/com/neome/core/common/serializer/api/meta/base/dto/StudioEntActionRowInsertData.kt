@@ -2,6 +2,7 @@ package com.neome.core.common.serializer.api.meta.base.dto
 
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.EnumDefnKindAction
+import com.neome.api.meta.base.Types.EnumDefnKindFormRenderingMode
 import com.neome.api.meta.base.dto.StudioDetails
 import com.neome.api.meta.base.dto.StudioDtoChatBubbleHeader
 import com.neome.api.meta.base.dto.StudioEntAction
@@ -28,6 +29,7 @@ data class StudioEntActionRowInsertData(
     override val tooltip: String? = null,
     override val chatBubbleHeader: StudioDtoChatBubbleHeaderData? = null,
     @Serializable(with = MetaIdLayoutFormSer::class) override val formEditorLayoutId: Types.MetaIdLayoutForm? = null,
+    override val formRenderingModeKind: EnumDefnKindFormRenderingMode? = null,
     @Serializable(with = MetaIdLayoutFormSer::class) override val mobileFormEditorLayoutId: Types.MetaIdLayoutForm? = null,
     override val sendMessageToInbox: Boolean? = null,
     @Serializable(with = MetaIdSpreadsheetSer::class) override val spreadsheetId: Types.MetaIdSpreadsheet? = null

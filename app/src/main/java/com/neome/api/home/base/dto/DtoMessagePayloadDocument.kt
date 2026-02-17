@@ -5,13 +5,13 @@
 
 package com.neome.api.home.base.dto
 
-import com.neome.api.home.base.dto.DtoMessagePayload
+import com.neome.api.home.base.dto.DtoMessagePayloadOptionalText
 import com.neome.api.meta.base.Types.MediaIdDocument
 
-interface DtoMessagePayloadDocument : DtoMessagePayload
+interface DtoMessagePayloadDocument : DtoMessagePayloadOptionalText
 {
   val fileExt: String
   val fileName: String
-  val fileSize: Long?
+  val fileSize: Long
   val mediaIdDocument: MediaIdDocument
 }

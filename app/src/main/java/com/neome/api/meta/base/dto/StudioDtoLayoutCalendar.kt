@@ -5,14 +5,18 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.Types.EnumDefnKindDefaultCalendarView
 import com.neome.api.meta.base.Types.MetaIdField
+import com.neome.api.meta.base.dto.StudioDtoLayoutGrid
 
-interface StudioDtoLayoutCalendar : StudioDtoLayoutGrid {
-    val colorFieldId: MetaIdField?
-    val fromDateFieldId: MetaIdField?
-    val fromTimeFieldId: MetaIdField?
-    val showFieldIdSet: List<MetaIdField>?
-    val titleFieldId: MetaIdField?
-    val toDateFieldId: MetaIdField?
-    val toTimeFieldId: MetaIdField?
+interface StudioDtoLayoutCalendar : StudioDtoLayoutGrid
+{
+  val colorFieldId: MetaIdField?
+  val defaultCalendarView: EnumDefnKindDefaultCalendarView?
+  val fromDateFieldId: MetaIdField?
+  val fromTimeFieldId: MetaIdField?
+  val showFieldIdSet: List<MetaIdField>?
+  val titleFieldId: MetaIdField?
+  val toDateFieldId: MetaIdField?
+  val toTimeFieldId: MetaIdField?
 }

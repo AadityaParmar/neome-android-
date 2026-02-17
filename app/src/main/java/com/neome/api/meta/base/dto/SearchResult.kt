@@ -7,6 +7,7 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.SearchPath
 
-interface SearchResult {
-    val result: Map<SearchPath, List<String>>?
+interface SearchResult
+{
+  val result: Map<SearchPath, Set<String>>?
 }

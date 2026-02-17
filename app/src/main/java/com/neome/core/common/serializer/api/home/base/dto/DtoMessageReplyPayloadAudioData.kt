@@ -15,6 +15,6 @@ data class DtoMessageReplyPayloadAudioData(
     @Serializable(with = MessageIdSer::class) override val messageId: Types.MessageId,
     override val messageType: EnumMessageType,
     @Serializable(with = EntUserIdSer::class) override val senderId: Types.EntUserId,
-    override val durationMs: Long? = null,
+    override val durationMs: Long,
     @Serializable(with = MediaIdAudioSer::class) override val mediaIdAudio: Types.MediaIdAudio
 ) : DtoMessageReplyPayloadAudio

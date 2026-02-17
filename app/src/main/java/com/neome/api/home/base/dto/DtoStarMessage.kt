@@ -16,6 +16,6 @@ interface DtoStarMessage
   val creationDate: String
   val entId: EntId
   val messageId: MessageId
-  val messageOffset: Long?
+  val messageOffset: Long
   val senderId: EntUserId
 }

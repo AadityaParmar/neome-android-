@@ -11,17 +11,21 @@ import com.neome.api.meta.base.Types.MetaIdGroup
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import com.neome.api.meta.base.dto.StudioEntAction
+import com.neome.api.meta.base.dto.StudioMapOfActionPermission
+import com.neome.api.meta.base.dto.StudioValueVarIdCondition
 
-interface StudioEntActionSpreadsheetEditor : StudioEntAction {
-    val actionPermissionMap: StudioMapOfActionPermission?
-    val bulkInsertRoleSet: List<MetaIdRole>?
-    val bulkUpdateFieldIdSet: List<MetaIdField>?
-    val bulkUpdateRoleSet: List<MetaIdRole>?
-    val doNotOpenAside: Boolean?
-    val filterConditionVarId: StudioValueVarIdCondition?
-    val inputFormId: MetaIdForm?
-    val layoutSpreadsheetId: MetaIdLayoutGrid?
-    val readOnly: Boolean?
-    val sendMessageToGroupId: MetaIdGroup?
-    val spreadsheetId: MetaIdSpreadsheet?
+interface StudioEntActionSpreadsheetEditor : StudioEntAction
+{
+  val actionPermissionMap: StudioMapOfActionPermission?
+  val bulkInsertRoleSet: List<MetaIdRole>?
+  val bulkUpdateFieldIdSet: List<MetaIdField>?
+  val bulkUpdateRoleSet: List<MetaIdRole>?
+  val doNotOpenAside: Boolean?
+  val filterConditionVarId: StudioValueVarIdCondition?
+  val inputFormId: MetaIdForm?
+  val layoutSpreadsheetId: MetaIdLayoutGrid?
+  val readOnly: Boolean?
+  val sendMessageToGroupId: MetaIdGroup?
+  val spreadsheetId: MetaIdSpreadsheet?
 }

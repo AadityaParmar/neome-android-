@@ -15,5 +15,5 @@ interface DtoEntLogNumberFieldTransaction
   val operationKind: EnumDefnLogOperationKind
   val transactionId: String
   val userAvatar: SigUserAvatar
-  val value: Long?
+  val value: Double
 }

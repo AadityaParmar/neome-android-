@@ -5,9 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnDtoTableFooter
 import com.neome.api.meta.base.Types.MetaIdFooter
 
-interface DefnStudioMapOfTableFooter {
-    val keys: List<MetaIdFooter>
-    val map: Map<MetaIdFooter, DefnDtoTableFooter>
+interface DefnStudioMapOfTableFooter
+{
+  val keys: List<MetaIdFooter>
+  val map: Map<MetaIdFooter, DefnDtoTableFooter>
 }

@@ -5,7 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-interface DefnStudioMapOfDtoOption {
-    val keys: List<String>
-    val map: Map<String, DefnDtoOption>
+import com.neome.api.meta.base.dto.DefnDtoOption
+
+interface DefnStudioMapOfDtoOption
+{
+  val keys: List<String>
+  val map: Map<String, DefnDtoOption>
 }

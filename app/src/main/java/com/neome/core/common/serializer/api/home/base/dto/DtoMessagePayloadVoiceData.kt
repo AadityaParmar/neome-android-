@@ -19,9 +19,8 @@ data class DtoMessagePayloadVoiceData(
     override val isForwarded: Boolean? = null,
     override val mentionMap: Map<String, @Serializable(with = ContactIdSer::class) Types.ContactId>? = null,
     override val messageType: EnumMessageType = EnumMessageType.voice,
-    override val isUpdated: Boolean? = null,
-    override val text: String,
-    override val durationMs: Long? = null,
-    override val fileSize: Long? = null,
+    override val text: String? = null,
+    override val durationMs: Long,
+    override val fileSize: Long,
     @Serializable(with = MediaIdAudioSer::class) override val mediaIdAudio: Types.MediaIdAudio
 ) : DtoMessagePayloadSeal, DtoMessagePayloadVoice

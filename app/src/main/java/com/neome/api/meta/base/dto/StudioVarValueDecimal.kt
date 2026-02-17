@@ -9,5 +9,5 @@ import com.neome.api.meta.base.dto.StudioBase
 
 interface StudioVarValueDecimal : StudioBase
 {
-  val value: Long?
+  val value: Double
 }

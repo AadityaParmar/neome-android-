@@ -9,6 +9,6 @@ import com.neome.api.nucleus.base.msg.Msg
 
 interface MsgGuaranteedRequestQueueIdOffset : Msg
 {
-  val offset: Long?
+  val offset: Long
   val queueId: String
 }

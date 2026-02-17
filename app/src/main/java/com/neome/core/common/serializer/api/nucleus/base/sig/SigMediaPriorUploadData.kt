@@ -8,6 +8,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SigMediaPriorUploadData(
-    override val serverUploadLen: Long? = null,
+    override val serverUploadLen: Long,
     override val serverUploadState: EnumMediaExchangeStatus
 ) : SigMediaPriorUpload

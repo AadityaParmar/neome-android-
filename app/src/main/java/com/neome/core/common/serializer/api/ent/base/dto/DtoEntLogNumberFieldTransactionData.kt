@@ -14,5 +14,5 @@ data class DtoEntLogNumberFieldTransactionData(
     override val operationKind: EnumDefnLogOperationKind,
     override val transactionId: String,
     override val userAvatar: SigUserAvatarData,
-    override val value: Long? = null
+    override val value: Double
 ) : DtoEntLogNumberFieldTransaction

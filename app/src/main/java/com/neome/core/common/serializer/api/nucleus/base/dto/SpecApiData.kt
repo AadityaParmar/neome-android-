@@ -29,7 +29,7 @@ data class SpecApiData(
     override val apiMethod: EnumApiMethod,
     override val apiName: String,
     override val apiVer: EnumApiVer,
-    override val artifactMembers: List<EnumArtifactMemberType>,
+    override val artifactMembers: Set<EnumArtifactMemberType>,
     override val canBeAccessedViaDeeplink: Boolean,
     override val internal: Boolean,
     override val isDeprecated: Boolean? = null,
@@ -39,7 +39,7 @@ data class SpecApiData(
     override val msgSchema: String? = null,
     override val msgSpec: SpecMsgData? = null,
     override val publishes: List<String>,
-    override val rateLimitPerSec: Long? = null,
+    override val rateLimitPerSec: Long,
     override val requiredEntAdminScopes: List<EnumDefnAdminDoNotOptionEnt>,
     override val requiredPluginAdminScopes: List<EnumDefnAdminDoNotOptionPlugin>,
     override val requiredStoreAdminScopes: List<EnumDefnAdminDoNotOptionStoreItem>,
@@ -52,7 +52,7 @@ data class SpecApiData(
     override val skipEntLockCheck: Boolean? = null,
     override val skipEntUserAuthorization: Boolean,
     override val skipInputValidation: Boolean,
-    override val sla: Long? = null,
-    override val timeout: Long? = null,
+    override val sla: Long,
+    override val timeout: Long,
     override val token: EnumApiToken
 ) : SpecApi

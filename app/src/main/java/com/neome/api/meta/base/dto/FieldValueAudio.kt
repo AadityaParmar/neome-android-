@@ -9,8 +9,8 @@ import com.neome.api.meta.base.Types.MediaIdAudio
 
 interface FieldValueAudio
 {
-  val durationMs: Long?
+  val durationMs: Long
   val fileName: String
-  val fileSize: Long?
+  val fileSize: Long
   val mediaIdAudio: MediaIdAudio
 }

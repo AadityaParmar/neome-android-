@@ -17,7 +17,7 @@ data class DtoWhatsAppTemplateGroupData(
     override val groupName: String,
     override val isCarouselTemplate: Boolean,
     override val numberOfButtonParams: Long? = null,
-    override val numberOfParams: Long? = null,
+    override val numberOfParams: Long,
     override val sample: String,
-    override val supportedHeaders: List<EnumWhatsAppTemplateHeaderType>
+    override val supportedHeaders: Set<EnumWhatsAppTemplateHeaderType>
 ) : DtoWhatsAppTemplateGroup

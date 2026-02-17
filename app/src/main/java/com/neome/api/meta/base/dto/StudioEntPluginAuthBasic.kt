@@ -5,8 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-interface FieldValueDateTimeRange
+import com.neome.api.meta.base.dto.StudioEntPluginAuthBase
+
+interface StudioEntPluginAuthBasic : StudioEntPluginAuthBase
 {
-  val from: String?
-  val to: String?
 }

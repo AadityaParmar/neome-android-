@@ -5,6 +5,9 @@
 
 package com.neome.api.nucleus.base.dto
 
-interface DescApiTypeEnum : DescApiType {
-    val valueSet: List<String>
+import com.neome.api.nucleus.base.dto.DescApiType
+
+interface DescApiTypeEnum : DescApiType
+{
+  val valueSet: Set<String>
 }

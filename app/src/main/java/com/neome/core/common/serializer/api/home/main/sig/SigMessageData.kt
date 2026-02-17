@@ -20,7 +20,7 @@ data class SigMessageData(
     override val creationTime: String,
     override val isCallerSender: Boolean? = null,
     @Serializable(with = MessageIdSer::class) override val messageId: Types.MessageId,
-    override val messageOffset: Long? = null,
+    override val messageOffset: Long,
     override val payload: DtoMessagePayloadSeal,
     override val reactionMap: Map<@Serializable(with = EntUserIdSer::class) Types.EntUserId, DtoMessageReactionData>? = null,
     override val replyPayload: DtoMessageReplyPayloadData? = null,

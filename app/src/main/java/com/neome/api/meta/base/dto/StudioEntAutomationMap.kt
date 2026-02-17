@@ -6,8 +6,11 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdAutomation
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioEntAutomation
 
-interface StudioEntAutomationMap : StudioBase {
-    val keys: List<MetaIdAutomation>
-    val map: Map<MetaIdAutomation, StudioEntAutomation>
+interface StudioEntAutomationMap : StudioBase
+{
+  val keys: List<MetaIdAutomation>
+  val map: Map<MetaIdAutomation, StudioEntAutomation>
 }

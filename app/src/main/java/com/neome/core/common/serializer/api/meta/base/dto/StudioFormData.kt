@@ -8,6 +8,7 @@ import com.neome.api.meta.base.dto.StudioCompositeMap
 import com.neome.api.meta.base.dto.StudioDetails
 import com.neome.api.meta.base.dto.StudioDtoPermissionMatrix
 import com.neome.api.meta.base.dto.StudioForm
+import com.neome.api.meta.base.dto.StudioFormEventMap
 import com.neome.api.meta.base.dto.StudioMapOfActionPermission
 import com.neome.api.meta.base.dto.StudioMapOfFormula
 import com.neome.api.meta.base.dto.StudioMapOfLayoutForm
@@ -18,6 +19,7 @@ import com.neome.api.meta.base.dto.StudioVisibilityRuleMap
 import com.neome.core.common.serializer.api.meta.base.dto.StudioCompositeMapData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioDetailsData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioFormEventMapData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioMapOfActionPermissionData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioMapOfFormulaData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioMapOfLayoutFormData
@@ -46,6 +48,7 @@ data class StudioFormData(
     override val compositeMap: StudioCompositeMapData,
     override val configForm: Boolean? = null,
     override val details: StudioDetailsData,
+    override val eventMap: StudioFormEventMapData? = null,
     override val formulaMap: StudioMapOfFormulaData? = null,
     override val layoutMap: StudioMapOfLayoutFormData? = null,
     @Serializable(with = MetaIdFormSer::class) override val metaId: Types.MetaIdForm,

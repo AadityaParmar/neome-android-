@@ -5,7 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-interface FieldDtoTree {
-    val keys: List<String>
-    val map: Map<String, FieldDtoTreeNode>
+import com.neome.api.meta.base.dto.FieldDtoTreeNode
+
+interface FieldDtoTree
+{
+  val keys: List<String>
+  val map: Map<String, FieldDtoTreeNode>
 }

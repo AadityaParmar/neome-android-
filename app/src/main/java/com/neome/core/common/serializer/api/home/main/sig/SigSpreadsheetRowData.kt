@@ -22,5 +22,5 @@ data class SigSpreadsheetRowData(
     override val rowCommentCount: SigSpreadsheetRowCommentCountData? = null,
     @Serializable(with = MetaIdSpreadsheetSer::class) override val spreadsheetId: Types.MetaIdSpreadsheet,
     @Serializable(with = SpreadsheetPartitionIdSer::class) override val spreadsheetPartitionId: Types.SpreadsheetPartitionId,
-    override val updatedKeySet: List<@Serializable(with = MetaIdCompSer::class) Types.MetaIdComp>? = null
+    override val updatedKeySet: Set<@Serializable(with = MetaIdCompSer::class) Types.MetaIdComp>? = null
 ) : SigSpreadsheetRow

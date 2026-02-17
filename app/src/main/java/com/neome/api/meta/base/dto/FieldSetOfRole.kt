@@ -7,7 +7,8 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdRole
 
-interface FieldSetOfRole {
-    val displaySet: List<String>?
-    val valueSet: List<MetaIdRole>
+interface FieldSetOfRole
+{
+  val displaySet: List<String>?
+  val valueSet: List<MetaIdRole>
 }

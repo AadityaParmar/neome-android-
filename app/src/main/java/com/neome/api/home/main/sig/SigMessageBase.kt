@@ -17,7 +17,7 @@ interface SigMessageBase : Sig
   val creationTime: String
   val isCallerSender: Boolean?
   val messageId: MessageId
-  val messageOffset: Long?
+  val messageOffset: Long
   val payload: DtoMessagePayload
   val reactionMap: Map<EntUserId, DtoMessageReaction>?
   val replyPayload: DtoMessageReplyPayload?

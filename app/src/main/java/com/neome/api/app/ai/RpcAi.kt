@@ -24,6 +24,13 @@ class RpcAi
   {
     val SN: ServiceName = ServiceName.ai
 
+      fun aiBuilder(entId: EntId, msg: MsgAiNeoScriptGen, sigAcceptor: ISigAcceptor<SigAiNeoScriptGen>)
+          {
+            CallFactory.rpc.create(SigAiNeoScriptGen::class.java, entId, SN, "aiBuilder")
+              .sendBearerToken()
+              .post(msg, sigAcceptor)
+          }
+
       fun aiNeoQLGet(entId: EntId, msg: MsgAiNeoQLGet, sigAcceptor: ISigAcceptor<SigAiNeoQLGet>)
           {
             CallFactory.rpc.create(SigAiNeoQLGet::class.java, entId, SN, "aiNeoQLGet")

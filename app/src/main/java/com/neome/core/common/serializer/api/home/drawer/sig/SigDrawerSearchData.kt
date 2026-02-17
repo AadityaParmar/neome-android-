@@ -22,7 +22,7 @@ data class SigDrawerSearchData(
     override val auditRecordMap: Map<@Serializable(with = EntIdSer::class) Types.EntId, Map<@Serializable(with = MetaIdSpreadsheetSer::class) Types.MetaIdSpreadsheet, List<FormValueData>>>? = null,
     override val groupAvatarList: List<SigGroupAvatarData>? = null,
     override val latestMessageMap: Map<@Serializable(with = EntIdSer::class) Types.EntId, DtoChatMessageListMapData>? = null,
-    override val spreadsheetRowMap: Map<@Serializable(with = EntIdSer::class) Types.EntId, Map<@Serializable(with = MetaIdSpreadsheetSer::class) Types.MetaIdSpreadsheet, List<@Serializable(with = RowIdSer::class) Types.RowId>>>? = null,
-    override val totalMessageCount: Long? = null,
+    override val spreadsheetRowMap: Map<@Serializable(with = EntIdSer::class) Types.EntId, Map<@Serializable(with = MetaIdSpreadsheetSer::class) Types.MetaIdSpreadsheet, Set<@Serializable(with = RowIdSer::class) Types.RowId>>>? = null,
+    override val totalMessageCount: Long,
     override val userAvatarList: List<SigUserAvatarData>? = null
 ) : SigDrawerSearch

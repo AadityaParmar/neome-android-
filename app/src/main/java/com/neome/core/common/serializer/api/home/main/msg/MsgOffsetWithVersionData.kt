@@ -11,5 +11,5 @@ import kotlinx.serialization.Serializable
 data class MsgOffsetWithVersionData(
     override val version: String? = null,
     @Serializable(with = ChatIdSer::class) override val chatId: Types.ChatId,
-    override val offset: Long? = null
+    override val offset: Long
 ) : MsgOffsetWithVersion

@@ -5,11 +5,13 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.EnumDefnKindAction
 import com.neome.api.meta.base.Types.MetaIdAction
 
-interface DefnStudioPickActionId : DefnFieldEditable {
-    val excludeActionIdSet: List<MetaIdAction>?
-    val filterActionKindSet: List<EnumDefnKindAction>?
-    val includeActionIdSet: List<MetaIdAction>?
+interface DefnStudioPickActionId : DefnFieldEditable
+{
+  val excludeActionIdSet: List<MetaIdAction>?
+  val filterActionKindSet: List<EnumDefnKindAction>?
+  val includeActionIdSet: List<MetaIdAction>?
 }

@@ -71,7 +71,7 @@ data class DefnFieldDecimalData(
     @Serializable(with = MetaIdFieldSer::class) override val minFieldId: Types.MetaIdField? = null,
     override val minVar: Double? = null,
     override val numberFormat: String? = null,
-    override val numberOfDigitsAfterPeriod: Double? = null,
+    override val numberOfDigitsAfterPeriod: Long? = null,
     @Serializable(with = MetaIdFieldSer::class) override val numberOfDigitsAfterPeriodFieldId: Types.MetaIdField? = null,
-    override val numberOfDigitsAfterPeriodVar: Double? = null
+    override val numberOfDigitsAfterPeriodVar: Long? = null
 ) : DefnCompSeal, DefnFieldDecimal

@@ -5,9 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.EnumStudioVarKind
 
-interface DefnStudioSetOfVarId : DefnFieldEditable {
-    val varKind: EnumStudioVarKind?
-    val varKindSet: List<EnumStudioVarKind>?
+interface DefnStudioSetOfVarId : DefnFieldEditable
+{
+  val varKind: EnumStudioVarKind?
+  val varKindSet: List<EnumStudioVarKind>?
 }

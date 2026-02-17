@@ -5,6 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.Types.EnumDefnKindFormRenderingMode
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 import com.neome.api.meta.base.dto.StudioDtoChatBubbleHeader
@@ -14,6 +15,7 @@ interface StudioEntActionRowInsert : StudioEntAction
 {
   val chatBubbleHeader: StudioDtoChatBubbleHeader?
   val formEditorLayoutId: MetaIdLayoutForm?
+  val formRenderingModeKind: EnumDefnKindFormRenderingMode?
   val mobileFormEditorLayoutId: MetaIdLayoutForm?
   val sendMessageToInbox: Boolean?
   val spreadsheetId: MetaIdSpreadsheet?

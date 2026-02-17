@@ -14,5 +14,5 @@ data class MsgMessageReportData(
     @Serializable(with = ChatIdSer::class) override val chatId: Types.ChatId,
     @Serializable(with = EntIdSer::class) override val entId: Types.EntId,
     @Serializable(with = MessageIdSer::class) override val messageId: Types.MessageId,
-    override val offset: Long? = null
+    override val offset: Long
 ) : MsgMessageReport

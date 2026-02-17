@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
 data class MsgGroupCreateData(
     override val about: String? = null,
     @Serializable(with = MediaIdAvatarSer::class) override val mediaIdAvatar: Types.MediaIdAvatar? = null,
-    override val members: List<@Serializable(with = EntUserIdSer::class) Types.EntUserId>,
+    override val members: Set<@Serializable(with = EntUserIdSer::class) Types.EntUserId>,
     override val name: String,
     override val settings: DtoGroupSettingsData
 ) : MsgGroupCreate

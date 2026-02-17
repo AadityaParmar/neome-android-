@@ -9,8 +9,9 @@ import com.neome.api.meta.base.Types.MetaIdAction
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.RowId
 
-interface DtoEntSpreadsheetExportExcel {
-    val layoutSpreadsheetId: MetaIdLayoutGrid?
-    val rowIdSet: List<RowId>?
-    val spreadsheetEditorActionId: MetaIdAction
+interface DtoEntSpreadsheetExportExcel
+{
+  val layoutSpreadsheetId: MetaIdLayoutGrid?
+  val rowIdSet: List<RowId>?
+  val spreadsheetEditorActionId: MetaIdAction
 }

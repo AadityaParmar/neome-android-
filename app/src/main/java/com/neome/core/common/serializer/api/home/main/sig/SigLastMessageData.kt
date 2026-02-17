@@ -19,7 +19,7 @@ data class SigLastMessageData(
     @Serializable(with = ChatIdSer::class) override val chatId: Types.ChatId,
     @Serializable(with = EntIdSer::class) override val entId: Types.EntId,
     @Serializable(with = MessageIdSer::class) override val messageId: Types.MessageId,
-    override val messageOffset: Long? = null,
+    override val messageOffset: Long,
     override val messagePayload: DtoMessagePayloadSeal,
     override val messageSummary: String,
     override val messageTime: String,

@@ -12,7 +12,7 @@ interface DtoMessagePayloadLocation : DtoMessagePayloadText
 {
   val city: String?
   val country: String?
-  val latitude: Long?
-  val longitude: Long?
+  val latitude: Double
+  val longitude: Double
   val mediaIdImage: MediaIdImage
 }

@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MsgEntSpreadsheetPartitionRowIdListData(
-    override val pageSize: Long? = null,
+    override val pageSize: Long,
     @Serializable(with = MetaIdSpreadsheetSer::class) override val spreadsheetId: Types.MetaIdSpreadsheet,
     override val toRowOrderVer: String
 ) : MsgEntSpreadsheetPartitionRowIdList

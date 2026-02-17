@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioVarValueLongData(
-    override val value: Long? = null
+    override val value: Long
 ) : StudioVarValueLong

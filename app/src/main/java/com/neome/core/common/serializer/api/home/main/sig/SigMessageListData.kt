@@ -12,13 +12,13 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SigMessageListData(
-    override val bottomOffset: Long? = null,
+    override val bottomOffset: Long,
     @Serializable(with = ChatIdSer::class) override val chatId: Types.ChatId,
     override val chatIdHash: String,
     @Serializable(with = EntIdSer::class) override val entId: Types.EntId,
     override val messageList: List<SigMessageData>,
-    override val pageBottomOffset: Long? = null,
-    override val pageTopOffset: Long? = null,
-    override val readOffset: Long? = null,
-    override val topOffset: Long? = null
+    override val pageBottomOffset: Long,
+    override val pageTopOffset: Long,
+    override val readOffset: Long,
+    override val topOffset: Long
 ) : SigMessageList

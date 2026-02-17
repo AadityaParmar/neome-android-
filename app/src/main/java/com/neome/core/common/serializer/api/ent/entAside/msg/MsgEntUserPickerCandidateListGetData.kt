@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MsgEntUserPickerCandidateListGetData(
     override val formValueRaw: FormValueRawData? = null,
-    override val roleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val roleIdSet: Set<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     @Serializable(with = MetaIdVarSer::class) override val setOfUserVarId: Types.MetaIdVar? = null,
     @Serializable(with = MetaIdFormSer::class) override val sourceFormId: Types.MetaIdForm
 ) : MsgEntUserPickerCandidateListGet

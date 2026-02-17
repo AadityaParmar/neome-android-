@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SigSpreadsheetBulkRowGetData(
-    override val expiredRowIdSet: List<@Serializable(with = RowIdSer::class) Types.RowId>? = null,
-    override val inProgressRowIdSet: List<@Serializable(with = RowIdSer::class) Types.RowId>? = null,
+    override val expiredRowIdSet: Set<@Serializable(with = RowIdSer::class) Types.RowId>? = null,
+    override val inProgressRowIdSet: Set<@Serializable(with = RowIdSer::class) Types.RowId>? = null,
     override val rowMap: Map<@Serializable(with = RowIdSer::class) Types.RowId, SigSpreadsheetRowData>? = null
 ) : SigSpreadsheetBulkRowGet

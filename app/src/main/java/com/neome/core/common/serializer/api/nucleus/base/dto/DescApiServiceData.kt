@@ -26,7 +26,7 @@ data class DescApiServiceData(
     override val enums: Map<String, DescApiTypeEnumData>,
     override val msg: Map<String, DescApiTypeDtoData>,
     override val rpc: DescApiCallData,
-    override val serviceNames: List<ServiceName>? = null,
+    override val serviceNames: Set<ServiceName>? = null,
     override val sets: Map<String, DescApiTypeSetData>,
     override val sig: Map<String, DescApiTypeDtoData>,
     override val symbols: Map<String, String>,

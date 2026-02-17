@@ -13,9 +13,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FieldValueVoiceData(
-    override val durationMs: Long? = null,
+    override val durationMs: Long,
     override val fileName: String,
-    override val fileSize: Long? = null,
+    override val fileSize: Long,
     @Serializable(with = MediaIdAudioSer::class) override val mediaIdAudio: Types.MediaIdAudio,
     override val captureLocation: FieldValueLocationData? = null,
     override val captureTime: String? = null,

@@ -11,5 +11,5 @@ import kotlinx.serialization.Serializable
 data class MsgMessageListOffsetData(
     @Serializable(with = ChatIdSer::class) override val chatId: Types.ChatId,
     override val pageSize: Long? = null,
-    override val offset: Long? = null
+    override val offset: Long
 ) : MsgMessageListOffset

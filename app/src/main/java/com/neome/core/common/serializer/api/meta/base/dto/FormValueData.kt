@@ -19,4 +19,3 @@ data class FormValueData(
     override val updatedOn: String? = null,
     override val valueMap: Map<@Serializable(with = MetaIdCompSer::class) Types.MetaIdComp, JsonElement>
 ) : FormValue
-

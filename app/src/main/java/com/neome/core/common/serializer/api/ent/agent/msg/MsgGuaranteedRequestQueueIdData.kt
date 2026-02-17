@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MsgGuaranteedRequestQueueIdData(
-    override val pageSize: Long? = null,
+    override val pageSize: Long,
     override val queueId: String,
     override val startOffset: Long? = null
 ) : MsgGuaranteedRequestQueueId

@@ -7,5 +7,5 @@ package com.neome.api.meta.base.dto
 
 interface StudioVarValueLong
 {
-  val value: Long?
+  val value: Long
 }

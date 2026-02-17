@@ -10,5 +10,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MsgOffsetData(
     @Serializable(with = ChatIdSer::class) override val chatId: Types.ChatId,
-    override val offset: Long? = null
+    override val offset: Long
 ) : MsgOffset

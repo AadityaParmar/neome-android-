@@ -11,7 +11,7 @@ import com.neome.api.meta.base.Types.MediaIdVideo
 
 interface DtoMessageReplyPayloadVideo : DtoMessageReplyPayload
 {
-  val durationMs: Long?
+  val durationMs: Long
   val mediaId: MediaIdImage
   val mediaIdBlurImage: MediaIdImage
   val mediaIdVideo: MediaIdVideo

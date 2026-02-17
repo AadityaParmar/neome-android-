@@ -9,5 +9,5 @@ import com.neome.api.core.session.sig.SigTopic
 
 interface SigTopicMessageNew : SigTopic
 {
-  val messageOffset: Long?
+  val messageOffset: Long
 }

@@ -15,5 +15,5 @@ data class MsgAiNeoQLValidateData(
     override val neoQL: String,
     override val outputFormRefKey: FormRefKeyData? = null,
     override val paramMap: Map<String, FormRefKeyData>? = null,
-    override val spreadsheetIdSet: List<@Serializable(with = MetaIdSpreadsheetSer::class) Types.MetaIdSpreadsheet>
+    override val spreadsheetIdSet: Set<@Serializable(with = MetaIdSpreadsheetSer::class) Types.MetaIdSpreadsheet>
 ) : MsgAiNeoQLValidate

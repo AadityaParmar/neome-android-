@@ -10,6 +10,6 @@ import com.neome.api.nucleus.base.sig.Sig
 
 interface SigMediaPriorUpload : Sig
 {
-  val serverUploadLen: Long?
+  val serverUploadLen: Long
   val serverUploadState: EnumMediaExchangeStatus
 }

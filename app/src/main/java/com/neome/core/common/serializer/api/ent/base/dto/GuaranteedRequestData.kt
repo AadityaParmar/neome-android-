@@ -8,6 +8,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class GuaranteedRequestData(
-    override val offset: Long? = null,
+    override val offset: Long,
     override val payload: DtoGuaranteedRequestData
 ) : GuaranteedRequest

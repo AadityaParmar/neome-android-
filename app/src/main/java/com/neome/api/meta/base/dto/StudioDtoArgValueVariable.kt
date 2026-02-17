@@ -6,8 +6,10 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdVar
+import com.neome.api.meta.base.dto.StudioDtoArgValue
 
-interface StudioDtoArgValueVariable : StudioDtoArgValue {
-    val valuePathArray: List<String>?
-    val varId: MetaIdVar
+interface StudioDtoArgValueVariable : StudioDtoArgValue
+{
+  val valuePathArray: List<String>?
+  val varId: MetaIdVar
 }

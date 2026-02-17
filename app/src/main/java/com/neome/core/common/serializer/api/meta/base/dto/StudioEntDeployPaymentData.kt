@@ -17,6 +17,6 @@ data class StudioEntDeployPaymentData(
     override val messagesPerSecond: Long? = null,
     override val paymentGatewayToken: String? = null,
     override val paymentMethod: EnumDefnPaymentMethod? = null,
-    override val totalPricePerMonth: Long? = null,
+    override val totalPricePerMonth: Double? = null,
     override val totalStorageGB: Long? = null
 ) : StudioEntDeployPayment

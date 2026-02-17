@@ -7,9 +7,12 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdLayoutDriveSheet
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioDtoLayoutDriveSheet
 
-interface StudioMapOfLayoutDriveSheet : StudioBase {
-    val includeMetaFieldIdSet: List<MetaIdField>?
-    val keys: List<MetaIdLayoutDriveSheet>
-    val map: Map<MetaIdLayoutDriveSheet, StudioDtoLayoutDriveSheet>
+interface StudioMapOfLayoutDriveSheet : StudioBase
+{
+  val includeMetaFieldIdSet: List<MetaIdField>?
+  val keys: List<MetaIdLayoutDriveSheet>
+  val map: Map<MetaIdLayoutDriveSheet, StudioDtoLayoutDriveSheet>
 }

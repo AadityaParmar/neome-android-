@@ -6,7 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnDocFileExt
+import com.neome.api.meta.base.dto.StudioBase
 
-interface StudioSetOfDocFileExt : StudioBase {
-    val valueSet: List<EnumDefnDocFileExt>
+interface StudioSetOfDocFileExt : StudioBase
+{
+  val valueSet: List<EnumDefnDocFileExt>
 }

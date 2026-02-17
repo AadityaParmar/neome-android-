@@ -11,5 +11,5 @@ import com.neome.api.nucleus.base.msg.Msg
 interface MsgOffset : Msg
 {
   val chatId: ChatId
-  val offset: Long?
+  val offset: Long
 }

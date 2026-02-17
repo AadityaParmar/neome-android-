@@ -5,11 +5,14 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnField
+import com.neome.api.meta.base.dto.DefnStudioMapOfDtoOption
 import com.neome.api.meta.base.Types.MetaIdForm
 
-interface DefnStudioPickFormId : DefnField {
-    val alias: String?
-    val allowSystemForms: Boolean?
-    val excludeFormIdSet: List<MetaIdForm>?
-    val includeOptionMap: DefnStudioMapOfDtoOption?
+interface DefnStudioPickFormId : DefnField
+{
+  val alias: String?
+  val allowSystemForms: Boolean?
+  val excludeFormIdSet: List<MetaIdForm>?
+  val includeOptionMap: DefnStudioMapOfDtoOption?
 }

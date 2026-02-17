@@ -9,5 +9,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MsgEntFilterNoVersionData(
-    override val filterEntIdSet: List<@Serializable(with = EntIdSer::class) Types.EntId>? = null
+    override val filterEntIdSet: Set<@Serializable(with = EntIdSer::class) Types.EntId>? = null
 ) : MsgEntFilterNoVersion

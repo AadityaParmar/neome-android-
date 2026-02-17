@@ -17,7 +17,7 @@ interface DefnLayoutFormWatermark
   val bgImageHorizontalPosition: EnumDefnContentAlignment?
   val bgImageVar: FieldDtoImage?
   val bgImageVerticalPosition: EnumDefnContentAlignment?
-  val textOpacityVar: Long?
+  val textOpacityVar: Double?
   val textPatternVar: DefnDtoText?
   val textPositionVar: EnumDefnPlacement?
   val textSizeVar: EnumDefnTextSize?

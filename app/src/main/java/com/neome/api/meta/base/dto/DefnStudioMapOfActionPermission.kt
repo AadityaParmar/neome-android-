@@ -5,9 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnStudioDtoActionPermission
 import com.neome.api.meta.base.Types.MetaIdAction
 
-interface DefnStudioMapOfActionPermission {
-    val keys: List<MetaIdAction>
-    val map: Map<MetaIdAction, DefnStudioDtoActionPermission>
+interface DefnStudioMapOfActionPermission
+{
+  val keys: List<MetaIdAction>
+  val map: Map<MetaIdAction, DefnStudioDtoActionPermission>
 }

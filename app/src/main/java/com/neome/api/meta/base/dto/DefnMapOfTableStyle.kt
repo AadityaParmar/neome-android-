@@ -5,9 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnDtoTableStyle
 import com.neome.api.meta.base.Types.MetaIdTableStyle
 
-interface DefnMapOfTableStyle {
-    val keys: List<MetaIdTableStyle>?
-    val map: Map<MetaIdTableStyle, DefnDtoTableStyle>
+interface DefnMapOfTableStyle
+{
+  val keys: List<MetaIdTableStyle>?
+  val map: Map<MetaIdTableStyle, DefnDtoTableStyle>
 }

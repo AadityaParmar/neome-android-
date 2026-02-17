@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudioVarValueDecimalData(
-    override val value: Long? = null
+    override val value: Double
 ) : StudioVarValueDecimal

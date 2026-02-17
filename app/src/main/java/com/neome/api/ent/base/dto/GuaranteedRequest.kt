@@ -9,6 +9,6 @@ import com.neome.api.ent.base.dto.DtoGuaranteedRequest
 
 interface GuaranteedRequest
 {
-  val offset: Long?
+  val offset: Long
   val payload: DtoGuaranteedRequest
 }

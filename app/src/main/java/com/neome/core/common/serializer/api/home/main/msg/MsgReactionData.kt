@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MsgReactionData(
     @Serializable(with = ChatIdSer::class) override val chatId: Types.ChatId,
-    override val offset: Long? = null,
+    override val offset: Long,
     override val chatMessageOffset: DtoChatMessageOffsetData? = null,
     override val reaction: String? = null
 ) : MsgReaction

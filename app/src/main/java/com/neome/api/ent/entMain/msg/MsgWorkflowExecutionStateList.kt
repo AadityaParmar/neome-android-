@@ -8,8 +8,9 @@ package com.neome.api.ent.entMain.msg
 import com.neome.api.ent.base.Types.EnumWorkflowResultKind
 import com.neome.api.nucleus.base.msg.Msg
 
-interface MsgWorkflowExecutionStateList : Msg {
-    val filterWorkflowStateSet: List<EnumWorkflowResultKind>?
-    val from: String?
-    val limit: Long?
+interface MsgWorkflowExecutionStateList : Msg
+{
+  val filterWorkflowStateSet: List<EnumWorkflowResultKind>?
+  val from: String?
+  val limit: Long?
 }

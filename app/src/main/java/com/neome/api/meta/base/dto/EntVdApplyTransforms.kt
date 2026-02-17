@@ -5,9 +5,12 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.AutoXform
+import com.neome.api.meta.base.dto.EntVdAutoStep
 import com.neome.api.meta.base.Types.MetaIdVdAutoFunc
 
-interface EntVdApplyTransforms : EntVdAutoStep {
-    val keys: List<MetaIdVdAutoFunc>
-    val map: Map<MetaIdVdAutoFunc, AutoXform>
+interface EntVdApplyTransforms : EntVdAutoStep
+{
+  val keys: List<MetaIdVdAutoFunc>
+  val map: Map<MetaIdVdAutoFunc, AutoXform>
 }

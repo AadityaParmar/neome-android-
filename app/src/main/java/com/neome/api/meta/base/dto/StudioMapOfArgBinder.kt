@@ -5,7 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
-interface StudioMapOfArgBinder : StudioBase {
-    val keys: List<String>
-    val map: Map<String, StudioBuildArgBinder>
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioBuildArgBinder
+
+interface StudioMapOfArgBinder : StudioBase
+{
+  val keys: List<String>
+  val map: Map<String, StudioBuildArgBinder>
 }

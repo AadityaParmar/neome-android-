@@ -9,9 +9,9 @@ import com.neome.api.nucleus.base.sig.Sig
 
 interface SigAppVersion : Sig
 {
-  val currVersionCode: Long?
+  val currVersionCode: Long
   val hasForceUpdate: Boolean
   val hasUpdate: Boolean
-  val mmkvVersion: Long?
-  val sqlVersion: Long?
+  val mmkvVersion: Long
+  val sqlVersion: Long
 }

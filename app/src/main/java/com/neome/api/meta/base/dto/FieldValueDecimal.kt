@@ -5,6 +5,7 @@
 
 package com.neome.api.meta.base.dto
 
-interface FieldValueDecimal {
-    val value: Double?
+interface FieldValueDecimal
+{
+  val value: Double
 }

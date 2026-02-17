@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SigEntVarSeqData(
-    override val endSeq: Long? = null,
-    override val startSeq: Long? = null
+    override val endSeq: Long,
+    override val startSeq: Long
 ) : SigEntVarSeq

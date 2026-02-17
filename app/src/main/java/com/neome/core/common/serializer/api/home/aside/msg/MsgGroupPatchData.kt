@@ -18,6 +18,6 @@ data class MsgGroupPatchData(
     @Serializable(with = GroupIdSer::class) override val groupId: Types.GroupId,
     @Serializable(with = MediaIdAvatarSer::class) override val mediaIdAvatar: Types.MediaIdAvatar? = null,
     override val name: String? = null,
-    override val patchPropNameSet: List<EnumGroupPatchPropName>,
+    override val patchPropNameSet: Set<EnumGroupPatchPropName>,
     override val settings: DtoGroupSettingsData? = null
 ) : MsgGroupPatch

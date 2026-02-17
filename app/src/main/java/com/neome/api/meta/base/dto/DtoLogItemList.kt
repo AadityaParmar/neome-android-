@@ -5,6 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-interface DtoLogItemList {
-    val children: List<DtoLogItem>?
+import com.neome.api.meta.base.dto.DtoLogItem
+
+interface DtoLogItemList
+{
+  val children: List<DtoLogItem>?
 }

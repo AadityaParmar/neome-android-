@@ -11,5 +11,5 @@ import com.neome.api.nucleus.base.msg.Msg
 interface MsgAppVersion : Msg
 {
   val deviceType: EnumDeviceType
-  val versionCode: Long?
+  val versionCode: Long
 }

@@ -8,7 +8,8 @@ package com.neome.api.ent.ent.sig
 import com.neome.api.meta.base.Types.RowId
 import com.neome.api.nucleus.base.sig.Sig
 
-interface SigEntSpreadsheetPartitionRowIdList : Sig {
-    val bottomRowOrderVer: String
-    val rowIdList: List<RowId>
+interface SigEntSpreadsheetPartitionRowIdList : Sig
+{
+  val bottomRowOrderVer: String
+  val rowIdList: List<RowId>
 }

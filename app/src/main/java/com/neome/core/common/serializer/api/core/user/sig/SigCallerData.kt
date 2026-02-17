@@ -35,7 +35,7 @@ data class SigCallerData(
     override val firstName: String? = null,
     override val fromCache: Boolean? = null,
     override val globalNotificationSetting: DtoNotificationSettingData? = null,
-    override val groupIdSet: List<@Serializable(with = GroupIdSer::class) Types.GroupId>,
+    override val groupIdSet: Set<@Serializable(with = GroupIdSer::class) Types.GroupId>,
     override val handle: String? = null,
     @Serializable(with = LanguageKeySer::class) override val languageKey: Types.LanguageKey? = null,
     override val lastName: String? = null,

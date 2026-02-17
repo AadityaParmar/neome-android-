@@ -7,6 +7,6 @@ package com.neome.api.meta.base.dto
 
 interface FieldValueDecimalRange
 {
-  val maxValue: Long?
-  val minValue: Long?
+  val maxValue: Double?
+  val minValue: Double?
 }

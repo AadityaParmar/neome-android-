@@ -15,8 +15,8 @@ data class DtoLogTreeData(
     override val bgColor: String,
     override val children: List<DtoLogTreeItemData>? = null,
     override val keyColor: String,
-    override val keyWidth: Long? = null,
+    override val keyWidth: Long,
     override val lineColor: String,
-    override val tabWidth: Long? = null,
+    override val tabWidth: Long,
     override val valueColor: String
 ) : DtoLogTree

@@ -5,6 +5,7 @@ import com.neome.api.ent.base.dto.DtoEntActionRowInsert
 import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.EnumDefnKindAction
+import com.neome.api.meta.base.Types.EnumDefnKindFormRenderingMode
 import com.neome.core.common.serializer.api.ent.base.dto.DtoEntActionSeal
 import com.neome.core.common.serializer.sysId.MetaIdActionSer
 import com.neome.core.common.serializer.sysId.MetaIdCompSer
@@ -32,6 +33,7 @@ data class DtoEntActionRowInsertData(
     override val tooltip: String? = null,
     override val defaultValueMap: Map<@Serializable(with = MetaIdCompSer::class) Types.MetaIdComp, JsonElement>? = null,
     @Serializable(with = MetaIdLayoutFormSer::class) override val formEditorLayoutId: Types.MetaIdLayoutForm? = null,
+    override val formRenderingModeKind: EnumDefnKindFormRenderingMode? = null,
     override val hasPartitions: Boolean? = null,
     @Serializable(with = MetaIdLayoutFormSer::class) override val mobileFormEditorLayoutId: Types.MetaIdLayoutForm? = null,
     override val sendMessageToInbox: Boolean? = null,

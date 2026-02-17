@@ -12,6 +12,6 @@ data class DtoAgentEntUserData(
     @Serializable(with = EntUserIdSer::class) override val entUserId: Types.EntUserId,
     override val handle: String,
     override val nickName: String,
-    override val roleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val roleIdSet: Set<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
     override val userColor: String
 ) : DtoAgentEntUser

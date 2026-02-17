@@ -5,8 +5,11 @@
 
 package com.neome.api.ent.base.dto
 
-interface SpreadsheetFilterComposite {
-    val andOr: Boolean?
-    val filter: SpreadsheetFilterValue?
-    val filterList: List<SpreadsheetFilterComposite>?
+import com.neome.api.ent.base.dto.SpreadsheetFilterValue
+
+interface SpreadsheetFilterComposite
+{
+  val andOr: Boolean?
+  val filter: SpreadsheetFilterValue?
+  val filterList: List<SpreadsheetFilterComposite>?
 }

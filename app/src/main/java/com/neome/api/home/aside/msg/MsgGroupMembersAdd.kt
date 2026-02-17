@@ -5,12 +5,13 @@
 
 package com.neome.api.home.aside.msg
 
-import com.neome.api.core.base.msg.MsgVersion
 import com.neome.api.meta.base.Types.EntUserId
 import com.neome.api.meta.base.Types.GroupId
+import com.neome.api.core.base.msg.MsgVersion
 
-interface MsgGroupMembersAdd : MsgVersion {
-    val groupId: GroupId
-    val insertAdminSet: List<EntUserId>?
-    val insertMemberSet: List<EntUserId>?
+interface MsgGroupMembersAdd : MsgVersion
+{
+  val groupId: GroupId
+  val insertAdminSet: Set<EntUserId>?
+  val insertMemberSet: Set<EntUserId>?
 }

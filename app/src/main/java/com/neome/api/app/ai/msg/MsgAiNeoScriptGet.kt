@@ -9,8 +9,9 @@ import com.neome.api.app.base.Types.EnumKindAiAssist
 import com.neome.api.meta.base.Types.MetaId
 import com.neome.api.nucleus.base.msg.Msg
 
-interface MsgAiNeoScriptGet : Msg {
-    val kind: EnumKindAiAssist
-    val neoScriptOrUserMessage: String
-    val paramPath: List<MetaId>?
+interface MsgAiNeoScriptGet : Msg
+{
+  val kind: EnumKindAiAssist
+  val neoScriptOrUserMessage: String
+  val paramPath: List<MetaId>?
 }

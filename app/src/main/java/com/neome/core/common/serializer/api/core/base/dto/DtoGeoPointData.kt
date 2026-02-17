@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DtoGeoPointData(
-    override val accuracy: Long? = null,
+    override val accuracy: Double? = null,
     override val dateTime: String,
     @Serializable(with = GeoPointSer::class) override val geoPoint: Types.GeoPoint
 ) : DtoGeoPoint

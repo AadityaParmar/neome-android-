@@ -37,6 +37,7 @@ data class StudioEntSpreadsheetData(
     @Serializable(with = MetaIdSpreadsheetSer::class) override val metaId: Types.MetaIdSpreadsheet,
     override val partitionMap: StudioMapOfPartitionData? = null,
     override val queryableIdSet: List<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
+    @Serializable(with = MetaIdFieldSer::class) override val ragGroupId: Types.MetaIdField? = null,
     override val ragIdSet: List<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,
     @Serializable(with = MetaIdVarSer::class) override val readAfterDurationVarId: Types.MetaIdVar? = null,
     override val readRoleSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,

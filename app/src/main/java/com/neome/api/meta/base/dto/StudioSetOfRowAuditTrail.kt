@@ -6,7 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.EnumDefnRowAuditTrail
+import com.neome.api.meta.base.dto.StudioBase
 
-interface StudioSetOfRowAuditTrail : StudioBase {
-    val valueSet: List<EnumDefnRowAuditTrail>
+interface StudioSetOfRowAuditTrail : StudioBase
+{
+  val valueSet: List<EnumDefnRowAuditTrail>
 }

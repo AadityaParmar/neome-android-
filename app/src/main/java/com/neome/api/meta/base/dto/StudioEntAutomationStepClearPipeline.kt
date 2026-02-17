@@ -6,7 +6,9 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
+import com.neome.api.meta.base.dto.StudioEntAutomationStep
 
-interface StudioEntAutomationStepClearPipeline : StudioEntAutomationStep {
-    val pipelineParamSet: List<MetaIdPipelineParam>?
+interface StudioEntAutomationStepClearPipeline : StudioEntAutomationStep
+{
+  val pipelineParamSet: List<MetaIdPipelineParam>?
 }

@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FieldValueDecimalRangeData(
-    override val maxValue: Long? = null,
-    override val minValue: Long? = null
+    override val maxValue: Double? = null,
+    override val minValue: Double? = null
 ) : FieldValueDecimalRange

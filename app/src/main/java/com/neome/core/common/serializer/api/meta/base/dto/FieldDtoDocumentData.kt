@@ -11,6 +11,6 @@ import kotlinx.serialization.Serializable
 data class FieldDtoDocumentData(
     override val fileExt: EnumDefnDocFileExt,
     override val fileName: String,
-    override val fileSize: Long? = null,
+    override val fileSize: Long,
     @Serializable(with = MediaIdDocumentSer::class) override val mediaIdDocument: Types.MediaIdDocument
 ) : FieldDtoDocument

@@ -5,22 +5,23 @@
 
 package com.neome.api.ent.entMain.sig
 
-import com.neome.api.ent.base.Types.EnumWorkflowResultKind
 import com.neome.api.ent.base.dto.DtoWorkflowParameterInfo
-import com.neome.api.ent.base.dto.WorkflowStepSummary
-import com.neome.api.meta.base.Types.MetaIdVdAutoNode
-import com.neome.api.meta.base.Types.WorkflowExecutionId
 import com.neome.api.meta.base.dto.EntVdWorkflowPointer
+import com.neome.api.ent.base.Types.EnumWorkflowResultKind
+import com.neome.api.meta.base.Types.MetaIdVdAutoNode
 import com.neome.api.nucleus.base.sig.SigVersion
+import com.neome.api.meta.base.Types.WorkflowExecutionId
+import com.neome.api.ent.base.dto.WorkflowStepSummary
 
-interface SigWorkflowExecutionState : SigVersion {
-    val createdOn: String
-    val currNodeId: MetaIdVdAutoNode?
-    val currStateKind: EnumWorkflowResultKind
-    val executionId: WorkflowExecutionId
-    val executionPathList: List<MetaIdVdAutoNode>?
-    val parameters: List<DtoWorkflowParameterInfo>?
-    val summaryList: List<WorkflowStepSummary>?
-    val updatedOn: String
-    val workflowPointer: EntVdWorkflowPointer
+interface SigWorkflowExecutionState : SigVersion
+{
+  val createdOn: String
+  val currNodeId: MetaIdVdAutoNode?
+  val currStateKind: EnumWorkflowResultKind
+  val executionId: WorkflowExecutionId
+  val executionPathList: List<MetaIdVdAutoNode>?
+  val parameters: List<DtoWorkflowParameterInfo>?
+  val summaryList: List<WorkflowStepSummary>?
+  val updatedOn: String
+  val workflowPointer: EntVdWorkflowPointer
 }

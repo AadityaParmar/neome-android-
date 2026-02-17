@@ -9,10 +9,10 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class FieldDtoImageData(
     override val fileName: String,
-    override val height: Long? = null,
+    override val height: Long,
     @Serializable(with = MediaIdImageSer::class) override val mediaIdBlurImage: Types.MediaIdImage,
     @Serializable(with = MediaIdImageSer::class) override val mediaIdImage: Types.MediaIdImage,
     override val primaryColor: String,
-    override val size: Long? = null,
-    override val width: Long? = null
+    override val size: Long,
+    override val width: Long
 ) : FieldDtoImage

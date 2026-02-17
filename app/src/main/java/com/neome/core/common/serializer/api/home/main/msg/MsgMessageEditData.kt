@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MsgMessageEditData(
     @Serializable(with = ChatIdSer::class) override val chatId: Types.ChatId,
-    override val offset: Long? = null,
+    override val offset: Long,
     override val chatMessageOffset: DtoChatMessageOffsetData? = null,
     override val dtoMessagePayload: DtoMessagePayloadSeal? = null
 ) : MsgMessageEdit

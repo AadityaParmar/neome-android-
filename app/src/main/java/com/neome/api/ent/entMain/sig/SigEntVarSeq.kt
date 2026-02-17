@@ -9,6 +9,6 @@ import com.neome.api.nucleus.base.sig.Sig
 
 interface SigEntVarSeq : Sig
 {
-  val endSeq: Long?
-  val startSeq: Long?
+  val endSeq: Long
+  val startSeq: Long
 }

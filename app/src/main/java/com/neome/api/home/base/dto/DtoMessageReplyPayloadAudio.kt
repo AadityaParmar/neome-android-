@@ -10,6 +10,6 @@ import com.neome.api.meta.base.Types.MediaIdAudio
 
 interface DtoMessageReplyPayloadAudio : DtoMessageReplyPayload
 {
-  val durationMs: Long?
+  val durationMs: Long
   val mediaIdAudio: MediaIdAudio
 }

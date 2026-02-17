@@ -12,14 +12,16 @@ import com.neome.api.meta.base.Types.MetaIdGrid
 import com.neome.api.meta.base.Types.MetaIdLayoutForm
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdVar
+import com.neome.api.meta.base.dto.StudioBase
 
-interface StudioDtoLayoutFormContentItem : StudioBase {
-    val borderColorVarId: MetaIdVar?
-    val borderPositionSet: List<EnumDefnShowBorderKind>?
-    val fieldIdSet: List<MetaIdField>?
-    val formLayoutIdSet: List<MetaIdLayoutForm>?
-    val gridLayoutIdSet: List<MetaIdLayoutGrid>?
-    val gridSwitcherSet: List<MetaIdGrid>?
-    val paddingPositionSet: List<EnumDefnShowBorderKind>?
-    val paddingSize: EnumDefnThemeDividerKind?
+interface StudioDtoLayoutFormContentItem : StudioBase
+{
+  val borderColorVarId: MetaIdVar?
+  val borderPositionSet: List<EnumDefnShowBorderKind>?
+  val fieldIdSet: List<MetaIdField>?
+  val formLayoutIdSet: List<MetaIdLayoutForm>?
+  val gridLayoutIdSet: List<MetaIdLayoutGrid>?
+  val gridSwitcherSet: List<MetaIdGrid>?
+  val paddingPositionSet: List<EnumDefnShowBorderKind>?
+  val paddingSize: EnumDefnThemeDividerKind?
 }

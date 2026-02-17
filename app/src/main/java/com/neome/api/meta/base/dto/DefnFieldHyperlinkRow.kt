@@ -5,11 +5,14 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnDtoText
+import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
 
-interface DefnFieldHyperlinkRow : DefnFieldEditable {
-    val displayTextVar: DefnDtoText?
-    val hyperlinkFieldIdSet: List<MetaIdField>?
-    val spreadsheetId: MetaIdSpreadsheet?
+interface DefnFieldHyperlinkRow : DefnFieldEditable
+{
+  val displayTextVar: DefnDtoText?
+  val hyperlinkFieldIdSet: List<MetaIdField>?
+  val spreadsheetId: MetaIdSpreadsheet?
 }

@@ -8,15 +8,17 @@ package com.neome.api.home.main.sig
 import com.neome.api.meta.base.Types.ChatId
 import com.neome.api.meta.base.Types.EntId
 import com.neome.api.nucleus.base.sig.Sig
+import com.neome.api.home.main.sig.SigMessage
 
-interface SigMessageList : Sig {
-    val bottomOffset: Long?
-    val chatId: ChatId
-    val chatIdHash: String
-    val entId: EntId
-    val messageList: List<SigMessage>
-    val pageBottomOffset: Long?
-    val pageTopOffset: Long?
-    val readOffset: Long?
-    val topOffset: Long?
+interface SigMessageList : Sig
+{
+  val bottomOffset: Long
+  val chatId: ChatId
+  val chatIdHash: String
+  val entId: EntId
+  val messageList: List<SigMessage>
+  val pageBottomOffset: Long
+  val pageTopOffset: Long
+  val readOffset: Long
+  val topOffset: Long
 }

@@ -16,7 +16,7 @@ data class DtoMessageReplyPayloadVideoData(
     @Serializable(with = MessageIdSer::class) override val messageId: Types.MessageId,
     override val messageType: EnumMessageType,
     @Serializable(with = EntUserIdSer::class) override val senderId: Types.EntUserId,
-    override val durationMs: Long? = null,
+    override val durationMs: Long,
     @Serializable(with = MediaIdImageSer::class) override val mediaId: Types.MediaIdImage,
     @Serializable(with = MediaIdImageSer::class) override val mediaIdBlurImage: Types.MediaIdImage,
     @Serializable(with = MediaIdVideoSer::class) override val mediaIdVideo: Types.MediaIdVideo,

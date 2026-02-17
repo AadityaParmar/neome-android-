@@ -5,6 +5,9 @@
 
 package com.neome.api.meta.base.dto
 
-interface DefnFieldPickEnum : DefnFieldEditable {
-    val filterOptionSet: List<String>?
+import com.neome.api.meta.base.dto.DefnFieldEditable
+
+interface DefnFieldPickEnum : DefnFieldEditable
+{
+  val filterOptionSet: List<String>?
 }

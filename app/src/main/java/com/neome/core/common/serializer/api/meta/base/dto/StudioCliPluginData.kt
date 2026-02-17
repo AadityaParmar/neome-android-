@@ -7,6 +7,7 @@ import com.neome.api.meta.base.dto.StudioFormMap
 import com.neome.api.meta.base.dto.StudioModuleMap
 import com.neome.api.meta.base.dto.StudioPlugin
 import com.neome.api.meta.base.dto.StudioPluginApiMap
+import com.neome.api.meta.base.dto.StudioPluginAuthMap
 import com.neome.api.meta.base.dto.StudioPluginDeploy
 import com.neome.api.meta.base.dto.StudioPluginDetails
 import com.neome.api.meta.base.dto.StudioPluginResourceMap
@@ -16,6 +17,7 @@ import com.neome.api.meta.base.dto.StudioVarMap
 import com.neome.core.common.serializer.api.meta.base.dto.StudioFormMapData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioModuleMapData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioPluginApiMapData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioPluginAuthMapData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioPluginDeployData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioPluginDetailsData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioPluginResourceMapData
@@ -31,6 +33,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class StudioCliPluginData(
     override val apiMap: StudioPluginApiMapData,
+    override val authMap: StudioPluginAuthMapData? = null,
     @Serializable(with = AdminIdSer::class) override val createdBy: Types.AdminId? = null,
     override val creationTime: String? = null,
     override val deploy: StudioPluginDeployData,

@@ -7,9 +7,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SigAppVersionData(
-    override val currVersionCode: Long? = null,
+    override val currVersionCode: Long,
     override val hasForceUpdate: Boolean,
     override val hasUpdate: Boolean,
-    override val mmkvVersion: Long? = null,
-    override val sqlVersion: Long? = null
+    override val mmkvVersion: Long,
+    override val sqlVersion: Long
 ) : SigAppVersion

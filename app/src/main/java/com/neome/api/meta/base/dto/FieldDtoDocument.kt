@@ -12,6 +12,6 @@ interface FieldDtoDocument
 {
   val fileExt: EnumDefnDocFileExt
   val fileName: String
-  val fileSize: Long?
+  val fileSize: Long
   val mediaIdDocument: MediaIdDocument
 }

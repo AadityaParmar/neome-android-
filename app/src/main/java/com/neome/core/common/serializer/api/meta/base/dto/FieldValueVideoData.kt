@@ -9,11 +9,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FieldValueVideoData(
-    override val durationMs: Long? = null,
+    override val durationMs: Long,
     override val fileName: String? = null,
     @Serializable(with = MediaIdImageSer::class) override val mediaIdBlurImage: Types.MediaIdImage,
     @Serializable(with = MediaIdImageSer::class) override val mediaIdImage: Types.MediaIdImage,
     @Serializable(with = MediaIdVideoSer::class) override val mediaIdVideo: Types.MediaIdVideo,
     override val primaryColor: String,
-    override val size: Long? = null
+    override val size: Long
 ) : FieldValueVideo

@@ -5,10 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.DefnField
+import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.dto.DefnMapOfDynamicRule
 
-interface DefnFieldDynamic : DefnField
+interface DefnFieldDynamic : DefnFieldEditable
 {
   val ruleMap: DefnMapOfDynamicRule?
 }

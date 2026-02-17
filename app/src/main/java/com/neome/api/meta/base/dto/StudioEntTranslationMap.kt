@@ -6,9 +6,12 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdTranslation
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioEntTranslation
 
-interface StudioEntTranslationMap : StudioBase {
-    val keys: List<MetaIdTranslation>
-    val map: Map<MetaIdTranslation, StudioEntTranslation>
-    val usePublicLibrary: Boolean?
+interface StudioEntTranslationMap : StudioBase
+{
+  val keys: List<MetaIdTranslation>
+  val map: Map<MetaIdTranslation, StudioEntTranslation>
+  val usePublicLibrary: Boolean?
 }

@@ -5,11 +5,12 @@
 
 package com.neome.api.home.base.dto
 
+import com.neome.api.home.base.dto.DtoMessagePayloadOptionalText
 import com.neome.api.meta.base.Types.MediaIdAudio
 
-
-interface DtoMessagePayloadAudio : DtoMessagePayloadText {
-    val durationMs: Long?
-    val fileSize: Long?
-    val mediaIdAudio: MediaIdAudio
+interface DtoMessagePayloadAudio : DtoMessagePayloadOptionalText
+{
+  val durationMs: Long
+  val fileSize: Long
+  val mediaIdAudio: MediaIdAudio
 }

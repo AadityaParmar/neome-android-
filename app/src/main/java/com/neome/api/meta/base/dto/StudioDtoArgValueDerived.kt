@@ -15,7 +15,7 @@ interface StudioDtoArgValueDerived : StudioDtoArgValue
   val derivedFieldType: EnumDefnCompType?
   val valueBoolean: Boolean?
   val valueDate: String?
-  val valueDouble: Long?
+  val valueDouble: Double?
   val valueLong: Long?
   val valueOptionId: String?
   val valueText: String?

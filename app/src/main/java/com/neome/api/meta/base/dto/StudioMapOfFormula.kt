@@ -6,8 +6,11 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdFormula
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioDtoFormula
 
-interface StudioMapOfFormula : StudioBase {
-    val keys: List<MetaIdFormula>?
-    val map: Map<MetaIdFormula, StudioDtoFormula>
+interface StudioMapOfFormula : StudioBase
+{
+  val keys: List<MetaIdFormula>?
+  val map: Map<MetaIdFormula, StudioDtoFormula>
 }

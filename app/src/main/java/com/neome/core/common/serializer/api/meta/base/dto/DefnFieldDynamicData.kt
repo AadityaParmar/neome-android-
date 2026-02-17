@@ -4,11 +4,13 @@ import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.api.meta.base.dto.DefnDtoPermissionMatrix
-import com.neome.api.meta.base.dto.DefnField
+import com.neome.api.meta.base.dto.DefnDtoText
 import com.neome.api.meta.base.dto.DefnFieldDynamic
+import com.neome.api.meta.base.dto.DefnFieldEditable
 import com.neome.api.meta.base.dto.DefnMapOfDynamicRule
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoPermissionMatrixData
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoTextData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnMapOfDynamicRuleData
 import com.neome.core.common.serializer.sysId.MetaIdFieldSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer
@@ -40,5 +42,25 @@ data class DefnFieldDynamicData(
     override val readOnly: Boolean? = null,
     override val type: EnumDefnCompType,
     @Serializable(with = MetaIdFieldSer::class) override val metaId: Types.MetaIdField,
+    override val autoFill: Boolean? = null,
+    override val autoFocus: Boolean? = null,
+    override val helperText: String? = null,
+    @Serializable(with = MetaIdFieldSer::class) override val helperTextFieldId: Types.MetaIdField? = null,
+    override val helperTextVar: DefnDtoTextData? = null,
+    override val hideLabel: Boolean? = null,
+    override val icon: String? = null,
+    override val iconVar: String? = null,
+    @Serializable(with = MetaIdFieldSer::class) override val labelFieldId: Types.MetaIdField? = null,
+    override val placeHolder: String? = null,
+    @Serializable(with = MetaIdFieldSer::class) override val placeHolderFieldId: Types.MetaIdField? = null,
+    override val placeHolderVar: DefnDtoTextData? = null,
+    override val prefix: String? = null,
+    override val prefixVar: DefnDtoTextData? = null,
+    override val required: Boolean? = null,
+    @Serializable(with = MetaIdFieldSer::class) override val requiredFieldId: Types.MetaIdField? = null,
+    override val requiredRoleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>? = null,
+    override val requiredVar: Boolean? = null,
+    override val suffix: String? = null,
+    override val suffixVar: DefnDtoTextData? = null,
     override val ruleMap: DefnMapOfDynamicRuleData? = null
 ) : DefnCompSeal, DefnFieldDynamic

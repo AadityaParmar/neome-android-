@@ -14,7 +14,7 @@ data class StudioDtoArgValueDerivedData(
     override val derivedFieldType: EnumDefnCompType? = null,
     override val valueBoolean: Boolean? = null,
     override val valueDate: String? = null,
-    override val valueDouble: Long? = null,
+    override val valueDouble: Double? = null,
     override val valueLong: Long? = null,
     override val valueOptionId: String? = null,
     override val valueText: String? = null

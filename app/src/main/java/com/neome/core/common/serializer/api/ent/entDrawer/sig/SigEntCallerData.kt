@@ -8,6 +8,7 @@ import com.neome.api.ent.base.dto.DtoEntRole
 import com.neome.api.ent.base.dto.DtoEntSpreadsheet
 import com.neome.api.ent.base.dto.DtoEntWallpaper
 import com.neome.api.ent.base.dto.DtoPaymentProvider
+import com.neome.api.ent.base.dto.DtoPluginInfo
 import com.neome.api.ent.base.dto.DtoVarUserSetting
 import com.neome.api.ent.entDrawer.sig.SigEntCaller
 import com.neome.api.meta.base.Types
@@ -25,6 +26,7 @@ import com.neome.core.common.serializer.api.ent.base.dto.DtoEntRoleData
 import com.neome.core.common.serializer.api.ent.base.dto.DtoEntSpreadsheetData
 import com.neome.core.common.serializer.api.ent.base.dto.DtoEntWallpaperData
 import com.neome.core.common.serializer.api.ent.base.dto.DtoPaymentProviderData
+import com.neome.core.common.serializer.api.ent.base.dto.DtoPluginInfoData
 import com.neome.core.common.serializer.api.ent.base.dto.DtoVarUserSettingData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFormData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnLayoutUserMapData
@@ -39,6 +41,7 @@ import com.neome.core.common.serializer.sysId.MetaIdActionSer
 import com.neome.core.common.serializer.sysId.MetaIdDeeplinkSer
 import com.neome.core.common.serializer.sysId.MetaIdFormSer
 import com.neome.core.common.serializer.sysId.MetaIdGroupSer
+import com.neome.core.common.serializer.sysId.MetaIdPluginSer
 import com.neome.core.common.serializer.sysId.MetaIdPromptSer
 import com.neome.core.common.serializer.sysId.MetaIdRoleSer
 import com.neome.core.common.serializer.sysId.MetaIdSpreadsheetSer
@@ -70,11 +73,12 @@ data class SigEntCallerData(
     override val locationAccuracy: EnumDefnLocationAccuracy? = null,
     override val locationConfig: StudioDtoLocationCaptureData? = null,
     @Serializable(with = EntUserIdSer::class) override val managerId: Types.EntUserId? = null,
-    override val managerialRelationshipMap: Map<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole, List<@Serializable(with = EntUserIdSer::class) Types.EntUserId>>? = null,
+    override val managerialRelationshipMap: Map<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole, Set<@Serializable(with = EntUserIdSer::class) Types.EntUserId>>? = null,
     override val nickName: String,
     override val paymentProvider: DtoPaymentProviderData? = null,
+    override val pluginMap: Map<@Serializable(with = MetaIdPluginSer::class) Types.MetaIdPlugin, DtoPluginInfoData>? = null,
     override val promptMap: Map<@Serializable(with = MetaIdPromptSer::class) Types.MetaIdPrompt, DtoEntPromptData>? = null,
-    override val roleIdSet: List<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>,
+    override val roleIdSet: Set<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole>,
     override val roleMap: Map<@Serializable(with = MetaIdRoleSer::class) Types.MetaIdRole, DtoEntRoleData>,
     override val spreadsheetMap: Map<@Serializable(with = MetaIdSpreadsheetSer::class) Types.MetaIdSpreadsheet, DtoEntSpreadsheetData>? = null,
     @Serializable(with = TimeZoneKeySer::class) override val timeZone: Types.TimeZoneKey? = null,

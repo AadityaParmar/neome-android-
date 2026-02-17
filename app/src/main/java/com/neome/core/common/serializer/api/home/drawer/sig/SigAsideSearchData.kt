@@ -11,5 +11,5 @@ import kotlinx.serialization.Serializable
 data class SigAsideSearchData(
     override val version: String,
     override val messageList: List<SigMessageData>,
-    override val totalMessageCount: Long? = null
+    override val totalMessageCount: Long
 ) : SigAsideSearch

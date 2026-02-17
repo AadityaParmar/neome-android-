@@ -6,8 +6,11 @@
 package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdField
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioField
 
-interface StudioFieldMap : StudioBase {
-    val keys: List<MetaIdField>
-    val map: Map<MetaIdField, StudioField>
+interface StudioFieldMap : StudioBase
+{
+  val keys: List<MetaIdField>
+  val map: Map<MetaIdField, StudioField>
 }

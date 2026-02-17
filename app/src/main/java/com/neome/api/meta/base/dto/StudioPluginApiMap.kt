@@ -7,9 +7,12 @@ package com.neome.api.meta.base.dto
 
 import com.neome.api.meta.base.Types.MetaIdForm
 import com.neome.api.meta.base.Types.PluginApiId
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioPluginApi
 
-interface StudioPluginApiMap : StudioBase {
-    val keys: List<PluginApiId>
-    val map: Map<PluginApiId, StudioPluginApi>
-    val pluginConfigFormId: MetaIdForm?
+interface StudioPluginApiMap : StudioBase
+{
+  val keys: List<PluginApiId>
+  val map: Map<PluginApiId, StudioPluginApi>
+  val pluginConfigFormId: MetaIdForm?
 }

@@ -5,7 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-interface StudioValueText : StudioValueVarIdBase {
-    val paramSet: List<String>?
-    val value: String
+import com.neome.api.meta.base.dto.StudioValueVarIdBase
+
+interface StudioValueText : StudioValueVarIdBase
+{
+  val paramSet: List<String>?
+  val value: String
 }

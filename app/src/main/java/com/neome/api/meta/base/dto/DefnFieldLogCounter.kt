@@ -5,9 +5,11 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.DefnFieldCounter
 import com.neome.api.meta.base.Types.MetaIdRole
 
-interface DefnFieldLogCounter : DefnFieldCounter {
-    val hideInfo: Boolean?
-    val logReadRoleSet: List<MetaIdRole>?
+interface DefnFieldLogCounter : DefnFieldCounter
+{
+  val hideInfo: Boolean?
+  val logReadRoleSet: List<MetaIdRole>?
 }

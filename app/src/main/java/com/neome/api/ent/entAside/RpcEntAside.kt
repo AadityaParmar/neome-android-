@@ -14,6 +14,7 @@ import com.neome.api.ent.entAside.msg.MsgEntUserPickerCandidateListGet
 import com.neome.api.ent.entAside.msg.MsgPaymentStatus
 import com.neome.api.ent.entAside.msg.MsgPaymentVerify
 import com.neome.api.ent.entAside.msg.MsgPluginApiOutput
+import com.neome.api.ent.entAside.msg.MsgPluginOAuth
 import com.neome.api.ent.entAside.msg.MsgRefFieldDataPaginatedGet
 import com.neome.api.ent.entAside.msg.MsgReportFieldDataGet
 import com.neome.api.ent.entAside.msg.MsgSpreadsheetRefFieldDataGet
@@ -27,6 +28,7 @@ import com.neome.api.ent.entAside.sig.SigEntUserPickerCandidateListGet
 import com.neome.api.ent.entMain.sig.SigOutputFormValue
 import com.neome.api.ent.entAside.sig.SigPaymentStatus
 import com.neome.api.ent.entAside.sig.SigPluginApiOutput
+import com.neome.api.ent.entAside.sig.SigPluginOAuthUrl
 import com.neome.api.ent.entAside.sig.SigReportFieldData
 import com.neome.api.ent.entAside.sig.SigSpreadsheetRefFieldData
 import com.neome.api.ent.entAside.sig.SigSpreadsheetRowsGet
@@ -113,6 +115,20 @@ class RpcEntAside
             CallFactory.rpc.create(SigPluginApiOutput::class.java, entId, SN, "pluginApiOutputGet")
               .sendBearerToken()
               .post(msg, sigAcceptor)
+          }
+
+      fun pluginOAuthCredRemove(entId: EntId, msg: MsgPluginOAuth, sigAcceptor: ISigAcceptor<SigDone>)
+          {
+            CallFactory.rpc.create(SigDone::class.java, entId, SN, "pluginOAuthCredRemove")
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
+          }
+
+      fun pluginOAuthUrlGet(entId: EntId, msg: MsgPluginOAuth, sigAcceptor: ISigAcceptor<SigPluginOAuthUrl>)
+          {
+            CallFactory.rpc.create(SigPluginOAuthUrl::class.java, entId, SN, "pluginOAuthUrlGet")
+              .sendBearerToken()
+              .get(msg, sigAcceptor)
           }
   }
 }

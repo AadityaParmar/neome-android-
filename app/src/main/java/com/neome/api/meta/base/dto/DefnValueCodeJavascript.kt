@@ -5,7 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-interface FieldValueTime
+import com.neome.api.meta.base.dto.FieldDtoArg
+
+interface DefnValueCodeJavascript
 {
-  val value: String
+  val argBinderMap: Map<String, FieldDtoArg>?
+  val value: String?
 }

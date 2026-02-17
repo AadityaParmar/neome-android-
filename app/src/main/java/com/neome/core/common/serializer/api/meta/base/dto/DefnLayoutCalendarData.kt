@@ -2,6 +2,7 @@ package com.neome.core.common.serializer.api.meta.base.dto
 
 import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types
+import com.neome.api.meta.base.Types.EnumDefnKindDefaultCalendarView
 import com.neome.api.meta.base.Types.EnumDefnLayoutGridKind
 import com.neome.api.meta.base.dto.DefnLayoutCalendar
 import com.neome.api.meta.base.dto.DefnLayoutGrid
@@ -22,6 +23,7 @@ data class DefnLayoutCalendarData(
     @Serializable(with = SymbolSer::class) override val name: Symbol,
     @Serializable(with = MetaIdFieldSer::class) override val toolTipFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdFieldSer::class) override val colorFieldId: Types.MetaIdField? = null,
+    override val defaultCalendarView: EnumDefnKindDefaultCalendarView? = null,
     @Serializable(with = MetaIdFieldSer::class) override val fromDateFieldId: Types.MetaIdField? = null,
     @Serializable(with = MetaIdFieldSer::class) override val fromTimeFieldId: Types.MetaIdField? = null,
     override val showFieldIdSet: List<@Serializable(with = MetaIdFieldSer::class) Types.MetaIdField>? = null,

@@ -23,7 +23,7 @@ data class DtoMessagePayloadLocationData(
     override val text: String,
     override val city: String? = null,
     override val country: String? = null,
-    override val latitude: Long? = null,
-    override val longitude: Long? = null,
+    override val latitude: Double,
+    override val longitude: Double,
     @Serializable(with = MediaIdImageSer::class) override val mediaIdImage: Types.MediaIdImage
 ) : DtoMessagePayloadSeal, DtoMessagePayloadLocation

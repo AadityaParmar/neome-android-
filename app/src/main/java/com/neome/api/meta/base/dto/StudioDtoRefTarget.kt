@@ -5,15 +5,18 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdLayoutGrid
 import com.neome.api.meta.base.Types.MetaIdSpreadsheet
+import com.neome.api.meta.base.dto.StudioBase
+import com.neome.api.meta.base.dto.StudioValueVarIdCondition
+import com.neome.api.meta.base.Symbol
 
-interface StudioDtoRefTarget : StudioBase {
-    val displayFieldIdSet: List<MetaIdField>?
-    val filterConditionVarId: StudioValueVarIdCondition?
-    val metaId: MetaIdSpreadsheet
-    val name: Symbol?
-    val overrideLayoutSpreadsheetId: MetaIdLayoutGrid?
+interface StudioDtoRefTarget : StudioBase
+{
+  val displayFieldIdSet: List<MetaIdField>?
+  val filterConditionVarId: StudioValueVarIdCondition?
+  val metaId: MetaIdSpreadsheet
+  val name: Symbol?
+  val overrideLayoutSpreadsheetId: MetaIdLayoutGrid?
 }

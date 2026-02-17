@@ -16,9 +16,11 @@ interface StudioGrid : StudioComposite
 {
   val layoutGridMap: StudioMapOfLayoutGrid?
   val maxRows: Long?
+  val maxRowsFieldId: MetaIdField?
   val maxRowsVarId: MetaIdVar?
   val metaId: MetaIdGrid
   val minRows: Long?
+  val minRowsFieldId: MetaIdField?
   val minRowsVarId: MetaIdVar?
   val rowActionPermissionMap: StudioMapOfActionPermission?
   val showAllRowsFieldId: MetaIdField?

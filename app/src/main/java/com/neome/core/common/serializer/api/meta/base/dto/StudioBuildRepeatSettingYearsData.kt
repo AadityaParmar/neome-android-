@@ -17,7 +17,7 @@ data class StudioBuildRepeatSettingYearsData(
     @Serializable(with = MetaIdVarSer::class) override val excludeSetOfDateVarId: Types.MetaIdVar? = null,
     override val frequency: Long? = null,
     override val repeatFrequencyKind: EnumDefnRepeatFrequencyKind,
-    override val customDateSet: List<Long>? = null,
+    override val customDateSet: List<Int>? = null,
     override val dateOccurrence: EnumDefnDateOccurrence? = null,
     override val setOfMonth: List<EnumDefnMonth>? = null,
     override val setOfTime: List<@Serializable(with = AnyTimeSer::class) Types.AnyTime>? = null

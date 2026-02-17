@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MsgDrawerSearchData(
-    override val filterEntIdSet: List<@Serializable(with = EntIdSer::class) Types.EntId>? = null,
+    override val filterEntIdSet: Set<@Serializable(with = EntIdSer::class) Types.EntId>? = null,
     override val pageSize: Long? = null,
     override val searchId: String,
     override val searchQuery: String

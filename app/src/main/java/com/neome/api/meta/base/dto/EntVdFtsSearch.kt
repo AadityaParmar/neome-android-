@@ -5,7 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-interface FieldValueHyperlink
+import com.neome.api.meta.base.dto.EntVdSsSearch
+
+interface EntVdFtsSearch : EntVdSsSearch
 {
-  val value: String
 }

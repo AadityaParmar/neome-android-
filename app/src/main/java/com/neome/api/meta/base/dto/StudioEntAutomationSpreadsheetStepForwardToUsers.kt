@@ -9,12 +9,14 @@ import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdPipelineParam
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.Types.MetaIdVar
+import com.neome.api.meta.base.dto.StudioEntAutomationStep
 
-interface StudioEntAutomationSpreadsheetStepForwardToUsers : StudioEntAutomationStep {
-    val dataSourceRoleIdSet: List<MetaIdRole>?
-    val formDataSourcePipelineVarId: MetaIdPipelineParam?
-    val senderFieldId: MetaIdField?
-    val senderFormPipelineVarId: MetaIdPipelineParam?
-    val senderRoleId: MetaIdRole?
-    val setOfUserVarId: MetaIdVar?
+interface StudioEntAutomationSpreadsheetStepForwardToUsers : StudioEntAutomationStep
+{
+  val dataSourceRoleIdSet: List<MetaIdRole>?
+  val formDataSourcePipelineVarId: MetaIdPipelineParam?
+  val senderFieldId: MetaIdField?
+  val senderFormPipelineVarId: MetaIdPipelineParam?
+  val senderRoleId: MetaIdRole?
+  val setOfUserVarId: MetaIdVar?
 }

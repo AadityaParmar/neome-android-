@@ -15,5 +15,5 @@ interface MsgMessageReport : Msg
   val chatId: ChatId
   val entId: EntId
   val messageId: MessageId
-  val offset: Long?
+  val offset: Long
 }

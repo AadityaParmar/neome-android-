@@ -5,7 +5,8 @@
 
 package com.neome.api.meta.base.dto
 
-interface FieldValuePropertyMap {
-    val keys: List<String>?
-    val values: List<String>?
+interface FieldValuePropertyMap
+{
+  val keys: List<String>?
+  val values: List<String>?
 }

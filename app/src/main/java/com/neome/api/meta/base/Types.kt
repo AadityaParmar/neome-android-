@@ -71,6 +71,7 @@ object Types {
     val PREFIX_MEDIA_ID_VOICE: String = "mo"
     val PREFIX_MESSAGE_ID: String = "m"
     val PREFIX_META_ID_ACTION: String = "mac"
+    val PREFIX_META_ID_AUTH_METHOD: String = "mam"
     val PREFIX_META_ID_AUTOMATION: String = "mau"
     val PREFIX_META_ID_CHART_X_AXIS: String = "mcx"
     val PREFIX_META_ID_CHART_Y_AXIS: String = "mcy"
@@ -85,6 +86,10 @@ object Types {
     val PREFIX_META_ID_FOOTER: String = "mft"
     val PREFIX_META_ID_FORM: String = "mf"
     val PREFIX_META_ID_FORMULA: String = "mfm"
+    val PREFIX_META_ID_FORM_EVENT: String = "mfe"
+    val PREFIX_META_ID_FORM_EVENT_ACTION: String = "mea"
+    val PREFIX_META_ID_FORM_EVENT_ACTION_BINDING: String = "meb"
+    val PREFIX_META_ID_FORM_EVENT_CONDITION: String = "mec"
     val PREFIX_META_ID_FUNC_ARG: String = "mfa"
     val PREFIX_META_ID_GRID: String = "mgr"
     val PREFIX_META_ID_GROUP: String = "mgp"
@@ -186,6 +191,7 @@ object Types {
     open class MessageId : SysId()
     open class MetaId : SysId()
     open class MetaIdAction : MetaId()
+    open class MetaIdAuthMethod : MetaId()
     open class MetaIdAutomation : MetaId()
     open class MetaIdChartXAxis : MetaId()
     open class MetaIdChartYAxis : MetaId()
@@ -201,6 +207,10 @@ object Types {
     open class MetaIdFieldDynamicRule : MetaId()
     open class MetaIdFooter : MetaId()
     open class MetaIdForm : MetaId()
+    open class MetaIdFormEvent : MetaId()
+    open class MetaIdFormEventAction : MetaId()
+    open class MetaIdFormEventActionBinding : MetaId()
+    open class MetaIdFormEventCondition : MetaId()
     open class MetaIdFormula : MetaId()
     open class MetaIdFuncArg : MetaId()
     open class MetaIdGrid : MetaIdComposite()
@@ -561,6 +571,7 @@ object Types {
         enumPaymentPlan("enumPaymentPlan"),
         enumPermission("enumPermission"),
         enumPluginApiMethod("enumPluginApiMethod"),
+        enumPluginAuthMethod("enumPluginAuthMethod"),
         enumPluginResources("enumPluginResources"),
         enumPluginSecurityAccess("enumPluginSecurityAccess"),
         enumPromptAction("enumPromptAction"),
@@ -841,6 +852,7 @@ object Types {
         carousel("carousel"),
         formList("formList"),
         formListItem("formListItem"),
+        pickKeychain("pickKeychain"),
         pickOption("pickOption"),
         wallpaper("wallpaper")
     }
@@ -1073,6 +1085,18 @@ object Types {
         warning("warning")
     }
 
+    enum class EnumDefnEventOperator(val value: String) {
+        hasNoValue("hasNoValue"),
+        hasValue("hasValue"),
+        equalTo("equalTo"),
+        notEqualTo("notEqualTo"),
+        greaterThan("greaterThan"),
+        lessThan("lessThan"),
+        greaterThanOrEqualTo("greaterThanOrEqualTo"),
+        lessThanOrEqualTo("lessThanOrEqualTo"),
+        contains("contains")
+    }
+
     enum class EnumDefnFields(val value: String) {
         @SerialName("\$CreatedBy")
         CreatedBy("\$CreatedBy"),
@@ -1201,6 +1225,12 @@ object Types {
         doNotInsert("doNotInsert")
     }
 
+    enum class EnumDefnKeychainType(val value: String) {
+        rpcReceive("rpcReceive"),
+        rpcSend("rpcSend"),
+        slack("slack")
+    }
+
     enum class EnumDefnKindAction(val value: String) {
         executeCallable("executeCallable"),
         report("report"),
@@ -1315,6 +1345,7 @@ object Types {
         generateImage("generateImage"),
         generatePaymentLink("generatePaymentLink"),
         generatePdf("generatePdf"),
+        generateExcel("generateExcel"),
         imageTransforms("imageTransforms"),
         mediaExists("mediaExists"),
         mediaRemove("mediaRemove"),
@@ -1380,7 +1411,8 @@ object Types {
     enum class EnumDefnKindAutoXform(val value: String) {
         stringJoiner("stringJoiner"),
         stringIsMobileNumber("stringIsMobileNumber"),
-        stringIsEmail("stringIsEmail")
+        stringIsEmail("stringIsEmail"),
+        spreadsheetIdGet("spreadsheetIdGet")
     }
 
     enum class EnumDefnKindAutomation(val value: String) {
@@ -1469,10 +1501,53 @@ object Types {
         spreadsheetRow("spreadsheetRow")
     }
 
+    enum class EnumDefnKindDefaultCalendarView(val value: String) {
+        currentMonth("currentMonth"),
+        firstAvailableMonth("firstAvailableMonth"),
+        lastAvailableMonth("lastAvailableMonth")
+    }
+
+    enum class EnumDefnKindEventAction(val value: String) {
+        blink("blink"),
+        click("click"),
+        clear("clear"),
+        setValue("setValue"),
+        disable("disable"),
+        enable("enable"),
+        executeAction("executeAction"),
+        executeFormula("executeFormula"),
+        hidden("hidden"),
+        highlight("highlight"),
+        invisible("invisible"),
+        shake("shake"),
+        visible("visible")
+    }
+
+    enum class EnumDefnKindEventActionOn(val value: String) {
+        component("component"),
+        field("field"),
+        layout("layout"),
+        sendButton("sendButton")
+    }
+
     enum class EnumDefnKindFormComposite(val value: String) {
         grid("grid"),
         section("section"),
         spreadsheetRef("spreadsheetRef")
+    }
+
+    enum class EnumDefnKindFormEvent(val value: String) {
+        onChange("onChange"),
+        onInitForm("onInitForm"),
+        onSubmitForm("onSubmitForm"),
+        onClickButton("onClickButton")
+    }
+
+    enum class EnumDefnKindFormRenderingMode(val value: String) {
+        bottom("bottom"),
+        dialog("dialog"),
+        aside("aside"),
+        main("main")
     }
 
     enum class EnumDefnKindHyperlink(val value: String) {
@@ -1506,6 +1581,13 @@ object Types {
         Error("Error"),
         Start("Start"),
         Verify("Verify")
+    }
+
+    enum class EnumDefnKindNotification(val value: String) {
+        invite("invite"),
+        message("message"),
+        comment("comment"),
+        reaction("reaction")
     }
 
     enum class EnumDefnKindPipelineUpdate(val value: String) {
@@ -1748,6 +1830,11 @@ object Types {
         put("put"),
         webhook("webhook"),
         function("function")
+    }
+
+    enum class EnumDefnPluginAuthMethod(val value: String) {
+        basic("basic"),
+        oauth("oauth")
     }
 
     enum class EnumDefnPluginMode(val value: String) {
@@ -2217,19 +2304,14 @@ object Types {
     enum class EnumFormExportType(val value: String) {
         pdf("pdf"),
         image("image"),
-        html("html")
+        html("html"),
+        excel("excel")
     }
 
     enum class EnumIdentityProviderKind(val value: String) {
         apple("apple"),
         google("google"),
         microsoft("microsoft")
-    }
-
-    enum class EnumKeychainType(val value: String) {
-        rpcReceive("rpcReceive"),
-        rpcSend("rpcSend"),
-        slack("slack")
     }
 
     enum class EnumLogItemType(val value: String) {
@@ -2530,6 +2612,7 @@ object Types {
         prefixSysIdClassMap[PREFIX_MEDIA_ID_VOICE] = MediaIdVoice::class.java
         prefixSysIdClassMap[PREFIX_MESSAGE_ID] = MessageId::class.java
         prefixSysIdClassMap[PREFIX_META_ID_ACTION] = MetaIdAction::class.java
+        prefixSysIdClassMap[PREFIX_META_ID_AUTH_METHOD] = MetaIdAuthMethod::class.java
         prefixSysIdClassMap[PREFIX_META_ID_AUTOMATION] = MetaIdAutomation::class.java
         prefixSysIdClassMap[PREFIX_META_ID_CHART_X_AXIS] = MetaIdChartXAxis::class.java
         prefixSysIdClassMap[PREFIX_META_ID_CHART_Y_AXIS] = MetaIdChartYAxis::class.java
@@ -2544,6 +2627,10 @@ object Types {
         prefixSysIdClassMap[PREFIX_META_ID_FOOTER] = MetaIdFooter::class.java
         prefixSysIdClassMap[PREFIX_META_ID_FORM] = MetaIdForm::class.java
         prefixSysIdClassMap[PREFIX_META_ID_FORMULA] = MetaIdFormula::class.java
+        prefixSysIdClassMap[PREFIX_META_ID_FORM_EVENT] = MetaIdFormEvent::class.java
+        prefixSysIdClassMap[PREFIX_META_ID_FORM_EVENT_ACTION] = MetaIdFormEventAction::class.java
+        prefixSysIdClassMap[PREFIX_META_ID_FORM_EVENT_ACTION_BINDING] = MetaIdFormEventActionBinding::class.java
+        prefixSysIdClassMap[PREFIX_META_ID_FORM_EVENT_CONDITION] = MetaIdFormEventCondition::class.java
         prefixSysIdClassMap[PREFIX_META_ID_FUNC_ARG] = MetaIdFuncArg::class.java
         prefixSysIdClassMap[PREFIX_META_ID_GRID] = MetaIdGrid::class.java
         prefixSysIdClassMap[PREFIX_META_ID_GROUP] = MetaIdGroup::class.java
@@ -2634,6 +2721,7 @@ object Types {
         sysIdClassPrefixMap[MediaIdVoice::class.java] = PREFIX_MEDIA_ID_VOICE
         sysIdClassPrefixMap[MessageId::class.java] = PREFIX_MESSAGE_ID
         sysIdClassPrefixMap[MetaIdAction::class.java] = PREFIX_META_ID_ACTION
+        sysIdClassPrefixMap[MetaIdAuthMethod::class.java] = PREFIX_META_ID_AUTH_METHOD
         sysIdClassPrefixMap[MetaIdAutomation::class.java] = PREFIX_META_ID_AUTOMATION
         sysIdClassPrefixMap[MetaIdChartXAxis::class.java] = PREFIX_META_ID_CHART_X_AXIS
         sysIdClassPrefixMap[MetaIdChartYAxis::class.java] = PREFIX_META_ID_CHART_Y_AXIS
@@ -2648,6 +2736,10 @@ object Types {
         sysIdClassPrefixMap[MetaIdFooter::class.java] = PREFIX_META_ID_FOOTER
         sysIdClassPrefixMap[MetaIdForm::class.java] = PREFIX_META_ID_FORM
         sysIdClassPrefixMap[MetaIdFormula::class.java] = PREFIX_META_ID_FORMULA
+        sysIdClassPrefixMap[MetaIdFormEvent::class.java] = PREFIX_META_ID_FORM_EVENT
+        sysIdClassPrefixMap[MetaIdFormEventAction::class.java] = PREFIX_META_ID_FORM_EVENT_ACTION
+        sysIdClassPrefixMap[MetaIdFormEventActionBinding::class.java] = PREFIX_META_ID_FORM_EVENT_ACTION_BINDING
+        sysIdClassPrefixMap[MetaIdFormEventCondition::class.java] = PREFIX_META_ID_FORM_EVENT_CONDITION
         sysIdClassPrefixMap[MetaIdFuncArg::class.java] = PREFIX_META_ID_FUNC_ARG
         sysIdClassPrefixMap[MetaIdGrid::class.java] = PREFIX_META_ID_GRID
         sysIdClassPrefixMap[MetaIdGroup::class.java] = PREFIX_META_ID_GROUP

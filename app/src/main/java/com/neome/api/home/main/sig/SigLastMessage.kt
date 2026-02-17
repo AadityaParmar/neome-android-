@@ -18,7 +18,7 @@ interface SigLastMessage : SigVersion
   val chatId: ChatId
   val entId: EntId
   val messageId: MessageId
-  val messageOffset: Long?
+  val messageOffset: Long
   val messagePayload: DtoMessagePayload
   val messageSummary: String
   val messageTime: String

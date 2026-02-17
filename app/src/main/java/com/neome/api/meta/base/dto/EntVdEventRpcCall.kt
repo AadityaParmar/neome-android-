@@ -5,16 +5,20 @@
 
 package com.neome.api.meta.base.dto
 
+import com.neome.api.meta.base.dto.EntVdEvent
 import com.neome.api.meta.base.Types.EnumDefnHttpMethod
+import com.neome.api.meta.base.dto.FormRefKey
 import com.neome.api.meta.base.Types.KeychainId
+import com.neome.api.meta.base.dto.StudioPluginApiBody
 
-interface EntVdEventRpcCall : EntVdEvent {
-    val allowedKeychainIdSet: List<KeychainId>?
-    val apiMethod: EnumDefnHttpMethod?
-    val apiName: String?
-    val executeAsync: Boolean?
-    val inputForm: FormRefKey?
-    val outputForm: FormRefKey?
-    val requestBody: StudioPluginApiBody?
-    val responseBody: StudioPluginApiBody?
+interface EntVdEventRpcCall : EntVdEvent
+{
+  val allowedKeychainIdSet: List<KeychainId>?
+  val apiMethod: EnumDefnHttpMethod?
+  val apiName: String?
+  val executeAsync: Boolean?
+  val inputForm: FormRefKey?
+  val outputForm: FormRefKey?
+  val requestBody: StudioPluginApiBody?
+  val responseBody: StudioPluginApiBody?
 }

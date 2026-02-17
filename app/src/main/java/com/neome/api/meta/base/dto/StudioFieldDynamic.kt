@@ -5,10 +5,10 @@
 
 package com.neome.api.meta.base.dto
 
-import com.neome.api.meta.base.dto.StudioField
+import com.neome.api.meta.base.dto.StudioFieldEditable
 import com.neome.api.meta.base.dto.StudioMapOfDynamicRule
 
-interface StudioFieldDynamic : StudioField
+interface StudioFieldDynamic : StudioFieldEditable
 {
   val ruleMap: StudioMapOfDynamicRule?
 }
