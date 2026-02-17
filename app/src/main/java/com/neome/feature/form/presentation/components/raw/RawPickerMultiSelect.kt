@@ -7,27 +7,33 @@ import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.InputChip
+import androidx.compose.material3.InputChipDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -43,7 +49,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoOptionData
@@ -53,7 +62,8 @@ import com.neome.feature.form.presentation.components.resolveThemeColor
 /**
  * Raw multi-select picker component — stateless, reusable picker UI for choosing multiple options.
  *
- * Displays an [OutlinedTextField] (read-only) showing comma-separated selected options.
+ * Displays selected options as [InputChip]s inside an outlined text field container.
+ * Chips wrap to multiple lines via [FlowRow] and each chip has a close icon for live removal.
  * Tapping the field opens a [ModalBottomSheet] with a virtualized list of options,
  * each with a checkbox on the left. A footer provides "Select All" / "Deselect All" and "Done" buttons.
  *
@@ -61,7 +71,8 @@ import com.neome.feature.form.presentation.components.resolveThemeColor
  * If [optionMap] is null and [cbGetOptionMap] is provided, options are fetched eagerly on composition.
  * The text field shows "Loading…" until the callback delivers the options.
  *
- * Selection changes are committed only when the user presses "Done".
+ * Selection changes in the bottom sheet are committed only when the user presses "Done".
+ * Chip removal via the close icon is live and immediately updates the parent via [onChange].
  * If no options are selected when "Done" is pressed, [onChange] receives null (same as clearing).
  *
  * State is fully controlled by the caller via [selectedOptions], [onChange], and [optionMap].
@@ -79,7 +90,7 @@ import com.neome.feature.form.presentation.components.resolveThemeColor
  * @param readOnly Whether the picker is read-only (shows value but not interactive)
  * @param modifier Modifier for customization
  */
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun RawPickerMultiSelect(
     optionMap: DefnStudioMapOfDtoOptionData?,
@@ -129,7 +140,8 @@ fun RawPickerMultiSelect(
         } == true
     }
 
-    // Display text: "Loading…" during fetch, comma-separated values, with "Not Found" for missing entries
+    // Display text used to control label floating in DecorationBox
+    // Non-empty when there are selections so the label stays floated
     val displayText = remember(selectedOptions, resolvedOptionMap, isFetchingOptions) {
         if (selectedOptions.isNullOrEmpty()) return@remember ""
         if (optionMap == null && isFetchingOptions) return@remember "Loading\u2026"
@@ -137,6 +149,9 @@ fun RawPickerMultiSelect(
             .map { metaId -> resolvedOptionMap?.map?.get(metaId)?.value ?: "Not Found" }
             .joinToString(", ")
     }
+
+    val isLoading = optionMap == null && isFetchingOptions && hasSelection
+    val hasError = isError || isOptionNotFound
 
     // Click detection on the text field (same pattern as FieldDate)
     val interactionSource = remember { MutableInteractionSource() }
@@ -151,49 +166,128 @@ fun RawPickerMultiSelect(
         }
     }
 
-    OutlinedTextField(
-        value = displayText,
-        onValueChange = { /* Read-only, no manual text input */ },
-        label = label?.let { { Text(it) } },
-        placeholder = placeholder?.let { { Text(it) } },
-        supportingText = { Text(text = helperText ?: " ") },
-        isError = isError || isOptionNotFound,
-        enabled = enabled,
-        readOnly = true,
-        singleLine = true,
-        colors = if (isOptionNotFound) {
-            OutlinedTextFieldDefaults.colors(
-                unfocusedTextColor = MaterialTheme.colorScheme.error,
-                focusedTextColor = MaterialTheme.colorScheme.error
-            )
+    // Helper to remove a single chip by metaId (live removal)
+    fun removeChip(metaId: String) {
+        val remaining = selectedOptions?.filter { it != metaId }
+        if (remaining.isNullOrEmpty()) {
+            onChange(null)
+            focusManager.clearFocus()
         } else {
-            OutlinedTextFieldDefaults.colors()
-        },
-        modifier = modifier.fillMaxWidth(),
-        interactionSource = interactionSource,
-        trailingIcon = {
-            Row {
-                if (isInteractive && hasSelection) {
-                    IconButton(onClick = {
-                        onChange(null)
-                        focusManager.clearFocus()
-                    }) {
-                        Icon(
-                            imageVector = Icons.Default.Clear,
-                            contentDescription = "Clear selection"
-                        )
-                    }
-                }
-                IconButton(
-                    onClick = { if (isInteractive) showSheet = true },
-                    enabled = isInteractive
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowDropDown,
-                        contentDescription = "Open picker"
-                    )
-                }
+            val resultOptions = remaining.mapNotNull { id ->
+                resolvedOptionMap?.map?.get(id)
             }
+            onChange(resultOptions.ifEmpty { null })
+        }
+    }
+
+    val colors = if (isOptionNotFound) {
+        OutlinedTextFieldDefaults.colors(
+            unfocusedTextColor = MaterialTheme.colorScheme.error,
+            focusedTextColor = MaterialTheme.colorScheme.error
+        )
+    } else {
+        OutlinedTextFieldDefaults.colors()
+    }
+
+    BasicTextField(
+        value = "",
+        onValueChange = {},
+        readOnly = true,
+        enabled = enabled,
+        textStyle = TextStyle.Default,
+        cursorBrush = SolidColor(Color.Transparent),
+        interactionSource = interactionSource,
+        modifier = modifier.fillMaxWidth(),
+        decorationBox = { innerTextField ->
+            OutlinedTextFieldDefaults.DecorationBox(
+                value = displayText,
+                innerTextField = {
+                    if (isLoading) {
+                        Text(
+                            text = "Loading\u2026",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    } else if (hasSelection) {
+                        FlowRow(
+                            horizontalArrangement = Arrangement.spacedBy(4.dp),
+                            verticalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            selectedOptions?.forEach { metaId ->
+                                val option = resolvedOptionMap?.map?.get(metaId)
+                                val chipLabel = option?.value ?: "Not Found"
+                                val isNotFound = option == null
+
+                                InputChip(
+                                    selected = true,
+                                    onClick = {},
+                                    label = {
+                                        Text(
+                                            text = chipLabel,
+                                            style = MaterialTheme.typography.bodySmall
+                                        )
+                                    },
+                                    trailingIcon = {
+                                        if (isInteractive) {
+                                            Icon(
+                                                imageVector = Icons.Default.Close,
+                                                contentDescription = "Remove $chipLabel",
+                                                modifier = Modifier
+                                                    .size(16.dp)
+                                                    .clickable { removeChip(metaId) }
+                                            )
+                                        }
+                                    },
+                                    colors = if (isNotFound) {
+                                        InputChipDefaults.inputChipColors(
+                                            selectedContainerColor = MaterialTheme.colorScheme.errorContainer,
+                                            selectedLabelColor = MaterialTheme.colorScheme.onErrorContainer,
+                                            selectedTrailingIconColor = MaterialTheme.colorScheme.onErrorContainer
+                                        )
+                                    } else {
+                                        InputChipDefaults.inputChipColors()
+                                    }
+                                )
+                            }
+                        }
+                    } else {
+                        innerTextField()
+                    }
+                },
+                label = label?.let { { Text(it) } },
+                placeholder = placeholder?.let { { Text(it) } },
+                supportingText = { Text(text = helperText ?: " ") },
+                trailingIcon = {
+                    Row {
+                        if (isInteractive && hasSelection) {
+                            IconButton(onClick = {
+                                onChange(null)
+                                focusManager.clearFocus()
+                            }) {
+                                Icon(
+                                    imageVector = Icons.Default.Clear,
+                                    contentDescription = "Clear selection"
+                                )
+                            }
+                        }
+                        IconButton(
+                            onClick = { if (isInteractive) showSheet = true },
+                            enabled = isInteractive
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.ArrowDropDown,
+                                contentDescription = "Open picker"
+                            )
+                        }
+                    }
+                },
+                isError = hasError,
+                enabled = enabled,
+                singleLine = false,
+                visualTransformation = VisualTransformation.None,
+                interactionSource = interactionSource,
+                colors = colors
+            )
         }
     )
 
@@ -283,6 +377,7 @@ fun RawPickerMultiSelect(
                                     }
                                 }
                                 onChange(result)
+                                focusManager.clearFocus()
                                 scope.launch {
                                     sheetState.hide()
                                 }.invokeOnCompletion {

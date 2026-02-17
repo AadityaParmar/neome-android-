@@ -28,7 +28,7 @@ fun RawShowcase(
     ) {
         Text("Raw components", style = MaterialTheme.typography.headlineSmall)
 
-        var singleSelect by remember { mutableStateOf<String?>("c") }
+        var singleSelect by remember { mutableStateOf<String?>("z") }
 
         RawPickerSingleSelect(
             modifier = modifier,
@@ -37,23 +37,11 @@ fun RawShowcase(
             enabled = true,
             onChange = { option -> singleSelect = option?.metaId },
             isError = false,
-            optionMap = DefnStudioMapOfDtoOptionData(
-                keys = listOf("a", "b"),
-                map = mapOf(
-                    "a" to DefnDtoOptionData(
-                        metaId = "a",
-                        value = "A"
-                    ),
-                    "b" to DefnDtoOptionData(
-                        metaId = "b",
-                        value = "B"
-                    )
-                )
-            ),
+            optionMap = optionMap,
             selectedOption = singleSelect
         )
 
-        var multiSelect by remember { mutableStateOf<List<String>?>(listOf("a", "b")) }
+        var multiSelect by remember { mutableStateOf<List<String>?>(listOf("a", "z")) }
 
         RawPickerMultiSelect(
             modifier = modifier,
@@ -62,19 +50,7 @@ fun RawShowcase(
             enabled = true,
             onChange = { options -> multiSelect = options?.map { it.metaId } },
             isError = false,
-            optionMap = DefnStudioMapOfDtoOptionData(
-                keys = listOf("a", "b"),
-                map = mapOf(
-                    "a" to DefnDtoOptionData(
-                        metaId = "a",
-                        value = "A"
-                    ),
-                    "b" to DefnDtoOptionData(
-                        metaId = "b",
-                        value = "B"
-                    )
-                )
-            ),
+            optionMap = optionMap,
             selectedOptions = multiSelect
         )
     }
@@ -87,3 +63,49 @@ private fun RawShowcasePreview() {
         TextFieldShowcase()
     }
 }
+
+val optionMap = DefnStudioMapOfDtoOptionData(
+    keys = listOf("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"),
+    map = mapOf(
+        "a" to DefnDtoOptionData(
+            metaId = "a",
+            value = "AAAAA"
+        ),
+        "b" to DefnDtoOptionData(
+            metaId = "b",
+            value = "BBBBB"
+        ),
+        "c" to DefnDtoOptionData(
+            metaId = "c",
+            value = "CCCCC"
+        ),
+        "d" to DefnDtoOptionData(
+            metaId = "d",
+            value = "DDDDD"
+        ),
+        "e" to DefnDtoOptionData(
+            metaId = "e",
+            value = "EEEEE"
+        ),
+        "f" to DefnDtoOptionData(
+            metaId = "f",
+            value = "FFFFF"
+        ),
+        "g" to DefnDtoOptionData(
+            metaId = "g",
+            value = "GGGGG"
+        ),
+        "h" to DefnDtoOptionData(
+            metaId = "h",
+            value = "HHHHH"
+        ),
+        "i" to DefnDtoOptionData(
+            metaId = "i",
+            value = "IIIII"
+        ),
+        "j" to DefnDtoOptionData(
+            metaId = "j",
+            value = "JJJJJ"
+        )
+    )
+)
