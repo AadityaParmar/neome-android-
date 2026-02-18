@@ -104,11 +104,7 @@ private fun FieldTextContent(
         label = label?.let { { Text(it) } },
         placeholder = placeholder?.let { { Text(it) } },
         isError = error != null,
-        supportingText = {
-            // Always render with placeholder space to prevent layout jumps
-            // Space character reserves height when no error or helper text
-            Text(text = error?.message ?: helperText ?: " ")
-        },
+        supportingText = error?.message?.let { { Text(it) } } ?: helperText?.let { { Text(it) } },
         enabled = enabled,
         readOnly = readOnly,
         maxLines = 1,

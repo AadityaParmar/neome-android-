@@ -45,7 +45,7 @@ fun FieldDecimal(
     val fieldValue = fieldController.value.value
 
     // Collect reactive field properties and error
-    val (properties, _) = fieldController.field.value
+    val (properties, error) = fieldController.field.value
 
     // Early return if field is hidden
     if (properties.hidden) return
@@ -74,7 +74,7 @@ fun FieldDecimal(
             value = currentValue,
             label = properties.label?.let { { Text(it) } },
             placeholder = properties.placeholder?.let { { Text(it) } },
-            supportingText = properties.helperText?.let { { Text(it) } },
+            supportingText = error?.message?.let { { Text(it) } } ?: properties?.helperText?.let { { Text(it) } },
             enabled = !properties.disabled,
             readOnly = properties.readOnly,
             maxLines = 1,

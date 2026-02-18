@@ -61,8 +61,8 @@ fun FieldSection(
     // Defaults match previous hardcoded values so existing forms look unchanged
     // when no theme is set.
     val theme = formCtx.getDefnForm()?.theme
-    val colSpacing = (theme?.colSpacing ?: 4L).toInt().dp
-    val rowSpacing = (theme?.rowSpacing ?: 2L).toInt().dp
+    val colSpacing = (theme?.colSpacing ?: 8L).toInt().dp
+    val rowSpacing = (theme?.rowSpacing ?: 8L).toInt().dp
 
     // --- Container padding from defn ------------------------------------------
     // pl/pr/pt/pb are Long? values representing dp. Null → 0 (no padding).
