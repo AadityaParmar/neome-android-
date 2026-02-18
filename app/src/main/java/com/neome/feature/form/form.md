@@ -4,7 +4,7 @@
 
 | Property           | Value                                       |
 |--------------------|---------------------------------------------|
-| **Version**        | 1.15.0                                      |
+| **Version**        | 1.15.1                                      |
 | **Last Updated**   | 2026-02-18                                  |
 | **Scope**          | Android Form Component Architecture         |
 | **Path**           | `app/src/main/java/com/neome/feature/form/` |
@@ -1042,6 +1042,13 @@ app/src/main/java/com/neome/feature/form/
 ---
 
 ## Changelog
+
+### v1.15.1 (2026-02-18)
+
+- **Fix**: `FieldButton` — `bgColor` now applied to **all 4 variants** (contained, outlined, text, icon), not just contained
+  - When `bgColor` is set, `contentColor` is forced to `Color.White` so text/icons remain legible
+  - Uses `ButtonDefaults.outlinedButtonColors`, `ButtonDefaults.textButtonColors`, and `IconButtonDefaults.iconButtonColors` for per-variant color customisation
+- **Removed**: `toolTip` property from `FieldProperties` — tooltip is a web-only concept with no mobile equivalent; removed from `FieldState.kt`, `FieldPropertyResolver.kt`, and `FieldButton.kt`
 
 ### v1.15.0 (2026-02-18)
 

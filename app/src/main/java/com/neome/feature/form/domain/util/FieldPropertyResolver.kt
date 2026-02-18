@@ -100,7 +100,6 @@ object FieldPropertyResolver {
             bgColor = resolveBgColor(defnComp),
             buttonPosition = resolveButtonPosition(defnComp),
             iconPosition = resolveIconPosition(defnComp),
-            toolTip = resolveToolTip(defnComp),
             icon = resolveIcon(defnComp),
 
             // Layout properties
@@ -759,11 +758,6 @@ object FieldPropertyResolver {
     private fun resolveIconPosition(defnComp: DefnComp): String? {
         if (defnComp !is DefnFieldButton) return null
         return defnComp.iconPosition?.value ?: defnComp.iconPositionVar?.value
-    }
-
-    private fun resolveToolTip(defnComp: DefnComp): String? {
-        if (defnComp !is DefnFieldButton) return null
-        return defnComp.toolTip
     }
 
     private fun resolveIcon(defnComp: DefnComp): String? {
