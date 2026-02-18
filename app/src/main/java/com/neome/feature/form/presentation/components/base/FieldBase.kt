@@ -2,10 +2,8 @@ package com.neome.feature.form.presentation.components.base
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 
 /**
  * Base component for all field components.
@@ -24,10 +22,6 @@ fun FieldBase(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(
-                horizontal = 16.dp,
-                vertical = 8.dp
-            )
     ) {
         content()
     }
