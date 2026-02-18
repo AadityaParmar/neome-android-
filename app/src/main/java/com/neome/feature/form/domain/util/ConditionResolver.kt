@@ -68,8 +68,8 @@ object ConditionResolver {
             val keys = condition.keys ?: return false
             val map = condition.map ?: return false
 
-            val results = keys.mapNotNull { conditionId ->
-                val child = map[conditionId] ?: return@mapNotNull null
+            val results = keys.map { conditionId ->
+                val child = map[conditionId] ?: return@map null
                 val childStatement = child.statement
 
                 if (childStatement != null) {
@@ -80,9 +80,9 @@ object ConditionResolver {
             }
 
             return if (isAnd == true) {
-                results.all { it }
+                results.all { it == true }
             } else {
-                results.any { it }
+                results.any { it == true }
             }
         }
 
@@ -166,7 +166,12 @@ object ConditionResolver {
         rhs.valueFieldId?.let { fieldId ->
             val compType = defnForm.compMap[fieldId]?.type
             if (compType != null && compType in SET_COMP_TYPES) {
-                return resolvedFieldValue(fieldId, defnForm.compMap, getValue, null) as? List<String>?
+                return (resolvedFieldValue(
+                    fieldId,
+                    defnForm.compMap,
+                    getValue,
+                    null
+                ) as? List<Any?>?)?.map { it.toString() }
             }
         }
 
@@ -303,7 +308,6 @@ object ConditionResolver {
         }
     }
 
-    @Suppress("UNCHECKED_CAST")
     private fun evaluateEqualTo(
         lhsValue: Any?,
         rhsValue: Any?,
