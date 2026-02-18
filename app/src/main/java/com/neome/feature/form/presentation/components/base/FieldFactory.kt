@@ -10,6 +10,7 @@ import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.presentation.components.composite.FieldSection
 import com.neome.feature.form.presentation.components.composite.FieldTab
+import com.neome.feature.form.presentation.components.field.FieldButton
 import com.neome.feature.form.presentation.components.field.FieldDate
 import com.neome.feature.form.presentation.components.field.FieldDateRange
 import com.neome.feature.form.presentation.components.field.FieldDateTime
@@ -159,6 +160,12 @@ fun FieldFactory(
         )
 
         EnumDefnCompType.setOfText -> FieldSetOfText(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.button -> FieldButton(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             modifier = modifier

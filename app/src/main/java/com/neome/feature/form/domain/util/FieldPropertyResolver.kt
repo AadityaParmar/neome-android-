@@ -25,6 +25,7 @@ import com.neome.api.meta.base.dto.DefnFieldTime
 import com.neome.api.meta.base.dto.DefnFieldVideo
 import com.neome.api.meta.base.dto.DefnFieldVoice
 import com.neome.api.meta.base.dto.FieldValueSwitch
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoColorData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldSwitchData
 import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
@@ -95,6 +96,12 @@ object FieldPropertyResolver {
             // Button properties
             textSize = resolveTextSize(defnComp, defnForm, getFieldValue),
             disableElevation = resolveDisableElevation(defnComp, defnForm, getFieldValue),
+            buttonVariant = resolveButtonVariant(defnComp),
+            bgColor = resolveBgColor(defnComp),
+            buttonPosition = resolveButtonPosition(defnComp),
+            iconPosition = resolveIconPosition(defnComp),
+            toolTip = resolveToolTip(defnComp),
+            icon = resolveIcon(defnComp),
 
             // Layout properties
             justifyContent = resolveJustifyContent(defnComp),
@@ -731,6 +738,37 @@ object FieldPropertyResolver {
         } else {
             null
         }
+    }
+
+    private fun resolveButtonVariant(defnComp: DefnComp): String? {
+        if (defnComp !is DefnFieldButton) return null
+        return defnComp.buttonVariant?.value ?: defnComp.buttonVariantVar?.value
+    }
+
+    private fun resolveBgColor(defnComp: DefnComp): DefnDtoColorData? {
+        if (defnComp !is DefnFieldButton) return null
+        val color = defnComp.bgColor ?: defnComp.bgColorVar ?: return null
+        return DefnDtoColorData(shade = color.shade, value = color.value)
+    }
+
+    private fun resolveButtonPosition(defnComp: DefnComp): String? {
+        if (defnComp !is DefnFieldButton) return null
+        return defnComp.buttonPosition?.value ?: defnComp.buttonPositionVar?.value
+    }
+
+    private fun resolveIconPosition(defnComp: DefnComp): String? {
+        if (defnComp !is DefnFieldButton) return null
+        return defnComp.iconPosition?.value ?: defnComp.iconPositionVar?.value
+    }
+
+    private fun resolveToolTip(defnComp: DefnComp): String? {
+        if (defnComp !is DefnFieldButton) return null
+        return defnComp.toolTip
+    }
+
+    private fun resolveIcon(defnComp: DefnComp): String? {
+        if (defnComp !is DefnFieldButton) return null
+        return defnComp.icon ?: defnComp.iconVar
     }
 
     // ==================== Switch Field Property Resolvers ====================

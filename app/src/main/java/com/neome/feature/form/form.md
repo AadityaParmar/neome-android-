@@ -4,8 +4,8 @@
 
 | Property           | Value                                       |
 |--------------------|---------------------------------------------|
-| **Version**        | 1.14.0                                      |
-| **Last Updated**   | 2026-02-17                                  |
+| **Version**        | 1.15.0                                      |
+| **Last Updated**   | 2026-02-18                                  |
 | **Scope**          | Android Form Component Architecture         |
 | **Path**           | `app/src/main/java/com/neome/feature/form/` |
 | **Update Trigger** | Any modification to form component files    |
@@ -611,6 +611,7 @@ Routes `defnComp.type` to correct field renderer. Supported types (25):
 | Pick       | `pickText` (dropdown via RawPickerSingleSelect)              |
 | Set        | `setOfText` (multi-select via RawPickerMultiSelect)          |
 | Media     | `image`, `document`                                                 |
+| Action    | `button` (4 variants: contained/outlined/text/icon)                 |
 | Composite | `section`, `tab`                                                    |
 | TODO      | `grid`                                                              |
 
@@ -654,7 +655,7 @@ Wraps all fields with consistent `Column(fillMaxWidth)` + padding (16dp horizont
 - Content area with `verticalScroll`
 - Renders selected tab content via `FieldFactory`
 
-### Field Implementations (23 files)
+### Field Implementations (25 files)
 
 **Field Component Pattern:**
 
@@ -756,6 +757,7 @@ Form (provides LocalFormCtx)
             ├── Boolean: FieldSwitch
             ├── Pick: FieldPickText
             ├── Set: FieldSetOfText
+            ├── Action: FieldButton (contained/outlined/text/icon)
             └── Media: FieldImage, FieldDocument
 ```
 
@@ -1007,6 +1009,8 @@ app/src/main/java/com/neome/feature/form/
 │   │   │   ├── FieldSwitch.kt               # Switch/Checkbox + capture metadata
 │   │   │   ├── FieldPickText.kt             # Single-select dropdown (RawPickerSingleSelect)
 │   │   │   ├── FieldSetOfText.kt            # Multi-select dropdown (RawPickerMultiSelect)
+│   │   │   ├── FieldButton.kt               # Action button (4 variants: contained/outlined/text/icon)
+│   │   │   ├── MuiIconMapper.kt             # MUI icon name → ImageVector mapper (~60 icons)
 │   │   │   ├── FieldImage.kt                # Image picker + preview dialog
 │   │   │   ├── FieldDocument.kt             # Document picker (40+ MIME types)
 │   │   │   ├── ImagePreviewDialog.kt        # Pinch-to-zoom image preview
@@ -1032,12 +1036,39 @@ app/src/main/java/com/neome/feature/form/
 │       ├── FieldEvent.kt                    # 3 field→form events
 │       └── FieldError.kt                    # Error model + ErrorType enum
 │
-└── Total: ~98 files, ~7500 LOC
+└── Total: ~100 files, ~7700 LOC
 ```
 
 ---
 
 ## Changelog
+
+### v1.15.0 (2026-02-18)
+
+- **Feature**: Added `FieldButton` component — renders an action button with 4 visual variants
+- **Added**: `presentation/components/field/FieldButton.kt` — stateful wrapper + stateless `FieldButtonContent`
+  - Variants: `contained` (Material3 `Button`, default), `outlined` (`OutlinedButton`), `text` (`TextButton`), `icon` (`IconButton`)
+  - Supports: `bgColor` (custom container color for contained), `disableElevation`, `buttonPosition` (start/center/end alignment), `icon` + `iconPosition` (start/end), `toolTip` (content description), `textSize` (typography mapping), `disabled` / `hidden`
+  - Uses `rememberFieldController<Unit?>` — no stored value, properties-only access
+- **Added**: `presentation/components/field/MuiIconMapper.kt` — maps MUI (camelCase) icon name strings to Material Icons `ImageVector`
+  - Covers 60+ common icons (navigation, actions, media, communication, account/security)
+  - Returns `null` for unmapped names; callers handle gracefully by omitting the icon
+- **Modified**: `presentation/state/FieldState.kt` — added 6 new button properties to `FieldProperties`:
+  - `buttonVariant: String?` — variant name string (e.g., `"contained"`)
+  - `bgColor: DefnDtoColorData?` — resolved background color data
+  - `buttonPosition: String?` — horizontal alignment (e.g., `"start"`, `"center"`, `"end"`)
+  - `iconPosition: String?` — icon placement relative to label (`"start"` or `"end"`)
+  - `toolTip: String?` — accessibility label / tooltip text
+  - `icon: String?` — MUI icon name string
+- **Modified**: `domain/util/FieldPropertyResolver.kt` — added 6 new private resolvers for the button properties above, wired into `resolveFieldProperties()`
+  - `resolveButtonVariant` — direct: `buttonVariant?.value` → var: `buttonVariantVar?.value`
+  - `resolveBgColor` — direct: `bgColor` → var: `bgColorVar` (wraps to `DefnDtoColorData`)
+  - `resolveButtonPosition` — direct/var pattern
+  - `resolveIconPosition` — direct/var pattern
+  - `resolveToolTip` — direct only (`toolTip`)
+  - `resolveIcon` — direct: `icon` → var: `iconVar`
+- **Modified**: `presentation/components/base/FieldFactory.kt` — added `EnumDefnCompType.button → FieldButton` routing
+- **Note**: Schema returns `null` for `button` type (already in `CompSchemaFactory`); no value conversion needed (button has no stored value)
 
 ### v1.14.0 (2026-02-17)
 

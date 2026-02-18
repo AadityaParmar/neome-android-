@@ -1,6 +1,7 @@
 package com.neome.feature.form.presentation.state
 
 import androidx.compose.runtime.Immutable
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoColorData
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
 
@@ -82,6 +83,12 @@ data class FieldProperties(
     // Button properties
     val textSize: String? = null,          // Button (EnumDefnTextSize.value)
     val disableElevation: Boolean? = null, // Button
+    val buttonVariant: String? = null,     // Button variant: "text", "contained", "outlined", "icon"
+    val bgColor: DefnDtoColorData? = null, // Button background color
+    val buttonPosition: String? = null,    // Button alignment (EnumDefnPlacement.value): "start", "center", "end"
+    val iconPosition: String? = null,      // Icon position (EnumDefnPlacement.value): "start", "end"
+    val toolTip: String? = null,           // Button tooltip / content description
+    val icon: String? = null,              // Icon name (MUI icon name string)
 
     // Layout properties
     val justifyContent: String? = null,    // Counter (EnumDefnPlacement.value)
