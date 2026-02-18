@@ -1,6 +1,9 @@
 package com.neome.feature.form.domain.util
 
+import com.neome.api.meta.base.Types.EnumDefnCompType
+import com.neome.api.meta.base.Types.EnumDefnFields
 import com.neome.api.meta.base.Types.MetaIdComp
+import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.api.meta.base.Types.MetaIdRole
 import com.neome.api.meta.base.dto.DefnField
 import com.neome.api.meta.base.dto.DefnForm
@@ -25,6 +28,18 @@ object FormPlus {
         targetRoles: Set<MetaIdRole>
     ): Boolean {
         return callerRoles.all { it in targetRoles }
+    }
+
+    fun getSystemFieldCompType(fieldId: MetaIdField): EnumDefnCompType? {
+        return when (fieldId.getId()) {
+            EnumDefnFields.CreatedBy.value -> EnumDefnCompType.userId
+            EnumDefnFields.UpdatedBy.value -> EnumDefnCompType.userId
+            EnumDefnFields.CreatedOn.value -> EnumDefnCompType.date
+            EnumDefnFields.UpdatedOn.value -> EnumDefnCompType.date
+            EnumDefnFields.RowId.value -> EnumDefnCompType.rowId
+            EnumDefnFields.RowOrder.value -> EnumDefnCompType.text
+            else -> null
+        }
     }
 
     fun getCompMetaId(comp: DefnCompSeal): MetaIdComp? {

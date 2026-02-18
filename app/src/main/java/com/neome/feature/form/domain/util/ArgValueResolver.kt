@@ -62,7 +62,7 @@ object ArgValueResolver {
 
         val newValue = mutableListOf<String>()
         defnDtoText.value?.forEach { argStr ->
-            val resolvedVal = resolveArgVal(argStr, defnForm, callerEnt, skipResolveSeqVar)
+            val resolvedVal = resolveArgStr(argStr, defnForm, callerEnt, skipResolveSeqVar)
             if (resolvedVal != null) {
                 newValue.add(resolvedVal)
             }
@@ -84,7 +84,7 @@ object ArgValueResolver {
 
         val newValue = mutableListOf<String>()
         paragraph.value?.forEach { argStr ->
-            val resolvedVal = resolveArgVal(argStr, defnForm, callerEnt, false)
+            val resolvedVal = resolveArgStr(argStr, defnForm, callerEnt, false)
             if (resolvedVal != null) {
                 newValue.add(resolvedVal)
             }
@@ -101,9 +101,10 @@ object ArgValueResolver {
 
         val newValue = mutableListOf<String>()
         defnDtoText.value?.forEach { argStr ->
-            newValue.add(resolveArgValField(argStr, defnForm, formValue))
+            if (argStr.isNotBlank())
+                newValue.add(resolveArgStrField(argStr, defnForm, formValue))
         }
-        return newValue.filter { it.isNotBlank() || !it.isEmpty() || it != " " }.joinToString(", ")
+        return newValue.joinToString(", ")
     }
 
     fun resolveArgForFieldVal(
@@ -114,12 +115,13 @@ object ArgValueResolver {
 
         val newValue = mutableListOf<String>()
         defnDtoText.value?.forEach { argStr ->
-            newValue.add(resolveArgValField(argStr, defnForm, formValue))
+            if (argStr.isNotBlank())
+                newValue.add(resolveArgStrField(argStr, defnForm, formValue))
         }
-        return newValue.filter { it.isNotBlank() || !it.isEmpty() || it != " " }.joinToString(", ")
+        return newValue.joinToString(", ")
     }
 
-    private fun resolveArgValField(
+    fun resolveArgStrField(
         argStr: String,
         defnForm: DefnForm,
         formValue: FormValueData,
@@ -153,7 +155,7 @@ object ArgValueResolver {
      * If it's JSON, parse as StudioDtoArgValueForClient and dispatch by kind.
      * Otherwise return as-is.
      */
-    private fun resolveArgVal(
+    fun resolveArgStr(
         argStr: String,
         defnForm: DefnForm,
         callerEnt: SigEntCaller,

@@ -2,17 +2,28 @@ package com.neome.feature.form.domain.util.FieldVal
 
 import com.neome.api.meta.base.Types
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.FieldChipSetDateTimeData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldChipSetDayData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldChipSetDeviceSizeData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldChipSetDeviceTypeData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldChipSetTimeData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldSetOfEntUserIdData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldSetOfOptionIdData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldSetOfRoleData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldSetOfStringData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueColorData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDecimalData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueEmailData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueEntUserIdData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueHandleData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueMobileData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueNumberData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueOptionIdData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueParagraphData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldValueSwitchData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
+import com.neome.core.common.serializer.api.meta.base.dto.StudioSetOfDateData
 import com.neome.core.logging.AppLogger
 import com.neome.feature.utils.JsonParser
 import kotlinx.serialization.json.JsonElement
@@ -146,8 +157,90 @@ internal interface Converter {
                 }
 
                 // Complex types — serialized/deserialized via KSerializer in FieldController
-                Types.EnumDefnCompType.pickText,
-                Types.EnumDefnCompType.setOfText -> null
+                Types.EnumDefnCompType.pickText -> null
+
+                // ── Set-type fields ────────────────────────────────────────────
+
+                Types.EnumDefnCompType.setOfUser -> {
+                    @Suppress("UNCHECKED_CAST")
+                    val list = value as? List<Types.EntUserId> ?: return null
+                    FieldSetOfEntUserIdData(valueSet = list)
+                }
+
+                Types.EnumDefnCompType.setOfRole -> {
+                    @Suppress("UNCHECKED_CAST")
+                    val list = value as? List<Types.MetaIdRole> ?: return null
+                    FieldSetOfRoleData(valueSet = list)
+                }
+
+                Types.EnumDefnCompType.setOfText -> {
+                    @Suppress("UNCHECKED_CAST")
+                    val list = value as? List<String> ?: return null
+                    FieldSetOfOptionIdData(valueSet = list)
+                }
+
+                Types.EnumDefnCompType.chipSet -> {
+                    @Suppress("UNCHECKED_CAST")
+                    val list = value as? List<String> ?: return null
+                    FieldSetOfStringData(valueSet = list)
+                }
+
+                Types.EnumDefnCompType.chipSetDate -> {
+                    @Suppress("UNCHECKED_CAST")
+                    val list = value as? List<String> ?: return null
+                    StudioSetOfDateData(valueSet = list)
+                }
+
+                Types.EnumDefnCompType.chipSetDay -> {
+                    @Suppress("UNCHECKED_CAST")
+                    val list = value as? List<Types.EnumDefnDay> ?: return null
+                    FieldChipSetDayData(valueSet = list)
+                }
+
+                Types.EnumDefnCompType.chipSetDeviceType -> {
+                    @Suppress("UNCHECKED_CAST")
+                    val list = value as? List<Types.EnumDeviceType> ?: return null
+                    FieldChipSetDeviceTypeData(valueSet = list)
+                }
+
+                Types.EnumDefnCompType.chipSetDeviceSize -> {
+                    @Suppress("UNCHECKED_CAST")
+                    val list = value as? List<Types.EnumDefnDeviceSize> ?: return null
+                    FieldChipSetDeviceSizeData(valueSet = list)
+                }
+
+                Types.EnumDefnCompType.chipSetDateTime -> {
+                    @Suppress("UNCHECKED_CAST")
+                    val list = value as? List<String> ?: return null
+                    FieldChipSetDateTimeData(valueSet = list)
+                }
+
+                Types.EnumDefnCompType.chipSetTime -> {
+                    @Suppress("UNCHECKED_CAST")
+                    val list = value as? List<Types.AnyTime> ?: return null
+                    FieldChipSetTimeData(valueSet = list)
+                }
+
+                // ── Bool ───────────────────────────────────────────────────────
+
+                Types.EnumDefnCompType.bool -> {
+                    val boolValue = when (value) {
+                        is Boolean -> value
+                        is String -> value.toBooleanStrictOrNull() ?: false
+                        else -> false
+                    }
+                    FieldValueSwitchData(value = boolValue)
+                }
+
+                // ── userId (single user) ───────────────────────────────────────
+
+                Types.EnumDefnCompType.userId,
+                Types.EnumDefnCompType.pickUser -> {
+                    when (value) {
+                        is Types.EntUserId -> FieldValueEntUserIdData(value = value)
+                        else -> null
+                    }
+                }
 
                 else -> null
             }
@@ -253,6 +346,145 @@ internal interface Converter {
                             FieldSetOfOptionIdData.serializer(),
                             value
                         ).valueSet
+
+                        else -> null
+                    }
+                }
+
+                // ── Set-type fields ────────────────────────────────────────────
+
+                Types.EnumDefnCompType.setOfUser -> {
+                    when (value) {
+                        is FieldSetOfEntUserIdData -> value.valueSet
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            FieldSetOfEntUserIdData.serializer(),
+                            value
+                        ).valueSet
+
+                        else -> null
+                    }
+                }
+
+                Types.EnumDefnCompType.setOfRole -> {
+                    when (value) {
+                        is FieldSetOfRoleData -> value.valueSet
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            FieldSetOfRoleData.serializer(),
+                            value
+                        ).valueSet
+
+                        else -> null
+                    }
+                }
+
+                Types.EnumDefnCompType.chipSet -> {
+                    when (value) {
+                        is FieldSetOfStringData -> value.valueSet
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            FieldSetOfStringData.serializer(),
+                            value
+                        ).valueSet
+
+                        else -> null
+                    }
+                }
+
+                Types.EnumDefnCompType.chipSetDate -> {
+                    when (value) {
+                        is StudioSetOfDateData -> value.valueSet
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            StudioSetOfDateData.serializer(),
+                            value
+                        ).valueSet
+
+                        else -> null
+                    }
+                }
+
+                Types.EnumDefnCompType.chipSetDay -> {
+                    when (value) {
+                        is FieldChipSetDayData -> value.valueSet
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            FieldChipSetDayData.serializer(),
+                            value
+                        ).valueSet
+
+                        else -> null
+                    }
+                }
+
+                Types.EnumDefnCompType.chipSetDeviceType -> {
+                    when (value) {
+                        is FieldChipSetDeviceTypeData -> value.valueSet
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            FieldChipSetDeviceTypeData.serializer(),
+                            value
+                        ).valueSet
+
+                        else -> null
+                    }
+                }
+
+                Types.EnumDefnCompType.chipSetDeviceSize -> {
+                    when (value) {
+                        is FieldChipSetDeviceSizeData -> value.valueSet
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            FieldChipSetDeviceSizeData.serializer(),
+                            value
+                        ).valueSet
+
+                        else -> null
+                    }
+                }
+
+                Types.EnumDefnCompType.chipSetDateTime -> {
+                    when (value) {
+                        is FieldChipSetDateTimeData -> value.valueSet
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            FieldChipSetDateTimeData.serializer(),
+                            value
+                        ).valueSet
+
+                        else -> null
+                    }
+                }
+
+                Types.EnumDefnCompType.chipSetTime -> {
+                    when (value) {
+                        is FieldChipSetTimeData -> value.valueSet
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            FieldChipSetTimeData.serializer(),
+                            value
+                        ).valueSet
+
+                        else -> null
+                    }
+                }
+
+                // ── Bool ───────────────────────────────────────────────────────
+
+                Types.EnumDefnCompType.bool -> {
+                    when (value) {
+                        is FieldValueSwitchData -> value.value
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            FieldValueSwitchData.serializer(),
+                            value
+                        ).value
+
+                        else -> null
+                    }
+                }
+
+                // ── userId (single user) ───────────────────────────────────────
+
+                Types.EnumDefnCompType.userId,
+                Types.EnumDefnCompType.pickUser -> {
+                    when (value) {
+                        is FieldValueEntUserIdData -> value.value
+                        is JsonElement -> JsonParser.json.decodeFromJsonElement(
+                            FieldValueEntUserIdData.serializer(),
+                            value
+                        ).value
 
                         else -> null
                     }
