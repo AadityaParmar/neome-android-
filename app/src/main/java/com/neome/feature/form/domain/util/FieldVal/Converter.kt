@@ -1,9 +1,8 @@
 package com.neome.feature.form.domain.util.FieldVal
 
-import com.neome.api.meta.base.AnyValue
 import com.neome.api.meta.base.Types
-import com.neome.api.meta.base.Types.AnyTime
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.FieldSetOfOptionIdData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueColorData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDateData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueDecimalData
@@ -11,7 +10,6 @@ import com.neome.core.common.serializer.api.meta.base.dto.FieldValueEmailData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueHandleData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueMobileData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueNumberData
-import com.neome.core.common.serializer.api.meta.base.dto.FieldSetOfOptionIdData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueOptionIdData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueParagraphData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueTextData
@@ -94,13 +92,11 @@ internal interface Converter {
                     FieldValueDateData(stringValue)
                 }
 
-                Types.EnumDefnCompType.time -> {
-                    val stringValue = when (value) {
-                        is JsonElement -> value.jsonPrimitive.content
-                        else -> value.toString()
-                    }
-                    AnyValue.create(stringValue, AnyTime::class.java)
+                Types.EnumDefnCompType.time -> when (value) {
+                    is JsonElement -> value.jsonPrimitive.content
+                    else -> value.toString()
                 }
+
 
                 Types.EnumDefnCompType.dateTime -> {
                     val stringValue = when (value) {

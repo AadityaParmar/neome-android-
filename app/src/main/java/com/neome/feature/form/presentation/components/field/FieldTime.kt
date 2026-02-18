@@ -28,8 +28,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.neome.api.meta.base.AnyValue
-import com.neome.api.meta.base.Types.AnyTime
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
@@ -72,7 +70,7 @@ fun FieldTime(
     modifier: Modifier = Modifier
 ) {
     // ========== REUSED FROM FieldDate: Field Controller Setup ==========
-    val fieldController = rememberFieldController<AnyTime>(
+    val fieldController = rememberFieldController<String>(
         defnComp = defnComp,
         onFieldEvent = onFieldEvent
     )
@@ -89,7 +87,7 @@ fun FieldTime(
 
     // ========== REUSED FROM FieldDate: Current Value & Local State ==========
     // Get current time value from FieldValueTimeData
-    val currentValue = fieldValue?.value
+    val currentValue = fieldValue
 
     // ========== Time-specific: Picker State ==========
     var showTimePicker by remember { mutableStateOf(false) }
@@ -144,8 +142,7 @@ fun FieldTime(
             set(Calendar.MILLISECOND, 0)
         }
         val timeString = dateToIsoString(calendar.time)
-        val newValue = AnyValue.create(timeString, AnyTime::class.java)
-        fieldController.onChange(newValue)
+        fieldController.onChange(timeString)
         showTimePicker = false
     }
 

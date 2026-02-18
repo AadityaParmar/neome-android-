@@ -1,6 +1,5 @@
 package com.neome.feature.form.domain.ctx.helper.schema
 
-import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.dto.DefnFieldTime
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.feature.form.domain.DefnFormUi
@@ -30,13 +29,12 @@ class FieldTimeSchema(
     private val defnField = defnComp as DefnFieldTime
 
     override fun validate(fieldValue: JsonElement?, fieldState: FieldState?): String? {
-        val typedValue = FieldValueResolver.fnJsonElementFieldValue(
+        val timeValue = FieldValueResolver.fnJsonElementFieldValue(
             defnField.type,
             fieldValue
-        ) as Types.AnyTime?
+        ) as String?
         val properties = fieldState?.fieldProperties ?: FieldProperties()
 
-        val timeValue = typedValue?.value
 
         val validation = buildValidation(properties)
         val result = validation(timeValue)
