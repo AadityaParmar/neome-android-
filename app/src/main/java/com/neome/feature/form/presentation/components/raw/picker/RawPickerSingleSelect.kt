@@ -128,7 +128,7 @@ fun RawPickerSingleSelect(
         onValueChange = { /* Read-only, no manual text input */ },
         label = label?.let { { Text(it) } },
         placeholder = placeholder?.let { { Text(it) } },
-        supportingText = { Text(text = helperText ?: " ") },
+        supportingText = helperText?.let { { Text(it) } },
         isError = isError || isOptionNotFound,
         enabled = enabled,
         readOnly = true,

@@ -163,7 +163,7 @@ private fun FieldSetOfTextContent(
         isLoading = isLoading,
         label = label,
         placeholder = placeholder,
-        helperText = error?.message ?: helperText ?: " ",
+        helperText = error?.message ?: helperText,
         isError = error != null,
         enabled = enabled,
         readOnly = readOnly,

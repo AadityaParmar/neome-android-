@@ -84,7 +84,7 @@ fun FieldDateRange(
     val fieldValue = fieldController.value.value
 
     // ========== Collect reactive field properties and error ==========
-    val (properties, _) = fieldController.field.value
+    val (properties, error) = fieldController.field.value
 
     if (properties.hidden) return
 
@@ -238,11 +238,12 @@ fun FieldDateRange(
                 onValueChange = { /* Read-only, no manual text input */ },
                 label = { Text(properties.label?.let { "$it (To)" } ?: "To") },
                 placeholder = properties.placeholder?.let { { Text(it) } },
-                supportingText = properties.helperText?.let { { Text(it) } },
-                enabled = !properties.disabled,
-                readOnly = true,
-                modifier = Modifier.fillMaxWidth(),
-                interactionSource = toInteractionSource,
+            isError = error != null,
+            supportingText = error?.message?.let { { Text(it) } } ?: properties.helperText?.let { { Text(it) } },
+            enabled = !properties.disabled,
+            readOnly = true,
+            modifier = Modifier.fillMaxWidth(),
+            interactionSource = toInteractionSource,
                 trailingIcon = {
                     Row {
                         if (isInteractive) {

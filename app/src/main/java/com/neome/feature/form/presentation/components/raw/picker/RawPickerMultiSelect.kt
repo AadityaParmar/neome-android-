@@ -241,7 +241,7 @@ fun RawPickerMultiSelect(
                 },
                 label = label?.let { { Text(it) } },
                 placeholder = placeholder?.let { { Text(it) } },
-                supportingText = { Text(text = helperText ?: " ") },
+                supportingText = helperText?.let { { Text(it) } },
                 trailingIcon = {
                     Row {
                         if (isInteractive && hasSelection) {

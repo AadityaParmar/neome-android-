@@ -86,7 +86,7 @@ fun FieldDateTime(
     val fieldValue = fieldController.value.value
 
     // ========== Collect reactive field properties and error ==========
-    val (properties, _) = fieldController.field.value
+    val (properties, error) = fieldController.field.value
 
     if (properties.hidden) return
 
@@ -200,7 +200,8 @@ fun FieldDateTime(
             onValueChange = { /* Read-only, no manual text input */ },
             label = properties.label?.let { { Text(it) } },
             placeholder = properties.placeholder?.let { { Text(it) } },
-            supportingText = properties.helperText?.let { { Text(it) } },
+            isError = error != null,
+            supportingText = error?.message?.let { { Text(it) } } ?: properties.helperText?.let { { Text(it) } },
             enabled = !properties.disabled,
             readOnly = true,
             modifier = Modifier.fillMaxWidth(),

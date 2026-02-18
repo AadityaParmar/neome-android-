@@ -230,10 +230,11 @@ internal fun FieldSwitchContent(
         }
 
         // Supporting text (error or helper)
-        if (isError || !helperText.isNullOrBlank()) {
+        val supportingMessage = errorMessage ?: helperText
+        if (supportingMessage != null) {
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = errorMessage ?: helperText ?: "",
+                text = supportingMessage,
                 style = MaterialTheme.typography.bodySmall,
                 color = if (isError) {
                     MaterialTheme.colorScheme.error

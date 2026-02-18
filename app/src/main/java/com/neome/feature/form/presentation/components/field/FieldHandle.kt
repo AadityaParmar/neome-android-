@@ -190,7 +190,7 @@ fun FieldHandle(
     val fieldValue = fieldController.value.value
 
     // ========== Collect reactive field properties and error ==========
-    val (properties, _) = fieldController.field.value
+    val (properties, error) = fieldController.field.value
 
     // Early return if field is hidden
     if (properties.hidden) return
@@ -206,8 +206,9 @@ fun FieldHandle(
     }
 
     // ========== Handle-specific: Validation State ==========
-    val isError = hasValidationError(currentValue)
-    val errorMessage = getValidationErrorMessage(currentValue)
+    val localValidationError = hasValidationError(currentValue)
+    val localErrorMessage = getValidationErrorMessage(currentValue)
+    val isError = error != null || localValidationError
 
     // ========== Handle-specific: Determine Keyboard Type ==========
     // Use phone keyboard if input starts with '+', otherwise email keyboard
@@ -224,21 +225,9 @@ fun FieldHandle(
             onValueChange = ::onValueChange,
             label = properties.label?.let { { Text(it) } },
             placeholder = properties.placeholder?.let { { Text(it) } },
-            supportingText = {
-                when {
-                    // Show validation error if present
-                    isError && errorMessage != null -> {
-                        Text(
-                            text = errorMessage,
-                            color = MaterialTheme.colorScheme.error
-                        )
-                    }
-                    // Otherwise show helper text if available
-                    properties.helperText != null -> {
-                        Text(properties.helperText!!)
-                    }
-                }
-            },
+            supportingText = error?.message?.let { msg -> { Text(msg) } }
+                ?: localErrorMessage?.let { msg -> { Text(msg, color = MaterialTheme.colorScheme.error) } }
+                ?: properties.helperText?.let { { Text(it) } },
             isError = isError,
             enabled = !properties.disabled,
             readOnly = properties.readOnly,

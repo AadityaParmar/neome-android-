@@ -46,7 +46,7 @@ fun FieldEmail(
     val fieldValue = fieldController.value.value
 
     // Collect reactive field properties and error
-    val (properties, _) = fieldController.field.value
+    val (properties, error) = fieldController.field.value
 
     // Early return if field is hidden
     if (properties.hidden) return
@@ -60,13 +60,17 @@ fun FieldEmail(
         fieldController.onChange(fv)
     }
 
+    // Local email validation (only when no controller error)
+    val localEmailError = currentValue.isNotEmpty() && !currentValue.contains("@")
+    val isError = error != null || localEmailError
+
     FieldBase(modifier = modifier) {
         OutlinedTextField(
             value = currentValue,
             label = properties.label?.let { { Text(it) } },
-            isError = currentValue.isNotEmpty() && !currentValue.contains("@"),
+            isError = isError,
             placeholder = properties.placeholder?.let { { Text(it) } },
-            supportingText = properties.helperText?.let { { Text(it) } },
+            supportingText = error?.message?.let { { Text(it) } } ?: properties.helperText?.let { { Text(it) } },
             enabled = !properties.disabled,
             readOnly = properties.readOnly,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),

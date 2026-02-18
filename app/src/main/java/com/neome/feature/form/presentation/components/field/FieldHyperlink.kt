@@ -118,7 +118,7 @@ fun FieldHyperlink(
     val fieldValue = fieldController.value.value
 
     // ========== Collect reactive field properties and error ==========
-    val (properties, _) = fieldController.field.value
+    val (properties, error) = fieldController.field.value
 
     // Early return if field is hidden
     if (properties.hidden) return
@@ -134,7 +134,8 @@ fun FieldHyperlink(
     }
 
     // ========== Hyperlink-specific: Validation State ==========
-    val isError = hasUrlValidationError(currentValue)
+    val localUrlError = hasUrlValidationError(currentValue)
+    val isError = error != null || localUrlError
     val isValidLink = currentValue.isNotEmpty() && isValidUrl(currentValue)
 
     // ========== Hyperlink-specific: Icon Click State ==========
@@ -166,21 +167,9 @@ fun FieldHyperlink(
             onValueChange = ::onValueChange,
             label = properties.label?.let { { Text(it) } },
             placeholder = properties.placeholder?.let { { Text(it) } },
-            supportingText = {
-                when {
-                    // Show validation error if URL is invalid
-                    isError -> {
-                        Text(
-                            text = "Please enter a valid URL",
-                            color = MaterialTheme.colorScheme.error
-                        )
-                    }
-                    // Otherwise show helper text if available
-                    properties.helperText != null -> {
-                        Text(properties.helperText!!)
-                    }
-                }
-            },
+            supportingText = error?.message?.let { msg -> { Text(msg) } }
+                ?: if (localUrlError) ({ Text("Please enter a valid URL", color = MaterialTheme.colorScheme.error) })
+                else properties.helperText?.let { { Text(it) } },
             isError = isError,
             enabled = !properties.disabled,
             readOnly = properties.readOnly,

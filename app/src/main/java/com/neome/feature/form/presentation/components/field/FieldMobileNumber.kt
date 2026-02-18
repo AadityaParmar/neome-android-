@@ -328,7 +328,7 @@ fun FieldMobile(
     val fieldValue = fieldController.value.value
 
     // ========== Collect reactive field properties and error ==========
-    val (properties, _) = fieldController.field.value
+    val (properties, error) = fieldController.field.value
 
     if (properties.hidden) return
 
@@ -344,8 +344,8 @@ fun FieldMobile(
     var isDropdownExpanded by remember { mutableStateOf(false) }
 
     // ========== Mobile-specific: Validation ==========
-    val validationError = validateMobileNumber(parsedMobileNumber)
-    val isError = validationError != null
+    val localValidationError = validateMobileNumber(parsedMobileNumber)
+    val isError = error != null || localValidationError != null
 
     // ========== Mobile-specific: Value Change Handlers ==========
     fun onCountryCodeSelected(country: CountryCode) {
@@ -414,19 +414,9 @@ fun FieldMobile(
                 onValueChange = ::onMobileNumberChange,
                 label = properties.label?.let { { Text(it) } },
                 placeholder = properties.placeholder?.let { { Text(it) } },
-                supportingText = {
-                    when {
-                        validationError != null -> {
-                            Text(
-                                text = validationError,
-                                color = MaterialTheme.colorScheme.error
-                            )
-                        }
-                        properties.helperText != null -> {
-                            Text(properties.helperText!!)
-                        }
-                    }
-                },
+                supportingText = error?.message?.let { msg -> { Text(msg) } }
+                    ?: localValidationError?.let { msg -> { Text(msg, color = MaterialTheme.colorScheme.error) } }
+                    ?: properties.helperText?.let { { Text(it) } },
                 isError = isError,
                 enabled = !properties.disabled,
                 readOnly = properties.readOnly,

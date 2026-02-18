@@ -175,7 +175,7 @@ fun FieldDocument(
     val fieldValue = fieldController.value.value
 
     // ========== Collect reactive field properties and error ==========
-    val (properties, _) = fieldController.field.value
+    val (properties, error) = fieldController.field.value
 
     if (properties.hidden) return
 
@@ -237,7 +237,7 @@ fun FieldDocument(
             label = properties.label,
             placeholder = properties.placeholder,
             helperText = properties.helperText,
-            errorMessage = documentState.validationError,
+            errorMessage = error?.message ?: documentState.validationError,
             isDisabled = properties.disabled,
             isInteractive = isInteractive,
             hasDocument = hasDocument,
@@ -388,13 +388,13 @@ private fun DocumentTextField(
         onValueChange = { /* Read-only, no manual text input */ },
         label = label?.let { { Text(it) } },
         placeholder = { Text(placeholder ?: "Select a document") },
-        supportingText = {
+        supportingText = if (errorMessage != null || helperText != null || (fileSize != null && fileSize > 0)) ({
             DocumentSupportingText(
                 errorMessage = errorMessage,
                 helperText = helperText,
                 fileSize = fileSize
             )
-        },
+        }) else null,
         isError = errorMessage != null,
         enabled = !isDisabled,
         readOnly = true,

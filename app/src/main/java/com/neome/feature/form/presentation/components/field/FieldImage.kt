@@ -84,7 +84,7 @@ fun FieldImage(
     val fieldValue = fieldController.value.value
 
     // Collect reactive field properties and error
-    val (properties, _) = fieldController.field.value
+    val (properties, error) = fieldController.field.value
 
     if (properties.hidden) return
 
@@ -130,7 +130,7 @@ fun FieldImage(
             label = properties.label,
             placeholder = properties.placeholder,
             helperText = properties.helperText,
-            errorMessage = imageState.validationError,
+            errorMessage = error?.message ?: imageState.validationError,
             isDisabled = properties.disabled,
             isInteractive = isInteractive,
             hasImage = hasImage,
@@ -255,12 +255,12 @@ private fun ImageTextField(
         onValueChange = { /* Read-only, no manual text input */ },
         label = label?.let { { Text(it) } },
         placeholder = { Text(placeholder ?: "Select an image") },
-        supportingText = {
+        supportingText = if (errorMessage != null || helperText != null) ({
             SupportingText(
                 errorMessage = errorMessage,
                 helperText = helperText
             )
-        },
+        }) else null,
         isError = errorMessage != null,
         enabled = !isDisabled,
         readOnly = true,
