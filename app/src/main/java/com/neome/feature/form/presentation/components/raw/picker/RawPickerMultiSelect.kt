@@ -71,9 +71,10 @@ import kotlinx.coroutines.launch
  * Tapping the field opens a [ModalBottomSheet] with a virtualized list of options,
  * each with a checkbox on the left. A footer provides "Select All" / "Deselect All" and "Done" buttons.
  *
- * Options can be provided directly via [optionMap], or fetched asynchronously via [cbGetOptionMap].
- * If [optionMap] is null and [cbGetOptionMap] is provided, options are fetched eagerly on composition.
- * The text field shows "Loading…" until the callback delivers the options.
+ * This component is purely prop-driven. Options must be provided via [optionMap].
+ * Async option fetching (e.g. via FormApiContext) is the caller's responsibility.
+ * Use [isLoading] to indicate that options are being fetched — the component will
+ * show "Loading…" text and a spinner in the bottom sheet.
  *
  * Selection changes in the bottom sheet are committed only when the user presses "Done".
  * Chip removal via the close icon is live and immediately updates the parent via [onChange].
@@ -84,8 +85,7 @@ import kotlinx.coroutines.launch
  * @param optionMap Map of option metaIds to option data providing the list of choices
  * @param selectedOptions List of currently selected option metaIds (null or empty means no selection)
  * @param onChange Callback when selection is committed (receives null when selection is cleared)
- * @param cbGetOptionMap Optional async callback to fetch options when [optionMap] is null.
- *   The caller invokes the provided `cb` with the fetched options when ready.
+ * @param isLoading Whether options are currently being fetched. Shows "Loading…" in field and spinner in sheet.
  * @param label Optional label for the text field
  * @param placeholder Optional placeholder shown when nothing is selected
  * @param helperText Optional supporting text displayed below the field
@@ -100,7 +100,7 @@ fun RawPickerMultiSelect(
     optionMap: DefnStudioMapOfDtoOptionData?,
     selectedOptions: List<String>?,
     onChange: (options: List<DefnDtoOptionData>?) -> Unit,
-    cbGetOptionMap: ((cb: (DefnStudioMapOfDtoOptionData?) -> Unit) -> Unit)? = null,
+    isLoading: Boolean = false,
     label: String? = null,
     placeholder: String? = null,
     helperText: String? = null,
@@ -115,46 +115,27 @@ fun RawPickerMultiSelect(
     var showSheet by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
-    // Async option fetching: used when optionMap is null and cbGetOptionMap is provided
-    var fetchedOptionMap by remember { mutableStateOf<DefnStudioMapOfDtoOptionData?>(null) }
-    var isFetchingOptions by remember { mutableStateOf(false) }
-
-    // Eagerly fetch options on composition when optionMap is not provided
-    LaunchedEffect(optionMap, cbGetOptionMap) {
-        if (optionMap == null && cbGetOptionMap != null) {
-            isFetchingOptions = true
-            fetchedOptionMap = null
-            cbGetOptionMap { options ->
-                fetchedOptionMap = options
-                isFetchingOptions = false
-            }
-        }
-    }
-
-    // Resolved option map: prefer direct optionMap, fall back to fetched
-    val resolvedOptionMap = optionMap ?: fetchedOptionMap
-
     val hasSelection = !selectedOptions.isNullOrEmpty()
 
     // Detect if any selectedOption references an option that no longer exists in the map
     // Suppressed during loading so we don't flash error styling before fetch completes
-    val isOptionNotFound = remember(selectedOptions, resolvedOptionMap, isFetchingOptions) {
-        hasSelection && !isFetchingOptions && selectedOptions?.any { metaId ->
-            resolvedOptionMap?.map?.containsKey(metaId) != true
+    val isOptionNotFound = remember(selectedOptions, optionMap, isLoading) {
+        hasSelection && !isLoading && selectedOptions?.any { metaId ->
+            optionMap?.map?.containsKey(metaId) != true
         } == true
     }
 
     // Display text used to control label floating in DecorationBox
     // Non-empty when there are selections so the label stays floated
-    val displayText = remember(selectedOptions, resolvedOptionMap, isFetchingOptions) {
+    val displayText = remember(selectedOptions, optionMap, isLoading) {
         if (selectedOptions.isNullOrEmpty()) return@remember ""
-        if (optionMap == null && isFetchingOptions) return@remember "Loading\u2026"
+        if (isLoading) return@remember "Loading\u2026"
         selectedOptions
-            .map { metaId -> resolvedOptionMap?.map?.get(metaId)?.value ?: "Not Found" }
+            .map { metaId -> optionMap?.map?.get(metaId)?.value ?: "Not Found" }
             .joinToString(", ")
     }
 
-    val isLoading = optionMap == null && isFetchingOptions && hasSelection
+    val showLoadingText = isLoading && hasSelection
     val hasError = isError || isOptionNotFound
 
     // Click detection on the text field (same pattern as FieldDate)
@@ -178,7 +159,7 @@ fun RawPickerMultiSelect(
             focusManager.clearFocus()
         } else {
             val resultOptions = remaining.mapNotNull { id ->
-                resolvedOptionMap?.map?.get(id)
+                optionMap?.map?.get(id)
             }
             onChange(resultOptions.ifEmpty { null })
         }
@@ -206,7 +187,7 @@ fun RawPickerMultiSelect(
             OutlinedTextFieldDefaults.DecorationBox(
                 value = displayText,
                 innerTextField = {
-                    if (isLoading) {
+                    if (showLoadingText) {
                         Text(
                             text = "Loading\u2026",
                             style = MaterialTheme.typography.bodyLarge,
@@ -218,7 +199,7 @@ fun RawPickerMultiSelect(
                             verticalArrangement = Arrangement.spacedBy(4.dp)
                         ) {
                             selectedOptions?.forEach { metaId ->
-                                val option = resolvedOptionMap?.map?.get(metaId)
+                                val option = optionMap?.map?.get(metaId)
                                 val chipLabel = option?.value ?: "Not Found"
                                 val isNotFound = option == null
 
@@ -308,7 +289,7 @@ fun RawPickerMultiSelect(
             Column(
                 modifier = Modifier.fillMaxHeight(0.75f)
             ) {
-                if (optionMap == null && isFetchingOptions) {
+                if (isLoading) {
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -318,14 +299,14 @@ fun RawPickerMultiSelect(
                         CircularProgressIndicator()
                     }
                 } else {
-                    val optionKeys = resolvedOptionMap?.keys ?: emptyList()
+                    val optionKeys = optionMap?.keys ?: emptyList()
 
                     // Search
                     var searchQuery by remember { mutableStateOf("") }
                     val filteredKeys = remember(optionKeys, searchQuery) {
                         if (searchQuery.isBlank()) optionKeys
                         else optionKeys.filter { metaId ->
-                            resolvedOptionMap?.map?.get(metaId)?.value
+                            optionMap?.map?.get(metaId)?.value
                                 ?.contains(searchQuery, ignoreCase = true) == true
                         }
                     }
@@ -375,7 +356,7 @@ fun RawPickerMultiSelect(
                             items = filteredKeys,
                             key = { it }
                         ) { metaId ->
-                            val option = resolvedOptionMap?.map?.get(metaId) ?: return@items
+                            val option = optionMap?.map?.get(metaId) ?: return@items
                             val isSelected = metaId in localSelectedSet
 
                             MultiSelectOptionItem(
@@ -422,7 +403,7 @@ fun RawPickerMultiSelect(
                                     null
                                 } else {
                                     localSelectedSet.mapNotNull { metaId ->
-                                        resolvedOptionMap?.map?.get(metaId)
+                                        optionMap?.map?.get(metaId)
                                     }
                                 }
                                 onChange(result)

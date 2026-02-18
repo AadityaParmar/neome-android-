@@ -1,11 +1,19 @@
 package com.neome.feature.form.presentation.components.field
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import com.neome.api.meta.base.Types.MetaIdField
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoOptionData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldPickTextData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfDtoOptionData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueOptionIdData
+import com.neome.feature.form.domain.ctx.LocalFormCtx
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.components.raw.picker.RawPickerSingleSelect
@@ -19,6 +27,10 @@ import com.neome.feature.form.presentation.state.FieldEvent
  * Stateful wrapper that uses rememberFieldController for state management.
  * Delegates rendering to stateless FieldPickTextContent for optimal recomposition.
  * Uses [RawPickerSingleSelect] for the dropdown picker UI.
+ *
+ * When [DefnFieldPickTextData.optionMap] is null and [DefnFieldPickTextData.pluginApi] is present,
+ * options are fetched asynchronously via [FormApiContext.onGetFieldOptions].
+ * The fetch is triggered eagerly on composition.
  *
  * The field value is stored as [FieldValueOptionIdData] containing the selected
  * option's metaId and display value.
@@ -60,11 +72,35 @@ fun FieldPickText(
     // Extract selected option metaId from FieldValueOptionIdData
     val selectedOptionId = fieldValue?.optionId
 
+    // --- Async option fetching via FormApiContext ---
+    val formCtx = LocalFormCtx.current
+    var fetchedOptionMap by remember { mutableStateOf<DefnStudioMapOfDtoOptionData?>(null) }
+    var isFetchingOptions by remember { mutableStateOf(false) }
+
+    LaunchedEffect(defn.optionMap, defn.pluginApi) {
+        if (defn.optionMap == null && defn.pluginApi != null) {
+            val apiCtx = formCtx.getApiCtx()
+            if (apiCtx != null) {
+                val fieldId = fieldController.fieldId as? MetaIdField ?: return@LaunchedEffect
+                isFetchingOptions = true
+                fetchedOptionMap = null
+                apiCtx.onGetFieldOptions(fieldId) { options ->
+                    fetchedOptionMap = options as? DefnStudioMapOfDtoOptionData
+                    isFetchingOptions = false
+                }
+            }
+        }
+    }
+
+    // Resolved option map: prefer static defn.optionMap, fall back to async-fetched
+    val resolvedOptionMap = defn.optionMap ?: fetchedOptionMap
+
     // Delegate to stateless content for optimal recomposition
     FieldBase(modifier = modifier) {
         FieldPickTextContent(
-            optionMap = defn.optionMap,
+            optionMap = resolvedOptionMap,
             selectedOption = selectedOptionId,
+            isLoading = isFetchingOptions,
             label = properties.label,
             placeholder = properties.placeholder,
             helperText = properties.helperText,
@@ -94,8 +130,9 @@ fun FieldPickText(
  * Wraps [RawPickerSingleSelect] with form-specific error and helper text handling.
  * Only recomposes when its parameters change.
  *
- * @param optionMap Map of available options (from DefnFieldPickTextData)
+ * @param optionMap Map of available options (resolved from defn or async fetch)
  * @param selectedOption Currently selected option metaId (null means no selection)
+ * @param isLoading Whether options are currently being fetched asynchronously
  * @param label Field label
  * @param placeholder Field placeholder
  * @param helperText Helper text to display below field
@@ -109,19 +146,21 @@ fun FieldPickText(
 private fun FieldPickTextContent(
     optionMap: DefnStudioMapOfDtoOptionData?,
     selectedOption: String?,
+    isLoading: Boolean,
     label: String?,
     placeholder: String?,
     helperText: String?,
     error: FieldError?,
     enabled: Boolean,
     readOnly: Boolean,
-    onChange: (com.neome.core.common.serializer.api.meta.base.dto.DefnDtoOptionData?) -> Unit,
+    onChange: (DefnDtoOptionData?) -> Unit,
     modifier: Modifier = Modifier
 ) {
     RawPickerSingleSelect(
         optionMap = optionMap,
         selectedOption = selectedOption,
         onChange = onChange,
+        isLoading = isLoading,
         label = label,
         placeholder = placeholder,
         helperText = error?.message ?: helperText ?: " ",
