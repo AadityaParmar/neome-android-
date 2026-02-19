@@ -22,6 +22,7 @@ import com.neome.feature.form.presentation.components.field.FieldDocument
 import com.neome.feature.form.presentation.components.field.FieldEmail
 import com.neome.feature.form.presentation.components.field.FieldHandle
 import com.neome.feature.form.presentation.components.field.FieldHyperlink
+import com.neome.feature.form.presentation.components.field.FieldIdentifier
 import com.neome.feature.form.presentation.components.field.FieldImage
 import com.neome.feature.form.presentation.components.field.FieldMobile
 import com.neome.feature.form.presentation.components.field.FieldNumber
@@ -181,6 +182,12 @@ fun FieldFactory(
         EnumDefnCompType.tab -> FieldTab(
             defnComp = defnComp,
             defnForm = defnForm,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.identifier -> FieldIdentifier(
+            defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             modifier = modifier
         )
