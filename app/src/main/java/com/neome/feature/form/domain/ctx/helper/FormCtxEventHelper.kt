@@ -55,7 +55,7 @@ object FormCtxEventHelper {
             compSchemaMap = state.compSchemaMap
         )
 
-        val newState = state.copy(
+        var newState = state.copy(
             fieldStates = triggerResult.fieldStates,
             valueMap = newValueMap,
             errors = triggerResult.errors
@@ -66,6 +66,23 @@ object FormCtxEventHelper {
             fieldValue = event.value,
             valueMap = newState.valueMap
         )
+
+        // Execute onChange form events for this field
+        val categorizedEvents = newState.categorizedEvents
+        if (categorizedEvents != null) {
+            val onChangeEventIds = categorizedEvents.onChangeMap[event.fieldId]
+            if (!onChangeEventIds.isNullOrEmpty()) {
+                var stateAfterEvents = newState
+                for (eventId in onChangeEventIds) {
+                    stateAfterEvents = FormCtxFormEvents.executeEvent(
+                        eventId = eventId,
+                        state = stateAfterEvents,
+                        defnForm = defnForm
+                    )
+                }
+                newState = stateAfterEvents
+            }
+        }
 
         return FormReducerResult(newState, intent)
     }

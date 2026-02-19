@@ -38,9 +38,6 @@ object FormCtxInitHelper {
         val dependencyMap = FieldPropertyResolver.buildDependencyMap(leafFields)
 
 
-        //TODO execute DefnFormEvent onInit type
-
-
         val fieldStates = compMap
             .filter { (_, defnComp) ->
                 !isCompositeType(defnComp.type)
@@ -67,7 +64,7 @@ object FormCtxInitHelper {
         // Build validation schemas for all fields
         val compSchemaMap = CompSchemaFactory.buildFormSchemas(defnForm)
 
-        return FormState(
+        val baseState = FormState(
             defnForm = defnForm,
             initialFormValue = realInitialValue,
             fieldStates = fieldStates,
@@ -77,5 +74,10 @@ object FormCtxInitHelper {
             compSchemaMap = compSchemaMap,
             isInitialized = true
         )
+
+        // Initialize form events: categorize by kind and execute onInitForm events
+        val (categorizedEvents, stateAfterInit) = FormCtxFormEvents.initEvents(defnForm, baseState)
+
+        return stateAfterInit.copy(categorizedEvents = categorizedEvents)
     }
 }
