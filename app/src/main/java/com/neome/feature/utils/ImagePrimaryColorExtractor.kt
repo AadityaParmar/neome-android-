@@ -1,6 +1,7 @@
 package com.neome.feature.utils
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import androidx.annotation.ColorInt
 
@@ -98,6 +99,31 @@ object ImagePrimaryColorExtractor {
             result
         } catch (e: Exception) {
             PrimaryColorOutcome.Error("Color extraction failed: ${e.message ?: "Unknown error"}")
+        }
+    }
+
+    /**
+     * Extracts the primary/dominant color from image data provided as a ByteArray.
+     *
+     * @param byteArray The raw image data (e.g., JPEG, PNG, WebP bytes).
+     * @return PrimaryColorOutcome containing either the extracted color or an error.
+     */
+    fun extractPrimaryColor(byteArray: ByteArray): PrimaryColorOutcome {
+        if (byteArray.isEmpty()) {
+            return PrimaryColorOutcome.Error("ByteArray is empty.")
+        }
+
+        val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+            ?: return PrimaryColorOutcome.Error(
+                "Failed to decode ByteArray into a Bitmap. Data may be corrupt or not a valid image format."
+            )
+
+        return try {
+            extractPrimaryColor(bitmap)
+        } finally {
+            if (!bitmap.isRecycled) {
+                bitmap.recycle()
+            }
         }
     }
 
