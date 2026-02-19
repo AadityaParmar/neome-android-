@@ -48,7 +48,7 @@ object ConditionResolver {
     fun resolve(
         conditionMap: DefnEventConditionMap,
         defnForm: DefnForm,
-        formValue: FormValue,
+        formValue: FormValue?,
         getValue: (MetaIdField) -> JsonElement?,
         callerEnt: SigEntCaller? = null
     ): Boolean? {
@@ -59,7 +59,7 @@ object ConditionResolver {
     private fun resolveCondition(
         condition: DefnEventConditionMap,
         defnForm: DefnForm,
-        formValue: FormValue,
+        formValue: FormValue?,
         getValue: (MetaIdField) -> JsonElement?,
         callerEnt: SigEntCaller?
     ): Boolean? {
@@ -97,7 +97,7 @@ object ConditionResolver {
     private fun resolveStatement(
         statement: DefnEventCondition,
         defnForm: DefnForm,
-        formValue: FormValue,
+        formValue: FormValue?,
         getValue: (MetaIdField) -> JsonElement?,
         callerEnt: SigEntCaller?
     ): Boolean? {
@@ -191,7 +191,7 @@ object ConditionResolver {
     private fun getRhsValue(
         rhs: FieldDtoArg?,
         defnForm: DefnForm,
-        formValue: FormValue,
+        formValue: FormValue?,
         getValue: (MetaIdField) -> JsonElement?,
         callerEnt: SigEntCaller?
     ): Any? {

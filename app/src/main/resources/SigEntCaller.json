@@ -10898,20 +10898,9 @@
           "metaId": "mfd-HxbXkSxSQY",
           "name": "FieldText",
           "type": "text",
-          "disabledRoleIdSet": [
-            "mr-unc2rgX8VuhQhbbhf1AxYkvFk",
-            "mr-BqYHZ0fBEKzOJdhdiWlANL4AW",
-            "$Self"
-          ],
           "permissionMatrix": {
-            "keys": [
-              "$Self",
-              "mr-unc2rgX8VuhQhbbhf1AxYkvFk"
-            ],
-            "map": {
-              "$Self": "write",
-              "mr-unc2rgX8VuhQhbbhf1AxYkvFk": "hide"
-            }
+            "keys": [],
+            "map": {}
           }
         },
         "mfd-qDpfN1vSGT": {
@@ -11032,7 +11021,66 @@
         }
       },
       "displayCompositeId": "mtb-pdPRpwtlFt",
-      "gridLookupMap": {}
+      "gridLookupMap": {},
+      "eventMap": {
+        "keys": [
+          "mfe-8CFOJF8Rp8"
+        ],
+        "map": {
+          "mfe-8CFOJF8Rp8": {
+            "metaId": "mfe-8CFOJF8Rp8",
+            "name": "Event101",
+            "kind": "onInitForm",
+            "actionBindingMap": {
+              "keys": [
+                "meb-AQDGszMt7j"
+              ],
+              "map": {
+                "meb-AQDGszMt7j": {
+                  "metaId": "meb-AQDGszMt7j",
+                  "name": "Event1",
+                  "actionId": "mea-1CuIOLsMo1",
+                  "conditionId": "mec-oRANqqyUVL"
+                }
+              }
+            }
+          }
+        },
+        "conditions": {
+          "map": {
+            "mec-oRANqqyUVL": {
+              "metaId": "mec-oRANqqyUVL",
+              "statement": {
+                "lhs": "mfd-HxbXkSxSQY",
+                "operator": "equalTo",
+                "rhs": {
+                  "valueFieldId": "mfd-q96ZG1wLEp"
+                }
+              }
+            }
+          }
+        },
+        "actions": {
+          "map": {
+            "mea-1CuIOLsMo1": {
+              "metaId": "mea-1CuIOLsMo1",
+              "name": "A1",
+              "kind": "clear",
+              "actionOn": "field",
+              "compIdSet": [
+                "mfd-HxbXkSxSQY",
+                "mfd-qDpfN1vSGT",
+                "mfd-63HKAMm6LQ",
+                "mfd-q96ZG1wLEp",
+                "mfd-9RKtsdg0Db",
+                "mfd-ZuQoq66Rz9",
+                "mfd-wIACoHHagW",
+                "mfd-QtN0Joxw3j"
+              ]
+            }
+          }
+        }
+      }
     },
     "mf-d0O16WKXpG9m61voUJqoMwucJ": {
       "metaId": "mf-d0O16WKXpG9m61voUJqoMwucJ",
@@ -15500,5 +15548,5 @@
       ]
     }
   },
-  "version": "IGDTvr5CkSaqBwsbz9jOmGHxp|gh-q3QtIvpx7feH1HBVV8ErkHUIV|en|RaxYwBMRq43uBwELyk24rjkeC"
+  "version": "kp5EpsfydltQVyUJijW7sU3D3|gh-q3QtIvpx7feH1HBVV8ErkHUIV|en|RaxYwBMRq43uBwELyk24rjkeC"
 }
