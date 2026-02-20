@@ -2,6 +2,8 @@ package com.neome.feature.form.domain.ctx.helper
 
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.ctx.helper.FormCtxEventHelper.handleFieldValueChanged
+import com.neome.feature.form.domain.ctx.helper.events.FormCtxFormEvents
 import com.neome.feature.form.domain.ctx.helper.schema.CompSchema
 import com.neome.feature.form.domain.util.FieldPropertyResolver
 import com.neome.feature.form.presentation.state.FieldError
@@ -20,74 +22,27 @@ object FormCtxEventHelper {
         event: FormEvent.FieldValueChanged,
         defnForm: DefnFormUi
     ): FormReducerResult {
-        val currentFieldState = state.fieldStates[event.fieldId]
-            ?: return FormReducerResult(state)
+        // Save old value before updating to check if value actually changed
+        val oldValue = state.valueMap[event.fieldId]
 
-        // Update valueMap
-        val newValueMap = if (event.value != null) {
-            state.valueMap + (event.fieldId to event.value)
+        // Update valueMap first (for user-initiated changes, depth=0)
+        val stateWithValue = if (event.value != null) {
+            state.copy(valueMap = state.valueMap + (event.fieldId to event.value))
         } else {
-            state.valueMap - event.fieldId
+            state.copy(valueMap = state.valueMap - event.fieldId)
         }
 
-        val newFieldState = currentFieldState.copy(
-            isDirty = event.value != currentFieldState.defaultValue
-        )
+        var newState = stateWithValue
 
-        val newFieldStates = state.fieldStates + (event.fieldId to newFieldState)
-
-        // Trigger current field first to recalculate properties and validate
-        val currentFieldTriggerResult = triggerField(
-            fieldId = event.fieldId,
-            fieldStates = newFieldStates,
-            valueMap = newValueMap,
-            errors = state.errors,
-            defnForm = defnForm,
-            compSchemaMap = state.compSchemaMap,
-            formEventPropsMap = state.formEventPropsMap
-        ) ?: TriggerResult(newFieldStates, state.errors)
-
-        // Then trigger dependent fields
-        val dependents = state.fieldDependencies.getDependents(event.fieldId)
-        val triggerResult = triggerDependentFields(
-            fieldStates = currentFieldTriggerResult.fieldStates,
-            valueMap = newValueMap,
-            dependentIds = dependents,
-            defnForm = defnForm,
-            errors = currentFieldTriggerResult.errors,
-            compSchemaMap = state.compSchemaMap,
-            formEventPropsMap = state.formEventPropsMap
-        )
-
-        var newState = state.copy(
-            fieldStates = triggerResult.fieldStates,
-            valueMap = newValueMap,
-            errors = triggerResult.errors
-        )
-
-        // Execute onChange form events for this field
-        val categorizedEvents = newState.categorizedEvents
-        if (categorizedEvents != null) {
-            val onChangeEventIds = categorizedEvents.onChangeMap[event.fieldId]
-            if (!onChangeEventIds.isNullOrEmpty()) {
-                val eventResult = FormCtxFormEvents.executeEvents(
-                    eventIds = onChangeEventIds,
-                    state = newState,
-                    defnForm = defnForm,
-                    categorizedEvents = categorizedEvents
-                )
-                newState = eventResult.state
-
-                // Re-trigger fields whose values were modified by setValue/clear actions
-                // so their properties are recalculated and they are validated
-                if (eventResult.affectedFieldIds.isNotEmpty()) {
-                    newState = retriggerAffectedFields(
-                        state = newState,
-                        affectedFieldIds = eventResult.affectedFieldIds,
-                        defnForm = defnForm
-                    )
-                }
-            }
+        // Only process field value changed if value actually changed
+        if (event.value != oldValue) {
+            newState = processFieldValueChanged(
+                state = stateWithValue,
+                fieldId = event.fieldId,
+                value = event.value,
+                defnForm = defnForm,
+                depth = event.depth
+            )
         }
 
         // Update SendBtnStateFlag.Invalid based on final error state
@@ -100,6 +55,86 @@ object FormCtxEventHelper {
         )
 
         return FormReducerResult(newState, intent)
+    }
+
+    /**
+     * Core pure-state processing for a field value change.
+     * Handles: isDirty update, trigger field + dependents, onChange cascade, validation.
+     *
+     * Called from:
+     * - [handleFieldValueChanged] for user-initiated changes (via FormEvent.FieldValueChanged)
+     * - [com.neome.feature.form.domain.ctx.helper.events.FormCtxFormEvents.executeEventInternal] for event-driven setValue/clear actions
+     *
+     * The [depth] parameter guards against infinite onChange recursion (A→B→C→A).
+     * valueMap must already be updated with the new value before calling this function.
+     *
+     * @param state Current form state with valueMap already updated
+     * @param fieldId The field whose value changed
+     * @param value The new value (null = cleared)
+     * @param defnForm Form definition
+     * @param depth Current cascade depth for recursion guard
+     * @return Updated form state with isDirty, properties, validation, and onChange effects applied
+     */
+    fun processFieldValueChanged(
+        state: FormState,
+        fieldId: MetaIdComp,
+        value: JsonElement?,
+        defnForm: DefnFormUi,
+        depth: Int = 0
+    ): FormState {
+        val currentFieldState = state.fieldStates[fieldId]
+            ?: return state
+
+        // Update isDirty
+        val newFieldState = currentFieldState.copy(
+            isDirty = value != currentFieldState.defaultValue
+        )
+        val newFieldStates = state.fieldStates + (fieldId to newFieldState)
+
+        // Trigger current field first to recalculate properties and validate
+        val currentFieldTriggerResult = triggerField(
+            fieldId = fieldId,
+            fieldStates = newFieldStates,
+            valueMap = state.valueMap,
+            errors = state.errors,
+            defnForm = defnForm,
+            compSchemaMap = state.compSchemaMap,
+            formEventPropsMap = state.formEventPropsMap
+        ) ?: TriggerResult(newFieldStates, state.errors)
+
+        // Then trigger dependent fields
+        val dependents = state.fieldDependencies.getDependents(fieldId)
+        val triggerResult = triggerDependentFields(
+            fieldStates = currentFieldTriggerResult.fieldStates,
+            valueMap = state.valueMap,
+            dependentIds = dependents,
+            defnForm = defnForm,
+            errors = currentFieldTriggerResult.errors,
+            compSchemaMap = state.compSchemaMap,
+            formEventPropsMap = state.formEventPropsMap
+        )
+
+        var newState = state.copy(
+            fieldStates = triggerResult.fieldStates,
+            errors = triggerResult.errors
+        )
+
+        // Execute onChange form events for this field
+        val categorizedEvents = newState.categorizedEvents
+        if (categorizedEvents != null) {
+            val onChangeEventIds = categorizedEvents.onChangeMap[fieldId]
+            if (!onChangeEventIds.isNullOrEmpty()) {
+                newState = FormCtxFormEvents.executeEvents(
+                    eventIds = onChangeEventIds,
+                    state = newState,
+                    defnForm = defnForm,
+                    triggerValueChanged = true,
+                    depth = depth
+                )
+            }
+        }
+
+        return newState
     }
 
     fun handleFieldFocused(
@@ -185,21 +220,12 @@ object FormCtxEventHelper {
         if (categorizedEvents != null) {
             val onClickButtonEventIds = categorizedEvents.onClickButtonMap[event.buttonCompId]
             if (!onClickButtonEventIds.isNullOrEmpty()) {
-                val eventResult = FormCtxFormEvents.executeEvents(
+                newState = FormCtxFormEvents.executeEvents(
                     eventIds = onClickButtonEventIds,
                     state = newState,
-                    defnForm = defnForm
+                    defnForm = defnForm,
+                    triggerValueChanged = true
                 )
-                newState = eventResult.state
-
-                // Re-trigger fields whose values were modified by setValue/clear actions
-                if (eventResult.affectedFieldIds.isNotEmpty()) {
-                    newState = retriggerAffectedFields(
-                        state = newState,
-                        affectedFieldIds = eventResult.affectedFieldIds,
-                        defnForm = defnForm
-                    )
-                }
             }
         }
 
@@ -223,21 +249,11 @@ object FormCtxEventHelper {
         if (categorizedEvents != null) {
             val onSubmitFormEventIds = categorizedEvents.onSubmitFormList
             if (!onSubmitFormEventIds.isNullOrEmpty()) {
-                val eventResult = FormCtxFormEvents.executeEvents(
+                finalState = FormCtxFormEvents.executeEvents(
                     eventIds = onSubmitFormEventIds,
                     state = finalState,
                     defnForm = defnForm
                 )
-                finalState = eventResult.state
-
-                // Re-trigger fields whose values were modified by onSubmit events
-                if (eventResult.affectedFieldIds.isNotEmpty()) {
-                    finalState = retriggerAffectedFields(
-                        state = finalState,
-                        affectedFieldIds = eventResult.affectedFieldIds,
-                        defnForm = defnForm
-                    )
-                }
             }
         }
 
@@ -462,71 +478,6 @@ object FormCtxEventHelper {
 
         val error = schema.validate(fieldValue, fieldState)
         return FormCtxValidationHelper.updateFieldError(fieldId, error, errors)
-    }
-
-    /**
-     * Re-triggers fields whose values were modified by form event actions (setValue/clear).
-     * For each affected field: recalculates properties, validates, and triggers its dependents.
-     * This ensures cascaded value changes produce correct field properties and validation state.
-     *
-     * Uses a visited set to avoid processing the same field or dependent multiple times.
-     *
-     * @param state The current form state after event execution
-     * @param affectedFieldIds Fields whose values were changed by events
-     * @param defnForm The form definition
-     * @return Updated state with recalculated properties and validation for affected fields
-     */
-    private fun retriggerAffectedFields(
-        state: FormState,
-        affectedFieldIds: Set<MetaIdComp>,
-        defnForm: DefnFormUi
-    ): FormState {
-        var currentFieldStates = state.fieldStates
-        var currentErrors = state.errors
-        val visited = mutableSetOf<MetaIdComp>()
-
-        for (fieldId in affectedFieldIds) {
-            if (!visited.add(fieldId)) continue
-
-            val result = triggerField(
-                fieldId = fieldId,
-                fieldStates = currentFieldStates,
-                valueMap = state.valueMap,
-                errors = currentErrors,
-                defnForm = defnForm,
-                compSchemaMap = state.compSchemaMap,
-                formEventPropsMap = state.formEventPropsMap
-            )
-            if (result != null) {
-                currentFieldStates = result.fieldStates
-                currentErrors = result.errors
-            }
-
-            // Also trigger dependents of the affected field
-            val dependents = state.fieldDependencies.getDependents(fieldId)
-            for (depId in dependents) {
-                if (!visited.add(depId)) continue
-
-                val depResult = triggerField(
-                    fieldId = depId,
-                    fieldStates = currentFieldStates,
-                    valueMap = state.valueMap,
-                    errors = currentErrors,
-                    defnForm = defnForm,
-                    compSchemaMap = state.compSchemaMap,
-                    formEventPropsMap = state.formEventPropsMap
-                )
-                if (depResult != null) {
-                    currentFieldStates = depResult.fieldStates
-                    currentErrors = depResult.errors
-                }
-            }
-        }
-
-        return state.copy(
-            fieldStates = currentFieldStates,
-            errors = currentErrors
-        )
     }
 
     /**

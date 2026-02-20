@@ -15,10 +15,15 @@ sealed interface FormEvent : UiEvent {
     /**
      * Field value has changed.
      * Always triggers validation and dependent fields to recalculate their properties.
+     *
+     * @param depth Cascade depth for onChange event recursion guard.
+     *              0 = user-initiated change, >0 = triggered by form event setValue/clear.
+     *              Used to prevent infinite recursion (A→B→C→A).
      */
     data class FieldValueChanged(
         val fieldId: MetaIdComp,
-        val value: JsonElement?
+        val value: JsonElement?,
+        val depth: Int = 0
     ) : FormEvent
 
     // ==================== Field Interaction Events ====================

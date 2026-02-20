@@ -1,15 +1,12 @@
-package com.neome.feature.form.domain.ctx.helper
+package com.neome.feature.form.domain.ctx.helper.events
 
 import android.util.Log
 import com.neome.api.meta.base.Types
-import com.neome.api.meta.base.Types.EnumDefnKindEventAction
-import com.neome.api.meta.base.Types.EnumDefnKindFormEvent
-import com.neome.api.meta.base.Types.MetaIdComp
-import com.neome.api.meta.base.Types.MetaIdFormEvent
 import com.neome.api.meta.base.dto.DefnEventAction
 import com.neome.api.meta.base.dto.DefnSection
 import com.neome.api.meta.base.dto.FieldDtoArg
 import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.ctx.helper.FormCtxEventHelper
 import com.neome.feature.form.domain.util.ConditionResolver
 import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
 import com.neome.feature.form.presentation.state.FormEventProps
@@ -26,24 +23,18 @@ object FormCtxFormEvents {
     private const val MAX_CASCADE_DEPTH = 5
 
     data class CategorizedEvents(
-        val onChangeMap: Map<MetaIdComp, List<MetaIdFormEvent>>,
-        val onSubmitFormList: List<MetaIdFormEvent>,
-        val onClickButtonMap: Map<MetaIdComp, List<MetaIdFormEvent>>
-    )
-
-
-    data class EventExecutionResult(
-        val state: FormState,
-        val affectedFieldIds: Set<MetaIdComp>
+        val onChangeMap: Map<Types.MetaIdComp, List<Types.MetaIdFormEvent>>,
+        val onSubmitFormList: List<Types.MetaIdFormEvent>,
+        val onClickButtonMap: Map<Types.MetaIdComp, List<Types.MetaIdFormEvent>>
     )
 
 
     fun initEvents(defnForm: DefnFormUi, state: FormState): Pair<CategorizedEvents?, FormState> {
         val eventMap = defnForm.eventMap ?: return Pair(null, state)
 
-        val onChangeMap = mutableMapOf<MetaIdComp, MutableList<MetaIdFormEvent>>()
-        val onSubmitFormList = mutableListOf<MetaIdFormEvent>()
-        val onClickButtonMap = mutableMapOf<MetaIdComp, MutableList<MetaIdFormEvent>>()
+        val onChangeMap = mutableMapOf<Types.MetaIdComp, MutableList<Types.MetaIdFormEvent>>()
+        val onSubmitFormList = mutableListOf<Types.MetaIdFormEvent>()
+        val onClickButtonMap = mutableMapOf<Types.MetaIdComp, MutableList<Types.MetaIdFormEvent>>()
 
         var currentState = state
 
@@ -52,7 +43,7 @@ object FormCtxFormEvents {
             val event = eventMap.map[eventId] ?: continue
 
             when (event.kind) {
-                EnumDefnKindFormEvent.onChange -> {
+                Types.EnumDefnKindFormEvent.onChange -> {
                     // Null or empty eventFieldIdSet means this event applies to all fields
                     val fieldIds = event.eventFieldIdSet?.takeIf { it.isNotEmpty() }
                         ?: state.fieldStates.keys
@@ -61,18 +52,18 @@ object FormCtxFormEvents {
                     }
                 }
 
-                EnumDefnKindFormEvent.onSubmitForm -> {
+                Types.EnumDefnKindFormEvent.onSubmitForm -> {
                     onSubmitFormList.add(event.metaId)
                 }
 
-                EnumDefnKindFormEvent.onClickButton -> {
+                Types.EnumDefnKindFormEvent.onClickButton -> {
                     // For button events, eventFieldIdSet holds the button component IDs
                     event.eventFieldIdSet?.forEach { compId ->
                         onClickButtonMap.getOrPut(compId) { mutableListOf() }.add(event.metaId)
                     }
                 }
 
-                EnumDefnKindFormEvent.onInitForm -> {
+                Types.EnumDefnKindFormEvent.onInitForm -> {
                     // Execute immediately and accumulate state changes
                     currentState = executeEvent(event.metaId, currentState, defnForm)
                     currentState = mergeEventPropsIntoFieldStates(currentState)
@@ -91,57 +82,53 @@ object FormCtxFormEvents {
 
 
     fun executeEvents(
-        eventIds: List<MetaIdFormEvent>,
+        eventIds: List<Types.MetaIdFormEvent>,
         state: FormState,
         defnForm: DefnFormUi,
-        categorizedEvents: CategorizedEvents? = null
-    ): EventExecutionResult {
+        triggerValueChanged: Boolean = false,
+        depth: Int = 0
+    ): FormState {
         // Reset formEventPropsMap before each event cycle so stale overrides are cleared.
         // Events will re-establish any visibility/disability overrides that still apply.
         var currentState = state.copy(formEventPropsMap = emptyMap())
-        val allAffectedFieldIds = mutableSetOf<MetaIdComp>()
 
         for (eventId in eventIds) {
-            val result = executeEventInternal(
+            currentState = executeEventInternal(
                 eventId = eventId,
                 state = currentState,
                 defnForm = defnForm,
-                categorizedEvents = categorizedEvents,
-                affectedFieldIds = allAffectedFieldIds
+                triggerValueChanged = triggerValueChanged,
+                depth = depth
             )
-            currentState = result
         }
 
         // Merge event props into field states once after all events complete
         currentState = mergeEventPropsIntoFieldStates(currentState)
 
-        return EventExecutionResult(currentState, allAffectedFieldIds)
+        return currentState
     }
 
     fun executeEvent(
-        eventId: MetaIdFormEvent,
+        eventId: Types.MetaIdFormEvent,
         state: FormState,
         defnForm: DefnFormUi,
-        categorizedEvents: CategorizedEvents? = null,
         depth: Int = 0
     ): FormState {
         return executeEventInternal(
             eventId = eventId,
             state = state,
             defnForm = defnForm,
-            categorizedEvents = categorizedEvents,
-            depth = depth,
-            affectedFieldIds = null
+            triggerValueChanged = false,
+            depth = depth
         )
     }
 
     private fun executeEventInternal(
-        eventId: MetaIdFormEvent,
+        eventId: Types.MetaIdFormEvent,
         state: FormState,
         defnForm: DefnFormUi,
-        categorizedEvents: CategorizedEvents? = null,
-        depth: Int = 0,
-        affectedFieldIds: MutableSet<MetaIdComp>?
+        triggerValueChanged: Boolean,
+        depth: Int = 0
     ): FormState {
         // Guard against infinite recursion during onChange cascading
         if (depth >= MAX_CASCADE_DEPTH) {
@@ -184,37 +171,41 @@ object FormCtxFormEvents {
             // --- Action lookup ---
             val action = eventMap.actions?.map?.get(binding.actionId) ?: continue
 
+            // --- Save old values before executing action for setValue/clear ---
+            val affectedFieldIds = if (triggerValueChanged &&
+                (action.kind == Types.EnumDefnKindEventAction.setValue || action.kind == Types.EnumDefnKindEventAction.clear)
+            ) {
+                resolveAffectedFieldIds(action, defnForm)
+            } else {
+                emptyList()
+            }
+
+            val oldValues = affectedFieldIds.associateWith { fieldId ->
+                currentState.valueMap[fieldId]
+            }
+
             // --- Execute action ---
             currentState = executeAction(action, currentState, defnForm)
 
-            // --- Track affected fields for setValue/clear ---
-            if (action.kind == EnumDefnKindEventAction.setValue || action.kind == EnumDefnKindEventAction.clear) {
-                val compIds = action.compIdSet
-                if (!compIds.isNullOrEmpty()) {
-                    affectedFieldIds?.addAll(compIds)
-                }
-            }
+            // --- Trigger processFieldValueChanged for setValue/clear ---
+            // Only when executed from onChange/onClickButton context (not onSubmitForm/onInitForm).
+            // Routes through processFieldValueChanged which handles:
+            // isDirty, trigger field + dependents, onChange cascade, validation
+            // Only processes fields whose values actually changed
+            if (affectedFieldIds.isNotEmpty()) {
+                for (fieldId in affectedFieldIds) {
+                    val newValue = currentState.valueMap[fieldId]
+                    val oldValue = oldValues[fieldId]
 
-            // --- Cascade onChange for setValue/clear when in onChange context ---
-            if (categorizedEvents != null &&
-                (action.kind == EnumDefnKindEventAction.setValue || action.kind == EnumDefnKindEventAction.clear)
-            ) {
-                val affectedCompIds = action.compIdSet
-                if (!affectedCompIds.isNullOrEmpty()) {
-                    for (compId in affectedCompIds) {
-                        val targetEventIds = categorizedEvents.onChangeMap[compId]
-                        if (!targetEventIds.isNullOrEmpty()) {
-                            for (targetEventId in targetEventIds) {
-                                currentState = executeEventInternal(
-                                    eventId = targetEventId,
-                                    state = currentState,
-                                    defnForm = defnForm,
-                                    categorizedEvents = categorizedEvents,
-                                    depth = depth + 1,
-                                    affectedFieldIds = affectedFieldIds
-                                )
-                            }
-                        }
+                    // Only call processFieldValueChanged if value actually changed
+                    if (newValue != oldValue) {
+                        currentState = FormCtxEventHelper.processFieldValueChanged(
+                            state = currentState,
+                            fieldId = fieldId,
+                            value = newValue,
+                            defnForm = defnForm,
+                            depth = depth + 1
+                        )
                     }
                 }
             }
@@ -243,13 +234,12 @@ object FormCtxFormEvents {
     ): FormState {
         return when (action.kind) {
 
-            EnumDefnKindEventAction.setValue -> {
+            Types.EnumDefnKindEventAction.setValue -> {
                 val resolvedValue = resolveSourceValue(action.source, state, defnForm)
                 val compIdSet = action.compIdSet
                 if (compIdSet.isNullOrEmpty()) return state
 
                 var updatedValueMap = state.valueMap
-                var updatedFieldStates = state.fieldStates
 
                 for (compId in compIdSet) {
                     if (compId is Types.MetaIdField) {
@@ -263,99 +253,89 @@ object FormCtxFormEvents {
                             updatedValueMap = updatedValueMap - compId
                         }
                     }
-
-                    val fieldState = updatedFieldStates[compId]
-                    if (fieldState != null) {
-                        val isDirty = resolvedValue != fieldState.defaultValue
-                        updatedFieldStates = updatedFieldStates + (compId to fieldState.copy(isDirty = isDirty))
-                    }
                 }
 
-                state.copy(valueMap = updatedValueMap, fieldStates = updatedFieldStates)
+                // Only update valueMap here; isDirty, validation, and onChange
+                // cascading are handled by processFieldValueChanged in executeEventInternal
+                state.copy(valueMap = updatedValueMap)
             }
 
-            EnumDefnKindEventAction.clear -> {
+            Types.EnumDefnKindEventAction.clear -> {
                 val compIdSet = action.compIdSet
                 if (compIdSet.isNullOrEmpty()) return state
 
                 var updatedValueMap = state.valueMap
-                var updatedFieldStates = state.fieldStates
 
                 for (compId in compIdSet) {
                     if (compId is Types.MetaIdField) {
                         updatedValueMap = updatedValueMap - compId
-
-                        val fieldState = updatedFieldStates[compId]
-                        if (fieldState != null) {
-                            // Cleared value is null; dirty if defaultValue was non-null
-                            val isDirty = fieldState.defaultValue != null
-                            updatedFieldStates = updatedFieldStates + (compId to fieldState.copy(isDirty = isDirty))
-                        }
                     }
                 }
 
-                state.copy(valueMap = updatedValueMap, fieldStates = updatedFieldStates)
+                // Only update valueMap here; isDirty, validation, and onChange
+                // cascading are handled by processFieldValueChanged in executeEventInternal
+                state.copy(valueMap = updatedValueMap)
             }
 
-            EnumDefnKindEventAction.visible -> {
+            Types.EnumDefnKindEventAction.visible -> {
                 updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(hidden = false, invisible = false)
                 }
             }
 
-            EnumDefnKindEventAction.invisible -> {
+            Types.EnumDefnKindEventAction.invisible -> {
                 updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(invisible = true)
                 }
             }
 
-            EnumDefnKindEventAction.hidden -> {
+            Types.EnumDefnKindEventAction.hidden -> {
                 updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(hidden = true)
                 }
             }
 
-            EnumDefnKindEventAction.enable -> {
+            Types.EnumDefnKindEventAction.enable -> {
                 updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(disabled = false)
                 }
             }
 
-            EnumDefnKindEventAction.disable -> {
+            Types.EnumDefnKindEventAction.disable -> {
                 updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(disabled = true)
                 }
             }
 
-            EnumDefnKindEventAction.highlight -> {
+            Types.EnumDefnKindEventAction.highlight -> {
                 updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(highlight = true)
                 }
             }
 
-            EnumDefnKindEventAction.blink -> {
+            Types.EnumDefnKindEventAction.blink -> {
                 updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(blink = true)
                 }
             }
 
-            EnumDefnKindEventAction.shake -> {
+            Types.EnumDefnKindEventAction.shake -> {
                 updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(shake = true)
                 }
             }
 
-            EnumDefnKindEventAction.executeAction -> {
+            Types.EnumDefnKindEventAction.executeAction -> {
                 Log.d(TAG, "TODO: ${action.kind} not yet implemented")
                 state
             }
 
-            EnumDefnKindEventAction.executeFormula -> {
+            Types.EnumDefnKindEventAction.executeFormula -> {
                 Log.d(TAG, "TODO: ${action.kind} not yet implemented")
                 state
             }
 
-            EnumDefnKindEventAction.click -> {
+            Types.EnumDefnKindEventAction.click -> {
                 Log.d(TAG, "TODO: ${action.kind} not yet implemented")
                 state
             }
@@ -370,20 +350,17 @@ object FormCtxFormEvents {
     ): FormState {
         return when (action.kind) {
 
-            EnumDefnKindEventAction.clear -> {
+            Types.EnumDefnKindEventAction.clear -> {
                 val compIdSet = action.compIdSet
                 if (compIdSet.isNullOrEmpty()) return state
 
                 var updatedValueMap = state.valueMap
-                var updatedFieldStates = state.fieldStates
-                var allAffectedFieldIds = mutableSetOf<MetaIdComp>()
 
                 for (compId in compIdSet) {
                     when (compId) {
                         is Types.MetaIdGrid -> {
                             // Clear grid value
                             updatedValueMap = updatedValueMap - compId
-                            allAffectedFieldIds.add(compId)
                         }
 
                         is Types.MetaIdSection -> {
@@ -394,70 +371,61 @@ object FormCtxFormEvents {
                                 if (!fieldIdSet.isNullOrEmpty()) {
                                     for (fieldId in fieldIdSet) {
                                         updatedValueMap = updatedValueMap - fieldId
-                                        allAffectedFieldIds.add(fieldId)
-
-                                        val fieldState = updatedFieldStates[fieldId]
-                                        if (fieldState != null) {
-                                            // Cleared value is null; dirty if defaultValue was non-null
-                                            val isDirty = fieldState.defaultValue != null
-                                            updatedFieldStates =
-                                                updatedFieldStates + (fieldId to fieldState.copy(isDirty = isDirty))
-                                        }
                                     }
                                 }
                             }
                         }
-
-
                     }
                 }
 
-                state.copy(valueMap = updatedValueMap, fieldStates = updatedFieldStates)
+                // Only update valueMap here; isDirty, validation, and onChange
+                // cascading are handled by processFieldValueChanged in executeEventInternal
+                state.copy(valueMap = updatedValueMap)
             }
 
-            EnumDefnKindEventAction.visible -> {
+            Types.EnumDefnKindEventAction.visible -> {
                 updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(hidden = false, invisible = false)
                 }
             }
 
-            EnumDefnKindEventAction.invisible -> {
+            Types.EnumDefnKindEventAction.invisible -> {
                 updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(invisible = true)
                 }
             }
 
-            EnumDefnKindEventAction.hidden -> {
+            Types.EnumDefnKindEventAction.hidden -> {
                 updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(hidden = true)
                 }
             }
 
-            EnumDefnKindEventAction.enable -> {
+            Types.EnumDefnKindEventAction.enable -> {
                 updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(disabled = false)
                 }
             }
 
-            EnumDefnKindEventAction.disable -> {
+            Types.EnumDefnKindEventAction.disable -> {
                 updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(disabled = true)
                 }
             }
 
-            EnumDefnKindEventAction.highlight -> {
+            Types.EnumDefnKindEventAction.highlight -> {
                 updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(highlight = true)
                 }
             }
 
-            EnumDefnKindEventAction.blink -> {
+            Types.EnumDefnKindEventAction.blink -> {
                 updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(blink = true)
                 }
             }
 
-            EnumDefnKindEventAction.shake -> {
+            Types.EnumDefnKindEventAction.shake -> {
                 updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(shake = true)
                 }
@@ -474,23 +442,23 @@ object FormCtxFormEvents {
         state: FormState,
     ): FormState {
         return when (action.kind) {
-            EnumDefnKindEventAction.visible -> {
+            Types.EnumDefnKindEventAction.visible -> {
                 state.copy(sendBtnStateFlags = state.sendBtnStateFlags - SendBtnStateFlag.Invisible)
             }
 
-            EnumDefnKindEventAction.invisible -> {
+            Types.EnumDefnKindEventAction.invisible -> {
                 state.copy(sendBtnStateFlags = state.sendBtnStateFlags + SendBtnStateFlag.Invisible)
             }
 
-            EnumDefnKindEventAction.hidden -> {
+            Types.EnumDefnKindEventAction.hidden -> {
                 state.copy(sendBtnStateFlags = state.sendBtnStateFlags + SendBtnStateFlag.Invisible)
             }
 
-            EnumDefnKindEventAction.enable -> {
+            Types.EnumDefnKindEventAction.enable -> {
                 state.copy(sendBtnStateFlags = state.sendBtnStateFlags - SendBtnStateFlag.Disabled)
             }
 
-            EnumDefnKindEventAction.disable -> {
+            Types.EnumDefnKindEventAction.disable -> {
                 state.copy(sendBtnStateFlags = state.sendBtnStateFlags + SendBtnStateFlag.Disabled)
             }
 
@@ -565,9 +533,47 @@ object FormCtxFormEvents {
         }
     }
 
+    /**
+     * Resolves the set of leaf field IDs affected by a setValue/clear action.
+     * For field-level actions, returns the compIdSet directly (filtered to MetaIdField).
+     * For component-level actions (section clear), expands to all fields within the section.
+     */
+    private fun resolveAffectedFieldIds(
+        action: DefnEventAction,
+        defnForm: DefnFormUi
+    ): List<Types.MetaIdField> {
+        val compIdSet = action.compIdSet
+        if (compIdSet.isNullOrEmpty()) return emptyList()
+
+        return when (action.actionOn) {
+            Types.EnumDefnKindEventActionOn.component -> {
+                // Expand component IDs (sections/grids) to their constituent field IDs
+                buildList {
+                    for (compId in compIdSet) {
+                        when (compId) {
+                            is Types.MetaIdSection -> {
+                                val section = defnForm.compMap[compId] as? DefnSection
+                                if (section != null && section.type === Types.EnumDefnCompType.section) {
+                                    section.fieldIdSet?.let { addAll(it) }
+                                }
+                            }
+                            // Grid clear doesn't expand to leaf fields
+                            else -> {}
+                        }
+                    }
+                }
+            }
+
+            else -> {
+                // Field-level: filter to MetaIdField directly
+                compIdSet.filterIsInstance<Types.MetaIdField>()
+            }
+        }
+    }
+
     private fun updateFormEventProps(
         state: FormState,
-        compIdSet: List<MetaIdComp>?,
+        compIdSet: List<Types.MetaIdComp>?,
         update: (FormEventProps) -> FormEventProps
     ): FormState {
         if (compIdSet.isNullOrEmpty()) return state
