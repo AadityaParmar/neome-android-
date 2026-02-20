@@ -1,10 +1,19 @@
 package com.neome.feature.form.presentation.components.field
 
-import android.net.Uri
+import android.graphics.BitmapFactory
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Image
@@ -16,17 +25,23 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.Stable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import com.neome.api.meta.base.SysId
+import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.dto.DefnFieldImage
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.FieldDtoImageData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueImageData
 import com.neome.feature.filepicker.domain.model.FilePickerMode
 import com.neome.feature.filepicker.domain.model.FilePickerResult
@@ -34,6 +49,7 @@ import com.neome.feature.filepicker.presentation.rememberFilePicker
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldEvent
+import com.neome.feature.utils.MediaFieldUtil
 
 // ============================================================================
 // Constants
@@ -88,26 +104,67 @@ fun FieldImage(
 
     if (properties.hidden) return
 
+    val context = LocalContext.current
+
     // Extract max file size from field definition
     val maxSizeBytes = extractMaxSizeBytes(defnComp)
 
-    // State holder for image field logic
-    val imageState = rememberFieldImageState(
-        initialFileName = fieldValue?.value?.fileName,
-        maxSizeBytes = maxSizeBytes,
-        onValueChange = { fieldController.onChange(null) },
-        onClear = { fieldController.onChange(null) }
-    )
+    // --- State ---------------------------------------------------------------
+    var showPreviewDialog by remember { mutableStateOf(false) }
+    var selectedImageBytes by remember { mutableStateOf<ByteArray?>(null) }
+
+    // Display text: show file name when an image is selected
+    val displayFileName = fieldValue?.value?.fileName ?: ""
+    val hasImage = fieldValue != null
+
+    // --- Image picked handler ------------------------------------------------
+    val onImagePicked: (FilePickerResult) -> Unit = onImagePicked@{ result ->
+        // Validate file size
+        val sizeValidationError = validateFileSize(result.fileSize, maxSizeBytes)
+        if (sizeValidationError != null) {
+            // TODO: Show validation error to user
+            return@onImagePicked
+        }
+
+        val mediaFieldUtil = MediaFieldUtil(context)
+
+        val metaData = mediaFieldUtil.getFieldImageMetaData(result)
+            ?: return@onImagePicked
+
+        // Store byteArrays in temp variables for later use (e.g., upload)
+        val compressedImageBytes = metaData.compressedImage
+        val blurImageBytes = metaData.blurImage
+
+        // Store compressed bytes for preview
+        selectedImageBytes = compressedImageBytes
+
+        val fieldValueImageData = FieldValueImageData(
+            value = FieldDtoImageData(
+                fileName = result.fileName,
+                width = 0L,
+                height = 0L,
+                size = result.fileSize,
+                mediaIdImage = SysId.nextId(Types.MediaIdImage::class.java),
+                mediaIdBlurImage = SysId.nextId(Types.MediaIdImage::class.java),
+                primaryColor = metaData.primaryColor.hexString
+            )
+        )
+
+        fieldController.onChange(fieldValueImageData)
+    }
 
     // File picker integration
     val launchFilePicker = rememberFilePicker(
         mode = FilePickerMode.IMAGE,
-        onResult = { result -> imageState.handleFilePickerResult(result) }
+        onResult = { result ->
+            if (result != null) {
+                onImagePicked(result)
+            }
+        }
     )
 
     // Derived state for UI logic
     val isInteractive = !properties.disabled && !properties.readOnly
-    val hasImage by remember { derivedStateOf { imageState.displayFileName.isNotBlank() } }
 
     // Interaction source for text field click handling
     val interactionSource = remember { MutableInteractionSource() }
@@ -123,108 +180,41 @@ fun FieldImage(
         }
     }
 
-    // UI
+    // --- UI ------------------------------------------------------------------
     FieldBase(modifier = modifier, properties = properties) {
         ImageTextField(
-            displayFileName = imageState.displayFileName,
+            displayFileName = displayFileName,
             label = properties.label,
             placeholder = properties.placeholder,
             helperText = properties.helperText,
-            errorMessage = error?.message ?: imageState.validationError,
+            errorMessage = error?.message,
             isDisabled = properties.disabled,
             isInteractive = isInteractive,
             hasImage = hasImage,
             interactionSource = interactionSource,
-            onPreviewClick = { imageState.showPreviewDialog = true },
-            onClearClick = { imageState.clear() }
+            onPreviewClick = { showPreviewDialog = true },
+            onClearClick = {
+                fieldController.onChange(null)
+                selectedImageBytes = null
+            }
         )
-    }
 
-    // Preview dialog
-    if (imageState.showPreviewDialog && imageState.selectedUri != null) {
-        ImagePreviewDialog(
-            uri = imageState.selectedUri!!,
-            fileName = imageState.displayFileName,
-            onDismiss = { imageState.showPreviewDialog = false }
-        )
-    }
-}
-
-// ============================================================================
-// State Holder
-// ============================================================================
-
-/**
- * State holder for FieldImage component.
- *
- * Encapsulates all mutable state and business logic for the image field,
- * making the component easier to test and reason about.
- */
-@Stable
-class FieldImageState(
-    initialFileName: String?,
-    private val maxSizeBytes: Long?,
-    private val onValueChange: () -> Unit,
-    private val onClear: () -> Unit
-) {
-    var displayFileName by mutableStateOf(initialFileName ?: "")
-        private set
-
-    var selectedUri by mutableStateOf<Uri?>(null)
-        private set
-
-    var showPreviewDialog by mutableStateOf(false)
-
-    var validationError by mutableStateOf<String?>(null)
-        private set
-
-    /**
-     * Handles the result from the file picker.
-     * Validates file size and updates state accordingly.
-     */
-    fun handleFilePickerResult(result: FilePickerResult?) {
-        if (result == null) return
-
-        val sizeValidationError = validateFileSize(result.fileSize, maxSizeBytes)
-
-        if (sizeValidationError != null) {
-            validationError = sizeValidationError
-            return
+        // Conditional: image preview box
+        if (hasImage) {
+            Spacer(modifier = Modifier.height(8.dp))
+            ImagePreviewBox(
+                imageBytes = selectedImageBytes,
+                onPreviewClick = { showPreviewDialog = true }
+            )
         }
-
-        validationError = null
-        displayFileName = result.fileName
-        selectedUri = result.uri
-        onValueChange()
     }
 
-    /**
-     * Clears the current image selection.
-     */
-    fun clear() {
-        displayFileName = ""
-        selectedUri = null
-        validationError = null
-        onClear()
-    }
-}
-
-/**
- * Creates and remembers a [FieldImageState] instance.
- */
-@Composable
-private fun rememberFieldImageState(
-    initialFileName: String?,
-    maxSizeBytes: Long?,
-    onValueChange: () -> Unit,
-    onClear: () -> Unit
-): FieldImageState {
-    return remember(initialFileName) {
-        FieldImageState(
-            initialFileName = initialFileName,
-            maxSizeBytes = maxSizeBytes,
-            onValueChange = onValueChange,
-            onClear = onClear
+    // --- Full-screen image preview dialog ------------------------------------
+    if (showPreviewDialog && selectedImageBytes != null) {
+        ImagePreviewDialog(
+            byteArray = selectedImageBytes!!,
+            fileName = displayFileName,
+            onDismiss = { showPreviewDialog = false }
         )
     }
 }
@@ -388,4 +378,71 @@ private fun iconTint(isEnabled: Boolean, enabledColor: Color): Color {
     } else {
         MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
     }
+}
+
+// ============================================================================
+// Image Preview Components
+// ============================================================================
+
+/**
+ * Image preview box (150dp x 150dp).
+ *
+ * Shows the selected image thumbnail if bytes are available, otherwise a placeholder icon.
+ * Clicking the preview opens the full-screen preview dialog.
+ *
+ * @param imageBytes Raw image bytes to display, or null for placeholder
+ * @param onPreviewClick Callback when the preview is clicked
+ * @param modifier Modifier for customization
+ */
+@Composable
+private fun ImagePreviewBox(
+    imageBytes: ByteArray?,
+    onPreviewClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val shape = RoundedCornerShape(8.dp)
+
+    Box(
+        modifier = modifier
+            .size(150.dp)
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.outlineVariant,
+                shape = shape
+            )
+            .clip(shape)
+            .clickable(onClick = onPreviewClick),
+        contentAlignment = Alignment.Center
+    ) {
+        if (imageBytes != null) {
+            val bitmap = remember(imageBytes) {
+                BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+            }
+            if (bitmap != null) {
+                Image(
+                    bitmap = bitmap.asImageBitmap(),
+                    contentDescription = "Selected image preview",
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+            } else {
+                ImagePreviewPlaceholder()
+            }
+        } else {
+            ImagePreviewPlaceholder()
+        }
+    }
+}
+
+/**
+ * Placeholder icon shown when no image is available.
+ */
+@Composable
+private fun ImagePreviewPlaceholder() {
+    Icon(
+        imageVector = Icons.Default.Image,
+        contentDescription = "Image preview placeholder",
+        modifier = Modifier.size(48.dp),
+        tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
+    )
 }
