@@ -1,5 +1,6 @@
 package com.neome.feature.form.domain.util
 
+import android.util.Log
 import com.neome.api.ent.entDrawer.sig.SigEntCaller
 import com.neome.api.meta.base.Types
 import com.neome.api.meta.base.Types.EnumDefnArgBinder
@@ -30,6 +31,8 @@ import java.util.TimeZone
 
 
 object ConditionResolver {
+
+    private const val TAG = "ConditionResolver"
 
     private val SET_COMP_TYPES = setOf(
         EnumDefnCompType.setOfUser,
@@ -241,7 +244,8 @@ object ConditionResolver {
                     callerEnt?.roleIdSet?.map { it.getId() ?: "" } ?: emptyList()
                 } else null
             } else null
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            Log.w(TAG, "Failed to resolve context binder array from: $text", e)
             null
         }
     }
@@ -401,7 +405,8 @@ object ConditionResolver {
                     cal.set(Calendar.SECOND, 0)
                     cal.set(Calendar.MILLISECOND, 0)
                     cal.timeInMillis
-                } catch (_: Exception) {
+                } catch (e: Exception) {
+                    Log.w(TAG, "Failed to parse date: $dateStr", e)
                     null
                 }
             }
@@ -413,7 +418,8 @@ object ConditionResolver {
                     sdf.timeZone = TimeZone.getDefault()
                     val date = sdf.parse(dateStr) ?: return null
                     date.time
-                } catch (_: Exception) {
+                } catch (e: Exception) {
+                    Log.w(TAG, "Failed to parse dateTime: $dateStr", e)
                     null
                 }
             }
@@ -426,7 +432,8 @@ object ConditionResolver {
                         val concatenated = parts.joinToString("")
                         concatenated.toLongOrNull()
                     } else null
-                } catch (_: Exception) {
+                } catch (e: Exception) {
+                    Log.w(TAG, "Failed to parse time: $timeStr", e)
                     null
                 }
             }
@@ -457,7 +464,8 @@ object ConditionResolver {
                 val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US)
                 sdf.timeZone = TimeZone.getDefault()
                 sdf.parse(dateStr)?.time
-            } catch (_: Exception) {
+            } catch (e: Exception) {
+                Log.w(TAG, "Failed to parse RHS date: $dateStr", e)
                 null
             }
         }
