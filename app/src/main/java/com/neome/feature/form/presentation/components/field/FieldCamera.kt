@@ -22,7 +22,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -37,8 +36,6 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import com.neome.api.meta.base.SysId
 import com.neome.api.meta.base.Types
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
@@ -47,6 +44,8 @@ import com.neome.core.common.serializer.api.meta.base.dto.FieldDtoImageData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueCameraData
 import com.neome.feature.camera.domain.model.CapturedImage
 import com.neome.feature.camera.presentation.capture.CameraCaptureScreen
+import com.neome.feature.camera.presentation.components.FullScreenCameraDialog
+import com.neome.feature.camera.presentation.components.ImagePreviewWithCropDialog
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldError
@@ -110,7 +109,8 @@ fun FieldCamera(
     val context = LocalContext.current
 
     // --- State ---------------------------------------------------------------
-    var showCamera by remember { mutableStateOf(false) }
+    var showCameraForPreview by remember { mutableStateOf(false) }
+    var previewImage by remember { mutableStateOf<CapturedImage?>(null) }
     var showPreviewDialog by remember { mutableStateOf(false) }
     var capturedImageBytes by remember { mutableStateOf<ByteArray?>(null) }
 
@@ -151,7 +151,7 @@ fun FieldCamera(
         if (isInteractive) {
             interactionSource.interactions.collect { interaction ->
                 if (interaction is PressInteraction.Release) {
-                    showCamera = true
+                    showCameraForPreview = true
                 }
             }
         }
@@ -203,33 +203,46 @@ fun FieldCamera(
         }
     }
 
-    // --- Full-screen camera dialog -------------------------------------------
-    if (showCamera) {
-        Dialog(
-            onDismissRequest = { showCamera = false },
-            properties = DialogProperties(
-                dismissOnBackPress = true,
-                dismissOnClickOutside = false,
-                usePlatformDefaultWidth = false
-            )
+    // --- Camera capture dialog ------------------------------------------------
+    // Step 1: Capture photo, then hand off to preview+crop dialog
+    if (showCameraForPreview) {
+        FullScreenCameraDialog(
+            onDismiss = { showCameraForPreview = false }
         ) {
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
-            ) {
-                CameraCaptureScreen(
-                    onImageCaptured = { capturedImage ->
-                        showCamera = false
-                        onCameraCaptured(capturedImage)
-                    },
-                    onCancelled = { showCamera = false },
-                    onError = { showCamera = false }
-                )
-            }
+            CameraCaptureScreen(
+                onImageCaptured = { image ->
+                    // Camera closes, preview+crop dialog opens
+                    previewImage = image
+                    showCameraForPreview = false
+                },
+                onCancelled = { showCameraForPreview = false },
+                onError = { showCameraForPreview = false }
+            )
         }
     }
 
-    // --- Full-screen image preview dialog ------------------------------------
+    // --- Preview + Crop dialog -----------------------------------------------
+    // Step 2: User previews, optionally crops, then confirms
+    if (previewImage != null) {
+        ImagePreviewWithCropDialog(
+            image = previewImage!!,
+            onImageUpdated = { updatedImage ->
+                // Cropped image replaces original in preview
+                previewImage = updatedImage
+            },
+            onDismiss = {
+                // Cancel - discard image
+                previewImage = null
+            },
+            onConfirm = { confirmedImage ->
+                // Done - process the final image
+                previewImage = null
+                onCameraCaptured(confirmedImage)
+            }
+        )
+    }
+
+    // --- Full-screen image preview dialog (for viewing saved image) ----------
     if (showPreviewDialog && capturedImageBytes != null) {
         ImagePreviewDialog(
             byteArray = capturedImageBytes!!,

@@ -1,5 +1,7 @@
 package com.neome.feature.cropper.domain.model
 
+import com.neome.feature.camera.domain.model.CapturedImage
+
 /**
  * Represents an image that can be cropped.
  * Contains raw bytes and metadata needed for crop operations.
@@ -31,4 +33,18 @@ data class CroppableImage(
         result = 31 * result + rotation
         return result
     }
+}
+
+/**
+ * Convert CroppableImage back to CapturedImage after cropping.
+ */
+fun CroppableImage.toCapturedImage(): CapturedImage {
+    return CapturedImage(
+        bytes = bytes,
+        width = width,
+        height = height,
+        rotation = rotation,
+        mimeType = mimeType,
+        timestamp = System.currentTimeMillis()
+    )
 }
