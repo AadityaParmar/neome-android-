@@ -5,7 +5,7 @@ import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormState
-import com.neome.feature.form.presentation.state.SendBtnDisableFlag
+import com.neome.feature.form.presentation.state.SendBtnStateFlag
 import kotlinx.serialization.json.JsonElement
 
 /**
@@ -102,13 +102,15 @@ class FormRefImpl(
 
     // ==================== Send Button Control ====================
 
-    override fun addSendBtnDisableFlag(flag: SendBtnDisableFlag) {
-        dispatchEvent(FormEvent.AddSendBtnDisableFlag(flag))
+    override fun addSendBtnStateFlag(flag: SendBtnStateFlag) {
+        dispatchEvent(FormEvent.AddSendBtnStateFlag(flag))
     }
 
-    override fun removeSendBtnDisableFlag(flag: SendBtnDisableFlag) {
-        dispatchEvent(FormEvent.RemoveSendBtnDisableFlag(flag))
+    override fun removeSendBtnStateFlag(flag: SendBtnStateFlag) {
+        dispatchEvent(FormEvent.RemoveSendBtnStateFlag(flag))
     }
 
     override fun isSendBtnEnabled(): Boolean = currentState.isSendBtnEnabled
+
+    override fun isSendBtnInvisible(): Boolean = currentState.isSendBtnInvisible
 }

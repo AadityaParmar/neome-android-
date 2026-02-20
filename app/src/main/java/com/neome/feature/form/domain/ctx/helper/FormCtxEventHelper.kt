@@ -10,7 +10,7 @@ import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormEventProps
 import com.neome.feature.form.presentation.state.FormIntent
 import com.neome.feature.form.presentation.state.FormState
-import com.neome.feature.form.presentation.state.SendBtnDisableFlag
+import com.neome.feature.form.presentation.state.SendBtnStateFlag
 import kotlinx.serialization.json.JsonElement
 
 object FormCtxEventHelper {
@@ -90,7 +90,7 @@ object FormCtxEventHelper {
             }
         }
 
-        // Update SendBtnDisableFlag.Invalid based on final error state
+        // Update SendBtnStateFlag.Invalid based on final error state
         newState = syncInvalidFlag(newState)
 
         val intent = FormIntent.Watch(
@@ -203,7 +203,7 @@ object FormCtxEventHelper {
             }
         }
 
-        // Update SendBtnDisableFlag.Invalid based on final error state
+        // Update SendBtnStateFlag.Invalid based on final error state
         newState = syncInvalidFlag(newState)
 
         return FormReducerResult(newState)
@@ -530,24 +530,24 @@ object FormCtxEventHelper {
     }
 
     /**
-     * Synchronizes [SendBtnDisableFlag.Invalid] with current error state.
+     * Synchronizes [SendBtnStateFlag.Invalid] with current error state.
      * Adds the flag if errors exist, removes it if no errors.
      * This ensures the send button state is always consistent after
      * any operation that may change errors (value changes, event execution).
      *
-     * @return Updated state with correct disableSendBtnSet
+     * @return Updated state with correct sendBtnStateFlags
      */
     private fun syncInvalidFlag(state: FormState): FormState {
         val hasErrors = state.errors.isNotEmpty()
-        val hasInvalidFlag = SendBtnDisableFlag.Invalid in state.disableSendBtnSet
+        val hasInvalidFlag = SendBtnStateFlag.Invalid in state.sendBtnStateFlags
 
         return when {
             hasErrors && !hasInvalidFlag -> {
-                state.copy(disableSendBtnSet = state.disableSendBtnSet + SendBtnDisableFlag.Invalid)
+                state.copy(sendBtnStateFlags = state.sendBtnStateFlags + SendBtnStateFlag.Invalid)
             }
 
             !hasErrors && hasInvalidFlag -> {
-                state.copy(disableSendBtnSet = state.disableSendBtnSet - SendBtnDisableFlag.Invalid)
+                state.copy(sendBtnStateFlags = state.sendBtnStateFlags - SendBtnStateFlag.Invalid)
             }
 
             else -> state

@@ -34,7 +34,7 @@ class FormScreenViewModel @Inject constructor() : ViewModel() {
             }
 
             is FormIntent.SendBtnStateChanged -> {
-                "SendBtn → enabled=${intent.enabled}"
+                "SendBtn → enabled=${intent.enabled} invisible=${intent.invisible}"
             }
         }
 

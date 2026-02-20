@@ -9,25 +9,31 @@ import com.neome.feature.form.domain.ctx.helper.schema.CompSchema
 import kotlinx.serialization.json.JsonElement
 
 /**
- * Flags that disable the send button.
- * When any flag is present in [FormState.disableSendBtnSet], the send button is disabled.
+ * Flags that control the send button state.
+ * When any flag is present in [FormState.sendBtnStateFlags], the send button is disabled.
  * When the set is empty, the send button is enabled.
  */
-sealed interface SendBtnDisableFlag {
+sealed interface SendBtnStateFlag {
     /** Form has validation errors - managed automatically by FormCtxValidationHelper */
-    data object Invalid : SendBtnDisableFlag
+    data object Invalid : SendBtnStateFlag
 
     /** File upload in progress */
-    data object Uploading : SendBtnDisableFlag
+    data object Uploading : SendBtnStateFlag
 
     /** Background processing in progress */
-    data object Processing : SendBtnDisableFlag
+    data object Processing : SendBtnStateFlag
 
     /** Validation in progress */
-    data object Validating : SendBtnDisableFlag
+    data object Validating : SendBtnStateFlag
+
+    /** Send button should be invisible */
+    data object Invisible : SendBtnStateFlag
+
+    /** Send button disabled by form event action */
+    data object Disabled : SendBtnStateFlag
 
     /** Custom flag with a unique key for extensibility */
-    data class Custom(val key: String) : SendBtnDisableFlag
+    data class Custom(val key: String) : SendBtnStateFlag
 }
 
 /**
@@ -78,11 +84,11 @@ data class FormState(
     val isInitialized: Boolean = false,
 
     /**
-     * Set of flags that disable the send button.
+     * Set of flags that control the send button state.
      * Send button is enabled only when this set is empty.
-     * @see SendBtnDisableFlag
+     * @see SendBtnStateFlag
      */
-    val disableSendBtnSet: Set<SendBtnDisableFlag> = emptySet()
+    val sendBtnStateFlags: Set<SendBtnStateFlag> = emptySet()
 ) {
     /**
      * Check if any field has validation errors.
@@ -126,10 +132,18 @@ data class FormState(
 
     /**
      * Check if send button is enabled.
-     * Returns true only when no disable flags are present.
+     * Returns true only when no state flags are present.
+     * Any flag (including Invisible) disables the send button.
      */
     val isSendBtnEnabled: Boolean
-        get() = disableSendBtnSet.isEmpty()
+        get() = sendBtnStateFlags.isEmpty()
+
+    /**
+     * Check if send button should be invisible.
+     * Returns true when the Invisible flag is present.
+     */
+    val isSendBtnInvisible: Boolean
+        get() = SendBtnStateFlag.Invisible in sendBtnStateFlags
 }
 
 /**

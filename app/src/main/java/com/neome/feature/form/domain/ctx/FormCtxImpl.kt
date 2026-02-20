@@ -16,7 +16,7 @@ import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormIntent
 import com.neome.feature.form.presentation.state.FormState
-import com.neome.feature.form.presentation.state.SendBtnDisableFlag
+import com.neome.feature.form.presentation.state.SendBtnStateFlag
 import kotlinx.serialization.json.JsonElement
 
 class FormCtxImpl(
@@ -34,7 +34,10 @@ class FormCtxImpl(
     private val currentState: FormState get() = _formState.value
 
     init {
-        onIntent(FormIntent.SendBtnStateChanged(enabled = _formState.value.isSendBtnEnabled))
+        onIntent(FormIntent.SendBtnStateChanged(
+            enabled = _formState.value.isSendBtnEnabled,
+            invisible = _formState.value.isSendBtnInvisible
+        ))
     }
 
     internal fun dispatch(event: FormEvent) {
@@ -61,34 +64,43 @@ class FormCtxImpl(
             is FormEvent.Submit -> FormCtxEventHelper.handleSubmit(state, defnForm)
             is FormEvent.Reset -> FormCtxEventHelper.handleReset(state, event)
             is FormEvent.SetValues -> FormCtxEventHelper.handleSetValues(state, event, defnForm)
-            is FormEvent.AddSendBtnDisableFlag -> handleAddSendBtnDisableFlag(state, event)
-            is FormEvent.RemoveSendBtnDisableFlag -> handleRemoveSendBtnDisableFlag(state, event)
+            is FormEvent.AddSendBtnStateFlag -> handleAddSendBtnStateFlag(state, event)
+            is FormEvent.RemoveSendBtnStateFlag -> handleRemoveSendBtnStateFlag(state, event)
             is FormEvent.Click -> FormCtxEventHelper.handleClick(state, event, defnForm)
         }
     }
 
-    private fun handleAddSendBtnDisableFlag(
+    private fun handleAddSendBtnStateFlag(
         state: FormState,
-        event: FormEvent.AddSendBtnDisableFlag
+        event: FormEvent.AddSendBtnStateFlag
     ): FormReducerResult {
-        if (event.flag in state.disableSendBtnSet) return FormReducerResult(state)
+        if (event.flag in state.sendBtnStateFlags) return FormReducerResult(state)
         val wasEnabled = state.isSendBtnEnabled
-        val newSet = state.disableSendBtnSet + event.flag
-        val newState = state.copy(disableSendBtnSet = newSet)
-        val intent = if (wasEnabled) FormIntent.SendBtnStateChanged(enabled = false) else null
+        val wasInvisible = state.isSendBtnInvisible
+        val newSet = state.sendBtnStateFlags + event.flag
+        val newState = state.copy(sendBtnStateFlags = newSet)
+        val isNowEnabled = newState.isSendBtnEnabled
+        val isNowInvisible = newState.isSendBtnInvisible
+        val intent = if (wasEnabled != isNowEnabled || wasInvisible != isNowInvisible) {
+            FormIntent.SendBtnStateChanged(enabled = isNowEnabled, invisible = isNowInvisible)
+        } else null
         return FormReducerResult(newState, intent)
     }
 
-    private fun handleRemoveSendBtnDisableFlag(
+    private fun handleRemoveSendBtnStateFlag(
         state: FormState,
-        event: FormEvent.RemoveSendBtnDisableFlag
+        event: FormEvent.RemoveSendBtnStateFlag
     ): FormReducerResult {
-        if (event.flag !in state.disableSendBtnSet) return FormReducerResult(state)
+        if (event.flag !in state.sendBtnStateFlags) return FormReducerResult(state)
         val wasEnabled = state.isSendBtnEnabled
-        val newSet = state.disableSendBtnSet - event.flag
-        val newState = state.copy(disableSendBtnSet = newSet)
+        val wasInvisible = state.isSendBtnInvisible
+        val newSet = state.sendBtnStateFlags - event.flag
+        val newState = state.copy(sendBtnStateFlags = newSet)
         val isNowEnabled = newState.isSendBtnEnabled
-        val intent = if (!wasEnabled && isNowEnabled) FormIntent.SendBtnStateChanged(enabled = true) else null
+        val isNowInvisible = newState.isSendBtnInvisible
+        val intent = if (wasEnabled != isNowEnabled || wasInvisible != isNowInvisible) {
+            FormIntent.SendBtnStateChanged(enabled = isNowEnabled, invisible = isNowInvisible)
+        } else null
         return FormReducerResult(newState, intent)
     }
 
@@ -128,11 +140,11 @@ class FormCtxImpl(
         dispatch(FormEvent.ClearFieldError(fieldId))
     }
 
-    override fun addSendBtnDisableFlag(flag: SendBtnDisableFlag) {
-        dispatch(FormEvent.AddSendBtnDisableFlag(flag))
+    override fun addSendBtnStateFlag(flag: SendBtnStateFlag) {
+        dispatch(FormEvent.AddSendBtnStateFlag(flag))
     }
 
-    override fun removeSendBtnDisableFlag(flag: SendBtnDisableFlag) {
-        dispatch(FormEvent.RemoveSendBtnDisableFlag(flag))
+    override fun removeSendBtnStateFlag(flag: SendBtnStateFlag) {
+        dispatch(FormEvent.RemoveSendBtnStateFlag(flag))
     }
 }

@@ -3,7 +3,7 @@ package com.neome.feature.form.domain.ref
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueRawData
 import com.neome.feature.form.presentation.state.FieldState
-import com.neome.feature.form.presentation.state.SendBtnDisableFlag
+import com.neome.feature.form.presentation.state.SendBtnStateFlag
 import kotlinx.serialization.json.JsonElement
 
 /**
@@ -141,20 +141,20 @@ interface FormRef {
     // ==================== Send Button Control ====================
 
     /**
-     * Add a flag that disables the send button.
+     * Add a send button state flag.
      * When any flag is present, the send button is disabled.
      *
-     * @param flag The flag to add
+     * @param flag The state flag to add
      */
-    fun addSendBtnDisableFlag(flag: SendBtnDisableFlag)
+    fun addSendBtnStateFlag(flag: SendBtnStateFlag)
 
     /**
-     * Remove a flag that disables the send button.
+     * Remove a send button state flag.
      * When all flags are removed, the send button is enabled.
      *
-     * @param flag The flag to remove
+     * @param flag The state flag to remove
      */
-    fun removeSendBtnDisableFlag(flag: SendBtnDisableFlag)
+    fun removeSendBtnStateFlag(flag: SendBtnStateFlag)
 
     /**
      * Check if send button is enabled.
@@ -163,4 +163,12 @@ interface FormRef {
      * @return true if send button is enabled
      */
     fun isSendBtnEnabled(): Boolean
+
+    /**
+     * Check if send button should be invisible.
+     * Returns true when the Invisible flag is present.
+     *
+     * @return true if send button should be invisible
+     */
+    fun isSendBtnInvisible(): Boolean
 }

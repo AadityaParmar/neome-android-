@@ -5,7 +5,7 @@ import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormIntent
 import com.neome.feature.form.presentation.state.FormState
-import com.neome.feature.form.presentation.state.SendBtnDisableFlag
+import com.neome.feature.form.presentation.state.SendBtnStateFlag
 
 object FormCtxValidationHelper {
 
@@ -144,32 +144,40 @@ object FormCtxValidationHelper {
     }
 
     /**
-     * Updates the SendBtnDisableFlag.Invalid flag based on error state.
+     * Updates the SendBtnStateFlag.Invalid flag based on error state.
      * Returns updated state with correct flag and optional intent on transition.
      *
      * @param state The state after error changes
-     * @return FormReducerResult with updated disableSendBtnSet and optional SendBtnStateChanged intent
+     * @return FormReducerResult with updated sendBtnStateFlags and optional SendBtnStateChanged intent
      */
     private fun updateInvalidFlag(state: FormState): FormReducerResult {
         val hasErrors = state.errors.isNotEmpty()
-        val hasInvalidFlag = SendBtnDisableFlag.Invalid in state.disableSendBtnSet
+        val hasInvalidFlag = SendBtnStateFlag.Invalid in state.sendBtnStateFlags
 
         return when {
             hasErrors && !hasInvalidFlag -> {
                 // Add Invalid flag
                 val wasEnabled = state.isSendBtnEnabled
-                val newSet = state.disableSendBtnSet + SendBtnDisableFlag.Invalid
-                val newState = state.copy(disableSendBtnSet = newSet)
-                val intent = if (wasEnabled) FormIntent.SendBtnStateChanged(enabled = false) else null
+                val wasInvisible = state.isSendBtnInvisible
+                val newSet = state.sendBtnStateFlags + SendBtnStateFlag.Invalid
+                val newState = state.copy(sendBtnStateFlags = newSet)
+                val isNowEnabled = newState.isSendBtnEnabled
+                val isNowInvisible = newState.isSendBtnInvisible
+                val intent = if (wasEnabled != isNowEnabled || wasInvisible != isNowInvisible) {
+                    FormIntent.SendBtnStateChanged(enabled = isNowEnabled, invisible = isNowInvisible)
+                } else null
                 FormReducerResult(newState, intent)
             }
 
             !hasErrors && hasInvalidFlag -> {
                 // Remove Invalid flag
-                val newSet = state.disableSendBtnSet - SendBtnDisableFlag.Invalid
-                val newState = state.copy(disableSendBtnSet = newSet)
+                val newSet = state.sendBtnStateFlags - SendBtnStateFlag.Invalid
+                val newState = state.copy(sendBtnStateFlags = newSet)
                 val isNowEnabled = newState.isSendBtnEnabled
-                val intent = if (isNowEnabled) FormIntent.SendBtnStateChanged(enabled = true) else null
+                val isNowInvisible = newState.isSendBtnInvisible
+                val intent = if (isNowEnabled != state.isSendBtnEnabled || isNowInvisible != state.isSendBtnInvisible) {
+                    FormIntent.SendBtnStateChanged(enabled = isNowEnabled, invisible = isNowInvisible)
+                } else null
                 FormReducerResult(newState, intent)
             }
 

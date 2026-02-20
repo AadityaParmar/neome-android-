@@ -127,16 +127,14 @@ sealed interface FormEvent : UiEvent {
     // ==================== Send Button Flag Events ====================
 
     /**
-     * Add a flag that disables the send button.
-     * When any flag is present, the send button is disabled.
+     * Add a send button state flag. When any non-Invisible flag is present, the send button is disabled.
      */
-    data class AddSendBtnDisableFlag(val flag: SendBtnDisableFlag) : FormEvent
+    data class AddSendBtnStateFlag(val flag: SendBtnStateFlag) : FormEvent
 
     /**
-     * Remove a flag that disables the send button.
-     * When all flags are removed, the send button is enabled.
+     * Remove a send button state flag. When all non-Invisible flags are removed, the send button is enabled.
      */
-    data class RemoveSendBtnDisableFlag(val flag: SendBtnDisableFlag) : FormEvent
+    data class RemoveSendBtnStateFlag(val flag: SendBtnStateFlag) : FormEvent
 
     // ==================== Click Events ====================
 
