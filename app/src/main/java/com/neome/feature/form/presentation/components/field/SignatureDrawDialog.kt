@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -130,7 +131,13 @@ private fun SignatureDrawContent(
         )
 
         // Bottom bar
-        SignatureBottomBar(onDoneClick = onDoneClick)
+        SignatureBottomBar(
+            onClearClick = {
+                completedPaths = emptyList()
+                currentPath = emptyList()
+            },
+            onDoneClick = onDoneClick
+        )
     }
 }
 
@@ -258,10 +265,13 @@ private fun SignatureCanvas(
 // =============================================================================
 
 /**
- * Bottom bar with "Done" button aligned to the end.
+ * Bottom bar with "Clear" button on the left and "Done" button on the right.
+ *
+ * Layout: [Clear                    Done]
  */
 @Composable
 private fun SignatureBottomBar(
+    onClearClick: () -> Unit,
     onDoneClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -270,8 +280,11 @@ private fun SignatureBottomBar(
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.surface)
             .padding(horizontal = 16.dp, vertical = 12.dp),
-        horizontalArrangement = Arrangement.End
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
+        OutlinedButton(onClick = onClearClick) {
+            Text("Clear")
+        }
         Button(onClick = onDoneClick) {
             Text("Done")
         }
