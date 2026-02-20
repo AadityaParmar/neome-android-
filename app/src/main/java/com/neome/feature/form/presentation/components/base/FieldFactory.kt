@@ -30,6 +30,7 @@ import com.neome.feature.form.presentation.components.field.FieldNumber
 import com.neome.feature.form.presentation.components.field.FieldParagraph
 import com.neome.feature.form.presentation.components.field.FieldPickText
 import com.neome.feature.form.presentation.components.field.FieldSetOfText
+import com.neome.feature.form.presentation.components.field.FieldSignature
 import com.neome.feature.form.presentation.components.field.FieldText
 import com.neome.feature.form.presentation.components.field.FieldSwitch
 import com.neome.feature.form.presentation.components.field.FieldTime
@@ -194,6 +195,12 @@ fun FieldFactory(
         )
 
         EnumDefnCompType.identifier -> FieldIdentifier(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.signature -> FieldSignature(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             modifier = modifier

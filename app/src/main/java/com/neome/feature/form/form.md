@@ -600,7 +600,7 @@ fun Form(
 
 > **File:** `presentation/components/base/FieldFactory.kt`
 
-Routes `defnComp.type` to correct field renderer. Supported types (25):
+Routes `defnComp.type` to correct field renderer. Supported types (26):
 
 | Category  | Types                                                               |
 |-----------|---------------------------------------------------------------------|
@@ -610,7 +610,7 @@ Routes `defnComp.type` to correct field renderer. Supported types (25):
 | Boolean   | `bool` (renders as Switch)                                          |
 | Pick       | `pickText` (dropdown via RawPickerSingleSelect)              |
 | Set        | `setOfText` (multi-select via RawPickerMultiSelect)          |
-| Media     | `image`, `document`                                                 |
+| Media     | `image`, `document`, `signature`                                    |
 | Action    | `button` (4 variants: contained/outlined/text/icon)                 |
 | Composite | `section`, `tab`                                                    |
 | TODO      | `grid`                                                              |
@@ -655,7 +655,7 @@ Wraps all fields with consistent `Column(fillMaxWidth)` + padding (16dp horizont
 - Content area with `verticalScroll`
 - Renders selected tab content via `FieldFactory`
 
-### Field Implementations (25 files)
+### Field Implementations (26 files)
 
 **Field Component Pattern:**
 
@@ -707,9 +707,10 @@ fun FieldX(defnComp: DefnCompSeal, onFieldEvent: (FieldEvent) -> Unit) {
 
 | Component       | Special Features                                                |
 |-----------------|-----------------------------------------------------------------|
-| `FieldSwitch`   | Render modes: Switch/Checkbox, labelPlacement, capture metadata |
-| `FieldImage`    | File picker, size validation, zoomable preview dialog           |
-| `FieldDocument` | 40+ MIME types, size display, system preview via Intent         |
+| `FieldSwitch`    | Render modes: Switch/Checkbox, labelPlacement, capture metadata                        |
+| `FieldImage`     | File picker, size validation, zoomable preview dialog                                  |
+| `FieldDocument`  | 40+ MIME types, size display, system preview via Intent                                |
+| `FieldSignature` | Non-editable text field with clear icon, capture metadata, UI-only (capture logic TODO) |
 
 **Pick/Selection Fields:**
 
@@ -758,7 +759,8 @@ Form (provides LocalFormCtx)
             ├── Pick: FieldPickText
             ├── Set: FieldSetOfText
             ├── Action: FieldButton (contained/outlined/text/icon)
-            └── Media: FieldImage, FieldDocument
+            ├── Media: FieldImage, FieldDocument
+            └── Signature: FieldSignature
 ```
 
 ---
@@ -1064,6 +1066,16 @@ app/src/main/java/com/neome/feature/form/
 - **Architecture Improvements**:
   - Event props now reset before each event cycle (`executeEvents()` starts with `formEventPropsMap = emptyMap()`)
   - Single responsibility: Event props merging happens once per cycle, not in `triggerField()`
+
+### v1.16.0 (2026-02-20)
+
+- **Feature**: Added `FieldSignature` component — renders a non-editable text field for signature display
+- **Added**: `presentation/components/field/FieldSignature.kt` — stateful wrapper + stateless `SignatureTextField`
+  - Non-editable `OutlinedTextField` showing `FieldValueSignatureData.signature` value
+  - Trailing clear (cross) icon to reset value, enabled only when interactive and has value
+  - Conditional `RawCaptureExtraProperties` for capture metadata (time, user, location)
+  - Actual signature capture logic deferred to future implementation
+- **Modified**: `presentation/components/base/FieldFactory.kt` — added `EnumDefnCompType.signature -> FieldSignature(...)` routing
 
 ### v1.15.1 (2026-02-18)
 
