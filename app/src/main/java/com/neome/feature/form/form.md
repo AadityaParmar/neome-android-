@@ -4,8 +4,8 @@
 
 | Property           | Value                                       |
 |--------------------|---------------------------------------------|
-| **Version**        | 1.15.1                                      |
-| **Last Updated**   | 2026-02-18                                  |
+| **Version**        | 1.16.0                                      |
+| **Last Updated**   | 2026-02-20                                  |
 | **Scope**          | Android Form Component Architecture         |
 | **Path**           | `app/src/main/java/com/neome/feature/form/` |
 | **Update Trigger** | Any modification to form component files    |
@@ -1042,6 +1042,28 @@ app/src/main/java/com/neome/feature/form/
 ---
 
 ## Changelog
+
+### v1.16.0 (2026-02-20)
+
+- **Critical Fixes**: Cascaded `setValue`/`clear` targets now properly re-triggered with property recalculation and validation
+  - Added `EventExecutionResult` data class containing `affectedFieldIds` set
+  - New `executeEvents()` method resets `formEventPropsMap` before event execution (fixes stale visibility/disability)
+  - `retriggerAffectedFields()` method re-triggers all affected fields with visited deduplication
+  - `syncInvalidFlag()` method synchronizes `SendBtnDisableFlag.Invalid` with final error state
+- **Bug Fixes**:
+  - `handleFieldValueChanged`: Now calls `retriggerAffectedFields()` after event execution
+  - `handleClick` and `handleSubmit`: Updated to use `executeEvents()` API
+  - `FormCtxFormEvents.clear`: Fixed `isDirty` calculation to compare with `defaultValue` (was hardcoded `false`)
+- **Code Quality**:
+  - Removed `println` debug statements, replaced with `Log.d()` / `Log.w()`
+  - `ConditionResolver`: Replaced silent exception catches with `Log.w()` for parse failures
+  - Removed duplicate event props merge from `triggerField()` (now central in `mergeEventPropsIntoFieldStates()`)
+- **Observability**:
+  - Added `TAG` constants for structured logging (`FormCtxFormEvents`, `ConditionResolver`)
+  - `Log.w()` for max cascade depth reached during event execution
+- **Architecture Improvements**:
+  - Event props now reset before each event cycle (`executeEvents()` starts with `formEventPropsMap = emptyMap()`)
+  - Single responsibility: Event props merging happens once per cycle, not in `triggerField()`
 
 ### v1.15.1 (2026-02-18)
 

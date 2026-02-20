@@ -10878,20 +10878,6 @@
           "disabled": false
         },
         "mfd-HxbXkSxSQY": {
-          "defaultVar": {
-            "value": [
-              "static ",
-              "{\"kind\":\"context\",\"argValue\":{\"attribute\":\"nickName\",\"kind\":\"caller\"}}",
-              "  ",
-              "{\"kind\":\"variable\",\"argValue\":{\"varId\":\"mw-VJorq1gJUW\"},\"customValueMap\":{\"id\":\"mw-VJorq1gJUW\",\"name\":\"VarDate\",\"kind\":\"date\",\"customDate\":\"2026-02-12T18:30:00.000Z\"}}",
-              " ",
-              "{\"kind\":\"field\",\"argValue\":{\"compositeId\":\"msc-MgknD5pYZT\",\"fieldId\":\"mfd-qDpfN1vSGT\"}}",
-              " ",
-              "{\"kind\":\"variable\",\"argValue\":{\"varId\":\"mw-iUn8KLLpV5\"},\"customValueMap\":{\"id\":\"mw-iUn8KLLpV5\",\"name\":\"VarDateTime\",\"kind\":\"dateTime\",\"customDate\":\"2026-02-12T22:30:00.000Z\"}}",
-              " ",
-              "{\"kind\":\"variable\",\"argValue\":{\"varId\":\"mw-sGnqJaflD1\"},\"customValueMap\":{\"id\":\"mw-sGnqJaflD1\",\"name\":\"VarTime\",\"kind\":\"time\",\"customValue\":\"00:00:00\"}}"
-            ]
-          },
           "requiredFieldId": "mfd-qDpfN1vSGT",
           "placeHolderFieldId": "mfd-63HKAMm6LQ",
           "helperTextFieldId": "mfd-q96ZG1wLEp",
@@ -10917,7 +10903,6 @@
           }
         },
         "mfd-63HKAMm6LQ": {
-          "defaultValue": "place holder",
           "metaId": "mfd-63HKAMm6LQ",
           "name": "Placeholder",
           "type": "text",
@@ -10932,12 +10917,6 @@
           }
         },
         "mfd-q96ZG1wLEp": {
-          "defaultVar": {
-            "value": [
-              "",
-              "{\"kind\":\"field\",\"argValue\":{\"compositeId\":\"msc-MgknD5pYZT\",\"fieldId\":\"mfd-63HKAMm6LQ\"}}"
-            ]
-          },
           "metaId": "mfd-q96ZG1wLEp",
           "name": "Helpertext",
           "type": "text",
@@ -11030,17 +11009,20 @@
           "mfe-8CFOJF8Rp8": {
             "metaId": "mfe-8CFOJF8Rp8",
             "name": "Event101",
-            "kind": "onInitForm",
+            "kind": "onChange",
+            "eventFieldIdSet": [
+              "mfd-qDpfN1vSGT"
+            ],
             "actionBindingMap": {
               "keys": [
-                "meb-AQDGszMt7j"
+                "meb-Q9VdAFaesp"
               ],
               "map": {
-                "meb-AQDGszMt7j": {
-                  "metaId": "meb-AQDGszMt7j",
-                  "name": "Event1",
-                  "actionId": "mea-1CuIOLsMo1",
-                  "conditionId": "mec-oRANqqyUVL"
+                "meb-Q9VdAFaesp": {
+                  "metaId": "meb-Q9VdAFaesp",
+                  "name": "A1",
+                  "actionId": "mea-9bYO9HmrXm",
+                  "conditionId": "mec-0MH1XEasV4"
                 }
               }
             }
@@ -11048,13 +11030,13 @@
         },
         "conditions": {
           "map": {
-            "mec-oRANqqyUVL": {
-              "metaId": "mec-oRANqqyUVL",
+            "mec-0MH1XEasV4": {
+              "metaId": "mec-0MH1XEasV4",
               "statement": {
-                "lhs": "mfd-HxbXkSxSQY",
+                "lhs": "mfd-qDpfN1vSGT",
                 "operator": "equalTo",
                 "rhs": {
-                  "valueFieldId": "mfd-q96ZG1wLEp"
+                  "valueBoolean": true
                 }
               }
             }
@@ -11062,21 +11044,18 @@
         },
         "actions": {
           "map": {
-            "mea-1CuIOLsMo1": {
-              "metaId": "mea-1CuIOLsMo1",
+            "mea-9bYO9HmrXm": {
+              "metaId": "mea-9bYO9HmrXm",
               "name": "A1",
-              "kind": "clear",
+              "kind": "setValue",
               "actionOn": "field",
               "compIdSet": [
-                "mfd-HxbXkSxSQY",
-                "mfd-qDpfN1vSGT",
-                "mfd-63HKAMm6LQ",
                 "mfd-q96ZG1wLEp",
-                "mfd-9RKtsdg0Db",
-                "mfd-ZuQoq66Rz9",
-                "mfd-wIACoHHagW",
-                "mfd-QtN0Joxw3j"
-              ]
+                "mfd-63HKAMm6LQ"
+              ],
+              "source": {
+                "valueFieldId": "mfd-HxbXkSxSQY"
+              }
             }
           }
         }
@@ -15548,5 +15527,5 @@
       ]
     }
   },
-  "version": "kp5EpsfydltQVyUJijW7sU3D3|gh-q3QtIvpx7feH1HBVV8ErkHUIV|en|RaxYwBMRq43uBwELyk24rjkeC"
+  "version": "opuRtSc5JM6XExJnGWXvcYCyJ|gh-q3QtIvpx7feH1HBVV8ErkHUIV|en|RaxYwBMRq43uBwELyk24rjkeC"
 }
