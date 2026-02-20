@@ -137,4 +137,14 @@ sealed interface FormEvent : UiEvent {
      * When all flags are removed, the send button is enabled.
      */
     data class RemoveSendBtnDisableFlag(val flag: SendBtnDisableFlag) : FormEvent
+
+    // ==================== Click Events ====================
+
+    /**
+     * Field/component was clicked.
+     * Triggers onClickButton form events defined for this component.
+     */
+    data class Click(
+        val buttonCompId: MetaIdComp
+    ) : FormEvent
 }

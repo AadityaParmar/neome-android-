@@ -65,14 +65,19 @@ fun FieldButton(
         onFieldEvent = onFieldEvent
     )
 
-    if (fieldController.fieldId == null) return
+    val buttonId = fieldController.fieldId ?: return
 
     val (properties, _) = fieldController.field.value
 
     if (properties.hidden) return
 
-    FieldBase(modifier = modifier) {
-        FieldButtonContent(properties = properties)
+    FieldBase(modifier = modifier, properties = properties) {
+        FieldButtonContent(
+            properties = properties,
+            onClick = {
+                onFieldEvent(FieldEvent.Click(buttonId))
+            }
+        )
     }
 }
 
@@ -86,11 +91,13 @@ fun FieldButton(
  * so text/icons stay legible against custom backgrounds.
  *
  * @param properties Resolved field properties
- * @param modifier   Modifier for customization
+ * @param onClick     Callback invoked when the button is clicked
+ * @param modifier    Modifier for customization
  */
 @Composable
 internal fun FieldButtonContent(
     properties: FieldProperties,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val variant = properties.buttonVariant ?: EnumDefnThemeButtonVariant.contained.value
@@ -132,7 +139,7 @@ internal fun FieldButtonContent(
                         IconButtonDefaults.iconButtonColors()
                     }
                     IconButton(
-                        onClick = { /* action handled externally */ },
+                        onClick = onClick,
                         enabled = isEnabled,
                         colors  = colors
                     ) {
@@ -152,7 +159,7 @@ internal fun FieldButtonContent(
                     ButtonDefaults.textButtonColors()
                 }
                 TextButton(
-                    onClick = { /* action handled externally */ },
+                    onClick = onClick,
                     enabled = isEnabled,
                     colors  = colors
                 ) {
@@ -171,7 +178,7 @@ internal fun FieldButtonContent(
                     ButtonDefaults.outlinedButtonColors()
                 }
                 OutlinedButton(
-                    onClick = { /* action handled externally */ },
+                    onClick = onClick,
                     enabled = isEnabled,
                     colors  = colors
                 ) {
@@ -190,7 +197,7 @@ internal fun FieldButtonContent(
                     ButtonDefaults.buttonColors()
                 }
                 Button(
-                    onClick = { /* action handled externally */ },
+                    onClick = onClick,
                     enabled = isEnabled,
                     colors  = colors,
                     elevation = if (properties.disableElevation == true) {

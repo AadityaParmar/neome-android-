@@ -58,11 +58,12 @@ class FormCtxImpl(
             is FormEvent.SetFieldError -> FormCtxValidationHelper.handleSetFieldError(state, event)
             is FormEvent.ClearFieldError -> FormCtxValidationHelper.handleClearFieldError(state, event)
             is FormEvent.ClearAllErrors -> FormCtxValidationHelper.handleClearAllErrors(state)
-            is FormEvent.Submit -> FormCtxEventHelper.handleSubmit(state)
+            is FormEvent.Submit -> FormCtxEventHelper.handleSubmit(state, defnForm)
             is FormEvent.Reset -> FormCtxEventHelper.handleReset(state, event)
             is FormEvent.SetValues -> FormCtxEventHelper.handleSetValues(state, event, defnForm)
             is FormEvent.AddSendBtnDisableFlag -> handleAddSendBtnDisableFlag(state, event)
             is FormEvent.RemoveSendBtnDisableFlag -> handleRemoveSendBtnDisableFlag(state, event)
+            is FormEvent.Click -> FormCtxEventHelper.handleClick(state, event, defnForm)
         }
     }
 

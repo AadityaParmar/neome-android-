@@ -34,6 +34,13 @@ sealed interface FieldEvent {
     data class Blurred(
         override val fieldId: MetaIdComp
     ) : FieldEvent
+
+    /**
+     * Field/component was clicked.
+     */
+    data class Click(
+        override val fieldId: MetaIdComp
+    ) : FieldEvent
 }
 
 /**

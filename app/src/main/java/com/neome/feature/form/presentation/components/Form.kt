@@ -16,6 +16,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
 import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.domain.ctx.FormCtxImpl
@@ -98,6 +99,10 @@ fun Form(
 
                         is FieldEvent.Blurred -> {
                             formCtx.dispatch(FormEvent.FieldBlurred(fieldEvent.fieldId))
+                        }
+
+                        is FieldEvent.Click -> {
+                            formCtx.dispatch(FormEvent.Click(fieldEvent.fieldId))
                         }
                     }
                 }

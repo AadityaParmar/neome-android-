@@ -157,7 +157,32 @@ object FormCtxEventHelper {
         return FormReducerResult(newState)
     }
 
-    fun handleSubmit(state: FormState): FormReducerResult {
+    fun handleClick(
+        state: FormState,
+        event: FormEvent.Click,
+        defnForm: DefnFormUi
+    ): FormReducerResult {
+        var newState = state
+
+        // Execute onClickButton form events for this component
+        val categorizedEvents = newState.categorizedEvents
+        if (categorizedEvents != null) {
+            val onClickButtonEventIds = categorizedEvents.onClickButtonMap[event.buttonCompId]
+            if (!onClickButtonEventIds.isNullOrEmpty()) {
+                for (eventId in onClickButtonEventIds) {
+                    newState = FormCtxFormEvents.executeEvent(
+                        eventId = eventId,
+                        state = newState,
+                        defnForm = defnForm
+                    )
+                }
+            }
+        }
+
+        return FormReducerResult(newState)
+    }
+
+    fun handleSubmit(state: FormState, defnForm: DefnFormUi): FormReducerResult {
         val validationResult = FormCtxValidationHelper.handleValidateAll(state)
         val validatedState = validationResult.state
 
@@ -165,8 +190,24 @@ object FormCtxEventHelper {
             return FormReducerResult(validatedState)
         }
 
-        val newState = validatedState.copy(isSubmitting = true)
-        val intent = FormIntent.Submit(valueMap = validatedState.valueMap)
+        // Execute onSubmitForm events before submitting
+        var finalState = validatedState
+        val categorizedEvents = validatedState.categorizedEvents
+        if (categorizedEvents != null) {
+            val onSubmitFormEventIds = categorizedEvents.onSubmitFormList
+            if (!onSubmitFormEventIds.isNullOrEmpty()) {
+                for (eventId in onSubmitFormEventIds) {
+                    finalState = FormCtxFormEvents.executeEvent(
+                        eventId = eventId,
+                        state = finalState,
+                        defnForm = defnForm
+                    )
+                }
+            }
+        }
+
+        val newState = finalState.copy(isSubmitting = true)
+        val intent = FormIntent.Submit(valueMap = finalState.valueMap)
 
         return FormReducerResult(newState, intent)
     }
