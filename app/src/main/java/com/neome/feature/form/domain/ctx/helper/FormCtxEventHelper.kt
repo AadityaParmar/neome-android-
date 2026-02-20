@@ -7,8 +7,10 @@ import com.neome.feature.form.domain.util.FieldPropertyResolver
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormEvent
+import com.neome.feature.form.presentation.state.FormEventProps
 import com.neome.feature.form.presentation.state.FormIntent
 import com.neome.feature.form.presentation.state.FormState
+import com.neome.feature.form.presentation.state.SendBtnDisableFlag
 import kotlinx.serialization.json.JsonElement
 
 object FormCtxEventHelper {
@@ -41,7 +43,8 @@ object FormCtxEventHelper {
             valueMap = newValueMap,
             errors = state.errors,
             defnForm = defnForm,
-            compSchemaMap = state.compSchemaMap
+            compSchemaMap = state.compSchemaMap,
+            formEventPropsMap = state.formEventPropsMap
         ) ?: TriggerResult(newFieldStates, state.errors)
 
         // Then trigger dependent fields
@@ -52,7 +55,8 @@ object FormCtxEventHelper {
             dependentIds = dependents,
             defnForm = defnForm,
             errors = currentFieldTriggerResult.errors,
-            compSchemaMap = state.compSchemaMap
+            compSchemaMap = state.compSchemaMap,
+            formEventPropsMap = state.formEventPropsMap
         )
 
         var newState = state.copy(
@@ -61,28 +65,39 @@ object FormCtxEventHelper {
             errors = triggerResult.errors
         )
 
-        val intent = FormIntent.Watch(
-            fieldId = event.fieldId,
-            fieldValue = event.value,
-            valueMap = newState.valueMap
-        )
-
         // Execute onChange form events for this field
         val categorizedEvents = newState.categorizedEvents
         if (categorizedEvents != null) {
             val onChangeEventIds = categorizedEvents.onChangeMap[event.fieldId]
             if (!onChangeEventIds.isNullOrEmpty()) {
-                var stateAfterEvents = newState
-                for (eventId in onChangeEventIds) {
-                    stateAfterEvents = FormCtxFormEvents.executeEvent(
-                        eventId = eventId,
-                        state = stateAfterEvents,
+                val eventResult = FormCtxFormEvents.executeEvents(
+                    eventIds = onChangeEventIds,
+                    state = newState,
+                    defnForm = defnForm,
+                    categorizedEvents = categorizedEvents
+                )
+                newState = eventResult.state
+
+                // Re-trigger fields whose values were modified by setValue/clear actions
+                // so their properties are recalculated and they are validated
+                if (eventResult.affectedFieldIds.isNotEmpty()) {
+                    newState = retriggerAffectedFields(
+                        state = newState,
+                        affectedFieldIds = eventResult.affectedFieldIds,
                         defnForm = defnForm
                     )
                 }
-                newState = stateAfterEvents
             }
         }
+
+        // Update SendBtnDisableFlag.Invalid based on final error state
+        newState = syncInvalidFlag(newState)
+
+        val intent = FormIntent.Watch(
+            fieldId = event.fieldId,
+            fieldValue = event.value,
+            valueMap = newState.valueMap
+        )
 
         return FormReducerResult(newState, intent)
     }
@@ -146,7 +161,8 @@ object FormCtxEventHelper {
             valueMap = state.valueMap,
             errors = state.errors,
             defnForm = defnForm,
-            compSchemaMap = state.compSchemaMap
+            compSchemaMap = state.compSchemaMap,
+            formEventPropsMap = state.formEventPropsMap
         ) ?: return FormReducerResult(state)
 
         val newState = state.copy(
@@ -169,15 +185,26 @@ object FormCtxEventHelper {
         if (categorizedEvents != null) {
             val onClickButtonEventIds = categorizedEvents.onClickButtonMap[event.buttonCompId]
             if (!onClickButtonEventIds.isNullOrEmpty()) {
-                for (eventId in onClickButtonEventIds) {
-                    newState = FormCtxFormEvents.executeEvent(
-                        eventId = eventId,
+                val eventResult = FormCtxFormEvents.executeEvents(
+                    eventIds = onClickButtonEventIds,
+                    state = newState,
+                    defnForm = defnForm
+                )
+                newState = eventResult.state
+
+                // Re-trigger fields whose values were modified by setValue/clear actions
+                if (eventResult.affectedFieldIds.isNotEmpty()) {
+                    newState = retriggerAffectedFields(
                         state = newState,
+                        affectedFieldIds = eventResult.affectedFieldIds,
                         defnForm = defnForm
                     )
                 }
             }
         }
+
+        // Update SendBtnDisableFlag.Invalid based on final error state
+        newState = syncInvalidFlag(newState)
 
         return FormReducerResult(newState)
     }
@@ -196,10 +223,18 @@ object FormCtxEventHelper {
         if (categorizedEvents != null) {
             val onSubmitFormEventIds = categorizedEvents.onSubmitFormList
             if (!onSubmitFormEventIds.isNullOrEmpty()) {
-                for (eventId in onSubmitFormEventIds) {
-                    finalState = FormCtxFormEvents.executeEvent(
-                        eventId = eventId,
+                val eventResult = FormCtxFormEvents.executeEvents(
+                    eventIds = onSubmitFormEventIds,
+                    state = finalState,
+                    defnForm = defnForm
+                )
+                finalState = eventResult.state
+
+                // Re-trigger fields whose values were modified by onSubmit events
+                if (eventResult.affectedFieldIds.isNotEmpty()) {
+                    finalState = retriggerAffectedFields(
                         state = finalState,
+                        affectedFieldIds = eventResult.affectedFieldIds,
                         defnForm = defnForm
                     )
                 }
@@ -276,7 +311,8 @@ object FormCtxEventHelper {
                 valueMap = updatedValueMap,
                 errors = currentErrors,
                 defnForm = defnForm,
-                compSchemaMap = state.compSchemaMap
+                compSchemaMap = state.compSchemaMap,
+                formEventPropsMap = state.formEventPropsMap
             )
             if (fieldTriggerResult != null) {
                 currentFieldStates = fieldTriggerResult.fieldStates
@@ -291,7 +327,8 @@ object FormCtxEventHelper {
                 dependentIds = dependents,
                 defnForm = defnForm,
                 errors = currentErrors,
-                compSchemaMap = state.compSchemaMap
+                compSchemaMap = state.compSchemaMap,
+                formEventPropsMap = state.formEventPropsMap
             )
             currentFieldStates = dependentResult.fieldStates
             currentErrors = dependentResult.errors
@@ -311,7 +348,8 @@ object FormCtxEventHelper {
         dependentIds: Set<MetaIdComp>,
         defnForm: DefnFormUi,
         errors: Map<MetaIdComp, FieldError>,
-        compSchemaMap: Map<MetaIdComp, CompSchema>
+        compSchemaMap: Map<MetaIdComp, CompSchema>,
+        formEventPropsMap: Map<MetaIdComp, FormEventProps> = emptyMap()
     ): TriggerResult {
         if (dependentIds.isEmpty()) return TriggerResult(fieldStates, errors)
 
@@ -325,7 +363,8 @@ object FormCtxEventHelper {
                 valueMap = valueMap,
                 errors = updatedErrors,
                 defnForm = defnForm,
-                compSchemaMap = compSchemaMap
+                compSchemaMap = compSchemaMap,
+                formEventPropsMap = formEventPropsMap
             ) ?: return@forEach
 
             updatedFieldStates = result.fieldStates
@@ -336,7 +375,11 @@ object FormCtxEventHelper {
     }
 
     /**
-     * Trigger a single field: recalculate properties and validate.
+     * Trigger a single field: recalculate properties from definition, apply event prop
+     * overrides, and validate.
+     *
+     * Event props merging uses OR semantics — event overrides can only **add** restrictions
+     * (hidden, disabled), never remove definition-level flags.
      *
      * @return Updated field states and errors, or null if field/defnComp not found
      */
@@ -346,18 +389,24 @@ object FormCtxEventHelper {
         valueMap: Map<MetaIdComp, JsonElement>,
         errors: Map<MetaIdComp, FieldError>,
         defnForm: DefnFormUi,
-        compSchemaMap: Map<MetaIdComp, CompSchema>
+        compSchemaMap: Map<MetaIdComp, CompSchema>,
+        formEventPropsMap: Map<MetaIdComp, FormEventProps> = emptyMap()
     ): TriggerResult? {
         defnForm.compMap[fieldId] ?: return null
         val currentFieldState = fieldStates[fieldId] ?: return null
 
-        // 1. Recalculate field properties
+        // 1. Recalculate field properties from definition
         val newFieldState = calcCompProperties(
             fieldId = fieldId,
             currentFieldState = currentFieldState,
             defnForm = defnForm,
             valueMap = valueMap
         )
+
+        // Note: Event props merging is handled centrally by
+        // FormCtxFormEvents.mergeEventPropsIntoFieldStates() after event execution.
+        // triggerField only recalculates definition-level properties.
+
         val updatedFieldStates = fieldStates + (fieldId to newFieldState)
 
         // 2. Validate field and update errors
@@ -413,6 +462,96 @@ object FormCtxEventHelper {
 
         val error = schema.validate(fieldValue, fieldState)
         return FormCtxValidationHelper.updateFieldError(fieldId, error, errors)
+    }
+
+    /**
+     * Re-triggers fields whose values were modified by form event actions (setValue/clear).
+     * For each affected field: recalculates properties, validates, and triggers its dependents.
+     * This ensures cascaded value changes produce correct field properties and validation state.
+     *
+     * Uses a visited set to avoid processing the same field or dependent multiple times.
+     *
+     * @param state The current form state after event execution
+     * @param affectedFieldIds Fields whose values were changed by events
+     * @param defnForm The form definition
+     * @return Updated state with recalculated properties and validation for affected fields
+     */
+    private fun retriggerAffectedFields(
+        state: FormState,
+        affectedFieldIds: Set<MetaIdComp>,
+        defnForm: DefnFormUi
+    ): FormState {
+        var currentFieldStates = state.fieldStates
+        var currentErrors = state.errors
+        val visited = mutableSetOf<MetaIdComp>()
+
+        for (fieldId in affectedFieldIds) {
+            if (!visited.add(fieldId)) continue
+
+            val result = triggerField(
+                fieldId = fieldId,
+                fieldStates = currentFieldStates,
+                valueMap = state.valueMap,
+                errors = currentErrors,
+                defnForm = defnForm,
+                compSchemaMap = state.compSchemaMap,
+                formEventPropsMap = state.formEventPropsMap
+            )
+            if (result != null) {
+                currentFieldStates = result.fieldStates
+                currentErrors = result.errors
+            }
+
+            // Also trigger dependents of the affected field
+            val dependents = state.fieldDependencies.getDependents(fieldId)
+            for (depId in dependents) {
+                if (!visited.add(depId)) continue
+
+                val depResult = triggerField(
+                    fieldId = depId,
+                    fieldStates = currentFieldStates,
+                    valueMap = state.valueMap,
+                    errors = currentErrors,
+                    defnForm = defnForm,
+                    compSchemaMap = state.compSchemaMap,
+                    formEventPropsMap = state.formEventPropsMap
+                )
+                if (depResult != null) {
+                    currentFieldStates = depResult.fieldStates
+                    currentErrors = depResult.errors
+                }
+            }
+        }
+
+        return state.copy(
+            fieldStates = currentFieldStates,
+            errors = currentErrors
+        )
+    }
+
+    /**
+     * Synchronizes [SendBtnDisableFlag.Invalid] with current error state.
+     * Adds the flag if errors exist, removes it if no errors.
+     * This ensures the send button state is always consistent after
+     * any operation that may change errors (value changes, event execution).
+     *
+     * @return Updated state with correct disableSendBtnSet
+     */
+    private fun syncInvalidFlag(state: FormState): FormState {
+        val hasErrors = state.errors.isNotEmpty()
+        val hasInvalidFlag = SendBtnDisableFlag.Invalid in state.disableSendBtnSet
+
+        return when {
+            hasErrors && !hasInvalidFlag -> {
+                state.copy(disableSendBtnSet = state.disableSendBtnSet + SendBtnDisableFlag.Invalid)
+            }
+
+            !hasErrors && hasInvalidFlag -> {
+                state.copy(disableSendBtnSet = state.disableSendBtnSet - SendBtnDisableFlag.Invalid)
+            }
+
+            else -> state
+        }
     }
 
     /**
