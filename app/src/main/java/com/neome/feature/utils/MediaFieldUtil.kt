@@ -45,7 +45,8 @@ data class MediaMetaData(
  * Usage:
  * ```
  * val util = MediaFieldUtil(context)
- * util.getFieldImageMetaData(filePickerResult) { metaData ->
+ * val metaData = util.getFieldImageMetaData(filePickerResult)
+ * if (metaData != null) {
  *     // Use metaData.compressedImage, metaData.blurImage, metaData.primaryColor
  * }
  * ```
@@ -56,15 +57,15 @@ class MediaFieldUtil(private val context: Context) {
      * Processes an image from the file picker and returns the media metadata.
      *
      * @param image The file picker result containing URI and file info
-     * @param cb Callback invoked with the processed MediaMetaData
+     * @return MediaMetaData if processing succeeds, null otherwise
      */
-    fun getFieldImageMetaData(image: FilePickerResult, cb: (MediaMetaData) -> Unit) {
+    fun getFieldImageMetaData(image: FilePickerResult): MediaMetaData? {
         // 1. Convert URI to ByteArray using ContentResolver
         val byteArray = context.contentResolver.openInputStream(image.uri)?.use {
             it.readBytes()
-        } ?: return
+        } ?: return null
 
-        if (byteArray.isEmpty()) return
+        if (byteArray.isEmpty()) return null
 
         // 2. Compress image
         val compressedImage = getCompressedImage(byteArray)
@@ -73,15 +74,13 @@ class MediaFieldUtil(private val context: Context) {
         val blurImage = getBlurImage(byteArray)
 
         // 4. Extract primary color
-        val primaryColor = getPrimaryColor(byteArray) ?: return
+        val primaryColor = getPrimaryColor(byteArray) ?: return null
 
-        // 5. Return MediaMetaData via callback
-        cb(
-            MediaMetaData(
-                compressedImage = compressedImage,
-                blurImage = blurImage,
-                primaryColor = primaryColor
-            )
+        // 5. Return MediaMetaData
+        return MediaMetaData(
+            compressedImage = compressedImage,
+            blurImage = blurImage,
+            primaryColor = primaryColor
         )
     }
 
@@ -89,13 +88,13 @@ class MediaFieldUtil(private val context: Context) {
      * Processes an image from camera capture and returns the media metadata.
      *
      * @param image The captured image containing raw bytes and metadata
-     * @param cb Callback invoked with the processed MediaMetaData
+     * @return MediaMetaData if processing succeeds, null otherwise
      */
-    fun getFieldCameraMetaData(image: CapturedImage, cb: (MediaMetaData) -> Unit) {
+    fun getFieldCameraMetaData(image: CapturedImage): MediaMetaData? {
         // 1. Use image.bytes directly
         val byteArray = image.bytes
 
-        if (byteArray.isEmpty()) return
+        if (byteArray.isEmpty()) return null
 
         // 2. Compress image
         val compressedImage = getCompressedImage(byteArray)
@@ -104,15 +103,13 @@ class MediaFieldUtil(private val context: Context) {
         val blurImage = getBlurImage(byteArray)
 
         // 4. Extract primary color
-        val primaryColor = getPrimaryColor(byteArray) ?: return
+        val primaryColor = getPrimaryColor(byteArray) ?: return null
 
-        // 5. Return MediaMetaData via callback
-        cb(
-            MediaMetaData(
-                compressedImage = compressedImage,
-                blurImage = blurImage,
-                primaryColor = primaryColor
-            )
+        // 5. Return MediaMetaData
+        return MediaMetaData(
+            compressedImage = compressedImage,
+            blurImage = blurImage,
+            primaryColor = primaryColor
         )
     }
 

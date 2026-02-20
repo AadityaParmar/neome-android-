@@ -29,11 +29,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.neome.api.meta.base.SysId
+import com.neome.api.meta.base.Types
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldCameraData
+import com.neome.core.common.serializer.api.meta.base.dto.FieldDtoImageData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueCameraData
 import com.neome.feature.camera.domain.model.CapturedImage
 import com.neome.feature.camera.presentation.capture.CameraCaptureScreen
@@ -41,6 +45,7 @@ import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldEvent
+import com.neome.feature.utils.MediaFieldUtil
 
 /**
  * Camera field component for form.
@@ -96,13 +101,34 @@ fun FieldCamera(
 
     val isInteractive = !properties.disabled && !properties.readOnly
 
+    val context = LocalContext.current
+
     // --- Camera dialog state -------------------------------------------------
     var showCamera by remember { mutableStateOf(false) }
 
-    // Empty stub — will process CapturedImage into FieldValueCameraData later
-    val onCameraCaptured: (CapturedImage) -> Unit = { capturedImage ->
-        // TODO: Convert CapturedImage to FieldValueCameraData,
-        //       upload to server, update field value via fieldController.onChange()
+    val onCameraCaptured: (CapturedImage) -> Unit = onCameraCaptured@{ capturedImage ->
+        val mediaFieldUtil = MediaFieldUtil(context)
+
+        val metaData = mediaFieldUtil.getFieldCameraMetaData(capturedImage)
+            ?: return@onCameraCaptured
+
+        // Store byteArrays in temp variables for later use (e.g., upload)
+        val compressedImageBytes = metaData.compressedImage
+        val blurImageBytes = metaData.blurImage
+
+        val fieldValueCameraData = FieldValueCameraData(
+            value = FieldDtoImageData(
+                fileName = capturedImage.mimeType,
+                width = capturedImage.width.toLong(),
+                height = capturedImage.height.toLong(),
+                size = capturedImage.bytes.size.toLong(),
+                mediaIdImage = SysId.nextId(Types.MediaIdImage::class.java),
+                mediaIdBlurImage = SysId.nextId(Types.MediaIdImage::class.java),
+                primaryColor = metaData.primaryColor.hexString
+            )
+        )
+
+        fieldController.onChange(fieldValueCameraData)
     }
 
     // --- Click detection on text field ---------------------------------------
