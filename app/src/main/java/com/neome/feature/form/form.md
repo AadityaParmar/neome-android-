@@ -4,7 +4,7 @@
 
 | Property           | Value                                       |
 |--------------------|---------------------------------------------|
-| **Version**        | 1.16.0                                      |
+| **Version**        | 1.16.1                                      |
 | **Last Updated**   | 2026-02-20                                  |
 | **Scope**          | Android Form Component Architecture         |
 | **Path**           | `app/src/main/java/com/neome/feature/form/` |
@@ -1073,8 +1073,14 @@ app/src/main/java/com/neome/feature/form/
 - **Added**: `presentation/components/field/FieldSignature.kt` — stateful wrapper + stateless `SignatureTextField`
   - Non-editable `OutlinedTextField` showing `FieldValueSignatureData.signature` value
   - Trailing clear (cross) icon to reset value, enabled only when interactive and has value
+  - Click-to-open interaction via `interactionSource` — tapping the field opens `SignatureDrawDialog`
   - Conditional `RawCaptureExtraProperties` for capture metadata (time, user, location)
-  - Actual signature capture logic deferred to future implementation
+- **Added**: `presentation/components/field/SignatureDrawDialog.kt` — full-screen signature drawing dialog
+  - Top bar with back arrow and "Draw signature" title
+  - Canvas drawing surface with `detectDragGestures` for freeform stroke capture
+  - Strokes rendered as `Path` objects with round cap/join styling
+  - Bottom bar with "Done" button
+  - Bitmap export and value persistence deferred to future implementation (UI-only)
 - **Modified**: `presentation/components/base/FieldFactory.kt` — added `EnumDefnCompType.signature -> FieldSignature(...)` routing
 
 ### v1.15.1 (2026-02-18)

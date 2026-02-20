@@ -1,5 +1,7 @@
 package com.neome.feature.form.presentation.components.field
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -11,6 +13,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
@@ -78,6 +85,25 @@ fun FieldSignature(
 
     val isInteractive = !properties.disabled && !properties.readOnly
 
+    // --- State ---------------------------------------------------------------
+    var showSignatureDialog by remember { mutableStateOf(false) }
+
+    // --- Click detection on text field ---------------------------------------
+    // When the user taps anywhere on the text field, open the signature dialog.
+    // Same interactionSource pattern as FieldCamera.kt.
+    val interactionSource = remember { MutableInteractionSource() }
+
+    LaunchedEffect(interactionSource, isInteractive) {
+        if (isInteractive) {
+            interactionSource.interactions.collect { interaction ->
+                if (interaction is PressInteraction.Release) {
+                    showSignatureDialog = true
+                }
+            }
+        }
+    }
+
+    // --- UI ------------------------------------------------------------------
     FieldBase(modifier = modifier, properties = properties) {
         SignatureTextField(
             displayValue = displayValue,
@@ -88,6 +114,7 @@ fun FieldSignature(
             isDisabled = properties.disabled,
             isInteractive = isInteractive,
             hasValue = hasValue,
+            interactionSource = interactionSource,
             onClearClick = { fieldController.onChange(null) }
         )
 
@@ -107,6 +134,17 @@ fun FieldSignature(
             )
         }
     }
+
+    // --- Signature draw dialog -----------------------------------------------
+    if (showSignatureDialog) {
+        SignatureDrawDialog(
+            onDismiss = { showSignatureDialog = false },
+            onConfirm = {
+                // TODO: capture drawn signature bitmap and persist as FieldValueSignatureData
+                showSignatureDialog = false
+            }
+        )
+    }
 }
 
 // =============================================================================
@@ -122,7 +160,9 @@ fun FieldSignature(
  * ----------------------------------------------------------
  * helper text || error text
  *
- * The text area is always read-only. The cross icon clears the value.
+ * Clicking anywhere on the text field (via [interactionSource]) triggers
+ * the signature draw dialog when the field is interactive.
+ * The cross icon clears the value.
  */
 @Composable
 private fun SignatureTextField(
@@ -134,6 +174,7 @@ private fun SignatureTextField(
     isDisabled: Boolean,
     isInteractive: Boolean,
     hasValue: Boolean,
+    interactionSource: MutableInteractionSource,
     onClearClick: () -> Unit
 ) {
     OutlinedTextField(
@@ -148,6 +189,7 @@ private fun SignatureTextField(
         readOnly = true,
         maxLines = 1,
         modifier = Modifier.fillMaxWidth(),
+        interactionSource = interactionSource,
         trailingIcon = {
             IconButton(
                 onClick = onClearClick,
