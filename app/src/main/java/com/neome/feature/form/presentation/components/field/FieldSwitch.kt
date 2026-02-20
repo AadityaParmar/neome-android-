@@ -61,9 +61,10 @@ fun FieldSwitch(
     // Read reactive field properties and error
     val (properties, error) = fieldController.field.value
 
-    if (properties.hidden) return
-
     val currentValue = fieldValue?.value ?: false
+
+    // Early return if field is hidden
+    if (properties.hidden) return
 
     // Render mode: resolved via FieldPropertyResolver.resolveShowAsCheckbox
     val showAsCheckbox = properties.showAsCheckbox == true
@@ -88,7 +89,7 @@ fun FieldSwitch(
     val captureLocation = fieldValue?.captureLocation
     val captureLocationLatLng = fieldValue?.captureLocation?.value?.geoPoint?.toString()
 
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         FieldSwitchContent(
             value = currentValue,
             label = properties.label,

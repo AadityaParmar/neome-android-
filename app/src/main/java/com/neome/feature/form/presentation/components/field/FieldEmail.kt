@@ -64,7 +64,7 @@ fun FieldEmail(
     val localEmailError = currentValue.isNotEmpty() && !currentValue.contains("@")
     val isError = error != null || localEmailError
 
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         OutlinedTextField(
             value = currentValue,
             label = properties.label?.let { { Text(it) } },

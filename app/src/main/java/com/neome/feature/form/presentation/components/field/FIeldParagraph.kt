@@ -58,7 +58,7 @@ fun FieldParagraph(
         fieldController.onChange(fieldValue)
     }
 
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         OutlinedTextField(
             value = fieldValue?.value.let { it ?: "" },
             label = properties.label?.let { { Text(it) } },

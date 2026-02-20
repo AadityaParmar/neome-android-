@@ -439,7 +439,7 @@ Handles all field-level events and cascading dependency updates.
 - `handleFieldValueChanged()` - Update value → trigger field + dependents → emit Watch intent
 - `handleFieldFocused/Blurred/Touched()` - Update interaction state
 - `handleTriggerField()` - Recalculate properties for single field
-- `handleSubmit()` - ValidateAll → emit Submit intent if valid
+- `handleSubmit()` - ValidateAll → execute onSubmitForm events → emit Submit intent if valid
 - `handleReset()` - Reset to initial or provided values
 - `handleSetValues()` - Batch update multiple field values
 - `triggerDependentFields()` - Walk dependency graph, recalculate dependents

@@ -16,6 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.neome.api.meta.base.Types.MetaIdComposite
+import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.dto.DefnTab
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.feature.form.domain.DefnFormUi
@@ -105,7 +106,7 @@ fun FieldTab(
 
 /**
  * Render content for a specific tab.
- * Renders the tab component and its children using FieldFactory.
+ * Renders tab component and its children using FieldFactory.
  */
 @Composable
 private fun RenderTabContent(
@@ -116,7 +117,7 @@ private fun RenderTabContent(
 ) {
     val tabComponent = defnForm.compMap[tabId]
 
-    // Render the tab component using FieldFactory
+    // Render tab component using FieldFactory
     // This will recursively render child components (e.g., sections with their fields)
     if (tabComponent != null) {
         FieldFactory(

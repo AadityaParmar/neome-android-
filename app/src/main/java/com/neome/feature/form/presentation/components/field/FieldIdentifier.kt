@@ -44,7 +44,7 @@ fun FieldIdentifier(
 
     val currentValue = fieldValue?.value ?: ""
 
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         OutlinedTextField(
             value = currentValue,
             onValueChange = {},

@@ -8,7 +8,7 @@ import com.neome.api.meta.base.dto.DefnEventAction
 import com.neome.api.meta.base.dto.FieldDtoArg
 import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.domain.util.ConditionResolver
-import com.neome.feature.form.presentation.state.FieldProperties
+import com.neome.feature.form.presentation.state.FormEventProps
 import com.neome.feature.form.presentation.state.FormState
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
@@ -201,48 +201,51 @@ object FormCtxFormEvents {
             }
 
             EnumDefnKindEventAction.visible -> {
-                updateFieldProperties(state, action.compIdSet) { props ->
-                    props.copy(hidden = false)
+                updateFormEventProps(state, action.compIdSet) { props ->
+                    props.copy(hidden = false, invisible = false)
                 }
             }
 
             EnumDefnKindEventAction.invisible -> {
-                updateFieldProperties(state, action.compIdSet) { props ->
-                    props.copy(hidden = true)
+                updateFormEventProps(state, action.compIdSet) { props ->
+                    props.copy(invisible = true)
                 }
             }
 
             EnumDefnKindEventAction.hidden -> {
-                updateFieldProperties(state, action.compIdSet) { props ->
+                updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(hidden = true)
                 }
             }
 
             EnumDefnKindEventAction.enable -> {
-                updateFieldProperties(state, action.compIdSet) { props ->
+                updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(disabled = false)
                 }
             }
 
             EnumDefnKindEventAction.disable -> {
-                updateFieldProperties(state, action.compIdSet) { props ->
+                updateFormEventProps(state, action.compIdSet) { props ->
                     props.copy(disabled = true)
                 }
             }
 
             EnumDefnKindEventAction.highlight -> {
-                println("FormCtxFormEvents: TODO ${action.kind}")
-                state
+                updateFormEventProps(state, action.compIdSet) { props ->
+                    props.copy(highlight = true)
+                }
             }
 
             EnumDefnKindEventAction.blink -> {
-                println("FormCtxFormEvents: TODO ${action.kind}")
-                state
+                updateFormEventProps(state, action.compIdSet) { props ->
+                    props.copy(blink = true)
+                }
             }
 
             EnumDefnKindEventAction.shake -> {
-                println("FormCtxFormEvents: TODO ${action.kind}")
-                state
+                updateFormEventProps(state, action.compIdSet) { props ->
+                    props.copy(shake = true)
+                }
             }
 
             EnumDefnKindEventAction.executeAction -> {
@@ -291,26 +294,25 @@ object FormCtxFormEvents {
     }
 
     /**
-     * Applies a property [update] function to the [FieldProperties] of each component
+     * Applies an [update] function to the [FormEventProps] of each component
      * in [compIdSet], returning an updated [FormState] via immutable copies.
      *
-     * Components not found in [FormState.fieldStates] are silently skipped.
+     * If a component has no existing [FormEventProps] entry, a default instance is created.
      */
-    private fun updateFieldProperties(
+    private fun updateFormEventProps(
         state: FormState,
         compIdSet: List<MetaIdComp>?,
-        update: (FieldProperties) -> FieldProperties
+        update: (FormEventProps) -> FormEventProps
     ): FormState {
         if (compIdSet.isNullOrEmpty()) return state
 
-        var updatedFieldStates = state.fieldStates
+        var updatedMap = state.formEventPropsMap
 
         for (compId in compIdSet) {
-            val fieldState = updatedFieldStates[compId] ?: continue
-            val updatedProperties = update(fieldState.fieldProperties)
-            updatedFieldStates = updatedFieldStates + (compId to fieldState.copy(fieldProperties = updatedProperties))
+            val current = updatedMap[compId] ?: FormEventProps()
+            updatedMap = updatedMap + (compId to update(current))
         }
 
-        return state.copy(fieldStates = updatedFieldStates)
+        return state.copy(formEventPropsMap = updatedMap)
     }
 }

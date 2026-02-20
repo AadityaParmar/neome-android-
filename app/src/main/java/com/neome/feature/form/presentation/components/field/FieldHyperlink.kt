@@ -161,7 +161,7 @@ fun FieldHyperlink(
     }
 
     // ========== REUSED FROM FieldText: FieldBase + OutlinedTextField UI ==========
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         OutlinedTextField(
             value = currentValue,
             onValueChange = ::onValueChange,

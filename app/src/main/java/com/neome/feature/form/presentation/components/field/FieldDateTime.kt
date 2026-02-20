@@ -194,7 +194,7 @@ fun FieldDateTime(
     }
 
     // ========== REUSED FROM FieldDate: FieldBase + OutlinedTextField UI ==========
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         OutlinedTextField(
             value = formatDateTimeForDisplay(currentValue),
             onValueChange = { /* Read-only, no manual text input */ },

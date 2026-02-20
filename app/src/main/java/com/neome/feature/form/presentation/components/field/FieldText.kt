@@ -46,14 +46,14 @@ fun FieldText(
     // Read reactive field properties and error
     val (properties, error) = fieldController.field.value
 
-    // Early return if field is hidden
-    if (properties.hidden) return
-
     // Get current text value from FieldValueTextData
     val currentValue = fieldValue?.value ?: ""
 
+    // Early return if field is hidden
+    if (properties.hidden) return
+
     // Delegate to stateless content for optimal recomposition
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         FieldTextContent(
             value = currentValue,
             label = properties.label,

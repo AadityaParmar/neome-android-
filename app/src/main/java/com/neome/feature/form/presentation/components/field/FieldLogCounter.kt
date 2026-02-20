@@ -60,7 +60,7 @@ fun FieldLogCounter(
     // val hideInfo = logCounterDefn.hideInfo == true
     // val logReadRoleSet = logCounterDefn.logReadRoleSet
 
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         FieldCounterContent(
             value = currentValue,
             label = properties.label,

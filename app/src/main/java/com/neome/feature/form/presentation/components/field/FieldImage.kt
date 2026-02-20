@@ -124,7 +124,7 @@ fun FieldImage(
     }
 
     // UI
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         ImageTextField(
             displayFileName = imageState.displayFileName,
             label = properties.label,

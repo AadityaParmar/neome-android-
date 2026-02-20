@@ -58,6 +58,14 @@ data class FormState(
      * Only contains schemas for leaf field types with validation rules.
      */
     val compSchemaMap: Map<MetaIdComp, CompSchema> = emptyMap(),
+
+    /**
+     * Event-driven property overrides per component.
+     * Set by form event actions (visible, invisible, hidden, enable, disable, highlight, blink, shake).
+     * Only contains entries for components that have been affected by at least one event action.
+     * @see FormEventProps
+     */
+    val formEventPropsMap: Map<MetaIdComp, FormEventProps> = emptyMap(),
     val categorizedEvents: FormCtxFormEvents.CategorizedEvents? = null,
 
     // Form-wide configuration

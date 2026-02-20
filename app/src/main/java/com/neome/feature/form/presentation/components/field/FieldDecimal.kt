@@ -69,7 +69,7 @@ fun FieldDecimal(
         // If parsing fails, don't update state (keep previous valid value)
     }
 
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         OutlinedTextField(
             value = currentValue,
             label = properties.label?.let { { Text(it) } },

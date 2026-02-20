@@ -147,8 +147,11 @@ fun deriveFieldUiState(
     formState: FormState
 ): FieldUiState {
     if (fieldId == null) return FieldUiState()
+
+    val properties = formState.getFieldState(fieldId)?.fieldProperties ?: FieldProperties()
+
     return FieldUiState(
-        properties = formState.getFieldState(fieldId)?.fieldProperties ?: FieldProperties(),
+        properties = properties,
         error = formState.getError(fieldId)
     )
 }

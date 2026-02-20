@@ -230,7 +230,7 @@ fun FieldDocument(
     val context = LocalContext.current
 
     // ========== REUSED FROM ImageField: UI ==========
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         DocumentTextField(
             displayFileName = documentState.displayFileName,
             fileSize = if (showFileSize) documentState.fileSizeBytes else null,

@@ -196,7 +196,7 @@ fun FieldDateRange(
     }
 
     // ========== UI: Two Date Fields Stacked Vertically ==========
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         Column(modifier = Modifier.fillMaxWidth()) {
             // ===== FROM DATE FIELD (reuses FieldDate OutlinedTextField pattern) =====
             OutlinedTextField(

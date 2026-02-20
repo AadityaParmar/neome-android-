@@ -364,7 +364,7 @@ fun FieldMobile(
     }
 
     // ========== REUSED FROM FieldText: FieldBase Wrapper ==========
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.Top

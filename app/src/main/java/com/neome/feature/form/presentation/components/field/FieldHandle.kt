@@ -219,7 +219,7 @@ fun FieldHandle(
     }
 
     // ========== REUSED FROM FieldEmail: FieldBase + OutlinedTextField UI ==========
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         OutlinedTextField(
             value = currentValue,
             onValueChange = ::onValueChange,

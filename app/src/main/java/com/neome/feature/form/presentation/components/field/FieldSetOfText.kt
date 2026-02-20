@@ -96,7 +96,7 @@ fun FieldSetOfText(
     val resolvedOptionMap = defn.optionMap ?: fetchedOptionMap
 
     // Delegate to stateless content for optimal recomposition
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         FieldSetOfTextContent(
             optionMap = resolvedOptionMap,
             selectedOptions = selectedOptionIds,

@@ -121,7 +121,7 @@ fun FieldCamera(
     }
 
     // --- UI ------------------------------------------------------------------
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         // Main text field row
         CameraTextField(
             displayFileName = displayFileName,

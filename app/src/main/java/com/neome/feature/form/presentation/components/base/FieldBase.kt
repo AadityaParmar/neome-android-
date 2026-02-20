@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.neome.feature.form.presentation.state.FieldProperties
 
 /**
  * Base component for all field components.
@@ -12,17 +13,21 @@ import androidx.compose.ui.Modifier
  * including consistent padding and spacing.
  *
  * @param modifier Modifier for customization
+ * @param properties Field properties
  * @param content The field content to be wrapped
  */
 @Composable
 fun FieldBase(
     modifier: Modifier = Modifier,
+    properties: FieldProperties,
     content: @Composable () -> Unit
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-    ) {
+    // Early return if field is hidden
+    if (properties.hidden) {
+        return
+    }
+
+    Column(modifier = modifier.fillMaxWidth()) {
         content()
     }
 }

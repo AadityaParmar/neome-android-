@@ -35,6 +35,26 @@ data class FieldState(
 }
 
 /**
+ * Event-driven properties set by form event actions ([EnumDefnKindEventAction]).
+ * Stored in [FormState.formEventPropsMap] per component ID.
+ * These override the corresponding [FieldProperties] values when present.
+ *
+ * All fields default to false (no override). When an event action fires,
+ * the relevant flag is set to true/false and takes precedence over
+ * the base [FieldProperties] computed from the form definition.
+ */
+@Immutable
+@Serializable
+data class FormEventProps(
+    val hidden: Boolean = false,
+    val invisible: Boolean = false,
+    val disabled: Boolean = false,
+    val highlight: Boolean = false,
+    val blink: Boolean = false,
+    val shake: Boolean = false
+)
+
+/**
  * Computed field properties.
  * Recalculated when field is triggered (on init or when dependent field changes).
  *

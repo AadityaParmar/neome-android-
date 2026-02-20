@@ -294,7 +294,7 @@ fun FieldDateTimeRange(
     }
 
     // ========== UI: Two DateTime Fields Stacked Vertically ==========
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         Column(modifier = Modifier.fillMaxWidth()) {
             // ===== FROM DATETIME FIELD =====
             OutlinedTextField(

@@ -67,7 +67,7 @@ fun FieldCounter(
     val defaultValue = counterDefn.defaultValue ?: counterDefn.minDisplayValue ?: 0L
     val hideLabel = counterDefn.hideLabel == true
 
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         FieldCounterContent(
             value = currentValue,
             label = properties.label,

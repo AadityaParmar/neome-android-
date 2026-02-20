@@ -96,7 +96,7 @@ fun FieldPickText(
     val resolvedOptionMap = defn.optionMap ?: fetchedOptionMap
 
     // Delegate to stateless content for optimal recomposition
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         FieldPickTextContent(
             optionMap = resolvedOptionMap,
             selectedOption = selectedOptionId,

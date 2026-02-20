@@ -108,7 +108,7 @@ fun FieldDate(
         }
     }
 
-    FieldBase(modifier = modifier) {
+    FieldBase(modifier = modifier, properties = properties) {
         OutlinedTextField(
             value = formatDateForDisplay(currentValue),
             onValueChange = { /* Read-only, no manual text input */ },
