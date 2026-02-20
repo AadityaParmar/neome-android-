@@ -112,6 +112,59 @@ fun ImagePreviewDialog(
     )
 }
 
+/**
+ * Full-screen image preview dialog for ByteArray-based images (e.g., camera capture).
+ *
+ * Same zoom/pan functionality as the URI variant but decodes directly from a ByteArray.
+ *
+ * @param byteArray Raw image bytes to preview
+ * @param fileName Name of the file for display in the dialog title
+ * @param onDismiss Callback when the dialog is dismissed
+ */
+@Composable
+fun ImagePreviewDialog(
+    byteArray: ByteArray,
+    fileName: String,
+    onDismiss: () -> Unit
+) {
+    val previewState = rememberImagePreviewState()
+
+    // Decode ByteArray to Bitmap on background thread
+    LaunchedEffect(byteArray) {
+        previewState.loadImage {
+            withContext(Dispatchers.IO) {
+                BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+            }
+        }
+    }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        properties = DialogProperties(usePlatformDefaultWidth = false),
+        title = {
+            Text(
+                text = fileName,
+                maxLines = 1
+            )
+        },
+        text = {
+            ImagePreviewContent(
+                bitmap = previewState.bitmap,
+                isLoading = previewState.isLoading,
+                scale = previewState.scale,
+                offsetX = previewState.offsetX,
+                offsetY = previewState.offsetY,
+                onTransformGesture = previewState::handleTransformGesture
+            )
+        },
+        confirmButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Close")
+            }
+        }
+    )
+}
+
 // ============================================================================
 // State Holder
 // ============================================================================

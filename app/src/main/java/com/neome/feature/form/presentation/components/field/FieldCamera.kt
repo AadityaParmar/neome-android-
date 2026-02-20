@@ -1,6 +1,9 @@
 package com.neome.feature.form.presentation.components.field
 
+import android.graphics.BitmapFactory
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Box
@@ -29,6 +32,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -103,8 +109,10 @@ fun FieldCamera(
 
     val context = LocalContext.current
 
-    // --- Camera dialog state -------------------------------------------------
+    // --- State ---------------------------------------------------------------
     var showCamera by remember { mutableStateOf(false) }
+    var showPreviewDialog by remember { mutableStateOf(false) }
+    var capturedImageBytes by remember { mutableStateOf<ByteArray?>(null) }
 
     val onCameraCaptured: (CapturedImage) -> Unit = onCameraCaptured@{ capturedImage ->
         val mediaFieldUtil = MediaFieldUtil(context)
@@ -115,6 +123,9 @@ fun FieldCamera(
         // Store byteArrays in temp variables for later use (e.g., upload)
         val compressedImageBytes = metaData.compressedImage
         val blurImageBytes = metaData.blurImage
+
+        // Store original bytes for preview
+        capturedImageBytes = capturedImage.bytes
 
         val fieldValueCameraData = FieldValueCameraData(
             value = FieldDtoImageData(
@@ -159,14 +170,20 @@ fun FieldCamera(
             isInteractive = isInteractive,
             hasImage = hasImage,
             interactionSource = interactionSource,
-            onPreviewClick = { /* TODO: open preview dialog */ },
-            onClearClick = { /* TODO: clear value via fieldController.onChange(null) */ }
+            onPreviewClick = { showPreviewDialog = true },
+            onClearClick = {
+                fieldController.onChange(null)
+                capturedImageBytes = null
+            }
         )
 
         // Conditional: image preview box
         if (hasImage) {
             Spacer(modifier = Modifier.height(8.dp))
-            CameraImagePreview()
+            CameraImagePreview(
+                imageBytes = capturedImageBytes,
+                onPreviewClick = { showPreviewDialog = true }
+            )
         }
 
         // Conditional: capture metadata rows
@@ -210,6 +227,15 @@ fun FieldCamera(
                 )
             }
         }
+    }
+
+    // --- Full-screen image preview dialog ------------------------------------
+    if (showPreviewDialog && capturedImageBytes != null) {
+        ImagePreviewDialog(
+            byteArray = capturedImageBytes!!,
+            fileName = displayFileName,
+            onDismiss = { showPreviewDialog = false }
+        )
     }
 }
 
@@ -317,30 +343,64 @@ private fun CameraTrailingIcons(
 }
 
 /**
- * Image preview placeholder box (150dp x 150dp).
+ * Image preview box (150dp x 150dp).
  *
- * Shows a bordered box with a centered camera icon as a placeholder.
- * Actual image loading via Coil/AsyncImage will be added later.
+ * Shows the captured image if bytes are available, otherwise a placeholder icon.
+ * Clicking the preview opens the full-screen preview dialog.
+ *
+ * @param imageBytes Raw image bytes to display, or null for placeholder
+ * @param onPreviewClick Callback when the preview is clicked
+ * @param modifier Modifier for customization
  */
 @Composable
 private fun CameraImagePreview(
+    imageBytes: ByteArray?,
+    onPreviewClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val shape = RoundedCornerShape(8.dp)
+
     Box(
         modifier = modifier
             .size(150.dp)
             .border(
                 width = 1.dp,
                 color = MaterialTheme.colorScheme.outlineVariant,
-                shape = RoundedCornerShape(8.dp)
-            ),
+                shape = shape
+            )
+            .clip(shape)
+            .clickable(onClick = onPreviewClick),
         contentAlignment = Alignment.Center
     ) {
-        Icon(
-            imageVector = Icons.Default.CameraAlt,
-            contentDescription = "Image preview placeholder",
-            modifier = Modifier.size(48.dp),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
-        )
+        if (imageBytes != null) {
+            val bitmap = remember(imageBytes) {
+                BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+            }
+            if (bitmap != null) {
+                Image(
+                    bitmap = bitmap.asImageBitmap(),
+                    contentDescription = "Captured image preview",
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+            } else {
+                CameraImagePlaceholder()
+            }
+        } else {
+            CameraImagePlaceholder()
+        }
     }
+}
+
+/**
+ * Placeholder icon shown when no image is available.
+ */
+@Composable
+private fun CameraImagePlaceholder() {
+    Icon(
+        imageVector = Icons.Default.CameraAlt,
+        contentDescription = "Image preview placeholder",
+        modifier = Modifier.size(48.dp),
+        tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
+    )
 }
