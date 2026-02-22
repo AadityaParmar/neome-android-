@@ -40,16 +40,17 @@ This skill file is the source of truth for AI assistants working on the form sys
 ## Table of Contents
 
 1. [Quick Reference](#quick-reference)
-2. [Architecture Overview](#architecture-overview)
-3. [Core Concepts](#core-concepts)
-4. [Domain Layer Classes](#domain-layer-classes)
-5. [Presentation Layer Classes](#presentation-layer-classes)
-6. [Component Hierarchy](#component-hierarchy)
-7. [Data Flow](#data-flow)
-8. [How-To Guides](#how-to-guides)
-9. [Troubleshooting](#troubleshooting)
-10. [File Structure](#file-structure)
-11. [Changelog](#changelog)
+2. [Modules and Utils Index](MODULES.md) — package path index of all modules/classes (separate file)
+3. [Architecture Overview](#architecture-overview)
+4. [Core Concepts](#core-concepts)
+5. [Domain Layer Classes](#domain-layer-classes)
+6. [Presentation Layer Classes](#presentation-layer-classes)
+7. [Component Hierarchy](#component-hierarchy)
+8. [Data Flow](#data-flow)
+9. [How-To Guides](#how-to-guides)
+10. [Troubleshooting](#troubleshooting)
+11. [File Structure](#file-structure)
+12. [Changelog](#changelog)
 
 ---
 
@@ -115,6 +116,12 @@ using skill : defnForm do [instruction]
 | Skill            | Purpose                                                                                                             |
 |------------------|---------------------------------------------------------------------------------------------------------------------|
 | `defnFieldMaker` | Step-by-step guide for adding new field types to FieldFactory. Use: `using skill : defnFieldMaker do [instruction]` |
+
+---
+
+**Modules and classes list:** see [MODULES.md](MODULES.md) for the full index of packages, files, and classes under `com.neome.feature.form`.
+
+**README init plan:** see [README-INIT-PLAN.md](README-INIT-PLAN.md) for a gradual checklist to create/update README.md per package using the init-readme protocol.
 
 ---
 

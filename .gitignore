@@ -129,3 +129,4 @@ androidTest-results/
 **/compose_compiler_config.conf
 **/compose_metrics/
 **/compose_reports/
+.opencode
