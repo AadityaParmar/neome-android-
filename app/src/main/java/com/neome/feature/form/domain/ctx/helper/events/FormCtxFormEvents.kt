@@ -66,9 +66,6 @@ object FormCtxFormEvents {
         )
     }
 
-    fun mergeEventPropsIntoFieldStates(state: FormState): FormState {
-        return FormCtxEventPropsHelper.mergeEventPropsIntoFieldStates(state)
-    }
 
     private fun executeEventInternal(
         eventId: Types.MetaIdFormEvent,
@@ -87,6 +84,8 @@ object FormCtxFormEvents {
         val event = eventMap.map[eventId] ?: return state
         val actionBindingMap = event.actionBindingMap ?: return state
 
+        Log.d(TAG, "Event executed: $eventId | kind = ${event.kind}")
+
         var currentState = state
 
         // Iterate binding keys in order to preserve action sequence
@@ -95,6 +94,7 @@ object FormCtxFormEvents {
 
             // --- Condition check ---
             val conditionId = binding.conditionId
+            val hadCondition = conditionId != null
             if (conditionId != null) {
                 val conditionMap = eventMap.conditions?.map?.get(conditionId)
                 if (conditionMap != null) {
@@ -111,12 +111,19 @@ object FormCtxFormEvents {
                     }
 
                     // Skip action if condition is false or unresolvable
-                    if (conditionResult != true) continue
+                    if (conditionResult != true) {
+//                        Log.d(TAG, "  Action skipped: ${binding.actionId} (condition not met)")
+                        continue
+                    }
                 }
             }
 
             // --- Action lookup ---
             val action = eventMap.actions?.map?.get(binding.actionId) ?: continue
+            Log.d(
+                TAG,
+                "  Action executed: ${binding.actionId} (${action.kind}) — ${if (hadCondition) "condition passed" else "no condition"}"
+            )
 
             // --- Save old values before executing action for setValue/clear ---
             val affectedFieldIds = if (triggerValueChanged &&

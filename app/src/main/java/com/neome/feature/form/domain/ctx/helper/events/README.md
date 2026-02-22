@@ -65,3 +65,5 @@ Handles the initialization, categorization, and execution of form-level events (
 - Not-yet-implemented actions: `executeAction`, `executeFormula`, `click` (logged as TODOs in `FormCtxActionExecutor`)
 - TODO: `resolveSourceValue` does not yet resolve `valueText` as an arg string via `ArgValueResolver`
 - Verified against latest source (2026-02-22): all entry points, dependencies, and flow descriptions confirmed accurate
+- Logging added in `FormCtxFormEvents.executeEventInternal`: event executed (eventId), action executed (actionId, kind, condition passed vs no condition), action skipped (condition not met). Tag: `FormCtxFormEvents`. Enables verification of which events and actions run and whether they were conditional.
+- Logging added in `FormCtxActionExecutor.executeAction`: action running (kind, actionOn, target names). Target names resolved from compMap (field/section/grid label or name, or "submit btn" for sendButton). Tag: `FormCtxActionExecutor`. Enables verification of which action kind ran and on which named targets.

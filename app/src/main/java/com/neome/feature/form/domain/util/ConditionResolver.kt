@@ -82,11 +82,17 @@ object ConditionResolver {
                 }
             }
 
-            return if (isAnd == true) {
+            val groupResult = if (isAnd == true) {
                 results.all { it == true }
             } else {
                 results.any { it == true }
             }
+            val conditionName = condition.metaId.getId().orEmpty()
+            Log.d(
+                TAG,
+                "Condition group | name=$conditionName | ${if (isAnd == true) "AND" else "OR"} | ${keys.size} clause(s) | result=$groupResult"
+            )
+            return groupResult
         }
 
         val statement = condition.statement
@@ -102,7 +108,7 @@ object ConditionResolver {
         defnForm: DefnForm,
         formValue: FormValue?,
         getValue: (MetaIdField) -> JsonElement?,
-        callerEnt: SigEntCaller?
+        callerEnt: SigEntCaller?,
     ): Boolean? {
 
         val lhs = statement.lhs
@@ -110,8 +116,9 @@ object ConditionResolver {
         val rhs = statement.rhs
         val rhsValueArray = getRhsArray(rhs, defnForm, getValue, callerEnt)
         val rhsValue = getRhsValue(rhs, defnForm, formValue, getValue, callerEnt)
+        val fieldName = resolveFieldName(defnForm, lhs)
 
-        return when (statement.operator) {
+        val result = when (statement.operator) {
             EnumDefnEventOperator.hasNoValue -> isEmptyValue(lhsValue)
             EnumDefnEventOperator.hasValue -> !isEmptyValue(lhsValue)
 
@@ -151,6 +158,51 @@ object ConditionResolver {
                 statement,
                 getValue
             ) { a, b -> a <= b }
+        }
+        logConditionResult(
+            fieldName = fieldName,
+            operator = statement.operator.name,
+            lhsValue = lhsValue,
+            rhsValue = rhsValue,
+            rhsValueArray = rhsValueArray,
+            result = result
+        )
+        return result
+    }
+
+    private fun resolveFieldName(defnForm: DefnForm, fieldId: MetaIdField): String {
+        val comp = defnForm.compMap[fieldId]
+        return comp?.label ?: comp?.name?.toString() ?: fieldId.getId().orEmpty()
+    }
+
+    private fun logConditionResult(
+        fieldName: String,
+        operator: String,
+        lhsValue: Any?,
+        rhsValue: Any?,
+        rhsValueArray: List<String>?,
+        result: Boolean
+    ) {
+        val rhsDesc = when {
+            rhsValueArray != null -> "array(${rhsValueArray.size})=${
+                rhsValueArray.take(3)
+            }${if (rhsValueArray.size > 3) "…" else ""}"
+
+            rhsValue != null -> formatLogValue(rhsValue)
+            else -> "null"
+        }
+        Log.d(
+            TAG,
+            "Condition | field=$fieldName | $operator | lhs=${formatLogValue(lhsValue)} | rhs=$rhsDesc | result=$result"
+        )
+    }
+
+    private fun formatLogValue(value: Any?): String {
+        if (value == null) return "null"
+        return when (value) {
+            is List<*> -> "list(${value.size})=${value.take(3)}${if (value.size > 3) "…" else ""}"
+            is String -> if (value.length > 40) "${value.take(40)}…" else value
+            else -> value.toString()
         }
     }
 

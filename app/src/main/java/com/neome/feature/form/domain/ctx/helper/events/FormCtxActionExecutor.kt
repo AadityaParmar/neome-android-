@@ -2,6 +2,7 @@ package com.neome.feature.form.domain.ctx.helper.events
 
 import android.util.Log
 import com.neome.api.meta.base.Types
+import com.neome.api.meta.base.dto.DefnComp
 import com.neome.api.meta.base.dto.DefnEventAction
 import com.neome.api.meta.base.dto.DefnSection
 import com.neome.api.meta.base.dto.FieldDtoArg
@@ -22,11 +23,30 @@ object FormCtxActionExecutor {
         state: FormState,
         defnForm: DefnFormUi
     ): FormState {
+        val targetNames = actionTargetNames(defnForm, action)
+        Log.d(TAG, "Action running: ${action.kind} on ${action.actionOn} targets: $targetNames")
         return when (action.actionOn) {
             Types.EnumDefnKindEventActionOn.field -> executeActionOnField(action, state, defnForm)
             Types.EnumDefnKindEventActionOn.component -> executeActionOnComponent(action, state, defnForm)
             Types.EnumDefnKindEventActionOn.sendButton -> executeActionOnSendButton(action, state)
             else -> state
+        }
+    }
+
+    /**
+     * Resolves human-readable target names for logging: field/section/grid label or name, or "submit btn".
+     */
+    private fun actionTargetNames(defnForm: DefnFormUi, action: DefnEventAction): String {
+        return when (action.actionOn) {
+            Types.EnumDefnKindEventActionOn.sendButton -> "submit btn"
+            else -> {
+                val compIdSet = action.compIdSet ?: return ""
+                compIdSet.mapNotNull { compId ->
+                    (defnForm.compMap[compId] as? DefnComp)?.let { comp ->
+                        comp.label?.takeIf { it.isNotBlank() } ?: comp.name.toString()
+                    }
+                }.joinToString(", ").ifBlank { "" }
+            }
         }
     }
 
