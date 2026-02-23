@@ -28,6 +28,7 @@ import com.neome.feature.form.presentation.components.field.FieldHandle
 import com.neome.feature.form.presentation.components.field.FieldHyperlink
 import com.neome.feature.form.presentation.components.field.FieldIdentifier
 import com.neome.feature.form.presentation.components.field.FieldImage
+import com.neome.feature.form.presentation.components.field.FieldLanguage
 import com.neome.feature.form.presentation.components.field.FieldLogCounter
 import com.neome.feature.form.presentation.components.field.FieldMobile
 import com.neome.feature.form.presentation.components.field.FieldNumber
@@ -175,6 +176,12 @@ fun FieldFactory(
         )
 
         EnumDefnCompType.textSize -> FieldPickTextSize(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.language -> FieldLanguage(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             modifier = modifier
