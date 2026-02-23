@@ -159,14 +159,15 @@ internal interface Converter {
                 // Complex types — serialized/deserialized via KSerializer in FieldController
                 Types.EnumDefnCompType.pickText -> null
 
-                // ── PickEnum / Currency / PickOption / TextSize / Language / LineStroke / Month / PinShape — string-based value ─────
+                // ── PickEnum / Currency / PickOption / TextSize / Language / LineStroke / Month / PinShape / Quarter — string-based value ─────
                 Types.EnumDefnCompType.currency,
                 Types.EnumDefnCompType.pickOption,
                 Types.EnumDefnCompType.textSize,
                 Types.EnumDefnCompType.language,
                 Types.EnumDefnCompType.lineStroke,
                 Types.EnumDefnCompType.month,
-                Types.EnumDefnCompType.pinShape -> {
+                Types.EnumDefnCompType.pinShape,
+                Types.EnumDefnCompType.quarter -> {
                     val stringValue = when (value) {
                         is JsonElement -> value.jsonPrimitive.content
                         else -> value.toString()
@@ -361,7 +362,8 @@ internal interface Converter {
                 Types.EnumDefnCompType.language,
                 Types.EnumDefnCompType.lineStroke,
                 Types.EnumDefnCompType.month,
-                Types.EnumDefnCompType.pinShape -> {
+                Types.EnumDefnCompType.pinShape,
+                Types.EnumDefnCompType.quarter -> {
                     when (value) {
                         is String -> value
                         is JsonElement -> value.jsonPrimitive.content
