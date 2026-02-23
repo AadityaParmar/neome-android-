@@ -12,80 +12,84 @@ import com.neome.feature.form.presentation.state.SendBtnStateFlag
 import kotlinx.serialization.json.JsonElement
 
 class ReducerFormStateAccessor(initialState: FormState) : FormStateAccessor {
-    private var state = initialState
+    private var mutableState: MutableFormState = MutableFormState.fromImmutableState(initialState)
+    private val baseState: FormState = initialState
     private val intents = mutableListOf<FormIntent>()
 
     // ==================== Read Methods ====================
 
-    override fun getState() = state
+    override fun getState(): FormState = mutableState.toImmutableState(baseState)
 
-    override fun getValue(fieldId: MetaIdComp): JsonElement? = state.getValue(fieldId)
+    override fun getValue(fieldId: MetaIdComp): JsonElement? = mutableState.valueMap[fieldId]
 
-    override fun getFieldState(fieldId: MetaIdComp): FieldState? = state.getFieldState(fieldId)
+    override fun getFieldState(fieldId: MetaIdComp): FieldState? = mutableState.fieldStates[fieldId]
 
-    override fun getError(fieldId: MetaIdComp): FieldError? = state.getError(fieldId)
+    override fun getError(fieldId: MetaIdComp): FieldError? = mutableState.errors[fieldId]
 
-    override fun getValueMap(): Map<MetaIdComp, JsonElement> = state.valueMap
+    override fun getValueMap(): Map<MetaIdComp, JsonElement> = mutableState.valueMap.toMap()
 
-    override fun getFieldStates(): Map<MetaIdComp, FieldState> = state.fieldStates
+    override fun getFieldStates(): Map<MetaIdComp, FieldState> = mutableState.fieldStates.toMap()
 
-    override fun getErrors(): Map<MetaIdComp, FieldError> = state.errors
+    override fun getErrors(): Map<MetaIdComp, FieldError> = mutableState.errors.toMap()
 
     override fun getFieldProperties(fieldId: MetaIdComp): FieldProperties? =
-        state.getFieldState(fieldId)?.fieldProperties
+        mutableState.fieldStates[fieldId]?.fieldProperties
 
     // ==================== Write Methods ====================
 
     override fun setValue(fieldId: MetaIdComp, value: JsonElement?) {
-        state = if (value != null) {
-            state.copy(valueMap = state.valueMap + (fieldId to value))
+        if (value != null) {
+            mutableState.valueMap[fieldId] = value
         } else {
-            state.copy(valueMap = state.valueMap - fieldId)
+            mutableState.valueMap.remove(fieldId)
         }
     }
 
     override fun removeValue(fieldId: MetaIdComp) {
-        state = state.copy(valueMap = state.valueMap - fieldId)
+        mutableState.valueMap.remove(fieldId)
     }
 
     override fun setFieldState(fieldId: MetaIdComp, fieldState: FieldState) {
-        state = state.copy(fieldStates = state.fieldStates + (fieldId to fieldState))
+        mutableState.fieldStates[fieldId] = fieldState
     }
 
     override fun updateFieldStates(fieldStates: Map<MetaIdComp, FieldState>) {
-        state = state.copy(fieldStates = state.fieldStates + fieldStates)
+        mutableState.fieldStates.putAll(fieldStates)
     }
 
     override fun setError(fieldId: MetaIdComp, error: FieldError) {
-        state = state.copy(errors = state.errors + (fieldId to error))
+        mutableState.errors[fieldId] = error
     }
 
     override fun clearError(fieldId: MetaIdComp) {
-        state = state.copy(errors = state.errors - fieldId)
+        mutableState.errors.remove(fieldId)
     }
 
     override fun updateErrors(errors: Map<MetaIdComp, FieldError>) {
-        state = state.copy(errors = state.errors + errors)
+        mutableState.errors.putAll(errors)
     }
 
     override fun clearAllErrors() {
-        state = state.copy(errors = emptyMap())
+        mutableState.errors.clear()
     }
 
     override fun setFormEventPropsMap(map: Map<MetaIdComp, FormEventProps>) {
-        state = state.copy(formEventPropsMap = map)
+        mutableState.formEventPropsMap = map
     }
 
     override fun setSendBtnStateFlags(flags: Set<SendBtnStateFlag>) {
-        state = state.copy(sendBtnStateFlags = flags)
+        mutableState.sendBtnStateFlags.clear()
+        mutableState.sendBtnStateFlags.addAll(flags)
     }
 
     override fun setIsSubmitting(value: Boolean) {
-        state = state.copy(isSubmitting = value)
+        mutableState.isSubmitting = value
     }
 
     override fun updateState(transform: (FormState) -> FormState) {
-        state = transform(state)
+        val tempImmutable = mutableState.toImmutableState(baseState)
+        val newImmutable = transform(tempImmutable)
+        mutableState = MutableFormState.fromImmutableState(newImmutable)
     }
 
     // ==================== Intent ====================
@@ -96,8 +100,66 @@ class ReducerFormStateAccessor(initialState: FormState) : FormStateAccessor {
 
     // ==================== Result ====================
 
-    fun result(): FormReducerResult = FormReducerResult(state, intents.lastOrNull())
+    fun result(): FormReducerResult = FormReducerResult(
+        state = mutableState.toImmutableState(baseState),
+        intents = collectedIntents()
+    )
 
     fun collectedIntents(): List<FormIntent> = intents.toList()
 }
 
+
+internal data class MutableFormState(
+    val valueMap: MutableMap<MetaIdComp, JsonElement> = mutableMapOf(),
+    val fieldStates: MutableMap<MetaIdComp, FieldState> = mutableMapOf(),
+    val errors: MutableMap<MetaIdComp, FieldError> = mutableMapOf(),
+    var formEventPropsMap: Map<MetaIdComp, FormEventProps> = emptyMap(),
+    val sendBtnStateFlags: MutableSet<SendBtnStateFlag> = mutableSetOf(),
+    var isSubmitting: Boolean = false,
+    val disabled: Boolean = false,
+    val readOnly: Boolean = false,
+    val formError: String? = null,
+    val isInitialized: Boolean = false
+) {
+    /**
+     * Convert to immutable FormState for UI consumption.
+     * Called only once per reducer cycle, avoiding repeated allocations.
+     */
+    fun toImmutableState(
+        baseState: FormState
+    ): FormState {
+        return baseState.copy(
+            valueMap = valueMap.toMap(),
+            fieldStates = fieldStates.toMap(),
+            errors = errors.toMap(),
+            formEventPropsMap = formEventPropsMap,
+            sendBtnStateFlags = sendBtnStateFlags.toSet(),
+            isSubmitting = isSubmitting,
+            disabled = disabled,
+            readOnly = readOnly,
+            formError = formError,
+            isInitialized = isInitialized
+        )
+    }
+
+    companion object {
+        /**
+         * Create mutable state from immutable FormState.
+         * Called once at the start of each reducer cycle.
+         */
+        fun fromImmutableState(state: FormState): MutableFormState {
+            return MutableFormState(
+                valueMap = state.valueMap.toMutableMap(),
+                fieldStates = state.fieldStates.toMutableMap(),
+                errors = state.errors.toMutableMap(),
+                formEventPropsMap = state.formEventPropsMap,
+                sendBtnStateFlags = state.sendBtnStateFlags.toMutableSet(),
+                isSubmitting = state.isSubmitting,
+                disabled = state.disabled,
+                readOnly = state.readOnly,
+                formError = state.formError,
+                isInitialized = state.isInitialized
+            )
+        }
+    }
+}

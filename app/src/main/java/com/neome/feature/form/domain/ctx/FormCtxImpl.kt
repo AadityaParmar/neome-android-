@@ -45,7 +45,7 @@ class FormCtxImpl(
     internal fun dispatch(event: FormEvent) {
         val result = processEvent(currentState, event)
         _formState.value = result.state
-        result.intent?.let { onIntent(it) }
+        result.intents.forEach { onIntent(it) }
     }
 
     private fun processEvent(state: FormState, event: FormEvent): FormReducerResult {
