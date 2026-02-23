@@ -23,6 +23,7 @@ import com.neome.feature.form.presentation.components.field.FieldDecimal
 import com.neome.feature.form.presentation.components.field.FieldDivider
 import com.neome.feature.form.presentation.components.field.FieldDocument
 import com.neome.feature.form.presentation.components.field.FieldEmail
+import com.neome.feature.form.presentation.components.field.FieldCurrency
 import com.neome.feature.form.presentation.components.field.FieldHandle
 import com.neome.feature.form.presentation.components.field.FieldHyperlink
 import com.neome.feature.form.presentation.components.field.FieldIdentifier
@@ -32,6 +33,7 @@ import com.neome.feature.form.presentation.components.field.FieldMobile
 import com.neome.feature.form.presentation.components.field.FieldNumber
 import com.neome.feature.form.presentation.components.field.FieldParagraph
 import com.neome.feature.form.presentation.components.field.FieldPickText
+import com.neome.feature.form.presentation.components.field.FieldPickTextSize
 import com.neome.feature.form.presentation.components.field.FieldSetOfText
 import com.neome.feature.form.presentation.components.field.FieldSignature
 import com.neome.feature.form.presentation.components.field.FieldSwitch
@@ -167,6 +169,12 @@ fun FieldFactory(
 
         EnumDefnCompType.currency,
         EnumDefnCompType.pickOption -> FieldCurrency(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.textSize -> FieldPickTextSize(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             modifier = modifier
