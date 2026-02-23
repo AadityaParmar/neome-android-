@@ -1,5 +1,7 @@
 package com.neome.feature.form.presentation.components.field
 
+import android.graphics.Bitmap
+import android.util.Base64
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -15,14 +17,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -36,9 +39,19 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import java.io.ByteArrayOutputStream
+
+// =============================================================================
+// Constants
+// =============================================================================
+
+private const val STROKE_WIDTH_DP = 3
+private const val CROP_PADDING_PX = 16
+private const val PNG_QUALITY = 100
 
 /**
  * Full-screen dialog for drawing a signature.
@@ -52,21 +65,23 @@ import androidx.compose.ui.window.DialogProperties
  * |    (drawing canvas)      |
  * |                          |
  * ---------------------------
- * |                 Done     |
+ * | Clear              Done  |
  * ---------------------------
  * ```
  *
  * The canvas tracks touch/drag gestures and renders freeform strokes.
- * Actual bitmap export and value persistence are deferred to a future
- * implementation — this is currently UI-only.
+ * On "Done", the drawn strokes are rendered to a [Bitmap], cropped to
+ * the bounding box of the signature, encoded as a base64 PNG string,
+ * and returned via [onConfirm].
  *
  * @param onDismiss Called when the user presses back arrow or system back
- * @param onConfirm Called when the user taps "Done"
+ * @param onConfirm Called when the user taps "Done" with the base64-encoded
+ *                  signature PNG string. Null if canvas is empty.
  */
 @Composable
 fun SignatureDrawDialog(
     onDismiss: () -> Unit,
-    onConfirm: () -> Unit
+    onConfirm: (base64Signature: String?) -> Unit
 ) {
     Dialog(
         onDismissRequest = onDismiss,
@@ -93,19 +108,23 @@ fun SignatureDrawDialog(
 // =============================================================================
 
 /**
- * Stateless content layout for the signature draw dialog.
+ * Content layout for the signature draw dialog.
  *
- * Manages drawing state (strokes) internally since it is transient
- * UI state that does not outlive the dialog.
+ * Manages drawing state (strokes) and canvas dimensions internally
+ * since they are transient UI state that does not outlive the dialog.
  */
 @Composable
 private fun SignatureDrawContent(
     onBackClick: () -> Unit,
-    onDoneClick: () -> Unit
+    onDoneClick: (String?) -> Unit
 ) {
     // Drawing state — transient, lives only while the dialog is open
     var completedPaths by remember { mutableStateOf(listOf<List<Offset>>()) }
     var currentPath by remember { mutableStateOf(listOf<Offset>()) }
+
+    // Canvas pixel dimensions — needed to create a matching Bitmap on "Done"
+    var canvasWidthPx by remember { mutableIntStateOf(0) }
+    var canvasHeightPx by remember { mutableIntStateOf(0) }
 
     Column(modifier = Modifier.fillMaxSize()) {
         // Top bar
@@ -127,6 +146,10 @@ private fun SignatureDrawContent(
                 }
                 currentPath = emptyList()
             },
+            onCanvasSizeChanged = { width, height ->
+                canvasWidthPx = width
+                canvasHeightPx = height
+            },
             modifier = Modifier.weight(1f)
         )
 
@@ -136,7 +159,18 @@ private fun SignatureDrawContent(
                 completedPaths = emptyList()
                 currentPath = emptyList()
             },
-            onDoneClick = onDoneClick
+            onDoneClick = {
+                if (completedPaths.isEmpty()) {
+                    onDoneClick(null)
+                } else {
+                    val base64 = renderSignatureToBase64(
+                        paths = completedPaths,
+                        canvasWidth = canvasWidthPx,
+                        canvasHeight = canvasHeightPx
+                    )
+                    onDoneClick(base64)
+                }
+            }
         )
     }
 }
@@ -190,6 +224,7 @@ private fun SignatureTopBar(
  * @param onDragStart Called with the starting offset when a new stroke begins
  * @param onDrag Called with each new offset as the finger moves
  * @param onDragEnd Called when the finger lifts — stroke is finalized
+ * @param onCanvasSizeChanged Called when the canvas size is measured (width, height in pixels)
  * @param modifier Modifier for sizing (use weight(1f) to fill available space)
  */
 @Composable
@@ -199,6 +234,7 @@ private fun SignatureCanvas(
     onDragStart: (Offset) -> Unit,
     onDrag: (Offset) -> Unit,
     onDragEnd: () -> Unit,
+    onCanvasSizeChanged: (width: Int, height: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val strokeColor = MaterialTheme.colorScheme.onSurface
@@ -219,6 +255,9 @@ private fun SignatureCanvas(
         Canvas(
             modifier = Modifier
                 .fillMaxSize()
+                .onSizeChanged { size ->
+                    onCanvasSizeChanged(size.width, size.height)
+                }
                 .pointerInput(Unit) {
                     detectDragGestures(
                         onDragStart = { offset -> onDragStart(offset) },
@@ -232,7 +271,7 @@ private fun SignatureCanvas(
                 }
         ) {
             val stroke = Stroke(
-                width = 3.dp.toPx(),
+                width = STROKE_WIDTH_DP.dp.toPx(),
                 cap = StrokeCap.Round,
                 join = StrokeJoin.Round
             )
@@ -292,11 +331,101 @@ private fun SignatureBottomBar(
 }
 
 // =============================================================================
+// Bitmap Rendering & Base64 Encoding
+// =============================================================================
+
+/**
+ * Renders the drawn strokes onto a [Bitmap], crops to the bounding box
+ * of the signature (with padding), and encodes as a base64 PNG string.
+ *
+ * Steps:
+ * 1. Create a full-size transparent Bitmap matching the canvas dimensions
+ * 2. Draw all strokes onto the Bitmap's Canvas using Android graphics Path
+ * 3. Compute the bounding box of all stroke points
+ * 4. Crop the Bitmap to the bounding box (with [CROP_PADDING_PX] padding)
+ * 5. Compress to PNG and encode as base64
+ *
+ * @param paths All completed stroke paths (List of point lists)
+ * @param canvasWidth Canvas width in pixels
+ * @param canvasHeight Canvas height in pixels
+ * @return Base64-encoded PNG string of the cropped signature
+ */
+private fun renderSignatureToBase64(
+    paths: List<List<Offset>>,
+    canvasWidth: Int,
+    canvasHeight: Int
+): String {
+    // 1. Create transparent Bitmap matching canvas size
+    val bitmap = Bitmap.createBitmap(canvasWidth, canvasHeight, Bitmap.Config.ARGB_8888)
+    val canvas = android.graphics.Canvas(bitmap)
+
+    // 2. Draw all strokes using Android graphics
+    val paint = android.graphics.Paint().apply {
+        color = android.graphics.Color.BLACK
+        strokeWidth = STROKE_WIDTH_DP * 3f // approximate dp-to-px for ~3dp
+        style = android.graphics.Paint.Style.STROKE
+        strokeCap = android.graphics.Paint.Cap.ROUND
+        strokeJoin = android.graphics.Paint.Join.ROUND
+        isAntiAlias = true
+    }
+
+    paths.forEach { points ->
+        if (points.size > 1) {
+            val path = android.graphics.Path()
+            path.moveTo(points.first().x, points.first().y)
+            for (i in 1 until points.size) {
+                path.lineTo(points[i].x, points[i].y)
+            }
+            canvas.drawPath(path, paint)
+        }
+    }
+
+    // 3. Compute bounding box of all stroke points
+    var minX = Float.MAX_VALUE
+    var minY = Float.MAX_VALUE
+    var maxX = Float.MIN_VALUE
+    var maxY = Float.MIN_VALUE
+
+    paths.forEach { points ->
+        points.forEach { offset ->
+            if (offset.x < minX) minX = offset.x
+            if (offset.y < minY) minY = offset.y
+            if (offset.x > maxX) maxX = offset.x
+            if (offset.y > maxY) maxY = offset.y
+        }
+    }
+
+    // 4. Crop to bounding box with padding
+    val cropLeft = (minX - CROP_PADDING_PX).coerceAtLeast(0f).toInt()
+    val cropTop = (minY - CROP_PADDING_PX).coerceAtLeast(0f).toInt()
+    val cropRight = (maxX + CROP_PADDING_PX).coerceAtMost(canvasWidth.toFloat()).toInt()
+    val cropBottom = (maxY + CROP_PADDING_PX).coerceAtMost(canvasHeight.toFloat()).toInt()
+
+    val cropWidth = (cropRight - cropLeft).coerceAtLeast(1)
+    val cropHeight = (cropBottom - cropTop).coerceAtLeast(1)
+
+    val croppedBitmap = Bitmap.createBitmap(bitmap, cropLeft, cropTop, cropWidth, cropHeight)
+
+    // Recycle the full-size bitmap if it differs from the cropped one
+    if (croppedBitmap !== bitmap) {
+        bitmap.recycle()
+    }
+
+    // 5. Encode to base64 PNG
+    val outputStream = ByteArrayOutputStream()
+    croppedBitmap.compress(Bitmap.CompressFormat.PNG, PNG_QUALITY, outputStream)
+    croppedBitmap.recycle()
+
+    val byteArray = outputStream.toByteArray()
+    return Base64.encodeToString(byteArray, Base64.NO_WRAP)
+}
+
+// =============================================================================
 // Utility
 // =============================================================================
 
 /**
- * Converts a list of [Offset] points into a smooth [Path].
+ * Converts a list of [Offset] points into a Compose [Path].
  */
 private fun List<Offset>.toPath(): Path {
     return Path().apply {

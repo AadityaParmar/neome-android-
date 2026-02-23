@@ -1076,18 +1076,21 @@ app/src/main/java/com/neome/feature/form/
 
 ### v1.16.0 (2026-02-20)
 
-- **Feature**: Added `FieldSignature` component — renders a non-editable text field for signature display
-- **Added**: `presentation/components/field/FieldSignature.kt` — stateful wrapper + stateless `SignatureTextField`
-  - Non-editable `OutlinedTextField` showing `FieldValueSignatureData.signature` value
+- **Feature**: Added `FieldSignature` component — full signature capture field with drawing dialog
+- **Added**: `presentation/components/field/FieldSignature.kt` — stateful wrapper + stateless `SignatureTextField` + `SignatureImagePreview`
+  - Non-editable `OutlinedTextField` showing "Signed" when signature exists
   - Trailing clear (cross) icon to reset value, enabled only when interactive and has value
   - Click-to-open interaction via `interactionSource` — tapping the field opens `SignatureDrawDialog`
+  - `SignatureImagePreview` — decodes base64 PNG from `FieldValueSignatureData.signature` and renders as an image below the text field
+  - On "Done" from dialog: creates `FieldValueSignatureData(handle = "", signature = base64String)` and persists via `fieldController.onChange`
   - Conditional `RawCaptureExtraProperties` for capture metadata (time, user, location)
 - **Added**: `presentation/components/field/SignatureDrawDialog.kt` — full-screen signature drawing dialog
   - Top bar with back arrow and "Draw signature" title
   - Canvas drawing surface with `detectDragGestures` for freeform stroke capture
   - Strokes rendered as `Path` objects with round cap/join styling
-  - Bottom bar with "Done" button
-  - Bitmap export and value persistence deferred to future implementation (UI-only)
+  - Bottom bar with "Clear" (resets canvas) and "Done" buttons
+  - On "Done": renders strokes to `Bitmap`, crops to bounding box with padding, compresses as PNG, encodes to base64 string, returns via `onConfirm(String?)`
+  - Returns `null` if canvas is empty (no strokes drawn)
 - **Modified**: `presentation/components/base/FieldFactory.kt` — added `EnumDefnCompType.signature -> FieldSignature(...)` routing
 
 ### v1.15.1 (2026-02-18)

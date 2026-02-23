@@ -69,7 +69,8 @@ fun FormScreen(
                     intentLog.takeLast(3).forEach { message ->
                         Text(
                             text = message,
-                            style = MaterialTheme.typography.bodySmall
+                            style = MaterialTheme.typography.bodySmall,
+                            maxLines = 2
                         )
                     }
 

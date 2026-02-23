@@ -1,10 +1,17 @@
 package com.neome.feature.form.presentation.components.field
 
+import android.graphics.BitmapFactory
+import android.util.Base64
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Icon
@@ -18,14 +25,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnFieldSignatureData
-import com.neome.core.common.serializer.api.meta.base.dto.FieldValueEntUserIdData
-import com.neome.core.common.serializer.api.meta.base.dto.FieldValueLocationData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueSignatureData
-import com.neome.api.meta.base.Types.EnumDefnCaptureValueKind
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldError
@@ -34,14 +42,14 @@ import com.neome.feature.form.presentation.state.FieldEvent
 /**
  * Signature field component for form.
  *
- * Displays a non-editable text field showing the signature value,
- * with a trailing clear (cross) icon. Actual signature capture
- * functionality will be implemented later.
+ * Displays a non-editable text field. When tapped, opens a full-screen
+ * [SignatureDrawDialog] for freeform signature drawing. On "Done", the
+ * drawn signature is cropped, encoded as a base64 PNG string, and stored
+ * in [FieldValueSignatureData.signature]. The signature is also displayed
+ * as an image preview below the text field.
  *
  * Optionally renders capture metadata properties (time, user, location)
- * below the text field via [RawCaptureExtraProperties].
- *
- * Uses [FieldValueSignatureData] as the value type.
+ * below the preview via [RawCaptureExtraProperties].
  *
  * @param defnComp  Field definition (expected to be [DefnFieldSignatureData])
  * @param onFieldEvent Callback to emit field events to the form
@@ -67,9 +75,9 @@ fun FieldSignature(
 
     if (properties.hidden) return
 
-    // Display text: show signature value when present
-    val displayValue = fieldValue?.signature ?: ""
+    // Display text: show "Signed" indicator when signature exists
     val hasValue = fieldValue != null
+    val displayValue = if (hasValue) "Signed" else ""
 
     // Capture flags from definition
     val captureTimeEnabled = signatureDefn.captureTime == true
@@ -89,8 +97,6 @@ fun FieldSignature(
     var showSignatureDialog by remember { mutableStateOf(false) }
 
     // --- Click detection on text field ---------------------------------------
-    // When the user taps anywhere on the text field, open the signature dialog.
-    // Same interactionSource pattern as FieldCamera.kt.
     val interactionSource = remember { MutableInteractionSource() }
 
     LaunchedEffect(interactionSource, isInteractive) {
@@ -118,6 +124,12 @@ fun FieldSignature(
             onClearClick = { fieldController.onChange(null) }
         )
 
+        // Conditional: signature image preview
+        if (fieldValue != null) {
+            Spacer(modifier = Modifier.height(8.dp))
+            SignatureImagePreview(base64Signature = fieldValue.signature)
+        }
+
         // Conditional: capture metadata rows
         if (hasCaptureEnabled) {
             Spacer(modifier = Modifier.height(4.dp))
@@ -139,9 +151,15 @@ fun FieldSignature(
     if (showSignatureDialog) {
         SignatureDrawDialog(
             onDismiss = { showSignatureDialog = false },
-            onConfirm = {
-                // TODO: capture drawn signature bitmap and persist as FieldValueSignatureData
+            onConfirm = { base64Signature ->
                 showSignatureDialog = false
+                if (base64Signature != null) {
+                    val signatureValue = FieldValueSignatureData(
+                        handle = "",
+                        signature = base64Signature
+                    )
+                    fieldController.onChange(signatureValue)
+                }
             }
         )
     }
@@ -207,4 +225,51 @@ private fun SignatureTextField(
             }
         }
     )
+}
+
+/**
+ * Displays the signature as a decoded image from its base64 PNG string.
+ *
+ * Shows the cropped signature image inside a bordered box.
+ * If decoding fails, nothing is rendered.
+ *
+ * @param base64Signature Base64-encoded PNG string of the signature
+ * @param modifier Modifier for customization
+ */
+@Composable
+private fun SignatureImagePreview(
+    base64Signature: String,
+    modifier: Modifier = Modifier
+) {
+    val bitmap = remember(base64Signature) {
+        try {
+            val bytes = Base64.decode(base64Signature, Base64.NO_WRAP)
+            BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    if (bitmap != null) {
+        val shape = RoundedCornerShape(8.dp)
+        Box(
+            modifier = modifier
+                .fillMaxWidth()
+                .heightIn(min = 80.dp, max = 150.dp)
+                .border(
+                    width = 1.dp,
+                    color = MaterialTheme.colorScheme.outlineVariant,
+                    shape = shape
+                )
+                .clip(shape),
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                bitmap = bitmap.asImageBitmap(),
+                contentDescription = "Signature preview",
+                modifier = Modifier.fillMaxWidth(),
+                contentScale = ContentScale.Fit
+            )
+        }
+    }
 }
