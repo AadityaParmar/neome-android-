@@ -3,16 +3,17 @@ package com.neome.feature.form.domain.ctx
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import com.neome.api.meta.base.Types.MetaIdComp
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoFormThemeData
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
 import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.domain.ctx.base.FormCtxEventHelper
 import com.neome.feature.form.domain.ctx.base.FormCtxInitHelper
+import com.neome.feature.form.domain.ctx.base.FormCtxSendBtnStateHelper
 import com.neome.feature.form.domain.ctx.base.FormCtxValidationHelper
 import com.neome.feature.form.domain.ctx.base.FormReducerResult
 import com.neome.feature.form.domain.ctx.base.ReducerFormStateAccessor
 import com.neome.feature.form.domain.ref.FormRef
 import com.neome.feature.form.domain.ref.FormRefImpl
-import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormIntent
@@ -65,46 +66,16 @@ class FormCtxImpl(
             is FormEvent.Submit -> FormCtxEventHelper.handleSubmit(accessor, defnForm)
             is FormEvent.Reset -> FormCtxEventHelper.handleReset(accessor, event)
             is FormEvent.SetValues -> FormCtxEventHelper.handleSetValues(accessor, event, defnForm)
-            is FormEvent.AddSendBtnStateFlag -> handleAddSendBtnStateFlag(accessor, event)
-            is FormEvent.RemoveSendBtnStateFlag -> handleRemoveSendBtnStateFlag(accessor, event)
+            is FormEvent.AddSendBtnStateFlag -> FormCtxSendBtnStateHelper.handleAddSendBtnStateFlag(accessor, event)
+            is FormEvent.RemoveSendBtnStateFlag -> FormCtxSendBtnStateHelper.handleRemoveSendBtnStateFlag(
+                accessor,
+                event
+            )
+
             is FormEvent.Click -> FormCtxEventHelper.handleClick(accessor, event, defnForm)
         }
 
         return accessor.result()
-    }
-
-    private fun handleAddSendBtnStateFlag(
-        accessor: FormStateAccessor,
-        event: FormEvent.AddSendBtnStateFlag
-    ) {
-        val state = accessor.getState()
-        if (event.flag in state.sendBtnStateFlags) return
-        val wasEnabled = state.isSendBtnEnabled
-        val wasInvisible = state.isSendBtnInvisible
-        accessor.setSendBtnStateFlags(state.sendBtnStateFlags + event.flag)
-        val newState = accessor.getState()
-        val isNowEnabled = newState.isSendBtnEnabled
-        val isNowInvisible = newState.isSendBtnInvisible
-        if (wasEnabled != isNowEnabled || wasInvisible != isNowInvisible) {
-            accessor.emitIntent(FormIntent.SendBtnStateChanged(enabled = isNowEnabled, invisible = isNowInvisible))
-        }
-    }
-
-    private fun handleRemoveSendBtnStateFlag(
-        accessor: FormStateAccessor,
-        event: FormEvent.RemoveSendBtnStateFlag
-    ) {
-        val state = accessor.getState()
-        if (event.flag !in state.sendBtnStateFlags) return
-        val wasEnabled = state.isSendBtnEnabled
-        val wasInvisible = state.isSendBtnInvisible
-        accessor.setSendBtnStateFlags(state.sendBtnStateFlags - event.flag)
-        val newState = accessor.getState()
-        val isNowEnabled = newState.isSendBtnEnabled
-        val isNowInvisible = newState.isSendBtnInvisible
-        if (wasEnabled != isNowEnabled || wasInvisible != isNowInvisible) {
-            accessor.emitIntent(FormIntent.SendBtnStateChanged(enabled = isNowEnabled, invisible = isNowInvisible))
-        }
     }
 
     fun createFormRef(): FormRef {
@@ -118,6 +89,5 @@ class FormCtxImpl(
 
 
     override fun getFieldState(fieldId: MetaIdComp): FieldState? = currentState.getFieldState(fieldId)
-    override fun getError(fieldId: MetaIdComp): FieldError? = currentState.getError(fieldId)
-    override fun getDefnForm(): DefnFormUi? = currentState.defnForm
+    override fun getDefnFormTheme(): DefnDtoFormThemeData? = currentState.defnForm?.theme
 }

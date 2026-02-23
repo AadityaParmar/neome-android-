@@ -3,7 +3,7 @@ package com.neome.feature.form.domain.ctx
 import androidx.compose.runtime.State
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.neome.api.meta.base.Types.MetaIdComp
-import com.neome.feature.form.domain.DefnFormUi
+import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoFormThemeData
 import com.neome.feature.form.domain.ctx.base.FormCtxApiCtx
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldProperties
@@ -92,11 +92,10 @@ interface FormCtx {
 
     fun getFieldState(fieldId: MetaIdComp): FieldState?
 
-    fun getError(fieldId: MetaIdComp): FieldError?
 
     fun getApiCtx(): FormCtxApiCtx? = null
 
-    fun getDefnForm(): DefnFormUi?
+    fun getDefnFormTheme(): DefnDtoFormThemeData?
 
 }
 
