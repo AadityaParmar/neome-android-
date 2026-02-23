@@ -11,18 +11,6 @@ import com.neome.feature.form.presentation.state.FormState
 import com.neome.feature.form.presentation.state.SendBtnStateFlag
 import kotlinx.serialization.json.JsonElement
 
-/**
- * Accessor for reducer/processEvent context.
- * Wraps a mutable state variable — all reads see latest accumulated state,
- * all writes update via state.copy(). Collects intents in a list.
- *
- * Usage:
- * ```
- * val accessor = ReducerFormStateAccessor(currentState)
- * helper.handleSomething(accessor, event)
- * val result = accessor.result()
- * ```
- */
 class ReducerFormStateAccessor(initialState: FormState) : FormStateAccessor {
     private var state = initialState
     private val intents = mutableListOf<FormIntent>()
