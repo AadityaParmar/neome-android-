@@ -1,6 +1,7 @@
 package com.neome.feature.form.presentation.state
 
 import com.neome.api.meta.base.Types.MetaIdComp
+import com.neome.api.meta.base.Types.RowId
 import com.neome.core.mvi.UiEvent
 import kotlinx.serialization.json.JsonElement
 
@@ -141,5 +142,30 @@ sealed interface FormEvent : UiEvent {
      */
     data class Click(
         val buttonCompId: MetaIdComp
+    ) : FormEvent
+
+    // ==================== Grid Events ====================
+
+    /**
+     * Add a new row to the grid. Emits FormIntent.GridAdd to parent.
+     */
+    data class GridAdd(
+        val gridId: MetaIdComp
+    ) : FormEvent
+
+    /**
+     * Edit a grid row. Emits FormIntent.GridEdit to parent.
+     */
+    data class GridEdit(
+        val gridId: MetaIdComp,
+        val rowId: RowId
+    ) : FormEvent
+
+    /**
+     * Remove a grid row. Emits FormIntent.GridRemove to parent.
+     */
+    data class GridRemove(
+        val gridId: MetaIdComp,
+        val rowId: RowId
     ) : FormEvent
 }

@@ -7,6 +7,7 @@ import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoFormThemeData
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
 import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.domain.ctx.base.FormCtxEventHelper
+import com.neome.feature.form.domain.ctx.base.FormCtxGridHelper
 import com.neome.feature.form.domain.ctx.base.FormCtxInitHelper
 import com.neome.feature.form.domain.ctx.base.FormCtxSendBtnStateHelper
 import com.neome.feature.form.domain.ctx.base.FormCtxValidationHelper
@@ -73,6 +74,10 @@ class FormCtxImpl(
             )
 
             is FormEvent.Click -> FormCtxEventHelper.handleClick(accessor, event, defnForm)
+
+            is FormEvent.GridAdd -> FormCtxGridHelper.handleGridAdd(accessor, event, defnForm)
+            is FormEvent.GridEdit -> FormCtxGridHelper.handleGridEdit(accessor, event, defnForm)
+            is FormEvent.GridRemove -> FormCtxGridHelper.handleGridRemove(accessor, event, defnForm)
         }
 
         return accessor.result()

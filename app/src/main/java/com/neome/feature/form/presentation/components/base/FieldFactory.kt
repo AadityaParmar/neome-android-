@@ -22,6 +22,7 @@ import com.neome.feature.form.presentation.components.field.FieldDecimal
 import com.neome.feature.form.presentation.components.field.FieldDivider
 import com.neome.feature.form.presentation.components.field.FieldDocument
 import com.neome.feature.form.presentation.components.field.FieldEmail
+import com.neome.feature.form.presentation.components.field.FieldGrid
 import com.neome.feature.form.presentation.components.field.FieldHandle
 import com.neome.feature.form.presentation.components.field.FieldHyperlink
 import com.neome.feature.form.presentation.components.field.FieldIdentifier
@@ -213,17 +214,11 @@ fun FieldFactory(
             modifier = modifier
         )
 
-        EnumDefnCompType.grid -> {
-            // TODO: Implement FieldGrid component
-            Column(
-                modifier = modifier
-            ) {
-                Text(
-                    text = "Grid component not implemented yet",
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            }
-        }
+        EnumDefnCompType.grid -> FieldGrid(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
 
         else -> {
             Column(

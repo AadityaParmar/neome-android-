@@ -37,10 +37,12 @@ object FormCtxInitHelper {
         }
         val dependencyMap = FieldPropertyResolver.buildDependencyMap(leafFields)
 
+        // Include grid in fieldStates and valueMap (grid is composite but has a value)
+        val valueCarryingCompositeTypes = setOf(EnumDefnCompType.grid)
 
         val fieldStates = compMap
             .filter { (_, defnComp) ->
-                !isCompositeType(defnComp.type)
+                !isCompositeType(defnComp.type) || defnComp.type in valueCarryingCompositeTypes
             }
             .mapValues { (fieldId, defnComp) ->
                 val value = initialValueMap[fieldId]
@@ -56,9 +58,11 @@ object FormCtxInitHelper {
                 )
             }
 
-        // Build valueMap from initial values (only non-null entries)
+        // Build valueMap from initial values (leaf fields + grid)
         val valueMap = initialValueMap.filterKeys { fieldId ->
-            compMap[fieldId]?.let { !isCompositeType(it.type) } ?: false
+            compMap[fieldId]?.let { defnComp ->
+                !isCompositeType(defnComp.type) || defnComp.type in valueCarryingCompositeTypes
+            } ?: false
         }
 
         // Build validation schemas for all fields

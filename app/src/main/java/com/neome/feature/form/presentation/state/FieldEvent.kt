@@ -1,6 +1,7 @@
 package com.neome.feature.form.presentation.state
 
 import com.neome.api.meta.base.Types.MetaIdComp
+import com.neome.api.meta.base.Types.RowId
 import kotlinx.serialization.json.JsonElement
 
 /**
@@ -40,6 +41,31 @@ sealed interface FieldEvent {
      */
     data class Click(
         override val fieldId: MetaIdComp
+    ) : FieldEvent
+
+    // ==================== Grid events ====================
+
+    /**
+     * Add a new row to the grid.
+     */
+    data class GridAdd(
+        override val fieldId: MetaIdComp
+    ) : FieldEvent
+
+    /**
+     * Edit the given grid row (e.g. open row editor).
+     */
+    data class GridEdit(
+        override val fieldId: MetaIdComp,
+        val rowId: RowId
+    ) : FieldEvent
+
+    /**
+     * Remove the given row from the grid.
+     */
+    data class GridRemove(
+        override val fieldId: MetaIdComp,
+        val rowId: RowId
     ) : FieldEvent
 }
 

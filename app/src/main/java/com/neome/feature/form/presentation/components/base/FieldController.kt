@@ -6,9 +6,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import com.neome.api.meta.base.Types
-import com.neome.api.meta.base.dto.DefnField
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.feature.form.domain.ctx.LocalFormCtx
+import com.neome.feature.form.domain.util.FormPlus
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldEvent
 import com.neome.feature.form.presentation.state.FieldProperties
@@ -97,7 +97,7 @@ inline fun <reified T> rememberFieldController(
 ): FieldController<T> {
     val formCtx = LocalFormCtx.current
     val serializer = serializer<T>()
-    val fieldId = (defnComp as? DefnField)?.metaId
+    val fieldId = FormPlus.getCompMetaId(defnComp)
 
     return remember(defnComp, onFieldEvent) {
         val valueState = derivedStateOf {

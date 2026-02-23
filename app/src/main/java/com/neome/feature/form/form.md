@@ -4,8 +4,8 @@
 
 | Property           | Value                                       |
 |--------------------|---------------------------------------------|
-| **Version**        | 1.16.1                                      |
-| **Last Updated**   | 2026-02-20                                  |
+| **Version**        | 1.17.0                                      |
+| **Last Updated**   | 2026-02-23                                  |
 | **Scope**          | Android Form Component Architecture         |
 | **Path**           | `app/src/main/java/com/neome/feature/form/` |
 | **Update Trigger** | Any modification to form component files    |
@@ -620,7 +620,8 @@ Routes `defnComp.type` to correct field renderer. Supported types (26):
 | Media     | `image`, `document`, `signature`                                    |
 | Action    | `button` (4 variants: contained/outlined/text/icon)                 |
 | Composite | `section`, `tab`                                                    |
-| TODO      | `grid`                                                              |
+| Grid      | `grid` (FieldGrid — simple list of rowId per row)                   |
+| TODO      | `wizard`, `spreadsheetRef`                                          |
 
 ### FieldController.kt - Field State Access
 
@@ -756,7 +757,7 @@ Form (provides LocalFormCtx)
         ├── COMPOSITE TYPES (no FieldState, recursive)
         │   ├── FieldTab → ScrollableTabRow → FieldFactory (per tab)
         │   ├── FieldSection → Row/Column → FieldFactory (per child)
-        │   └── grid, wizard, spreadsheetRef (TODO)
+        │   └── grid (FieldGrid), wizard, spreadsheetRef (TODO)
         │
         └── LEAF TYPES (have FieldState, use FieldController)
             ├── Text: FieldText, FieldParagraph, FieldEmail, FieldHandle, FieldHyperlink, FieldMobileNumber
@@ -767,7 +768,9 @@ Form (provides LocalFormCtx)
             ├── Set: FieldSetOfText
             ├── Action: FieldButton (contained/outlined/text/icon)
             ├── Media: FieldImage, FieldDocument
-            └── Signature: FieldSignature
+            ├── Media: FieldImage, FieldDocument
+            ├── Signature: FieldSignature
+            └── Grid: FieldGrid (simple list of rowId per row)
 ```
 
 ---
@@ -1022,6 +1025,7 @@ app/src/main/java/com/neome/feature/form/
 │   │   │   ├── MuiIconMapper.kt             # MUI icon name → ImageVector mapper (~60 icons)
 │   │   │   ├── FieldImage.kt                # Image picker + preview dialog
 │   │   │   ├── FieldDocument.kt             # Document picker (40+ MIME types)
+│   │   │   ├── FieldGrid.kt                 # Grid: simple list of rowId per row
 │   │   │   ├── ImagePreviewDialog.kt        # Pinch-to-zoom image preview
 │   │   │   ├── RawCaptureExtraProperties.kt # Reusable capture metadata display
 │   │   │   └── RawCounter.kt               # Reusable stepper UI component
@@ -1051,6 +1055,14 @@ app/src/main/java/com/neome/feature/form/
 ---
 
 ## Changelog
+
+### v1.17.0 (2026-02-23)
+
+- **Feature**: Added `FieldGrid` component — grid field with simple list of rowId as text per row
+- **Added**: `presentation/components/field/FieldGrid.kt` — uses `rememberFieldController<FieldValueGridData>`, `FieldGridContent` with `LazyColumn` of row ids
+- **Modified**: `presentation/components/base/FieldController.kt` — use `FormPlus.getCompMetaId(defnComp)` instead of `(defnComp as? DefnField)?.metaId` so grid (and other composite-with-value comps) get correct fieldId
+- **Modified**: `domain/ctx/base/FormCtxInitHelper.kt` — include grid in `fieldStates` and `valueMap` (value-carrying composite)
+- **Modified**: `presentation/components/base/FieldFactory.kt` — route `EnumDefnCompType.grid` to `FieldGrid`
 
 ### v1.16.0 (2026-02-20)
 

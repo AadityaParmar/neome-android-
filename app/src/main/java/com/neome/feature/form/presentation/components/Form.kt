@@ -104,6 +104,18 @@ fun Form(
                         is FieldEvent.Click -> {
                             formCtx.dispatch(FormEvent.Click(fieldEvent.fieldId))
                         }
+
+                        is FieldEvent.GridAdd -> {
+                            formCtx.dispatch(FormEvent.GridAdd(fieldEvent.fieldId))
+                        }
+
+                        is FieldEvent.GridEdit -> {
+                            formCtx.dispatch(FormEvent.GridEdit(fieldEvent.fieldId, fieldEvent.rowId))
+                        }
+
+                        is FieldEvent.GridRemove -> {
+                            formCtx.dispatch(FormEvent.GridRemove(fieldEvent.fieldId, fieldEvent.rowId))
+                        }
                     }
                 }
             },
