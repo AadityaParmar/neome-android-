@@ -33,6 +33,7 @@ import com.neome.feature.form.presentation.components.field.FieldLogCounter
 import com.neome.feature.form.presentation.components.field.FieldMobile
 import com.neome.feature.form.presentation.components.field.FieldNumber
 import com.neome.feature.form.presentation.components.field.FieldParagraph
+import com.neome.feature.form.presentation.components.field.FieldPickLineStroke
 import com.neome.feature.form.presentation.components.field.FieldPickText
 import com.neome.feature.form.presentation.components.field.FieldPickTextSize
 import com.neome.feature.form.presentation.components.field.FieldSetOfText
@@ -182,6 +183,12 @@ fun FieldFactory(
         )
 
         EnumDefnCompType.language -> FieldLanguage(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.lineStroke -> FieldPickLineStroke(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             modifier = modifier
