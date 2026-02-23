@@ -11,85 +11,117 @@ import com.neome.feature.form.presentation.state.FormState
 import com.neome.feature.form.presentation.state.SendBtnStateFlag
 import kotlinx.serialization.json.JsonElement
 
+/**
+ * Mutable accessor for [FormState] used during a single reducer cycle.
+ *
+ * Design rationale — type-safety against silent field loss:
+ *
+ *  • **Hot-path collections** (valueMap, fieldStates, errors, sendBtnStateFlags) are extracted
+ *    into mutable copies for O(1) per-field mutations during a reducer cycle. These are the
+ *    only fields that need collection-level mutation and are synced back in [snapshot].
+ *
+ *  • **All other fields** (scalar flags, categorizedEvents, formEventPropsMap, …) are mutated
+ *    directly on [currentState] via `copy()`. Because `copy()` operates on the real [FormState],
+ *    new fields added to [FormState] are automatically carried forward — there is no parallel
+ *    data class to keep in sync, so the bug class of "forgot to add field to MutableFormState"
+ *    is structurally eliminated.
+ *
+ *  • [snapshot] merges the hot-path collections back into [currentState]. Only the four
+ *    collection fields are listed here; adding a new *scalar* field to [FormState] requires
+ *    zero changes in this class.
+ */
 class ReducerFormStateAccessor(initialState: FormState) : FormStateAccessor {
-    private var mutableState: MutableFormState = MutableFormState.fromImmutableState(initialState)
-    private val baseState: FormState = initialState
+
+    /**
+     * Running immutable state — source of truth for all scalar / cold-path fields.
+     * Mutated in-place via `copy()` for scalar updates.
+     */
+    private var currentState: FormState = initialState
+
+    // ── Hot-path mutable collections ────────────────────────────────────────
+    // Extracted once at construction, synced back in [snapshot].
+    private val _valueMap: MutableMap<MetaIdComp, JsonElement> = initialState.valueMap.toMutableMap()
+    private val _fieldStates: MutableMap<MetaIdComp, FieldState> = initialState.fieldStates.toMutableMap()
+    private val _errors: MutableMap<MetaIdComp, FieldError> = initialState.errors.toMutableMap()
+    private val _sendBtnStateFlags: MutableSet<SendBtnStateFlag> = initialState.sendBtnStateFlags.toMutableSet()
+
     private val intents = mutableListOf<FormIntent>()
 
     // ==================== Read Methods ====================
 
-    override fun getState(): FormState = mutableState.toImmutableState(baseState)
+    override fun getState(): FormState = snapshot()
 
-    override fun getValue(fieldId: MetaIdComp): JsonElement? = mutableState.valueMap[fieldId]
+    override fun getValue(fieldId: MetaIdComp): JsonElement? = _valueMap[fieldId]
 
-    override fun getFieldState(fieldId: MetaIdComp): FieldState? = mutableState.fieldStates[fieldId]
+    override fun getFieldState(fieldId: MetaIdComp): FieldState? = _fieldStates[fieldId]
 
-    override fun getError(fieldId: MetaIdComp): FieldError? = mutableState.errors[fieldId]
+    override fun getError(fieldId: MetaIdComp): FieldError? = _errors[fieldId]
 
-    override fun getValueMap(): Map<MetaIdComp, JsonElement> = mutableState.valueMap.toMap()
+    override fun getValueMap(): Map<MetaIdComp, JsonElement> = _valueMap.toMap()
 
-    override fun getFieldStates(): Map<MetaIdComp, FieldState> = mutableState.fieldStates.toMap()
+    override fun getFieldStates(): Map<MetaIdComp, FieldState> = _fieldStates.toMap()
 
-    override fun getErrors(): Map<MetaIdComp, FieldError> = mutableState.errors.toMap()
+    override fun getErrors(): Map<MetaIdComp, FieldError> = _errors.toMap()
 
     override fun getFieldProperties(fieldId: MetaIdComp): FieldProperties? =
-        mutableState.fieldStates[fieldId]?.fieldProperties
+        _fieldStates[fieldId]?.fieldProperties
 
     // ==================== Write Methods ====================
 
     override fun setValue(fieldId: MetaIdComp, value: JsonElement?) {
         if (value != null) {
-            mutableState.valueMap[fieldId] = value
+            _valueMap[fieldId] = value
         } else {
-            mutableState.valueMap.remove(fieldId)
+            _valueMap.remove(fieldId)
         }
     }
 
     override fun removeValue(fieldId: MetaIdComp) {
-        mutableState.valueMap.remove(fieldId)
+        _valueMap.remove(fieldId)
     }
 
     override fun setFieldState(fieldId: MetaIdComp, fieldState: FieldState) {
-        mutableState.fieldStates[fieldId] = fieldState
+        _fieldStates[fieldId] = fieldState
     }
 
     override fun updateFieldStates(fieldStates: Map<MetaIdComp, FieldState>) {
-        mutableState.fieldStates.putAll(fieldStates)
+        _fieldStates.putAll(fieldStates)
     }
 
     override fun setError(fieldId: MetaIdComp, error: FieldError) {
-        mutableState.errors[fieldId] = error
+        _errors[fieldId] = error
     }
 
     override fun clearError(fieldId: MetaIdComp) {
-        mutableState.errors.remove(fieldId)
+        _errors.remove(fieldId)
     }
 
     override fun updateErrors(errors: Map<MetaIdComp, FieldError>) {
-        mutableState.errors.putAll(errors)
+        _errors.putAll(errors)
     }
 
     override fun clearAllErrors() {
-        mutableState.errors.clear()
+        _errors.clear()
     }
 
     override fun setFormEventPropsMap(map: Map<MetaIdComp, FormEventProps>) {
-        mutableState.formEventPropsMap = map
+        currentState = currentState.copy(formEventPropsMap = map)
     }
 
     override fun setSendBtnStateFlags(flags: Set<SendBtnStateFlag>) {
-        mutableState.sendBtnStateFlags.clear()
-        mutableState.sendBtnStateFlags.addAll(flags)
+        _sendBtnStateFlags.clear()
+        _sendBtnStateFlags.addAll(flags)
     }
 
     override fun setIsSubmitting(value: Boolean) {
-        mutableState.isSubmitting = value
+        currentState = currentState.copy(isSubmitting = value)
     }
 
     override fun updateState(transform: (FormState) -> FormState) {
-        val tempImmutable = mutableState.toImmutableState(baseState)
-        val newImmutable = transform(tempImmutable)
-        mutableState = MutableFormState.fromImmutableState(newImmutable)
+        val transformed = transform(snapshot())
+        // Re-sync: adopt the transformed state wholesale, re-extract mutable collections
+        currentState = transformed
+        syncCollectionsFrom(transformed)
     }
 
     // ==================== Intent ====================
@@ -101,65 +133,43 @@ class ReducerFormStateAccessor(initialState: FormState) : FormStateAccessor {
     // ==================== Result ====================
 
     fun result(): FormReducerResult = FormReducerResult(
-        state = mutableState.toImmutableState(baseState),
+        state = snapshot(),
         intents = collectedIntents()
     )
 
     fun collectedIntents(): List<FormIntent> = intents.toList()
-}
 
+    // ==================== Internal ====================
 
-internal data class MutableFormState(
-    val valueMap: MutableMap<MetaIdComp, JsonElement> = mutableMapOf(),
-    val fieldStates: MutableMap<MetaIdComp, FieldState> = mutableMapOf(),
-    val errors: MutableMap<MetaIdComp, FieldError> = mutableMapOf(),
-    var formEventPropsMap: Map<MetaIdComp, FormEventProps> = emptyMap(),
-    val sendBtnStateFlags: MutableSet<SendBtnStateFlag> = mutableSetOf(),
-    var isSubmitting: Boolean = false,
-    val disabled: Boolean = false,
-    val readOnly: Boolean = false,
-    val formError: String? = null,
-    val isInitialized: Boolean = false
-) {
     /**
-     * Convert to immutable FormState for UI consumption.
-     * Called only once per reducer cycle, avoiding repeated allocations.
+     * Merge the four hot-path collections back into [currentState].
+     *
+     * Only these four fields are listed because they are the only ones extracted
+     * into separate mutable collections. Every other field already lives in
+     * [currentState] and is carried through automatically by `copy()`.
      */
-    fun toImmutableState(
-        baseState: FormState
-    ): FormState {
-        return baseState.copy(
-            valueMap = valueMap.toMap(),
-            fieldStates = fieldStates.toMap(),
-            errors = errors.toMap(),
-            formEventPropsMap = formEventPropsMap,
-            sendBtnStateFlags = sendBtnStateFlags.toSet(),
-            isSubmitting = isSubmitting,
-            disabled = disabled,
-            readOnly = readOnly,
-            formError = formError,
-            isInitialized = isInitialized
-        )
-    }
+    private fun snapshot(): FormState = currentState.copy(
+        valueMap = _valueMap.toMap(),
+        fieldStates = _fieldStates.toMap(),
+        errors = _errors.toMap(),
+        sendBtnStateFlags = _sendBtnStateFlags.toSet()
+    )
 
-    companion object {
-        /**
-         * Create mutable state from immutable FormState.
-         * Called once at the start of each reducer cycle.
-         */
-        fun fromImmutableState(state: FormState): MutableFormState {
-            return MutableFormState(
-                valueMap = state.valueMap.toMutableMap(),
-                fieldStates = state.fieldStates.toMutableMap(),
-                errors = state.errors.toMutableMap(),
-                formEventPropsMap = state.formEventPropsMap,
-                sendBtnStateFlags = state.sendBtnStateFlags.toMutableSet(),
-                isSubmitting = state.isSubmitting,
-                disabled = state.disabled,
-                readOnly = state.readOnly,
-                formError = state.formError,
-                isInitialized = state.isInitialized
-            )
-        }
+    /**
+     * Re-populate mutable collections from an immutable [FormState].
+     * Called after [updateState] to stay in sync with a wholesale state replacement.
+     */
+    private fun syncCollectionsFrom(state: FormState) {
+        _valueMap.clear()
+        _valueMap.putAll(state.valueMap)
+
+        _fieldStates.clear()
+        _fieldStates.putAll(state.fieldStates)
+
+        _errors.clear()
+        _errors.putAll(state.errors)
+
+        _sendBtnStateFlags.clear()
+        _sendBtnStateFlags.addAll(state.sendBtnStateFlags)
     }
 }
