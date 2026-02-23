@@ -100,6 +100,8 @@ object CompSchemaFactory {
             // PICK/SELECTION FIELDS
             // ═══════════════════════════════════════════════════════════════
             EnumDefnCompType.pickText -> FieldPickTextSchema(defnForm, defnComp)
+            EnumDefnCompType.currency,
+            EnumDefnCompType.pickOption -> FieldCurrencySchema(defnForm, defnComp)
             EnumDefnCompType.pickTree -> FieldPickTreeSchema(defnForm, defnComp)
             EnumDefnCompType.pickUser -> FieldPickUserSchema(defnForm, defnComp)
             EnumDefnCompType.pickRole -> FieldPickRoleSchema(defnForm, defnComp)

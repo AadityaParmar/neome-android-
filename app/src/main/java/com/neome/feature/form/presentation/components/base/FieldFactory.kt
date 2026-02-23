@@ -14,6 +14,7 @@ import com.neome.feature.form.presentation.components.composite.grid.FieldGrid
 import com.neome.feature.form.presentation.components.field.FieldButton
 import com.neome.feature.form.presentation.components.field.FieldCamera
 import com.neome.feature.form.presentation.components.field.FieldCounter
+import com.neome.feature.form.presentation.components.field.FieldCurrency
 import com.neome.feature.form.presentation.components.field.FieldDate
 import com.neome.feature.form.presentation.components.field.FieldDateRange
 import com.neome.feature.form.presentation.components.field.FieldDateTime
@@ -159,6 +160,13 @@ fun FieldFactory(
         )
 
         EnumDefnCompType.pickText -> FieldPickText(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.currency,
+        EnumDefnCompType.pickOption -> FieldCurrency(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             modifier = modifier
