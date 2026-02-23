@@ -5,149 +5,100 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.presentation.state.FieldError
+import com.neome.feature.form.presentation.state.FieldProperties
 import com.neome.feature.form.presentation.state.FieldState
+import com.neome.feature.form.presentation.state.FormEventProps
+import com.neome.feature.form.presentation.state.FormIntent
 import com.neome.feature.form.presentation.state.FormState
 import com.neome.feature.form.presentation.state.SendBtnStateFlag
 import kotlinx.serialization.json.JsonElement
 
-/**
- * Internal form context for field components.
- * Provides access to form operations without exposing full FormRef.
- *
- * This is passed to all field renderers via CompositionLocal so they can:
- * - Access form state reactively via [formState]
- * - Access other field values (for dependent calculations)
- * - Trigger recalculation of field properties
- * - Query field states
- * - Validate fields
- *
- * All mutations are synchronous via dispatch. For future threading,
- * callers wrap dispatch calls in their own dispatcher.
- */
-interface FormCtx {
 
-    // ==================== Reactive State ====================
+interface FormStateAccessor {
+    // ==================== Read ====================
 
-    /**
-     * Compose State holding the current FormState.
-     * Reading this in a composable automatically triggers recomposition on change.
-     * Use derivedStateOf for per-field granularity.
-     */
-    val formState: State<FormState>
+    /** Get full current state snapshot */
+    fun getState(): FormState
 
-    // ==================== Field Trigger ====================
-
-    /**
-     * Trigger field to recalculate its fieldProperties.
-     * Call this when a value that affects another field's properties changes.
-     *
-     * @param fieldId The field to trigger
-     */
-    fun trigger(fieldId: MetaIdComp)
-
-    // ==================== Read Operations ====================
-
-    /**
-     * Get current form values as a map.
-     *
-     * @return Map of field IDs to their current values
-     */
-    fun getValues(): Map<MetaIdComp, JsonElement>
-
-    /**
-     * Get specific field state.
-     *
-     * @param fieldId The field ID to look up
-     * @return FieldState or null if field doesn't exist
-     */
-    fun getFieldState(fieldId: MetaIdComp): FieldState?
-
-    /**
-     * Get field value (convenience method).
-     *
-     * @param fieldId The field ID to look up
-     * @return JsonElement value or null if field doesn't exist or has no value
-     */
+    /** Get field value from valueMap */
     fun getValue(fieldId: MetaIdComp): JsonElement?
 
-    /**
-     * Get field error (convenience method).
-     *
-     * @param fieldId The field ID to look up
-     * @return FieldError or null if field has no error
-     */
+    /** Get field state */
+    fun getFieldState(fieldId: MetaIdComp): FieldState?
+
+    /** Get field error */
     fun getError(fieldId: MetaIdComp): FieldError?
 
-    /**
-     * Optional API context provider.
-     * Implementations may override to expose additional APIs specific to this form.
-     * This is intentionally nullable to keep backward compatibility prior to API wiring.
-     */
-    fun getApiCtx(): FormApiContext? = null
+    /** Get all values */
+    fun getValueMap(): Map<MetaIdComp, JsonElement>
 
-    /**
-     * Check if a field exists in the form.
-     *
-     * @param fieldId The field ID to check
-     * @return true if field exists
-     */
-    fun hasField(fieldId: MetaIdComp): Boolean
+    /** Get all field states */
+    fun getFieldStates(): Map<MetaIdComp, FieldState>
 
-    /**
-     * Get the DefnForm data.
-     * Useful for accessing form-level configuration.
-     */
-    fun getDefnForm(): DefnFormUi?
+    /** Get all errors */
+    fun getErrors(): Map<MetaIdComp, FieldError>
 
-    // ==================== Validation ====================
+    /** Get field properties */
+    fun getFieldProperties(fieldId: MetaIdComp): FieldProperties?
 
-    /**
-     * Trigger validation for specific field or entire form.
-     *
-     * @param fieldId Field to validate, or null for entire form
-     */
-    fun validate(fieldId: MetaIdComp? = null)
+    // ==================== Write ====================
 
-    /**
-     * Set error on a specific field.
-     *
-     * @param fieldId The field to set error on
-     * @param error The error message
-     */
-    fun setError(fieldId: MetaIdComp, error: String)
+    /** Set a field value in valueMap */
+    fun setValue(fieldId: MetaIdComp, value: JsonElement?)
 
-    /**
-     * Clear error on a specific field.
-     *
-     * @param fieldId The field to clear error from
-     */
+    /** Remove a field value from valueMap */
+    fun removeValue(fieldId: MetaIdComp)
+
+    /** Update a field state */
+    fun setFieldState(fieldId: MetaIdComp, fieldState: FieldState)
+
+    /** Update field states map */
+    fun updateFieldStates(fieldStates: Map<MetaIdComp, FieldState>)
+
+    /** Set error for a field */
+    fun setError(fieldId: MetaIdComp, error: FieldError)
+
+    /** Clear error for a field */
     fun clearError(fieldId: MetaIdComp)
 
-    // ==================== Send Button Control ====================
+    /** Update errors map */
+    fun updateErrors(errors: Map<MetaIdComp, FieldError>)
 
-    /**
-     * Add a send button state flag. When any non-Invisible flag is present, the send button is disabled.
-     * @param flag The flag to add
-     */
-    fun addSendBtnStateFlag(flag: SendBtnStateFlag)
+    /** Clear all errors */
+    fun clearAllErrors()
 
-    /**
-     * Remove a send button state flag. When all non-Invisible flags are removed, the send button is enabled.
-     * @param flag The flag to remove
-     */
-    fun removeSendBtnStateFlag(flag: SendBtnStateFlag)
+    /** Update form event props map */
+    fun setFormEventPropsMap(map: Map<MetaIdComp, FormEventProps>)
+
+    /** Update send button state flags */
+    fun setSendBtnStateFlags(flags: Set<SendBtnStateFlag>)
+
+    /** Set isSubmitting flag */
+    fun setIsSubmitting(value: Boolean)
+
+    /** Generic state update for complex transformations */
+    fun updateState(transform: (FormState) -> FormState)
+
+    // ==================== Intent ====================
+
+    /** Emit a side-effect intent */
+    fun emitIntent(intent: FormIntent)
 }
 
-/**
- * CompositionLocal to provide FormCtx to nested composables.
- * FormCtx is a stable pointer that never changes after initialization.
- *
- * Usage:
- * ```kotlin
- * val formCtx = LocalFormCtx.current
- * val fieldState = formCtx.getFieldState(fieldId)
- * ```
- */
+interface FormCtx {
+
+    val formState: State<FormState>
+
+    fun getFieldState(fieldId: MetaIdComp): FieldState?
+
+    fun getError(fieldId: MetaIdComp): FieldError?
+
+    fun getApiCtx(): FormApiContext? = null
+
+    fun getDefnForm(): DefnFormUi?
+
+}
+
 val LocalFormCtx = staticCompositionLocalOf<FormCtx> {
     error("FormCtx not provided. Ensure Form composable is in the composition tree.")
 }

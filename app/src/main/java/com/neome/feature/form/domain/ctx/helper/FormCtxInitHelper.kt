@@ -3,7 +3,8 @@ package com.neome.feature.form.domain.ctx.helper
 import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
 import com.neome.feature.form.domain.DefnFormUi
-import com.neome.feature.form.domain.ctx.helper.events.FormCtxFormEvents
+import com.neome.feature.form.domain.ctx.ReducerFormStateAccessor
+import com.neome.feature.form.domain.ctx.helper.events.FormCtxInitEvents
 import com.neome.feature.form.domain.ctx.helper.schema.CompSchemaFactory
 import com.neome.feature.form.domain.util.FieldPropertyResolver
 import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
@@ -76,8 +77,9 @@ object FormCtxInitHelper {
         )
 
         // Initialize form events: categorize by kind and execute onInitForm events
-        val (categorizedEvents, stateAfterInit) = FormCtxFormEvents.initEvents(defnForm, baseState)
+        val initAccessor = ReducerFormStateAccessor(baseState)
+        FormCtxInitEvents.initEvents(defnForm, initAccessor)
 
-        return stateAfterInit.copy(categorizedEvents = categorizedEvents)
+        return initAccessor.getState()
     }
 }

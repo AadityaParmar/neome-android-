@@ -2,18 +2,18 @@ package com.neome.feature.form.domain.ctx.helper.events
 
 import com.neome.api.meta.base.Types
 import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.ctx.FormStateAccessor
 import com.neome.feature.form.presentation.state.FormState
 
 object FormCtxInitEvents {
 
-    fun initEvents(defnForm: DefnFormUi, state: FormState): Pair<FormCtxFormEvents.CategorizedEvents?, FormState> {
-        val eventMap = defnForm.eventMap ?: return Pair(null, state)
+    fun initEvents(defnForm: DefnFormUi, accessor: FormStateAccessor) {
+        val state = accessor.getState()
+        val eventMap = defnForm.eventMap ?: return
 
         val onChangeMap = mutableMapOf<Types.MetaIdComp, MutableList<Types.MetaIdFormEvent>>()
         val onSubmitFormList = mutableListOf<Types.MetaIdFormEvent>()
         val onClickButtonMap = mutableMapOf<Types.MetaIdComp, MutableList<Types.MetaIdFormEvent>>()
-
-        var currentState = state
 
         // Iterate keys in order to preserve event sequence defined in the form definition
         for (eventId in eventMap.keys) {
@@ -41,9 +41,9 @@ object FormCtxInitEvents {
                 }
 
                 Types.EnumDefnKindFormEvent.onInitForm -> {
-                    // Execute immediately and accumulate state changes
-                    currentState = FormCtxFormEvents.executeEvent(event.metaId, currentState, defnForm)
-                    currentState = FormCtxEventPropsHelper.mergeEventPropsIntoFieldStates(currentState)
+                    // Execute immediately via accessor
+                    FormCtxFormEvents.executeEvent(event.metaId, accessor, defnForm)
+                    FormCtxEventPropsHelper.mergeEventPropsIntoFieldStates(accessor)
                 }
             }
         }
@@ -54,6 +54,7 @@ object FormCtxInitEvents {
             onClickButtonMap = onClickButtonMap
         )
 
-        return Pair(categorizedEvents, currentState)
+        // Store categorizedEvents into the accessor state
+        accessor.updateState { it.copy(categorizedEvents = categorizedEvents) }
     }
 }

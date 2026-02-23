@@ -16,11 +16,9 @@ import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormIntent
 import com.neome.feature.form.presentation.state.FormState
-import com.neome.feature.form.presentation.state.SendBtnStateFlag
-import kotlinx.serialization.json.JsonElement
 
 class FormCtxImpl(
-    private val defnForm: DefnFormUi,
+    defnForm: DefnFormUi,
     initialValue: FormValueData?,
     private val onIntent: (FormIntent) -> Unit
 ) : FormCtx {
@@ -34,10 +32,12 @@ class FormCtxImpl(
     private val currentState: FormState get() = _formState.value
 
     init {
-        onIntent(FormIntent.SendBtnStateChanged(
-            enabled = _formState.value.isSendBtnEnabled,
-            invisible = _formState.value.isSendBtnInvisible
-        ))
+        onIntent(
+            FormIntent.SendBtnStateChanged(
+                enabled = _formState.value.isSendBtnEnabled,
+                invisible = _formState.value.isSendBtnInvisible
+            )
+        )
     }
 
     internal fun dispatch(event: FormEvent) {
@@ -48,60 +48,62 @@ class FormCtxImpl(
 
     private fun processEvent(state: FormState, event: FormEvent): FormReducerResult {
         val defnForm = state.defnForm ?: return FormReducerResult(state)
+        val accessor = ReducerFormStateAccessor(state)
 
-        return when (event) {
-            is FormEvent.Initialize -> FormReducerResult(state)
-            is FormEvent.FieldValueChanged -> FormCtxEventHelper.handleFieldValueChanged(state, event, defnForm)
-            is FormEvent.FieldFocused -> FormCtxEventHelper.handleFieldFocused(state, event)
-            is FormEvent.FieldBlurred -> FormCtxEventHelper.handleFieldBlurred(state, event)
-            is FormEvent.FieldTouched -> FormCtxEventHelper.handleFieldTouched(state, event)
-            is FormEvent.TriggerField -> FormCtxEventHelper.handleTriggerField(state, event, defnForm)
-            is FormEvent.ValidateField -> FormCtxValidationHelper.handleValidateField(state, event)
-            is FormEvent.ValidateAll -> FormCtxValidationHelper.handleValidateAll(state)
-            is FormEvent.SetFieldError -> FormCtxValidationHelper.handleSetFieldError(state, event)
-            is FormEvent.ClearFieldError -> FormCtxValidationHelper.handleClearFieldError(state, event)
-            is FormEvent.ClearAllErrors -> FormCtxValidationHelper.handleClearAllErrors(state)
-            is FormEvent.Submit -> FormCtxEventHelper.handleSubmit(state, defnForm)
-            is FormEvent.Reset -> FormCtxEventHelper.handleReset(state, event)
-            is FormEvent.SetValues -> FormCtxEventHelper.handleSetValues(state, event, defnForm)
-            is FormEvent.AddSendBtnStateFlag -> handleAddSendBtnStateFlag(state, event)
-            is FormEvent.RemoveSendBtnStateFlag -> handleRemoveSendBtnStateFlag(state, event)
-            is FormEvent.Click -> FormCtxEventHelper.handleClick(state, event, defnForm)
+        when (event) {
+            is FormEvent.FieldValueChanged -> FormCtxEventHelper.handleFieldValueChanged(accessor, event, defnForm)
+            is FormEvent.FieldFocused -> FormCtxEventHelper.handleFieldFocused(accessor, event)
+            is FormEvent.FieldBlurred -> FormCtxEventHelper.handleFieldBlurred(accessor, event)
+            is FormEvent.FieldTouched -> FormCtxEventHelper.handleFieldTouched(accessor, event)
+            is FormEvent.TriggerField -> FormCtxEventHelper.handleTriggerField(accessor, event, defnForm)
+            is FormEvent.ValidateField -> FormCtxValidationHelper.handleValidateField(accessor, event)
+            is FormEvent.ValidateAll -> FormCtxValidationHelper.handleValidateAll(accessor)
+            is FormEvent.SetFieldError -> FormCtxValidationHelper.handleSetFieldError(accessor, event)
+            is FormEvent.ClearFieldError -> FormCtxValidationHelper.handleClearFieldError(accessor, event)
+            is FormEvent.ClearAllErrors -> FormCtxValidationHelper.handleClearAllErrors(accessor)
+            is FormEvent.Submit -> FormCtxEventHelper.handleSubmit(accessor, defnForm)
+            is FormEvent.Reset -> FormCtxEventHelper.handleReset(accessor, event)
+            is FormEvent.SetValues -> FormCtxEventHelper.handleSetValues(accessor, event, defnForm)
+            is FormEvent.AddSendBtnStateFlag -> handleAddSendBtnStateFlag(accessor, event)
+            is FormEvent.RemoveSendBtnStateFlag -> handleRemoveSendBtnStateFlag(accessor, event)
+            is FormEvent.Click -> FormCtxEventHelper.handleClick(accessor, event, defnForm)
         }
+
+        return accessor.result()
     }
 
     private fun handleAddSendBtnStateFlag(
-        state: FormState,
+        accessor: FormStateAccessor,
         event: FormEvent.AddSendBtnStateFlag
-    ): FormReducerResult {
-        if (event.flag in state.sendBtnStateFlags) return FormReducerResult(state)
+    ) {
+        val state = accessor.getState()
+        if (event.flag in state.sendBtnStateFlags) return
         val wasEnabled = state.isSendBtnEnabled
         val wasInvisible = state.isSendBtnInvisible
-        val newSet = state.sendBtnStateFlags + event.flag
-        val newState = state.copy(sendBtnStateFlags = newSet)
+        accessor.setSendBtnStateFlags(state.sendBtnStateFlags + event.flag)
+        val newState = accessor.getState()
         val isNowEnabled = newState.isSendBtnEnabled
         val isNowInvisible = newState.isSendBtnInvisible
-        val intent = if (wasEnabled != isNowEnabled || wasInvisible != isNowInvisible) {
-            FormIntent.SendBtnStateChanged(enabled = isNowEnabled, invisible = isNowInvisible)
-        } else null
-        return FormReducerResult(newState, intent)
+        if (wasEnabled != isNowEnabled || wasInvisible != isNowInvisible) {
+            accessor.emitIntent(FormIntent.SendBtnStateChanged(enabled = isNowEnabled, invisible = isNowInvisible))
+        }
     }
 
     private fun handleRemoveSendBtnStateFlag(
-        state: FormState,
+        accessor: FormStateAccessor,
         event: FormEvent.RemoveSendBtnStateFlag
-    ): FormReducerResult {
-        if (event.flag !in state.sendBtnStateFlags) return FormReducerResult(state)
+    ) {
+        val state = accessor.getState()
+        if (event.flag !in state.sendBtnStateFlags) return
         val wasEnabled = state.isSendBtnEnabled
         val wasInvisible = state.isSendBtnInvisible
-        val newSet = state.sendBtnStateFlags - event.flag
-        val newState = state.copy(sendBtnStateFlags = newSet)
+        accessor.setSendBtnStateFlags(state.sendBtnStateFlags - event.flag)
+        val newState = accessor.getState()
         val isNowEnabled = newState.isSendBtnEnabled
         val isNowInvisible = newState.isSendBtnInvisible
-        val intent = if (wasEnabled != isNowEnabled || wasInvisible != isNowInvisible) {
-            FormIntent.SendBtnStateChanged(enabled = isNowEnabled, invisible = isNowInvisible)
-        } else null
-        return FormReducerResult(newState, intent)
+        if (wasEnabled != isNowEnabled || wasInvisible != isNowInvisible) {
+            accessor.emitIntent(FormIntent.SendBtnStateChanged(enabled = isNowEnabled, invisible = isNowInvisible))
+        }
     }
 
     fun createFormRef(): FormRef {
@@ -113,38 +115,8 @@ class FormCtxImpl(
 
     // ==================== FormCtx Implementation ====================
 
-    override fun trigger(fieldId: MetaIdComp) {
-        dispatch(FormEvent.TriggerField(fieldId))
-    }
 
-    override fun getValues(): Map<MetaIdComp, JsonElement> = currentState.valueMap
     override fun getFieldState(fieldId: MetaIdComp): FieldState? = currentState.getFieldState(fieldId)
-    override fun getValue(fieldId: MetaIdComp): JsonElement? = currentState.getValue(fieldId)
     override fun getError(fieldId: MetaIdComp): FieldError? = currentState.getError(fieldId)
-    override fun hasField(fieldId: MetaIdComp): Boolean = currentState.fieldStates.containsKey(fieldId)
     override fun getDefnForm(): DefnFormUi? = currentState.defnForm
-
-    override fun validate(fieldId: MetaIdComp?) {
-        if (fieldId != null) {
-            dispatch(FormEvent.ValidateField(fieldId))
-        } else {
-            dispatch(FormEvent.ValidateAll)
-        }
-    }
-
-    override fun setError(fieldId: MetaIdComp, error: String) {
-        dispatch(FormEvent.SetFieldError(fieldId, error))
-    }
-
-    override fun clearError(fieldId: MetaIdComp) {
-        dispatch(FormEvent.ClearFieldError(fieldId))
-    }
-
-    override fun addSendBtnStateFlag(flag: SendBtnStateFlag) {
-        dispatch(FormEvent.AddSendBtnStateFlag(flag))
-    }
-
-    override fun removeSendBtnStateFlag(flag: SendBtnStateFlag) {
-        dispatch(FormEvent.RemoveSendBtnStateFlag(flag))
-    }
 }

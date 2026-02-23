@@ -121,14 +121,6 @@ sealed interface FormEvent : UiEvent {
         val valueMap: Map<MetaIdComp, JsonElement>
     ) : FormEvent
 
-    // ==================== Initialization ====================
-
-    /**
-     * Initialize the form.
-     * Builds dependency map, sets initial values, and calculates initial fieldProperties.
-     */
-    data object Initialize : FormEvent
-
     // ==================== Send Button Flag Events ====================
 
     /**

@@ -1,14 +1,15 @@
 package com.neome.feature.form.domain.ctx.helper.events
 
 import com.neome.api.meta.base.Types
+import com.neome.feature.form.domain.ctx.FormStateAccessor
 import com.neome.feature.form.presentation.state.FormEventProps
-import com.neome.feature.form.presentation.state.FormState
 
 object FormCtxEventPropsHelper {
 
-    fun mergeEventPropsIntoFieldStates(state: FormState): FormState {
+    fun mergeEventPropsIntoFieldStates(accessor: FormStateAccessor) {
+        val state = accessor.getState()
         val eventPropsMap = state.formEventPropsMap
-        if (eventPropsMap.isEmpty()) return state
+        if (eventPropsMap.isEmpty()) return
 
         var updatedFieldStates = state.fieldStates
 
@@ -29,20 +30,19 @@ object FormCtxEventPropsHelper {
             }
         }
 
-        return if (updatedFieldStates !== state.fieldStates) {
-            state.copy(fieldStates = updatedFieldStates)
-        } else {
-            state
+        if (updatedFieldStates !== state.fieldStates) {
+            accessor.updateFieldStates(updatedFieldStates)
         }
     }
 
     fun updateFormEventProps(
-        state: FormState,
+        accessor: FormStateAccessor,
         compIdSet: List<Types.MetaIdComp>?,
         update: (FormEventProps) -> FormEventProps
-    ): FormState {
-        if (compIdSet.isNullOrEmpty()) return state
+    ) {
+        if (compIdSet.isNullOrEmpty()) return
 
+        val state = accessor.getState()
         var updatedMap = state.formEventPropsMap
 
         for (compId in compIdSet) {
@@ -50,6 +50,6 @@ object FormCtxEventPropsHelper {
             updatedMap = updatedMap + (compId to update(current))
         }
 
-        return state.copy(formEventPropsMap = updatedMap)
+        accessor.setFormEventPropsMap(updatedMap)
     }
 }

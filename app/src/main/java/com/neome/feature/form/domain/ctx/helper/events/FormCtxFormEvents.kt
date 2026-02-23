@@ -3,9 +3,9 @@ package com.neome.feature.form.domain.ctx.helper.events
 import android.util.Log
 import com.neome.api.meta.base.Types
 import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.ctx.FormStateAccessor
 import com.neome.feature.form.domain.ctx.helper.FormCtxEventHelper
 import com.neome.feature.form.domain.util.ConditionResolver
-import com.neome.feature.form.presentation.state.FormState
 
 object FormCtxFormEvents {
 
@@ -20,25 +20,21 @@ object FormCtxFormEvents {
         val onClickButtonMap: Map<Types.MetaIdComp, List<Types.MetaIdFormEvent>>
     )
 
-    fun initEvents(defnForm: DefnFormUi, state: FormState): Pair<CategorizedEvents?, FormState> {
-        return FormCtxInitEvents.initEvents(defnForm, state)
-    }
-
     fun executeEvents(
         eventIds: List<Types.MetaIdFormEvent>,
-        state: FormState,
+        accessor: FormStateAccessor,
         defnForm: DefnFormUi,
         triggerValueChanged: Boolean = false,
         depth: Int = 0
-    ): FormState {
+    ) {
         // Reset formEventPropsMap before each event cycle so stale overrides are cleared.
         // Events will re-establish any visibility/disability overrides that still apply.
-        var currentState = state.copy(formEventPropsMap = emptyMap())
+        accessor.setFormEventPropsMap(emptyMap())
 
         for (eventId in eventIds) {
-            currentState = executeEventInternal(
+            executeEventInternal(
                 eventId = eventId,
-                state = currentState,
+                accessor = accessor,
                 defnForm = defnForm,
                 triggerValueChanged = triggerValueChanged,
                 depth = depth
@@ -46,20 +42,18 @@ object FormCtxFormEvents {
         }
 
         // Merge event props into field states once after all events complete
-        currentState = FormCtxEventPropsHelper.mergeEventPropsIntoFieldStates(currentState)
-
-        return currentState
+        FormCtxEventPropsHelper.mergeEventPropsIntoFieldStates(accessor)
     }
 
     fun executeEvent(
         eventId: Types.MetaIdFormEvent,
-        state: FormState,
+        accessor: FormStateAccessor,
         defnForm: DefnFormUi,
         depth: Int = 0
-    ): FormState {
-        return executeEventInternal(
+    ) {
+        executeEventInternal(
             eventId = eventId,
-            state = state,
+            accessor = accessor,
             defnForm = defnForm,
             triggerValueChanged = false,
             depth = depth
@@ -69,24 +63,23 @@ object FormCtxFormEvents {
 
     private fun executeEventInternal(
         eventId: Types.MetaIdFormEvent,
-        state: FormState,
+        accessor: FormStateAccessor,
         defnForm: DefnFormUi,
         triggerValueChanged: Boolean,
         depth: Int = 0
-    ): FormState {
+    ) {
         // Guard against infinite recursion during onChange cascading
         if (depth >= MAX_CASCADE_DEPTH) {
             Log.w(TAG, "Max cascade depth ($MAX_CASCADE_DEPTH) reached for event $eventId")
-            return state
+            return
         }
 
-        val eventMap = defnForm.eventMap ?: return state
-        val event = eventMap.map[eventId] ?: return state
-        val actionBindingMap = event.actionBindingMap ?: return state
+        val state = accessor.getState()
+        val eventMap = defnForm.eventMap ?: return
+        val event = eventMap.map[eventId] ?: return
+        val actionBindingMap = event.actionBindingMap ?: return
 
         Log.d(TAG, "Event executed: $eventId | kind = ${event.kind}")
-
-        var currentState = state
 
         // Iterate binding keys in order to preserve action sequence
         for (bindingKey in actionBindingMap.keys) {
@@ -101,8 +94,8 @@ object FormCtxFormEvents {
                     var conditionResult = ConditionResolver.resolve(
                         conditionMap = conditionMap,
                         defnForm = defnForm,
-                        formValue = currentState.initialFormValue,
-                        getValue = { metaIdComp -> currentState.valueMap[metaIdComp] }
+                        formValue = state.initialFormValue,
+                        getValue = { metaIdComp -> accessor.getValue(metaIdComp) }
                     )
 
                     // Apply notCondition flag: invert result when true
@@ -135,11 +128,11 @@ object FormCtxFormEvents {
             }
 
             val oldValues = affectedFieldIds.associateWith { fieldId ->
-                currentState.valueMap[fieldId]
+                accessor.getValue(fieldId)
             }
 
             // --- Execute action ---
-            currentState = FormCtxActionExecutor.executeAction(action, currentState, defnForm)
+            FormCtxActionExecutor.executeAction(accessor, action, defnForm)
 
             // --- Trigger processFieldValueChanged for setValue/clear ---
             // Only when executed from onChange/onClickButton context (not onSubmitForm/onInitForm).
@@ -148,15 +141,14 @@ object FormCtxFormEvents {
             // Only processes fields whose values actually changed
             if (affectedFieldIds.isNotEmpty()) {
                 for (fieldId in affectedFieldIds) {
-                    val newValue = currentState.valueMap[fieldId]
+                    val newValue = accessor.getValue(fieldId)
                     val oldValue = oldValues[fieldId]
 
                     // Only call processFieldValueChanged if value actually changed
                     if (newValue != oldValue) {
-                        currentState = FormCtxEventHelper.processFieldValueChanged(
-                            state = currentState,
+                        FormCtxEventHelper.processFieldValueChanged(
+                            accessor = accessor,
                             fieldId = fieldId,
-                            value = newValue,
                             defnForm = defnForm,
                             depth = depth + 1
                         )
@@ -164,7 +156,5 @@ object FormCtxFormEvents {
                 }
             }
         }
-
-        return currentState
     }
 }

@@ -7,6 +7,7 @@ import com.neome.api.meta.base.dto.DefnEventAction
 import com.neome.api.meta.base.dto.DefnSection
 import com.neome.api.meta.base.dto.FieldDtoArg
 import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.ctx.FormStateAccessor
 import com.neome.feature.form.domain.util.ConditionResolver
 import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
 import com.neome.feature.form.presentation.state.FormState
@@ -19,17 +20,17 @@ object FormCtxActionExecutor {
     private const val TAG = "FormCtxActionExecutor"
 
     fun executeAction(
+        accessor: FormStateAccessor,
         action: DefnEventAction,
-        state: FormState,
         defnForm: DefnFormUi
-    ): FormState {
+    ) {
         val targetNames = actionTargetNames(defnForm, action)
         Log.d(TAG, "Action running: ${action.kind} on ${action.actionOn} targets: $targetNames")
-        return when (action.actionOn) {
-            Types.EnumDefnKindEventActionOn.field -> executeActionOnField(action, state, defnForm)
-            Types.EnumDefnKindEventActionOn.component -> executeActionOnComponent(action, state, defnForm)
-            Types.EnumDefnKindEventActionOn.sendButton -> executeActionOnSendButton(action, state)
-            else -> state
+        when (action.actionOn) {
+            Types.EnumDefnKindEventActionOn.field -> executeActionOnField(accessor, action, defnForm)
+            Types.EnumDefnKindEventActionOn.component -> executeActionOnComponent(accessor, action, defnForm)
+            Types.EnumDefnKindEventActionOn.sendButton -> executeActionOnSendButton(accessor, action)
+            else -> {}
         }
     }
 
@@ -51,18 +52,16 @@ object FormCtxActionExecutor {
     }
 
     private fun executeActionOnField(
+        accessor: FormStateAccessor,
         action: DefnEventAction,
-        state: FormState,
         defnForm: DefnFormUi
-    ): FormState {
-        return when (action.kind) {
+    ) {
+        when (action.kind) {
 
             Types.EnumDefnKindEventAction.setValue -> {
-                val resolvedValue = resolveSourceValue(action.source, state, defnForm)
+                val resolvedValue = resolveSourceValue(action.source, accessor, defnForm)
                 val compIdSet = action.compIdSet
-                if (compIdSet.isNullOrEmpty()) return state
-
-                var updatedValueMap = state.valueMap
+                if (compIdSet.isNullOrEmpty()) return
 
                 for (compId in compIdSet) {
                     if (compId is Types.MetaIdField) {
@@ -70,119 +69,111 @@ object FormCtxActionExecutor {
                             val compType = defnForm.compMap[compId]?.type ?: continue
                             val fieldVal = FieldValueResolver.fnRawValueToFieldValue(compType, resolvedValue)
                             val jsonElement = FieldValueResolver.fnFieldValueToJsonElement(compType, fieldVal)
-                            if (jsonElement != null)
-                                updatedValueMap = updatedValueMap + (compId to jsonElement)
+                            if (jsonElement != null) {
+                                accessor.setValue(compId, jsonElement)
+                            }
                         } else {
-                            updatedValueMap = updatedValueMap - compId
+                            accessor.removeValue(compId)
                         }
                     }
                 }
 
                 // Only update valueMap here; isDirty, validation, and onChange
                 // cascading are handled by processFieldValueChanged in executeEventInternal
-                state.copy(valueMap = updatedValueMap)
             }
 
             Types.EnumDefnKindEventAction.clear -> {
                 val compIdSet = action.compIdSet
-                if (compIdSet.isNullOrEmpty()) return state
-
-                var updatedValueMap = state.valueMap
+                if (compIdSet.isNullOrEmpty()) return
 
                 for (compId in compIdSet) {
                     if (compId is Types.MetaIdField) {
-                        updatedValueMap = updatedValueMap - compId
+                        accessor.removeValue(compId)
                     }
                 }
 
                 // Only update valueMap here; isDirty, validation, and onChange
                 // cascading are handled by processFieldValueChanged in executeEventInternal
-                state.copy(valueMap = updatedValueMap)
             }
 
             Types.EnumDefnKindEventAction.visible -> {
-                FormCtxEventPropsHelper.updateFormEventProps(state, action.compIdSet) { props ->
+                FormCtxEventPropsHelper.updateFormEventProps(accessor, action.compIdSet) { props ->
                     props.copy(hidden = false, invisible = false)
                 }
             }
 
             Types.EnumDefnKindEventAction.invisible -> {
-                FormCtxEventPropsHelper.updateFormEventProps(state, action.compIdSet) { props ->
+                FormCtxEventPropsHelper.updateFormEventProps(accessor, action.compIdSet) { props ->
                     props.copy(invisible = true)
                 }
             }
 
             Types.EnumDefnKindEventAction.hidden -> {
-                FormCtxEventPropsHelper.updateFormEventProps(state, action.compIdSet) { props ->
+                FormCtxEventPropsHelper.updateFormEventProps(accessor, action.compIdSet) { props ->
                     props.copy(hidden = true)
                 }
             }
 
             Types.EnumDefnKindEventAction.enable -> {
-                FormCtxEventPropsHelper.updateFormEventProps(state, action.compIdSet) { props ->
+                FormCtxEventPropsHelper.updateFormEventProps(accessor, action.compIdSet) { props ->
                     props.copy(disabled = false)
                 }
             }
 
             Types.EnumDefnKindEventAction.disable -> {
-                FormCtxEventPropsHelper.updateFormEventProps(state, action.compIdSet) { props ->
+                FormCtxEventPropsHelper.updateFormEventProps(accessor, action.compIdSet) { props ->
                     props.copy(disabled = true)
                 }
             }
 
             Types.EnumDefnKindEventAction.highlight -> {
-                FormCtxEventPropsHelper.updateFormEventProps(state, action.compIdSet) { props ->
+                FormCtxEventPropsHelper.updateFormEventProps(accessor, action.compIdSet) { props ->
                     props.copy(highlight = true)
                 }
             }
 
             Types.EnumDefnKindEventAction.blink -> {
-                FormCtxEventPropsHelper.updateFormEventProps(state, action.compIdSet) { props ->
+                FormCtxEventPropsHelper.updateFormEventProps(accessor, action.compIdSet) { props ->
                     props.copy(blink = true)
                 }
             }
 
             Types.EnumDefnKindEventAction.shake -> {
-                FormCtxEventPropsHelper.updateFormEventProps(state, action.compIdSet) { props ->
+                FormCtxEventPropsHelper.updateFormEventProps(accessor, action.compIdSet) { props ->
                     props.copy(shake = true)
                 }
             }
 
             Types.EnumDefnKindEventAction.executeAction -> {
                 Log.d(TAG, "TODO: ${action.kind} not yet implemented")
-                state
             }
 
             Types.EnumDefnKindEventAction.executeFormula -> {
                 Log.d(TAG, "TODO: ${action.kind} not yet implemented")
-                state
             }
 
             Types.EnumDefnKindEventAction.click -> {
                 Log.d(TAG, "TODO: ${action.kind} not yet implemented")
-                state
             }
         }
     }
 
     private fun executeActionOnComponent(
+        accessor: FormStateAccessor,
         action: DefnEventAction,
-        state: FormState,
         defnForm: DefnFormUi
-    ): FormState {
-        return when (action.kind) {
+    ) {
+        when (action.kind) {
 
             Types.EnumDefnKindEventAction.clear -> {
                 val compIdSet = action.compIdSet
-                if (compIdSet.isNullOrEmpty()) return state
-
-                var updatedValueMap = state.valueMap
+                if (compIdSet.isNullOrEmpty()) return
 
                 for (compId in compIdSet) {
                     when (compId) {
                         is Types.MetaIdGrid -> {
                             // Clear grid value
-                            updatedValueMap = updatedValueMap - compId
+                            accessor.removeValue(compId)
                         }
 
                         is Types.MetaIdSection -> {
@@ -192,7 +183,7 @@ object FormCtxActionExecutor {
                                 val fieldIdSet = section.fieldIdSet
                                 if (!fieldIdSet.isNullOrEmpty()) {
                                     for (fieldId in fieldIdSet) {
-                                        updatedValueMap = updatedValueMap - fieldId
+                                        accessor.removeValue(fieldId)
                                     }
                                 }
                             }
@@ -202,103 +193,108 @@ object FormCtxActionExecutor {
 
                 // Only update valueMap here; isDirty, validation, and onChange
                 // cascading are handled by processFieldValueChanged in executeEventInternal
-                state.copy(valueMap = updatedValueMap)
             }
 
             Types.EnumDefnKindEventAction.visible -> {
-                FormCtxEventPropsHelper.updateFormEventProps(state, action.compIdSet) { props ->
+                FormCtxEventPropsHelper.updateFormEventProps(accessor, action.compIdSet) { props ->
                     props.copy(hidden = false, invisible = false)
                 }
             }
 
             Types.EnumDefnKindEventAction.invisible -> {
-                FormCtxEventPropsHelper.updateFormEventProps(state, action.compIdSet) { props ->
+                FormCtxEventPropsHelper.updateFormEventProps(accessor, action.compIdSet) { props ->
                     props.copy(invisible = true)
                 }
             }
 
             Types.EnumDefnKindEventAction.hidden -> {
-                FormCtxEventPropsHelper.updateFormEventProps(state, action.compIdSet) { props ->
+                FormCtxEventPropsHelper.updateFormEventProps(accessor, action.compIdSet) { props ->
                     props.copy(hidden = true)
                 }
             }
 
             Types.EnumDefnKindEventAction.enable -> {
-                FormCtxEventPropsHelper.updateFormEventProps(state, action.compIdSet) { props ->
+                FormCtxEventPropsHelper.updateFormEventProps(accessor, action.compIdSet) { props ->
                     props.copy(disabled = false)
                 }
             }
 
             Types.EnumDefnKindEventAction.disable -> {
-                FormCtxEventPropsHelper.updateFormEventProps(state, action.compIdSet) { props ->
+                FormCtxEventPropsHelper.updateFormEventProps(accessor, action.compIdSet) { props ->
                     props.copy(disabled = true)
                 }
             }
 
             Types.EnumDefnKindEventAction.highlight -> {
-                FormCtxEventPropsHelper.updateFormEventProps(state, action.compIdSet) { props ->
+                FormCtxEventPropsHelper.updateFormEventProps(accessor, action.compIdSet) { props ->
                     props.copy(highlight = true)
                 }
             }
 
             Types.EnumDefnKindEventAction.blink -> {
-                FormCtxEventPropsHelper.updateFormEventProps(state, action.compIdSet) { props ->
+                FormCtxEventPropsHelper.updateFormEventProps(accessor, action.compIdSet) { props ->
                     props.copy(blink = true)
                 }
             }
 
             Types.EnumDefnKindEventAction.shake -> {
-                FormCtxEventPropsHelper.updateFormEventProps(state, action.compIdSet) { props ->
+                FormCtxEventPropsHelper.updateFormEventProps(accessor, action.compIdSet) { props ->
                     props.copy(shake = true)
                 }
             }
 
-            else -> state
+            else -> {}
         }
     }
 
     private fun executeActionOnSendButton(
+        accessor: FormStateAccessor,
         action: DefnEventAction,
-        state: FormState,
-    ): FormState {
-        return when (action.kind) {
+    ) {
+        when (action.kind) {
             Types.EnumDefnKindEventAction.visible -> {
-                state.copy(sendBtnStateFlags = state.sendBtnStateFlags - SendBtnStateFlag.Invisible)
+                val state = accessor.getState()
+                accessor.setSendBtnStateFlags(state.sendBtnStateFlags - SendBtnStateFlag.Invisible)
             }
 
             Types.EnumDefnKindEventAction.invisible -> {
-                state.copy(sendBtnStateFlags = state.sendBtnStateFlags + SendBtnStateFlag.Invisible)
+                val state = accessor.getState()
+                accessor.setSendBtnStateFlags(state.sendBtnStateFlags + SendBtnStateFlag.Invisible)
             }
 
             Types.EnumDefnKindEventAction.hidden -> {
-                state.copy(sendBtnStateFlags = state.sendBtnStateFlags + SendBtnStateFlag.Invisible)
+                val state = accessor.getState()
+                accessor.setSendBtnStateFlags(state.sendBtnStateFlags + SendBtnStateFlag.Invisible)
             }
 
             Types.EnumDefnKindEventAction.enable -> {
-                state.copy(sendBtnStateFlags = state.sendBtnStateFlags - SendBtnStateFlag.Disabled)
+                val state = accessor.getState()
+                accessor.setSendBtnStateFlags(state.sendBtnStateFlags - SendBtnStateFlag.Disabled)
             }
 
             Types.EnumDefnKindEventAction.disable -> {
-                state.copy(sendBtnStateFlags = state.sendBtnStateFlags + SendBtnStateFlag.Disabled)
+                val state = accessor.getState()
+                accessor.setSendBtnStateFlags(state.sendBtnStateFlags + SendBtnStateFlag.Disabled)
             }
 
-            else -> state
+            else -> {}
         }
     }
 
     fun resolveSourceValue(
         source: FieldDtoArg?,
-        state: FormState,
+        accessor: FormStateAccessor,
         defnForm: DefnFormUi
     ): Any? {
         if (source == null) return null
 
         source.valueFieldId?.let { fieldId ->
+            val state = accessor.getState()
             return ConditionResolver.resolvedFieldValue(
                 fieldId,
                 defnForm.compMap,
                 { fId ->
-                    val fieldValue = state.valueMap[fId]
+                    val fieldValue = accessor.getValue(fId)
                     val type = defnForm.compMap[fId]?.type
                     if (type !== null)
                         FieldValueResolver.fnFieldValueToJsonElement(type, fieldValue)

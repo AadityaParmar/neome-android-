@@ -1,6 +1,7 @@
 package com.neome.feature.form.domain.ctx.helper
 
 import com.neome.api.meta.base.Types.MetaIdComp
+import com.neome.feature.form.domain.ctx.FormStateAccessor
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FormEvent
 import com.neome.feature.form.presentation.state.FormIntent
@@ -10,41 +11,43 @@ import com.neome.feature.form.presentation.state.SendBtnStateFlag
 object FormCtxValidationHelper {
 
     fun handleValidateField(
-        state: FormState,
+        accessor: FormStateAccessor,
         event: FormEvent.ValidateField
-    ): FormReducerResult {
-        val currentFieldState = state.fieldStates[event.fieldId]
-            ?: return FormReducerResult(state)
+    ) {
+        val state = accessor.getState()
+        val currentFieldState = accessor.getFieldState(event.fieldId)
+            ?: return
 
         val schema = state.compSchemaMap[event.fieldId]
-            ?: return FormReducerResult(state) // No schema = no validation needed
+            ?: return // No schema = no validation needed
 
         // 1. Mark as validating
         val validatingFieldState = currentFieldState.copy(isValidating = true)
 
         // 2. Use pure validation to get error without side effects
-        val error = schema.validate(state.valueMap[event.fieldId], currentFieldState)
+        val error = schema.validate(accessor.getValue(event.fieldId), currentFieldState)
 
         // 3. Update errors map
         val updatedErrors = updateFieldError(
             fieldId = event.fieldId,
             error = error,
-            errors = state.errors
+            errors = accessor.getErrors()
         )
 
         // 4. Mark as not validating
         val finalFieldState = validatingFieldState.copy(isValidating = false)
 
-        val newState = state.copy(
-            fieldStates = state.fieldStates + (event.fieldId to finalFieldState),
-            errors = updatedErrors
-        )
+        // 5. Update field state and errors
+        accessor.setFieldState(event.fieldId, finalFieldState)
+        accessor.updateErrors(updatedErrors)
 
         // Update Invalid flag based on new error state
-        return updateInvalidFlag(newState)
+        updateInvalidFlag(accessor)
     }
 
-    fun handleValidateAll(state: FormState): FormReducerResult {
+    fun handleValidateAll(accessor: FormStateAccessor) {
+        val state = accessor.getState()
+        
         // 1. Mark all as validating
         val validatingFieldStates = state.fieldStates.mapValues { (_, fieldState) ->
             fieldState.copy(isValidating = true)
@@ -54,7 +57,7 @@ object FormCtxValidationHelper {
         var updatedErrors = state.errors
         state.compSchemaMap.forEach { (fieldId, schema) ->
             val fieldState = state.fieldStates[fieldId]
-            val error = schema.validate(state.valueMap[fieldId], fieldState)
+            val error = schema.validate(accessor.getValue(fieldId), fieldState)
             updatedErrors = updateFieldError(
                 fieldId = fieldId,
                 error = error,
@@ -67,13 +70,12 @@ object FormCtxValidationHelper {
             fieldState.copy(isValidating = false)
         }
 
-        val newState = state.copy(
-            fieldStates = finalFieldStates,
-            errors = updatedErrors
-        )
+        // 4. Update field states and errors
+        accessor.updateFieldStates(finalFieldStates)
+        accessor.updateErrors(updatedErrors)
 
         // Update Invalid flag based on new error state
-        return updateInvalidFlag(newState)
+        updateInvalidFlag(accessor)
     }
 
     /**
@@ -112,76 +114,80 @@ object FormCtxValidationHelper {
     }
 
     fun handleSetFieldError(
-        state: FormState,
+        accessor: FormStateAccessor,
         event: FormEvent.SetFieldError
-    ): FormReducerResult {
-        val newErrors = state.errors + (event.fieldId to FieldError(
+    ) {
+        val newErrors = accessor.getErrors() + (event.fieldId to FieldError(
             message = event.error,
             type = FieldError.ErrorType.Custom
         ))
 
-        val newState = state.copy(errors = newErrors)
+        accessor.updateErrors(newErrors)
 
         // Update Invalid flag based on new error state
-        return updateInvalidFlag(newState)
+        updateInvalidFlag(accessor)
     }
 
     fun handleClearFieldError(
-        state: FormState,
+        accessor: FormStateAccessor,
         event: FormEvent.ClearFieldError
-    ): FormReducerResult {
-        val newState = state.copy(errors = state.errors - event.fieldId)
+    ) {
+        accessor.clearError(event.fieldId)
 
         // Update Invalid flag based on new error state
-        return updateInvalidFlag(newState)
+        updateInvalidFlag(accessor)
     }
 
-    fun handleClearAllErrors(state: FormState): FormReducerResult {
-        val newState = state.copy(errors = emptyMap())
+    fun handleClearAllErrors(accessor: FormStateAccessor) {
+        accessor.clearAllErrors()
 
         // Update Invalid flag based on new error state
-        return updateInvalidFlag(newState)
+        updateInvalidFlag(accessor)
     }
 
     /**
      * Updates the SendBtnStateFlag.Invalid flag based on error state.
-     * Returns updated state with correct flag and optional intent on transition.
+     * Uses accessor to read/write sendBtnStateFlags and emit intent on transition.
      *
-     * @param state The state after error changes
-     * @return FormReducerResult with updated sendBtnStateFlags and optional SendBtnStateChanged intent
+     * @param accessor The form state accessor for reading/writing
      */
-    private fun updateInvalidFlag(state: FormState): FormReducerResult {
+    private fun updateInvalidFlag(accessor: FormStateAccessor) {
+        val state = accessor.getState()
         val hasErrors = state.errors.isNotEmpty()
         val hasInvalidFlag = SendBtnStateFlag.Invalid in state.sendBtnStateFlags
 
-        return when {
+        when {
             hasErrors && !hasInvalidFlag -> {
                 // Add Invalid flag
                 val wasEnabled = state.isSendBtnEnabled
                 val wasInvisible = state.isSendBtnInvisible
                 val newSet = state.sendBtnStateFlags + SendBtnStateFlag.Invalid
-                val newState = state.copy(sendBtnStateFlags = newSet)
+                accessor.setSendBtnStateFlags(newSet)
+                
+                val newState = accessor.getState()
                 val isNowEnabled = newState.isSendBtnEnabled
                 val isNowInvisible = newState.isSendBtnInvisible
                 val intent = if (wasEnabled != isNowEnabled || wasInvisible != isNowInvisible) {
                     FormIntent.SendBtnStateChanged(enabled = isNowEnabled, invisible = isNowInvisible)
                 } else null
-                FormReducerResult(newState, intent)
+                intent?.let { accessor.emitIntent(it) }
             }
 
             !hasErrors && hasInvalidFlag -> {
                 // Remove Invalid flag
                 val newSet = state.sendBtnStateFlags - SendBtnStateFlag.Invalid
-                val newState = state.copy(sendBtnStateFlags = newSet)
+                accessor.setSendBtnStateFlags(newSet)
+                
+                val newState = accessor.getState()
                 val isNowEnabled = newState.isSendBtnEnabled
                 val isNowInvisible = newState.isSendBtnInvisible
                 val intent = if (isNowEnabled != state.isSendBtnEnabled || isNowInvisible != state.isSendBtnInvisible) {
                     FormIntent.SendBtnStateChanged(enabled = isNowEnabled, invisible = isNowInvisible)
                 } else null
-                FormReducerResult(newState, intent)
+                intent?.let { accessor.emitIntent(it) }
             }
 
-            else -> FormReducerResult(state) // No change needed
+            else -> {} // No change needed
         }
     }
 }
