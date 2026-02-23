@@ -37,6 +37,7 @@ import com.neome.feature.form.presentation.components.field.FieldPickLineStroke
 import com.neome.feature.form.presentation.components.field.FieldPickMonth
 import com.neome.feature.form.presentation.components.field.FieldPickText
 import com.neome.feature.form.presentation.components.field.FieldPickTextSize
+import com.neome.feature.form.presentation.components.field.FieldPinShape
 import com.neome.feature.form.presentation.components.field.FieldSetOfText
 import com.neome.feature.form.presentation.components.field.FieldSignature
 import com.neome.feature.form.presentation.components.field.FieldSwitch
@@ -196,6 +197,12 @@ fun FieldFactory(
         )
 
         EnumDefnCompType.month -> FieldPickMonth(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.pinShape -> FieldPinShape(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             modifier = modifier

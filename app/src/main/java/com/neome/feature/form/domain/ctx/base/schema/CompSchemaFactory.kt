@@ -106,6 +106,7 @@ object CompSchemaFactory {
             EnumDefnCompType.language -> FieldCurrencySchema(defnForm, defnComp)
             EnumDefnCompType.lineStroke -> FieldCurrencySchema(defnForm, defnComp)
             EnumDefnCompType.month -> FieldCurrencySchema(defnForm, defnComp)
+            EnumDefnCompType.pinShape -> FieldCurrencySchema(defnForm, defnComp)
             EnumDefnCompType.pickTree -> FieldPickTreeSchema(defnForm, defnComp)
             EnumDefnCompType.pickUser -> FieldPickUserSchema(defnForm, defnComp)
             EnumDefnCompType.pickRole -> FieldPickRoleSchema(defnForm, defnComp)
