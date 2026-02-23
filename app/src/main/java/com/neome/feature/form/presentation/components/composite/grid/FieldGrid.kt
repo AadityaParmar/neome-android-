@@ -1,4 +1,4 @@
-package com.neome.feature.form.presentation.components.field
+package com.neome.feature.form.presentation.components.composite.grid
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
