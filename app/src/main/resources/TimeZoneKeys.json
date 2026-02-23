@@ -1,0 +1,1316 @@
+{
+  "Etc/GMT+12": {
+    "displayName": "(UTC-12:00) International Date Line West"
+  },
+  "Etc/GMT+11": {
+    "displayName": "(UTC-11:00) Coordinated Universal Time-11"
+  },
+  "Pacific/Midway": {
+    "displayName": "(UTC-11:00) Coordinated Universal Time-11"
+  },
+  "Pacific/Niue": {
+    "displayName": "(UTC-11:00) Coordinated Universal Time-11"
+  },
+  "Pacific/Pago_Pago": {
+    "displayName": "(UTC-11:00) Coordinated Universal Time-11"
+  },
+  "Etc/GMT+10": {
+    "displayName": "(UTC-10:00) Hawaii"
+  },
+  "Pacific/Honolulu": {
+    "displayName": "(UTC-10:00) Hawaii"
+  },
+  "Pacific/Johnston": {
+    "displayName": "(UTC-10:00) Hawaii"
+  },
+  "Pacific/Rarotonga": {
+    "displayName": "(UTC-10:00) Hawaii"
+  },
+  "Pacific/Tahiti": {
+    "displayName": "(UTC-10:00) Hawaii"
+  },
+  "America/Anchorage": {
+    "displayName": "(UTC-09:00) Alaska"
+  },
+  "America/Juneau": {
+    "displayName": "(UTC-09:00) Alaska"
+  },
+  "America/Nome": {
+    "displayName": "(UTC-09:00) Alaska"
+  },
+  "America/Sitka": {
+    "displayName": "(UTC-09:00) Alaska"
+  },
+  "America/Yakutat": {
+    "displayName": "(UTC-09:00) Alaska"
+  },
+  "America/Santa_Isabel": {
+    "displayName": "(UTC-08:00) Baja California"
+  },
+  "America/Los_Angeles": {
+    "displayName": "(UTC-08:00) Pacific Standard Time (US & Canada)"
+  },
+  "America/Tijuana": {
+    "displayName": "(UTC-08:00) Pacific Standard Time (US & Canada)"
+  },
+  "America/Vancouver": {
+    "displayName": "(UTC-08:00) Pacific Standard Time (US & Canada)"
+  },
+  "PST8PDT": {
+    "displayName": "(UTC-08:00) Pacific Standard Time (US & Canada)"
+  },
+  "America/Creston": {
+    "displayName": "(UTC-07:00) Arizona"
+  },
+  "America/Dawson": {
+    "displayName": "(UTC-07:00) Arizona"
+  },
+  "America/Dawson_Creek": {
+    "displayName": "(UTC-07:00) Arizona"
+  },
+  "America/Hermosillo": {
+    "displayName": "(UTC-07:00) Arizona"
+  },
+  "America/Phoenix": {
+    "displayName": "(UTC-07:00) Arizona"
+  },
+  "America/Whitehorse": {
+    "displayName": "(UTC-07:00) Arizona"
+  },
+  "Etc/GMT+7": {
+    "displayName": "(UTC-07:00) Arizona"
+  },
+  "America/Chihuahua": {
+    "displayName": "(UTC-07:00) Chihuahua, La Paz, Mazatlan"
+  },
+  "America/Mazatlan": {
+    "displayName": "(UTC-07:00) Chihuahua, La Paz, Mazatlan"
+  },
+  "America/Boise": {
+    "displayName": "(UTC-07:00) Mountain Time (US & Canada)"
+  },
+  "America/Cambridge_Bay": {
+    "displayName": "(UTC-07:00) Mountain Time (US & Canada)"
+  },
+  "America/Denver": {
+    "displayName": "(UTC-07:00) Mountain Time (US & Canada)"
+  },
+  "America/Edmonton": {
+    "displayName": "(UTC-07:00) Mountain Time (US & Canada)"
+  },
+  "America/Inuvik": {
+    "displayName": "(UTC-07:00) Mountain Time (US & Canada)"
+  },
+  "America/Ojinaga": {
+    "displayName": "(UTC-07:00) Mountain Time (US & Canada)"
+  },
+  "America/Yellowknife": {
+    "displayName": "(UTC-07:00) Mountain Time (US & Canada)"
+  },
+  "MST7MDT": {
+    "displayName": "(UTC-07:00) Mountain Time (US & Canada)"
+  },
+  "America/Belize": {
+    "displayName": "(UTC-06:00) Central America"
+  },
+  "America/Costa_Rica": {
+    "displayName": "(UTC-06:00) Central America"
+  },
+  "America/El_Salvador": {
+    "displayName": "(UTC-06:00) Central America"
+  },
+  "America/Guatemala": {
+    "displayName": "(UTC-06:00) Central America"
+  },
+  "America/Managua": {
+    "displayName": "(UTC-06:00) Central America"
+  },
+  "America/Tegucigalpa": {
+    "displayName": "(UTC-06:00) Central America"
+  },
+  "Etc/GMT+6": {
+    "displayName": "(UTC-06:00) Central America"
+  },
+  "Pacific/Galapagos": {
+    "displayName": "(UTC-06:00) Central America"
+  },
+  "America/Chicago": {
+    "displayName": "(UTC-06:00) Central Time (US & Canada)"
+  },
+  "America/Indiana/Knox": {
+    "displayName": "(UTC-06:00) Central Time (US & Canada)"
+  },
+  "America/Indiana/Tell_City": {
+    "displayName": "(UTC-06:00) Central Time (US & Canada)"
+  },
+  "America/Matamoros": {
+    "displayName": "(UTC-06:00) Central Time (US & Canada)"
+  },
+  "America/Menominee": {
+    "displayName": "(UTC-06:00) Central Time (US & Canada)"
+  },
+  "America/North_Dakota/Beulah": {
+    "displayName": "(UTC-06:00) Central Time (US & Canada)"
+  },
+  "America/North_Dakota/Center": {
+    "displayName": "(UTC-06:00) Central Time (US & Canada)"
+  },
+  "America/North_Dakota/New_Salem": {
+    "displayName": "(UTC-06:00) Central Time (US & Canada)"
+  },
+  "America/Rainy_River": {
+    "displayName": "(UTC-06:00) Central Time (US & Canada)"
+  },
+  "America/Rankin_Inlet": {
+    "displayName": "(UTC-06:00) Central Time (US & Canada)"
+  },
+  "America/Resolute": {
+    "displayName": "(UTC-06:00) Central Time (US & Canada)"
+  },
+  "America/Winnipeg": {
+    "displayName": "(UTC-06:00) Central Time (US & Canada)"
+  },
+  "CST6CDT": {
+    "displayName": "(UTC-06:00) Central Time (US & Canada)"
+  },
+  "America/Bahia_Banderas": {
+    "displayName": "(UTC-06:00) Guadalajara, Mexico City, Monterrey"
+  },
+  "America/Cancun": {
+    "displayName": "(UTC-06:00) Guadalajara, Mexico City, Monterrey"
+  },
+  "America/Merida": {
+    "displayName": "(UTC-06:00) Guadalajara, Mexico City, Monterrey"
+  },
+  "America/Mexico_City": {
+    "displayName": "(UTC-06:00) Guadalajara, Mexico City, Monterrey"
+  },
+  "America/Monterrey": {
+    "displayName": "(UTC-06:00) Guadalajara, Mexico City, Monterrey"
+  },
+  "America/Regina": {
+    "displayName": "(UTC-06:00) Saskatchewan"
+  },
+  "America/Swift_Current": {
+    "displayName": "(UTC-06:00) Saskatchewan"
+  },
+  "America/Bogota": {
+    "displayName": "(UTC-05:00) Bogota, Lima, Quito"
+  },
+  "America/Cayman": {
+    "displayName": "(UTC-05:00) Bogota, Lima, Quito"
+  },
+  "America/Coral_Harbour": {
+    "displayName": "(UTC-05:00) Bogota, Lima, Quito"
+  },
+  "America/Eirunepe": {
+    "displayName": "(UTC-05:00) Bogota, Lima, Quito"
+  },
+  "America/Guayaquil": {
+    "displayName": "(UTC-05:00) Bogota, Lima, Quito"
+  },
+  "America/Jamaica": {
+    "displayName": "(UTC-05:00) Bogota, Lima, Quito"
+  },
+  "America/Lima": {
+    "displayName": "(UTC-05:00) Bogota, Lima, Quito"
+  },
+  "America/Panama": {
+    "displayName": "(UTC-05:00) Bogota, Lima, Quito"
+  },
+  "America/Rio_Branco": {
+    "displayName": "(UTC-05:00) Bogota, Lima, Quito"
+  },
+  "Etc/GMT+5": {
+    "displayName": "(UTC-05:00) Bogota, Lima, Quito"
+  },
+  "America/Detroit": {
+    "displayName": "(UTC-04:00) Eastern Daylight Time (US & Canada)"
+  },
+  "America/Havana": {
+    "displayName": "(UTC-04:00) Eastern Daylight Time (US & Canada)"
+  },
+  "America/Indiana/Petersburg": {
+    "displayName": "(UTC-04:00) Eastern Daylight Time (US & Canada)"
+  },
+  "America/Indiana/Vincennes": {
+    "displayName": "(UTC-04:00) Eastern Daylight Time (US & Canada)"
+  },
+  "America/Indiana/Winamac": {
+    "displayName": "(UTC-04:00) Eastern Daylight Time (US & Canada)"
+  },
+  "America/Iqaluit": {
+    "displayName": "(UTC-04:00) Eastern Daylight Time (US & Canada)"
+  },
+  "America/Kentucky/Monticello": {
+    "displayName": "(UTC-04:00) Eastern Daylight Time (US & Canada)"
+  },
+  "America/Louisville": {
+    "displayName": "(UTC-04:00) Eastern Daylight Time (US & Canada)"
+  },
+  "America/Montreal": {
+    "displayName": "(UTC-04:00) Eastern Daylight Time (US & Canada)"
+  },
+  "America/Nassau": {
+    "displayName": "(UTC-04:00) Eastern Daylight Time (US & Canada)"
+  },
+  "America/New_York": {
+    "displayName": "(UTC-04:00) Eastern Daylight Time (US & Canada)"
+  },
+  "America/Nipigon": {
+    "displayName": "(UTC-04:00) Eastern Daylight Time (US & Canada)"
+  },
+  "America/Pangnirtung": {
+    "displayName": "(UTC-04:00) Eastern Daylight Time (US & Canada)"
+  },
+  "America/Port-au-Prince": {
+    "displayName": "(UTC-04:00) Eastern Daylight Time (US & Canada)"
+  },
+  "America/Thunder_Bay": {
+    "displayName": "(UTC-04:00) Eastern Daylight Time (US & Canada)"
+  },
+  "America/Toronto": {
+    "displayName": "(UTC-04:00) Eastern Daylight Time (US & Canada)"
+  },
+  "America/Indiana/Marengo": {
+    "displayName": "(UTC-05:00) Indiana (East)"
+  },
+  "America/Indiana/Vevay": {
+    "displayName": "(UTC-05:00) Indiana (East)"
+  },
+  "America/Indianapolis": {
+    "displayName": "(UTC-05:00) Indiana (East)"
+  },
+  "America/Caracas": {
+    "displayName": "(UTC-04:30) Caracas"
+  },
+  "America/Asuncion": {
+    "displayName": "(UTC-04:00) Asuncion"
+  },
+  "America/Glace_Bay": {
+    "displayName": "(UTC-04:00) Atlantic Time (Canada)"
+  },
+  "America/Goose_Bay": {
+    "displayName": "(UTC-04:00) Atlantic Time (Canada)"
+  },
+  "America/Halifax": {
+    "displayName": "(UTC-04:00) Atlantic Time (Canada)"
+  },
+  "America/Moncton": {
+    "displayName": "(UTC-04:00) Atlantic Time (Canada)"
+  },
+  "America/Thule": {
+    "displayName": "(UTC-04:00) Atlantic Time (Canada)"
+  },
+  "Atlantic/Bermuda": {
+    "displayName": "(UTC-04:00) Atlantic Time (Canada)"
+  },
+  "America/Campo_Grande": {
+    "displayName": "(UTC-04:00) Cuiaba"
+  },
+  "America/Cuiaba": {
+    "displayName": "(UTC-04:00) Cuiaba"
+  },
+  "America/Anguilla": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Antigua": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Aruba": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Barbados": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Blanc-Sablon": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Boa_Vista": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Curacao": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Dominica": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Grand_Turk": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Grenada": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Guadeloupe": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Guyana": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Kralendijk": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/La_Paz": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Lower_Princes": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Manaus": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Marigot": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Martinique": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Montserrat": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Port_of_Spain": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Porto_Velho": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Puerto_Rico": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Santo_Domingo": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/St_Barthelemy": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/St_Kitts": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/St_Lucia": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/St_Thomas": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/St_Vincent": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Tortola": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "Etc/GMT+4": {
+    "displayName": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan"
+  },
+  "America/Santiago": {
+    "displayName": "(UTC-04:00) Santiago"
+  },
+  "Antarctica/Palmer": {
+    "displayName": "(UTC-04:00) Santiago"
+  },
+  "America/St_Johns": {
+    "displayName": "(UTC-03:30) Newfoundland"
+  },
+  "America/Sao_Paulo": {
+    "displayName": "(UTC-03:00) Brasilia"
+  },
+  "America/Argentina/Buenos_Aires": {
+    "displayName": "(UTC-03:00) Buenos Aires"
+  },
+  "America/Argentina/Catamarca": {
+    "displayName": "(UTC-03:00) Buenos Aires"
+  },
+  "America/Argentina/Cordoba": {
+    "displayName": "(UTC-03:00) Buenos Aires"
+  },
+  "America/Argentina/Jujuy": {
+    "displayName": "(UTC-03:00) Buenos Aires"
+  },
+  "America/Argentina/La_Rioja": {
+    "displayName": "(UTC-03:00) Buenos Aires"
+  },
+  "America/Argentina/Mendoza": {
+    "displayName": "(UTC-03:00) Buenos Aires"
+  },
+  "America/Argentina/Rio_Gallegos": {
+    "displayName": "(UTC-03:00) Buenos Aires"
+  },
+  "America/Argentina/Salta": {
+    "displayName": "(UTC-03:00) Buenos Aires"
+  },
+  "America/Argentina/San_Juan": {
+    "displayName": "(UTC-03:00) Buenos Aires"
+  },
+  "America/Argentina/San_Luis": {
+    "displayName": "(UTC-03:00) Buenos Aires"
+  },
+  "America/Argentina/Tucuman": {
+    "displayName": "(UTC-03:00) Buenos Aires"
+  },
+  "America/Argentina/Ushuaia": {
+    "displayName": "(UTC-03:00) Buenos Aires"
+  },
+  "America/Buenos_Aires": {
+    "displayName": "(UTC-03:00) Buenos Aires"
+  },
+  "America/Catamarca": {
+    "displayName": "(UTC-03:00) Buenos Aires"
+  },
+  "America/Cordoba": {
+    "displayName": "(UTC-03:00) Buenos Aires"
+  },
+  "America/Jujuy": {
+    "displayName": "(UTC-03:00) Buenos Aires"
+  },
+  "America/Mendoza": {
+    "displayName": "(UTC-03:00) Buenos Aires"
+  },
+  "America/Araguaina": {
+    "displayName": "(UTC-03:00) Cayenne, Fortaleza"
+  },
+  "America/Belem": {
+    "displayName": "(UTC-03:00) Cayenne, Fortaleza"
+  },
+  "America/Cayenne": {
+    "displayName": "(UTC-03:00) Cayenne, Fortaleza"
+  },
+  "America/Fortaleza": {
+    "displayName": "(UTC-03:00) Cayenne, Fortaleza"
+  },
+  "America/Maceio": {
+    "displayName": "(UTC-03:00) Cayenne, Fortaleza"
+  },
+  "America/Paramaribo": {
+    "displayName": "(UTC-03:00) Cayenne, Fortaleza"
+  },
+  "America/Recife": {
+    "displayName": "(UTC-03:00) Cayenne, Fortaleza"
+  },
+  "America/Santarem": {
+    "displayName": "(UTC-03:00) Cayenne, Fortaleza"
+  },
+  "Antarctica/Rothera": {
+    "displayName": "(UTC-03:00) Cayenne, Fortaleza"
+  },
+  "Atlantic/Stanley": {
+    "displayName": "(UTC-03:00) Cayenne, Fortaleza"
+  },
+  "Etc/GMT+3": {
+    "displayName": "(UTC-03:00) Cayenne, Fortaleza"
+  },
+  "America/Godthab": {
+    "displayName": "(UTC-03:00) Greenland"
+  },
+  "America/Montevideo": {
+    "displayName": "(UTC-03:00) Montevideo"
+  },
+  "America/Bahia": {
+    "displayName": "(UTC-03:00) Salvador"
+  },
+  "America/Noronha": {
+    "displayName": "(UTC-02:00) Coordinated Universal Time-02"
+  },
+  "Atlantic/South_Georgia": {
+    "displayName": "(UTC-02:00) Coordinated Universal Time-02"
+  },
+  "Etc/GMT+2": {
+    "displayName": "(UTC-02:00) Coordinated Universal Time-02"
+  },
+  "America/Scoresbysund": {
+    "displayName": "(UTC-01:00) Azores"
+  },
+  "Atlantic/Azores": {
+    "displayName": "(UTC-01:00) Azores"
+  },
+  "Atlantic/Cape_Verde": {
+    "displayName": "(UTC-01:00) Cape Verde Is."
+  },
+  "Etc/GMT+1": {
+    "displayName": "(UTC-01:00) Cape Verde Is."
+  },
+  "Africa/Casablanca": {
+    "displayName": "(UTC) Casablanca"
+  },
+  "Africa/El_Aaiun": {
+    "displayName": "(UTC) Casablanca"
+  },
+  "America/Danmarkshavn": {
+    "displayName": "(UTC) Coordinated Universal Time"
+  },
+  "Etc/GMT": {
+    "displayName": "(UTC) Coordinated Universal Time"
+  },
+  "Europe/Isle_of_Man": {
+    "displayName": "(UTC+01:00) Edinburgh, London"
+  },
+  "Europe/Guernsey": {
+    "displayName": "(UTC+01:00) Edinburgh, London"
+  },
+  "Europe/Jersey": {
+    "displayName": "(UTC+01:00) Edinburgh, London"
+  },
+  "Europe/London": {
+    "displayName": "(UTC+01:00) Edinburgh, London"
+  },
+  "Atlantic/Canary": {
+    "displayName": "(UTC) Dublin, Lisbon"
+  },
+  "Atlantic/Faeroe": {
+    "displayName": "(UTC) Dublin, Lisbon"
+  },
+  "Atlantic/Madeira": {
+    "displayName": "(UTC) Dublin, Lisbon"
+  },
+  "Europe/Dublin": {
+    "displayName": "(UTC) Dublin, Lisbon"
+  },
+  "Europe/Lisbon": {
+    "displayName": "(UTC) Dublin, Lisbon"
+  },
+  "Africa/Abidjan": {
+    "displayName": "(UTC) Monrovia, Reykjavik"
+  },
+  "Africa/Accra": {
+    "displayName": "(UTC) Monrovia, Reykjavik"
+  },
+  "Africa/Bamako": {
+    "displayName": "(UTC) Monrovia, Reykjavik"
+  },
+  "Africa/Banjul": {
+    "displayName": "(UTC) Monrovia, Reykjavik"
+  },
+  "Africa/Bissau": {
+    "displayName": "(UTC) Monrovia, Reykjavik"
+  },
+  "Africa/Conakry": {
+    "displayName": "(UTC) Monrovia, Reykjavik"
+  },
+  "Africa/Dakar": {
+    "displayName": "(UTC) Monrovia, Reykjavik"
+  },
+  "Africa/Freetown": {
+    "displayName": "(UTC) Monrovia, Reykjavik"
+  },
+  "Africa/Lome": {
+    "displayName": "(UTC) Monrovia, Reykjavik"
+  },
+  "Africa/Monrovia": {
+    "displayName": "(UTC) Monrovia, Reykjavik"
+  },
+  "Africa/Nouakchott": {
+    "displayName": "(UTC) Monrovia, Reykjavik"
+  },
+  "Africa/Ouagadougou": {
+    "displayName": "(UTC) Monrovia, Reykjavik"
+  },
+  "Africa/Sao_Tome": {
+    "displayName": "(UTC) Monrovia, Reykjavik"
+  },
+  "Atlantic/Reykjavik": {
+    "displayName": "(UTC) Monrovia, Reykjavik"
+  },
+  "Atlantic/St_Helena": {
+    "displayName": "(UTC) Monrovia, Reykjavik"
+  },
+  "Arctic/Longyearbyen": {
+    "displayName": "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+  },
+  "Europe/Amsterdam": {
+    "displayName": "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+  },
+  "Europe/Andorra": {
+    "displayName": "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+  },
+  "Europe/Berlin": {
+    "displayName": "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+  },
+  "Europe/Busingen": {
+    "displayName": "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+  },
+  "Europe/Gibraltar": {
+    "displayName": "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+  },
+  "Europe/Luxembourg": {
+    "displayName": "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+  },
+  "Europe/Malta": {
+    "displayName": "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+  },
+  "Europe/Monaco": {
+    "displayName": "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+  },
+  "Europe/Oslo": {
+    "displayName": "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+  },
+  "Europe/Rome": {
+    "displayName": "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+  },
+  "Europe/San_Marino": {
+    "displayName": "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+  },
+  "Europe/Stockholm": {
+    "displayName": "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+  },
+  "Europe/Vaduz": {
+    "displayName": "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+  },
+  "Europe/Vatican": {
+    "displayName": "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+  },
+  "Europe/Vienna": {
+    "displayName": "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+  },
+  "Europe/Zurich": {
+    "displayName": "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+  },
+  "Europe/Belgrade": {
+    "displayName": "(UTC+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague"
+  },
+  "Europe/Bratislava": {
+    "displayName": "(UTC+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague"
+  },
+  "Europe/Budapest": {
+    "displayName": "(UTC+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague"
+  },
+  "Europe/Ljubljana": {
+    "displayName": "(UTC+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague"
+  },
+  "Europe/Podgorica": {
+    "displayName": "(UTC+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague"
+  },
+  "Europe/Prague": {
+    "displayName": "(UTC+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague"
+  },
+  "Europe/Tirane": {
+    "displayName": "(UTC+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague"
+  },
+  "Africa/Ceuta": {
+    "displayName": "(UTC+01:00) Brussels, Copenhagen, Madrid, Paris"
+  },
+  "Europe/Brussels": {
+    "displayName": "(UTC+01:00) Brussels, Copenhagen, Madrid, Paris"
+  },
+  "Europe/Copenhagen": {
+    "displayName": "(UTC+01:00) Brussels, Copenhagen, Madrid, Paris"
+  },
+  "Europe/Madrid": {
+    "displayName": "(UTC+01:00) Brussels, Copenhagen, Madrid, Paris"
+  },
+  "Europe/Paris": {
+    "displayName": "(UTC+01:00) Brussels, Copenhagen, Madrid, Paris"
+  },
+  "Europe/Sarajevo": {
+    "displayName": "(UTC+01:00) Sarajevo, Skopje, Warsaw, Zagreb"
+  },
+  "Europe/Skopje": {
+    "displayName": "(UTC+01:00) Sarajevo, Skopje, Warsaw, Zagreb"
+  },
+  "Europe/Warsaw": {
+    "displayName": "(UTC+01:00) Sarajevo, Skopje, Warsaw, Zagreb"
+  },
+  "Europe/Zagreb": {
+    "displayName": "(UTC+01:00) Sarajevo, Skopje, Warsaw, Zagreb"
+  },
+  "Africa/Algiers": {
+    "displayName": "(UTC+01:00) West Central Africa"
+  },
+  "Africa/Bangui": {
+    "displayName": "(UTC+01:00) West Central Africa"
+  },
+  "Africa/Brazzaville": {
+    "displayName": "(UTC+01:00) West Central Africa"
+  },
+  "Africa/Douala": {
+    "displayName": "(UTC+01:00) West Central Africa"
+  },
+  "Africa/Kinshasa": {
+    "displayName": "(UTC+01:00) West Central Africa"
+  },
+  "Africa/Lagos": {
+    "displayName": "(UTC+01:00) West Central Africa"
+  },
+  "Africa/Libreville": {
+    "displayName": "(UTC+01:00) West Central Africa"
+  },
+  "Africa/Luanda": {
+    "displayName": "(UTC+01:00) West Central Africa"
+  },
+  "Africa/Malabo": {
+    "displayName": "(UTC+01:00) West Central Africa"
+  },
+  "Africa/Ndjamena": {
+    "displayName": "(UTC+01:00) West Central Africa"
+  },
+  "Africa/Niamey": {
+    "displayName": "(UTC+01:00) West Central Africa"
+  },
+  "Africa/Porto-Novo": {
+    "displayName": "(UTC+01:00) West Central Africa"
+  },
+  "Africa/Tunis": {
+    "displayName": "(UTC+01:00) West Central Africa"
+  },
+  "Etc/GMT-1": {
+    "displayName": "(UTC+01:00) West Central Africa"
+  },
+  "Africa/Windhoek": {
+    "displayName": "(UTC+01:00) Windhoek"
+  },
+  "Asia/Nicosia": {
+    "displayName": "(UTC+02:00) E. Europe"
+  },
+  "Europe/Athens": {
+    "displayName": "(UTC+02:00) E. Europe"
+  },
+  "Europe/Bucharest": {
+    "displayName": "(UTC+02:00) E. Europe"
+  },
+  "Europe/Chisinau": {
+    "displayName": "(UTC+02:00) E. Europe"
+  },
+  "Asia/Beirut": {
+    "displayName": "(UTC+02:00) Beirut"
+  },
+  "Africa/Cairo": {
+    "displayName": "(UTC+02:00) Cairo"
+  },
+  "Asia/Damascus": {
+    "displayName": "(UTC+02:00) Damascus"
+  },
+  "Europe/Helsinki": {
+    "displayName": "(UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius"
+  },
+  "Europe/Kiev": {
+    "displayName": "(UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius"
+  },
+  "Europe/Mariehamn": {
+    "displayName": "(UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius"
+  },
+  "Europe/Nicosia": {
+    "displayName": "(UTC+02:00) E. Europe"
+  },
+  "Europe/Riga": {
+    "displayName": "(UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius"
+  },
+  "Europe/Sofia": {
+    "displayName": "(UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius"
+  },
+  "Europe/Tallinn": {
+    "displayName": "(UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius"
+  },
+  "Europe/Uzhgorod": {
+    "displayName": "(UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius"
+  },
+  "Europe/Vilnius": {
+    "displayName": "(UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius"
+  },
+  "Europe/Zaporozhye": {
+    "displayName": "(UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius"
+  },
+  "Africa/Blantyre": {
+    "displayName": "(UTC+02:00) Harare, Pretoria"
+  },
+  "Africa/Bujumbura": {
+    "displayName": "(UTC+02:00) Harare, Pretoria"
+  },
+  "Africa/Gaborone": {
+    "displayName": "(UTC+02:00) Harare, Pretoria"
+  },
+  "Africa/Harare": {
+    "displayName": "(UTC+02:00) Harare, Pretoria"
+  },
+  "Africa/Johannesburg": {
+    "displayName": "(UTC+02:00) Harare, Pretoria"
+  },
+  "Africa/Kigali": {
+    "displayName": "(UTC+02:00) Harare, Pretoria"
+  },
+  "Africa/Lubumbashi": {
+    "displayName": "(UTC+02:00) Harare, Pretoria"
+  },
+  "Africa/Lusaka": {
+    "displayName": "(UTC+02:00) Harare, Pretoria"
+  },
+  "Africa/Maputo": {
+    "displayName": "(UTC+02:00) Harare, Pretoria"
+  },
+  "Africa/Maseru": {
+    "displayName": "(UTC+02:00) Harare, Pretoria"
+  },
+  "Africa/Mbabane": {
+    "displayName": "(UTC+02:00) Harare, Pretoria"
+  },
+  "Etc/GMT-2": {
+    "displayName": "(UTC+02:00) Harare, Pretoria"
+  },
+  "Europe/Istanbul": {
+    "displayName": "(UTC+03:00) Istanbul"
+  },
+  "Asia/Jerusalem": {
+    "displayName": "(UTC+02:00) Jerusalem"
+  },
+  "Africa/Tripoli": {
+    "displayName": "(UTC+02:00) Tripoli"
+  },
+  "Asia/Amman": {
+    "displayName": "(UTC+03:00) Amman"
+  },
+  "Asia/Baghdad": {
+    "displayName": "(UTC+03:00) Baghdad"
+  },
+  "Europe/Kaliningrad": {
+    "displayName": "(UTC+02:00) Kaliningrad"
+  },
+  "Asia/Aden": {
+    "displayName": "(UTC+03:00) Kuwait, Riyadh"
+  },
+  "Asia/Bahrain": {
+    "displayName": "(UTC+03:00) Kuwait, Riyadh"
+  },
+  "Asia/Kuwait": {
+    "displayName": "(UTC+03:00) Kuwait, Riyadh"
+  },
+  "Asia/Qatar": {
+    "displayName": "(UTC+03:00) Kuwait, Riyadh"
+  },
+  "Asia/Riyadh": {
+    "displayName": "(UTC+03:00) Kuwait, Riyadh"
+  },
+  "Africa/Addis_Ababa": {
+    "displayName": "(UTC+03:00) Nairobi"
+  },
+  "Africa/Asmera": {
+    "displayName": "(UTC+03:00) Nairobi"
+  },
+  "Africa/Dar_es_Salaam": {
+    "displayName": "(UTC+03:00) Nairobi"
+  },
+  "Africa/Djibouti": {
+    "displayName": "(UTC+03:00) Nairobi"
+  },
+  "Africa/Juba": {
+    "displayName": "(UTC+03:00) Nairobi"
+  },
+  "Africa/Kampala": {
+    "displayName": "(UTC+03:00) Nairobi"
+  },
+  "Africa/Khartoum": {
+    "displayName": "(UTC+03:00) Nairobi"
+  },
+  "Africa/Mogadishu": {
+    "displayName": "(UTC+03:00) Nairobi"
+  },
+  "Africa/Nairobi": {
+    "displayName": "(UTC+03:00) Nairobi"
+  },
+  "Antarctica/Syowa": {
+    "displayName": "(UTC+03:00) Nairobi"
+  },
+  "Etc/GMT-3": {
+    "displayName": "(UTC+03:00) Nairobi"
+  },
+  "Indian/Antananarivo": {
+    "displayName": "(UTC+03:00) Nairobi"
+  },
+  "Indian/Comoro": {
+    "displayName": "(UTC+03:00) Nairobi"
+  },
+  "Indian/Mayotte": {
+    "displayName": "(UTC+03:00) Nairobi"
+  },
+  "Europe/Kirov": {
+    "displayName": "(UTC+03:00) Moscow, St. Petersburg, Volgograd, Minsk"
+  },
+  "Europe/Moscow": {
+    "displayName": "(UTC+03:00) Moscow, St. Petersburg, Volgograd, Minsk"
+  },
+  "Europe/Simferopol": {
+    "displayName": "(UTC+03:00) Moscow, St. Petersburg, Volgograd, Minsk"
+  },
+  "Europe/Volgograd": {
+    "displayName": "(UTC+03:00) Moscow, St. Petersburg, Volgograd, Minsk"
+  },
+  "Europe/Minsk": {
+    "displayName": "(UTC+03:00) Moscow, St. Petersburg, Volgograd, Minsk"
+  },
+  "Europe/Astrakhan": {
+    "displayName": "(UTC+04:00) Samara, Ulyanovsk, Saratov"
+  },
+  "Europe/Samara": {
+    "displayName": "(UTC+04:00) Samara, Ulyanovsk, Saratov"
+  },
+  "Europe/Ulyanovsk": {
+    "displayName": "(UTC+04:00) Samara, Ulyanovsk, Saratov"
+  },
+  "Asia/Tehran": {
+    "displayName": "(UTC+03:30) Tehran"
+  },
+  "Asia/Dubai": {
+    "displayName": "(UTC+04:00) Abu Dhabi, Muscat"
+  },
+  "Asia/Muscat": {
+    "displayName": "(UTC+04:00) Abu Dhabi, Muscat"
+  },
+  "Etc/GMT-4": {
+    "displayName": "(UTC+04:00) Abu Dhabi, Muscat"
+  },
+  "Asia/Baku": {
+    "displayName": "(UTC+04:00) Baku"
+  },
+  "Indian/Mahe": {
+    "displayName": "(UTC+04:00) Port Louis"
+  },
+  "Indian/Mauritius": {
+    "displayName": "(UTC+04:00) Port Louis"
+  },
+  "Indian/Reunion": {
+    "displayName": "(UTC+04:00) Port Louis"
+  },
+  "Asia/Tbilisi": {
+    "displayName": "(UTC+04:00) Tbilisi"
+  },
+  "Asia/Yerevan": {
+    "displayName": "(UTC+04:00) Yerevan"
+  },
+  "Asia/Kabul": {
+    "displayName": "(UTC+04:30) Kabul"
+  },
+  "Antarctica/Mawson": {
+    "displayName": "(UTC+05:00) Ashgabat, Tashkent"
+  },
+  "Asia/Aqtau": {
+    "displayName": "(UTC+05:00) Ashgabat, Tashkent"
+  },
+  "Asia/Aqtobe": {
+    "displayName": "(UTC+05:00) Ashgabat, Tashkent"
+  },
+  "Asia/Ashgabat": {
+    "displayName": "(UTC+05:00) Ashgabat, Tashkent"
+  },
+  "Asia/Dushanbe": {
+    "displayName": "(UTC+05:00) Ashgabat, Tashkent"
+  },
+  "Asia/Oral": {
+    "displayName": "(UTC+05:00) Ashgabat, Tashkent"
+  },
+  "Asia/Samarkand": {
+    "displayName": "(UTC+05:00) Ashgabat, Tashkent"
+  },
+  "Asia/Tashkent": {
+    "displayName": "(UTC+05:00) Ashgabat, Tashkent"
+  },
+  "Etc/GMT-5": {
+    "displayName": "(UTC+05:00) Ashgabat, Tashkent"
+  },
+  "Indian/Kerguelen": {
+    "displayName": "(UTC+05:00) Ashgabat, Tashkent"
+  },
+  "Indian/Maldives": {
+    "displayName": "(UTC+05:00) Ashgabat, Tashkent"
+  },
+  "Asia/Yekaterinburg": {
+    "displayName": "(UTC+05:00) Yekaterinburg"
+  },
+  "Asia/Karachi": {
+    "displayName": "(UTC+05:00) Islamabad, Karachi"
+  },
+  "Asia/Kolkata": {
+    "displayName": "(UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi"
+  },
+  "Asia/Calcutta": {
+    "displayName": "(UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi"
+  },
+  "Asia/Colombo": {
+    "displayName": "(UTC+05:30) Sri Jayawardenepura"
+  },
+  "Asia/Kathmandu": {
+    "displayName": "(UTC+05:45) Kathmandu"
+  },
+  "Antarctica/Vostok": {
+    "displayName": "(UTC+06:00) Nur-Sultan (Astana)"
+  },
+  "Asia/Almaty": {
+    "displayName": "(UTC+06:00) Nur-Sultan (Astana)"
+  },
+  "Asia/Bishkek": {
+    "displayName": "(UTC+06:00) Nur-Sultan (Astana)"
+  },
+  "Asia/Qyzylorda": {
+    "displayName": "(UTC+06:00) Nur-Sultan (Astana)"
+  },
+  "Asia/Urumqi": {
+    "displayName": "(UTC+06:00) Nur-Sultan (Astana)"
+  },
+  "Etc/GMT-6": {
+    "displayName": "(UTC+06:00) Nur-Sultan (Astana)"
+  },
+  "Indian/Chagos": {
+    "displayName": "(UTC+06:00) Nur-Sultan (Astana)"
+  },
+  "Asia/Dhaka": {
+    "displayName": "(UTC+06:00) Dhaka"
+  },
+  "Asia/Thimphu": {
+    "displayName": "(UTC+06:00) Dhaka"
+  },
+  "Asia/Rangoon": {
+    "displayName": "(UTC+06:30) Yangon (Rangoon)"
+  },
+  "Indian/Cocos": {
+    "displayName": "(UTC+06:30) Yangon (Rangoon)"
+  },
+  "Antarctica/Davis": {
+    "displayName": "(UTC+07:00) Bangkok, Hanoi, Jakarta"
+  },
+  "Asia/Bangkok": {
+    "displayName": "(UTC+07:00) Bangkok, Hanoi, Jakarta"
+  },
+  "Asia/Hovd": {
+    "displayName": "(UTC+07:00) Bangkok, Hanoi, Jakarta"
+  },
+  "Asia/Jakarta": {
+    "displayName": "(UTC+07:00) Bangkok, Hanoi, Jakarta"
+  },
+  "Asia/Phnom_Penh": {
+    "displayName": "(UTC+07:00) Bangkok, Hanoi, Jakarta"
+  },
+  "Asia/Pontianak": {
+    "displayName": "(UTC+07:00) Bangkok, Hanoi, Jakarta"
+  },
+  "Asia/Saigon": {
+    "displayName": "(UTC+07:00) Bangkok, Hanoi, Jakarta"
+  },
+  "Asia/Vientiane": {
+    "displayName": "(UTC+07:00) Bangkok, Hanoi, Jakarta"
+  },
+  "Etc/GMT-7": {
+    "displayName": "(UTC+07:00) Bangkok, Hanoi, Jakarta"
+  },
+  "Indian/Christmas": {
+    "displayName": "(UTC+07:00) Bangkok, Hanoi, Jakarta"
+  },
+  "Asia/Novokuznetsk": {
+    "displayName": "(UTC+07:00) Novosibirsk"
+  },
+  "Asia/Novosibirsk": {
+    "displayName": "(UTC+07:00) Novosibirsk"
+  },
+  "Asia/Omsk": {
+    "displayName": "(UTC+07:00) Novosibirsk"
+  },
+  "Asia/Hong_Kong": {
+    "displayName": "(UTC+08:00) Beijing, Chongqing, Hong Kong, Urumqi"
+  },
+  "Asia/Macau": {
+    "displayName": "(UTC+08:00) Beijing, Chongqing, Hong Kong, Urumqi"
+  },
+  "Asia/Shanghai": {
+    "displayName": "(UTC+08:00) Beijing, Chongqing, Hong Kong, Urumqi"
+  },
+  "Asia/Krasnoyarsk": {
+    "displayName": "(UTC+08:00) Krasnoyarsk"
+  },
+  "Asia/Brunei": {
+    "displayName": "(UTC+08:00) Kuala Lumpur, Singapore"
+  },
+  "Asia/Kuala_Lumpur": {
+    "displayName": "(UTC+08:00) Kuala Lumpur, Singapore"
+  },
+  "Asia/Kuching": {
+    "displayName": "(UTC+08:00) Kuala Lumpur, Singapore"
+  },
+  "Asia/Makassar": {
+    "displayName": "(UTC+08:00) Kuala Lumpur, Singapore"
+  },
+  "Asia/Manila": {
+    "displayName": "(UTC+08:00) Kuala Lumpur, Singapore"
+  },
+  "Asia/Singapore": {
+    "displayName": "(UTC+08:00) Kuala Lumpur, Singapore"
+  },
+  "Etc/GMT-8": {
+    "displayName": "(UTC+08:00) Kuala Lumpur, Singapore"
+  },
+  "Antarctica/Casey": {
+    "displayName": "(UTC+08:00) Perth"
+  },
+  "Australia/Perth": {
+    "displayName": "(UTC+08:00) Perth"
+  },
+  "Asia/Taipei": {
+    "displayName": "(UTC+08:00) Taipei"
+  },
+  "Asia/Choibalsan": {
+    "displayName": "(UTC+08:00) Ulaanbaatar"
+  },
+  "Asia/Ulaanbaatar": {
+    "displayName": "(UTC+08:00) Ulaanbaatar"
+  },
+  "Asia/Irkutsk": {
+    "displayName": "(UTC+08:00) Irkutsk"
+  },
+  "Asia/Dili": {
+    "displayName": "(UTC+09:00) Osaka, Sapporo, Tokyo"
+  },
+  "Asia/Jayapura": {
+    "displayName": "(UTC+09:00) Osaka, Sapporo, Tokyo"
+  },
+  "Asia/Tokyo": {
+    "displayName": "(UTC+09:00) Osaka, Sapporo, Tokyo"
+  },
+  "Etc/GMT-9": {
+    "displayName": "(UTC+09:00) Osaka, Sapporo, Tokyo"
+  },
+  "Pacific/Palau": {
+    "displayName": "(UTC+09:00) Osaka, Sapporo, Tokyo"
+  },
+  "Asia/Pyongyang": {
+    "displayName": "(UTC+09:00) Seoul"
+  },
+  "Asia/Seoul": {
+    "displayName": "(UTC+09:00) Seoul"
+  },
+  "Australia/Adelaide": {
+    "displayName": "(UTC+09:30) Adelaide"
+  },
+  "Australia/Broken_Hill": {
+    "displayName": "(UTC+09:30) Adelaide"
+  },
+  "Australia/Darwin": {
+    "displayName": "(UTC+09:30) Darwin"
+  },
+  "Australia/Brisbane": {
+    "displayName": "(UTC+10:00) Brisbane"
+  },
+  "Australia/Lindeman": {
+    "displayName": "(UTC+10:00) Brisbane"
+  },
+  "Australia/Melbourne": {
+    "displayName": "(UTC+10:00) Canberra, Melbourne, Sydney"
+  },
+  "Australia/Sydney": {
+    "displayName": "(UTC+10:00) Canberra, Melbourne, Sydney"
+  },
+  "Antarctica/DumontDUrville": {
+    "displayName": "(UTC+10:00) Guam, Port Moresby"
+  },
+  "Etc/GMT-10": {
+    "displayName": "(UTC+10:00) Guam, Port Moresby"
+  },
+  "Pacific/Guam": {
+    "displayName": "(UTC+10:00) Guam, Port Moresby"
+  },
+  "Pacific/Port_Moresby": {
+    "displayName": "(UTC+10:00) Guam, Port Moresby"
+  },
+  "Pacific/Saipan": {
+    "displayName": "(UTC+10:00) Guam, Port Moresby"
+  },
+  "Pacific/Truk": {
+    "displayName": "(UTC+10:00) Guam, Port Moresby"
+  },
+  "Australia/Currie": {
+    "displayName": "(UTC+10:00) Hobart"
+  },
+  "Australia/Hobart": {
+    "displayName": "(UTC+10:00) Hobart"
+  },
+  "Asia/Chita": {
+    "displayName": "(UTC+09:00) Yakutsk"
+  },
+  "Asia/Khandyga": {
+    "displayName": "(UTC+09:00) Yakutsk"
+  },
+  "Asia/Yakutsk": {
+    "displayName": "(UTC+09:00) Yakutsk"
+  },
+  "Antarctica/Macquarie": {
+    "displayName": "(UTC+11:00) Solomon Is., New Caledonia"
+  },
+  "Etc/GMT-11": {
+    "displayName": "(UTC+11:00) Solomon Is., New Caledonia"
+  },
+  "Pacific/Efate": {
+    "displayName": "(UTC+11:00) Solomon Is., New Caledonia"
+  },
+  "Pacific/Guadalcanal": {
+    "displayName": "(UTC+11:00) Solomon Is., New Caledonia"
+  },
+  "Pacific/Kosrae": {
+    "displayName": "(UTC+11:00) Solomon Is., New Caledonia"
+  },
+  "Pacific/Noumea": {
+    "displayName": "(UTC+11:00) Solomon Is., New Caledonia"
+  },
+  "Pacific/Ponape": {
+    "displayName": "(UTC+11:00) Solomon Is., New Caledonia"
+  },
+  "Asia/Sakhalin": {
+    "displayName": "(UTC+11:00) Vladivostok"
+  },
+  "Asia/Ust-Nera": {
+    "displayName": "(UTC+11:00) Vladivostok"
+  },
+  "Asia/Vladivostok": {
+    "displayName": "(UTC+11:00) Vladivostok"
+  },
+  "Antarctica/McMurdo": {
+    "displayName": "(UTC+12:00) Auckland, Wellington"
+  },
+  "Pacific/Auckland": {
+    "displayName": "(UTC+12:00) Auckland, Wellington"
+  },
+  "Etc/GMT-12": {
+    "displayName": "(UTC+12:00) Coordinated Universal Time+12"
+  },
+  "Pacific/Funafuti": {
+    "displayName": "(UTC+12:00) Coordinated Universal Time+12"
+  },
+  "Pacific/Kwajalein": {
+    "displayName": "(UTC+12:00) Coordinated Universal Time+12"
+  },
+  "Pacific/Majuro": {
+    "displayName": "(UTC+12:00) Coordinated Universal Time+12"
+  },
+  "Pacific/Nauru": {
+    "displayName": "(UTC+12:00) Coordinated Universal Time+12"
+  },
+  "Pacific/Tarawa": {
+    "displayName": "(UTC+12:00) Coordinated Universal Time+12"
+  },
+  "Pacific/Wake": {
+    "displayName": "(UTC+12:00) Coordinated Universal Time+12"
+  },
+  "Pacific/Wallis": {
+    "displayName": "(UTC+12:00) Coordinated Universal Time+12"
+  },
+  "Pacific/Fiji": {
+    "displayName": "(UTC+12:00) Fiji"
+  },
+  "Asia/Anadyr": {
+    "displayName": "(UTC+12:00) Magadan"
+  },
+  "Asia/Kamchatka": {
+    "displayName": "(UTC+12:00) Petropavlovsk-Kamchatsky - Old"
+  },
+  "Asia/Magadan": {
+    "displayName": "(UTC+12:00) Magadan"
+  },
+  "Asia/Srednekolymsk": {
+    "displayName": "(UTC+12:00) Magadan"
+  },
+  "Etc/GMT-13": {
+    "displayName": "(UTC+13:00) Nuku'alofa"
+  },
+  "Pacific/Enderbury": {
+    "displayName": "(UTC+13:00) Nuku'alofa"
+  },
+  "Pacific/Fakaofo": {
+    "displayName": "(UTC+13:00) Nuku'alofa"
+  },
+  "Pacific/Tongatapu": {
+    "displayName": "(UTC+13:00) Nuku'alofa"
+  },
+  "Pacific/Apia": {
+    "displayName": "(UTC+13:00) Samoa"
+  }
+}

@@ -44,6 +44,7 @@ import com.neome.feature.form.presentation.components.field.FieldSignature
 import com.neome.feature.form.presentation.components.field.FieldSwitch
 import com.neome.feature.form.presentation.components.field.FieldText
 import com.neome.feature.form.presentation.components.field.FieldTime
+import com.neome.feature.form.presentation.components.field.FieldTimeZone
 import com.neome.feature.form.presentation.state.FieldEvent
 
 /**
@@ -210,6 +211,12 @@ fun FieldFactory(
         )
 
         EnumDefnCompType.quarter -> FieldQuarter(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.timeZone -> FieldTimeZone(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             modifier = modifier

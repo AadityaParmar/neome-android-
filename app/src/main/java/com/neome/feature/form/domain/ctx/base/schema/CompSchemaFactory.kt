@@ -108,6 +108,7 @@ object CompSchemaFactory {
             EnumDefnCompType.month -> FieldCurrencySchema(defnForm, defnComp)
             EnumDefnCompType.pinShape -> FieldCurrencySchema(defnForm, defnComp)
             EnumDefnCompType.quarter -> FieldCurrencySchema(defnForm, defnComp)
+            EnumDefnCompType.timeZone -> FieldCurrencySchema(defnForm, defnComp)
             EnumDefnCompType.pickTree -> FieldPickTreeSchema(defnForm, defnComp)
             EnumDefnCompType.pickUser -> FieldPickUserSchema(defnForm, defnComp)
             EnumDefnCompType.pickRole -> FieldPickRoleSchema(defnForm, defnComp)
