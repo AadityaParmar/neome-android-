@@ -1,88 +1,85 @@
-# schema — Component Validation Schema Registry
+# schema — Field Validation Schema Registry
 
 ## Purpose
 
-Provides per-field-type validation logic for the form engine. Each field type has a concrete `CompSchema` subclass that implements pure, side-effect-free validation. Schemas are instantiated once at form initialization via `CompSchemaFactory` and reused for the form lifetime.
+Encapsulates all field-type-specific validation logic as reusable, stateless schema objects. This package bridges the form definition layer with validation execution, providing a single schema instance per field that validates field values against dynamic constraints (e.g., `minCharCount`, `maxCharCount`, `required`) extracted from `FieldProperties`.
 
 ## Responsibilities
 
-- Define the abstract validation contract (`CompSchema.validate`) returning an error message or null
-- Route each `EnumDefnCompType` to its corresponding schema implementation via `CompSchemaFactory`
-- Validate field values against dynamic constraints from `FieldProperties` (required, min/max bounds, patterns)
-- Use Konform library for type-safe, declarative validation rule composition
-- Provide a shared `isRequired` helper for the common required-field check
-- Return null (no schema) for composite types, display-only fields, reference fields, and studio/admin fields that do not need validation
+- Define an abstract `CompSchema` base contract with a pure `validate(fieldValue, fieldState): String?` method that returns an error message or null
+- Implement 38+ concrete schema classes, one per field type, each encapsulating validation rules specific to that type
+- Provide `CompSchemaFactory` to instantiate schemas once per form, mapping each field component type to its corresponding schema implementation
+- Return null-entry schemas for composite, display-only, and reference types that do not require validation
+- Enable form-wide validation by building a `Map<MetaIdComp, CompSchema>` during initialization
 
 ## Flow
 
-1. **Build** — `CompSchemaFactory.buildFormSchemas(defnForm)` iterates `defnForm.compMap`, calls `create()` for each component, and collects non-null schemas into `Map<MetaIdComp, CompSchema>`.
-2. **Route** — `CompSchemaFactory.create()` matches `defnComp.type` against `EnumDefnCompType` and returns the corresponding `Field*Schema` instance or null.
-3. **Validate** — Callers (e.g. `FormCtxValidationHelper`, `FormCtxEventHelper`) invoke `schema.validate(fieldValue, fieldState)`. Each schema casts the value to its typed DTO, reads constraints from `FieldProperties` and/or `DefnField*`, builds a Konform `Validation`, and returns the first error message or null.
+1. **Schema factory instantiation** — At form initialization (via `FormCtxInitHelper`), `CompSchemaFactory.buildFormSchemas` is called once with the form definition. The factory iterates all component definitions, routes each `EnumDefnCompType` to its schema implementation, and returns a schema map. Fields that do not need validation (sections, tabs, labels, dividers, references, spreadsheetRefs, composite containers) receive null entries.
+
+2. **Schema reuse** — The schema map is stored in `FormState` and reused for the entire form lifetime. Each time a field must be validated, its corresponding schema from the map is retrieved.
+
+3. **Validation call** — `CompSchema.validate(fieldValue, fieldState)` is invoked from `FormCtxValidationHelper`. The schema accesses dynamic constraints via `fieldState.properties` and validates the field value immutably. It returns:
+   - A non-null error message string if validation fails
+   - Null if validation passes
+
+4. **Error propagation** — The error string (or null) is passed to `FormCtxValidationHelper.updateFieldError` for error state management and UI reflection.
 
 ## Key Entry Points
 
 | File | Symbol | Role |
 |------|--------|------|
-| `CompSchema.kt` | `CompSchema` (abstract class) | Base class; declares `validate(JsonElement?, FieldState?) -> String?` and `isRequired()` helper |
-| `CompSchemaFactory.kt` | `CompSchemaFactory.buildFormSchemas` | Builds the full `Map<MetaIdComp, CompSchema>` from form definition |
-| `CompSchemaFactory.kt` | `CompSchemaFactory.create` | Routes a single `DefnCompSeal` to its `Field*Schema` or null |
+| `CompSchemaFactory.kt` | `CompSchemaFactory.buildFormSchemas` | Builds schema map from form definition; called once at init |
+| `CompSchema.kt` | `CompSchema.validate` | Pure validation method; returns error message or null |
+| `CompSchema.kt` | `CompSchema.isRequired` | Protected helper; checks required constraint from properties |
 
-### Field Schema classes (grouped by category)
+## Field Type Coverage
 
-**Text-based** — `FieldTextSchema`, `FieldParagraphSchema`, `FieldHyperlinkSchema`, `FieldSymbolSchema`, `FieldHandleSchema`
-- Validates: required, minCharCount, maxCharCount, validationPattern (aadhaar/gstin/pan/custom regex)
+The package implements validation schemas for the following field type categories:
 
-**Email / Mobile / OTP** — `FieldEmailSchema`, `FieldMobileNumberSchema`, `FieldOtpSchema`
-- Validates: required, format-specific constraints
+| Category | Field Types |
+|----------|------------|
+| **Text** | Text, Paragraph, Hyperlink, Symbol, Handle |
+| **Contact** | Email, Mobile Number, OTP |
+| **Numeric** | Number, Decimal |
+| **DateTime** | Date, Time, DateTime, DateRange |
+| **Primitives** | Duration, Boolean, Color, Slider, ScanCode |
+| **Pickers** | PickText, Currency, PickTree, PickUser, PickRole, PickGridRow |
+| **Sets** | SetOfText, SetOfUser, SetOfRole, SetOfDocument |
+| **ChipSet** | ChipSet (covers chipSet, chipSetDate, chipSetDateTime, chipSetDay, chipSetTime, device variants) |
+| **Media** | Image, Camera, Video, Audio, Voice, Document, Signature |
+| **Composite** | Grid |
+| **Location** | Location |
+| **No-op (null)** | Section, Tab, Label, Divider, Reference, SpreadsheetReference |
 
-**Numeric** — `FieldNumberSchema`, `FieldDecimalSchema`
-- Validates: required, minNumber, maxNumber
+Each schema implementation validates against constraints defined in `FieldProperties` (e.g., `minCharCount`, `maxCharCount`, `minValue`, `maxValue`, `pattern`, `required`).
 
-**Date/Time** — `FieldDateSchema`, `FieldTimeSchema`, `FieldDateTimeSchema`, `FieldDateRangeSchema`
-- Validates: required (min/max date noted as TODO)
+## Design Pattern
 
-**Duration** — `FieldDurationSchema`
-- Validates: required
+Schemas are instantiated once at form initialization and reused for every validation call. This approach:
+- Avoids repeated object creation
+- Maintains a centralized, type-safe validation registry
+- Keeps validation logic isolated from state management
 
-**Boolean** — `FieldBoolSchema`
-- Validates: required
-
-**Pick/Selection** — `FieldPickTextSchema`, `FieldPickTreeSchema`, `FieldPickUserSchema`, `FieldPickRoleSchema`, `FieldPickGridRowSchema`
-- Validates: required (optionId/selection must be present)
-
-**Set** — `FieldSetOfTextSchema`, `FieldSetOfUserSchema`, `FieldSetOfRoleSchema`, `FieldSetOfDocumentSchema`
-- Validates: required
-
-**ChipSet** — `FieldChipSetSchema`
-- Handles 7 chipSet variants (chipSet, chipSetDate, chipSetDateTime, chipSetDay, chipSetTime, chipSetDeviceSize, chipSetDeviceType)
-
-**Media** — `FieldImageSchema`, `FieldCameraSchema`, `FieldVideoSchema`, `FieldAudioSchema`, `FieldVoiceSchema`, `FieldDocumentSchema`, `FieldSignatureSchema`
-- Validates: required, maxSize (file size in MB)
-
-**Other** — `FieldLocationSchema`, `FieldColorSchema`, `FieldSliderSchema`, `FieldScanCodeSchema`, `FieldGridSchema`
-- Grid validates: minRows, maxRows (from `DefnGrid`)
+Each schema is stateless and pure; all constraint data is passed in via `fieldState.properties` and the field value itself.
 
 ## Dependencies
 
-- `com.neome.api.meta.base.Types.EnumDefnCompType` — field type enumeration used for routing
-- `com.neome.api.meta.base.dto.DefnField*` — per-field definition DTOs (constraints, patterns, config)
-- `com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal` — base component definition
-- `com.neome.core.common.serializer.api.meta.base.dto.FieldValue*Data` — typed value wrappers for each field type
-- `com.neome.feature.form.domain.DefnFormUi` — form definition (provides `compMap`)
-- `com.neome.feature.form.domain.util.FieldVal.FieldValueResolver` — converts `JsonElement` to typed field values
-- `com.neome.feature.form.presentation.state.FieldState`, `FieldProperties` — runtime field state and resolved properties
-- `io.konform.validation` — Konform library for declarative validation rule building
-- `com.neome.feature.utils.JsonParser` — kotlinx.serialization JSON instance for deserialization
+- `com.neome.feature.form.domain.DefnForm` — Form definition containing component types
+- `com.neome.api.meta.base.Types.EnumDefnCompType` — Component type enum for routing
+- `com.neome.feature.form.presentation.state.FieldState` — Contains field value and properties
+- `com.neome.feature.form.presentation.state.FieldProperties` — Contains dynamic constraints (minCharCount, maxCharCount, required, etc.)
+- `com.neome.api.meta.base.dto.DefnField*` — Per-field definition DTOs (patterns, bounds, validation config)
 
 ## Related READMEs
 
-- **Parent**: `../README.md` (helper package — orchestrates init, events, validation)
-- **Sibling**: `../events/README.md` (event execution engine, consumes schema validation results)
+- **Parent**: `../README.md` (base package — form state orchestration, initialization, event handling)
+- **Sibling**: `../events/README.md` (event execution engine)
+- **Grandparent**: `../../README.md` (ctx package — FormCtx facade)
 - **Form root**: `../../../../form.md` (full form feature documentation)
-- **FieldVal**: `../../../util/FieldVal/README.md` (value resolution used by schemas)
 
 ## Change Notes
 
 - Initial documentation created from source analysis (2026-02-22)
-- 40 files: 1 abstract base, 1 factory, 38 field schema implementations
-- Min/max date validation noted as TODO in `FieldDateSchema`
+- 40 source files: 1 abstract base, 1 factory, 38 schema implementations
+- All schemas implement the `CompSchema` contract and are instantiated by `CompSchemaFactory`
+- Null entries in the schema map represent fields that do not require validation

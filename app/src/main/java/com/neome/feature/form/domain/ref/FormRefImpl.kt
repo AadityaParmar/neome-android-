@@ -54,21 +54,6 @@ class FormRefImpl(
         dispatchEvent(FormEvent.SetValues(valueMap))
     }
 
-    // ==================== Validation ====================
-
-    override fun validate(fieldId: MetaIdComp?) {
-        if (fieldId != null) dispatchEvent(FormEvent.ValidateField(fieldId))
-        else dispatchEvent(FormEvent.ValidateAll)
-    }
-
-    override fun setError(fieldId: MetaIdComp, error: String) {
-        dispatchEvent(FormEvent.SetFieldError(fieldId, error))
-    }
-
-    override fun clearErrors(fieldId: MetaIdComp?) {
-        if (fieldId != null) dispatchEvent(FormEvent.ClearFieldError(fieldId))
-        else dispatchEvent(FormEvent.ClearAllErrors)
-    }
 
     // ==================== Form Operations ====================
 

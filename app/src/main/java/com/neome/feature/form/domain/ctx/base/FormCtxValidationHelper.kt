@@ -1,6 +1,5 @@
 package com.neome.feature.form.domain.ctx.base
 
-import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.feature.form.domain.ctx.FormStateAccessor
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FormEvent
@@ -27,18 +26,15 @@ object FormCtxValidationHelper {
         val error = schema.validate(accessor.getValue(event.fieldId), currentFieldState)
 
         // 3. Update errors map
-        val updatedErrors = updateFieldError(
-            fieldId = event.fieldId,
-            error = error,
-            errors = accessor.getErrors()
-        )
+        val fieldError = updateFieldError(error = error)
+        accessor.setError(fieldId = event.fieldId, error = fieldError)
+
 
         // 4. Mark as not validating
         val finalFieldState = validatingFieldState.copy(isValidating = false)
 
         // 5. Update field state and errors
         accessor.setFieldState(event.fieldId, finalFieldState)
-        accessor.updateErrors(updatedErrors)
 
         // Update Invalid flag based on new error state
         updateInvalidFlag(accessor)
@@ -57,11 +53,8 @@ object FormCtxValidationHelper {
         state.compSchemaMap.forEach { (fieldId, schema) ->
             val fieldState = state.fieldStates[fieldId]
             val error = schema.validate(accessor.getValue(fieldId), fieldState)
-            updatedErrors = updateFieldError(
-                fieldId = fieldId,
-                error = error,
-                errors = updatedErrors
-            )
+            val fieldError = updateFieldError(error = error)
+            accessor.setError(fieldId = fieldId, error = fieldError)
         }
 
         // 3. Mark all as not validating
@@ -85,43 +78,27 @@ object FormCtxValidationHelper {
      * Shared by both [FormCtxValidationHelper] and [FormCtxEventHelper]
      * to avoid duplicating error update logic.
      *
-     * @param fieldId The field to update
      * @param error The validation error message, or null if validation passed
-     * @param errors The current errors map
-     * @return Updated errors map
+     * @return Updated FieldError, or null if validation passed
      */
-    internal fun updateFieldError(
-        fieldId: MetaIdComp,
-        error: String?,
-        errors: Map<MetaIdComp, FieldError>
-    ): Map<MetaIdComp, FieldError> {
-        return if (error != null) {
-            // Set validation error
-            errors + (fieldId to FieldError(
+    internal fun updateFieldError(error: String?): FieldError? {
+        return if (error != null)
+            FieldError(
                 message = error,
                 type = FieldError.ErrorType.Validation
-            ))
-        } else {
-            // Clear error only if it's a validation error (preserve custom/server errors)
-            val existingError = errors[fieldId]
-            if (existingError?.type == FieldError.ErrorType.Validation) {
-                errors - fieldId
-            } else {
-                errors
-            }
-        }
+            ) else null
     }
 
     fun handleSetFieldError(
         accessor: FormStateAccessor,
         event: FormEvent.SetFieldError
     ) {
-        val newErrors = accessor.getErrors() + (event.fieldId to FieldError(
+        val newError = FieldError(
             message = event.error,
             type = FieldError.ErrorType.Custom
-        ))
+        )
 
-        accessor.updateErrors(newErrors)
+        accessor.setError(event.fieldId, newError)
 
         // Update Invalid flag based on new error state
         updateInvalidFlag(accessor)

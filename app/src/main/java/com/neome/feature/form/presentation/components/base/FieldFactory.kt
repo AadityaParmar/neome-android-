@@ -23,7 +23,6 @@ import com.neome.feature.form.presentation.components.field.FieldDecimal
 import com.neome.feature.form.presentation.components.field.FieldDivider
 import com.neome.feature.form.presentation.components.field.FieldDocument
 import com.neome.feature.form.presentation.components.field.FieldEmail
-import com.neome.feature.form.presentation.components.field.FieldCurrency
 import com.neome.feature.form.presentation.components.field.FieldHandle
 import com.neome.feature.form.presentation.components.field.FieldHyperlink
 import com.neome.feature.form.presentation.components.field.FieldIdentifier
@@ -274,6 +273,7 @@ fun FieldFactory(
 
         EnumDefnCompType.grid -> FieldGrid(
             defnComp = defnComp,
+            defnForm = defnForm,
             onFieldEvent = onFieldEvent,
             modifier = modifier
         )

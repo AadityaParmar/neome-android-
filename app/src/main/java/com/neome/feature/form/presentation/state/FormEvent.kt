@@ -147,18 +147,14 @@ sealed interface FormEvent : UiEvent {
     // ==================== Grid Events ====================
 
     /**
-     * Add a new row to the grid. Emits FormIntent.GridAdd to parent.
+     * Open grid row editor for adding a new row or editing an existing row.
+     * Initializes FormState.gridCtx with row state.
+     * - rowId = null → add new row
+     * - rowId = non-null → edit existing row
      */
-    data class GridAdd(
-        val gridId: MetaIdComp
-    ) : FormEvent
-
-    /**
-     * Edit a grid row. Emits FormIntent.GridEdit to parent.
-     */
-    data class GridEdit(
+    data class GridOpen(
         val gridId: MetaIdComp,
-        val rowId: RowId
+        val rowId: RowId? = null
     ) : FormEvent
 
     /**
@@ -167,5 +163,20 @@ sealed interface FormEvent : UiEvent {
     data class GridRemove(
         val gridId: MetaIdComp,
         val rowId: RowId
+    ) : FormEvent
+
+    /**
+     * Close grid row editor without saving. Clears FormState.gridCtx.
+     */
+    data class GridClose(
+        val gridId: MetaIdComp
+    ) : FormEvent
+
+    /**
+     * Submit grid row: validate all fields, merge into parent grid value,
+     * clear FormState.gridCtx.
+     */
+    data class GridSubmit(
+        val gridId: MetaIdComp
     ) : FormEvent
 }

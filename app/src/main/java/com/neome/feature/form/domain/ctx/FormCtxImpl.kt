@@ -12,6 +12,7 @@ import com.neome.feature.form.domain.ctx.base.FormCtxInitHelper
 import com.neome.feature.form.domain.ctx.base.FormCtxSendBtnStateHelper
 import com.neome.feature.form.domain.ctx.base.FormCtxValidationHelper
 import com.neome.feature.form.domain.ctx.base.FormReducerResult
+import com.neome.feature.form.domain.ctx.base.ReducerFormGridStateAccessor
 import com.neome.feature.form.domain.ctx.base.ReducerFormStateAccessor
 import com.neome.feature.form.domain.ref.FormRef
 import com.neome.feature.form.domain.ref.FormRefImpl
@@ -51,7 +52,15 @@ class FormCtxImpl(
 
     private fun processEvent(state: FormState, event: FormEvent): FormReducerResult {
         val defnForm = state.defnForm ?: return FormReducerResult(state)
-        val accessor = ReducerFormStateAccessor(state)
+        val parentAccessor = ReducerFormStateAccessor(state)
+
+        // Determine if we need grid-aware routing
+        val gridCtx = state.gridCtx
+        val accessor: FormStateAccessor = if (gridCtx != null) {
+            ReducerFormGridStateAccessor(parentAccessor, gridCtx)
+        } else {
+            parentAccessor
+        }
 
         when (event) {
             is FormEvent.FieldValueChanged -> FormCtxEventHelper.handleFieldValueChanged(accessor, event, defnForm)
@@ -75,12 +84,23 @@ class FormCtxImpl(
 
             is FormEvent.Click -> FormCtxEventHelper.handleClick(accessor, event, defnForm)
 
-            is FormEvent.GridAdd -> FormCtxGridHelper.handleGridAdd(accessor, event, defnForm)
-            is FormEvent.GridEdit -> FormCtxGridHelper.handleGridEdit(accessor, event, defnForm)
-            is FormEvent.GridRemove -> FormCtxGridHelper.handleGridRemove(accessor, event, defnForm)
+            // Grid lifecycle events — always use parentAccessor directly
+            is FormEvent.GridOpen -> FormCtxGridHelper.handleGridOpen(parentAccessor, event, defnForm)
+            is FormEvent.GridClose -> FormCtxGridHelper.handleGridClose(parentAccessor, event)
+            is FormEvent.GridSubmit -> {
+                if (accessor is ReducerFormGridStateAccessor) {
+                    FormCtxGridHelper.handleGridSubmit(accessor, event, defnForm)
+                }
+            }
+            is FormEvent.GridRemove -> FormCtxGridHelper.handleGridRemove(parentAccessor, event, defnForm)
         }
 
-        return accessor.result()
+        // Return result — grid accessor syncs back automatically
+        return if (accessor is ReducerFormGridStateAccessor) {
+            accessor.result()
+        } else {
+            parentAccessor.result()
+        }
     }
 
     fun createFormRef(): FormRef {

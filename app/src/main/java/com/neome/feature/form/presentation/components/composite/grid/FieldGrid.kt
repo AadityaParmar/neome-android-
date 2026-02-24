@@ -15,12 +15,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.neome.api.meta.base.Types
+import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
+import com.neome.core.common.serializer.api.meta.base.dto.DefnGridData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueGridData
+import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.ctx.LocalFormCtx
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController
 import com.neome.feature.form.presentation.state.FieldError
@@ -28,15 +33,22 @@ import com.neome.feature.form.presentation.state.FieldEvent
 import com.neome.feature.form.presentation.state.FieldProperties
 
 /**
- * Grid field component: displays a list of rows (rowId as text), Add button, clickable rows, remove per row.
+ * Grid field component: displays a list of rows with add/edit/remove actions.
  *
- * Uses DefnGridData / FieldValueGridData. Emits FieldEvent.GridAdd, GridEdit, GridRemove.
+ * Pure event emitter — zero local state. All grid row editing state lives
+ * in [FormState.gridCtx], managed by the MVI reducer.
  *
- * Uses Column (not LazyColumn) to avoid nested scrolling with form's verticalScroll.
+ * - Add: emits [FieldEvent.GridAdd] → reducer initializes gridCtx → sheet opens
+ * - Edit: emits [FieldEvent.GridEdit] → reducer initializes gridCtx with row data → sheet opens
+ * - Remove: emits [FieldEvent.GridRemove] → reducer removes row from grid value
+ * - Sheet visibility: derived from `formState.gridCtx?.gridId == fieldId`
+ * - Submit: [GridRowSheet] emits [FieldEvent.GridSubmit] → reducer validates + merges + closes
+ * - Dismiss: [GridRowSheet] emits [FieldEvent.GridClose] → reducer clears gridCtx
  */
 @Composable
 fun FieldGrid(
     defnComp: DefnCompSeal,
+    defnForm: DefnFormUi,
     onFieldEvent: (FieldEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -53,14 +65,40 @@ fun FieldGrid(
 
     if (properties.hidden) return
 
+    val defnGrid = defnComp as? DefnGridData ?: return
+
+    // ==================== Read grid sheet state from FormState ====================
+    val formCtx = LocalFormCtx.current
+    val formState = formCtx.formState.value
+    val gridCtxActive = formState.gridCtx?.gridId == fieldId
+
+    // ==================== Render ====================
     FieldBase(modifier = modifier, properties = properties) {
         FieldGridContent(
             fieldId = fieldId,
             keys = fieldValue?.keys ?: emptyList(),
             error = error,
             properties = properties,
-            onFieldEvent = onFieldEvent,
+            onAddRow = { onFieldEvent(FieldEvent.GridAdd(fieldId)) },
+            onEditRow = { rowId -> onFieldEvent(FieldEvent.GridEdit(fieldId, rowId)) },
+            onRemoveRow = { rowId -> onFieldEvent(FieldEvent.GridRemove(fieldId, rowId)) },
             modifier = Modifier.fillMaxWidth()
+        )
+    }
+
+    // ==================== Bottom sheet (driven by gridCtx) ====================
+    if (gridCtxActive) {
+        val gridFormCtx = remember(formCtx, defnForm) {
+            GridFormCtx(parentFormCtx = formCtx, defnForm = defnForm)
+        }
+        GridRowSheet(
+            gridFormCtx = gridFormCtx,
+            defnGrid = defnGrid,
+            defnForm = defnForm,
+            onFieldEvent = onFieldEvent,
+            onSubmit = { onFieldEvent(FieldEvent.GridSubmit(fieldId)) },
+            onDismiss = { onFieldEvent(FieldEvent.GridClose(fieldId)) },
+            isEditing = formState.gridCtx?.isNewRow == false
         )
     }
 }
@@ -70,11 +108,13 @@ fun FieldGrid(
  */
 @Composable
 private fun FieldGridContent(
-    fieldId: Types.MetaIdComp,
+    fieldId: MetaIdComp,
     keys: List<Types.RowId>,
     error: FieldError?,
     properties: FieldProperties,
-    onFieldEvent: (FieldEvent) -> Unit,
+    onAddRow: () -> Unit,
+    onEditRow: (Types.RowId) -> Unit,
+    onRemoveRow: (Types.RowId) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val interactive = !properties.disabled && !properties.readOnly
@@ -85,7 +125,7 @@ private fun FieldGridContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable(enabled = interactive) {
-                        onFieldEvent(FieldEvent.GridEdit(fieldId, rowId))
+                        onEditRow(rowId)
                     }
                     .padding(vertical = 4.dp),
                 verticalAlignment = Alignment.CenterVertically,
@@ -97,7 +137,7 @@ private fun FieldGridContent(
                     modifier = Modifier.weight(1f)
                 )
                 IconButton(
-                    onClick = { onFieldEvent(FieldEvent.GridRemove(fieldId, rowId)) },
+                    onClick = { onRemoveRow(rowId) },
                     enabled = interactive
                 ) {
                     Icon(
@@ -110,7 +150,7 @@ private fun FieldGridContent(
 
         if (interactive) {
             TextButton(
-                onClick = { onFieldEvent(FieldEvent.GridAdd(fieldId)) },
+                onClick = onAddRow,
                 modifier = Modifier.padding(top = 4.dp)
             ) {
                 Icon(

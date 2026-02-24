@@ -44,6 +44,7 @@ Provides the two structural layout composables that contain and recursively rend
 - **Parent**: `../README.md` (presentation/components root)
 - **Dispatcher**: `../base/README.md` (FieldFactory dispatches to FieldSection and FieldTab)
 - **Children rendered**: `../field/README.md` (leaf field composables rendered by FieldFactory inside sections/tabs)
+- **Grid sub-package**: `grid/README.md` (FieldGrid — pure event emitter for grid field; row editing state centralized in FormState.gridCtx via MVI reducer)
 - **State source**: `../../state/README.md` (FieldState, FieldProperties for visibility)
 - **Form root**: `../../../form.md` (full form feature documentation)
 

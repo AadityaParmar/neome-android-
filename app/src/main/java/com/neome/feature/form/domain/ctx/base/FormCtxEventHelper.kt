@@ -9,7 +9,6 @@ import com.neome.feature.form.domain.util.FieldPropertyResolver
 import com.neome.feature.form.presentation.state.FieldError
 import com.neome.feature.form.presentation.state.FieldState
 import com.neome.feature.form.presentation.state.FormEvent
-import com.neome.feature.form.presentation.state.FormEventProps
 import com.neome.feature.form.presentation.state.FormIntent
 import com.neome.feature.form.presentation.state.SendBtnStateFlag
 import kotlinx.serialization.json.JsonElement
@@ -53,22 +52,7 @@ object FormCtxEventHelper {
         accessor.emitIntent(intent)
     }
 
-    /**
-     * Core pure-state processing for a field value change.
-     * Handles: isDirty update, trigger field + dependents, onChange cascade, validation.
-     *
-     * Called from:
-     * - [handleFieldValueChanged] for user-initiated changes (via FormEvent.FieldValueChanged)
-     * - [com.neome.feature.form.domain.ctx.base.events.FormCtxFormEvents.executeEventInternal] for event-driven setValue/clear actions
-     *
-     * The [depth] parameter guards against infinite onChange recursion (A→B→C→A).
-     * valueMap must already be updated with the new value before calling this function.
-     *
-     * @param accessor Current form accessor
-     * @param fieldId The field whose value changed
-     * @param defnForm Form definition
-     * @param depth Current cascade depth for recursion guard
-     */
+
     fun processFieldValueChanged(
         accessor: FormStateAccessor,
         fieldId: MetaIdComp,
@@ -88,34 +72,21 @@ object FormCtxEventHelper {
         accessor.setFieldState(fieldId, newFieldState)
 
         // Trigger current field first to recalculate properties and validate
-        val currentFieldTriggerResult = triggerField(
+        triggerField(
+            accessor = accessor,
             fieldId = fieldId,
-            fieldStates = accessor.getFieldStates(),
-            valueMap = accessor.getValueMap(),
-            errors = accessor.getErrors(),
-            defnForm = defnForm,
-            compSchemaMap = state.compSchemaMap,
-            formEventPropsMap = state.formEventPropsMap
-        ) ?: TriggerResult(accessor.getFieldStates(), accessor.getErrors())
+            defnForm = defnForm
+        )
 
-        // Apply trigger result to accessor
-        accessor.updateFieldStates(currentFieldTriggerResult.fieldStates)
-        accessor.updateErrors(currentFieldTriggerResult.errors)
 
         // Then trigger dependent fields
         val dependents = state.fieldDependencies.getDependents(fieldId)
-        val triggerResult = triggerDependentFields(
-            fieldStates = accessor.getFieldStates(),
-            valueMap = accessor.getValueMap(),
+        triggerDependentFields(
+            accessor = accessor,
             dependentIds = dependents,
-            defnForm = defnForm,
-            errors = accessor.getErrors(),
-            compSchemaMap = state.compSchemaMap,
-            formEventPropsMap = state.formEventPropsMap
+            defnForm = defnForm
         )
 
-        accessor.updateFieldStates(triggerResult.fieldStates)
-        accessor.updateErrors(triggerResult.errors)
 
         // Execute onChange form events for this field
         val categorizedEvents = accessor.getState().categorizedEvents
@@ -174,19 +145,12 @@ object FormCtxEventHelper {
         event: FormEvent.TriggerField,
         defnForm: DefnFormUi
     ) {
-        val state = accessor.getState()
-        val result = triggerField(
+        triggerField(
+            accessor = accessor,
             fieldId = event.fieldId,
-            fieldStates = accessor.getFieldStates(),
-            valueMap = accessor.getValueMap(),
-            errors = accessor.getErrors(),
-            defnForm = defnForm,
-            compSchemaMap = state.compSchemaMap,
-            formEventPropsMap = state.formEventPropsMap
-        ) ?: return
+            defnForm = defnForm
+        )
 
-        accessor.updateFieldStates(result.fieldStates)
-        accessor.updateErrors(result.errors)
     }
 
     fun handleClick(
@@ -289,9 +253,7 @@ object FormCtxEventHelper {
             }
         }
 
-        // Merge event values into existing valueMap (only for known leaf fields)
         val validKeys = event.valueMap.filterKeys { state.fieldStates.containsKey(it) }
-        val updatedValueMap = accessor.getValueMap() + validKeys
 
         accessor.updateFieldStates(updatedFieldStates)
 
@@ -301,122 +263,80 @@ object FormCtxEventHelper {
         }
 
         // Trigger each changed field and its dependents to recalculate properties and validate
-        var currentFieldStates = accessor.getFieldStates()
-        var currentErrors = accessor.getErrors()
+
         val changedFieldIds = validKeys.keys
 
         changedFieldIds.forEach { fieldId ->
             // Trigger the changed field itself
-            val fieldTriggerResult = triggerField(
+            triggerField(
+                accessor = accessor,
                 fieldId = fieldId,
-                fieldStates = currentFieldStates,
-                valueMap = accessor.getValueMap(),
-                errors = currentErrors,
-                defnForm = defnForm,
-                compSchemaMap = state.compSchemaMap,
-                formEventPropsMap = state.formEventPropsMap
+                defnForm = defnForm
             )
-            if (fieldTriggerResult != null) {
-                currentFieldStates = fieldTriggerResult.fieldStates
-                currentErrors = fieldTriggerResult.errors
-            }
 
             // Trigger dependent fields
             val dependents = state.fieldDependencies.getDependents(fieldId)
-            val dependentResult = triggerDependentFields(
-                fieldStates = currentFieldStates,
-                valueMap = accessor.getValueMap(),
+            triggerDependentFields(
+                accessor = accessor,
                 dependentIds = dependents,
-                defnForm = defnForm,
-                errors = currentErrors,
-                compSchemaMap = state.compSchemaMap,
-                formEventPropsMap = state.formEventPropsMap
+                defnForm = defnForm
             )
-            currentFieldStates = dependentResult.fieldStates
-            currentErrors = dependentResult.errors
+
         }
 
-        accessor.updateFieldStates(currentFieldStates)
-        accessor.updateErrors(currentErrors)
+
     }
 
     internal fun triggerDependentFields(
-        fieldStates: Map<MetaIdComp, FieldState>,
-        valueMap: Map<MetaIdComp, JsonElement>,
+        accessor: FormStateAccessor,
         dependentIds: Set<MetaIdComp>,
-        defnForm: DefnFormUi,
-        errors: Map<MetaIdComp, FieldError>,
-        compSchemaMap: Map<MetaIdComp, CompSchema>,
-        formEventPropsMap: Map<MetaIdComp, FormEventProps> = emptyMap()
-    ): TriggerResult {
-        if (dependentIds.isEmpty()) return TriggerResult(fieldStates, errors)
-
-        var updatedFieldStates = fieldStates
-        var updatedErrors = errors
+        defnForm: DefnFormUi
+    ) {
+        if (dependentIds.isEmpty()) return
 
         dependentIds.forEach { dependentId ->
-            val result = triggerField(
+            triggerField(
+                accessor = accessor,
                 fieldId = dependentId,
-                fieldStates = updatedFieldStates,
-                valueMap = valueMap,
-                errors = updatedErrors,
-                defnForm = defnForm,
-                compSchemaMap = compSchemaMap,
-                formEventPropsMap = formEventPropsMap
-            ) ?: return@forEach
-
-            updatedFieldStates = result.fieldStates
-            updatedErrors = result.errors
+                defnForm = defnForm
+            )
         }
-
-        return TriggerResult(updatedFieldStates, updatedErrors)
     }
 
-    /**
-     * Trigger a single field: recalculate properties from definition, apply event prop
-     * overrides, and validate.
-     *
-     * Event props merging uses OR semantics — event overrides can only **add** restrictions
-     * (hidden, disabled), never remove definition-level flags.
-     *
-     * @return Updated field states and errors, or null if field/defnComp not found
-     */
     private fun triggerField(
+        accessor: FormStateAccessor,
         fieldId: MetaIdComp,
-        fieldStates: Map<MetaIdComp, FieldState>,
-        valueMap: Map<MetaIdComp, JsonElement>,
-        errors: Map<MetaIdComp, FieldError>,
-        defnForm: DefnFormUi,
-        compSchemaMap: Map<MetaIdComp, CompSchema>,
-        formEventPropsMap: Map<MetaIdComp, FormEventProps> = emptyMap()
-    ): TriggerResult? {
-        defnForm.compMap[fieldId] ?: return null
-        val currentFieldState = fieldStates[fieldId] ?: return null
+        defnForm: DefnFormUi
+    ) {
+        val state = accessor.getState()
+        val schema = state.compSchemaMap[fieldId]
+
+        defnForm.compMap[fieldId] ?: return
+        val currentFieldState = accessor.getFieldState(fieldId) ?: return
 
         // 1. Recalculate field properties from definition
         val newFieldState = calcCompProperties(
             fieldId = fieldId,
             currentFieldState = currentFieldState,
             defnForm = defnForm,
-            valueMap = valueMap
+            getFieldValue = { fieldId -> accessor.getValue(fieldId) }
         )
+        accessor.setFieldState(fieldId, newFieldState)
 
         // Note: Event props merging is handled centrally by
         // FormCtxFormEvents.mergeEventPropsIntoFieldStates() after event execution.
         // triggerField only recalculates definition-level properties.
 
-        val updatedFieldStates = fieldStates + (fieldId to newFieldState)
 
         // 2. Validate field and update errors
-        val updatedErrors = validateField(
-            fieldId = fieldId,
-            fieldValue = valueMap[fieldId],
-            fieldState = newFieldState,
-            errors = errors,
-            compSchemaMap = compSchemaMap
-        )
-
-        return TriggerResult(updatedFieldStates, updatedErrors)
+        if (schema != null)
+            validateField(
+                fieldId = fieldId,
+                fieldValue = accessor.getValue(fieldId),
+                fieldState = newFieldState,
+                schema = schema,
+                setError = { field, error -> accessor.setError(field, error) }
+            )
     }
 
     /**
@@ -428,14 +348,14 @@ object FormCtxEventHelper {
         fieldId: MetaIdComp,
         currentFieldState: FieldState,
         defnForm: DefnFormUi,
-        valueMap: Map<MetaIdComp, JsonElement>
+        getFieldValue: (MetaIdComp) -> JsonElement?
     ): FieldState {
         val defnComp = defnForm.compMap[fieldId] ?: return currentFieldState
 
         val newProperties = FieldPropertyResolver.resolveFieldProperties(
             defnComp = defnComp,
             defnForm = defnForm,
-            getFieldValue = { id -> valueMap[id] }
+            getFieldValue = getFieldValue
         )
 
         return currentFieldState.copy(fieldProperties = newProperties)
@@ -443,7 +363,6 @@ object FormCtxEventHelper {
 
     /**
      * Validate a single field and update errors map accordingly.
-     * Delegates to [FormCtxValidationHelper.updateFieldError] for error map updates.
      *
      * @param fieldValue The current field value from valueMap
      * @return Updated errors map with error set or cleared for this field
@@ -452,14 +371,15 @@ object FormCtxEventHelper {
         fieldId: MetaIdComp,
         fieldValue: JsonElement?,
         fieldState: FieldState,
-        errors: Map<MetaIdComp, FieldError>,
-        compSchemaMap: Map<MetaIdComp, CompSchema>
-    ): Map<MetaIdComp, FieldError> {
-        val schema = compSchemaMap[fieldId]
-            ?: return errors // No schema = no validation needed
+        schema: CompSchema,
+        setError: (fieldId: MetaIdComp, error: FieldError?) -> Unit
+    ) {
 
         val error = schema.validate(fieldValue, fieldState)
-        return FormCtxValidationHelper.updateFieldError(fieldId, error, errors)
+        val fieldError = FormCtxValidationHelper.updateFieldError(error)
+
+        setError(fieldId, fieldError)
+
     }
 
     /**

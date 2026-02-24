@@ -10978,6 +10978,7 @@
         },
         "mfd-wIACoHHagW": {
           "defaultValue": "row default",
+          "requiredFieldId": "mfd-qDpfN1vSGT",
           "metaId": "mfd-wIACoHHagW",
           "name": "GridFieldText",
           "type": "text",

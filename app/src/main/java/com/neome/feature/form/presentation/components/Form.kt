@@ -106,15 +106,23 @@ fun Form(
                         }
 
                         is FieldEvent.GridAdd -> {
-                            formCtx.dispatch(FormEvent.GridAdd(fieldEvent.fieldId))
+                            formCtx.dispatch(FormEvent.GridOpen(gridId = fieldEvent.fieldId))
                         }
 
                         is FieldEvent.GridEdit -> {
-                            formCtx.dispatch(FormEvent.GridEdit(fieldEvent.fieldId, fieldEvent.rowId))
+                            formCtx.dispatch(FormEvent.GridOpen(gridId = fieldEvent.fieldId, rowId = fieldEvent.rowId))
                         }
 
                         is FieldEvent.GridRemove -> {
                             formCtx.dispatch(FormEvent.GridRemove(fieldEvent.fieldId, fieldEvent.rowId))
+                        }
+
+                        is FieldEvent.GridSubmit -> {
+                            formCtx.dispatch(FormEvent.GridSubmit(gridId = fieldEvent.fieldId))
+                        }
+
+                        is FieldEvent.GridClose -> {
+                            formCtx.dispatch(FormEvent.GridClose(gridId = fieldEvent.fieldId))
                         }
                     }
                 }

@@ -2,11 +2,41 @@ package com.neome.feature.form.presentation.state
 
 import androidx.compose.runtime.Immutable
 import com.neome.api.meta.base.Types.MetaIdComp
+import com.neome.api.meta.base.Types.RowId
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
 import com.neome.feature.form.domain.DefnFormUi
 import com.neome.feature.form.domain.ctx.base.events.FormCtxFormEvents
 import com.neome.feature.form.domain.ctx.base.schema.CompSchema
 import kotlinx.serialization.json.JsonElement
+
+/**
+ * Active grid row editing context.
+ * Non-null = grid bottom sheet is open.
+ * Single source of truth for all grid row field data during editing.
+ */
+@Immutable
+data class GridCtx(
+    /** Which grid field is being edited */
+    val gridId: MetaIdComp,
+    /** Which row (new or existing) */
+    val rowId: RowId,
+    /** true = adding new row, false = editing existing */
+    val isNewRow: Boolean,
+    /** Set of MetaIdComp that belong to this grid's child fields */
+    val fieldIdSet: Set<MetaIdComp>,
+    /** Field states for grid row child fields */
+    val fieldStates: Map<MetaIdComp, FieldState> = emptyMap(),
+    /** Field values for grid row child fields */
+    val valueMap: Map<MetaIdComp, JsonElement> = emptyMap(),
+    /** Validation errors for grid row child fields */
+    val errors: Map<MetaIdComp, FieldError> = emptyMap(),
+    /** Dependency tracking scoped to grid child fields */
+    val fieldDependencies: FieldDependencyMap = FieldDependencyMap(),
+    /** Validation schemas scoped to grid child fields */
+    val compSchemaMap: Map<MetaIdComp, CompSchema> = emptyMap(),
+    /** Event-driven property overrides scoped to grid child fields */
+    val formEventPropsMap: Map<MetaIdComp, FormEventProps> = emptyMap()
+)
 
 /**
  * Flags that control the send button state.
@@ -88,7 +118,10 @@ data class FormState(
      * Send button is enabled only when this set is empty.
      * @see SendBtnStateFlag
      */
-    val sendBtnStateFlags: Set<SendBtnStateFlag> = emptySet()
+    val sendBtnStateFlags: Set<SendBtnStateFlag> = emptySet(),
+
+    /** Active grid row editing context. Non-null = grid bottom sheet is open. */
+    val gridCtx: GridCtx? = null
 ) {
     /**
      * Check if any field has validation errors.

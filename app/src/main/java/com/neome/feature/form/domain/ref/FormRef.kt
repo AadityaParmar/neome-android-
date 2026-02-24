@@ -73,29 +73,6 @@ interface FormRef {
      */
     fun setValues(valueMap: Map<MetaIdComp, JsonElement>)
 
-    // ==================== Validation ====================
-
-    /**
-     * Validate a specific field or all fields.
-     *
-     * @param fieldId Field to validate, or null for entire form
-     */
-    fun validate(fieldId: MetaIdComp? = null)
-
-    /**
-     * Set custom validation error for a field.
-     *
-     * @param fieldId Field identifier
-     * @param error Error message
-     */
-    fun setError(fieldId: MetaIdComp, error: String)
-
-    /**
-     * Clear validation errors.
-     *
-     * @param fieldId Field to clear errors for, or null for all fields
-     */
-    fun clearErrors(fieldId: MetaIdComp? = null)
 
     // ==================== Form Operations ====================
 

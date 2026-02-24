@@ -67,6 +67,20 @@ sealed interface FieldEvent {
         override val fieldId: MetaIdComp,
         val rowId: RowId
     ) : FieldEvent
+
+    /**
+     * Submit the current grid row (validate + merge into parent grid).
+     */
+    data class GridSubmit(
+        override val fieldId: MetaIdComp
+    ) : FieldEvent
+
+    /**
+     * Close/dismiss the grid row editor without saving.
+     */
+    data class GridClose(
+        override val fieldId: MetaIdComp
+    ) : FieldEvent
 }
 
 /**

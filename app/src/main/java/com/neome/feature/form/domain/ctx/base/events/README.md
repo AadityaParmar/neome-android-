@@ -1,69 +1,159 @@
-# events — Form Event Execution Engine
+# Form Context Events Package
+
+**Domain Layer | Clean Architecture | MVI Pattern**
 
 ## Purpose
 
-Handles the initialization, categorization, and execution of form-level events (onChange, onInitForm, onSubmitForm, onClickButton). This package is the runtime engine that evaluates event conditions, dispatches actions against form state, and manages cascading side effects from value changes.
+The events package implements form event orchestration—categorizing, evaluating, and executing declarative events defined in form metadata. Events include user interactions (field changes, button clicks, form submission) and initialization routines. The package transforms raw event definitions into concrete state mutations, field value changes, visibility/disabled overrides, and cascading effects.
 
 ## Responsibilities
 
-- Categorize form events by kind during initialization (onChange, onSubmitForm, onClickButton, onInitForm)
-- Execute onInitForm events immediately at form load and accumulate their state changes
-- Evaluate event action bindings with condition checks before executing actions
-- Execute actions on fields (setValue, clear, visibility, enable/disable, animations)
-- Execute actions on components (sections, grids) with field expansion for clears
-- Execute actions on the send button (visibility, enable/disable)
-- Resolve source values from multiple value types (field references, text/long/double/boolean/date literals, sysId, sysIdArray, sysIdSet, textArray)
-- Manage event property overrides (hidden, invisible, disabled, highlight, blink, shake)
-- Merge event-driven property overrides into field states
-- Guard against infinite onChange cascading with a configurable depth limit
+### Event Categorization & Initialization
+- **`FormCtxInitEvents.initEvents()`** — Scans form metadata for all event definitions, categorizes them by kind (`onChange`, `onSubmitForm`, `onClickButton`, `onInitForm`), and immediately executes any `onInitForm` events at form load time. Stores categorized events in form state for later dispatch.
 
-## Flow
+### Event Execution Engine
+- **`FormCtxFormEvents.executeEvents()`** — Main entry point for executing multiple events. Resets event props overrides at the start of each execution cycle, processes each event sequentially, evaluates conditions, dispatches actions, and merges event props into field states at the end.
+- **`FormCtxFormEvents.executeEventInternal()`** — Handles individual event execution: guards against infinite recursion (max depth = 5 for onChange cascades), evaluates condition maps with negation support, routes action execution via `FormCtxActionExecutor`, and optionally triggers `processFieldValueChanged` for value-mutating actions.
 
-1. **Initialization** — `FormCtxInitEvents.initEvents` iterates all events in the form definition. It categorizes onChange/onSubmitForm/onClickButton events into lookup maps and immediately executes onInitForm events via `FormCtxFormEvents.executeEvent`.
-2. **Event execution** — `FormCtxFormEvents.executeEvents` resets the event props map, then iterates each event ID through `executeEventInternal`. For each event, it walks the action binding map in order, evaluates optional conditions (with negation support), and dispatches the resolved action to `FormCtxActionExecutor.executeAction`.
-3. **Action dispatch** — `FormCtxActionExecutor.executeAction` routes by `actionOn` (field, component, sendButton) and then by action kind. Field/component setValue and clear mutate the valueMap. Visibility/disability/animation actions delegate to `FormCtxEventPropsHelper.updateFormEventProps` to accumulate overrides.
-4. **Value change cascading** — When `triggerValueChanged` is true and a setValue/clear action modifies a field value, the executor resolves affected field IDs, compares old vs new values, and calls `FormCtxEventHelper.processFieldValueChanged` for each changed field. This triggers isDirty updates, dependent field recalculation, validation, and further onChange cascading (depth-guarded at 5 levels).
-5. **Props merge** — After all events complete, `FormCtxEventPropsHelper.mergeEventPropsIntoFieldStates` folds event property overrides into field states, combining base properties with event-driven hidden/disabled flags.
+### Action Execution & Field State Updates
+- **`FormCtxActionExecutor.executeAction()`** — Routes actions to target type (field / component / send button). Field actions include `setValue`, `clear`, `visible`, `invisible`, `hidden`, `enable`, `disable`, `highlight`, `blink`, `shake`. Component actions clear sections or grids. Send button actions control visibility and disabled state.
+- **`FormCtxActionExecutor.resolveSourceValue()`** — Resolves literal values (text, numbers, dates, booleans), field reference values, and system ID values (single or array) for `setValue` actions.
+- **`FormCtxActionExecutor.resolveAffectedFieldIds()`** — Expands component-level actions (section clear) to their constituent leaf field IDs for cascading value-change logic.
+
+### Event Props Merging
+- **`FormCtxEventPropsHelper.mergeEventPropsIntoFieldStates()`** — Merges transient event-driven overrides (`hidden`, `disabled`, `highlight`, `blink`, `shake`) from `formEventPropsMap` into each field's `FieldState.fieldProperties`. Hidden is OR'd with invisible; disabled is OR'd independently.
+- **`FormCtxEventPropsHelper.updateFormEventProps()`** — Applies update lambdas to event props for a set of component IDs, building a new immutable props map.
+
+## Flow: Event → Condition → Action → Props → Cascade
+
+```
+1. Event Categorization
+   FormCtxInitEvents.initEvents()
+   └─ Scan form.eventMap for all events
+   └─ Group by kind: onChange, onSubmitForm, onClickButton, onInitForm
+   └─ Execute onInitForm immediately
+   └─ Store categorized events in state
+
+2. Event Dispatch (onChange, onClickButton, onSubmitForm)
+   FormCtxFormEvents.executeEvents(eventIds)
+   └─ Reset formEventPropsMap to clear stale overrides
+   └─ For each event ID:
+      FormCtxFormEvents.executeEventInternal()
+      ├─ Guard: depth < MAX_CASCADE_DEPTH (5)
+      ├─ Condition Evaluation
+      │  └─ Resolve condition map with ConditionResolver
+      │  └─ Apply notCondition flag (invert if true)
+      │  └─ Skip action if condition false or unresolvable
+      ├─ Action Execution
+      │  FormCtxActionExecutor.executeAction()
+      │  ├─ Route to field / component / sendButton handler
+      │  ├─ Field mutations: setValue, clear, visibility, disabled, animations
+      │  ├─ Component mutations: section/grid clear
+      │  └─ SendButton mutations: visibility, disabled via SendBtnStateFlag
+      ├─ Value Change Cascade (only for setValue/clear)
+      │  └─ Call FormCtxEventHelper.processFieldValueChanged()
+      │     └─ Mark isDirty, run validation, trigger dependent onChange events
+      │     └─ Recursively process dependent fields (depth + 1)
+      └─ Merge event props once after all events complete
+
+3. Props Merge
+   FormCtxEventPropsHelper.mergeEventPropsIntoFieldStates()
+   └─ For each component in formEventPropsMap:
+      └─ Merge hidden, disabled, highlight, blink, shake into FieldState
+      └─ Update field state only if props changed
+```
 
 ## Key Entry Points
 
-| File | Symbol | Role |
-|------|--------|------|
-| `FormCtxInitEvents.kt` | `FormCtxInitEvents.initEvents` | Categorizes events and executes onInitForm; returns `CategorizedEvents` + updated state |
-| `FormCtxFormEvents.kt` | `FormCtxFormEvents.executeEvents` | Executes a list of event IDs with optional value-change cascading |
-| `FormCtxFormEvents.kt` | `FormCtxFormEvents.initEvents` | Delegate to `FormCtxInitEvents.initEvents`; convenience entry point for callers |
-| `FormCtxFormEvents.kt` | `FormCtxFormEvents.executeEvent` | Executes a single event ID |
-| `FormCtxFormEvents.kt` | `FormCtxFormEvents.CategorizedEvents` | Data class holding onChangeMap, onSubmitFormList, onClickButtonMap |
-| `FormCtxFormEvents.kt` | `FormCtxFormEvents.mergeEventPropsIntoFieldStates` | Delegates to helper for props merge |
-| `FormCtxActionExecutor.kt` | `FormCtxActionExecutor.executeAction` | Routes and executes a single action by actionOn and kind |
-| `FormCtxActionExecutor.kt` | `FormCtxActionExecutor.resolveSourceValue` | Resolves action source to a value (field reference or literal) |
-| `FormCtxActionExecutor.kt` | `FormCtxActionExecutor.resolveAffectedFieldIds` | Expands component IDs to leaf field IDs for cascade tracking |
-| `FormCtxEventPropsHelper.kt` | `FormCtxEventPropsHelper.updateFormEventProps` | Applies a property update lambda to a set of component IDs |
-| `FormCtxEventPropsHelper.kt` | `FormCtxEventPropsHelper.mergeEventPropsIntoFieldStates` | Merges event overrides into field states |
+| Symbol | File | Purpose |
+|--------|------|---------|
+| `FormCtxInitEvents.initEvents()` | `FormCtxInitEvents.kt` | Initialize form events at load time, categorize by kind, execute onInitForm |
+| `FormCtxFormEvents.executeEvents()` | `FormCtxFormEvents.kt` | Execute multiple events with condition evaluation and cascade depth guard |
+| `FormCtxFormEvents.executeEvent()` | `FormCtxFormEvents.kt` | Execute single event without triggering value-change cascade (used by onInitForm) |
+| `FormCtxFormEvents.executeEventInternal()` | `FormCtxFormEvents.kt` | Core event execution: condition eval, action dispatch, cascade depth guard |
+| `FormCtxActionExecutor.executeAction()` | `FormCtxActionExecutor.kt` | Route action to field/component/sendButton handler, execute mutations |
+| `FormCtxActionExecutor.resolveSourceValue()` | `FormCtxActionExecutor.kt` | Resolve source values (literal, field reference, sysId) for setValue actions |
+| `FormCtxActionExecutor.resolveAffectedFieldIds()` | `FormCtxActionExecutor.kt` | Expand component actions to leaf field IDs |
+| `FormCtxEventPropsHelper.mergeEventPropsIntoFieldStates()` | `FormCtxEventPropsHelper.kt` | Merge event props (hidden, disabled, etc.) into FieldState |
+| `FormCtxEventPropsHelper.updateFormEventProps()` | `FormCtxEventPropsHelper.kt` | Update formEventPropsMap with lambdas per component |
 
-## Dependencies
+## Dependencies & Relationships
 
-- `com.neome.api.meta.base.Types` — MetaId types, enum definitions for event kinds and action kinds
-- `com.neome.api.meta.base.dto.DefnEventAction`, `DefnSection`, `FieldDtoArg` — Action/section/arg DTOs
-- `com.neome.feature.form.domain.DefnFormUi` — Form definition (compMap, eventMap)
-- `com.neome.feature.form.domain.util.ConditionResolver` — Evaluates conditions for action bindings
-- `com.neome.feature.form.domain.util.FieldVal.FieldValueResolver` — Converts between raw values, field values, and JSON elements
-- `com.neome.feature.form.presentation.state.FormState` — Immutable form state (valueMap, fieldStates, formEventPropsMap, etc.)
-- `com.neome.feature.form.presentation.state.FormEventProps` — Per-component event property overrides
-- `com.neome.feature.form.presentation.state.SendBtnStateFlag` — Send button state flags
-- `com.neome.feature.form.domain.ctx.helper.FormCtxEventHelper` — Parent helper; `processFieldValueChanged` drives cascading from this package
+### Inbound Dependencies
+- **`FormCtxInitHelper.kt`** (parent `base/`) — Calls `FormCtxInitEvents.initEvents()` during form initialization
+- **`FormCtxEventHelper.kt`** (parent `base/`) — Calls `FormCtxFormEvents.executeEvents()` for onChange, onClickButton, onSubmitForm dispatch
+- **`ConditionResolver`** (`util/`) — Evaluates condition maps with field references
+- **`FieldValueResolver`** (`util/`) — Converts between FieldValue, raw values, and JsonElement
+- **`FormStateAccessor`** (presentation state) — Provides getValue, setValue, getState, updateState, etc.
 
-## Related READMEs
+### Outbound Dependencies
+- **`FormStateAccessor`** — Reads/writes form state, field values, event props, send button flags
+- **`FormCtxEventHelper.processFieldValueChanged()`** (parent `base/`) — Triggered by setValue/clear actions to cascade field changes, isDirty, validation
+- **`FormEventProps`** (presentation state) — Immutable props container (hidden, disabled, highlight, blink, shake)
+- **`SendBtnStateFlag`** (presentation state) — Flags for send button visibility/disabled state
 
-- **Parent**: `../README.md` (helper package — orchestrates event handling, validation, initialization)
-- **Sibling**: `../schema/README.md` (component schema resolution)
-- **Form root**: `../../../../form.md` (full form feature documentation)
+### State Structures
+- **`FormCtxFormEvents.CategorizedEvents`** — Data class holding `onChangeMap`, `onSubmitFormList`, `onClickButtonMap`
+- **`FormEventProps`** — Holds event-driven overrides (hidden, invisible, disabled, highlight, blink, shake)
+- **`FieldState`** — Contains `fieldProperties` (hidden, disabled) merged from base definition and events
 
-## Change Notes
+## Key Design Patterns
 
-- Initial documentation created from source analysis (2026-02-22)
-- Not-yet-implemented actions: `executeAction`, `executeFormula`, `click` (logged as TODOs in `FormCtxActionExecutor`)
-- TODO: `resolveSourceValue` does not yet resolve `valueText` as an arg string via `ArgValueResolver`
-- Verified against latest source (2026-02-22): all entry points, dependencies, and flow descriptions confirmed accurate
-- Logging added in `FormCtxFormEvents.executeEventInternal`: event executed (eventId), action executed (actionId, kind, condition passed vs no condition), action skipped (condition not met). Tag: `FormCtxFormEvents`. Enables verification of which events and actions run and whether they were conditional.
-- Logging added in `FormCtxActionExecutor.executeAction`: action running (kind, actionOn, target names). Target names resolved from compMap (field/section/grid label or name, or "submit btn" for sendButton). Tag: `FormCtxActionExecutor`. Enables verification of which action kind ran and on which named targets.
+### Immutable State Updates
+- Event props and field states are updated immutably via `copy()` and `+` (map union) operations.
+- `formEventPropsMap` is reset and rebuilt per event execution cycle to prevent stale overrides.
+
+### Condition Evaluation with Negation
+- Conditions are resolved via `ConditionResolver` against current form state.
+- The `notCondition` flag inverts the result, allowing both positive and negative conditions.
+- Actions are skipped if condition is false or unresolvable.
+
+### Cascade Depth Guard
+- `MAX_CASCADE_DEPTH = 5` prevents infinite recursion in onChange cascades (e.g., A→B→C→A).
+- Depth increments as `processFieldValueChanged` triggers dependent onChange events.
+
+### Value Change Tracking
+- `setValue` and `clear` actions save old values before mutation and compare with new values.
+- Only fields with actual value changes trigger `processFieldValueChanged`, avoiding redundant cascades.
+
+### Target Polymorphism
+- Actions can target fields, components (sections/grids), or the send button.
+- Field targets mutate values; component targets expand to constituent fields; send button targets mutate flags.
+
+## Related Documentation
+
+- **Parent Package**: [`base/README.md`](../README.md) — Form context architecture, helpers, and state accessor
+- **Util Package**: `util/` — Condition resolution, field value conversion, validation
+- **Presentation State**: `presentation/state/` — FieldState, FormEventProps, SendBtnStateFlag
+- **Clean Architecture Rules**: See project `CLAUDE.md` for MVI/MVVM patterns and layer separation
+
+## Anti-Patterns
+
+❌ **Do not** mutate state directly in event handlers — always use `accessor.updateState()` or `accessor.setFormEventPropsMap()`.
+
+❌ **Do not** call `processFieldValueChanged()` without checking if value actually changed — this causes unnecessary cascades.
+
+❌ **Do not** exceed `MAX_CASCADE_DEPTH` — if you see warnings, the event configuration has a cycle that needs fixing.
+
+❌ **Do not** merge event props before all events complete — wait until the end of `executeEvents()` to batch props updates.
+
+❌ **Do not** resolve field references without checking the field exists in `compMap` — use defensive null checks.
+
+## Testing
+
+Test vectors should cover:
+- **Event categorization**: Verify all event kinds are grouped correctly
+- **Condition evaluation**: Both true, false, and unresolvable conditions
+- **Negation**: Verify `notCondition=true` inverts results
+- **Action execution**: Field setValue/clear, visibility, disabled, send button mutations
+- **Value change cascade**: onChange events triggered by dependent field mutations (depth < 5)
+- **Cascade termination**: Verify `MAX_CASCADE_DEPTH` stops runaway cascades
+- **Props merging**: Verify hidden/disabled/animations are merged into FieldState
+- **Stale props cleanup**: Verify `formEventPropsMap` is reset each cycle
+
+## Implementation Notes
+
+- **Logging**: `FormCtxFormEvents` (tag `FormCtxFormEvents`) logs event execution and action dispatch with condition status. `FormCtxActionExecutor` (tag `FormCtxActionExecutor`) logs action kind, actionOn, and resolved target names from compMap for debugging.
+- **Not Yet Implemented**: Actions `executeAction`, `executeFormula`, `click` are logged as TODOs.
+- **Future Work**: `resolveSourceValue()` should resolve `valueText` as an arg string via `ArgValueResolver`.
+

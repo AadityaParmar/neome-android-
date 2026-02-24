@@ -27,17 +27,9 @@ interface FormStateAccessor {
     /** Get field state */
     fun getFieldState(fieldId: MetaIdComp): FieldState?
 
-    /** Get field error */
-    fun getError(fieldId: MetaIdComp): FieldError?
-
     /** Get all values */
     fun getValueMap(): Map<MetaIdComp, JsonElement>
 
-    /** Get all field states */
-    fun getFieldStates(): Map<MetaIdComp, FieldState>
-
-    /** Get all errors */
-    fun getErrors(): Map<MetaIdComp, FieldError>
 
     /** Get field properties */
     fun getFieldProperties(fieldId: MetaIdComp): FieldProperties?
@@ -57,7 +49,7 @@ interface FormStateAccessor {
     fun updateFieldStates(fieldStates: Map<MetaIdComp, FieldState>)
 
     /** Set error for a field */
-    fun setError(fieldId: MetaIdComp, error: FieldError)
+    fun setError(fieldId: MetaIdComp, error: FieldError?)
 
     /** Clear error for a field */
     fun clearError(fieldId: MetaIdComp)

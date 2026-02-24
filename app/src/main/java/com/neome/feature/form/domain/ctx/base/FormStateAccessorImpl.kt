@@ -55,13 +55,8 @@ class ReducerFormStateAccessor(initialState: FormState) : FormStateAccessor {
 
     override fun getFieldState(fieldId: MetaIdComp): FieldState? = _fieldStates[fieldId]
 
-    override fun getError(fieldId: MetaIdComp): FieldError? = _errors[fieldId]
-
     override fun getValueMap(): Map<MetaIdComp, JsonElement> = _valueMap.toMap()
 
-    override fun getFieldStates(): Map<MetaIdComp, FieldState> = _fieldStates.toMap()
-
-    override fun getErrors(): Map<MetaIdComp, FieldError> = _errors.toMap()
 
     override fun getFieldProperties(fieldId: MetaIdComp): FieldProperties? =
         _fieldStates[fieldId]?.fieldProperties
@@ -88,8 +83,8 @@ class ReducerFormStateAccessor(initialState: FormState) : FormStateAccessor {
         _fieldStates.putAll(fieldStates)
     }
 
-    override fun setError(fieldId: MetaIdComp, error: FieldError) {
-        _errors[fieldId] = error
+    override fun setError(fieldId: MetaIdComp, error: FieldError?) {
+        if (error == null) clearError(fieldId) else _errors[fieldId] = error
     }
 
     override fun clearError(fieldId: MetaIdComp) {
