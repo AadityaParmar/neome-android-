@@ -41,6 +41,7 @@ import com.neome.feature.form.presentation.components.field.FieldPickText
 import com.neome.feature.form.presentation.components.field.FieldPickTextSize
 import com.neome.feature.form.presentation.components.field.FieldPinShape
 import com.neome.feature.form.presentation.components.field.FieldQuarter
+import com.neome.feature.form.presentation.components.field.FieldRowId
 import com.neome.feature.form.presentation.components.field.FieldSetOfText
 import com.neome.feature.form.presentation.components.field.FieldSignature
 import com.neome.feature.form.presentation.components.field.FieldSwitch
@@ -275,6 +276,12 @@ fun FieldFactory(
         )
 
         EnumDefnCompType.identifier -> FieldIdentifier(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.rowId -> FieldRowId(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             modifier = modifier
