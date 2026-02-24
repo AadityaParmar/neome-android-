@@ -19,6 +19,7 @@ kotlinxSerialization = "1.8.0"
 konform = "0.11.0"
 coroutinesTest = "1.10.1"
 turbine = "1.2.0"
+zxing = "3.5.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -49,6 +50,7 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 konform-jvm = { group = "io.konform", name = "konform-jvm", version.ref = "konform" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+zxing-core = { group = "com.google.zxing", name = "core", version.ref = "zxing" }
 
 # CameraX
 androidx-camera-core = { group = "androidx.camera", name = "camera-core", version.ref = "cameraX" }

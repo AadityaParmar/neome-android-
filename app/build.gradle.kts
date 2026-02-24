@@ -79,6 +79,7 @@ dependencies {
     implementation(libs.androidx.media3.ui)
     implementation(libs.jnanoid)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.zxing.core)
 
     // Hilt
     implementation(libs.hilt.android)
