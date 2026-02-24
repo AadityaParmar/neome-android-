@@ -147,7 +147,7 @@ class SigEntCallerSerTest {
 
         jsonArray.forEachIndexed { index, element ->
             val jsonValue = element.jsonPrimitive.content
-            val deserializedValue = deserialized.roleIdSet[index].toString()
+            val deserializedValue = deserialized.roleIdSet.elementAt(index).toString()
             assertEquals("roleIdSet[$index] mismatch", jsonValue, deserializedValue)
         }
         println("roleIdSet verified: ${jsonArray.size} items")
@@ -542,7 +542,7 @@ class SigEntCallerSerTest {
 
             jsonArray.forEachIndexed { index, element ->
                 val jsonValue = element.jsonPrimitive.content
-                val deserializedValue = list[index].toString()
+                val deserializedValue = list.elementAt(index).toString()
                 assertEquals("managerialRelationshipMap[$key][$index] mismatch", jsonValue, deserializedValue)
             }
         }
