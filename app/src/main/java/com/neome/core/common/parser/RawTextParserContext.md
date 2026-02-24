@@ -84,26 +84,26 @@ byte-for-byte output parity for all supported formatting.
 
 ### Algorithm Match
 
-| Aspect | Backend (Java) | Android (Kotlin) |
-|---|---|---|
-| Pattern detection | Precompiled `java.util.regex.Pattern` | Kotlin `Regex` (wraps same Pattern) |
-| Action map | `HashMap<Integer, StyleAction>` | `HashMap<Int, StyleAction>` |
-| Map collision | Last regex to write wins (HashMap.put) | Same (HashMap assignment) |
-| Style tracking | `LinkedHashSet<Style>` | `linkedSetOf<Style>()` |
-| Color priority | First color in iteration order | Same (LinkedHashSet insertion order) |
-| Walker semantics | `position += charToSkip; position++` | Same |
-| Newlines | Each `\r` and `\n` individually | Same |
-| Regex patterns | Identical lookbehind/lookahead/backreference | Identical |
+| Aspect            | Backend (Java)                               | Android (Kotlin)                     |
+|-------------------|----------------------------------------------|--------------------------------------|
+| Pattern detection | Precompiled `java.util.regex.Pattern`        | Kotlin `Regex` (wraps same Pattern)  |
+| Action map        | `HashMap<Integer, StyleAction>`              | `HashMap<Int, StyleAction>`          |
+| Map collision     | Last regex to write wins (HashMap.put)       | Same (HashMap assignment)            |
+| Style tracking    | `LinkedHashSet<Style>`                       | `linkedSetOf<Style>()`               |
+| Color priority    | First color in iteration order               | Same (LinkedHashSet insertion order) |
+| Walker semantics  | `position += charToSkip; position++`         | Same                                 |
+| Newlines          | Each `\r` and `\n` individually              | Same                                 |
+| Regex patterns    | Identical lookbehind/lookahead/backreference | Identical                            |
 
 ### Android-Only Additions (NOT in Backend)
 
-| Feature | Implementation |
-|---|---|
+| Feature                             | Implementation                                                             |
+|-------------------------------------|----------------------------------------------------------------------------|
 | Escape sequences (`\*`, `\_`, etc.) | Pre-process: replace with Unicode PUA placeholders → post-process: restore |
-| URL link detection | Post-pass regex on span texts |
-| Word highlighting | Post-pass with `String.indexOf` |
-| HTML angle bracket escaping | `<` → `‹`, `>` → `›` (before regex phase) |
-| Feature toggle config | `ParserConfig` data class |
+| URL link detection                  | Post-pass regex on span texts                                              |
+| Word highlighting                   | Post-pass with `String.indexOf`                                            |
+| HTML angle bracket escaping         | `<` → `‹`, `>` → `›` (before regex phase)                                  |
+| Feature toggle config               | `ParserConfig` data class                                                  |
 
 ### TypeScript Reference (Legacy)
 
@@ -116,16 +116,16 @@ Earlier TS implementation lives at `app/src/main/resources/MarkdownParser.ts` an
 
 ## 3. Supported Formatting Syntax
 
-| Syntax | Renders As | Nesting | Example |
-|---|---|---|---|
-| `*text*` | **Bold** | Yes (via regex overlap) | `*hello*` → **hello** |
-| `_text_` | *Italic* | Yes (via regex overlap) | `_hello_` → *hello* |
-| `~text~` | ~~Strikethrough~~ | Yes (via regex overlap) | `~hello~` → ~~hello~~ |
-| `[color]text[/color]` | Colored text | No (outer regex captures inner) | `[red]hello[/red]` |
-| `[#RRGGBB]text[/#RRGGBB]` | Hex-colored text | No (outer regex captures inner) | `[#FF0000]hello[/#FF0000]` |
-| `https://...` or `www.…` | Clickable link (Android-only) | N/A | `https://example.com` |
-| `\*` `\_` `\~` `\[` `\]` `\\` | Literal character (Android-only) | N/A | `\*not bold\*` → `*not bold*` |
-| `\n`, `\r` | Line break | N/A | Each `\r` and `\n` is a separate newline |
+| Syntax                        | Renders As                       | Nesting                         | Example                                  |
+|-------------------------------|----------------------------------|---------------------------------|------------------------------------------|
+| `*text*`                      | **Bold**                         | Yes (via regex overlap)         | `*hello*` → **hello**                    |
+| `_text_`                      | *Italic*                         | Yes (via regex overlap)         | `_hello_` → *hello*                      |
+| `~text~`                      | ~~Strikethrough~~                | Yes (via regex overlap)         | `~hello~` → ~~hello~~                    |
+| `[color]text[/color]`         | Colored text                     | No (outer regex captures inner) | `[red]hello[/red]`                       |
+| `[#RRGGBB]text[/#RRGGBB]`     | Hex-colored text                 | No (outer regex captures inner) | `[#FF0000]hello[/#FF0000]`               |
+| `https://...` or `www.…`      | Clickable link (Android-only)    | N/A                             | `https://example.com`                    |
+| `\*` `\_` `\~` `\[` `\]` `\\` | Literal character (Android-only) | N/A                             | `\*not bold\*` → `*not bold*`            |
+| `\n`, `\r`                    | Line break                       | N/A                             | Each `\r` and `\n` is a separate newline |
 
 ### Boundary Rules (Regex-Based)
 
@@ -171,17 +171,17 @@ non-ws `o`). This matches the backend behavior.
                                       AnnotatedStringExt
                                    (Compose bridge layer)
                                                  ↓
-                                          RawText Composable
+                                          RawTextParserUi Composable
 ```
 
 ### Layer Separation
 
-| Layer | Package | Depends On |
-|---|---|---|
-| **Style/Action types** | `parser/rule/` | Nothing (pure Kotlin) |
-| **Pipeline + Config** | `parser/` | `rule/`, `model/` |
-| **Output model** | `parser/model/` | Nothing (pure Kotlin) |
-| **Compose bridge** | `parser/ext/` | `model/`, `parser/` + Compose UI |
+| Layer                  | Package         | Depends On                       |
+|------------------------|-----------------|----------------------------------|
+| **Style/Action types** | `parser/rule/`  | Nothing (pure Kotlin)            |
+| **Pipeline + Config**  | `parser/`       | `rule/`, `model/`                |
+| **Output model**       | `parser/model/` | Nothing (pure Kotlin)            |
+| **Compose bridge**     | `parser/ext/`   | `model/`, `parser/` + Compose UI |
 
 The core parser (`rule/`, `model/`, `RawTextParser.kt`) has **zero Android framework
 dependencies**. Only `parser/ext/` imports Compose.
@@ -223,7 +223,7 @@ core/common/parser/
     │   ParsedText.toAnnotatedString(), TextSpan.toSpanStyle(),
     │   parseColor() — 25 named colors + hex.
     │
-    └── RawText.kt                      [~70 lines]
+    └── RawTextParserUi.kt                      [~70 lines]
         @Composable drop-in component with memoization + link clicks.
 
 TEST:
@@ -279,6 +279,7 @@ flush remaining buffer
 ```
 
 **Critical**: `pos++` happens after charToSkip. So for `[red]`:
+
 - charToSkip = 4 (skip `red]`)
 - `pos += 4`, then `pos++` → total skip = 5 characters = `[red]`
 
@@ -334,14 +335,14 @@ Final: [plain("Hello "), bold("world"), plain(" "), link("https://x.com")]
 
 All patterns are identical to the backend Java `MarkdownTextParser`.
 
-| Pattern | Regex | Notes |
-|---|---|---|
-| Bold | `(?<![a-zA-Z0-9])\*(.*?\S)\*(?![a-zA-Z0-9])` | ASCII boundary, non-greedy content ending in non-ws |
-| Italic | `(?<![a-zA-Z0-9])_(.*?\S)_(?![a-zA-Z0-9])` | Same structure |
-| Strikethrough | `(?<![a-zA-Z0-9])~(.*?\S)~(?![a-zA-Z0-9])` | Same structure |
-| Color (named) | `\[(\w+)](.*?)\[/\1]` | `\w+` = `[a-zA-Z0-9_]`, backreference `\1` for close tag |
-| Color (hex) | `\[(#[0-9a-fA-F]{6})](.*?)\[/\1]` | Hex with backreference |
-| Newline | `[\r\n]` | Each `\r` and `\n` matched individually |
+| Pattern       | Regex                                        | Notes                                                    |
+|---------------|----------------------------------------------|----------------------------------------------------------|
+| Bold          | `(?<![a-zA-Z0-9])\*(.*?\S)\*(?![a-zA-Z0-9])` | ASCII boundary, non-greedy content ending in non-ws      |
+| Italic        | `(?<![a-zA-Z0-9])_(.*?\S)_(?![a-zA-Z0-9])`   | Same structure                                           |
+| Strikethrough | `(?<![a-zA-Z0-9])~(.*?\S)~(?![a-zA-Z0-9])`   | Same structure                                           |
+| Color (named) | `\[(\w+)](.*?)\[/\1]`                        | `\w+` = `[a-zA-Z0-9_]`, backreference `\1` for close tag |
+| Color (hex)   | `\[(#[0-9a-fA-F]{6})](.*?)\[/\1]`            | Hex with backreference                                   |
+| Newline       | `[\r\n]`                                     | Each `\r` and `\n` matched individually                  |
 
 ### Important Regex Behaviors
 
@@ -367,14 +368,14 @@ Uses `linkedSetOf<Style>()` (Kotlin) / `LinkedHashSet<Style>()` (Java).
 
 ### charToSkip Semantics
 
-| Style | Open charToSkip | Close charToSkip |
-|---|---|---|
-| Bold (`*`) | 0 | 0 |
-| Italic (`_`) | 0 | 0 |
-| Strikethrough (`~`) | 0 | 0 |
-| Color named (`[red]`) | name.length + 1 (= 4 for "red") | name.length + 2 (= 5 for "red") |
-| Color hex (`[#FF0000]`) | hex.length + 1 (= 8) | hex.length + 2 (= 9) |
-| Newline | N/A (no charToSkip, no pos+=) | N/A |
+| Style                   | Open charToSkip                 | Close charToSkip                |
+|-------------------------|---------------------------------|---------------------------------|
+| Bold (`*`)              | 0                               | 0                               |
+| Italic (`_`)            | 0                               | 0                               |
+| Strikethrough (`~`)     | 0                               | 0                               |
+| Color named (`[red]`)   | name.length + 1 (= 4 for "red") | name.length + 2 (= 5 for "red") |
+| Color hex (`[#FF0000]`) | hex.length + 1 (= 8)            | hex.length + 2 (= 9)            |
+| Newline                 | N/A (no charToSkip, no pos+=)   | N/A                             |
 
 The walker always does `pos++` after processing, so the character AT the action position
 is consumed (not output). Combined with charToSkip, this skips the full delimiter.
@@ -391,6 +392,7 @@ are set AND a color is found. The Kotlin implementation does the same.
 ### Named Colors: `\w+`
 
 The regex `\[(\w+)]` accepts `[a-zA-Z0-9_]+` for color names. This means:
+
 - `[red]` ✓, `[blue]` ✓, `[dark_red]` ✓, `[color2]` ✓
 - `[123]` ✓ (all digits are word chars)
 - `[hello world]` ✗ (space is not `\w`)
@@ -418,6 +420,7 @@ closeSkip = colorName.length + 2
 ```
 
 For `[red]hello[/red]` (length 16):
+
 - matchEnd = 16, colorName = "red" (length 3)
 - closePos = 16 - 3 - 3 = 10 (the `[` of `[/red]`)
 - closeSkip = 5 (skips `/red]`)
@@ -432,6 +435,7 @@ For `[red]hello[/red]` (length 16):
 The regex `[\r\n]` matches each `\r` and `\n` as separate characters.
 
 **`\r\n` produces TWO newlines:**
+
 - Position i: `\r` → newline action → flush buffer + add newline span
 - Position i+1: `\n` → newline action → flush buffer (empty) + add newline span
 - Result: two consecutive newline spans
@@ -442,6 +446,7 @@ The regex `[\r\n]` matches each `\r` and `\n` as separate characters.
 ### Formatting Cannot Span Newlines
 
 Since `.` in regex doesn't match `\n` (no DOTALL flag):
+
 - `*bold\ntext*` → bold regex doesn't match → literal `*bold`, newline, `text*`
 - `[red]hello\nworld[/red]` → color regex doesn't match → literal text
 
@@ -455,6 +460,7 @@ Since the backend has no escape support, escapes are implemented as a pre/post-p
 layer that's invisible to the regex engine:
 
 **Pre-process** (before regexes):
+
 ```
 \* → U+E001
 \_ → U+E002
@@ -467,6 +473,7 @@ layer that's invisible to the regex engine:
 **Regex runs** → PUA characters are not `*`, `_`, `~`, `[`, `]`, so regexes ignore them.
 
 **Post-process** (after walker produces spans):
+
 ```
 U+E001 → *
 U+E002 → _
@@ -500,6 +507,7 @@ walk, never re-scanning the raw input.
 - Returns original list if no links found (zero-copy)
 
 **URL Regex**: `(?:https?://|www\.)[a-zA-Z0-9][-a-zA-Z0-9@:%._+~#=]{0,256}\.[a-zA-Z0-9()]{1,6}[-a-zA-Z0-9()@:%_+.~#?&/=]*`
+
 - Requires `http://`, `https://`, or `www.` prefix
 - Case-insensitive
 
@@ -529,15 +537,15 @@ data class ParserConfig(
 )
 ```
 
-| Flag | Effect When Disabled |
-|---|---|
-| `boldEnabled = false` | Bold regex not run → `*` stays literal |
-| `italicEnabled = false` | Italic regex not run → `_` stays literal |
-| `strikethroughEnabled = false` | Strikethrough regex not run → `~` stays literal |
-| `colorEnabled = false` | Both color regexes not run → `[tag]` stays literal |
-| `newlineEnabled = false` | Newline regex not run → `\n`/`\r` stays in text |
-| `escapeEnabled = false` | No placeholder substitution → `\*` is literal `\` + `*` |
-| `linkEnabled = false` | Link post-pass skipped |
+| Flag                           | Effect When Disabled                                    |
+|--------------------------------|---------------------------------------------------------|
+| `boldEnabled = false`          | Bold regex not run → `*` stays literal                  |
+| `italicEnabled = false`        | Italic regex not run → `_` stays literal                |
+| `strikethroughEnabled = false` | Strikethrough regex not run → `~` stays literal         |
+| `colorEnabled = false`         | Both color regexes not run → `[tag]` stays literal      |
+| `newlineEnabled = false`       | Newline regex not run → `\n`/`\r` stays in text         |
+| `escapeEnabled = false`        | No placeholder substitution → `\*` is literal `\` + `*` |
+| `linkEnabled = false`          | Link post-pass skipped                                  |
 
 **For exact backend parity**: Use `ParserConfig(escapeEnabled = false, linkEnabled = false)`.
 
@@ -570,15 +578,16 @@ Factory methods: `TextSpan.plain(text)`, `TextSpan.newline()`, `ParsedText.EMPTY
 ### AnnotatedStringExt.kt
 
 `ParsedText.toAnnotatedString(highlightColor)` → Compose `AnnotatedString` with:
+
 - `SpanStyle` for bold/italic/strikethrough/color
 - `pushStringAnnotation(tag="URL")` for links
 - 25 named colors + `#RRGGBB` + `#AARRGGBB` hex
 
-### RawText.kt — @Composable
+### RawTextParserUi.kt — @Composable
 
 ```kotlin
 @Composable
-fun RawText(
+fun RawTextParserUi(
     text: String?,
     modifier: Modifier = Modifier,
     config: ParserConfig = ParserConfig(),
@@ -633,17 +642,17 @@ Custom rules run AFTER built-in rules → can override at same positions.
 
 ## 18. Performance Characteristics
 
-| Phase | Time | Space |
-|---|---|---|
-| Fast-path check | O(n) | O(1) |
-| HTML escape | O(n) | O(n) if needed |
-| Escape placeholders | O(n) | O(n) if needed |
-| Build action map (6 regexes) | O(n) each | O(k) actions |
-| Walk action map | O(n) | O(n) output + O(s) active styles |
-| Restore placeholders | O(m) spans | O(1) per span |
-| Link pass | O(n) | O(m) spans |
-| Highlight pass | O(n × w) | O(n) marks |
-| **Total** | **O(n × max(6, w))** | **O(n)** |
+| Phase                        | Time                 | Space                            |
+|------------------------------|----------------------|----------------------------------|
+| Fast-path check              | O(n)                 | O(1)                             |
+| HTML escape                  | O(n)                 | O(n) if needed                   |
+| Escape placeholders          | O(n)                 | O(n) if needed                   |
+| Build action map (6 regexes) | O(n) each            | O(k) actions                     |
+| Walk action map              | O(n)                 | O(n) output + O(s) active styles |
+| Restore placeholders         | O(m) spans           | O(1) per span                    |
+| Link pass                    | O(n)                 | O(m) spans                       |
+| Highlight pass               | O(n × w)             | O(n) marks                       |
+| **Total**                    | **O(n × max(6, w))** | **O(n)**                         |
 
 All regexes are precompiled as `companion object val`. Zero regex compilation per `parse()` call.
 
@@ -651,100 +660,100 @@ All regexes are precompiled as `companion object val`. Zero regex compilation pe
 
 ## 19. Edge Cases & Backend-Exact Behaviors
 
-| # | Scenario | Behavior |
-|---|---|---|
-| 1 | `null` / `""` | Returns `ParsedText.EMPTY` |
-| 2 | Unclosed `*hello` | Regex doesn't match → literal `*hello` |
-| 3 | Empty `**` | Regex needs `.*?\S` (at least 1 non-ws) → no match → literal `**` |
-| 4 | `* hello*` (space after open) | Regex matches: content ` hello` ends with non-ws → bold |
-| 5 | `some_var*name*here` | Lookbehind: `r` is alnum → no match → literal |
-| 6 | `*name*here` | Lookahead: `h` is alnum → no match → literal |
-| 7 | `中*bold*文` | `中` not in `[a-zA-Z0-9]` → boundary passes → bold |
-| 8 | Nested colors `[red][blue]x[/blue][/red]` | Outer captures inner → `[blue]x[/blue]` displayed in red |
-| 9 | Sequential colors `[red]a[/red][blue]b[/blue]` | Two separate matches → works correctly |
-| 10 | Color across newline `[red]a\nb[/red]` | `.` doesn't match `\n` → no match → literal |
-| 11 | Bold across newline `*a\nb*` | Same → no match → literal |
-| 12 | `\r\n` | Two separate newlines (backend-exact) |
-| 13 | HashMap collision (same position) | Last regex wins (Bold < Italic < Strike < Color < Hex < Newline) |
-| 14 | `[red]*bold*[/red]` | Both color and bold match; bold ADD/REMOVE may collide with color → depends on positions |
-| 15 | `[#ff0000]world*[/#ff0000]` | Backend main() test case → color="ff0000", text="world*" |
-| 16 | `<script>` | `<` → `‹`, `>` → `›` (Android-only) |
-| 17 | `\*escaped\*` | Placeholders hide from regex → literal `*escaped*` (Android-only) |
-| 18 | `[dark_red]text[/dark_red]` | `\w+` matches underscore → valid color name |
-| 19 | All features disabled | No regexes run, no post-passes → single plain span |
+| #  | Scenario                                       | Behavior                                                                                 |
+|----|------------------------------------------------|------------------------------------------------------------------------------------------|
+| 1  | `null` / `""`                                  | Returns `ParsedText.EMPTY`                                                               |
+| 2  | Unclosed `*hello`                              | Regex doesn't match → literal `*hello`                                                   |
+| 3  | Empty `**`                                     | Regex needs `.*?\S` (at least 1 non-ws) → no match → literal `**`                        |
+| 4  | `* hello*` (space after open)                  | Regex matches: content ` hello` ends with non-ws → bold                                  |
+| 5  | `some_var*name*here`                           | Lookbehind: `r` is alnum → no match → literal                                            |
+| 6  | `*name*here`                                   | Lookahead: `h` is alnum → no match → literal                                             |
+| 7  | `中*bold*文`                                     | `中` not in `[a-zA-Z0-9]` → boundary passes → bold                                        |
+| 8  | Nested colors `[red][blue]x[/blue][/red]`      | Outer captures inner → `[blue]x[/blue]` displayed in red                                 |
+| 9  | Sequential colors `[red]a[/red][blue]b[/blue]` | Two separate matches → works correctly                                                   |
+| 10 | Color across newline `[red]a\nb[/red]`         | `.` doesn't match `\n` → no match → literal                                              |
+| 11 | Bold across newline `*a\nb*`                   | Same → no match → literal                                                                |
+| 12 | `\r\n`                                         | Two separate newlines (backend-exact)                                                    |
+| 13 | HashMap collision (same position)              | Last regex wins (Bold < Italic < Strike < Color < Hex < Newline)                         |
+| 14 | `[red]*bold*[/red]`                            | Both color and bold match; bold ADD/REMOVE may collide with color → depends on positions |
+| 15 | `[#ff0000]world*[/#ff0000]`                    | Backend main() test case → color="ff0000", text="world*"                                 |
+| 16 | `<script>`                                     | `<` → `‹`, `>` → `›` (Android-only)                                                      |
+| 17 | `\*escaped\*`                                  | Placeholders hide from regex → literal `*escaped*` (Android-only)                        |
+| 18 | `[dark_red]text[/dark_red]`                    | `\w+` matches underscore → valid color name                                              |
+| 19 | All features disabled                          | No regexes run, no post-passes → single plain span                                       |
 
 ---
 
 ## 20. Test Coverage Map
 
-| Category | # Tests | Key Verifications |
-|---|---|---|
-| Null/Empty | 3 | null, empty, plain text |
-| Bold | 6 | basic, start, end, boundary rejection (alnum before/after), space-after-open, punctuation, unicode |
-| Italic | 2 | basic, variable name rejection |
-| Strikethrough | 1 | basic |
-| Nested Inline | 2 | bold+italic, triple nesting |
-| Color Tags | 7 | named, hex, color+bold, \w+ name, nested (outer wins), sequential, unclosed, backend main() |
-| Newlines | 5 | LF, CR, CRLF (two newlines), consecutive, across-formatting |
-| Action Map Collision | 1 | color and bold at same position |
-| Escape (Android) | 4 | asterisk, underscore, backslash, bracket |
-| Links (Android) | 4 | http, www prefix, link+bold, disabled |
-| Highlights (Android) | 3 | single, case-insensitive, preserves formatting |
-| Config Flags | 4 | bold/italic/color/newline disabled |
-| HTML Escape | 1 | angle brackets |
-| Malformed | 3 | unclosed, empty delimiters, deep nesting |
-| Extensibility | 1 | custom FormattingRule |
-| Performance | 1 | 10K repetitions |
-| PlainText | 1 | extraction |
-| Fast-path | 1 | plain text skip |
-| Backend-specific | 2 | first-color-wins, leading-space-bold |
-| **Total** | **~50** | |
+| Category             | # Tests | Key Verifications                                                                                  |
+|----------------------|---------|----------------------------------------------------------------------------------------------------|
+| Null/Empty           | 3       | null, empty, plain text                                                                            |
+| Bold                 | 6       | basic, start, end, boundary rejection (alnum before/after), space-after-open, punctuation, unicode |
+| Italic               | 2       | basic, variable name rejection                                                                     |
+| Strikethrough        | 1       | basic                                                                                              |
+| Nested Inline        | 2       | bold+italic, triple nesting                                                                        |
+| Color Tags           | 7       | named, hex, color+bold, \w+ name, nested (outer wins), sequential, unclosed, backend main()        |
+| Newlines             | 5       | LF, CR, CRLF (two newlines), consecutive, across-formatting                                        |
+| Action Map Collision | 1       | color and bold at same position                                                                    |
+| Escape (Android)     | 4       | asterisk, underscore, backslash, bracket                                                           |
+| Links (Android)      | 4       | http, www prefix, link+bold, disabled                                                              |
+| Highlights (Android) | 3       | single, case-insensitive, preserves formatting                                                     |
+| Config Flags         | 4       | bold/italic/color/newline disabled                                                                 |
+| HTML Escape          | 1       | angle brackets                                                                                     |
+| Malformed            | 3       | unclosed, empty delimiters, deep nesting                                                           |
+| Extensibility        | 1       | custom FormattingRule                                                                              |
+| Performance          | 1       | 10K repetitions                                                                                    |
+| PlainText            | 1       | extraction                                                                                         |
+| Fast-path            | 1       | plain text skip                                                                                    |
+| Backend-specific     | 2       | first-color-wins, leading-space-bold                                                               |
+| **Total**            | **~50** |                                                                                                    |
 
 ---
 
 ## 21. Key Design Decisions & Rationale
 
-| Decision | Rationale |
-|---|---|
+| Decision                                       | Rationale                                                                                     |
+|------------------------------------------------|-----------------------------------------------------------------------------------------------|
 | **Regex action-map** (not single-pass scanner) | Exact backend parity. The backend uses this algorithm; matching it avoids subtle differences. |
-| **Same regex patterns** verbatim | Ensures identical match boundaries for all inputs |
-| **HashMap collision = last writer wins** | Matches backend's `HashMap.put` overwrite semantics |
-| **LinkedHashSet for active styles** | Matches backend's iteration order → first color wins |
-| **`\r` and `\n` individually** | Matches backend's `[\r\n]` regex (each char separate) |
-| **Escape via PUA placeholders** | Invisible to regexes; clean pre/post boundary; easy to disable |
-| **Post-passes for link/highlight** | Android-only features that don't affect backend parity |
-| **Platform-agnostic output model** | TextSpan has no Compose imports → testable with plain JUnit |
-| **Config as data class** | Immutable, `remember(config)` works in Compose |
+| **Same regex patterns** verbatim               | Ensures identical match boundaries for all inputs                                             |
+| **HashMap collision = last writer wins**       | Matches backend's `HashMap.put` overwrite semantics                                           |
+| **LinkedHashSet for active styles**            | Matches backend's iteration order → first color wins                                          |
+| **`\r` and `\n` individually**                 | Matches backend's `[\r\n]` regex (each char separate)                                         |
+| **Escape via PUA placeholders**                | Invisible to regexes; clean pre/post boundary; easy to disable                                |
+| **Post-passes for link/highlight**             | Android-only features that don't affect backend parity                                        |
+| **Platform-agnostic output model**             | TextSpan has no Compose imports → testable with plain JUnit                                   |
+| **Config as data class**                       | Immutable, `remember(config)` works in Compose                                                |
 
 ---
 
 ## 22. Known Limitations & Future Work
 
-| # | Limitation | Notes |
-|---|---|---|
-| 1 | Colors don't nest | By design — matches backend regex behavior |
-| 2 | Formatting can't span newlines | By design — `.` doesn't match `\n` without DOTALL |
-| 3 | `\r\n` = two newlines | Backend-exact; could add config flag if UX issue |
-| 4 | HashMap collision drops style actions | Backend-exact; rare in practice |
-| 5 | No monospace/code formatting | Add via `FormattingRule` extensibility |
-| 6 | No `@mention` or `#channel` | Add as post-pass |
-| 7 | URL regex won't match bare domains | By design — reduces false positives |
-| 8 | Named colors limited to 25 in Compose layer | Extend `NAMED_COLORS` map |
+| # | Limitation                                  | Notes                                             |
+|---|---------------------------------------------|---------------------------------------------------|
+| 1 | Colors don't nest                           | By design — matches backend regex behavior        |
+| 2 | Formatting can't span newlines              | By design — `.` doesn't match `\n` without DOTALL |
+| 3 | `\r\n` = two newlines                       | Backend-exact; could add config flag if UX issue  |
+| 4 | HashMap collision drops style actions       | Backend-exact; rare in practice                   |
+| 5 | No monospace/code formatting                | Add via `FormattingRule` extensibility            |
+| 6 | No `@mention` or `#channel`                 | Add as post-pass                                  |
+| 7 | URL regex won't match bare domains          | By design — reduces false positives               |
+| 8 | Named colors limited to 25 in Compose layer | Extend `NAMED_COLORS` map                         |
 
 ---
 
 ## 23. Anti-Patterns to Avoid
 
-| ❌ Don't | ✅ Do Instead |
-|---|---|
-| Change regex patterns without checking backend Java | Patterns must stay identical for parity |
-| Change regex execution order | Order determines HashMap collision winners |
-| Use `linkedSetOf` alternatives (e.g., `mutableSetOf`) | Must preserve insertion order for first-color-wins |
-| Add Compose imports to `rule/` or `model/` | Keep platform deps in `ext/` only |
-| Mutate TextSpan after creation | Use `.copy()` |
-| Create regex per `parse()` call | Use `companion object val` |
-| Handle `\r\n` as one newline in core | That breaks backend parity (add config flag if needed) |
-| Add nesting support for colors | Backend doesn't support it; would change output |
+| ❌ Don't                                               | ✅ Do Instead                                           |
+|-------------------------------------------------------|--------------------------------------------------------|
+| Change regex patterns without checking backend Java   | Patterns must stay identical for parity                |
+| Change regex execution order                          | Order determines HashMap collision winners             |
+| Use `linkedSetOf` alternatives (e.g., `mutableSetOf`) | Must preserve insertion order for first-color-wins     |
+| Add Compose imports to `rule/` or `model/`            | Keep platform deps in `ext/` only                      |
+| Mutate TextSpan after creation                        | Use `.copy()`                                          |
+| Create regex per `parse()` call                       | Use `companion object val`                             |
+| Handle `\r\n` as one newline in core                  | That breaks backend parity (add config flag if needed) |
+| Add nesting support for colors                        | Backend doesn't support it; would change output        |
 
 ---
 
@@ -761,7 +770,7 @@ All regexes are precompiled as `companion object val`. Zero regex compilation pe
                           │
                    AnnotatedStringExt
                           │
-                   RawText (@Composable)
+                   RawTextParserUi (@Composable)
 ```
 
 ### Import Rules
@@ -771,7 +780,7 @@ model/TextSpan.kt         → imports: nothing
 rule/FormattingRule.kt     → imports: nothing
 RawTextParser.kt           → imports: model/*, rule/*
 ext/AnnotatedStringExt.kt  → imports: model/*, Compose UI
-ext/RawText.kt             → imports: RawTextParser, ParserConfig, ext/AnnotatedStringExt, Compose UI
+ext/RawTextParserUi.kt             → imports: RawTextParser, ParserConfig, ext/AnnotatedStringExt, Compose UI
 ```
 
 ---
@@ -788,6 +797,7 @@ The core parsing engine was rewritten from a single-pass character scanner to a 
 action-map** approach, matching the backend Java `MarkdownTextParser` byte-for-byte.
 
 #### Changed (Breaking)
+
 - **Core algorithm**: Replaced `InlineScanner` (single-pass char-by-char) with regex-based
   action-map builder + walker, identical to backend `prepareActionMap()` + `convertToHtmlText()`
 - **Style system**: Replaced `ActiveStyle`/`RuleMatch` with `Style` abstract class + `StyleAction`,
@@ -810,15 +820,17 @@ action-map** approach, matching the backend Java `MarkdownTextParser` byte-for-b
   `populateActionMap()` — rules contribute to the shared action map
 
 #### Removed
+
 - `scanner/InlineScanner.kt` — replaced by action-map walker in RawTextParser
 - `rule/InlineDelimiterRule.kt` — replaced by regex patterns
 - `rule/ColorTagRule.kt` — replaced by regex patterns
 - `rule/EscapeRule.kt` — replaced by PUA placeholder mechanism in RawTextParser
 
 #### Unchanged
+
 - `model/TextSpan.kt` — output model identical
 - `ext/AnnotatedStringExt.kt` — Compose bridge identical
-- `ext/RawText.kt` — Composable component identical
+- `ext/RawTextParserUi.kt` — Composable component identical
 - `ParserConfig` — same fields (added to config: no new flags, order changed)
 - Escape sequences (Android-only) — still supported via placeholder mechanism
 - Link detection (Android-only) — still supported via post-pass
@@ -831,6 +843,7 @@ action-map** approach, matching the backend Java `MarkdownTextParser` byte-for-b
 **Bug fixes** — Test verification pass.
 
 #### Fixed
+
 - **Style class**: Changed from `sealed class` to `abstract class` to allow custom `Style`
   subclasses in `FormattingRule` implementations (anonymous objects can't extend sealed classes)
 - **Link URL prefix**: Fixed `HTTP_PREFIX_REGEX` check using `.containsMatchIn()` instead of
@@ -840,6 +853,7 @@ action-map** approach, matching the backend Java `MarkdownTextParser` byte-for-b
   non-empty, since custom rules may match characters not checked by the fast-path
 
 #### Verified
+
 - All 59 unit tests pass (`./gradlew :app:testDebugUnitTest --tests "...RawTextParserTest"`)
 
 ### [1.0.0] — 2026-02-24
@@ -847,9 +861,10 @@ action-map** approach, matching the backend Java `MarkdownTextParser` byte-for-b
 **Initial Release** — Ground-up Kotlin rewrite of TS `MarkdownParser.ts`.
 
 #### Added
+
 - Single-pass inline scanner (`InlineScanner.kt`)
 - `FormattingRule` interface with `InlineDelimiterRule`, `ColorTagRule`, `EscapeRule`
-- `ParserConfig`, `TextSpan`, `ParsedText`, `AnnotatedStringExt`, `RawText`
+- `ParserConfig`, `TextSpan`, `ParsedText`, `AnnotatedStringExt`, `RawTextParserUi`
 - 5-phase pipeline, fast-path optimization, 44 unit tests
 - Android-only: escape sequences, link detection, word highlighting
 

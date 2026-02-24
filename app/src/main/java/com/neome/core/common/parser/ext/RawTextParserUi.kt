@@ -26,7 +26,7 @@ import com.neome.core.common.parser.RawTextParser
  *                         links open via [LocalUriHandler].
  */
 @Composable
-fun RawText(
+fun RawTextParserUi(
     text: String?,
     modifier: Modifier = Modifier,
     config: ParserConfig = ParserConfig(),
