@@ -23,6 +23,8 @@ import com.neome.feature.form.presentation.components.field.FieldDecimal
 import com.neome.feature.form.presentation.components.field.FieldDivider
 import com.neome.feature.form.presentation.components.field.FieldDocument
 import com.neome.feature.form.presentation.components.field.FieldEmail
+import com.neome.feature.form.presentation.components.field.FieldCurrency
+import com.neome.feature.form.presentation.components.field.FieldError
 import com.neome.feature.form.presentation.components.field.FieldHandle
 import com.neome.feature.form.presentation.components.field.FieldHyperlink
 import com.neome.feature.form.presentation.components.field.FieldIdentifier
@@ -234,6 +236,12 @@ fun FieldFactory(
         )
 
         EnumDefnCompType.divider -> FieldDivider(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.error -> FieldError(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             modifier = modifier
