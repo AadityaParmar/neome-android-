@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import com.neome.core.common.parser.ParserConfig
 import com.neome.core.common.parser.RawTextParser
 
@@ -22,6 +23,8 @@ import com.neome.core.common.parser.RawTextParser
  * @param config           Parser configuration (toggle features, set colors).
  * @param style            Base text style.
  * @param highlightColor   Background color for highlighted words.
+ * @param maxLines         Maximum number of lines to display. Defaults to [Int.MAX_VALUE].
+ * @param overflow         How visual overflow should be handled. Defaults to [TextOverflow.Clip].
  * @param onLinkClick      Optional callback for link clicks. If null,
  *                         links open via [LocalUriHandler].
  */
@@ -32,6 +35,8 @@ fun RawTextParserUi(
     config: ParserConfig = ParserConfig(),
     style: TextStyle = MaterialTheme.typography.bodyMedium,
     highlightColor: Color = Color.Yellow,
+    maxLines: Int = Int.MAX_VALUE,
+    overflow: TextOverflow = TextOverflow.Clip,
     onLinkClick: ((url: String) -> Unit)? = null
 ) {
     if (text.isNullOrEmpty()) return
@@ -51,6 +56,8 @@ fun RawTextParserUi(
         text = annotatedString,
         modifier = modifier,
         style = style,
+        maxLines = maxLines,
+        overflow = overflow,
         onClick = { offset ->
             annotatedString.getStringAnnotations(
                 tag = LINK_ANNOTATION_TAG,

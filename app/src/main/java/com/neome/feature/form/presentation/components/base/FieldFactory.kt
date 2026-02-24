@@ -29,6 +29,7 @@ import com.neome.feature.form.presentation.components.field.FieldHandle
 import com.neome.feature.form.presentation.components.field.FieldHyperlink
 import com.neome.feature.form.presentation.components.field.FieldIdentifier
 import com.neome.feature.form.presentation.components.field.FieldImage
+import com.neome.feature.form.presentation.components.field.FieldInfo
 import com.neome.feature.form.presentation.components.field.FieldLanguage
 import com.neome.feature.form.presentation.components.field.FieldLogCounter
 import com.neome.feature.form.presentation.components.field.FieldMobile
@@ -242,6 +243,12 @@ fun FieldFactory(
         )
 
         EnumDefnCompType.error -> FieldError(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.info -> FieldInfo(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             modifier = modifier
