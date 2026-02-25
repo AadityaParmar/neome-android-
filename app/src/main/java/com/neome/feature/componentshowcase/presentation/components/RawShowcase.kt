@@ -13,9 +13,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.neome.api.meta.base.Types.EnumDefnCodeType
 import com.neome.core.common.parser.ext.RawTextParserUi
 import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoOptionData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfDtoOptionData
+import com.neome.feature.form.presentation.components.field.RawShowCode
 import com.neome.feature.form.presentation.components.raw.picker.RawPickerMultiSelect
 import com.neome.feature.form.presentation.components.raw.picker.RawPickerSingleSelect
 
@@ -58,6 +60,21 @@ fun RawShowcase(
 
         RawTextParserUi(
             text = "*bold ~strike _bold  italic strike*  only italic strike_ only strike @aditya~"
+        )
+
+        // ── RawShowCode: QR Code ──
+        Text("ShowCode — QR Code", style = MaterialTheme.typography.titleSmall)
+        RawShowCode(
+            value = "https://neome.ai",
+            codeType = EnumDefnCodeType.qrCode,
+            qrSize = 150.dp
+        )
+
+        // ── RawShowCode: Bar Code ──
+        Text("ShowCode — Bar Code", style = MaterialTheme.typography.titleSmall)
+        RawShowCode(
+            value = "1234567890",
+            codeType = EnumDefnCodeType.barCode
         )
     }
 }
