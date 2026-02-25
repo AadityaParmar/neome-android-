@@ -2,7 +2,10 @@ package com.neome.feature.componentshowcase.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,7 +20,10 @@ import com.neome.api.meta.base.Types.EnumDefnCodeType
 import com.neome.core.common.parser.ext.RawTextParserUi
 import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoOptionData
 import com.neome.core.common.serializer.api.meta.base.dto.DefnStudioMapOfDtoOptionData
+import com.neome.feature.camera.presentation.components.FullScreenCameraDialog
+import com.neome.feature.form.presentation.components.field.RawScanCode
 import com.neome.feature.form.presentation.components.field.RawShowCode
+import com.neome.feature.form.presentation.components.field.ScanCodeFormat
 import com.neome.feature.form.presentation.components.raw.picker.RawPickerMultiSelect
 import com.neome.feature.form.presentation.components.raw.picker.RawPickerSingleSelect
 
@@ -76,6 +82,40 @@ fun RawShowcase(
             value = "1234567890",
             codeType = EnumDefnCodeType.barCode
         )
+
+        // ── RawScanCode: Scanner Test ──
+        Text("ScanCode — Scanner", style = MaterialTheme.typography.titleSmall)
+
+        var showScanner by remember { mutableStateOf(false) }
+        var scannedValue by remember { mutableStateOf<String?>(null) }
+
+        Button(onClick = { showScanner = true }) {
+            Text("Scan Code")
+        }
+
+        if (scannedValue != null) {
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "Scanned: $scannedValue",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
+
+        if (showScanner) {
+            FullScreenCameraDialog(
+                onDismiss = { showScanner = false }
+            ) {
+                RawScanCode(
+                    codeTypes = ScanCodeFormat.all,
+                    onScanned = { value ->
+                        scannedValue = value
+                        showScanner = false
+                    },
+                    onDismiss = { showScanner = false }
+                )
+            }
+        }
     }
 }
 
