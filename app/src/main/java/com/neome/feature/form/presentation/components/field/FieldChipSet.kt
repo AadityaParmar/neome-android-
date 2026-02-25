@@ -2,9 +2,11 @@ package com.neome.feature.form.presentation.components.field
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
@@ -24,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalFocusManager
@@ -102,9 +105,12 @@ fun FieldChipSet(
             readOnly = properties.readOnly,
             isInteractive = isInteractive,
             onChipAdd = { newChip ->
-                // Append new chip to existing list
-                val updatedList = chipValues + newChip
-                fieldController.onChange(FieldSetOfStringData(valueSet = updatedList))
+                // Prevent duplicate chips (case-insensitive check)
+                val isDuplicate = chipValues.any { it.equals(newChip, ignoreCase = true) }
+                if (!isDuplicate) {
+                    val updatedList = chipValues + newChip
+                    fieldController.onChange(FieldSetOfStringData(valueSet = updatedList))
+                }
             },
             onChipRemove = { index ->
                 // Remove chip at index; list re-indexes automatically
@@ -205,41 +211,12 @@ private fun FieldChipSetContent(
             OutlinedTextFieldDefaults.DecorationBox(
                 value = displayText,
                 innerTextField = {
-                    FlowRow(
-                        horizontalArrangement = Arrangement.spacedBy(4.dp),
-                        verticalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        // Render existing chips
-                        chipValues.forEachIndexed { index, chipText ->
-                            InputChip(
-                                selected = true,
-                                onClick = {},
-                                label = {
-                                    Text(
-                                        text = chipText,
-                                        style = MaterialTheme.typography.bodySmall
-                                    )
-                                },
-                                trailingIcon = {
-                                    if (isInteractive) {
-                                        Icon(
-                                            imageVector = Icons.Default.Close,
-                                            contentDescription = "Remove $chipText",
-                                            modifier = Modifier
-                                                .size(16.dp)
-                                                .clickable { onChipRemove(index) }
-                                        )
-                                    }
-                                },
-                                colors = InputChipDefaults.inputChipColors()
-                            )
-                        }
-
-                        // Inline text input after chips
-                        if (isInteractive) {
-                            innerTextField()
-                        }
-                    }
+                    ChipSetFlowContent(
+                        chipValues = chipValues,
+                        isInteractive = isInteractive,
+                        onChipRemove = onChipRemove,
+                        innerTextField = innerTextField
+                    )
                 },
                 label = label?.let { { Text(it) } },
                 placeholder = if (!hasChips) placeholder?.let { { Text(it) } } else null,
@@ -268,4 +245,68 @@ private fun FieldChipSetContent(
             )
         }
     )
+}
+
+/**
+ * FlowRow content that renders chips and the inline text input.
+ *
+ * Extracted as a separate composable so that [FlowRowScope.align] modifier
+ * can be used on each child — this is the only way to vertically center-align
+ * individual items within a [FlowRow].
+ *
+ * The text input [Box] is constrained to exactly 32.dp height (Material3 InputChip height)
+ * and uses [FlowRowScope.align] with [Alignment.CenterVertically] so the cursor
+ * sits at the same vertical center as sibling chips.
+ */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun ChipSetFlowContent(
+    chipValues: List<String>,
+    isInteractive: Boolean,
+    onChipRemove: (Int) -> Unit,
+    innerTextField: @Composable () -> Unit
+) {
+    FlowRow(
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalArrangement = Arrangement.spacedBy(0.dp)
+    ) {
+        // Render existing chips
+        chipValues.forEachIndexed { index, chipText ->
+            InputChip(
+                selected = true,
+                onClick = {},
+                label = {
+                    Text(
+                        text = chipText,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                },
+                trailingIcon = {
+                    if (isInteractive) {
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = "Remove $chipText",
+                            modifier = Modifier
+                                .size(16.dp)
+                                .clickable { onChipRemove(index) }
+                        )
+                    }
+                },
+                colors = InputChipDefaults.inputChipColors(),
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
+
+        // Inline text input — exact 32dp height to match InputChip, vertically centered in row
+        if (isInteractive) {
+            Box(
+                modifier = Modifier
+                    .height(32.dp)
+                    .align(Alignment.CenterVertically),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                innerTextField()
+            }
+        }
+    }
 }
