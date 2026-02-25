@@ -13,6 +13,7 @@ import com.neome.feature.form.presentation.components.composite.FieldTab
 import com.neome.feature.form.presentation.components.composite.grid.FieldGrid
 import com.neome.feature.form.presentation.components.field.FieldButton
 import com.neome.feature.form.presentation.components.field.FieldCamera
+import com.neome.feature.form.presentation.components.field.FieldChipSet
 import com.neome.feature.form.presentation.components.field.FieldCounter
 import com.neome.feature.form.presentation.components.field.FieldCurrency
 import com.neome.feature.form.presentation.components.field.FieldDate
@@ -228,6 +229,12 @@ fun FieldFactory(
         )
 
         EnumDefnCompType.setOfText -> FieldSetOfText(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.chipSet -> FieldChipSet(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             modifier = modifier
