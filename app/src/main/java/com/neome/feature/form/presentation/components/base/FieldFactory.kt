@@ -43,6 +43,7 @@ import com.neome.feature.form.presentation.components.field.FieldPinShape
 import com.neome.feature.form.presentation.components.field.FieldQuarter
 import com.neome.feature.form.presentation.components.field.FieldRowId
 import com.neome.feature.form.presentation.components.field.FieldSetOfText
+import com.neome.feature.form.presentation.components.field.FieldScanCode
 import com.neome.feature.form.presentation.components.field.FieldShowCode
 import com.neome.feature.form.presentation.components.field.FieldSignature
 import com.neome.feature.form.presentation.components.field.FieldSwitch
@@ -295,6 +296,12 @@ fun FieldFactory(
         )
 
         EnumDefnCompType.showCode -> FieldShowCode(
+            defnComp = defnComp,
+            onFieldEvent = onFieldEvent,
+            modifier = modifier
+        )
+
+        EnumDefnCompType.scanCode -> FieldScanCode(
             defnComp = defnComp,
             onFieldEvent = onFieldEvent,
             modifier = modifier
