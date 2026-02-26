@@ -1,4 +1,4 @@
-package com.neome.feature.form.domain
+package com.neome.feature.form.domain.model
 
 import com.neome.api.meta.base.Symbol
 import com.neome.api.meta.base.Types

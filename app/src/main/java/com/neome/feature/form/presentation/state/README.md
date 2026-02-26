@@ -30,39 +30,39 @@ Defines all immutable state, event, and intent types for the form feature's pres
 
 ## Key Entry Points
 
-| File | Symbol | Role |
-|------|--------|------|
-| `FormState.kt` | `FormState` | Central immutable state: `defnForm`, `fieldStates`, `valueMap`, `errors`, `compSchemaMap`, `formEventPropsMap`, `sendBtnStateFlags`, form-level flags |
-| `FormState.kt` | `FormState.hasErrors` / `isDirty` / `isValid` | Derived boolean properties computed from state |
-| `FormState.kt` | `FormState.getFieldState` / `getValue` / `getError` / `hasError` | State accessor methods |
-| `FormState.kt` | `FormState.isSendBtnEnabled` / `isSendBtnInvisible` | Send button state queries |
-| `FormState.kt` | `SendBtnStateFlag` | Sealed interface: `Invalid`, `Uploading`, `Processing`, `Validating`, `Invisible`, `Disabled`, `Custom(key)` |
-| `FormState.kt` | `FieldDependencyMap` | Maps `MetaIdComp` → dependents set; `getDependents`, `addDependency` |
-| `FieldState.kt` | `FieldState` | Per-field: `defaultValue`, `isTouched`, `isDirty`, `isFocused`, `isValidating`, `fieldProperties` |
-| `FieldState.kt` | `FieldState.computeIsDirty` | Compares current value against `defaultValue` |
-| `FieldState.kt` | `FieldProperties` | 30+ resolved display/validation properties: `required`, `disabled`, `readOnly`, `hidden`, `label`, `placeholder`, `helperText`, min/max constraints, media/button/layout props |
-| `FieldState.kt` | `FormEventProps` | Event-action override flags per component: `hidden`, `invisible`, `disabled`, `highlight`, `blink`, `shake` |
-| `FieldError.kt` | `FieldError` | `message: String`, `type: ErrorType` (Validation, Custom, Server) |
-| `FormEvent.kt` | `FormEvent` | Sealed interface — all internal reducer events |
-| `FormEvent.kt` | `FormEvent.FieldValueChanged` | Value change with `fieldId`, `value`, `depth` (cascade guard) |
-| `FormEvent.kt` | `FormEvent.TriggerField` | Re-resolve field properties for dependent cascade |
-| `FormEvent.kt` | `FormEvent.ValidateField` / `ValidateAll` | Validation triggers |
-| `FormEvent.kt` | `FormEvent.Submit` / `Reset` | Form-level lifecycle events |
-| `FormEvent.kt` | `FormEvent.SetValues` | Bulk field value assignment |
-| `FormEvent.kt` | `FormEvent.AddSendBtnStateFlag` / `RemoveSendBtnStateFlag` | Send button flag management |
-| `FormEvent.kt` | `FormEvent.Click` | Button component click → triggers `onClickButton` form events |
-| `FieldEvent.kt` | `FieldEvent` | Sealed interface emitted by composables: `ValueChanged`, `Focused`, `Blurred`, `Click` |
-| `FieldEvent.kt` | `FieldEventHandler` | `fun interface` with `onFieldEvent(FieldEvent)` — passed to each field composable |
-| `FormIntent.kt` | `FormIntent` | Sealed interface for parent communication: `Submit`, `Watch`, `ValidationStateChanged`, `SendBtnStateChanged` |
-| `FormIntent.kt` | `FormIntent.Submit` | Carries `valueMap: Map<MetaIdComp, JsonElement>` on successful validation |
-| `FormIntent.kt` | `FormIntent.Watch` | Per-field change notification: `fieldId`, `fieldValue`, `valueMap` snapshot |
+| File            | Symbol                                                           | Role                                                                                                                                                                           |
+|-----------------|------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `FormState.kt`  | `FormState`                                                      | Central immutable state: `defnForm`, `fieldStates`, `valueMap`, `errors`, `compSchemaMap`, `formEventPropsMap`, `sendBtnStateFlags`, form-level flags                          |
+| `FormState.kt`  | `FormState.hasErrors` / `isDirty` / `isValid`                    | Derived boolean properties computed from state                                                                                                                                 |
+| `FormState.kt`  | `FormState.getFieldState` / `getValue` / `getError` / `hasError` | State accessor methods                                                                                                                                                         |
+| `FormState.kt`  | `FormState.isSendBtnEnabled` / `isSendBtnInvisible`              | Send button state queries                                                                                                                                                      |
+| `FormState.kt`  | `SendBtnStateFlag`                                               | Sealed interface: `Invalid`, `Uploading`, `Processing`, `Validating`, `Invisible`, `Disabled`, `Custom(key)`                                                                   |
+| `FormState.kt`  | `FieldDependencyMap`                                             | Maps `MetaIdComp` → dependents set; `getDependents`, `addDependency`                                                                                                           |
+| `FieldState.kt` | `FieldState`                                                     | Per-field: `defaultValue`, `isTouched`, `isDirty`, `isFocused`, `isValidating`, `fieldProperties`                                                                              |
+| `FieldState.kt` | `FieldState.computeIsDirty`                                      | Compares current value against `defaultValue`                                                                                                                                  |
+| `FieldState.kt` | `FieldProperties`                                                | 30+ resolved display/validation properties: `required`, `disabled`, `readOnly`, `hidden`, `label`, `placeholder`, `helperText`, min/max constraints, media/button/layout props |
+| `FieldState.kt` | `FormEventProps`                                                 | Event-action override flags per component: `hidden`, `invisible`, `disabled`, `highlight`, `blink`, `shake`                                                                    |
+| `FieldError.kt` | `FieldError`                                                     | `message: String`, `type: ErrorType` (Validation, Custom, Server)                                                                                                              |
+| `FormEvent.kt`  | `FormEvent`                                                      | Sealed interface — all internal reducer events                                                                                                                                 |
+| `FormEvent.kt`  | `FormEvent.FieldValueChanged`                                    | Value change with `fieldId`, `value`, `depth` (cascade guard)                                                                                                                  |
+| `FormEvent.kt`  | `FormEvent.TriggerField`                                         | Re-resolve field properties for dependent cascade                                                                                                                              |
+| `FormEvent.kt`  | `FormEvent.ValidateField` / `ValidateAll`                        | Validation triggers                                                                                                                                                            |
+| `FormEvent.kt`  | `FormEvent.Submit` / `Reset`                                     | Form-level lifecycle events                                                                                                                                                    |
+| `FormEvent.kt`  | `FormEvent.SetValues`                                            | Bulk field value assignment                                                                                                                                                    |
+| `FormEvent.kt`  | `FormEvent.AddSendBtnStateFlag` / `RemoveSendBtnStateFlag`       | Send button flag management                                                                                                                                                    |
+| `FormEvent.kt`  | `FormEvent.Click`                                                | Button component click → triggers `onClickButton` form events                                                                                                                  |
+| `FieldEvent.kt` | `FieldEvent`                                                     | Sealed interface emitted by composables: `ValueChanged`, `Focused`, `Blurred`, `Click`                                                                                         |
+| `FieldEvent.kt` | `FieldEventHandler`                                              | `fun interface` with `onFieldEvent(FieldEvent)` — passed to each field composable                                                                                              |
+| `FormIntent.kt` | `FormIntent`                                                     | Sealed interface for parent communication: `Submit`, `Watch`, `ValidationStateChanged`, `SendBtnStateChanged`                                                                  |
+| `FormIntent.kt` | `FormIntent.Submit`                                              | Carries `valueMap: Map<MetaIdComp, JsonElement>` on successful validation                                                                                                      |
+| `FormIntent.kt` | `FormIntent.Watch`                                               | Per-field change notification: `fieldId`, `fieldValue`, `valueMap` snapshot                                                                                                    |
 
 ## Dependencies
 
 - `androidx.compose.runtime.Immutable` — Marks state classes as structurally immutable for Compose stability
 - `com.neome.api.meta.base.Types.MetaIdComp` — Component/field ID type (keys in all maps)
 - `com.neome.core.mvi.UiEvent` — Base interface for `FormEvent` and `FormIntent`
-- `com.neome.feature.form.domain.DefnFormUi` — Form definition stored in `FormState.defnForm`
+- `com.neome.feature.form.domain.model.DefnFormUi` — Form definition stored in `FormState.defnForm`
 - `com.neome.feature.form.domain.ctx.helper.events.FormCtxFormEvents.CategorizedEvents` — Pre-categorized event map stored in `FormState.categorizedEvents`
 - `com.neome.feature.form.domain.ctx.helper.schema.CompSchema` — Validation schema type stored in `FormState.compSchemaMap`
 - `com.neome.core.common.serializer.api.meta.base.dto.FormValueData` — Initial values stored in `FormState.initialFormValue`

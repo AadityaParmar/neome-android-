@@ -37,13 +37,13 @@ Grid row editing follows the same reducer pattern as the parent form:
 
 ## Key Entry Points
 
-| File | Symbol | Role |
-|------|--------|------|
-| `FieldGrid.kt` | `FieldGrid` | `@Composable` — pure event emitter; reads grid value and `gridCtx` from `FormState`; emits all grid events |
-| `FieldGrid.kt` | `FieldGridContent` | `@Composable private` — stateless row list with Add button and per-row delete |
-| `GridRowSheet.kt` | `GridRowSheet` | `@Composable` — `ModalBottomSheet` rendering child fields via `GridFormCtx` as `LocalFormCtx` |
-| `GridFormCtx.kt` | `GridFormCtx` | `FormCtx` implementation — derives `FormState` from `FormState.gridCtx` via `derivedStateOf` |
-| `GridRowInitHelper.kt` | `GridRowInitHelper.initializeGridCtx` | Builds `GridCtx` for add or edit mode; resolves field states, values, dependencies, schemas |
+| File                   | Symbol                                | Role                                                                                                       |
+|------------------------|---------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `FieldGrid.kt`         | `FieldGrid`                           | `@Composable` — pure event emitter; reads grid value and `gridCtx` from `FormState`; emits all grid events |
+| `FieldGrid.kt`         | `FieldGridContent`                    | `@Composable private` — stateless row list with Add button and per-row delete                              |
+| `GridRowSheet.kt`      | `GridRowSheet`                        | `@Composable` — `ModalBottomSheet` rendering child fields via `GridFormCtx` as `LocalFormCtx`              |
+| `GridFormCtx.kt`       | `GridFormCtx`                         | `FormCtx` implementation — derives `FormState` from `FormState.gridCtx` via `derivedStateOf`               |
+| `GridRowInitHelper.kt` | `GridRowInitHelper.initializeGridCtx` | Builds `GridCtx` for add or edit mode; resolves field states, values, dependencies, schemas                |
 
 ## Dependencies
 
@@ -54,7 +54,7 @@ Grid row editing follows the same reducer pattern as the parent form:
 - `com.neome.core.common.serializer.api.meta.base.dto.DefnGridData` — grid definition with `fieldIdSet`
 - `com.neome.core.common.serializer.api.meta.base.dto.FieldDtoGridRowData` — per-row value container
 - `com.neome.core.common.serializer.api.meta.base.dto.FieldValueGridData` — grid field value (keys + map of rows)
-- `com.neome.feature.form.domain.DefnFormUi` — parent form definition (`compMap`, `theme`)
+- `com.neome.feature.form.domain.model.DefnFormUi` — parent form definition (`compMap`, `theme`)
 - `com.neome.feature.form.domain.ctx.FormCtx` — interface implemented by `GridFormCtx`
 - `com.neome.feature.form.domain.ctx.LocalFormCtx` — `CompositionLocal` overridden inside the sheet
 - `com.neome.feature.form.domain.ctx.base.schema.CompSchemaFactory` — `buildFormSchemas` for validation schemas

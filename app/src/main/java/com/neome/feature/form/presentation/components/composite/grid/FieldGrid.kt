@@ -24,7 +24,7 @@ import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
 import com.neome.core.common.serializer.api.meta.base.dto.DefnGridData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueGridData
-import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.model.DefnFormUi
 import com.neome.feature.form.domain.ctx.LocalFormCtx
 import com.neome.feature.form.presentation.components.base.FieldBase
 import com.neome.feature.form.presentation.components.base.rememberFieldController

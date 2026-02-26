@@ -5,7 +5,7 @@ import com.neome.api.meta.base.Types
 import com.neome.core.common.serializer.api.meta.base.dto.DefnGridData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldDtoGridRowData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueGridData
-import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.model.DefnFormUi
 import com.neome.feature.form.domain.ctx.FormStateAccessor
 import com.neome.feature.form.presentation.components.composite.grid.GridRowInitHelper
 import com.neome.feature.form.presentation.state.FieldError
@@ -88,10 +88,12 @@ object FormCtxGridHelper {
             val fieldState = accessor.getFieldState(fieldId)
             val error = schema.validate(value, fieldState)
             if (error != null) {
-                accessor.setError(fieldId, FieldError(
-                    message = error,
-                    type = FieldError.ErrorType.Validation
-                ))
+                accessor.setError(
+                    fieldId, FieldError(
+                        message = error,
+                        type = FieldError.ErrorType.Validation
+                    )
+                )
                 hasErrors = true
             } else {
                 accessor.clearError(fieldId)
@@ -120,7 +122,9 @@ object FormCtxGridHelper {
         val currentGridData = gridJsonValue?.let {
             try {
                 JsonParser.json.decodeFromJsonElement(FieldValueGridData.serializer(), it)
-            } catch (_: Exception) { null }
+            } catch (_: Exception) {
+                null
+            }
         }
 
         val currentKeys = currentGridData?.keys ?: emptyList()

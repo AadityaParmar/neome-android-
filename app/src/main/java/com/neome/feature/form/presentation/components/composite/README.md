@@ -18,12 +18,12 @@ Provides the two structural layout composables that contain and recursively rend
 
 ## Key Entry Points
 
-| File | Symbol | Role |
-|------|--------|------|
-| `FieldSection.kt` | `FieldSection` | `@Composable` — renders `DefnSection` as directional container; reads theme spacing; calls `RenderChildField` per child |
-| `FieldSection.kt` | `RenderChildField` | `@Composable private fun` — resolves `defnForm.compMap[fieldId]` and calls `FieldFactory` |
-| `FieldTab.kt` | `FieldTab` | `@Composable` — renders `DefnTab` as `ScrollableTabRow` + content column with tab switching |
-| `FieldTab.kt` | `RenderTabContent` | `@Composable private fun` — resolves tab component from `defnForm.compMap` and calls `FieldFactory` |
+| File              | Symbol             | Role                                                                                                                    |
+|-------------------|--------------------|-------------------------------------------------------------------------------------------------------------------------|
+| `FieldSection.kt` | `FieldSection`     | `@Composable` — renders `DefnSection` as directional container; reads theme spacing; calls `RenderChildField` per child |
+| `FieldSection.kt` | `RenderChildField` | `@Composable private fun` — resolves `defnForm.compMap[fieldId]` and calls `FieldFactory`                               |
+| `FieldTab.kt`     | `FieldTab`         | `@Composable` — renders `DefnTab` as `ScrollableTabRow` + content column with tab switching                             |
+| `FieldTab.kt`     | `RenderTabContent` | `@Composable private fun` — resolves tab component from `defnForm.compMap` and calls `FieldFactory`                     |
 
 ## Dependencies
 
@@ -34,7 +34,7 @@ Provides the two structural layout composables that contain and recursively rend
 - `com.neome.api.meta.base.dto.DefnSection` — cast target; provides `fieldIdSet`, `sectionDirection`, `pl`/`pr`/`pt`/`pb`, `metaId`
 - `com.neome.api.meta.base.dto.DefnTab` — cast target; provides `tabIdSet`
 - `com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal` — input opaque component definition
-- `com.neome.feature.form.domain.DefnFormUi` — `compMap` for child/tab lookup; `theme` for spacing
+- `com.neome.feature.form.domain.model.DefnFormUi` — `compMap` for child/tab lookup; `theme` for spacing
 - `com.neome.feature.form.domain.ctx.LocalFormCtx` — accessed to read visibility (`getFieldState`) and theme (`getDefnForm`)
 - `com.neome.feature.form.presentation.components.base.FieldFactory` — recursive child renderer
 - `com.neome.feature.form.presentation.state.FieldEvent` — passed through to children

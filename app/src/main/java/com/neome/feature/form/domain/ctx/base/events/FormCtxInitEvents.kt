@@ -1,7 +1,7 @@
 package com.neome.feature.form.domain.ctx.base.events
 
 import com.neome.api.meta.base.Types
-import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.model.DefnFormUi
 import com.neome.feature.form.domain.ctx.FormStateAccessor
 
 object FormCtxInitEvents {

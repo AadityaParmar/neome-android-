@@ -4,7 +4,7 @@ import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.Types.RowId
 import com.neome.core.common.serializer.api.meta.base.dto.DefnGridData
 import com.neome.core.common.serializer.api.meta.base.dto.FieldDtoGridRowData
-import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.model.DefnFormUi
 import com.neome.feature.form.domain.ctx.base.schema.CompSchemaFactory
 import com.neome.feature.form.domain.util.FieldPropertyResolver
 import com.neome.feature.form.presentation.state.FieldState

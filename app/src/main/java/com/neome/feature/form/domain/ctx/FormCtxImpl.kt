@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.core.common.serializer.api.meta.base.dto.DefnDtoFormThemeData
 import com.neome.core.common.serializer.api.meta.base.dto.FormValueData
-import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.model.DefnFormUi
 import com.neome.feature.form.domain.ctx.base.FormCtxEventHelper
 import com.neome.feature.form.domain.ctx.base.FormCtxGridHelper
 import com.neome.feature.form.domain.ctx.base.FormCtxInitHelper
@@ -92,6 +92,7 @@ class FormCtxImpl(
                     FormCtxGridHelper.handleGridSubmit(accessor, event, defnForm)
                 }
             }
+
             is FormEvent.GridRemove -> FormCtxGridHelper.handleGridRemove(parentAccessor, event, defnForm)
         }
 

@@ -3,7 +3,7 @@ package com.neome.feature.form.domain.ctx.base.schema
 import com.neome.api.meta.base.Types.EnumDefnCompType
 import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.model.DefnFormUi
 
 /**
  * Factory that creates appropriate CompSchema based on component type.
@@ -102,6 +102,7 @@ object CompSchemaFactory {
             EnumDefnCompType.pickText -> FieldPickTextSchema(defnForm, defnComp)
             EnumDefnCompType.currency,
             EnumDefnCompType.pickOption -> FieldCurrencySchema(defnForm, defnComp)
+
             EnumDefnCompType.textSize -> FieldCurrencySchema(defnForm, defnComp)
             EnumDefnCompType.language -> FieldCurrencySchema(defnForm, defnComp)
             EnumDefnCompType.lineStroke -> FieldCurrencySchema(defnForm, defnComp)

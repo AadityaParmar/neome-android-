@@ -16,10 +16,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.neome.api.meta.base.Types.MetaIdComposite
-import com.neome.api.meta.base.Types.MetaIdComp
 import com.neome.api.meta.base.dto.DefnTab
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.model.DefnFormUi
 import com.neome.feature.form.domain.ctx.LocalFormCtx
 import com.neome.feature.form.presentation.components.base.FieldFactory
 import com.neome.feature.form.presentation.state.FieldEvent

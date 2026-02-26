@@ -6,7 +6,7 @@ import com.neome.api.meta.base.dto.DefnComp
 import com.neome.api.meta.base.dto.DefnEventAction
 import com.neome.api.meta.base.dto.DefnSection
 import com.neome.api.meta.base.dto.FieldDtoArg
-import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.model.DefnFormUi
 import com.neome.feature.form.domain.ctx.FormStateAccessor
 import com.neome.feature.form.domain.util.ConditionResolver
 import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver

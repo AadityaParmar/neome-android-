@@ -2,7 +2,7 @@ package com.neome.feature.form.domain.ctx.base.events
 
 import android.util.Log
 import com.neome.api.meta.base.Types
-import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.model.DefnFormUi
 import com.neome.feature.form.domain.ctx.FormStateAccessor
 import com.neome.feature.form.domain.ctx.base.FormCtxEventHelper
 import com.neome.feature.form.domain.util.ConditionResolver

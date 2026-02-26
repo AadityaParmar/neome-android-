@@ -36,7 +36,7 @@ import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoArgValueConte
 import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoArgValueContextEntData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoArgValueDerivedData
 import com.neome.core.common.serializer.api.meta.base.dto.StudioDtoArgValueFieldData
-import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.model.DefnFormUi
 import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
 import com.neome.feature.utils.JsonParser
 import kotlinx.serialization.json.JsonElement

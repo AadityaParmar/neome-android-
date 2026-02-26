@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.neome.api.meta.base.Types.EnumDefnThemeDirection
 import com.neome.api.meta.base.dto.DefnSection
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.model.DefnFormUi
 import com.neome.feature.form.domain.ctx.LocalFormCtx
 import com.neome.feature.form.presentation.components.base.FieldFactory
 import com.neome.feature.form.presentation.state.FieldEvent

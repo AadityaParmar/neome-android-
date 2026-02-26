@@ -2,7 +2,7 @@ package com.neome.feature.form.domain.ctx.base.schema
 
 import com.neome.api.meta.base.dto.DefnFieldCamera
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.model.DefnFormUi
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValueCameraData
 import com.neome.feature.form.presentation.state.FieldProperties
 import com.neome.feature.form.presentation.state.FieldState

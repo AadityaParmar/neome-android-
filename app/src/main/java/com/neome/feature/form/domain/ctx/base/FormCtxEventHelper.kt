@@ -1,7 +1,7 @@
 package com.neome.feature.form.domain.ctx.base
 
 import com.neome.api.meta.base.Types.MetaIdComp
-import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.model.DefnFormUi
 import com.neome.feature.form.domain.ctx.FormStateAccessor
 import com.neome.feature.form.domain.ctx.base.events.FormCtxFormEvents
 import com.neome.feature.form.domain.ctx.base.schema.CompSchema

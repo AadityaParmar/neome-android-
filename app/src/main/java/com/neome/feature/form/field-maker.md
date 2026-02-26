@@ -2,13 +2,13 @@
 
 ## Metadata
 
-| Property           | Value                                                      |
-|--------------------|------------------------------------------------------------|
-| **Version**        | 1.0.0                                                      |
-| **Last Updated**   | 2026-02-17                                                 |
-| **Scope**          | Creating new field types for the Form FieldFactory system  |
-| **Path**           | `app/src/main/java/com/neome/feature/form/field-maker.md`  |
-| **Depends On**     | `skill:defnForm` (form architecture knowledge)             |
+| Property         | Value                                                     |
+|------------------|-----------------------------------------------------------|
+| **Version**      | 1.0.0                                                     |
+| **Last Updated** | 2026-02-17                                                |
+| **Scope**        | Creating new field types for the Form FieldFactory system |
+| **Path**         | `app/src/main/java/com/neome/feature/form/field-maker.md` |
+| **Depends On**   | `skill:defnForm` (form architecture knowledge)            |
 
 ---
 
@@ -37,26 +37,26 @@ using skill : defnFieldMaker do [instruction]
 
 ### Example Instructions
 
-| Task                        | Example                                              |
-|-----------------------------|------------------------------------------------------|
-| Add simple text-like field  | `Add new field type FieldColor`                      |
-| Add numeric field           | `Add new field type FieldRating with min/max`        |
-| Add complex field           | `Add new field type FieldLocation with capture`      |
-| Add picker field            | `Add new field type FieldPickText with dropdown`     |
-| Add media field             | `Add new field type FieldAudio with size validation` |
+| Task                       | Example                                              |
+|----------------------------|------------------------------------------------------|
+| Add simple text-like field | `Add new field type FieldColor`                      |
+| Add numeric field          | `Add new field type FieldRating with min/max`        |
+| Add complex field          | `Add new field type FieldLocation with capture`      |
+| Add picker field           | `Add new field type FieldPickText with dropdown`     |
+| Add media field            | `Add new field type FieldAudio with size validation` |
 
 ### Files to Touch (Ordered)
 
-| #  | File (relative to `feature/form/`)                      | Action  | When           |
-|----|----------------------------------------------------------|---------|----------------|
-| 1  | `domain/util/FieldVal/Converter.kt`                     | EDIT    | Always         |
-| 2  | `domain/util/FieldVal/DefaultValue.kt`                  | EDIT    | If has default |
-| 3  | `domain/util/FieldPropertyResolver.kt`                  | EDIT    | If has unique props or `*FieldId` refs |
-| 4  | `presentation/state/FieldState.kt`                      | EDIT    | If new `FieldProperties` fields needed |
-| 5  | `domain/ctx/helper/schema/Field{Name}Schema.kt`         | CREATE  | Always         |
-| 6  | `domain/ctx/helper/schema/CompSchemaFactory.kt`          | EDIT    | Always         |
-| 7  | `presentation/components/field/Field{Name}.kt`           | CREATE  | Always         |
-| 8  | `presentation/components/base/FieldFactory.kt`           | EDIT    | Always         |
+| # | File (relative to `feature/form/`)              | Action | When                                   |
+|---|-------------------------------------------------|--------|----------------------------------------|
+| 1 | `domain/util/FieldVal/Converter.kt`             | EDIT   | Always                                 |
+| 2 | `domain/util/FieldVal/DefaultValue.kt`          | EDIT   | If has default                         |
+| 3 | `domain/util/FieldPropertyResolver.kt`          | EDIT   | If has unique props or `*FieldId` refs |
+| 4 | `presentation/state/FieldState.kt`              | EDIT   | If new `FieldProperties` fields needed |
+| 5 | `domain/ctx/helper/schema/Field{Name}Schema.kt` | CREATE | Always                                 |
+| 6 | `domain/ctx/helper/schema/CompSchemaFactory.kt` | EDIT   | Always                                 |
+| 7 | `presentation/components/field/Field{Name}.kt`  | CREATE | Always                                 |
+| 8 | `presentation/components/base/FieldFactory.kt`  | EDIT   | Always                                 |
 
 > **Order matters.** Domain layer first (steps 1-6), then presentation (steps 7-8). This prevents compile errors from missing value conversions or schemas.
 
@@ -68,13 +68,13 @@ Before using this skill, these artifacts MUST already exist (they are auto-gener
 
 ### Already Exists (DO NOT CREATE)
 
-| Artifact | Location | Example |
-|----------|----------|---------|
-| `DefnField{Name}` interface | `api/meta/base/dto/DefnField{Name}.kt` | `DefnFieldSlider` |
-| `DefnField{Name}Data` data class | `core/common/serializer/api/meta/base/dto/DefnField{Name}Data.kt` | `DefnFieldSliderData` |
-| `FieldValue{Name}Data` data class | `core/common/serializer/api/meta/base/dto/FieldValue{Name}Data.kt` | `FieldValueSliderData` |
-| `EnumDefnCompType.{name}` enum entry | `api/meta/base/Types.kt` | `EnumDefnCompType.slider` |
-| `DefnCompSerializer` routing | `core/common/serializer/api/meta/base/dto/DefnCompData.kt` | Maps `"slider"` to `DefnFieldSliderData.serializer()` |
+| Artifact                             | Location                                                           | Example                                               |
+|--------------------------------------|--------------------------------------------------------------------|-------------------------------------------------------|
+| `DefnField{Name}` interface          | `api/meta/base/dto/DefnField{Name}.kt`                             | `DefnFieldSlider`                                     |
+| `DefnField{Name}Data` data class     | `core/common/serializer/api/meta/base/dto/DefnField{Name}Data.kt`  | `DefnFieldSliderData`                                 |
+| `FieldValue{Name}Data` data class    | `core/common/serializer/api/meta/base/dto/FieldValue{Name}Data.kt` | `FieldValueSliderData`                                |
+| `EnumDefnCompType.{name}` enum entry | `api/meta/base/Types.kt`                                           | `EnumDefnCompType.slider`                             |
+| `DefnCompSerializer` routing         | `core/common/serializer/api/meta/base/dto/DefnCompData.kt`         | Maps `"slider"` to `DefnFieldSliderData.serializer()` |
 
 ### Must Verify Before Starting
 
@@ -159,13 +159,13 @@ EnumDefnCompType.{fieldType} -> {
 
 **Pattern by value kind:**
 
-| Value Kind | Raw Type | Constructor Pattern |
-|-----------|----------|-------------------|
-| String-based | `String` | `FieldValue{Name}Data(value?.toString() ?: return null)` |
-| Long-based | `Long` | `FieldValue{Name}Data(value?.toString()?.toLongOrNull() ?: return null)` |
-| Double-based | `Double` | `FieldValue{Name}Data(value?.toString()?.toDoubleOrNull() ?: return null)` |
-| Boolean-based | `Boolean` | `FieldValue{Name}Data(value?.toString()?.toBooleanStrictOrNull() ?: return null)` |
-| Complex/Composite | `JsonElement` | Return `null` (handled via direct JSON serialization) |
+| Value Kind        | Raw Type      | Constructor Pattern                                                               |
+|-------------------|---------------|-----------------------------------------------------------------------------------|
+| String-based      | `String`      | `FieldValue{Name}Data(value?.toString() ?: return null)`                          |
+| Long-based        | `Long`        | `FieldValue{Name}Data(value?.toString()?.toLongOrNull() ?: return null)`          |
+| Double-based      | `Double`      | `FieldValue{Name}Data(value?.toString()?.toDoubleOrNull() ?: return null)`        |
+| Boolean-based     | `Boolean`     | `FieldValue{Name}Data(value?.toString()?.toBooleanStrictOrNull() ?: return null)` |
+| Complex/Composite | `JsonElement` | Return `null` (handled via direct JSON serialization)                             |
 
 #### 1b. `fnFieldValueToRawValue` - Typed FieldValue to raw value
 
@@ -324,7 +324,7 @@ package com.neome.feature.form.domain.ctx.helper.schema
 
 import com.neome.api.meta.base.dto.DefnField{Name}
 import com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal
-import com.neome.feature.form.domain.DefnFormUi
+import com.neome.feature.form.domain.model.DefnFormUi
 import com.neome.core.common.serializer.api.meta.base.dto.FieldValue{Name}Data
 import com.neome.feature.form.domain.util.FieldVal.FieldValueResolver
 import com.neome.feature.form.presentation.state.FieldProperties
@@ -614,6 +614,7 @@ EnumDefnCompType.{fieldType} -> Field{Name}(
 **Value type:** `FieldValue{Name}Data(value: String)`
 
 Use Step 7 template as-is. Key points:
+
 - `currentValue = fieldValue?.value ?: ""`
 - `onChange = { if (it.isEmpty()) null else FieldValue{Name}Data(it) }`
 - Schema validates `String` with Konform
@@ -623,6 +624,7 @@ Use Step 7 template as-is. Key points:
 **Value type:** `FieldValue{Name}Data(value: Long)` or `(value: Double)`
 
 Key differences from Template A:
+
 ```kotlin
 // In the composable:
 val currentValue = fieldValue?.value?.toString() ?: ""
@@ -650,6 +652,7 @@ Schema validates `Long?` or `Double?`.
 **Value type:** `FieldValue{Name}Data(value: Boolean)`
 
 Key differences:
+
 ```kotlin
 // In the composable:
 val currentValue = fieldValue?.value ?: false
@@ -669,6 +672,7 @@ Switch(
 **Value type:** complex (e.g., `FieldValuePickTextData`)
 
 Key differences:
+
 - Often uses `RawPickerSingleSelect` or `RawPickerMultiSelect` from `raw/picker/`
 - Value is set from picker callback, not from text input
 - May need `ModalBottomSheet` or `AlertDialog`
@@ -678,6 +682,7 @@ Key differences:
 **Value type:** `FieldValueDateData(value: String)` (ISO format)
 
 Key differences:
+
 - `OutlinedTextField` is `readOnly = true` with click handler
 - Opens `DatePickerDialog` or `TimePickerDialog`
 - Formats display value but stores ISO format
@@ -687,6 +692,7 @@ Key differences:
 **Value type:** complex (e.g., `FieldValueImageData`)
 
 Key differences:
+
 - Uses `ActivityResultContracts` for file picking
 - Validates file size via `properties.maxSize`
 - May display preview, file name, size info
@@ -821,11 +827,13 @@ properties.maxSize?.let { maxSizeBytes ->
 ### When to Add New FieldProperties
 
 Add a new `FieldProperties` field when:
+
 - The field type has a unique configuration property that affects UI rendering
 - The property can change dynamically (via `*Var` or `*FieldId`)
 - Multiple composables need to read this property
 
 Do NOT add when:
+
 - The property is static and can be read directly from `DefnField{Name}Data` in the composable
 - The property is only used in validation (read from `defnField` in the Schema instead)
 
@@ -893,37 +901,37 @@ if (defnComp is DefnFieldRating) {
 
 The simplest complete field. Study this first.
 
-| Layer | File | Key Points |
-|-------|------|-----------|
-| Converter | `Converter.kt` | `text -> FieldValueTextData(string)` |
-| DefaultValue | `DefaultValue.kt` | `resolverEditableText` handles `defaultValue`, `defaultFieldId` |
-| PropertyResolver | `FieldPropertyResolver.kt` | Resolves `minCharCount`, `maxCharCount` via 3-level cascade |
-| FieldProperties | `FieldState.kt` | `minCharCount: Long?`, `maxCharCount: Long?` |
-| Schema | `FieldTextSchema.kt` | Required + min/max char + regex validation patterns |
-| SchemaFactory | `CompSchemaFactory.kt` | `text -> FieldTextSchema(defnForm, defnComp)` |
-| UI Component | `FieldText.kt` | `rememberFieldController<FieldValueTextData>`, `OutlinedTextField` |
-| FieldFactory | `FieldFactory.kt` | `text -> FieldText(defnComp, onFieldEvent, modifier)` |
+| Layer            | File                       | Key Points                                                         |
+|------------------|----------------------------|--------------------------------------------------------------------|
+| Converter        | `Converter.kt`             | `text -> FieldValueTextData(string)`                               |
+| DefaultValue     | `DefaultValue.kt`          | `resolverEditableText` handles `defaultValue`, `defaultFieldId`    |
+| PropertyResolver | `FieldPropertyResolver.kt` | Resolves `minCharCount`, `maxCharCount` via 3-level cascade        |
+| FieldProperties  | `FieldState.kt`            | `minCharCount: Long?`, `maxCharCount: Long?`                       |
+| Schema           | `FieldTextSchema.kt`       | Required + min/max char + regex validation patterns                |
+| SchemaFactory    | `CompSchemaFactory.kt`     | `text -> FieldTextSchema(defnForm, defnComp)`                      |
+| UI Component     | `FieldText.kt`             | `rememberFieldController<FieldValueTextData>`, `OutlinedTextField` |
+| FieldFactory     | `FieldFactory.kt`          | `text -> FieldText(defnComp, onFieldEvent, modifier)`              |
 
 ### Example 2: FieldNumber (Numeric Field with Min/Max)
 
 Shows numeric value handling and range validation.
 
-| Layer | File | Key Points |
-|-------|------|-----------|
-| Converter | `Converter.kt` | `number -> FieldValueNumberData(toLongOrNull())` |
-| PropertyResolver | `FieldPropertyResolver.kt` | Resolves `minNumber`, `maxNumber` |
-| Schema | `FieldNumberSchema.kt` | Validates `Long?` with required + min/max |
-| UI Component | `FieldNumber.kt` | `KeyboardType.Number`, `toLongOrNull()` parsing |
+| Layer            | File                       | Key Points                                       |
+|------------------|----------------------------|--------------------------------------------------|
+| Converter        | `Converter.kt`             | `number -> FieldValueNumberData(toLongOrNull())` |
+| PropertyResolver | `FieldPropertyResolver.kt` | Resolves `minNumber`, `maxNumber`                |
+| Schema           | `FieldNumberSchema.kt`     | Validates `Long?` with required + min/max        |
+| UI Component     | `FieldNumber.kt`           | `KeyboardType.Number`, `toLongOrNull()` parsing  |
 
 ### Example 3: FieldSwitch (Complex Field with Casting)
 
 Shows DefnData casting, capture metadata, and render mode switching.
 
-| Layer | File | Key Points |
-|-------|------|-----------|
-| UI Component | `FieldSwitch.kt` | Casts `defnComp as? DefnFieldSwitchData`, reads `showAsCheckbox`, `captureTime` etc. |
-| Schema | `FieldBoolSchema.kt` | Required + capture validations |
-| PropertyResolver | `FieldPropertyResolver.kt` | `resolveShowAsCheckbox` with `showAsCheckboxFieldId` |
+| Layer            | File                       | Key Points                                                                           |
+|------------------|----------------------------|--------------------------------------------------------------------------------------|
+| UI Component     | `FieldSwitch.kt`           | Casts `defnComp as? DefnFieldSwitchData`, reads `showAsCheckbox`, `captureTime` etc. |
+| Schema           | `FieldBoolSchema.kt`       | Required + capture validations                                                       |
+| PropertyResolver | `FieldPropertyResolver.kt` | `resolveShowAsCheckbox` with `showAsCheckboxFieldId`                                 |
 
 ---
 
@@ -931,30 +939,30 @@ Shows DefnData casting, capture metadata, and render mode switching.
 
 ### DO NOT
 
-| Anti-Pattern | Why | Correct Approach |
-|-------------|-----|-----------------|
-| Create `DefnField*` or `DefnField*Data` classes | They are auto-generated | Verify they exist before starting |
-| Create `FieldValue*Data` classes | They are auto-generated | Use the existing one from serializer package |
-| Add mutable state in field composables | Violates MVI/UDF | Use `rememberFieldController` for all state |
-| Read `FormState` directly in field composables | Breaks fine-grained recomposition | Use `fieldController.value` and `fieldController.field` |
-| Skip the `if (fieldController.fieldId == null) return` check | Crashes on non-field DefnComp | Always add this guard |
-| Skip the `if (properties.hidden) return` check | Shows fields that should be hidden | Always add this guard |
-| Put business logic in the composable | Violates Clean Architecture | Put it in Schema or PropertyResolver |
-| Use `collectAsStateWithLifecycle` | Old pattern, FormState uses Compose `State` | Use `fieldController.value.value` (direct read) |
-| Forget to register in CompSchemaFactory | Validation silently skipped | Always add entry (even `null` for no validation) |
-| Forget to add Converter branches | Value serialization fails | Always add both `fnRawValueToFieldValue` and `fnFieldValueToRawValue` |
-| Use `mutableStateOf` inside field composables for value state | Creates second source of truth | The only source of truth is FormState via FieldController |
-| Skip error/helperText in supporting text | Inconsistent UI | Always show `error?.message ?: helperText ?: " "` |
+| Anti-Pattern                                                  | Why                                         | Correct Approach                                                      |
+|---------------------------------------------------------------|---------------------------------------------|-----------------------------------------------------------------------|
+| Create `DefnField*` or `DefnField*Data` classes               | They are auto-generated                     | Verify they exist before starting                                     |
+| Create `FieldValue*Data` classes                              | They are auto-generated                     | Use the existing one from serializer package                          |
+| Add mutable state in field composables                        | Violates MVI/UDF                            | Use `rememberFieldController` for all state                           |
+| Read `FormState` directly in field composables                | Breaks fine-grained recomposition           | Use `fieldController.value` and `fieldController.field`               |
+| Skip the `if (fieldController.fieldId == null) return` check  | Crashes on non-field DefnComp               | Always add this guard                                                 |
+| Skip the `if (properties.hidden) return` check                | Shows fields that should be hidden          | Always add this guard                                                 |
+| Put business logic in the composable                          | Violates Clean Architecture                 | Put it in Schema or PropertyResolver                                  |
+| Use `collectAsStateWithLifecycle`                             | Old pattern, FormState uses Compose `State` | Use `fieldController.value.value` (direct read)                       |
+| Forget to register in CompSchemaFactory                       | Validation silently skipped                 | Always add entry (even `null` for no validation)                      |
+| Forget to add Converter branches                              | Value serialization fails                   | Always add both `fnRawValueToFieldValue` and `fnFieldValueToRawValue` |
+| Use `mutableStateOf` inside field composables for value state | Creates second source of truth              | The only source of truth is FormState via FieldController             |
+| Skip error/helperText in supporting text                      | Inconsistent UI                             | Always show `error?.message ?: helperText ?: " "`                     |
 
 ### MUST DO
 
-| Rule | Why |
-|------|-----|
-| Wrap content in `FieldBase { ... }` | Consistent 16dp horizontal, 8dp vertical padding |
-| Create a stateless `Field{Name}Content` composable | Enables previews, testing, optimal recomposition |
-| Use `" "` (space) as fallback for supporting text | Prevents layout jumps when error appears/disappears |
-| Pass `Modifier = Modifier` as default parameter | Follows Compose conventions |
-| Accept `modifier: Modifier = Modifier` as last param in content | Compose convention for composables |
+| Rule                                                            | Why                                                 |
+|-----------------------------------------------------------------|-----------------------------------------------------|
+| Wrap content in `FieldBase { ... }`                             | Consistent 16dp horizontal, 8dp vertical padding    |
+| Create a stateless `Field{Name}Content` composable              | Enables previews, testing, optimal recomposition    |
+| Use `" "` (space) as fallback for supporting text               | Prevents layout jumps when error appears/disappears |
+| Pass `Modifier = Modifier` as default parameter                 | Follows Compose conventions                         |
+| Accept `modifier: Modifier = Modifier` as last param in content | Compose convention for composables                  |
 
 ---
 

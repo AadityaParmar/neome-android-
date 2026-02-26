@@ -22,11 +22,11 @@ Contains the top-level `Form` composable (the public embedding API for the form 
 
 ## Key Entry Points
 
-| File | Symbol | Role |
-|------|--------|------|
-| `Form.kt` | `Form` | Public `@Composable` — params: `defnForm: DefnFormUi`, `initialValue: FormValueData?`, `formRef: MutableState<FormRef?>`, `onIntent: (FormIntent) -> Unit`, `modifier: Modifier` |
-| `Form.kt` | `FormContent` | Private `@Composable` — stateless rendering; guards init state; calls `FieldFactory` on root component |
-| `Utils.kt` | `resolveThemeColor` | `@Composable fun resolveThemeColor(color: DefnDtoColorData?): Color` — maps 40+ `EnumDefnThemeColor` values to Compose `Color` |
+| File       | Symbol              | Role                                                                                                                                                                             |
+|------------|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Form.kt`  | `Form`              | Public `@Composable` — params: `defnForm: DefnFormUi`, `initialValue: FormValueData?`, `formRef: MutableState<FormRef?>`, `onIntent: (FormIntent) -> Unit`, `modifier: Modifier` |
+| `Form.kt`  | `FormContent`       | Private `@Composable` — stateless rendering; guards init state; calls `FieldFactory` on root component                                                                           |
+| `Utils.kt` | `resolveThemeColor` | `@Composable fun resolveThemeColor(color: DefnDtoColorData?): Color` — maps 40+ `EnumDefnThemeColor` values to Compose `Color`                                                   |
 
 ## Dependencies
 
@@ -35,7 +35,7 @@ Contains the top-level `Form` composable (the public embedding API for the form 
 - `com.neome.feature.form.domain.ctx.FormCtxImpl` — created inside `Form`; owns `FormState` and `dispatch`
 - `com.neome.feature.form.domain.ctx.LocalFormCtx` — the `staticCompositionLocalOf` provided by `Form`
 - `com.neome.feature.form.domain.ref.FormRef` — type returned by `formCtx.createFormRef()` and exposed via `formRef`
-- `com.neome.feature.form.domain.DefnFormUi` — input form definition
+- `com.neome.feature.form.domain.model.DefnFormUi` — input form definition
 - `com.neome.feature.form.presentation.components.base.FieldFactory` — called from `FormContent` to render root component
 - `com.neome.feature.form.presentation.state.FieldEvent`, `FormEvent`, `FormIntent`, `FormState` — event/state types bridged by `Form`
 - `com.neome.api.meta.base.Types.EnumDefnThemeColor` — color enum used in `resolveThemeColor`

@@ -55,14 +55,15 @@ Each helper accepts the current `FormState` and a `FormStateAccessor` (mutable v
 
 1. Mutates the accessor (field values, error states, flags, event properties, field states)
 2. Optionally triggers cascading effects:
-   - Value changes via `FormCtxEventHelper.processFieldValueChanged` trigger:
-     - Validation of the changed field
-     - Recalculation of dependent fields
-     - onChange form events (depth-guarded at max 5 levels)
-   - Visibility/disabled updates merge into field states
+    - Value changes via `FormCtxEventHelper.processFieldValueChanged` trigger:
+        - Validation of the changed field
+        - Recalculation of dependent fields
+        - onChange form events (depth-guarded at max 5 levels)
+    - Visibility/disabled updates merge into field states
 3. Returns a `FormReducerResult` containing the snapshotted immutable state and optional `FormIntent`
 
-**Entry points**: 
+**Entry points**:
+
 - `FormCtxEventHelper.processFieldValueChanged` (main cascade handler)
 - `FormCtxEventHelper.processSubmit`
 - `FormCtxEventHelper.processReset`
@@ -106,28 +107,28 @@ After user events are processed, the context may trigger form-level events (onCh
 
 ## Key Entry Points
 
-| File | Symbol | Role |
-|------|--------|------|
-| `FormReducerResult.kt` | `FormReducerResult` | Data class holding immutable state + optional intent; return type for all helpers |
-| `FormStateAccessorImpl.kt` | `ReducerFormStateAccessor` | Mutable view for form state during a reducer cycle; extracts hot-path collections to copies; `snapshot()` merges them back |
-| `FormCtxInitHelper.kt` | `FormCtxInitHelper.initializeFormState` | Main entry point: initializes complete FormState from form definition and optional initial values |
-| `FormCtxInitHelper.kt` | `FormCtxInitHelper.isCompositeType` | Determines if a component type is composite (section, grid, tab, wizard, spreadsheetRef) |
-| `FormCtxEventHelper.kt` | `FormCtxEventHelper.processFieldValueChanged` | Handles value changes, cascades to validation and dependent fields (depth-guarded at 5 levels) |
-| `FormCtxEventHelper.kt` | `FormCtxEventHelper.processSubmit` | Validates all required fields and emits FormSubmitted intent if valid |
-| `FormCtxEventHelper.kt` | `FormCtxEventHelper.processReset` | Clears all field values, errors, and isDirty flags |
-| `FormCtxEventHelper.kt` | `FormCtxEventHelper.processSetValues` | Bulk replaces field values from a map with per-field triggering |
-| `FormCtxValidationHelper.kt` | `FormCtxValidationHelper.validateField` | Validates a single field against its schema and stores error in errors map |
-| `FormCtxValidationHelper.kt` | `FormCtxValidationHelper.validateAll` | Validates all fields and accumulates errors |
-| `FormCtxValidationHelper.kt` | `FormCtxValidationHelper.setFieldError` | Manually sets an error for a field (from server, for example) |
-| `FormCtxValidationHelper.kt` | `FormCtxValidationHelper.clearFieldError` | Removes error for a field and clears Invalid flag if no other errors exist |
-| `FormCtxValidationHelper.kt` | `FormCtxValidationHelper.clearAllErrors` | Removes all errors and clears Invalid flag |
-| `FormCtxGridHelper.kt` | `FormCtxGridHelper.handleGridOpen` | Initializes `FormState.gridCtx` for adding or editing a grid row |
-| `FormCtxGridHelper.kt` | `FormCtxGridHelper.handleGridClose` | Clears `gridCtx` to discard edits and close the sheet |
-| `FormCtxGridHelper.kt` | `FormCtxGridHelper.handleGridSubmit` | Validates grid row fields, merges into parent `FieldValueGridData`, clears `gridCtx` |
-| `FormCtxGridHelper.kt` | `FormCtxGridHelper.handleGridRemove` | Removes a row from a grid field value |
-| `ReducerFormGridStateAccessor.kt` | `ReducerFormGridStateAccessor` | Grid-aware `FormStateAccessor` — routes read/write to `gridCtx` for grid fields, delegates to parent for others |
-| `FormCtxSendBtnStateHelper.kt` | `FormCtxSendBtnStateHelper.onSendBtnStateFlagsChanged` | Detects flag set transitions and emits SendBtnStateChanged intent |
-| `FormCtxApiCtx.kt` | `FormCtxApiCtx` | Optional interface for external data fetching (field options via onGetFieldOptions callback) |
+| File                              | Symbol                                                 | Role                                                                                                                       |
+|-----------------------------------|--------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| `FormReducerResult.kt`            | `FormReducerResult`                                    | Data class holding immutable state + optional intent; return type for all helpers                                          |
+| `FormStateAccessorImpl.kt`        | `ReducerFormStateAccessor`                             | Mutable view for form state during a reducer cycle; extracts hot-path collections to copies; `snapshot()` merges them back |
+| `FormCtxInitHelper.kt`            | `FormCtxInitHelper.initializeFormState`                | Main entry point: initializes complete FormState from form definition and optional initial values                          |
+| `FormCtxInitHelper.kt`            | `FormCtxInitHelper.isCompositeType`                    | Determines if a component type is composite (section, grid, tab, wizard, spreadsheetRef)                                   |
+| `FormCtxEventHelper.kt`           | `FormCtxEventHelper.processFieldValueChanged`          | Handles value changes, cascades to validation and dependent fields (depth-guarded at 5 levels)                             |
+| `FormCtxEventHelper.kt`           | `FormCtxEventHelper.processSubmit`                     | Validates all required fields and emits FormSubmitted intent if valid                                                      |
+| `FormCtxEventHelper.kt`           | `FormCtxEventHelper.processReset`                      | Clears all field values, errors, and isDirty flags                                                                         |
+| `FormCtxEventHelper.kt`           | `FormCtxEventHelper.processSetValues`                  | Bulk replaces field values from a map with per-field triggering                                                            |
+| `FormCtxValidationHelper.kt`      | `FormCtxValidationHelper.validateField`                | Validates a single field against its schema and stores error in errors map                                                 |
+| `FormCtxValidationHelper.kt`      | `FormCtxValidationHelper.validateAll`                  | Validates all fields and accumulates errors                                                                                |
+| `FormCtxValidationHelper.kt`      | `FormCtxValidationHelper.setFieldError`                | Manually sets an error for a field (from server, for example)                                                              |
+| `FormCtxValidationHelper.kt`      | `FormCtxValidationHelper.clearFieldError`              | Removes error for a field and clears Invalid flag if no other errors exist                                                 |
+| `FormCtxValidationHelper.kt`      | `FormCtxValidationHelper.clearAllErrors`               | Removes all errors and clears Invalid flag                                                                                 |
+| `FormCtxGridHelper.kt`            | `FormCtxGridHelper.handleGridOpen`                     | Initializes `FormState.gridCtx` for adding or editing a grid row                                                           |
+| `FormCtxGridHelper.kt`            | `FormCtxGridHelper.handleGridClose`                    | Clears `gridCtx` to discard edits and close the sheet                                                                      |
+| `FormCtxGridHelper.kt`            | `FormCtxGridHelper.handleGridSubmit`                   | Validates grid row fields, merges into parent `FieldValueGridData`, clears `gridCtx`                                       |
+| `FormCtxGridHelper.kt`            | `FormCtxGridHelper.handleGridRemove`                   | Removes a row from a grid field value                                                                                      |
+| `ReducerFormGridStateAccessor.kt` | `ReducerFormGridStateAccessor`                         | Grid-aware `FormStateAccessor` — routes read/write to `gridCtx` for grid fields, delegates to parent for others            |
+| `FormCtxSendBtnStateHelper.kt`    | `FormCtxSendBtnStateHelper.onSendBtnStateFlagsChanged` | Detects flag set transitions and emits SendBtnStateChanged intent                                                          |
+| `FormCtxApiCtx.kt`                | `FormCtxApiCtx`                                        | Optional interface for external data fetching (field options via onGetFieldOptions callback)                               |
 
 ## Dependencies / Relationships
 
@@ -147,7 +148,7 @@ After user events are processed, the context may trigger form-level events (onCh
 ### External Dependencies
 
 - `androidx.compose.runtime.State`, `mutableStateOf` — Compose state primitives used by `FormCtx`
-- `com.neome.feature.form.domain.DefnFormUi` — Form definition (compMap, eventMap, componentDefns)
+- `com.neome.feature.form.domain.model.DefnFormUi` — Form definition (compMap, eventMap, componentDefns)
 - `com.neome.feature.form.presentation.state.*` — `FormState`, `FormEvent`, `FormIntent`, `FieldState`, `FieldError`, `SendBtnStateFlag`, `FieldProperties`, `FormEventProps`
 - `com.neome.feature.form.domain.util.FieldPropertyResolver` — Resolves field properties (visibility, required, disabled)
 - `com.neome.feature.form.domain.util.FieldVal.FieldValueResolver` — Converts between raw values, field values, and JSON elements

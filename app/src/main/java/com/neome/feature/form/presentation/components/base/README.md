@@ -23,15 +23,15 @@ Provides the foundational building blocks that every form field composable depen
 
 ## Key Entry Points
 
-| File | Symbol | Role |
-|------|--------|------|
-| `FieldFactory.kt` | `FieldFactory` | `@Composable` dispatcher — routes `EnumDefnCompType` to correct field/composite composable |
-| `FieldController.kt` | `rememberFieldController<T>` | `@Composable inline fun` — creates stable `FieldController<T>` with `derivedStateOf` states |
-| `FieldController.kt` | `FieldController<T>` | `@Immutable data class` — holds `fieldId`, `value: State<T?>`, `field: State<FieldUiState>`, `onChange: (T?) -> Unit` |
-| `FieldController.kt` | `FieldUiState` | `@Immutable data class` — `properties: FieldProperties`, `error: FieldError?` |
-| `FieldController.kt` | `deriveFieldValue` | Top-level fun — decodes `JsonElement` from `FormState.valueMap` using `KSerializer<T>` |
-| `FieldController.kt` | `deriveFieldUiState` | Top-level fun — reads `FieldState.fieldProperties` + `FormState.errors` into `FieldUiState` |
-| `FieldBase.kt` | `FieldBase` | `@Composable` — hidden guard + `Column(fillMaxWidth)` wrapper for field content |
+| File                 | Symbol                       | Role                                                                                                                  |
+|----------------------|------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| `FieldFactory.kt`    | `FieldFactory`               | `@Composable` dispatcher — routes `EnumDefnCompType` to correct field/composite composable                            |
+| `FieldController.kt` | `rememberFieldController<T>` | `@Composable inline fun` — creates stable `FieldController<T>` with `derivedStateOf` states                           |
+| `FieldController.kt` | `FieldController<T>`         | `@Immutable data class` — holds `fieldId`, `value: State<T?>`, `field: State<FieldUiState>`, `onChange: (T?) -> Unit` |
+| `FieldController.kt` | `FieldUiState`               | `@Immutable data class` — `properties: FieldProperties`, `error: FieldError?`                                         |
+| `FieldController.kt` | `deriveFieldValue`           | Top-level fun — decodes `JsonElement` from `FormState.valueMap` using `KSerializer<T>`                                |
+| `FieldController.kt` | `deriveFieldUiState`         | Top-level fun — reads `FieldState.fieldProperties` + `FormState.errors` into `FieldUiState`                           |
+| `FieldBase.kt`       | `FieldBase`                  | `@Composable` — hidden guard + `Column(fillMaxWidth)` wrapper for field content                                       |
 
 ## Dependencies
 
@@ -39,7 +39,7 @@ Provides the foundational building blocks that every form field composable depen
 - `com.neome.api.meta.base.Types.MetaIdComp`, `EnumDefnCompType` — field ID and component type enum
 - `com.neome.api.meta.base.dto.DefnField` — cast target to extract `metaId` from `DefnCompSeal`
 - `com.neome.core.common.serializer.api.meta.base.dto.DefnCompSeal` — opaque component definition passed to `FieldFactory` and `rememberFieldController`
-- `com.neome.feature.form.domain.DefnFormUi` — passed to `FieldFactory` and composites for `compMap` lookups
+- `com.neome.feature.form.domain.model.DefnFormUi` — passed to `FieldFactory` and composites for `compMap` lookups
 - `com.neome.feature.form.domain.ctx.LocalFormCtx` — accessed in `rememberFieldController` to get `formState`
 - `com.neome.feature.form.presentation.state.FieldEvent`, `FieldError`, `FieldProperties`, `FormState` — state types read/emitted by the controller
 - `com.neome.feature.utils.JsonParser` — `Json` instance used in `deriveFieldValue` for deserialization
